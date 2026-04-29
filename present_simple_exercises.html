@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present Simple — Упражнения A1</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f4f6fb;
+    color: #1a1a2e;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page-header {
+    max-width: 680px;
+    margin: 0 auto 2rem;
+    background: #1a1a2e;
+    border-radius: 16px;
+    padding: 1.75rem 2rem;
+    color: #fff;
+  }
+  .page-header .tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+  .page-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+  .page-header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 680px; margin: 0 auto; }
+
+  .score-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.85rem 1.25rem;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e2e6f0;
+    margin-bottom: 1.25rem;
+  }
+  .score-num { font-size: 20px; font-weight: 600; color: #1a1a2e; }
+  .score-label { font-size: 13px; color: #6b7280; }
+  .reset-btn {
+    margin-left: auto;
+    font-size: 13px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .reset-btn:hover { background: #f3f4f6; }
+
+  .ex-block {
+    background: #fff;
+    border: 1px solid #e2e6f0;
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .ex-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+  .label-blue   { background: #dbeafe; color: #1d4ed8; }
+  .label-amber  { background: #fef3c7; color: #92400e; }
+  .label-green  { background: #dcfce7; color: #166534; }
+  .label-teal   { background: #ccfbf1; color: #0f766e; }
+
+  .ex-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 1rem;
+  }
+
+  .q-row {
+    padding-bottom: 0.85rem;
+    margin-bottom: 0.85rem;
+    border-bottom: 1px solid #f0f2f7;
+  }
+  .q-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .q-text {
+    font-size: 14px;
+    color: #1a1a2e;
+    line-height: 1.65;
+    margin-bottom: 6px;
+  }
+  .q-text em { color: #6b7280; font-style: normal; }
+
+  .opts { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .opt-btn {
+    font-size: 13px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .opt-btn:hover:not(:disabled) { background: #f9fafb; border-color: #9ca3af; }
+  .opt-btn.correct  { background: #dcfce7; color: #166534; border-color: #86efac; }
+  .opt-btn.wrong    { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+  .opt-btn.reveal   { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+  .opt-btn:disabled { cursor: default; }
+
+  .fill-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .fill-inp {
+    font-size: 14px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #1a1a2e;
+    width: 130px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .fill-inp:focus { border-color: #6366f1; }
+  .fill-inp.correct { border-color: #86efac; background: #dcfce7; color: #166534; }
+  .fill-inp.wrong   { border-color: #fca5a5; background: #fee2e2; color: #991b1b; }
+
+  .check-btn {
+    font-size: 13px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .check-btn:hover { background: #f3f4f6; }
+
+  .hint { font-size: 12px; margin-top: 5px; }
+  .hint.ok  { color: #166534; }
+  .hint.err { color: #991b1b; }
+
+  .reorder-area { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .reorder-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .word-chip {
+    font-size: 13px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid #d1d5db;
+    background: #f3f4f6;
+    color: #374151;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .word-chip:hover:not(.used) { background: #e5e7eb; }
+  .word-chip.used { opacity: 0.3; cursor: default; pointer-events: none; }
+
+  .answer-area {
+    min-height: 36px;
+    padding: 5px 10px;
+    border: 1.5px dashed #d1d5db;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
+  }
+  .answer-area.correct-area { border-color: #86efac; background: #f0fdf4; }
+  .answer-area.wrong-area   { border-color: #fca5a5; background: #fff1f2; }
+
+  .placed-chip {
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid #a5b4fc;
+    background: #eef2ff;
+    color: #3730a3;
+    cursor: pointer;
+  }
+  .placed-chip:hover { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+  .reorder-actions { display: flex; gap: 8px; margin-top: 6px; }
+
+  @media (max-width: 500px) {
+    .page-header { padding: 1.25rem; }
+    .ex-block { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="tag">Уровень A1</div>
+  <h1>Present Simple Tense</h1>
+  <p>Выполните 4 упражнения на правила Present Simple. Нажмите на вариант ответа или введите слово в поле.</p>
+</div>
+
+<div class="container">
+
+  <div class="score-bar">
+    <div>
+      <div class="score-num" id="score-display">0 / 0</div>
+      <div class="score-label">правильных ответов</div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">Сбросить всё</button>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 1 -->
+  <div class="ex-block">
+    <span class="ex-label label-blue">Упражнение 1 — выбор формы</span>
+    <div class="ex-title">Выберите правильную форму глагола</div>
+
+    <div class="q-row" id="mc0">
+      <div class="q-text">She ___ coffee every morning. <em>(drink)</em></div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'mc0','drinks')">drink</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc0','drinks')">drinks</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc0','drinks')">is drink</button>
+      </div>
+      <div class="hint" id="mc0-hint"></div>
+    </div>
+
+    <div class="q-row" id="mc1">
+      <div class="q-text">They ___ in a big house. <em>(live)</em></div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'mc1','live')">lives</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc1','live')">live</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc1','live')">is live</button>
+      </div>
+      <div class="hint" id="mc1-hint"></div>
+    </div>
+
+    <div class="q-row" id="mc2">
+      <div class="q-text">He ___ the bus to work. <em>(take)</em></div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'mc2','takes')">take</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc2','takes')">is takes</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc2','takes')">takes</button>
+      </div>
+      <div class="hint" id="mc2-hint"></div>
+    </div>
+
+    <div class="q-row" id="mc3">
+      <div class="q-text">My sister ___ the piano. <em>(play)</em></div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'mc3','plays')">playes</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc3','plays')">play</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc3','plays')">plays</button>
+      </div>
+      <div class="hint" id="mc3-hint"></div>
+    </div>
+
+    <div class="q-row" id="mc4">
+      <div class="q-text">The dog ___ a lot. <em>(bark)</em></div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'mc4','barks')">barkes</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc4','barks')">barks</button>
+        <button class="opt-btn" onclick="checkMC(this,'mc4','barks')">bark</button>
+      </div>
+      <div class="hint" id="mc4-hint"></div>
+    </div>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 2 -->
+  <div class="ex-block">
+    <span class="ex-label label-amber">Упражнение 2 — вставьте слово</span>
+    <div class="ex-title">Напишите правильную форму глагола в скобках</div>
+
+    <div class="q-row">
+      <div class="q-text">I ___ English every day. <em>(study)</em></div>
+      <div class="fill-row">
+        <input class="fill-inp" id="f0" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f0',['study'])">
+        <button class="check-btn" onclick="checkFill('f0',['study'])">Проверить</button>
+      </div>
+      <div class="hint" id="f0-hint"></div>
+    </div>
+
+    <div class="q-row">
+      <div class="q-text">She ___ her teeth twice a day. <em>(brush)</em></div>
+      <div class="fill-row">
+        <input class="fill-inp" id="f1" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f1',['brushes'])">
+        <button class="check-btn" onclick="checkFill('f1',['brushes'])">Проверить</button>
+      </div>
+      <div class="hint" id="f1-hint"></div>
+    </div>
+
+    <div class="q-row">
+      <div class="q-text">We ___ football on Saturdays. <em>(play)</em></div>
+      <div class="fill-row">
+        <input class="fill-inp" id="f2" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f2',['play'])">
+        <button class="check-btn" onclick="checkFill('f2',['play'])">Проверить</button>
+      </div>
+      <div class="hint" id="f2-hint"></div>
+    </div>
+
+    <div class="q-row">
+      <div class="q-text">He ___ in a restaurant. <em>(work)</em></div>
+      <div class="fill-row">
+        <input class="fill-inp" id="f3" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f3',['works'])">
+        <button class="check-btn" onclick="checkFill('f3',['works'])">Проверить</button>
+      </div>
+      <div class="hint" id="f3-hint"></div>
+    </div>
+
+    <div class="q-row">
+      <div class="q-text">It ___ a lot in London. <em>(rain)</em></div>
+      <div class="fill-row">
+        <input class="fill-inp" id="f4" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f4',['rains'])">
+        <button class="check-btn" onclick="checkFill('f4',['rains'])">Проверить</button>
+      </div>
+      <div class="hint" id="f4-hint"></div>
+    </div>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 3 -->
+  <div class="ex-block">
+    <span class="ex-label label-green">Упражнение 3 — отрицание</span>
+    <div class="ex-title">Выберите правильное вспомогательное слово для отрицания</div>
+
+    <div class="q-row" id="neg0">
+      <div class="q-text">He ___ like spicy food.</div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'neg0',`doesn't`)">don't</button>
+        <button class="opt-btn" onclick="checkMC(this,'neg0',`doesn't`)">doesn't</button>
+        <button class="opt-btn" onclick="checkMC(this,'neg0',`doesn't`)">isn't</button>
+      </div>
+      <div class="hint" id="neg0-hint"></div>
+    </div>
+
+    <div class="q-row" id="neg1">
+      <div class="q-text">They ___ have a car.</div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'neg1',`don't`)">doesn't</button>
+        <button class="opt-btn" onclick="checkMC(this,'neg1',`don't`)">aren't</button>
+        <button class="opt-btn" onclick="checkMC(this,'neg1',`don't`)">don't</button>
+      </div>
+      <div class="hint" id="neg1-hint"></div>
+    </div>
+
+    <div class="q-row" id="neg2">
+      <div class="q-text">My cat ___ eat vegetables.</div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'neg2',`doesn't`)">don't</button>
+        <button class="opt-btn" onclick="checkMC(this,'neg2',`doesn't`)">doesn't</button>
+        <button class="opt-btn" onclick="checkMC(this,'neg2',`doesn't`)">isn't</button>
+      </div>
+      <div class="hint" id="neg2-hint"></div>
+    </div>
+
+    <div class="q-row" id="neg3">
+      <div class="q-text">I ___ watch TV in the morning.</div>
+      <div class="opts">
+        <button class="opt-btn" onclick="checkMC(this,'neg3',`don't`)">doesn't</button>
+        <button class="opt-btn" onclick="checkMC(this,'neg3',`don't`)">don't</button>
+        <button class="opt-btn" onclick="checkMC(this,'neg3',`don't`)">aren't</button>
+      </div>
+      <div class="hint" id="neg3-hint"></div>
+    </div>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 4 -->
+  <div class="ex-block">
+    <span class="ex-label label-teal">Упражнение 4 — составь вопрос</span>
+    <div class="ex-title">Составьте вопрос из слов — нажимайте на слова по порядку</div>
+
+    <div class="q-row" id="ror0">
+      <div class="q-text">Подсказка: <em>Ты живёшь здесь?</em></div>
+      <div class="reorder-area">
+        <div class="reorder-opts" id="ror0-opts"></div>
+        <div class="answer-area" id="ror0-ans" onclick="undoLastWord('ror0')"></div>
+      </div>
+      <div class="reorder-actions">
+        <button class="check-btn" onclick="checkReorder('ror0')">Проверить</button>
+        <button class="check-btn" onclick="resetReorder('ror0')">Сбросить</button>
+      </div>
+      <div class="hint" id="ror0-hint"></div>
+    </div>
+
+    <div class="q-row" id="ror1">
+      <div class="q-text">Подсказка: <em>Она работает каждый день?</em></div>
+      <div class="reorder-area">
+        <div class="reorder-opts" id="ror1-opts"></div>
+        <div class="answer-area" id="ror1-ans" onclick="undoLastWord('ror1')"></div>
+      </div>
+      <div class="reorder-actions">
+        <button class="check-btn" onclick="checkReorder('ror1')">Проверить</button>
+        <button class="check-btn" onclick="resetReorder('ror1')">Сбросить</button>
+      </div>
+      <div class="hint" id="ror1-hint"></div>
+    </div>
+
+    <div class="q-row" id="ror2">
+      <div class="q-text">Подсказка: <em>Они пьют чай по утрам?</em></div>
+      <div class="reorder-area">
+        <div class="reorder-opts" id="ror2-opts"></div>
+        <div class="answer-area" id="ror2-ans" onclick="undoLastWord('ror2')"></div>
+      </div>
+      <div class="reorder-actions">
+        <button class="check-btn" onclick="checkReorder('ror2')">Проверить</button>
+        <button class="check-btn" onclick="resetReorder('ror2')">Сбросить</button>
+      </div>
+      <div class="hint" id="ror2-hint"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var score = 0, total = 0;
+var answered = {};
+var reorderData = {
+  ror0: { words: ['Do','you','live','here','?'], answer: 'Do you live here ?', placed: [], locked: false },
+  ror1: { words: ['Does','she','work','every','day','?'], answer: 'Does she work every day ?', placed: [], locked: false },
+  ror2: { words: ['Do','they','drink','tea','in','the','morning','?'], answer: 'Do they drink tea in the morning ?', placed: [], locked: false }
+};
+
+function updateScore() {
+  document.getElementById('score-display').textContent = score + ' / ' + total;
+}
+
+function checkMC(btn, qid, correct) {
+  if (answered[qid]) return;
+  answered[qid] = true;
+  total++;
+  var opts = document.querySelectorAll('#' + qid + ' .opt-btn');
+  opts.forEach(function(b) { b.disabled = true; });
+  var hint = document.getElementById(qid + '-hint');
+  if (btn.textContent === correct) {
+    btn.classList.add('correct');
+    score++;
+    hint.textContent = 'Верно!';
+    hint.className = 'hint ok';
+  } else {
+    btn.classList.add('wrong');
+    opts.forEach(function(b) { if (b.textContent === correct) b.classList.add('reveal'); });
+    hint.textContent = 'Неверно. Правильный ответ: ' + correct;
+    hint.className = 'hint err';
+  }
+  updateScore();
+}
+
+function checkFill(id, answers) {
+  if (answered[id]) return;
+  var inp = document.getElementById(id);
+  var val = inp.value.trim().toLowerCase();
+  var hint = document.getElementById(id + '-hint');
+  if (!val) return;
+  answered[id] = true;
+  total++;
+  inp.disabled = true;
+  if (answers.indexOf(val) > -1) {
+    inp.classList.add('correct');
+    hint.textContent = 'Верно!';
+    hint.className = 'hint ok';
+    score++;
+  } else {
+    inp.classList.add('wrong');
+    hint.textContent = 'Неверно. Правильный ответ: ' + answers[0];
+    hint.className = 'hint err';
+  }
+  updateScore();
+}
+
+function initReorders() {
+  Object.keys(reorderData).forEach(function(id) {
+    var d = reorderData[id];
+    var shuffled = d.words.slice().sort(function() { return Math.random() - 0.5; });
+    d.shuffled = shuffled;
+    d.placed = [];
+    d.locked = false;
+    renderReorder(id);
+  });
+}
+
+function renderReorder(id) {
+  var d = reorderData[id];
+  var optsEl = document.getElementById(id + '-opts');
+  var ansEl  = document.getElementById(id + '-ans');
+  ansEl.className = 'answer-area';
+  optsEl.innerHTML = '';
+  ansEl.innerHTML  = '';
+  d.shuffled.forEach(function(w, i) {
+    var chip = document.createElement('span');
+    chip.className = 'word-chip' + (d.placed.indexOf(i) > -1 ? ' used' : '');
+    chip.textContent = w;
+    if (!d.locked && d.placed.indexOf(i) === -1) {
+      chip.onclick = function() { placeWord(id, i); };
+    }
+    optsEl.appendChild(chip);
+  });
+  d.placed.forEach(function(i) {
+    var chip = document.createElement('span');
+    chip.className = 'placed-chip';
+    chip.textContent = d.shuffled[i];
+    ansEl.appendChild(chip);
+  });
+  if (d.placed.length === 0) {
+    var ph = document.createElement('span');
+    ph.style.cssText = 'font-size:13px;color:#9ca3af;';
+    ph.textContent = 'Нажмите на слова выше...';
+    ansEl.appendChild(ph);
+  }
+}
+
+function placeWord(id, idx) {
+  var d = reorderData[id];
+  if (d.locked || d.placed.indexOf(idx) > -1) return;
+  d.placed.push(idx);
+  renderReorder(id);
+}
+
+function undoLastWord(id) {
+  var d = reorderData[id];
+  if (d.locked || d.placed.length === 0) return;
+  d.placed.pop();
+  renderReorder(id);
+}
+
+function checkReorder(id) {
+  var d = reorderData[id];
+  if (d.locked) return;
+  var constructed = d.placed.map(function(i) { return d.shuffled[i]; }).join(' ');
+  var hint = document.getElementById(id + '-hint');
+  d.locked = true;
+  if (!answered[id]) {
+    answered[id] = true;
+    total++;
+    if (constructed === d.answer) {
+      score++;
+      document.getElementById(id + '-ans').classList.add('correct-area');
+      hint.textContent = 'Верно!';
+      hint.className = 'hint ok';
+    } else {
+      document.getElementById(id + '-ans').classList.add('wrong-area');
+      hint.textContent = 'Неверно. Правильный ответ: ' + d.answer.replace(' ?', '?');
+      hint.className = 'hint err';
+    }
+    updateScore();
+  }
+}
+
+function resetReorder(id) {
+  var d = reorderData[id];
+  if (d.locked) return;
+  d.placed = [];
+  renderReorder(id);
+  document.getElementById(id + '-hint').textContent = '';
+}
+
+function resetAll() {
+  score = 0; total = 0; answered = {};
+  document.querySelectorAll('.opt-btn').forEach(function(b) { b.className = 'opt-btn'; b.disabled = false; });
+  document.querySelectorAll('.fill-inp').forEach(function(inp) { inp.value = ''; inp.className = 'fill-inp'; inp.disabled = false; });
+  document.querySelectorAll('.hint').forEach(function(h) { h.textContent = ''; h.className = 'hint'; });
+  Object.keys(reorderData).forEach(function(id) {
+    reorderData[id].locked = false;
+    reorderData[id].placed = [];
+  });
+  initReorders();
+  updateScore();
+}
+
+initReorders();
+updateScore();
+</script>
+</body>
+</html>
