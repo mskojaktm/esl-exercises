@@ -1,602 +1,613 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Present Simple — Упражнения A1</title>
+<title>Present Simple – Suffix -s / -es</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+  :root {
+    --bg: #f0f7ff;
+    --card: #ffffff;
+    --primary: #3a7bd5;
+    --primary-dark: #2560b8;
+    --accent: #ff6b6b;
+    --green: #34c97e;
+    --yellow: #ffd166;
+    --purple: #9b59b6;
+    --text: #1a2a4a;
+    --muted: #6b7c99;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(58,123,213,0.13);
+  }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Inter', sans-serif;
-    background: #f4f6fb;
-    color: #1a1a2e;
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
-    padding: 2rem 1rem 4rem;
+    padding: 0 0 60px;
   }
 
-  .page-header {
-    max-width: 680px;
-    margin: 0 auto 2rem;
-    background: #1a1a2e;
-    border-radius: 16px;
-    padding: 1.75rem 2rem;
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #3a7bd5 0%, #6a3de8 100%);
+    padding: 28px 24px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
     color: #fff;
+    letter-spacing: 1px;
+    position: relative;
   }
-  .page-header .tag {
-    font-size: 11px;
+  header p {
+    color: rgba(255,255,255,0.82);
+    font-size: 1rem;
+    margin-top: 6px;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    padding: 3px 10px;
-    border-radius: 20px;
-    display: inline-block;
-    margin-bottom: 0.75rem;
-  }
-  .page-header h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 0.35rem;
-  }
-  .page-header p {
-    font-size: 14px;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.6;
+    position: relative;
   }
 
-  .container { max-width: 680px; margin: 0 auto; }
-
-  .score-bar {
+  /* ── RULES PANEL ── */
+  .rules-toggle {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 22px auto 0;
+    background: rgba(255,255,255,0.18);
+    border: 2px solid rgba(255,255,255,0.4);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background .2s;
+    position: relative;
+  }
+  .rules-toggle:hover { background: rgba(255,255,255,0.28); }
+
+  .rules-panel {
+    max-width: 760px;
+    margin: 16px auto 0;
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .4s ease, padding .3s;
+  }
+  .rules-panel.open { max-height: 600px; }
+  .rules-inner { padding: 22px 24px; }
+
+  .rules-inner h2 {
+    font-family: 'Fredoka One', cursive;
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+  }
+  .rule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: 12px;
-    padding: 0.85rem 1.25rem;
-    background: #fff;
+  }
+  .rule-card {
     border-radius: 12px;
-    border: 1px solid #e2e6f0;
-    margin-bottom: 1.25rem;
+    padding: 14px 16px;
+    border-left: 4px solid;
   }
-  .score-num { font-size: 20px; font-weight: 600; color: #1a1a2e; }
-  .score-label { font-size: 13px; color: #6b7280; }
-  .reset-btn {
-    margin-left: auto;
-    font-size: 13px;
-    padding: 5px 16px;
-    border-radius: 20px;
-    border: 1px solid #d1d5db;
-    background: #fff;
-    color: #374151;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s;
+  .rule-card.blue  { background: #e8f0fd; border-color: var(--primary); }
+  .rule-card.green { background: #e6f9f0; border-color: var(--green); }
+  .rule-card.red   { background: #fff0f0; border-color: var(--accent); }
+  .rule-card.yellow{ background: #fffbea; border-color: var(--yellow); }
+  .rule-card h3 { font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 6px; }
+  .rule-card p  { font-size: 0.93rem; font-weight: 600; line-height: 1.5; }
+  .rule-card .ex{ font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    max-width: 760px;
+    margin: 20px auto 0;
+    padding: 0 16px;
   }
-  .reset-btn:hover { background: #f3f4f6; }
+  .progress-info { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+  .progress-bar { height: 10px; background: #dde8f7; border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--purple)); border-radius: 99px; transition: width .4s ease; }
 
-  .ex-block {
-    background: #fff;
-    border: 1px solid #e2e6f0;
-    border-radius: 14px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-  .ex-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 20px;
-    display: inline-block;
-    margin-bottom: 0.75rem;
-  }
-  .label-blue   { background: #dbeafe; color: #1d4ed8; }
-  .label-amber  { background: #fef3c7; color: #92400e; }
-  .label-green  { background: #dcfce7; color: #166534; }
-  .label-teal   { background: #ccfbf1; color: #0f766e; }
-
-  .ex-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin-bottom: 1rem;
-  }
-
-  .q-row {
-    padding-bottom: 0.85rem;
-    margin-bottom: 0.85rem;
-    border-bottom: 1px solid #f0f2f7;
-  }
-  .q-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-  .q-text {
-    font-size: 14px;
-    color: #1a1a2e;
-    line-height: 1.65;
-    margin-bottom: 6px;
-  }
-  .q-text em { color: #6b7280; font-style: normal; }
-
-  .opts { display: flex; flex-wrap: wrap; gap: 6px; }
-
-  .opt-btn {
-    font-size: 13px;
-    padding: 5px 16px;
-    border-radius: 20px;
-    border: 1px solid #d1d5db;
-    background: #fff;
-    color: #374151;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .opt-btn:hover:not(:disabled) { background: #f9fafb; border-color: #9ca3af; }
-  .opt-btn.correct  { background: #dcfce7; color: #166534; border-color: #86efac; }
-  .opt-btn.wrong    { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
-  .opt-btn.reveal   { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
-  .opt-btn:disabled { cursor: default; }
-
-  .fill-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .fill-inp {
-    font-size: 14px;
-    padding: 5px 12px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    background: #fff;
-    color: #1a1a2e;
-    width: 130px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .fill-inp:focus { border-color: #6366f1; }
-  .fill-inp.correct { border-color: #86efac; background: #dcfce7; color: #166534; }
-  .fill-inp.wrong   { border-color: #fca5a5; background: #fee2e2; color: #991b1b; }
-
-  .check-btn {
-    font-size: 13px;
-    padding: 5px 16px;
-    border-radius: 20px;
-    border: 1px solid #d1d5db;
-    background: #fff;
-    color: #374151;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s;
-  }
-  .check-btn:hover { background: #f3f4f6; }
-
-  .hint { font-size: 12px; margin-top: 5px; }
-  .hint.ok  { color: #166534; }
-  .hint.err { color: #991b1b; }
-
-  .reorder-area { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
-  .reorder-opts { display: flex; flex-wrap: wrap; gap: 6px; }
-
-  .word-chip {
-    font-size: 13px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    border: 1px solid #d1d5db;
-    background: #f3f4f6;
-    color: #374151;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .word-chip:hover:not(.used) { background: #e5e7eb; }
-  .word-chip.used { opacity: 0.3; cursor: default; pointer-events: none; }
-
-  .answer-area {
-    min-height: 36px;
-    padding: 5px 10px;
-    border: 1.5px dashed #d1d5db;
-    border-radius: 10px;
+  /* ── SCOREBOARD ── */
+  .score-row {
+    max-width: 760px;
+    margin: 12px auto 0;
+    padding: 0 16px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: center;
+    gap: 10px;
+  }
+  .badge {
+    flex: 1;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    text-align: center;
+  }
+  .badge .num { font-family: 'Fredoka One', cursive; font-size: 1.5rem; }
+  .badge .lbl { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+  .badge.correct .num { color: var(--green); }
+  .badge.wrong .num   { color: var(--accent); }
+  .badge.total .num   { color: var(--primary); }
+
+  /* ── QUESTION CARD ── */
+  .q-wrap {
+    max-width: 760px;
+    margin: 22px auto 0;
+    padding: 0 16px;
+  }
+  .q-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 28px 28px 24px;
+    box-shadow: var(--shadow);
+    animation: fadeUp .35s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-type-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+  }
+  .type-fill   { background: #e8f0fd; color: var(--primary); }
+  .type-choice { background: #fff0f0; color: var(--accent); }
+  .type-transform { background: #e6f9f0; color: #1a9a5c; }
+
+  .q-sentence {
+    font-size: clamp(1.05rem, 3vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .q-sentence .blank {
+    display: inline-block;
+    min-width: 90px;
+    border-bottom: 3px solid var(--primary);
+    text-align: center;
+    margin: 0 4px;
+    vertical-align: middle;
+  }
+
+  /* Fill-in input */
+  .fill-input {
+    width: 100%;
+    max-width: 320px;
+    padding: 12px 16px;
+    border: 2.5px solid #c9d9f0;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s;
+    background: #f7faff;
+  }
+  .fill-input:focus { border-color: var(--primary); background: #fff; }
+  .fill-input.correct { border-color: var(--green); background: #f0fff7; }
+  .fill-input.wrong   { border-color: var(--accent); background: #fff5f5; }
+
+  /* Multiple choice */
+  .choices { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .choice-btn {
+    padding: 10px 20px;
+    border: 2.5px solid #c9d9f0;
+    border-radius: 10px;
+    background: #f7faff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
     cursor: pointer;
+    transition: all .15s;
   }
-  .answer-area.correct-area { border-color: #86efac; background: #f0fdf4; }
-  .answer-area.wrong-area   { border-color: #fca5a5; background: #fff1f2; }
+  .choice-btn:hover:not(:disabled) { border-color: var(--primary); background: #e8f0fd; }
+  .choice-btn.selected-correct { border-color: var(--green); background: #e6f9f0; color: #1a9a5c; }
+  .choice-btn.selected-wrong   { border-color: var(--accent); background: #fff0f0; color: #c0392b; }
+  .choice-btn.reveal-correct   { border-color: var(--green); background: #e6f9f0; color: #1a9a5c; }
 
-  .placed-chip {
-    font-size: 13px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid #a5b4fc;
-    background: #eef2ff;
-    color: #3730a3;
+  /* Transform */
+  .transform-prompt {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .word-box {
+    display: inline-block;
+    background: #fffbea;
+    border: 2px dashed var(--yellow);
+    padding: 6px 18px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  /* Feedback */
+  .feedback {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: none;
+    animation: fadeUp .2s ease;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct { background: #e6f9f0; color: #1a9a5c; border-left: 4px solid var(--green); }
+  .feedback.wrong   { background: #fff0f0; color: #c0392b; border-left: 4px solid var(--accent); }
+
+  /* Buttons */
+  .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
     cursor: pointer;
+    transition: transform .1s, opacity .2s;
   }
-  .placed-chip:hover { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-next { background: var(--green); color: #fff; display: none; }
+  .btn-next:hover { opacity: .88; }
 
-  .reorder-actions { display: flex; gap: 8px; margin-top: 6px; }
-
-  @media (max-width: 500px) {
-    .page-header { padding: 1.25rem; }
-    .ex-block { padding: 1rem; }
+  /* ── RESULTS ── */
+  .results-card {
+    max-width: 760px;
+    margin: 30px auto;
+    padding: 0 16px;
+    display: none;
   }
+  .results-inner {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .results-emoji { font-size: 3.5rem; margin-bottom: 12px; }
+  .results-inner h2 { font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+  .results-inner p { color: var(--muted); font-weight: 600; font-size: 1rem; margin-bottom: 24px; }
+  .score-big { font-family: 'Fredoka One', cursive; font-size: 3rem; color: var(--text); margin: 10px 0; }
+  .score-big span { color: var(--primary); }
+  .btn-restart { background: linear-gradient(135deg, var(--primary), var(--purple)); color: #fff; font-size: 1.1rem; padding: 14px 36px; }
+
+  /* Mistakes review */
+  .mistakes-title { font-weight: 800; color: var(--accent); margin: 20px 0 10px; text-align: left; }
+  .mistake-item {
+    text-align: left;
+    background: #fff5f5;
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+  .mistake-item .correct-ans { color: var(--green); }
 </style>
 </head>
 <body>
 
-<div class="page-header">
-  <div class="tag">Уровень A1</div>
-  <h1>Present Simple Tense</h1>
-  <p>Выполните 4 упражнения на правила Present Simple. Нажмите на вариант ответа или введите слово в поле.</p>
+<header>
+  <h1>🔤 Present Simple: -s or -es?</h1>
+  <p>He / She / It — third person singular</p>
+  <button class="rules-toggle" onclick="toggleRules()">📚 Show / Hide Rules</button>
+</header>
+
+<!-- Rules Panel -->
+<div class="rules-panel" id="rulesPanel">
+  <div class="rules-inner">
+    <h2>📝 Rules for He / She / It</h2>
+    <div class="rule-grid">
+      <div class="rule-card blue">
+        <h3>Most verbs → + s</h3>
+        <p>Just add <strong>-s</strong></p>
+        <p class="ex">play → play<strong>s</strong><br>eat → eat<strong>s</strong><br>read → read<strong>s</strong></p>
+      </div>
+      <div class="rule-card red">
+        <h3>-s, -ss, -sh, -ch, -x, -o → + es</h3>
+        <p>Add <strong>-es</strong></p>
+        <p class="ex">go → go<strong>es</strong><br>watch → watch<strong>es</strong><br>wash → wash<strong>es</strong><br>mix → mix<strong>es</strong></p>
+      </div>
+      <div class="rule-card yellow">
+        <h3>Consonant + y → ies</h3>
+        <p>Change <strong>y → ies</strong></p>
+        <p class="ex">study → stud<strong>ies</strong><br>fly → fl<strong>ies</strong><br>carry → carr<strong>ies</strong></p>
+      </div>
+      <div class="rule-card green">
+        <h3>Vowel + y → + s</h3>
+        <p>Just add <strong>-s</strong></p>
+        <p class="ex">play → play<strong>s</strong><br>enjoy → enjoy<strong>s</strong><br>buy → buy<strong>s</strong></p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="container">
-
-  <div class="score-bar">
-    <div>
-      <div class="score-num" id="score-display">0 / 0</div>
-      <div class="score-label">правильных ответов</div>
-    </div>
-    <button class="reset-btn" onclick="resetAll()">Сбросить всё</button>
+<!-- Progress -->
+<div class="progress-wrap">
+  <div class="progress-info">
+    <span id="qCounter">Question 1 of 18</span>
+    <span id="pct">0%</span>
   </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+</div>
 
-  <!-- УПРАЖНЕНИЕ 1 -->
-  <div class="ex-block">
-    <span class="ex-label label-blue">Упражнение 1 — выбор формы</span>
-    <div class="ex-title">Выберите правильную форму глагола</div>
+<!-- Score -->
+<div class="score-row">
+  <div class="badge correct"><div class="num" id="sCorrect">0</div><div class="lbl">✅ Correct</div></div>
+  <div class="badge wrong">  <div class="num" id="sWrong">0</div>  <div class="lbl">❌ Wrong</div></div>
+  <div class="badge total">  <div class="num" id="sTotal">18</div> <div class="lbl">📋 Total</div></div>
+</div>
 
-    <div class="q-row" id="mc0">
-      <div class="q-text">She ___ coffee every morning. <em>(drink)</em></div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'mc0','drinks')">drink</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc0','drinks')">drinks</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc0','drinks')">is drink</button>
-      </div>
-      <div class="hint" id="mc0-hint"></div>
-    </div>
-
-    <div class="q-row" id="mc1">
-      <div class="q-text">They ___ in a big house. <em>(live)</em></div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'mc1','live')">lives</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc1','live')">live</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc1','live')">is live</button>
-      </div>
-      <div class="hint" id="mc1-hint"></div>
-    </div>
-
-    <div class="q-row" id="mc2">
-      <div class="q-text">He ___ the bus to work. <em>(take)</em></div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'mc2','takes')">take</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc2','takes')">is takes</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc2','takes')">takes</button>
-      </div>
-      <div class="hint" id="mc2-hint"></div>
-    </div>
-
-    <div class="q-row" id="mc3">
-      <div class="q-text">My sister ___ the piano. <em>(play)</em></div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'mc3','plays')">playes</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc3','plays')">play</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc3','plays')">plays</button>
-      </div>
-      <div class="hint" id="mc3-hint"></div>
-    </div>
-
-    <div class="q-row" id="mc4">
-      <div class="q-text">The dog ___ a lot. <em>(bark)</em></div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'mc4','barks')">barkes</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc4','barks')">barks</button>
-        <button class="opt-btn" onclick="checkMC(this,'mc4','barks')">bark</button>
-      </div>
-      <div class="hint" id="mc4-hint"></div>
+<!-- Question -->
+<div class="q-wrap">
+  <div class="q-card" id="qCard">
+    <span class="q-type-badge" id="qBadge"></span>
+    <div class="q-sentence" id="qSentence"></div>
+    <div id="qInput"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btnCheck" onclick="checkAnswer()">Check ✓</button>
+      <button class="btn btn-next"    id="btnNext"  onclick="nextQuestion()">Next →</button>
     </div>
   </div>
+</div>
 
-  <!-- УПРАЖНЕНИЕ 2 -->
-  <div class="ex-block">
-    <span class="ex-label label-amber">Упражнение 2 — вставьте слово</span>
-    <div class="ex-title">Напишите правильную форму глагола в скобках</div>
-
-    <div class="q-row">
-      <div class="q-text">I ___ English every day. <em>(study)</em></div>
-      <div class="fill-row">
-        <input class="fill-inp" id="f0" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f0',['study'])">
-        <button class="check-btn" onclick="checkFill('f0',['study'])">Проверить</button>
-      </div>
-      <div class="hint" id="f0-hint"></div>
-    </div>
-
-    <div class="q-row">
-      <div class="q-text">She ___ her teeth twice a day. <em>(brush)</em></div>
-      <div class="fill-row">
-        <input class="fill-inp" id="f1" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f1',['brushes'])">
-        <button class="check-btn" onclick="checkFill('f1',['brushes'])">Проверить</button>
-      </div>
-      <div class="hint" id="f1-hint"></div>
-    </div>
-
-    <div class="q-row">
-      <div class="q-text">We ___ football on Saturdays. <em>(play)</em></div>
-      <div class="fill-row">
-        <input class="fill-inp" id="f2" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f2',['play'])">
-        <button class="check-btn" onclick="checkFill('f2',['play'])">Проверить</button>
-      </div>
-      <div class="hint" id="f2-hint"></div>
-    </div>
-
-    <div class="q-row">
-      <div class="q-text">He ___ in a restaurant. <em>(work)</em></div>
-      <div class="fill-row">
-        <input class="fill-inp" id="f3" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f3',['works'])">
-        <button class="check-btn" onclick="checkFill('f3',['works'])">Проверить</button>
-      </div>
-      <div class="hint" id="f3-hint"></div>
-    </div>
-
-    <div class="q-row">
-      <div class="q-text">It ___ a lot in London. <em>(rain)</em></div>
-      <div class="fill-row">
-        <input class="fill-inp" id="f4" placeholder="..." onkeydown="if(event.key==='Enter')checkFill('f4',['rains'])">
-        <button class="check-btn" onclick="checkFill('f4',['rains'])">Проверить</button>
-      </div>
-      <div class="hint" id="f4-hint"></div>
-    </div>
+<!-- Results -->
+<div class="results-card" id="resultsCard">
+  <div class="results-inner">
+    <div class="results-emoji" id="resEmoji">🎉</div>
+    <h2 id="resTitle">Great job!</h2>
+    <p id="resMsg">Here are your results:</p>
+    <div class="score-big" id="resBig"></div>
+    <div id="mistakesBlock"></div>
+    <button class="btn btn-restart" onclick="restartQuiz()">🔄 Try Again</button>
   </div>
-
-  <!-- УПРАЖНЕНИЕ 3 -->
-  <div class="ex-block">
-    <span class="ex-label label-green">Упражнение 3 — отрицание</span>
-    <div class="ex-title">Выберите правильное вспомогательное слово для отрицания</div>
-
-    <div class="q-row" id="neg0">
-      <div class="q-text">He ___ like spicy food.</div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'neg0',`doesn't`)">don't</button>
-        <button class="opt-btn" onclick="checkMC(this,'neg0',`doesn't`)">doesn't</button>
-        <button class="opt-btn" onclick="checkMC(this,'neg0',`doesn't`)">isn't</button>
-      </div>
-      <div class="hint" id="neg0-hint"></div>
-    </div>
-
-    <div class="q-row" id="neg1">
-      <div class="q-text">They ___ have a car.</div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'neg1',`don't`)">doesn't</button>
-        <button class="opt-btn" onclick="checkMC(this,'neg1',`don't`)">aren't</button>
-        <button class="opt-btn" onclick="checkMC(this,'neg1',`don't`)">don't</button>
-      </div>
-      <div class="hint" id="neg1-hint"></div>
-    </div>
-
-    <div class="q-row" id="neg2">
-      <div class="q-text">My cat ___ eat vegetables.</div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'neg2',`doesn't`)">don't</button>
-        <button class="opt-btn" onclick="checkMC(this,'neg2',`doesn't`)">doesn't</button>
-        <button class="opt-btn" onclick="checkMC(this,'neg2',`doesn't`)">isn't</button>
-      </div>
-      <div class="hint" id="neg2-hint"></div>
-    </div>
-
-    <div class="q-row" id="neg3">
-      <div class="q-text">I ___ watch TV in the morning.</div>
-      <div class="opts">
-        <button class="opt-btn" onclick="checkMC(this,'neg3',`don't`)">doesn't</button>
-        <button class="opt-btn" onclick="checkMC(this,'neg3',`don't`)">don't</button>
-        <button class="opt-btn" onclick="checkMC(this,'neg3',`don't`)">aren't</button>
-      </div>
-      <div class="hint" id="neg3-hint"></div>
-    </div>
-  </div>
-
-  <!-- УПРАЖНЕНИЕ 4 -->
-  <div class="ex-block">
-    <span class="ex-label label-teal">Упражнение 4 — составь вопрос</span>
-    <div class="ex-title">Составьте вопрос из слов — нажимайте на слова по порядку</div>
-
-    <div class="q-row" id="ror0">
-      <div class="q-text">Подсказка: <em>Ты живёшь здесь?</em></div>
-      <div class="reorder-area">
-        <div class="reorder-opts" id="ror0-opts"></div>
-        <div class="answer-area" id="ror0-ans" onclick="undoLastWord('ror0')"></div>
-      </div>
-      <div class="reorder-actions">
-        <button class="check-btn" onclick="checkReorder('ror0')">Проверить</button>
-        <button class="check-btn" onclick="resetReorder('ror0')">Сбросить</button>
-      </div>
-      <div class="hint" id="ror0-hint"></div>
-    </div>
-
-    <div class="q-row" id="ror1">
-      <div class="q-text">Подсказка: <em>Она работает каждый день?</em></div>
-      <div class="reorder-area">
-        <div class="reorder-opts" id="ror1-opts"></div>
-        <div class="answer-area" id="ror1-ans" onclick="undoLastWord('ror1')"></div>
-      </div>
-      <div class="reorder-actions">
-        <button class="check-btn" onclick="checkReorder('ror1')">Проверить</button>
-        <button class="check-btn" onclick="resetReorder('ror1')">Сбросить</button>
-      </div>
-      <div class="hint" id="ror1-hint"></div>
-    </div>
-
-    <div class="q-row" id="ror2">
-      <div class="q-text">Подсказка: <em>Они пьют чай по утрам?</em></div>
-      <div class="reorder-area">
-        <div class="reorder-opts" id="ror2-opts"></div>
-        <div class="answer-area" id="ror2-ans" onclick="undoLastWord('ror2')"></div>
-      </div>
-      <div class="reorder-actions">
-        <button class="check-btn" onclick="checkReorder('ror2')">Проверить</button>
-        <button class="check-btn" onclick="resetReorder('ror2')">Сбросить</button>
-      </div>
-      <div class="hint" id="ror2-hint"></div>
-    </div>
-  </div>
-
 </div>
 
 <script>
-var score = 0, total = 0;
-var answered = {};
-var reorderData = {
-  ror0: { words: ['Do','you','live','here','?'], answer: 'Do you live here ?', placed: [], locked: false },
-  ror1: { words: ['Does','she','work','every','day','?'], answer: 'Does she work every day ?', placed: [], locked: false },
-  ror2: { words: ['Do','they','drink','tea','in','the','morning','?'], answer: 'Do they drink tea in the morning ?', placed: [], locked: false }
-};
+const questions = [
+  // ── FILL-IN (suffix) ──
+  { type:'fill', sentence:'She ___ (study) English every day.', answer:'studies', hint:'consonant + y → ies', base:'study' },
+  { type:'fill', sentence:'He ___ (go) to school by bus.', answer:'goes', hint:'-o → +es', base:'go' },
+  { type:'fill', sentence:'My dog ___ (eat) twice a day.', answer:'eats', hint:'most verbs → +s', base:'eat' },
+  { type:'fill', sentence:'Tom ___ (watch) TV in the evening.', answer:'watches', hint:'-ch → +es', base:'watch' },
+  { type:'fill', sentence:'Anna ___ (fly) to London every summer.', answer:'flies', hint:'consonant + y → ies', base:'fly' },
+  { type:'fill', sentence:'My mum ___ (wash) dishes after dinner.', answer:'washes', hint:'-sh → +es', base:'wash' },
+  { type:'fill', sentence:'He ___ (carry) a heavy backpack.', answer:'carries', hint:'consonant + y → ies', base:'carry' },
+  { type:'fill', sentence:'She ___ (mix) the ingredients.', answer:'mixes', hint:'-x → +es', base:'mix' },
+  { type:'fill', sentence:'The robot ___ (play) music for us.', answer:'plays', hint:'vowel + y → +s', base:'play' },
+  { type:'fill', sentence:'Dad ___ (fix) computers at work.', answer:'fixes', hint:'-x → +es', base:'fix' },
+
+  // ── MULTIPLE CHOICE ──
+  { type:'choice', sentence:'My sister ___ (read) books every night.',
+    options:['reads','reades','readies'], answer:'reads', hint:'most verbs → +s', base:'read' },
+  { type:'choice', sentence:'He ___ (teach) maths at our school.',
+    options:['teachs','teaches','teachies'], answer:'teaches', hint:'-ch → +es', base:'teach' },
+  { type:'choice', sentence:'The cat ___ (enjoy) sleeping in the sun.',
+    options:['enjoies','enjoys','enjoyes'], answer:'enjoys', hint:'vowel + y → +s', base:'enjoy' },
+  { type:'choice', sentence:'She ___ (do) her homework on time.',
+    options:['dos','does','doies'], answer:'does', hint:'-o → +es', base:'do' },
+
+  // ── TRANSFORM ──
+  { type:'transform', base:'push',   answer:'pushes',  hint:'-sh → +es',          sentence:'He ___ the door to open it.' },
+  { type:'transform', base:'try',    answer:'tries',   hint:'consonant + y → ies', sentence:'She always ___ her best.' },
+  { type:'transform', base:'kiss',   answer:'kisses',  hint:'-ss → +es',           sentence:'Grandma ___ the baby every morning.' },
+  { type:'transform', base:'buy',    answer:'buys',    hint:'vowel + y → +s',      sentence:'My brother ___ coffee every day.' },
+];
+
+let current = 0, correct = 0, wrong = 0;
+let mistakes = [];
+let answered = false;
+
+function init() {
+  current = 0; correct = 0; wrong = 0; mistakes = [];
+  answered = false;
+  document.getElementById('resultsCard').style.display = 'none';
+  document.getElementById('qCard').style.display = 'block';
+  document.querySelector('.progress-wrap').style.display = 'block';
+  document.querySelector('.score-row').style.display = 'flex';
+  updateScore();
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[current];
+  const total = questions.length;
+
+  document.getElementById('qCounter').textContent = `Question ${current+1} of ${total}`;
+  const pct = Math.round((current/total)*100);
+  document.getElementById('pct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  const badge = document.getElementById('qBadge');
+  badge.textContent = q.type === 'fill' ? '✏️ Fill in the blank' :
+                      q.type === 'choice' ? '🔘 Choose the correct form' : '🔁 Transform the verb';
+  badge.className = 'q-type-badge ' + (q.type==='fill'?'type-fill': q.type==='choice'?'type-choice':'type-transform');
+
+  const sentenceEl = document.getElementById('qSentence');
+  sentenceEl.innerHTML = q.sentence.replace('___', '<span class="blank" id="blankSpan">&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+
+  const inputEl = document.getElementById('qInput');
+  const fbEl = document.getElementById('feedback');
+  fbEl.className = 'feedback';
+  fbEl.textContent = '';
+  document.getElementById('btnCheck').style.display = 'inline-block';
+  document.getElementById('btnNext').style.display = 'none';
+
+  if (q.type === 'fill' || q.type === 'transform') {
+    let extra = '';
+    if (q.type === 'transform') {
+      extra = `<div class="transform-prompt">Write the correct form of:</div>
+               <div class="word-box">${q.base}</div><br>`;
+    }
+    inputEl.innerHTML = extra +
+      `<input class="fill-input" id="fillInput" type="text" placeholder="Type here..." autocomplete="off"
+              onkeydown="if(event.key==='Enter')checkAnswer()">`;
+    setTimeout(()=>{ const el=document.getElementById('fillInput'); if(el) el.focus(); }, 50);
+
+  } else {
+    inputEl.innerHTML = '<div class="choices">' +
+      q.options.map((o,i) =>
+        `<button class="choice-btn" id="opt${i}" onclick="selectChoice('${o}',${i})">${o}</button>`
+      ).join('') + '</div>';
+  }
+  // re-animate card
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeUp .35s ease';
+}
+
+let selectedChoice = null;
+function selectChoice(val, idx) {
+  if (answered) return;
+  selectedChoice = val;
+  document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected-correct','selected-wrong','reveal-correct'));
+  document.getElementById('opt'+idx).style.borderColor = '#3a7bd5';
+  document.getElementById('opt'+idx).style.background = '#e8f0fd';
+}
+
+function checkAnswer() {
+  if (answered) return;
+  const q = questions[current];
+  let userAnswer = '';
+
+  if (q.type === 'fill' || q.type === 'transform') {
+    const inp = document.getElementById('fillInput');
+    userAnswer = inp.value.trim().toLowerCase();
+    if (!userAnswer) { inp.focus(); return; }
+    const isOk = userAnswer === q.answer.toLowerCase();
+    inp.classList.add(isOk ? 'correct' : 'wrong');
+    inp.disabled = true;
+    giveFeedback(isOk, q);
+  } else {
+    if (!selectedChoice) return;
+    userAnswer = selectedChoice;
+    const isOk = userAnswer === q.answer;
+    const opts = document.querySelectorAll('.choice-btn');
+    opts.forEach(b => {
+      b.disabled = true;
+      if (b.textContent === q.answer) b.classList.add('reveal-correct');
+    });
+    if (!isOk) {
+      opts.forEach(b => { if(b.textContent===userAnswer) b.classList.add('selected-wrong'); });
+    }
+    selectedChoice = null;
+    giveFeedback(isOk, q);
+  }
+  answered = true;
+  document.getElementById('btnCheck').style.display = 'none';
+  document.getElementById('btnNext').style.display = 'inline-block';
+  updateScore();
+}
+
+function giveFeedback(isOk, q) {
+  const fb = document.getElementById('feedback');
+  if (isOk) {
+    correct++;
+    fb.className = 'feedback correct show';
+    fb.textContent = `✅ Correct! "${q.answer}" — rule: ${q.hint}`;
+  } else {
+    wrong++;
+    fb.className = 'feedback wrong show';
+    fb.textContent = `❌ Not quite. The correct form is: "${q.answer}" (rule: ${q.hint})`;
+    mistakes.push(q);
+  }
+  // update blank span
+  const bl = document.getElementById('blankSpan');
+  if (bl) bl.textContent = q.answer;
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) { showResults(); return; }
+  renderQuestion();
+}
 
 function updateScore() {
-  document.getElementById('score-display').textContent = score + ' / ' + total;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
 }
 
-function checkMC(btn, qid, correct) {
-  if (answered[qid]) return;
-  answered[qid] = true;
-  total++;
-  var opts = document.querySelectorAll('#' + qid + ' .opt-btn');
-  opts.forEach(function(b) { b.disabled = true; });
-  var hint = document.getElementById(qid + '-hint');
-  if (btn.textContent === correct) {
-    btn.classList.add('correct');
-    score++;
-    hint.textContent = 'Верно!';
-    hint.className = 'hint ok';
+function showResults() {
+  document.getElementById('qCard').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  document.querySelector('.score-row').style.display = 'none';
+
+  const total = questions.length;
+  const pct = Math.round((correct/total)*100);
+  const res = document.getElementById('resultsCard');
+  res.style.display = 'block';
+
+  let emoji, title, msg;
+  if (pct >= 90)      { emoji='🏆'; title='Excellent!';   msg='You know the rules really well!'; }
+  else if (pct >= 70) { emoji='🎉'; title='Well done!';   msg='Keep practising a little more!'; }
+  else if (pct >= 50) { emoji='💪'; title='Good try!';    msg='Review the rules and try again!'; }
+  else                { emoji='📖'; title='Keep going!';  msg='Read the rules and try once more!'; }
+
+  document.getElementById('resEmoji').textContent = emoji;
+  document.getElementById('resTitle').textContent = title;
+  document.getElementById('resMsg').textContent   = msg;
+  document.getElementById('resBig').innerHTML = `<span>${correct}</span> / ${total} correct (${pct}%)`;
+
+  const mb = document.getElementById('mistakesBlock');
+  if (mistakes.length > 0) {
+    mb.innerHTML = `<p class="mistakes-title">🔍 Review your mistakes (${mistakes.length}):</p>` +
+      mistakes.map(q=>`<div class="mistake-item">
+        <em>"${q.sentence.replace('___','______')}"</em><br>
+        ✅ Correct: <span class="correct-ans">${q.answer}</span> — ${q.hint}
+      </div>`).join('');
   } else {
-    btn.classList.add('wrong');
-    opts.forEach(function(b) { if (b.textContent === correct) b.classList.add('reveal'); });
-    hint.textContent = 'Неверно. Правильный ответ: ' + correct;
-    hint.className = 'hint err';
-  }
-  updateScore();
-}
-
-function checkFill(id, answers) {
-  if (answered[id]) return;
-  var inp = document.getElementById(id);
-  var val = inp.value.trim().toLowerCase();
-  var hint = document.getElementById(id + '-hint');
-  if (!val) return;
-  answered[id] = true;
-  total++;
-  inp.disabled = true;
-  if (answers.indexOf(val) > -1) {
-    inp.classList.add('correct');
-    hint.textContent = 'Верно!';
-    hint.className = 'hint ok';
-    score++;
-  } else {
-    inp.classList.add('wrong');
-    hint.textContent = 'Неверно. Правильный ответ: ' + answers[0];
-    hint.className = 'hint err';
-  }
-  updateScore();
-}
-
-function initReorders() {
-  Object.keys(reorderData).forEach(function(id) {
-    var d = reorderData[id];
-    var shuffled = d.words.slice().sort(function() { return Math.random() - 0.5; });
-    d.shuffled = shuffled;
-    d.placed = [];
-    d.locked = false;
-    renderReorder(id);
-  });
-}
-
-function renderReorder(id) {
-  var d = reorderData[id];
-  var optsEl = document.getElementById(id + '-opts');
-  var ansEl  = document.getElementById(id + '-ans');
-  ansEl.className = 'answer-area';
-  optsEl.innerHTML = '';
-  ansEl.innerHTML  = '';
-  d.shuffled.forEach(function(w, i) {
-    var chip = document.createElement('span');
-    chip.className = 'word-chip' + (d.placed.indexOf(i) > -1 ? ' used' : '');
-    chip.textContent = w;
-    if (!d.locked && d.placed.indexOf(i) === -1) {
-      chip.onclick = function() { placeWord(id, i); };
-    }
-    optsEl.appendChild(chip);
-  });
-  d.placed.forEach(function(i) {
-    var chip = document.createElement('span');
-    chip.className = 'placed-chip';
-    chip.textContent = d.shuffled[i];
-    ansEl.appendChild(chip);
-  });
-  if (d.placed.length === 0) {
-    var ph = document.createElement('span');
-    ph.style.cssText = 'font-size:13px;color:#9ca3af;';
-    ph.textContent = 'Нажмите на слова выше...';
-    ansEl.appendChild(ph);
+    mb.innerHTML = `<p style="color:var(--green);font-weight:700;margin-bottom:16px">🌟 No mistakes — perfect!</p>`;
   }
 }
 
-function placeWord(id, idx) {
-  var d = reorderData[id];
-  if (d.locked || d.placed.indexOf(idx) > -1) return;
-  d.placed.push(idx);
-  renderReorder(id);
+function restartQuiz() { init(); }
+
+function toggleRules() {
+  const p = document.getElementById('rulesPanel');
+  p.classList.toggle('open');
 }
 
-function undoLastWord(id) {
-  var d = reorderData[id];
-  if (d.locked || d.placed.length === 0) return;
-  d.placed.pop();
-  renderReorder(id);
-}
-
-function checkReorder(id) {
-  var d = reorderData[id];
-  if (d.locked) return;
-  var constructed = d.placed.map(function(i) { return d.shuffled[i]; }).join(' ');
-  var hint = document.getElementById(id + '-hint');
-  d.locked = true;
-  if (!answered[id]) {
-    answered[id] = true;
-    total++;
-    if (constructed === d.answer) {
-      score++;
-      document.getElementById(id + '-ans').classList.add('correct-area');
-      hint.textContent = 'Верно!';
-      hint.className = 'hint ok';
-    } else {
-      document.getElementById(id + '-ans').classList.add('wrong-area');
-      hint.textContent = 'Неверно. Правильный ответ: ' + d.answer.replace(' ?', '?');
-      hint.className = 'hint err';
-    }
-    updateScore();
-  }
-}
-
-function resetReorder(id) {
-  var d = reorderData[id];
-  if (d.locked) return;
-  d.placed = [];
-  renderReorder(id);
-  document.getElementById(id + '-hint').textContent = '';
-}
-
-function resetAll() {
-  score = 0; total = 0; answered = {};
-  document.querySelectorAll('.opt-btn').forEach(function(b) { b.className = 'opt-btn'; b.disabled = false; });
-  document.querySelectorAll('.fill-inp').forEach(function(inp) { inp.value = ''; inp.className = 'fill-inp'; inp.disabled = false; });
-  document.querySelectorAll('.hint').forEach(function(h) { h.textContent = ''; h.className = 'hint'; });
-  Object.keys(reorderData).forEach(function(id) {
-    reorderData[id].locked = false;
-    reorderData[id].placed = [];
-  });
-  initReorders();
-  updateScore();
-}
-
-initReorders();
-updateScore();
+// Start
+init();
 </script>
 </body>
 </html>
