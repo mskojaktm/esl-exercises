@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Food — Vocabulary</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F4EE;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --muted: #6B6760;
+    --border: #E2DDD5;
+    --accent: #2D6A4F;
+    --accent-light: #D8EDDF;
+    --blue: #1B4F8A;
+    --blue-light: #DAE8F7;
+    --purple: #4A3B8C;
+    --purple-light: #E8E4F7;
+    --tag-h: 13px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  header {
+    max-width: 760px;
+    margin: 0 auto 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--text);
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .controls {
+    max-width: 760px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover { border-color: #B0A99E; color: var(--text); }
+
+  .filter-btn.active {
+    background: var(--text);
+    color: #fff;
+    border-color: var(--text);
+  }
+
+  .stats {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .counter {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .reset-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .reset-btn:hover { border-color: #B0A99E; color: var(--text); }
+
+  .grid {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.1rem 1rem;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--border));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+    border-color: #C8C2B8;
+  }
+
+  .card.revealed {
+    border-color: var(--card-accent, var(--border));
+  }
+
+  .card.revealed::after { opacity: 1; }
+
+  .card[data-cat="food"] { --card-accent: var(--accent); }
+  .card[data-cat="sci"]  { --card-accent: var(--blue); }
+  .card[data-cat="gen"]  { --card-accent: var(--purple); }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-bottom: 8px;
+  }
+
+  .tag-food { background: var(--accent-light); color: var(--accent); }
+  .tag-sci  { background: var(--blue-light);   color: var(--blue); }
+  .tag-gen  { background: var(--purple-light); color: var(--purple); }
+
+  .word {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .pos {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  .translation {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 8px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.2s;
+  }
+
+  .card.revealed .translation {
+    max-height: 60px;
+    opacity: 1;
+  }
+
+  .tap-hint {
+    font-size: 11px;
+    color: #C0BAB0;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+  }
+
+  .card.revealed .tap-hint { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+
+  .progress-bar-wrap {
+    max-width: 760px;
+    margin: 0 auto 1.5rem;
+    height: 4px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .done-msg {
+    max-width: 760px;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.4s;
+    height: 0;
+  }
+
+  .done-msg.visible { opacity: 1; height: auto; }
+
+  footer {
+    max-width: 760px;
+    margin: 3rem auto 0;
+    font-size: 12px;
+    color: #C0BAB0;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="eyebrow">Pre-watching vocabulary</span>
+  <h1>Future Food —<br>The Menu of 2030</h1>
+  <p class="subtitle">Tap a card to reveal the Russian translation. Try to guess first!</p>
+</header>
+
+<div class="controls">
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All (16)</button>
+    <button class="filter-btn" onclick="filterCards('food', this)">🥗 Food</button>
+    <button class="filter-btn" onclick="filterCards('sci', this)">🔬 Science</button>
+    <button class="filter-btn" onclick="filterCards('gen', this)">📘 General</button>
+  </div>
+  <div class="stats">
+    <span class="counter" id="counter">0 / 16</span>
+    <button class="reset-btn" onclick="resetAll()">Reset</button>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar" id="progress"></div>
+</div>
+
+<div class="grid" id="grid">
+
+  <div class="card" data-cat="food" onclick="reveal(this)">
+    <span class="tag tag-food">food</span>
+    <div class="word">edible</div>
+    <div class="pos">adjective</div>
+    <div class="translation">съедобный</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="gen" onclick="reveal(this)">
+    <span class="tag tag-gen">general</span>
+    <div class="word">abundantly</div>
+    <div class="pos">adverb</div>
+    <div class="translation">в изобилии, в большом количестве</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="food" onclick="reveal(this)">
+    <span class="tag tag-food">food</span>
+    <div class="word">fiber</div>
+    <div class="pos">noun</div>
+    <div class="translation">клетчатка</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="sci" onclick="reveal(this)">
+    <span class="tag tag-sci">science</span>
+    <div class="word">synthetic</div>
+    <div class="pos">adjective</div>
+    <div class="translation">синтетический, искусственный</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="sci" onclick="reveal(this)">
+    <span class="tag tag-sci">science</span>
+    <div class="word">stem cells</div>
+    <div class="pos">noun phrase</div>
+    <div class="translation">стволовые клетки</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="food" onclick="reveal(this)">
+    <span class="tag tag-food">food</span>
+    <div class="word">bland</div>
+    <div class="pos">adjective</div>
+    <div class="translation">пресный, безвкусный</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="food" onclick="reveal(this)">
+    <span class="tag tag-food">food</span>
+    <div class="word">algae</div>
+    <div class="pos">noun</div>
+    <div class="translation">водоросли</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="gen" onclick="reveal(this)">
+    <span class="tag tag-gen">general</span>
+    <div class="word">tweaking</div>
+    <div class="pos">verb / noun</div>
+    <div class="translation">корректировка, внесение изменений</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="sci" onclick="reveal(this)">
+    <span class="tag tag-sci">science</span>
+    <div class="word">aquaculture</div>
+    <div class="pos">noun</div>
+    <div class="translation">аквакультура (разведение рыбы)</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="gen" onclick="reveal(this)">
+    <span class="tag tag-gen">general</span>
+    <div class="word">sustainable</div>
+    <div class="pos">adjective</div>
+    <div class="translation">устойчивый, экологически сбалансированный</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="sci" onclick="reveal(this)">
+    <span class="tag tag-sci">science</span>
+    <div class="word">genetically modified</div>
+    <div class="pos">adjective phrase</div>
+    <div class="translation">генетически модифицированный (ГМО)</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="sci" onclick="reveal(this)">
+    <span class="tag tag-sci">science</span>
+    <div class="word">disease-resistant</div>
+    <div class="pos">adjective</div>
+    <div class="translation">устойчивый к болезням</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="food" onclick="reveal(this)">
+    <span class="tag tag-food">food</span>
+    <div class="word">livestock</div>
+    <div class="pos">noun</div>
+    <div class="translation">скот, животноводческая продукция</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="gen" onclick="reveal(this)">
+    <span class="tag tag-gen">general</span>
+    <div class="word">to customize</div>
+    <div class="pos">verb</div>
+    <div class="translation">настраивать под себя, персонализировать</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="food" onclick="reveal(this)">
+    <span class="tag tag-food">food</span>
+    <div class="word">texture</div>
+    <div class="pos">noun</div>
+    <div class="translation">текстура, консистенция</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="sci" onclick="reveal(this)">
+    <span class="tag tag-sci">science</span>
+    <div class="word">bio fuel</div>
+    <div class="pos">noun</div>
+    <div class="translation">биотопливо</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+</div>
+
+<div class="done-msg" id="doneMsg">🎉 Well done! All words revealed. Ready to watch the video!</div>
+
+<footer>Future Food · Pre-watching vocabulary · mskojaktm / esl-exercises</footer>
+
+<script>
+  const TOTAL = 16;
+  let openCount = 0;
+  let currentFilter = 'all';
+
+  function reveal(card) {
+    if (card.classList.contains('revealed')) return;
+    if (card.style.display === 'none') return;
+    card.classList.add('revealed');
+    openCount++;
+    updateCounter();
+  }
+
+  function updateCounter() {
+    document.getElementById('counter').textContent = openCount + ' / ' + TOTAL;
+    document.getElementById('progress').style.width = Math.round((openCount / TOTAL) * 100) + '%';
+    if (openCount === TOTAL) {
+      document.getElementById('doneMsg').classList.add('visible');
+    }
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('revealed'));
+    openCount = 0;
+    updateCounter();
+    document.getElementById('doneMsg').classList.remove('visible');
+  }
+
+  function filterCards(cat, btn) {
+    currentFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
