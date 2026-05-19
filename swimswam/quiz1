@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spire Academy — Comprehension Questions</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F2F6FB;
+    --surface: #FFFFFF;
+    --text: #1A1A2E;
+    --muted: #6B7A99;
+    --border: #D9E2EF;
+    --blue: #1B4F8A;
+    --blue-light: #DAE8F7;
+    --green: #1A7A50;
+    --green-light: #D4F0E4;
+    --red: #9B2020;
+    --red-light: #FAE0E0;
+    --orange: #B8520A;
+    --orange-light: #FDEBD8;
+    --purple: #5B3FA0;
+    --purple-light: #EAE4F7;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container { max-width: 720px; margin: 0 auto; }
+
+  header { margin-bottom: 2rem; }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .subtitle { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* Score bar */
+  .scorebar {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .score-label { font-size: 13px; color: var(--muted); }
+  .score-value { font-size: 22px; font-family: 'DM Serif Display', serif; color: var(--text); }
+
+  .progress-wrap { flex: 1; min-width: 120px; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-bar { height: 100%; background: var(--blue); border-radius: 99px; width: 0%; transition: width 0.4s ease; }
+
+  .reset-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { border-color: #9BAABF; color: var(--text); }
+
+  /* Section */
+  .section { margin-bottom: 2rem; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    padding-left: 2px;
+  }
+
+  /* Question card */
+  .q-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.1rem 1.2rem;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .q-card.correct  { border-color: var(--green); }
+  .q-card.wrong    { border-color: var(--red);   }
+  .q-card.skipped  { border-color: var(--orange); }
+
+  .q-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+
+  .q-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+
+  /* Multiple choice */
+  .options { display: flex; flex-direction: column; gap: 7px; }
+
+  .opt-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    text-align: left;
+    padding: 9px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .opt-btn:hover:not(:disabled) { border-color: #9BAABF; background: #EAF0F8; }
+  .opt-btn:disabled { cursor: default; }
+  .opt-btn.correct-ans { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 500; }
+  .opt-btn.wrong-ans   { background: var(--red-light);   border-color: var(--red);   color: var(--red);   }
+
+  /* True/False */
+  .tf-group { display: flex; gap: 8px; }
+
+  .tf-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .tf-btn:hover:not(:disabled) { border-color: #9BAABF; background: #EAF0F8; }
+  .tf-btn:disabled { cursor: default; }
+  .tf-btn.correct-ans { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 600; }
+  .tf-btn.wrong-ans   { background: var(--red-light);   border-color: var(--red);   color: var(--red);   }
+
+  /* Open question */
+  .open-area {
+    width: 100%;
+    min-height: 72px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 12px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .open-area:focus { border-color: var(--blue); }
+
+  .show-key-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 99px;
+    border: 1.5px solid var(--blue);
+    background: transparent;
+    color: var(--blue);
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.15s;
+  }
+  .show-key-btn:hover { background: var(--blue-light); }
+
+  /* Feedback */
+  .feedback {
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 9px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct-fb { background: var(--green-light); color: var(--green); }
+  .feedback.wrong-fb   { background: var(--red-light);   color: var(--red);   }
+  .feedback.key-fb     { background: var(--blue-light);  color: var(--blue);  }
+
+  /* Final result */
+  .result-box {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    display: none;
+  }
+  .result-box.show { display: block; }
+  .result-emoji { font-size: 36px; margin-bottom: 8px; }
+  .result-title { font-family: 'DM Serif Display', serif; font-size: 26px; margin-bottom: 6px; }
+  .result-sub { font-size: 14px; color: var(--muted); }
+
+  footer { font-size: 12px; color: #B5BDCC; text-align: center; margin-top: 3rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <span class="eyebrow">Comprehension Questions · SwimSwam Podcast</span>
+    <h1>Spire Academy — The Only Swimming Sports Academy in the U.S.</h1>
+    <p class="subtitle">15 questions · Multiple choice, True/False, and open-ended. Answer all, then check your score.</p>
+  </header>
+
+  <div class="scorebar">
+    <div>
+      <div class="score-label">Score</div>
+      <div class="score-value" id="scoreVal">0 / 10</div>
+    </div>
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <button class="reset-btn" onclick="resetAll()">Start over</button>
+  </div>
+
+  <!-- SECTION 1: MULTIPLE CHOICE -->
+  <div class="section">
+    <div class="section-title">Part 1 — Multiple choice</div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="q1">
+      <div class="q-num">Question 1</div>
+      <div class="q-text">How long has Coach Thad Schultz been working at Spire Academy?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="checkMC(this,'q1','a')">A. Since 2010</button>
+        <button class="opt-btn" onclick="checkMC(this,'q1','b')">B. Since 2012</button>
+        <button class="opt-btn" onclick="checkMC(this,'q1','c')">C. Since 2015</button>
+        <button class="opt-btn" onclick="checkMC(this,'q1','d')">D. Since 2018</button>
+      </div>
+      <div class="feedback" id="q1-fb"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="q2">
+      <div class="q-num">Question 2</div>
+      <div class="q-text">What is the main difference between Spire Academy and a traditional prep school?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="checkMC(this,'q2','a')">A. Spire focuses only on swimming and ignores academics</button>
+        <button class="opt-btn" onclick="checkMC(this,'q2','b')">B. Spire is a sports academy where athletics and academics work equally together</button>
+        <button class="opt-btn" onclick="checkMC(this,'q2','c')">C. Spire is an online-only school for athletes</button>
+        <button class="opt-btn" onclick="checkMC(this,'q2','d')">D. Spire has no academic programme at all</button>
+      </div>
+      <div class="feedback" id="q2-fb"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" id="q3">
+      <div class="q-num">Question 3</div>
+      <div class="q-text">What kind of teaching method does Spire's school use?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="checkMC(this,'q3','a')">A. Memorising facts from textbooks</button>
+        <button class="opt-btn" onclick="checkMC(this,'q3','b')">B. Online video lectures</button>
+        <button class="opt-btn" onclick="checkMC(this,'q3','c')">C. Project-based learning through research</button>
+        <button class="opt-btn" onclick="checkMC(this,'q3','d')">D. Standard national curriculum testing</button>
+      </div>
+      <div class="feedback" id="q3-fb"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" id="q4">
+      <div class="q-num">Question 4</div>
+      <div class="q-text">Approximately how many swimmers are on the team at Spire Academy?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="checkMC(this,'q4','a')">A. About 5</button>
+        <button class="opt-btn" onclick="checkMC(this,'q4','b')">B. About 20</button>
+        <button class="opt-btn" onclick="checkMC(this,'q4','c')">C. About 50</button>
+        <button class="opt-btn" onclick="checkMC(this,'q4','d')">D. About 100</button>
+      </div>
+      <div class="feedback" id="q4-fb"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" id="q5">
+      <div class="q-num">Question 5</div>
+      <div class="q-text">What academic degrees does Coach Thad hold?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="checkMC(this,'q5','a')">A. BA in Sports Science and Master's in Physical Education</button>
+        <button class="opt-btn" onclick="checkMC(this,'q5','b')">B. BA in Psychology and Master's in Counselling</button>
+        <button class="opt-btn" onclick="checkMC(this,'q5','c')">C. BA in Biology and Master's in Nutrition</button>
+        <button class="opt-btn" onclick="checkMC(this,'q5','d')">D. BA in Education and Master's in Coaching</button>
+      </div>
+      <div class="feedback" id="q5-fb"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" id="q6">
+      <div class="q-num">Question 6</div>
+      <div class="q-text">How does Thad describe his coaching philosophy in terms of training volume?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="checkMC(this,'q6','a')">A. More yardage always leads to better results</button>
+        <button class="opt-btn" onclick="checkMC(this,'q6','b')">B. He focuses on fun only — no serious training</button>
+        <button class="opt-btn" onclick="checkMC(this,'q6','c')">C. He is technique-based, not yardage-based, and prefers variety</button>
+        <button class="opt-btn" onclick="checkMC(this,'q6','d')">D. He follows a strict sprint-only programme</button>
+      </div>
+      <div class="feedback" id="q6-fb"></div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 2: TRUE / FALSE -->
+  <div class="section">
+    <div class="section-title">Part 2 — True or False</div>
+
+    <!-- Q7 -->
+    <div class="q-card" id="q7">
+      <div class="q-num">Question 7</div>
+      <div class="q-text">Mel Stewart says his own boarding school experience was NOT important for his later success in swimming.</div>
+      <div class="tf-group">
+        <button class="tf-btn" onclick="checkTF(this,'q7',false)">True</button>
+        <button class="tf-btn" onclick="checkTF(this,'q7',true)">False</button>
+      </div>
+      <div class="feedback" id="q7-fb"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" id="q8">
+      <div class="q-num">Question 8</div>
+      <div class="q-text">Spire Academy can change its training schedule to accommodate exams or competitions.</div>
+      <div class="tf-group">
+        <button class="tf-btn" onclick="checkTF(this,'q8',true)">True</button>
+        <button class="tf-btn" onclick="checkTF(this,'q8',false)">False</button>
+      </div>
+      <div class="feedback" id="q8-fb"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card" id="q9">
+      <div class="q-num">Question 9</div>
+      <div class="q-text">Spire Academy has no international students — it accepts only American athletes.</div>
+      <div class="tf-group">
+        <button class="tf-btn" onclick="checkTF(this,'q9',false)">True</button>
+        <button class="tf-btn" onclick="checkTF(this,'q9',true)">False</button>
+      </div>
+      <div class="feedback" id="q9-fb"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card" id="q10">
+      <div class="q-num">Question 10</div>
+      <div class="q-text">Spire Academy has a full-time staff member dedicated to helping athletes find and apply to colleges.</div>
+      <div class="tf-group">
+        <button class="tf-btn" onclick="checkTF(this,'q10',true)">True</button>
+        <button class="tf-btn" onclick="checkTF(this,'q10',false)">False</button>
+      </div>
+      <div class="feedback" id="q10-fb"></div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 3: OPEN QUESTIONS (with key reveal) -->
+  <div class="section">
+    <div class="section-title">Part 3 — Open questions (discuss with your teacher)</div>
+
+    <!-- Q11 -->
+    <div class="q-card" id="q11">
+      <div class="q-num">Question 11</div>
+      <div class="q-text">According to Thad, what are the three most common reasons families contact Spire Academy?</div>
+      <textarea class="open-area" placeholder="Write your answer here…"></textarea>
+      <button class="show-key-btn" onclick="showKey('q11')">Show answer key</button>
+      <div class="feedback key-fb" id="q11-fb">
+        ✅ <strong>Key:</strong> (1) Their current swim club or pool programme has closed or fallen apart. (2) They feel "lost" or stuck in their current programme with no clear path. (3) International athletes who want a U.S. college experience and need connections to American universities.
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="q-card" id="q12">
+      <div class="q-num">Question 12</div>
+      <div class="q-text">What does Mel Stewart mean when he says that joining a sports academy is like "having college early"?</div>
+      <textarea class="open-area" placeholder="Write your answer here…"></textarea>
+      <button class="show-key-btn" onclick="showKey('q12')">Show answer key</button>
+      <div class="feedback key-fb" id="q12-fb">
+        ✅ <strong>Key:</strong> Students get the structure, independence, resilience, and self-discipline of college life — but at a younger age (14–16), when they are still focused and free from adult distractions like going out and managing full adult responsibilities.
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="q-card" id="q13">
+      <div class="q-num">Question 13</div>
+      <div class="q-text">Why does Thad believe that having a master's degree in Counselling is useful for his role at Spire Academy?</div>
+      <textarea class="open-area" placeholder="Write your answer here…"></textarea>
+      <button class="show-key-btn" onclick="showKey('q13')">Show answer key</button>
+      <div class="feedback key-fb" id="q13-fb">
+        ✅ <strong>Key:</strong> Many students are far from home and find it difficult to locate their support system. The COVID pandemic added extra stress. Thad uses his counselling background to talk through problems with athletes and parents, and to support their mental wellbeing alongside the sports psychology staff.
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="q-card" id="q14">
+      <div class="q-num">Question 14</div>
+      <div class="q-text">Thad says he asks every athlete two things at the end of each training session. What are they, and why do you think he does this?</div>
+      <textarea class="open-area" placeholder="Write your answer here…"></textarea>
+      <button class="show-key-btn" onclick="showKey('q14')">Show answer key</button>
+      <div class="feedback key-fb" id="q14-fb">
+        ✅ <strong>Key:</strong> He asks: (1) "Did you learn something today — and what was it?" (2) "Did you have fun?" This helps athletes stay aware of their progress, stay motivated, and develop the mindset of a "student of the sport."
+      </div>
+    </div>
+
+    <!-- Q15 — Opinion / personalised -->
+    <div class="q-card" id="q15">
+      <div class="q-num">Question 15 — Your opinion</div>
+      <div class="q-text">Would you personally benefit from the Spire Academy model — combining school and elite training in one place? What would be the biggest advantage and the biggest challenge for you?</div>
+      <textarea class="open-area" placeholder="Share your thoughts…"></textarea>
+      <button class="show-key-btn" onclick="showKey('q15')">Show sample answer</button>
+      <div class="feedback key-fb" id="q15-fb">
+        💬 <strong>Sample answer:</strong> "I think I would benefit from having everything in one place — training and school on the same campus would save a lot of time and reduce stress. The biggest advantage for me would be the one-on-one coaching. However, the biggest challenge would probably be living away from my family and adapting to such a big lifestyle change."
+      </div>
+    </div>
+
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-emoji" id="resultEmoji"></div>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-sub" id="resultSub"></div>
+  </div>
+
+  <footer>SwimSwam Podcast · Comprehension Questions · mskojaktm / esl-exercises</footer>
+</div>
+
+<script>
+  // Correct answers for MC and TF
+  const mcKeys = { q1:'c', q2:'b', q3:'c', q4:'b', q5:'b', q6:'c' };
+  const tfKeys = { q7:false, q8:true, q9:false, q10:true };
+
+  const correctMsg = [
+    "✅ Correct! Well done.",
+    "✅ That's right!",
+    "✅ Exactly! Great listening.",
+    "✅ Perfect answer!"
+  ];
+  const wrongMsg = [
+    "❌ Not quite — listen again to that part.",
+    "❌ Incorrect. Check your answer key and review the podcast.",
+    "❌ Close, but not right. The correct answer is highlighted."
+  ];
+
+  let score = 0;
+  const totalMCTF = 10; // 6 MC + 4 TF
+  let answered = {};
+
+  function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function updateScore() {
+    document.getElementById('scoreVal').textContent = score + ' / ' + totalMCTF;
+    document.getElementById('progressBar').style.width = Math.round((score / totalMCTF) * 100) + '%';
+  }
+
+  function checkMC(btn, qid, chosen) {
+    if (answered[qid]) return;
+    answered[qid] = true;
+
+    const card = document.getElementById(qid);
+    const fb = document.getElementById(qid + '-fb');
+    const buttons = card.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    const correct = mcKeys[qid];
+    const opts = ['a','b','c','d'];
+    const chosenBtn = card.querySelectorAll('.opt-btn')[opts.indexOf(chosen)];
+    const correctBtn = card.querySelectorAll('.opt-btn')[opts.indexOf(correct)];
+
+    correctBtn.classList.add('correct-ans');
+
+    if (chosen === correct) {
+      score++;
+      card.classList.add('correct');
+      fb.textContent = rand(correctMsg);
+      fb.className = 'feedback correct-fb show';
+    } else {
+      chosenBtn.classList.add('wrong-ans');
+      card.classList.add('wrong');
+      fb.textContent = rand(wrongMsg);
+      fb.className = 'feedback wrong-fb show';
+    }
+
+    updateScore();
+    checkDone();
+  }
+
+  function checkTF(btn, qid, chosen) {
+    if (answered[qid]) return;
+    answered[qid] = true;
+
+    const card = document.getElementById(qid);
+    const fb = document.getElementById(qid + '-fb');
+    const buttons = card.querySelectorAll('.tf-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    const correct = tfKeys[qid];
+
+    if (chosen === correct) {
+      btn.classList.add('correct-ans');
+      score++;
+      card.classList.add('correct');
+      fb.textContent = rand(correctMsg);
+      fb.className = 'feedback correct-fb show';
+    } else {
+      btn.classList.add('wrong-ans');
+      // highlight correct
+      buttons.forEach(b => {
+        if ((b.textContent.trim() === 'True' && correct === true) ||
+            (b.textContent.trim() === 'False' && correct === false)) {
+          b.classList.add('correct-ans');
+        }
+      });
+      card.classList.add('wrong');
+      fb.textContent = rand(wrongMsg);
+      fb.className = 'feedback wrong-fb show';
+    }
+
+    updateScore();
+    checkDone();
+  }
+
+  function showKey(qid) {
+    const fb = document.getElementById(qid + '-fb');
+    fb.className = 'feedback key-fb show';
+    document.getElementById(qid).classList.add('skipped');
+  }
+
+  function checkDone() {
+    const allAnswered = Object.keys(answered).length === totalMCTF;
+    if (!allAnswered) return;
+
+    const box = document.getElementById('resultBox');
+    box.classList.add('show');
+
+    let emoji, title, sub;
+    const pct = score / totalMCTF;
+
+    if (pct === 1)        { emoji = '🏆'; title = 'Perfect score!'; sub = 'Outstanding listening comprehension — 10 out of 10.'; }
+    else if (pct >= 0.8)  { emoji = '🥇'; title = 'Excellent!'; sub = score + ' out of 10. Great understanding of the podcast.'; }
+    else if (pct >= 0.6)  { emoji = '🥈'; title = 'Good job!'; sub = score + ' out of 10. A solid result — review the questions you missed.'; }
+    else if (pct >= 0.4)  { emoji = '🥉'; title = 'Keep going!'; sub = score + ' out of 10. Try listening to those sections again.'; }
+    else                   { emoji = '🎧'; title = 'Keep practising!'; sub = score + ' out of 10. Don\'t worry — re-listen and try again.'; }
+
+    document.getElementById('resultEmoji').textContent = emoji;
+    document.getElementById('resultTitle').textContent = title;
+    document.getElementById('resultSub').textContent = sub;
+
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function resetAll() {
+    score = 0;
+    answered = {};
+    updateScore();
+
+    document.querySelectorAll('.q-card').forEach(c => c.className = 'q-card');
+    document.querySelectorAll('.opt-btn').forEach(b => { b.disabled = false; b.className = 'opt-btn'; });
+    document.querySelectorAll('.tf-btn').forEach(b => { b.disabled = false; b.className = 'tf-btn'; });
+    document.querySelectorAll('.feedback').forEach(f => f.className = 'feedback');
+    document.querySelectorAll('.open-area').forEach(t => t.value = '');
+    document.getElementById('resultBox').classList.remove('show');
+  }
+
+  updateScore();
+</script>
+</body>
+</html>
