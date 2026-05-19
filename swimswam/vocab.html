@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spire Academy — Pre-listening Vocabulary</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F2F6FB;
+    --surface: #FFFFFF;
+    --text: #1A1A2E;
+    --muted: #6B7A99;
+    --border: #D9E2EF;
+    --blue: #1B4F8A;
+    --blue-light: #DAE8F7;
+    --teal: #1A7A6E;
+    --teal-light: #D4F0EB;
+    --purple: #5B3FA0;
+    --purple-light: #EAE4F7;
+    --orange: #B8520A;
+    --orange-light: #FDEBD8;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  header {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(24px, 4.5vw, 38px);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .controls {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 13px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: #9BAABF; color: var(--text); }
+  .filter-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+
+  .stats { display: flex; align-items: center; gap: 10px; }
+
+  .counter { font-size: 13px; color: var(--muted); }
+
+  .reset-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 5px 13px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { border-color: #9BAABF; color: var(--text); }
+
+  .progress-wrap {
+    max-width: 800px;
+    margin: 0 auto 1.25rem;
+    height: 4px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--blue);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .grid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+    gap: 11px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    position: relative;
+    user-select: none;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    border-color: #B0BDD0;
+  }
+
+  .card[data-cat="academy"]  { --card-accent: var(--blue);   }
+  .card[data-cat="coaching"] { --card-accent: var(--teal);   }
+  .card[data-cat="life"]     { --card-accent: var(--purple); }
+  .card[data-cat="general"]  { --card-accent: var(--orange); }
+
+  .card.revealed { border-color: var(--card-accent); }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--border));
+    border-radius: 0 0 12px 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .card.revealed::after { opacity: 1; }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-bottom: 8px;
+  }
+  .tag-academy  { background: var(--blue-light);   color: var(--blue);   }
+  .tag-coaching { background: var(--teal-light);   color: var(--teal);   }
+  .tag-life     { background: var(--purple-light); color: var(--purple); }
+  .tag-general  { background: var(--orange-light); color: var(--orange); }
+
+  .word {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .pos {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  .translation {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.25s ease, opacity 0.2s, margin-top 0.2s;
+  }
+  .card.revealed .translation { max-height: 80px; opacity: 1; margin-top: 8px; }
+
+  .context {
+    font-size: 11px;
+    color: #AAB3C4;
+    font-style: italic;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s, margin-top 0.2s;
+  }
+  .card.revealed .context { max-height: 60px; opacity: 1; margin-top: 5px; }
+
+  .tap-hint {
+    font-size: 11px;
+    color: #C5CDD9;
+    margin-top: 10px;
+    transition: opacity 0.15s;
+  }
+  .card.revealed .tap-hint { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+
+  .done-msg {
+    max-width: 800px;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--blue);
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .done-msg.visible { opacity: 1; }
+
+  footer {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    font-size: 12px;
+    color: #B5BDCC;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="eyebrow">Pre-listening vocabulary · SwimSwam Podcast</span>
+  <h1>Spire Academy —<br>The Only Swimming Sports Academy in the U.S.</h1>
+  <p class="subtitle">Tap a card to reveal translation + context from the podcast. Try to guess first!</p>
+</header>
+
+<div class="controls">
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All (20)</button>
+    <button class="filter-btn" onclick="filterCards('academy', this)">🏫 Academy</button>
+    <button class="filter-btn" onclick="filterCards('coaching', this)">🏊 Coaching</button>
+    <button class="filter-btn" onclick="filterCards('life', this)">🌱 Life skills</button>
+    <button class="filter-btn" onclick="filterCards('general', this)">📘 General</button>
+  </div>
+  <div class="stats">
+    <span class="counter" id="counter">0 / 20</span>
+    <button class="reset-btn" onclick="resetAll()">Reset</button>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar" id="progress"></div>
+</div>
+
+<div class="grid" id="grid">
+
+  <div class="card" data-cat="general" onclick="reveal(this)">
+    <span class="tag tag-general">general</span>
+    <div class="word">transformative</div>
+    <div class="pos">adjective</div>
+    <div class="translation">меняющий жизнь, преобразующий</div>
+    <div class="context">"It was truly transformative for my life."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="academy" onclick="reveal(this)">
+    <span class="tag tag-academy">academy</span>
+    <div class="word">boarding school</div>
+    <div class="pos">noun phrase</div>
+    <div class="translation">школа-интернат (с проживанием)</div>
+    <div class="context">"I boarded in high school… it was a boarding school."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="academy" onclick="reveal(this)">
+    <span class="tag tag-academy">academy</span>
+    <div class="word">pillars</div>
+    <div class="pos">noun (pl.)</div>
+    <div class="translation">столпы, ключевые принципы / направления</div>
+    <div class="context">"We've got four pillars that we centre our program around."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="academy" onclick="reveal(this)">
+    <span class="tag tag-academy">academy</span>
+    <div class="word">work hand in hand</div>
+    <div class="pos">phrase</div>
+    <div class="translation">работать в тесной связке, идти рука об руку</div>
+    <div class="context">"Athletics and academics work hand in hand."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="academy" onclick="reveal(this)">
+    <span class="tag tag-academy">academy</span>
+    <div class="word">project-based</div>
+    <div class="pos">adjective</div>
+    <div class="translation">основанный на проектах (метод обучения)</div>
+    <div class="context">"It's a project-based program, not opening up textbooks."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="coaching" onclick="reveal(this)">
+    <span class="tag tag-coaching">coaching</span>
+    <div class="word">kinesthetic</div>
+    <div class="pos">adjective</div>
+    <div class="translation">кинестетический (стиль обучения — через движение)</div>
+    <div class="context">"We try to hit all the different styles: audio, visual, and kinesthetic."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="coaching" onclick="reveal(this)">
+    <span class="tag tag-coaching">coaching</span>
+    <div class="word">elite lifestyle</div>
+    <div class="pos">noun phrase</div>
+    <div class="translation">образ жизни элитного спортсмена</div>
+    <div class="context">"We're gearing everything towards the elite lifestyle."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="coaching" onclick="reveal(this)">
+    <span class="tag tag-coaching">coaching</span>
+    <div class="word">student of the sport</div>
+    <div class="pos">phrase</div>
+    <div class="translation">человек, глубоко изучающий свой вид спорта</div>
+    <div class="context">"Getting kids to become students of the sport — understanding why they do what they do."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="coaching" onclick="reveal(this)">
+    <span class="tag tag-coaching">coaching</span>
+    <div class="word">yardage-based</div>
+    <div class="pos">adjective</div>
+    <div class="translation">ориентированный на объём (тренировки на километраж)</div>
+    <div class="context">"We're not a yardage-based program, we're a technique-based program."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="coaching" onclick="reveal(this)">
+    <span class="tag tag-coaching">coaching</span>
+    <div class="word">max VO2</div>
+    <div class="pos">noun phrase</div>
+    <div class="translation">максимальное потребление кислорода (показатель выносливости)</div>
+    <div class="context">"If we want to do a max VO2 practice, there are different ways to hit it."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="coaching" onclick="reveal(this)">
+    <span class="tag tag-coaching">coaching</span>
+    <div class="word">individualize</div>
+    <div class="pos">verb</div>
+    <div class="translation">индивидуализировать, адаптировать под каждого</div>
+    <div class="context">"We can individualize things as much as we need."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="coaching" onclick="reveal(this)">
+    <span class="tag tag-coaching">coaching</span>
+    <div class="word">think outside the box</div>
+    <div class="pos">phrase</div>
+    <div class="translation">мыслить нестандартно, искать нетривиальные решения</div>
+    <div class="context">"Doing different things, thinking outside the box — how can I approach energy systems differently?"</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="life" onclick="reveal(this)">
+    <span class="tag tag-life">life skills</span>
+    <div class="word">resilience</div>
+    <div class="pos">noun</div>
+    <div class="translation">стрессоустойчивость, способность восстанавливаться</div>
+    <div class="context">"You suddenly have the structure of college — the resilience, the self-discipline."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="life" onclick="reveal(this)">
+    <span class="tag tag-life">life skills</span>
+    <div class="word">self-discipline</div>
+    <div class="pos">noun</div>
+    <div class="translation">самодисциплина</div>
+    <div class="context">"You have the resilience, the self-discipline — but without the distractions of being an adult."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="life" onclick="reveal(this)">
+    <span class="tag tag-life">life skills</span>
+    <div class="word">time-manage</div>
+    <div class="pos">verb</div>
+    <div class="translation">управлять своим временем</div>
+    <div class="context">"It teaches them how to be flexible, how to time-manage better."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="life" onclick="reveal(this)">
+    <span class="tag tag-life">life skills</span>
+    <div class="word">adapt to</div>
+    <div class="pos">verb phrase</div>
+    <div class="translation">адаптироваться к чему-либо</div>
+    <div class="context">"A lot of kids have to be able to adapt to that big change."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="general" onclick="reveal(this)">
+    <span class="tag tag-general">general</span>
+    <div class="word">fortuitous</div>
+    <div class="pos">adjective</div>
+    <div class="translation">счастливый случай, удачное стечение обстоятельств</div>
+    <div class="context">"It was fortuitous — a pain point decision that turned out fantastic."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="general" onclick="reveal(this)">
+    <span class="tag tag-general">general</span>
+    <div class="word">pervasive</div>
+    <div class="pos">adjective</div>
+    <div class="translation">всеобъемлющий, повсеместный, проникающий всюду</div>
+    <div class="context">"This is pervasive — it's not just club swimmers who struggled, it goes to the top of the sport."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="general" onclick="reveal(this)">
+    <span class="tag tag-general">general</span>
+    <div class="word">proponent</div>
+    <div class="pos">noun</div>
+    <div class="translation">сторонник, активный защитник идеи</div>
+    <div class="context">"Caeleb Dressel is a huge proponent of this environment."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+  <div class="card" data-cat="academy" onclick="reveal(this)">
+    <span class="tag tag-academy">academy</span>
+    <div class="word">on deck</div>
+    <div class="pos">phrase</div>
+    <div class="translation">на бортике (у бассейна, где стоит тренер)</div>
+    <div class="context">"We have a lot of coaches that come on deck and watch practice."</div>
+    <div class="tap-hint">tap to reveal →</div>
+  </div>
+
+</div>
+
+<div class="done-msg" id="doneMsg">🎉 All 20 words revealed — you're ready to listen!</div>
+
+<footer>SwimSwam Podcast · Pre-listening vocabulary · mskojaktm / esl-exercises</footer>
+
+<script>
+  const TOTAL = 20;
+  let openCount = 0;
+
+  function reveal(card) {
+    if (card.classList.contains('revealed') || card.style.display === 'none') return;
+    card.classList.add('revealed');
+    openCount++;
+    document.getElementById('counter').textContent = openCount + ' / ' + TOTAL;
+    document.getElementById('progress').style.width = Math.round((openCount / TOTAL) * 100) + '%';
+    if (openCount === TOTAL) document.getElementById('doneMsg').classList.add('visible');
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('revealed'));
+    openCount = 0;
+    document.getElementById('counter').textContent = '0 / ' + TOTAL;
+    document.getElementById('progress').style.width = '0%';
+    document.getElementById('doneMsg').classList.remove('visible');
+  }
+
+  function filterCards(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
