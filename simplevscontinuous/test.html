@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present Simple vs Continuous · B1 Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f2ee;
+  --card: #ffffff;
+  --primary: #1e3a5f;
+  --accent: #d4651a;
+  --mint: #2a8c6e;
+  --err: #c0392b;
+  --text: #1a1a2a;
+  --muted: #7a8090;
+  --border: #e4e0d8;
+  --hover-bg: #f0ece6;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1rem 5rem;
+}
+
+/* ── HEADER ── */
+.page-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+}
+
+.level-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--primary);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.9rem;
+  border-radius: 2rem;
+  margin-bottom: 1.1rem;
+}
+
+.page-header h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  color: var(--primary);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ── SCORE BAR ── */
+.scorebar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--primary);
+  color: white;
+  border-radius: 14px;
+  padding: 1rem 1.8rem;
+  max-width: 820px;
+  margin: 0 auto 2rem;
+  flex-wrap: wrap;
+}
+
+.scorebar-num {
+  text-align: center;
+  min-width: 56px;
+}
+
+.scorebar-num .n {
+  font-family: 'Lora', serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.scorebar-num .l {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-top: 0.15rem;
+}
+
+.scorebar-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.2);
+}
+
+.progress-wrap {
+  flex: 1;
+  min-width: 140px;
+}
+
+.progress-label {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-bottom: 0.4rem;
+}
+
+.progress-track {
+  background: rgba(255,255,255,0.2);
+  border-radius: 6px;
+  height: 7px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4fc3a1, #f5a623);
+  border-radius: 6px;
+  transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  width: 0%;
+}
+
+/* ── TASK CARD ── */
+.wrap {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.task-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 2rem;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 2px 16px rgba(30,58,95,0.07);
+  border: 1px solid var(--border);
+}
+
+.task-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--bg);
+}
+
+.task-tag {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  background: var(--accent);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Lora', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.task-head h2 {
+  font-family: 'Lora', serif;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.task-head p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+  line-height: 1.4;
+}
+
+/* ── TIP BOX ── */
+.tip {
+  background: #eef4fb;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.84rem;
+  color: var(--primary);
+  line-height: 1.6;
+  margin-bottom: 1.3rem;
+}
+
+/* ── QUESTION ITEM ── */
+.q-item {
+  padding: 1rem 1.1rem;
+  background: var(--hover-bg);
+  border-radius: 12px;
+  border: 1.5px solid transparent;
+  margin-bottom: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.q-item.ok  { border-color: var(--mint); background: #f1faf6; }
+.q-item.bad { border-color: var(--err);  background: #fef5f5; }
+
+.q-text {
+  font-size: 0.97rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.q-text u { text-decoration: underline wavy var(--accent); color: var(--accent); font-style: normal; font-weight: 600; }
+
+/* ── OPTIONS ── */
+.opts {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.opt-btn {
+  padding: 0.38rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: var(--text);
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: #e8edf6;
+}
+
+.opt-btn.sel    { border-color: var(--primary); background: var(--primary); color: white; }
+.opt-btn.c-ans  { border-color: var(--mint);    background: var(--mint);    color: white; }
+.opt-btn.w-ans  { border-color: var(--err);     background: var(--err);     color: white; }
+
+/* ── FEEDBACK TEXT ── */
+.fb {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.4rem;
+  line-height: 1.4;
+}
+.fb.ok  { color: var(--mint); }
+.fb.bad { color: var(--err);  }
+
+/* ── TEXT INPUT ── */
+.ans-input {
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 0.42rem 0.85rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 180px;
+}
+
+.ans-input:focus { border-color: var(--primary); }
+.ans-input.ok    { border-color: var(--mint); background: #f1faf6; }
+.ans-input.bad   { border-color: var(--err);  background: #fef5f5; }
+
+/* ── TRANSLATION ── */
+.tr-item {
+  background: var(--hover-bg);
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid transparent;
+}
+
+.tr-ru {
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+
+.tr-hint {
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.tr-input {
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.tr-input:focus { border-color: var(--primary); }
+
+.ai-fb {
+  margin-top: 0.65rem;
+  font-size: 0.84rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 9px;
+  line-height: 1.55;
+  display: none;
+}
+
+.ai-fb.vis        { display: block; }
+.ai-fb.loading    { background: #eee; color: var(--muted); font-style: italic; }
+.ai-fb.good       { background: #edfaf4; color: #1a6648; }
+.ai-fb.partial    { background: #fff8ee; color: #8a5200; }
+.ai-fb.wrong      { background: #fef2f2; color: var(--err); }
+
+/* ── BUTTONS ── */
+.check-btn {
+  margin-top: 1.1rem;
+  padding: 0.7rem 2.2rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.1s;
+}
+
+.check-btn:hover    { background: #162d4c; }
+.check-btn:active   { transform: scale(0.98); }
+.check-btn:disabled { background: #b0bac8; cursor: not-allowed; }
+
+.check-single {
+  margin-top: 0.55rem;
+  padding: 0.35rem 1rem;
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.check-single:hover    { background: var(--primary); color: white; }
+.check-single:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── HINT TAG ── */
+.htag {
+  display: inline-block;
+  background: #e8edf6;
+  color: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.12rem 0.55rem;
+  border-radius: 5px;
+  margin-left: 0.45rem;
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+}
+
+/* ── RESULTS ── */
+.results {
+  background: var(--primary);
+  color: white;
+  border-radius: 18px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto;
+  display: none;
+}
+
+.results.vis { display: block; }
+
+.results h2 {
+  font-family: 'Lora', serif;
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.results .big {
+  font-family: 'Lora', serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  margin: 0.8rem 0;
+  line-height: 1;
+}
+
+.results p {
+  opacity: 0.85;
+  font-size: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ── TASK NUMBER LABEL ── */
+.task-num-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="level-chip">● B1 · Grammar</div>
+  <h1>Present Simple<br><em style="font-style:italic; color:var(--accent);">vs</em> Present Continuous</h1>
+  <p>4 exercises · stative verbs · AI translation check</p>
+</div>
+
+<div class="scorebar">
+  <div class="scorebar-num">
+    <div class="n" id="sc-now">0</div>
+    <div class="l">Score</div>
+  </div>
+  <div class="scorebar-divider"></div>
+  <div class="scorebar-num">
+    <div class="n">22</div>
+    <div class="l">Max</div>
+  </div>
+  <div class="scorebar-divider"></div>
+  <div class="progress-wrap">
+    <div class="progress-label">Progress (tasks 1–3)</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-fill"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ═══════════════════ TASK 1 ═══════════════════ -->
+  <div class="task-card">
+    <div class="task-head">
+      <div class="task-tag">1</div>
+      <div>
+        <div class="task-num-label">Exercise 1 · 8 points</div>
+        <h2>Choose the Correct Tense</h2>
+        <p>Select the right verb form for each sentence.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 Ask yourself: <strong>habit / general truth / permanent state</strong> → Present Simple &nbsp;|&nbsp;
+      <strong>happening now / temporary / changing situation</strong> → Present Continuous
+    </div>
+
+    <div id="t1"></div>
+    <button class="check-btn" id="btn1" onclick="checkTask(1)">Check Answers</button>
+  </div>
+
+  <!-- ═══════════════════ TASK 2 ═══════════════════ -->
+  <div class="task-card">
+    <div class="task-head">
+      <div class="task-tag">2</div>
+      <div>
+        <div class="task-num-label">Exercise 2 · 8 points</div>
+        <h2>Stative or Dynamic?</h2>
+        <p>Choose the correct form. Some verbs are never continuous — others depend on meaning.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 <strong>Never continuous:</strong> know · want · believe · own · seem · hate · love · need · understand · remember · prefer<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Meaning changes:</strong> <em>have</em> (possess ≠ eat), <em>think</em> (opinion ≠ consider), <em>taste / see</em> (sense ≠ action)
+    </div>
+
+    <div id="t2"></div>
+    <button class="check-btn" id="btn2" onclick="checkTask(2)">Check Answers</button>
+  </div>
+
+  <!-- ═══════════════════ TASK 3 ═══════════════════ -->
+  <div class="task-card">
+    <div class="task-head">
+      <div class="task-tag">3</div>
+      <div>
+        <div class="task-num-label">Exercise 3 · 6 points</div>
+        <h2>Find &amp; Fix the Error</h2>
+        <p>Each sentence has ONE verb mistake (underlined). Type the correct form.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 Type just the corrected verb form — e.g. <em>works</em>, <em>is working</em>, <em>don't remember</em>
+    </div>
+
+    <div id="t3"></div>
+    <button class="check-btn" id="btn3" onclick="checkTask(3)">Check Answers</button>
+  </div>
+
+  <!-- ═══════════════════ TASK 4 ═══════════════════ -->
+  <div class="task-card">
+    <div class="task-head">
+      <div class="task-tag">4</div>
+      <div>
+        <div class="task-num-label">Exercise 4 · AI feedback</div>
+        <h2>Translate into English</h2>
+        <p>Translate each Russian sentence. Click <strong>Check</strong> — AI will give instant feedback.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 Pay attention to which tense is needed. Is the action happening <em>right now</em> or is it a <em>habit / state</em>?
+    </div>
+
+    <div id="t4"></div>
+  </div>
+
+  <!-- ═══════════════════ RESULTS ═══════════════════ -->
+  <div class="results" id="results">
+    <h2>Tasks 1–3 Complete!</h2>
+    <div class="big" id="res-score">–</div>
+    <p id="res-msg"></p>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+// ────────────────────────── DATA ──────────────────────────────
+
+const T1 = [
+  { s:"Every morning, she ___ a cup of tea before work.", opts:["is drinking","drinks"], c:1, hint:"daily habit" },
+  { s:"Listen! The baby ___ again.", opts:["cries","is crying"], c:1, hint:"happening now" },
+  { s:"Where ___ right now? I can give you a lift.", opts:["do you go","are you going"], c:1, hint:"at this moment" },
+  { s:"He ___ horror movies. He never watches them.", opts:["isn't liking","doesn't like"], c:1, hint:"permanent feeling" },
+  { s:"My sister ___ for her final exams this week.", opts:["studies","is studying"], c:1, hint:"temporary situation" },
+  { s:"Water ___ at 100°C. That's a fact.", opts:["is boiling","boils"], c:1, hint:"scientific fact" },
+  { s:"They ___ a meeting right now — can I call back later?", opts:["are having","have"], c:0, hint:"activity in progress" },
+  { s:"He ___ as a software engineer. He's been there five years.", opts:["is working","works"], c:1, hint:"permanent job" },
+];
+
+const T2 = [
+  { s:'I ___ (know) the answer — don\'t tell me!', opts:["know","am knowing"], c:0, exp:"know → stative verb (mental state)" },
+  { s:"She ___ (think) about her next holiday right now.", opts:["thinks","is thinking"], c:1, exp:"think = mental activity in progress → dynamic use" },
+  { s:"He ___ (own) three apartments in this city.", opts:["owns","is owning"], c:0, exp:"own → stative verb (possession)" },
+  { s:"They ___ (have) lunch in the cafeteria at the moment.", opts:["have","are having"], c:1, exp:"have = eat/do (activity) → dynamic use" },
+  { s:"This coffee ___ (taste) absolutely amazing!", opts:["tastes","is tasting"], c:0, exp:"taste = perception/opinion → stative use" },
+  { s:"I ___ (not / remember) where I put my keys.", opts:["don't remember","am not remembering"], c:0, exp:"remember → stative verb" },
+  { s:"The chef ___ (taste) the soup to check the seasoning.", opts:["tastes","is tasting"], c:1, exp:"taste = deliberate action → dynamic use" },
+  { s:"She ___ (prefer) tea to coffee every time.", opts:["prefers","is preferring"], c:0, exp:"prefer → stative verb" },
+];
+
+const T3 = [
+  { s:'She <u>is knowing</u> the answer to every question.', correct:"knows", accepted:["knows"] },
+  { s:'I <u>am usually eating</u> breakfast at half past seven.', correct:"usually eat", accepted:["usually eat","eat"] },
+  { s:'They <u>work</u> on a really important project this month.', correct:"are working", accepted:["are working"] },
+  { s:'He <u>is seeming</u> a bit tired today.', correct:"seems", accepted:["seems"] },
+  { s:'What <u>do you do</u> right now? Can I call you back?', correct:"are you doing", accepted:["are you doing"] },
+  { s:'We <u>are believing</u> in giving people second chances.', correct:"believe", accepted:["believe"] },
+];
+
+const T4 = [
+  { ru:"Она сейчас разговаривает по телефону.", hint:"hint: right now / on the phone", model:"She is talking on the phone right now." },
+  { ru:"Он обычно пьёт кофе по утрам.", hint:"hint: habit / in the morning(s)", model:"He usually drinks coffee in the morning." },
+  { ru:"Я не понимаю этот вопрос.", hint:"hint: stative verb!", model:"I don't understand this question." },
+  { ru:"Посмотри! Дети играют в саду.", hint:"hint: Look! / happening right now", model:"Look! The children are playing in the garden." },
+  { ru:"Она знает правильный ответ.", hint:"hint: stative verb!", model:"She knows the right answer." },
+];
+
+// ────────────────────────── STATE ─────────────────────────────
+
+let score = 0;
+const checked = { 1:false, 2:false, 3:false };
+const answered4 = new Set();
+
+// ────────────────────────── RENDER ────────────────────────────
+
+function renderMC(data, taskId, container) {
+  data.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'q-item';
+    div.id = `t${taskId}q${i}`;
+    div.innerHTML = `
+      <div class="q-text">${i+1}. ${q.s}${q.hint?`<span class="htag">${q.hint}</span>`:''}</div>
+      <div class="opts">
+        ${q.opts.map((o,j)=>`<button class="opt-btn" id="t${taskId}q${i}o${j}" onclick="pick(${taskId},${i},${j})">${o}</button>`).join('')}
+      </div>
+      <div class="fb" id="t${taskId}q${i}fb"></div>`;
+    container.appendChild(div);
+  });
+}
+
+function renderTask3(container) {
+  T3.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'q-item';
+    div.id = `t3q${i}`;
+    div.innerHTML = `
+      <div class="q-text">${i+1}. ${q.s}</div>
+      <input class="ans-input" id="t3q${i}inp" type="text" placeholder="Correct verb form…" autocomplete="off">
+      <div class="fb" id="t3q${i}fb"></div>`;
+    container.appendChild(div);
+  });
+}
+
+function renderTask4(container) {
+  T4.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'tr-item';
+    div.id = `t4q${i}`;
+    div.innerHTML = `
+      <div class="tr-ru">${i+1}. ${q.ru}</div>
+      <div class="tr-hint">${q.hint}</div>
+      <input class="tr-input" id="t4q${i}inp" type="text" placeholder="Type your English translation…" autocomplete="off">
+      <br>
+      <button class="check-single" id="t4q${i}btn" onclick="checkTr(${i})">Check ✦</button>
+      <div class="ai-fb" id="t4q${i}fb"></div>`;
+    container.appendChild(div);
+  });
+}
+
+// ────────────────────────── INTERACTIONS ──────────────────────
+
+function pick(task, q, opt) {
+  if (checked[task]) return;
+  const data = task === 1 ? T1 : T2;
+  data[q].opts.forEach((_,j) => document.getElementById(`t${task}q${q}o${j}`).classList.remove('sel'));
+  document.getElementById(`t${task}q${q}o${opt}`).classList.add('sel');
+  data[q].ua = opt;
+}
+
+function checkTask(task) {
+  if (checked[task]) return;
+  checked[task] = true;
+  document.getElementById(`btn${task}`).disabled = true;
+  const data = task === 1 ? T1 : task === 2 ? T2 : null;
+  let pts = 0;
+
+  if (task === 1 || task === 2) {
+    data.forEach((q, i) => {
+      const qDiv = document.getElementById(`t${task}q${i}`);
+      const fb   = document.getElementById(`t${task}q${i}fb`);
+      q.opts.forEach((_,j) => { const b=document.getElementById(`t${task}q${i}o${j}`); b.disabled=true; });
+      document.getElementById(`t${task}q${i}o${q.c}`).classList.add('c-ans');
+      if (q.ua === q.c) {
+        qDiv.classList.add('ok');
+        fb.className = 'fb ok';
+        fb.textContent = `✓ Correct!${task===2?' — '+q.exp:''}`;
+        pts++;
+      } else {
+        qDiv.classList.add('bad');
+        fb.className = 'fb bad';
+        fb.textContent = `✗ Correct: ${q.opts[q.c]}${task===2?' — '+q.exp:''}`;
+        if (q.ua !== undefined) document.getElementById(`t${task}q${i}o${q.ua}`).classList.add('w-ans');
+      }
+    });
+  }
+
+  if (task === 3) {
+    T3.forEach((q, i) => {
+      const inp  = document.getElementById(`t3q${i}inp`);
+      const fb   = document.getElementById(`t3q${i}fb`);
+      const qDiv = document.getElementById(`t3q${i}`);
+      const val  = inp.value.trim().toLowerCase();
+      inp.disabled = true;
+      const ok = q.accepted.some(a => a.toLowerCase() === val);
+      if (ok) {
+        inp.classList.add('ok'); qDiv.classList.add('ok');
+        fb.className = 'fb ok'; fb.textContent = '✓ Correct!';
+        pts++;
+      } else {
+        inp.classList.add('bad'); qDiv.classList.add('bad');
+        fb.className = 'fb bad'; fb.textContent = `✗ Correct form: "${q.correct}"`;
+      }
+    });
+  }
+
+  addScore(pts);
+  if (checked[1] && checked[2] && checked[3]) showResults();
+}
+
+// ────────────────────────── AI TRANSLATION CHECK ──────────────
+
+async function checkTr(i) {
+  if (answered4.has(i)) return;
+  const inp = document.getElementById(`t4q${i}inp`);
+  const fb  = document.getElementById(`t4q${i}fb`);
+  const btn = document.getElementById(`t4q${i}btn`);
+  const val = inp.value.trim();
+
+  if (!val) {
+    fb.className = 'ai-fb vis loading';
+    fb.textContent = 'Please type your translation first.';
+    return;
+  }
+
+  answered4.add(i);
+  btn.disabled = true;
+  inp.disabled = true;
+  fb.className = 'ai-fb vis loading';
+  fb.textContent = '⏳ Checking…';
+
+  const q = T4[i];
+  const prompt = `You are a concise ESL teacher (B1 level). A student translated a Russian sentence into English.
+
+Russian original: "${q.ru}"
+Model answer: "${q.model}"
+Student's answer: "${val}"
+
+Evaluate ONLY:
+1. Correct tense choice (Present Simple vs Continuous)
+2. Grammar accuracy
+3. Meaning preserved
+
+Reply in maximum 2 short sentences in English. Start strictly with ✓ if correct or fully acceptable, ⚠ if mostly correct but with minor issues, or ✗ if wrong tense or major grammar error. Always include the correct sentence at the end if the student made a mistake.`;
+
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 160,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await res.json();
+    const text = (data.content || []).map(c => c.text || '').join('').trim();
+    fb.textContent = text;
+    fb.className = text.startsWith('✓') ? 'ai-fb vis good'
+                 : text.startsWith('⚠') ? 'ai-fb vis partial'
+                 : 'ai-fb vis wrong';
+  } catch(e) {
+    fb.className = 'ai-fb vis partial';
+    fb.textContent = `Could not reach AI. Model answer: "${q.model}"`;
+  }
+}
+
+// ────────────────────────── SCORE / RESULTS ───────────────────
+
+function addScore(pts) {
+  score += pts;
+  document.getElementById('sc-now').textContent = score;
+  document.getElementById('prog-fill').style.width = (score / 22 * 100) + '%';
+}
+
+function showResults() {
+  const el = document.getElementById('results');
+  el.classList.add('vis');
+  document.getElementById('res-score').textContent = `${score} / 22`;
+  const msg = score >= 20 ? "Excellent! You have a strong command of both tenses. 🏆"
+            : score >= 16 ? "Good job! A few more practice sessions and you'll master this. 👍"
+            : score >= 11 ? "Not bad! Review stative verbs and time expressions. 📚"
+            : "Keep practising! Review the rules and try again. 💪";
+  document.getElementById('res-msg').textContent = msg;
+  setTimeout(() => el.scrollIntoView({ behavior:'smooth', block:'center' }), 200);
+}
+
+// ────────────────────────── INIT ──────────────────────────────
+
+renderMC(T1, 1, document.getElementById('t1'));
+renderMC(T2, 2, document.getElementById('t2'));
+renderTask3(document.getElementById('t3'));
+renderTask4(document.getElementById('t4'));
+</script>
+</body>
+</html>
