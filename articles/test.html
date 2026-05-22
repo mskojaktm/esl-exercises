@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Articles — Practice Exercises</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2C5F2D;
+    --green-light: #4a8a4c;
+    --green-pale: #e8f3e8;
+    --mint: #97BC62;
+    --gold: #c9a84c;
+    --red: #c0392b;
+    --red-pale: #fdf0ef;
+    --white: #ffffff;
+    --off: #f7f9f5;
+    --text: #1a2a1a;
+    --muted: #6b826b;
+    --border: #d4e4d4;
+    --shadow: 0 4px 24px rgba(44,95,45,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--green);
+    color: white;
+    padding: 36px 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: 'a an the ∅';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 96px;
+    color: rgba(255,255,255,0.06);
+    letter-spacing: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.72);
+    font-weight: 400;
+  }
+
+  /* ── NAV TABS ── */
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    background: var(--green);
+    padding: 0 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab {
+    padding: 12px 18px;
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all .2s;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+  }
+  .tab:hover { color: white; }
+  .tab.active { color: var(--mint); border-bottom-color: var(--mint); }
+  .tab .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    font-size: 10px;
+    margin-left: 6px;
+    color: white;
+  }
+  .tab.done .badge { background: var(--mint); color: var(--green); }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* ── SECTION ── */
+  .section { display: none; animation: fadeIn .3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  .section-header {
+    margin-bottom: 24px;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── ALGORITHM CARD ── */
+  .algo-card {
+    background: var(--green);
+    border-radius: 14px;
+    padding: 20px 24px;
+    color: white;
+    margin-bottom: 28px;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .algo-card strong { color: var(--mint); }
+  .algo-steps { display: flex; flex-direction: column; gap: 8px; }
+  .algo-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .algo-num {
+    width: 24px;
+    height: 24px;
+    background: var(--mint);
+    color: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── EXERCISE CARD ── */
+  .ex-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    border: 1.5px solid var(--border);
+    transition: border-color .2s;
+  }
+  .ex-card.correct { border-color: var(--mint); background: var(--green-pale); }
+  .ex-card.wrong { border-color: var(--red); background: var(--red-pale); }
+
+  .ex-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .sentence {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .sentence em {
+    font-style: normal;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  /* ── OPTIONS ── */
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .opt-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    color: var(--text);
+    letter-spacing: .5px;
+  }
+  .opt-btn:hover:not(:disabled) {
+    border-color: var(--green);
+    background: var(--green-pale);
+    color: var(--green);
+  }
+  .opt-btn.selected-correct {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+  .opt-btn.selected-wrong {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+  }
+  .opt-btn.reveal-correct {
+    background: var(--mint);
+    border-color: var(--mint);
+    color: var(--green);
+  }
+  .opt-btn:disabled { cursor: default; }
+
+  /* ── INPUT ── */
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .ans-input {
+    width: 90px;
+    padding: 8px 14px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    outline: none;
+    transition: border-color .2s;
+    color: var(--text);
+  }
+  .ans-input:focus { border-color: var(--green); }
+  .ans-input.correct-input { border-color: var(--green); background: var(--green-pale); }
+  .ans-input.wrong-input { border-color: var(--red); background: var(--red-pale); }
+  .check-btn {
+    padding: 8px 18px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .check-btn:hover { background: var(--green-light); }
+  .check-btn:disabled { background: var(--border); cursor: default; }
+
+  /* ── FEEDBACK ── */
+  .feedback {
+    display: none;
+    font-size: 13.5px;
+    line-height: 1.6;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-top: 2px;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--green-pale); color: var(--green); border-left: 3px solid var(--mint); }
+  .feedback.err { background: var(--red-pale); color: var(--red); border-left: 3px solid var(--red); }
+  .feedback strong { font-weight: 700; }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 99px;
+    height: 6px;
+    margin: 20px 0 28px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--mint));
+    border-radius: 99px;
+    transition: width .4s ease;
+    width: 0%;
+  }
+
+  /* ── SCORE ── */
+  .score-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 24px;
+    border: 1.5px solid var(--border);
+    box-shadow: var(--shadow);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  /* ── RESULT ── */
+  .result-box {
+    display: none;
+    text-align: center;
+    background: var(--green);
+    color: white;
+    border-radius: 16px;
+    padding: 36px 32px;
+    margin-top: 24px;
+  }
+  .result-box.show { display: block; }
+  .result-emoji { font-size: 48px; margin-bottom: 12px; }
+  .result-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--mint);
+  }
+  .result-msg { font-size: 16px; color: rgba(255,255,255,0.8); margin: 10px 0 24px; }
+  .retry-btn {
+    padding: 12px 28px;
+    background: var(--mint);
+    color: var(--green);
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .retry-btn:hover { opacity: 0.9; }
+
+  /* ── SPEED DRILL ── */
+  .drill-arena {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .drill-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--green);
+    margin: 20px 0 8px;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .drill-hint {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    min-height: 20px;
+  }
+  .drill-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .drill-btn {
+    padding: 16px 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    background: white;
+    cursor: pointer;
+    transition: all .15s;
+    min-width: 100px;
+    box-shadow: var(--shadow);
+    color: var(--text);
+  }
+  .drill-btn:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+  .drill-btn.flash-green { background: var(--green); color: white; border-color: var(--green); }
+  .drill-btn.flash-red { background: var(--red); color: white; border-color: var(--red); }
+  .drill-counter {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .drill-score-line {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .drill-correct-count { color: var(--green); }
+  .drill-wrong-count { color: var(--red); }
+  .start-btn {
+    padding: 14px 36px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background .15s;
+  }
+  .start-btn:hover { background: var(--green-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    header { padding: 24px 20px 18px; }
+    header h1 { font-size: 24px; }
+    .tab { padding: 10px 12px; font-size: 11px; }
+    .ex-card { padding: 18px 16px; }
+    .sentence { font-size: 15px; }
+    .drill-word { font-size: 38px; }
+    .drill-btn { padding: 12px 28px; font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>English Articles</h1>
+  <p>Interactive exercises · A2–B1 · a &nbsp;/&nbsp; an &nbsp;/&nbsp; the &nbsp;/&nbsp; ∅ &nbsp;/&nbsp; substitutes</p>
+</header>
+
+<div class="tab-bar">
+  <div class="tab active" onclick="switchTab(0)">
+    Algorithm <span class="badge" id="b0">10</span>
+  </div>
+  <div class="tab" onclick="switchTab(1)">
+    a vs an <span class="badge" id="b1">10</span>
+  </div>
+  <div class="tab" onclick="switchTab(2)">
+    a/an vs ∅ <span class="badge" id="b2">10</span>
+  </div>
+  <div class="tab" onclick="switchTab(3)">
+    a / the / ∅ <span class="badge" id="b3">10</span>
+  </div>
+  <div class="tab" onclick="switchTab(4)">
+    Substitutes <span class="badge" id="b4">8</span>
+  </div>
+  <div class="tab" onclick="switchTab(5)">
+    Error Hunt <span class="badge" id="b5">8</span>
+  </div>
+  <div class="tab" onclick="switchTab(6)">
+    Mixed Drill <span class="badge" id="b6">15</span>
+  </div>
+  <div class="tab" onclick="switchTab(7)">
+    ⚡ Speed <span class="badge" id="b7">30</span>
+  </div>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 0 — ALGORITHM PRACTICE
+══════════════════════════════════════════════════════ -->
+<div class="section active" id="sec0">
+  <div class="section-header">
+    <div class="section-label">Section 1</div>
+    <div class="section-title">Apply the Algorithm</div>
+    <div class="section-desc">For each sentence, choose the correct article by following the 4-step algorithm. Think before you click!</div>
+  </div>
+
+  <div class="algo-card">
+    <div class="algo-steps">
+      <div class="algo-step">
+        <div class="algo-num">1</div>
+        <div>Is the noun <strong>definite</strong> (known/unique) or <strong>indefinite</strong>? → Definite = <strong>the</strong></div>
+      </div>
+      <div class="algo-step">
+        <div class="algo-num">2</div>
+        <div>If indefinite — is it <strong>singular or plural</strong>? → Plural = <strong>∅ (zero)</strong></div>
+      </div>
+      <div class="algo-step">
+        <div class="algo-num">3</div>
+        <div>If singular — is it <strong>countable or uncountable</strong>? → Uncountable = <strong>∅ (zero)</strong></div>
+      </div>
+      <div class="algo-step">
+        <div class="algo-num">4</div>
+        <div>If singular + countable — does the next word start with a <strong>vowel sound</strong>? → Yes = <strong>an</strong>, No = <strong>a</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="score0" class="score-box">
+    <span>Progress</span>
+    <span class="score-num" id="sn0">0 / 10</span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb0"></div></div>
+
+  <div id="algo-items"></div>
+  <div class="result-box" id="res0">
+    <div class="result-emoji" id="re0">🎉</div>
+    <div class="result-score" id="rs0">10/10</div>
+    <div class="result-msg" id="rm0">Well done!</div>
+    <button class="retry-btn" onclick="initAlgo()">Try again</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 1 — a vs an
+══════════════════════════════════════════════════════ -->
+<div class="section" id="sec1">
+  <div class="section-header">
+    <div class="section-label">Section 2</div>
+    <div class="section-title">a or an?</div>
+    <div class="section-desc">Choose <strong>a</strong> or <strong>an</strong>. Remember: it depends on the <em>sound</em>, not the letter — watch out for silent H and vowel-sounding consonants!</div>
+  </div>
+
+  <div class="score-box">
+    <span>Progress</span>
+    <span class="score-num" id="sn1">0 / 10</span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb1"></div></div>
+  <div id="avan-items"></div>
+  <div class="result-box" id="res1">
+    <div class="result-emoji" id="re1">⭐</div>
+    <div class="result-score" id="rs1">10/10</div>
+    <div class="result-msg" id="rm1">Great job!</div>
+    <button class="retry-btn" onclick="initAvan()">Try again</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 2 — a/an vs zero
+══════════════════════════════════════════════════════ -->
+<div class="section" id="sec2">
+  <div class="section-header">
+    <div class="section-label">Section 3</div>
+    <div class="section-title">a / an or nothing (∅)?</div>
+    <div class="section-desc">Type <strong>a</strong>, <strong>an</strong>, or leave blank (type <strong>–</strong> for zero article). Focus on countable vs uncountable nouns.</div>
+  </div>
+
+  <div class="score-box">
+    <span>Progress</span>
+    <span class="score-num" id="sn2">0 / 10</span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb2"></div></div>
+  <div id="zero-items"></div>
+  <div class="result-box" id="res2">
+    <div class="result-emoji" id="re2">🏆</div>
+    <div class="result-score" id="rs2">10/10</div>
+    <div class="result-msg" id="rm2">Excellent!</div>
+    <button class="retry-btn" onclick="initZero()">Try again</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 3 — a / the / zero
+══════════════════════════════════════════════════════ -->
+<div class="section" id="sec3">
+  <div class="section-header">
+    <div class="section-label">Section 4</div>
+    <div class="section-title">a / the / ∅ — which one?</div>
+    <div class="section-desc">Choose the correct article. Pay attention to whether the noun is mentioned for the <em>first</em> or <em>second</em> time, and whether it's unique.</div>
+  </div>
+
+  <div class="score-box">
+    <span>Progress</span>
+    <span class="score-num" id="sn3">0 / 10</span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb3"></div></div>
+  <div id="the-items"></div>
+  <div class="result-box" id="res3">
+    <div class="result-emoji" id="re3">🎯</div>
+    <div class="result-score" id="rs3">10/10</div>
+    <div class="result-msg" id="rm3">Superb!</div>
+    <button class="retry-btn" onclick="initThe()">Try again</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 4 — SUBSTITUTES
+══════════════════════════════════════════════════════ -->
+<div class="section" id="sec4">
+  <div class="section-header">
+    <div class="section-label">Section 5</div>
+    <div class="section-title">Article Substitutes</div>
+    <div class="section-desc">When a word like <strong>my, this, two, some, no</strong> is used, NO article is needed. Choose the right word for each gap.</div>
+  </div>
+
+  <div class="score-box">
+    <span>Progress</span>
+    <span class="score-num" id="sn4">0 / 8</span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb4"></div></div>
+  <div id="sub-items"></div>
+  <div class="result-box" id="res4">
+    <div class="result-emoji" id="re4">🌟</div>
+    <div class="result-score" id="rs4">8/8</div>
+    <div class="result-msg" id="rm4">Perfect!</div>
+    <button class="retry-btn" onclick="initSub()">Try again</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 5 — ERROR HUNT
+══════════════════════════════════════════════════════ -->
+<div class="section" id="sec5">
+  <div class="section-header">
+    <div class="section-label">Section 6</div>
+    <div class="section-title">Error Hunt — Fix the Mistake</div>
+    <div class="section-desc">Each sentence has one wrong article. Click on the wrong word to correct it, or type the correction.</div>
+  </div>
+
+  <div class="score-box">
+    <span>Progress</span>
+    <span class="score-num" id="sn5">0 / 8</span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb5"></div></div>
+  <div id="err-items"></div>
+  <div class="result-box" id="res5">
+    <div class="result-emoji" id="re5">🔍</div>
+    <div class="result-score" id="rs5">8/8</div>
+    <div class="result-msg" id="rm5">Sharp eyes!</div>
+    <button class="retry-btn" onclick="initErr()">Try again</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 6 — MIXED DRILL
+══════════════════════════════════════════════════════ -->
+<div class="section" id="sec6">
+  <div class="section-header">
+    <div class="section-label">Section 7</div>
+    <div class="section-title">Mixed Practice</div>
+    <div class="section-desc">All article types in one exercise. This is the real test — use everything you know!</div>
+  </div>
+
+  <div class="score-box">
+    <span>Progress</span>
+    <span class="score-num" id="sn6">0 / 15</span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb6"></div></div>
+  <div id="mix-items"></div>
+  <div class="result-box" id="res6">
+    <div class="result-emoji" id="re6">💪</div>
+    <div class="result-score" id="rs6">15/15</div>
+    <div class="result-msg" id="rm6">Outstanding!</div>
+    <button class="retry-btn" onclick="initMix()">Try again</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 7 — SPEED DRILL
+══════════════════════════════════════════════════════ -->
+<div class="section" id="sec7">
+  <div class="section-header">
+    <div class="section-label">Section 8</div>
+    <div class="section-title">⚡ Speed Drill</div>
+    <div class="section-desc">A word appears — quickly choose <strong>a</strong> or <strong>an</strong>. Train your instinct! 30 words, as fast as you can.</div>
+  </div>
+
+  <div class="ex-card drill-arena">
+    <div id="drill-start-screen">
+      <p style="font-size:15px;color:var(--muted);margin-bottom:20px;">30 words will flash on screen. Choose <strong>a</strong> or <strong>an</strong> as fast as possible. Watch out for tricky words!</p>
+      <button class="start-btn" onclick="startDrill()">Start Drill ⚡</button>
+    </div>
+    <div id="drill-game" style="display:none;">
+      <div class="drill-counter" id="drill-counter">Word 1 of 30</div>
+      <div class="drill-word" id="drill-word">—</div>
+      <div class="drill-hint" id="drill-hint"></div>
+      <div class="drill-btns">
+        <button class="drill-btn" id="btn-a" onclick="drillAnswer('a')">a</button>
+        <button class="drill-btn" id="btn-an" onclick="drillAnswer('an')">an</button>
+      </div>
+      <div class="drill-score-line">
+        <span class="drill-correct-count">✓ <span id="drill-ok">0</span></span>
+        <span class="drill-wrong-count">✗ <span id="drill-bad">0</span></span>
+      </div>
+    </div>
+    <div id="drill-end" style="display:none; text-align:center; padding:20px 0;">
+      <div class="result-emoji" id="drill-emoji">🎉</div>
+      <div class="result-score" style="font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--green);" id="drill-final">28/30</div>
+      <div style="font-size:15px;color:var(--muted);margin:10px 0 24px;" id="drill-msg">Amazing speed!</div>
+      <button class="start-btn" onclick="startDrill()">Play again ⚡</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ══════════════════════════════════════════════════
+// UTILITY
+// ══════════════════════════════════════════════════
+let scores = [0,0,0,0,0,0,0];
+let totals = [10,10,10,10,8,8,15];
+let answered = [0,0,0,0,0,0,0];
+
+function switchTab(i) {
+  document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active', i===j));
+  document.querySelectorAll('.section').forEach((s,j) => s.classList.toggle('active', i===j));
+}
+
+function updateScore(secIdx) {
+  const s = scores[secIdx], t = totals[secIdx], a = answered[secIdx];
+  const el = document.getElementById('sn'+secIdx);
+  if (el) el.textContent = s + ' / ' + t;
+  const pb = document.getElementById('pb'+secIdx);
+  if (pb) pb.style.width = (a/t*100) + '%';
+  // update badge
+  document.getElementById('b'+secIdx).textContent = s + '/' + t;
+  if (s === t) {
+    document.querySelectorAll('.tab')[secIdx].classList.add('done');
+  }
+}
+
+function showResult(secIdx) {
+  const s = scores[secIdx], t = totals[secIdx];
+  const pct = s/t;
+  const emojis = ['😔','🙂','😊','⭐','🏆'];
+  const msgs = ['Keep practising!','Good effort — review your mistakes.','Nice work!','Great job!','Perfect score!'];
+  const level = pct < 0.5 ? 0 : pct < 0.7 ? 1 : pct < 0.85 ? 2 : pct < 1 ? 3 : 4;
+  document.getElementById('re'+secIdx).textContent = emojis[level];
+  document.getElementById('rs'+secIdx).textContent = s + ' / ' + t;
+  document.getElementById('rm'+secIdx).textContent = msgs[level];
+  document.getElementById('res'+secIdx).classList.add('show');
+}
+
+function makeCard(num, html) {
+  const d = document.createElement('div');
+  d.className = 'ex-card';
+  d.id = 'card-' + num;
+  d.innerHTML = '<div class="ex-num">Question ' + num + '</div>' + html;
+  return d;
+}
+
+// ══════════════════════════════════════════════════
+// SECTION 0 — ALGORITHM
+// ══════════════════════════════════════════════════
+const algoData = [
+  { sentence: '___  project is almost finished.', hint:'(specific project, already known to both speakers)', answer:'The', options:['a','an','The','∅'], exp:'<strong>The</strong> — the project is already known from context (definite). → Step 1: definite → the.' },
+  { sentence: 'I need to write ___ report today.', hint:'(any report, first mention)', answer:'a', options:['a','an','the','∅'], exp:'<strong>a</strong> — indefinite, singular, countable. "report" starts with a consonant sound /r/ → a.' },
+  { sentence: '___ information was very useful.', hint:'(specific information mentioned before)', answer:'The', options:['a','an','The','∅'], exp:'<strong>The</strong> — specific, already mentioned → definite → the. Also: "information" is uncountable, so no a/an anyway.' },
+  { sentence: 'She sent me ___ email about the meeting.', hint:'(one email, first mention)', answer:'an', options:['a','an','the','∅'], exp:'<strong>an</strong> — indefinite, singular, countable. "email" starts with vowel sound /e/ → an.' },
+  { sentence: 'We have ___ meetings every Monday.', hint:'(meetings in general, no specific ones)', answer:'∅', options:['a','an','the','∅'], exp:'<strong>∅ (zero article)</strong> — indefinite + plural → zero article (Step 2).' },
+  { sentence: 'I need ___ advice on this project.', hint:'(advice in general)', answer:'∅', options:['a','an','the','∅'], exp:'<strong>∅ (zero article)</strong> — "advice" is uncountable → indefinite + singular + uncountable → zero article (Step 3).' },
+  { sentence: 'She is ___ experienced manager.', hint:'(first mention, one manager)', answer:'an', options:['a','an','the','∅'], exp:'<strong>an</strong> — indefinite, singular, countable. Next word is "experienced" /ɪk-/ → vowel sound → an.' },
+  { sentence: 'Please open ___ window — it\'s hot.', hint:'(specific window in the room, known to both)', answer:'the', options:['a','an','the','∅'], exp:'<strong>the</strong> — definite (only one window in the context, both speakers know which one) → Step 1: the.' },
+  { sentence: 'He has ___ good knowledge of Python.', hint:'(knowledge in general)', answer:'∅', options:['a','an','the','∅'], exp:'<strong>∅ (zero article)</strong> — "knowledge" is uncountable → zero article (Step 3).' },
+  { sentence: 'Can you give me ___ update on the situation?', hint:'(one update, first mention)', answer:'an', options:['a','an','the','∅'], exp:'<strong>an</strong> — indefinite, singular, countable. "update" starts with vowel /ʌ/ → an.' },
+];
+
+function initAlgo() {
+  scores[0] = 0; answered[0] = 0;
+  updateScore(0);
+  document.getElementById('res0').classList.remove('show');
+  const cont = document.getElementById('algo-items');
+  cont.innerHTML = '';
+  algoData.forEach((item, i) => {
+    const opts = item.options.map(o =>
+      `<button class="opt-btn" onclick="checkAlgo(${i},'${o}')" id="ao-${i}-${o.replace('∅','zero')}">${o}</button>`
+    ).join('');
+    const card = makeCard(i+1,
+      `<div class="sentence">${item.sentence} <em>${item.hint}</em></div>
+       <div class="options">${opts}</div>
+       <div class="feedback" id="af-${i}"></div>`
+    );
+    cont.appendChild(card);
+  });
+}
+
+function checkAlgo(i, chosen) {
+  const item = algoData[i];
+  if (document.getElementById('card-'+(i+1)).classList.contains('correct') ||
+      document.getElementById('card-'+(i+1)).classList.contains('wrong')) return;
+  const correct = chosen === item.answer;
+  const card = document.getElementById('card-'+(i+1));
+  card.classList.add(correct ? 'correct' : 'wrong');
+  // style buttons
+  item.options.forEach(o => {
+    const btn = document.getElementById('ao-'+i+'-'+o.replace('∅','zero'));
+    btn.disabled = true;
+    if (o === item.answer) btn.classList.add('selected-correct');
+    else if (o === chosen && !correct) btn.classList.add('selected-wrong');
+  });
+  const fb = document.getElementById('af-'+i);
+  fb.className = 'feedback show ' + (correct ? 'ok' : 'err');
+  fb.innerHTML = (correct ? '✓ Correct! ' : '✗ Wrong. ') + item.exp;
+  if (correct) scores[0]++;
+  answered[0]++;
+  updateScore(0);
+  if (answered[0] === totals[0]) setTimeout(() => showResult(0), 600);
+}
+
+// ══════════════════════════════════════════════════
+// SECTION 1 — a vs an
+// ══════════════════════════════════════════════════
+const avanData = [
+  { sentence: '___ umbrella', answer:'an', exp:'<strong>an</strong> — "umbrella" starts with vowel /ʌ/.' },
+  { sentence: '___ useful tool', answer:'a', exp:'<strong>a</strong> — "useful" starts with /j/ sound (a consonant), not a vowel.' },
+  { sentence: '___ honest mistake', answer:'an', exp:'<strong>an</strong> — "honest" has a silent H, so it starts with vowel /ɒ/.' },
+  { sentence: '___ hour', answer:'an', exp:'<strong>an</strong> — "hour" has a silent H; the word starts with vowel /aʊ/.' },
+  { sentence: '___ European country', answer:'a', exp:'<strong>a</strong> — "European" starts with /j/ sound (consonant). Same as "a university".' },
+  { sentence: '___ IT project', answer:'an', exp:'<strong>an</strong> — the abbreviation "IT" is read as /aɪ-tiː/, starting with vowel /aɪ/.' },
+  { sentence: '___ one-hour meeting', answer:'a', exp:'<strong>a</strong> — "one" is pronounced /wʌn/, starting with consonant /w/.' },
+  { sentence: '___ old laptop', answer:'an', exp:'<strong>an</strong> — "old" starts with vowel /oʊ/.' },
+  { sentence: '___ university degree', answer:'a', exp:'<strong>a</strong> — "university" starts with /j/ sound. This is a very common trick!' },
+  { sentence: '___ excellent result', answer:'an', exp:'<strong>an</strong> — "excellent" starts with vowel /e/.' },
+];
+
+function initAvan() {
+  scores[1] = 0; answered[1] = 0;
+  updateScore(1);
+  document.getElementById('res1').classList.remove('show');
+  const cont = document.getElementById('avan-items');
+  cont.innerHTML = '';
+  avanData.forEach((item, i) => {
+    const opts = ['a','an'].map(o =>
+      `<button class="opt-btn" onclick="checkAvan(${i},'${o}')" id="av-${i}-${o}">${o}</button>`
+    ).join('');
+    const card = makeCard(i+1,
+      `<div class="sentence">${item.sentence}</div>
+       <div class="options">${opts}</div>
+       <div class="feedback" id="avf-${i}"></div>`
+    );
+    cont.appendChild(card);
+  });
+}
+
+function checkAvan(i, chosen) {
+  if (document.getElementById('card-'+(i+1)).classList.contains('correct') ||
+      document.getElementById('card-'+(i+1)).classList.contains('wrong')) return;
+  const item = avanData[i];
+  const correct = chosen === item.answer;
+  const card = document.getElementById('card-'+(i+1));
+  card.classList.add(correct ? 'correct' : 'wrong');
+  ['a','an'].forEach(o => {
+    const btn = document.getElementById('av-'+i+'-'+o);
+    btn.disabled = true;
+    if (o === item.answer) btn.classList.add('selected-correct');
+    else if (o === chosen && !correct) btn.classList.add('selected-wrong');
+  });
+  const fb = document.getElementById('avf-'+i);
+  fb.className = 'feedback show ' + (correct ? 'ok' : 'err');
+  fb.innerHTML = (correct ? '✓ Correct! ' : '✗ Wrong. ') + item.exp;
+  if (correct) scores[1]++;
+  answered[1]++;
+  updateScore(1);
+  if (answered[1] === totals[1]) setTimeout(() => showResult(1), 600);
+}
+
+// ══════════════════════════════════════════════════
+// SECTION 2 — a/an vs zero
+// ══════════════════════════════════════════════════
+const zeroData = [
+  { before:'I drink', blank:true, after:'coffee every morning.', answer:['–','∅','zero',''], exp:'"coffee" is uncountable → zero article (∅). Type – or leave blank.' },
+  { before:'She is', blank:true, after:'manager at our company.', answer:['a'], exp:'"manager" is countable, singular, first mention, indefinite → <strong>a</strong>.' },
+  { before:'He has', blank:true, after:'good memory.', answer:['–','∅','zero',''], exp:'"memory" (as an abstract quality) is uncountable → zero article.' },
+  { before:'I need', blank:true, after:'information about the project.', answer:['–','∅','zero',''], exp:'"information" is always uncountable → zero article.' },
+  { before:'We have', blank:true, after:'meeting at 3 pm.', answer:['a'], exp:'"meeting" is countable, singular, one specific but first-mentioned → <strong>a</strong>.' },
+  { before:'', blank:true, after:'Projects take a lot of time.', answer:['–','∅','zero',''], exp:'Plural noun in general statement → zero article.' },
+  { before:'He sent me', blank:true, after:'email with the details.', answer:['an'], exp:'"email" is countable, singular, first mention. Starts with vowel /iː/ → <strong>an</strong>.' },
+  { before:'I love', blank:true, after:'music.', answer:['–','∅','zero',''], exp:'"music" is uncountable → zero article.' },
+  { before:'She found', blank:true, after:'solution to the problem.', answer:['a'], exp:'"solution" is countable, singular, first mention → <strong>a</strong>.' },
+  { before:'They use', blank:true, after:'software to manage their projects.', answer:['–','∅','zero',''], exp:'"software" is uncountable → zero article.' },
+];
+
+function initZero() {
+  scores[2] = 0; answered[2] = 0;
+  updateScore(2);
+  document.getElementById('res2').classList.remove('show');
+  const cont = document.getElementById('zero-items');
+  cont.innerHTML = '';
+  zeroData.forEach((item, i) => {
+    const card = makeCard(i+1,
+      `<div class="sentence">${item.before} <span style="color:var(--muted)">[ ___ ]</span> ${item.after}</div>
+       <div class="input-wrap">
+         <input class="ans-input" id="zi-${i}" placeholder="a / an / –" />
+         <button class="check-btn" onclick="checkZero(${i})" id="zb-${i}">Check</button>
+       </div>
+       <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Type: <strong>a</strong> · <strong>an</strong> · <strong>–</strong> (for zero article)</div>
+       <div class="feedback" id="zf-${i}"></div>`
+    );
+    const inp = card.querySelector('input');
+    inp.addEventListener('keydown', e => { if(e.key==='Enter') checkZero(i); });
+    cont.appendChild(card);
+  });
+}
+
+function checkZero(i) {
+  const item = zeroData[i];
+  const inp = document.getElementById('zi-'+i);
+  if (inp.disabled) return;
+  const val = inp.value.trim().toLowerCase();
+  const correct = item.answer.includes(val);
+  inp.disabled = true;
+  document.getElementById('zb-'+i).disabled = true;
+  inp.classList.add(correct ? 'correct-input' : 'wrong-input');
+  const card = document.getElementById('card-'+(i+1));
+  card.classList.add(correct ? 'correct' : 'wrong');
+  const fb = document.getElementById('zf-'+i);
+  fb.className = 'feedback show ' + (correct ? 'ok' : 'err');
+  const ansDisplay = item.answer[0] === '' || item.answer[0] === '∅' || item.answer[0] === '–' || item.answer[0] === 'zero' ? '∅ (zero article)' : item.answer[0];
+  fb.innerHTML = (correct ? '✓ Correct! ' : `✗ Answer: <strong>${ansDisplay}</strong>. `) + item.exp;
+  if (correct) scores[2]++;
+  answered[2]++;
+  updateScore(2);
+  if (answered[2] === totals[2]) setTimeout(() => showResult(2), 600);
+}
+
+// ══════════════════════════════════════════════════
+// SECTION 3 — a / the / zero
+// ══════════════════════════════════════════════════
+const theData = [
+  {
+    sentence: 'I have a cat. ___ cat is very playful.',
+    answer: 'the', options: ['a', 'the', '∅'],
+    exp: '<strong>the</strong> — second mention: introduced with "a cat" → now specific and known → the.'
+  },
+  {
+    sentence: '___ sun rises in the east.',
+    answer: 'The', options: ['A', 'The', '∅'],
+    exp: '<strong>The</strong> — unique in its kind (there is only one sun) → the.'
+  },
+  {
+    sentence: 'He is ___ best project manager in our team.',
+    answer: 'the', options: ['a', 'an', 'the', '∅'],
+    exp: '<strong>the</strong> — superlative adjective ("best") always takes the → the best.'
+  },
+  {
+    sentence: 'Can you close ___ door, please?',
+    answer: 'the', options: ['a', 'the', '∅'],
+    exp: '<strong>the</strong> — situationally unique: there is only one door in context, both speakers know which one.'
+  },
+  {
+    sentence: 'She is ___ experienced developer.',
+    answer: 'an', options: ['a', 'an', 'the', '∅'],
+    exp: '<strong>an</strong> — first mention, indefinite, singular countable. "experienced" starts with vowel /e/ → an.'
+  },
+  {
+    sentence: '___ Pacific Ocean is the largest ocean on Earth.',
+    answer: 'The', options: ['A', 'The', '∅'],
+    exp: '<strong>The</strong> — geographical rule: oceans always take the.'
+  },
+  {
+    sentence: 'We need ___ new approach to this problem.',
+    answer: 'a', options: ['a', 'the', '∅'],
+    exp: '<strong>a</strong> — any new approach, not a specific known one → indefinite singular → a.'
+  },
+  {
+    sentence: 'I bought ___ laptop yesterday. ___ laptop is incredibly fast.',
+    answer: 'a|the', options: ['a / the', 'a / a', 'the / the', 'an / a'],
+    exp: '<strong>a</strong> (first mention, indefinite) → <strong>the</strong> (second mention, now known).'
+  },
+  {
+    sentence: '___ money is not everything in life.',
+    answer: '∅', options: ['A', 'The', '∅'],
+    exp: '<strong>∅ (zero article)</strong> — "money" is uncountable, used in a general sense → zero article.'
+  },
+  {
+    sentence: 'She is ___ only person who knows the answer.',
+    answer: 'the', options: ['a', 'the', '∅'],
+    exp: '<strong>the</strong> — "only" makes it unique/definite → the only person.'
+  },
+];
+
+function initThe() {
+  scores[3] = 0; answered[3] = 0;
+  updateScore(3);
+  document.getElementById('res3').classList.remove('show');
+  const cont = document.getElementById('the-items');
+  cont.innerHTML = '';
+  theData.forEach((item, i) => {
+    const opts = item.options.map(o =>
+      `<button class="opt-btn" onclick="checkThe(${i},'${o.replace(/\//g,'|')}')" id="th-${i}-${i}-${item.options.indexOf(o)}">${o}</button>`
+    ).join('');
+    const card = makeCard(i+1,
+      `<div class="sentence">${item.sentence}</div>
+       <div class="options">${opts}</div>
+       <div class="feedback" id="thf-${i}"></div>`
+    );
+    cont.appendChild(card);
+  });
+}
+
+function checkThe(i, chosen) {
+  if (document.getElementById('card-'+(i+1)).classList.contains('correct') ||
+      document.getElementById('card-'+(i+1)).classList.contains('wrong')) return;
+  const item = theData[i];
+  const normalize = s => s.toLowerCase().replace(/[^a-z∅|\/]/g,'').replace('zero','∅');
+  const correct = normalize(chosen) === normalize(item.answer) ||
+                  chosen.toLowerCase().includes(normalize(item.answer).split('|')[0]);
+  const card = document.getElementById('card-'+(i+1));
+  card.classList.add(correct ? 'correct' : 'wrong');
+  const btns = card.querySelectorAll('.opt-btn');
+  btns.forEach((btn,j) => {
+    btn.disabled = true;
+    if (normalize(item.options[j]) === normalize(item.answer) ||
+        item.options[j].toLowerCase().includes(normalize(item.answer).split('|')[0])) {
+      btn.classList.add('selected-correct');
+    } else if (btn.textContent.trim() === chosen && !correct) {
+      btn.classList.add('selected-wrong');
+    }
+  });
+  const fb = document.getElementById('thf-'+i);
+  fb.className = 'feedback show ' + (correct ? 'ok' : 'err');
+  fb.innerHTML = (correct ? '✓ Correct! ' : '✗ Wrong. ') + item.exp;
+  if (correct) scores[3]++;
+  answered[3]++;
+  updateScore(3);
+  if (answered[3] === totals[3]) setTimeout(() => showResult(3), 600);
+}
+
+// ══════════════════════════════════════════════════
+// SECTION 4 — SUBSTITUTES
+// ══════════════════════════════════════════════════
+const subData = [
+  {
+    sentence: 'I can\'t find ___ keys. Have you seen them?',
+    options: ['my', 'a', 'the', 'some'], answer: 'my',
+    exp: '<strong>my</strong> — possessive pronoun replaces the article. You can\'t say "my the keys" — the article disappears.'
+  },
+  {
+    sentence: '___ books on the table are mine.',
+    options: ['Those', 'The some', 'A', 'An'], answer: 'Those',
+    exp: '<strong>Those</strong> — demonstrative pronoun (plural of "that") replaces the article.'
+  },
+  {
+    sentence: 'There are ___ people waiting outside.',
+    options: ['some', 'a', 'the', 'an'], answer: 'some',
+    exp: '<strong>some</strong> — quantifier, replaces the article before plural nouns. Means "a number of".'
+  },
+  {
+    sentence: 'She has ___ two meetings today.',
+    options: ['no article', 'the', 'a', 'an'], answer: 'no article',
+    exp: 'When a numeral (two, three...) is used, NO article is added — the numeral itself functions as a determiner.'
+  },
+  {
+    sentence: 'There is ___ milk left in the fridge.',
+    options: ['no', 'a', 'the', 'an'], answer: 'no',
+    exp: '<strong>no</strong> — negative quantifier, replaces the article. "No milk" = zero amount of milk.'
+  },
+  {
+    sentence: '___ project I\'m working on is very complex.',
+    options: ['This', 'A', 'Some', 'An'], answer: 'This',
+    exp: '<strong>This</strong> — demonstrative pronoun (singular) replaces the article and adds the meaning "this specific one, near me/in my mind".'
+  },
+  {
+    sentence: 'I have ___ little time before the call.',
+    options: ['a', 'an', 'the', 'no article'], answer: 'a',
+    exp: '<strong>a little</strong> — "a" is part of the fixed expression "a little" (= a small amount). Here "a" is not a standard article but part of the quantifier phrase.'
+  },
+  {
+    sentence: 'She lost ___ phone yesterday.',
+    options: ['her', 'the a', 'a her', 'an'], answer: 'her',
+    exp: '<strong>her</strong> — possessive pronoun replaces the article. We know which phone — hers — so no article is needed.'
+  },
+];
+
+function initSub() {
+  scores[4] = 0; answered[4] = 0;
+  updateScore(4);
+  document.getElementById('res4').classList.remove('show');
+  const cont = document.getElementById('sub-items');
+  cont.innerHTML = '';
+  subData.forEach((item, i) => {
+    const opts = item.options.map(o =>
+      `<button class="opt-btn" onclick="checkSub(${i},'${o}')" id="sb-${i}-${item.options.indexOf(o)}">${o}</button>`
+    ).join('');
+    const card = makeCard(i+1,
+      `<div class="sentence">${item.sentence}</div>
+       <div class="options">${opts}</div>
+       <div class="feedback" id="sbf-${i}"></div>`
+    );
+    cont.appendChild(card);
+  });
+}
+
+function checkSub(i, chosen) {
+  if (document.getElementById('card-'+(i+1)).classList.contains('correct') ||
+      document.getElementById('card-'+(i+1)).classList.contains('wrong')) return;
+  const item = subData[i];
+  const correct = chosen === item.answer;
+  const card = document.getElementById('card-'+(i+1));
+  card.classList.add(correct ? 'correct' : 'wrong');
+  item.options.forEach((o,j) => {
+    const btn = document.getElementById('sb-'+i+'-'+j);
+    btn.disabled = true;
+    if (o === item.answer) btn.classList.add('selected-correct');
+    else if (o === chosen && !correct) btn.classList.add('selected-wrong');
+  });
+  const fb = document.getElementById('sbf-'+i);
+  fb.className = 'feedback show ' + (correct ? 'ok' : 'err');
+  fb.innerHTML = (correct ? '✓ Correct! ' : '✗ Wrong. ') + item.exp;
+  if (correct) scores[4]++;
+  answered[4]++;
+  updateScore(4);
+  if (answered[4] === totals[4]) setTimeout(() => showResult(4), 600);
+}
+
+// ══════════════════════════════════════════════════
+// SECTION 5 — ERROR HUNT
+// ══════════════════════════════════════════════════
+const errData = [
+  {
+    sentence: 'She is a only person who speaks English in our team.',
+    wrongWord: 'a', correction: 'the',
+    exp: '"only" makes the noun definite and unique → must use <strong>the</strong>: "the only person".'
+  },
+  {
+    sentence: 'I need a advice from my manager.',
+    wrongWord: 'a', correction: '∅',
+    exp: '"advice" is uncountable → no article: just <strong>"advice"</strong>. You can say "a piece of advice" instead.'
+  },
+  {
+    sentence: 'Can I have the glass of water, please?',
+    wrongWord: 'the', correction: 'a',
+    exp: 'First mention, indefinite — any glass of water → <strong>a</strong> glass of water.'
+  },
+  {
+    sentence: 'He works as an project manager at a large company.',
+    wrongWord: 'an', correction: 'a',
+    exp: '"project" starts with consonant /p/ → <strong>a</strong> project manager.'
+  },
+  {
+    sentence: 'I love the music — it helps me concentrate.',
+    wrongWord: 'the', correction: '∅',
+    exp: '"Music" used in a general sense (music in general, not a specific piece) → zero article: <strong>"I love music"</strong>.'
+  },
+  {
+    sentence: 'We had the meeting yesterday. A meeting was very productive.',
+    wrongWord: 'A', correction: 'The',
+    exp: 'Second mention → must use <strong>the</strong>. "A" is for first mention only.'
+  },
+  {
+    sentence: 'There are a lot of informations on this website.',
+    wrongWord: 'informations', correction: 'information',
+    exp: '"Information" is always uncountable — it has no plural form: <strong>information</strong> (not informations).'
+  },
+  {
+    sentence: 'The Pacific Ocean is a largest ocean on Earth.',
+    wrongWord: 'a', correction: 'the',
+    exp: 'Superlative ("largest") always requires <strong>the</strong>: the largest ocean.'
+  },
+];
+
+function initErr() {
+  scores[5] = 0; answered[5] = 0;
+  updateScore(5);
+  document.getElementById('res5').classList.remove('show');
+  const cont = document.getElementById('err-items');
+  cont.innerHTML = '';
+  errData.forEach((item, i) => {
+    const card = makeCard(i+1,
+      `<div class="sentence">${item.sentence}</div>
+       <div class="input-wrap">
+         <span style="font-size:13px;color:var(--muted)">Wrong word:</span>
+         <input class="ans-input" id="ei-${i}" placeholder="type it" style="width:120px" />
+         <span style="font-size:13px;color:var(--muted)">→ should be:</span>
+         <input class="ans-input" id="ec-${i}" placeholder="correction" style="width:120px" />
+         <button class="check-btn" onclick="checkErr(${i})">Check</button>
+       </div>
+       <div class="feedback" id="ef-${i}"></div>`
+    );
+    [card.querySelector('#ei-'+i), card.querySelector('#ec-'+i)].forEach(inp => {
+      inp.addEventListener('keydown', e => { if(e.key==='Enter') checkErr(i); });
+    });
+    cont.appendChild(card);
+  });
+}
+
+function checkErr(i) {
+  const item = errData[i];
+  const wi = document.getElementById('ei-'+i);
+  const ci = document.getElementById('ec-'+i);
+  if (wi.disabled) return;
+  const wv = wi.value.trim().toLowerCase();
+  const cv = ci.value.trim().toLowerCase();
+  const correct = wv === item.wrongWord.toLowerCase() && cv === item.correction.toLowerCase();
+  wi.disabled = true; ci.disabled = true;
+  const card = document.getElementById('card-'+(i+1));
+  card.classList.add(correct ? 'correct' : 'wrong');
+  [wi, ci].forEach(el => el.classList.add(correct ? 'correct-input' : 'wrong-input'));
+  const fb = document.getElementById('ef-'+i);
+  fb.className = 'feedback show ' + (correct ? 'ok' : 'err');
+  fb.innerHTML = (correct ? '✓ Correct! ' : `✗ Wrong word: <strong>${item.wrongWord}</strong> → correct: <strong>${item.correction}</strong>. `) + item.exp;
+  if (correct) scores[5]++;
+  answered[5]++;
+  updateScore(5);
+  if (answered[5] === totals[5]) setTimeout(() => showResult(5), 600);
+}
+
+// ══════════════════════════════════════════════════
+// SECTION 6 — MIXED
+// ══════════════════════════════════════════════════
+const mixData = [
+  { s:'___ Amazon is the longest river in South America.', a:'The', opts:['A','An','The','∅'], e:'Rivers always take <strong>the</strong> (geographical rule).' },
+  { s:'She gave me ___ interesting idea for the project.', a:'an', opts:['a','an','the','∅'], e:'Indefinite, singular, countable. "interesting" starts with vowel /ɪ/ → <strong>an</strong>.' },
+  { s:'___ love is the most powerful emotion.', a:'∅', opts:['A','The','∅'], e:'"Love" is abstract and used in general → zero article.' },
+  { s:'I bought a new phone. ___ phone has a great camera.', a:'The', opts:['A','An','The','∅'], e:'Second mention → now definite → <strong>the</strong>.' },
+  { s:'We need ___ more experienced team member.', a:'a', opts:['a','an','the','∅'], e:'Indefinite, singular, countable. "more" starts with consonant /m/ → <strong>a</strong>.' },
+  { s:'___ water in this bottle is not fresh.', a:'The', opts:['A','The','∅'], e:'Specific water (in this bottle, both speakers can see it) → definite → <strong>the</strong>.' },
+  { s:'His job is ___ project management.', a:'∅', opts:['a','the','∅'], e:'"Project management" as a field/concept → uncountable/abstract → zero article.' },
+  { s:'She is ___ best developer in our department.', a:'the', opts:['a','an','the','∅'], e:'Superlative ("best") → always <strong>the</strong>.' },
+  { s:'Can I borrow ___ pen?', a:'a', opts:['a','an','the','∅'], e:'Any pen, first mention → indefinite → <strong>a</strong>.' },
+  { s:'There is ___ useful information in this report.', a:'∅', opts:['a','an','the','∅'], e:'"Information" is uncountable → no article. Note: "useful" would require "a" if it were countable, but it\'s not.' },
+  { s:'I work for ___ international company.', a:'an', opts:['a','an','the','∅'], e:'"international" starts with vowel /ɪ/ → <strong>an</strong>.' },
+  { s:'___ Kremlin is located in Moscow.', a:'The', opts:['A','The','∅'], e:'Government buildings and political institutions → <strong>the</strong>.' },
+  { s:'Please send me ___ email with the details.', a:'an', opts:['a','an','the','∅'], e:'"email" starts with vowel /iː/ → <strong>an</strong>. First mention → indefinite.' },
+  { s:'___ English is spoken in many countries.', a:'∅', opts:['A','The','∅'], e:'Language names → zero article: "English", "French", "Russian".' },
+  { s:'She has ___ great sense of humour.', a:'a', opts:['a','an','the','∅'], e:'"great" starts with consonant /ɡ/ → <strong>a</strong>. "Sense of humour" is countable (a sense).' },
+];
+
+function initMix() {
+  scores[6] = 0; answered[6] = 0;
+  updateScore(6);
+  document.getElementById('res6').classList.remove('show');
+  const cont = document.getElementById('mix-items');
+  cont.innerHTML = '';
+  mixData.forEach((item, i) => {
+    const opts = item.opts.map(o =>
+      `<button class="opt-btn" onclick="checkMix(${i},'${o}')" id="mx-${i}-${item.opts.indexOf(o)}">${o}</button>`
+    ).join('');
+    const card = makeCard(i+1,
+      `<div class="sentence">${item.s}</div>
+       <div class="options">${opts}</div>
+       <div class="feedback" id="mxf-${i}"></div>`
+    );
+    cont.appendChild(card);
+  });
+}
+
+function checkMix(i, chosen) {
+  if (document.getElementById('card-'+(i+1)).classList.contains('correct') ||
+      document.getElementById('card-'+(i+1)).classList.contains('wrong')) return;
+  const item = mixData[i];
+  const norm = s => s.toLowerCase().replace(/[^a-z∅]/g,'');
+  const correct = norm(chosen) === norm(item.a);
+  const card = document.getElementById('card-'+(i+1));
+  card.classList.add(correct ? 'correct' : 'wrong');
+  item.opts.forEach((o,j) => {
+    const btn = document.getElementById('mx-'+i+'-'+j);
+    btn.disabled = true;
+    if (norm(o) === norm(item.a)) btn.classList.add('selected-correct');
+    else if (o === chosen && !correct) btn.classList.add('selected-wrong');
+  });
+  const fb = document.getElementById('mxf-'+i);
+  fb.className = 'feedback show ' + (correct ? 'ok' : 'err');
+  fb.innerHTML = (correct ? '✓ Correct! ' : `✗ Answer: <strong>${item.a}</strong>. `) + item.e;
+  if (correct) scores[6]++;
+  answered[6]++;
+  updateScore(6);
+  if (answered[6] === totals[6]) setTimeout(() => showResult(6), 600);
+}
+
+// ══════════════════════════════════════════════════
+// SECTION 7 — SPEED DRILL
+// ══════════════════════════════════════════════════
+const drillWords = [
+  {w:'apple', a:'an'}, {w:'book', a:'a'}, {w:'hour', a:'an'}, {w:'university', a:'a'},
+  {w:'elephant', a:'an'}, {w:'European city', a:'a'}, {w:'honest person', a:'an'},
+  {w:'useful app', a:'a'}, {w:'email', a:'an'}, {w:'one-hour call', a:'a'},
+  {w:'IT system', a:'an'}, {w:'project', a:'a'}, {w:'urgent task', a:'an'},
+  {w:'deadline', a:'a'}, {w:'umbrella', a:'an'}, {w:'user', a:'a'},
+  {w:'open question', a:'an'}, {w:'meeting', a:'a'}, {w:'error', a:'an'},
+  {w:'good idea', a:'a'}, {w:'MBA degree', a:'an'}, {w:'problem', a:'a'},
+  {w:'interesting result', a:'an'}, {w:'new client', a:'a'}, {w:'old version', a:'an'},
+  {w:'unique opportunity', a:'a'}, {w:'issue', a:'an'}, {w:'report', a:'a'},
+  {w:'XML file', a:'an'}, {w:'long meeting', a:'a'},
+];
+
+let drillIdx = 0;
+let drillCorrect = 0;
+let drillWrong = 0;
+let drillList = [];
+let drillLocked = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i>0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function startDrill() {
+  drillIdx = 0; drillCorrect = 0; drillWrong = 0; drillLocked = false;
+  drillList = shuffle(drillWords).slice(0, 30);
+  document.getElementById('drill-start-screen').style.display = 'none';
+  document.getElementById('drill-end').style.display = 'none';
+  document.getElementById('drill-game').style.display = 'block';
+  document.getElementById('drill-ok').textContent = '0';
+  document.getElementById('drill-bad').textContent = '0';
+  showDrillWord();
+}
+
+function showDrillWord() {
+  if (drillIdx >= drillList.length) { endDrill(); return; }
+  const item = drillList[drillIdx];
+  document.getElementById('drill-counter').textContent = 'Word ' + (drillIdx+1) + ' of ' + drillList.length;
+  document.getElementById('drill-word').textContent = item.w;
+  document.getElementById('drill-hint').textContent = '';
+  drillLocked = false;
+  const ba = document.getElementById('btn-a');
+  const ban = document.getElementById('btn-an');
+  ba.className = 'drill-btn';
+  ban.className = 'drill-btn';
+}
+
+function drillAnswer(chosen) {
+  if (drillLocked) return;
+  drillLocked = true;
+  const item = drillList[drillIdx];
+  const correct = chosen === item.a;
+  const btn = document.getElementById('btn-'+chosen);
+  btn.classList.add(correct ? 'flash-green' : 'flash-red');
+  if (!correct) {
+    const other = document.getElementById('btn-'+(chosen==='a'?'an':'a'));
+    other.classList.add('flash-green');
+  }
+  document.getElementById('drill-hint').textContent = correct
+    ? '✓ ' + item.a + ' ' + item.w
+    : '✗ Should be: ' + item.a + ' ' + item.w;
+  if (correct) {
+    drillCorrect++;
+    document.getElementById('drill-ok').textContent = drillCorrect;
+  } else {
+    drillWrong++;
+    document.getElementById('drill-bad').textContent = drillWrong;
+  }
+  drillIdx++;
+  setTimeout(showDrillWord, 1000);
+}
+
+function endDrill() {
+  document.getElementById('drill-game').style.display = 'none';
+  document.getElementById('drill-end').style.display = 'block';
+  const pct = drillCorrect / drillList.length;
+  const emojis = ['😔','🙂','😊','⭐','🏆','🔥'];
+  const msgs = ['Keep practising!','Getting there!','Good effort!','Very good!','Excellent!','Flawless! 🔥'];
+  const level = pct < 0.5 ? 0 : pct < 0.65 ? 1 : pct < 0.8 ? 2 : pct < 0.9 ? 3 : pct < 1 ? 4 : 5;
+  document.getElementById('drill-emoji').textContent = emojis[level];
+  document.getElementById('drill-final').textContent = drillCorrect + '/' + drillList.length;
+  document.getElementById('drill-msg').textContent = msgs[level];
+}
+
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+initAlgo();
+initAvan();
+initZero();
+initThe();
+initSub();
+initErr();
+initMix();
+</script>
+</body>
+</html>
