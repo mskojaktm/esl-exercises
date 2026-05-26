@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spire Academy — Vocabulary Exercises</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:     #08182e;
+      --navy-2:   #0f2540;
+      --navy-3:   #1a3a5c;
+      --aqua:     #00c9b1;
+      --aqua-lt:  #00ecd2;
+      --gold:     #ffd166;
+      --white:    #eef3ff;
+      --grey:     #7a90a8;
+      --correct:  #2ecc71;
+      --wrong:    #e74c3c;
+      --card:     rgba(15,37,64,0.85);
+      --border:   rgba(0,201,177,0.22);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* — Lane stripe top bar — */
+    body::before {
+      content:'';
+      position:fixed; top:0; left:0; right:0; height:5px; z-index:200;
+      background: repeating-linear-gradient(90deg,
+        var(--aqua) 0 55px, var(--navy-3) 55px 110px);
+    }
+
+    /* — Subtle underwater glow — */
+    body::after {
+      content:'';
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      background:
+        radial-gradient(ellipse 70% 45% at 15% 110%, rgba(0,201,177,.1) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 35% at 85% -10%, rgba(0,120,255,.07) 0%, transparent 60%);
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+      position: relative; z-index:1;
+    }
+
+    /* ——— HEADER ——— */
+    header { text-align:center; padding: 52px 0 36px; }
+
+    .eyebrow {
+      font-family:'Barlow Condensed', sans-serif;
+      font-size:11px; font-weight:700; letter-spacing:3.5px;
+      text-transform:uppercase; color:var(--aqua);
+      margin-bottom:10px;
+    }
+
+    header h1 {
+      font-family:'Barlow Condensed', sans-serif;
+      font-size:clamp(36px,7vw,62px); font-weight:800;
+      line-height:.95; letter-spacing:-.5px;
+    }
+    header h1 em { color:var(--aqua); font-style:normal; }
+
+    header p { color:var(--grey); font-size:14px; margin-top:10px; }
+
+    /* ——— TABS ——— */
+    .tabs {
+      display:flex; gap:4px;
+      background:var(--navy-2);
+      border-radius:12px; padding:4px;
+      margin-bottom:28px; overflow-x:auto;
+    }
+
+    .tab {
+      flex:1; min-width:110px;
+      padding:10px 10px;
+      border:none; background:transparent;
+      color:var(--grey);
+      font-family:'DM Sans',sans-serif;
+      font-size:13px; font-weight:500;
+      cursor:pointer; border-radius:9px;
+      transition:all .18s;
+      white-space:nowrap; text-align:center;
+    }
+    .tab:hover { color:var(--white); }
+    .tab.active {
+      background:var(--aqua); color:var(--navy); font-weight:700;
+    }
+    .tab .n {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:19px; height:19px; border-radius:50%;
+      background:rgba(0,0,0,.2); font-size:11px;
+      margin-right:5px; vertical-align:middle;
+    }
+
+    /* ——— PANELS ——— */
+    .panel { display:none; }
+    .panel.active { display:block; }
+
+    /* ——— SECTION HEADER ——— */
+    .sec-head { margin-bottom:20px; overflow:hidden; }
+    .sec-head h2 {
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:26px; font-weight:700; letter-spacing:.3px;
+      float:left;
+    }
+    .score-pill {
+      float:right;
+      display:inline-flex; align-items:center; gap:5px;
+      background:var(--navy-2); border:1px solid var(--border);
+      border-radius:20px; padding:4px 14px;
+      font-size:13px; font-weight:600; color:var(--aqua);
+    }
+    .sec-head p { color:var(--grey); font-size:14px; margin-top:6px; clear:both; }
+
+    /* ——— CARD ——— */
+    .card {
+      background:var(--card);
+      border:1.5px solid var(--border);
+      border-radius:11px;
+      padding:16px 20px;
+      margin-bottom:12px;
+    }
+
+    .q-lbl {
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:12px; font-weight:700;
+      letter-spacing:2px; text-transform:uppercase;
+      color:var(--aqua); margin-bottom:8px;
+    }
+
+    /* ——— MATCHING ——— */
+    .match-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    }
+    .match-col { display:flex; flex-direction:column; gap:8px; }
+
+    .mi {
+      padding:12px 15px;
+      background:var(--card); border:1.5px solid var(--border);
+      border-radius:10px; cursor:pointer; font-size:14px;
+      line-height:1.45; transition:all .18s; user-select:none;
+    }
+    .mi:hover:not(.matched):not(.err) {
+      border-color:var(--aqua); background:rgba(0,201,177,.08);
+    }
+    .mi.sel {
+      border-color:var(--aqua); background:rgba(0,201,177,.14);
+      box-shadow:0 0 0 3px rgba(0,201,177,.18);
+    }
+    .mi.matched {
+      border-color:var(--correct); background:rgba(46,204,113,.12);
+      color:var(--correct); cursor:default;
+    }
+    .mi.err {
+      border-color:var(--wrong); background:rgba(231,76,60,.1);
+      animation:shake .32s ease;
+    }
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-7px)}
+      75%{transform:translateX(7px)}
+    }
+
+    /* ——— GAP-FILL ——— */
+    .word-bank {
+      display:flex; flex-wrap:wrap; gap:8px;
+      padding:13px 16px; margin-bottom:18px;
+      background:var(--navy-2); border:1px solid var(--border);
+      border-radius:10px;
+    }
+    .chip {
+      padding:5px 13px; border-radius:20px;
+      background:var(--navy-3); font-size:13px; font-weight:500;
+      transition:opacity .2s;
+    }
+    .chip.used { opacity:.28; text-decoration:line-through; }
+
+    .gap-sentence { font-size:15px; line-height:1.75; }
+
+    .gap-in {
+      border:none; border-bottom:2px solid var(--aqua);
+      background:transparent; color:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:15px;
+      padding:1px 6px; min-width:165px; outline:none;
+      transition:border-color .18s;
+    }
+    .gap-in:focus { border-color:var(--aqua-lt); }
+    .gap-in.ok  { border-color:var(--correct); color:var(--correct); }
+    .gap-in.bad { border-color:var(--wrong);   color:var(--wrong);   }
+
+    .hint {
+      display:none; margin-top:7px;
+      font-size:13px; color:var(--grey); font-style:italic;
+    }
+    .revealed .hint { display:block; }
+
+    /* ——— MULTIPLE CHOICE ——— */
+    .mc-sentence { font-size:15px; line-height:1.65; margin-bottom:12px; }
+
+    .mc-opts { display:flex; flex-direction:column; gap:8px; }
+
+    .mc-opt {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border:1.5px solid var(--border); border-radius:9px;
+      cursor:pointer; font-size:14px; transition:all .18s;
+    }
+    .mc-opt:hover:not(.locked) {
+      border-color:var(--aqua); background:rgba(0,201,177,.07);
+    }
+    .mc-opt.sel   { border-color:var(--aqua); background:rgba(0,201,177,.12); }
+    .mc-opt.right { border-color:var(--correct); background:rgba(46,204,113,.12); color:var(--correct); }
+    .mc-opt.wrong { border-color:var(--wrong);   background:rgba(231,76,60,.09); color:var(--wrong);   }
+
+    .let {
+      width:24px; height:24px; line-height:24px; text-align:center;
+      border-radius:6px; background:var(--navy-3); flex-shrink:0;
+      font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700;
+    }
+
+    /* ——— TRANSFORMATION ——— */
+    .original {
+      font-size:15px; line-height:1.6;
+      color:var(--grey); font-style:italic; margin-bottom:8px;
+    }
+    .kw-tag {
+      display:inline-block;
+      background:rgba(0,201,177,.12); border:1px solid var(--aqua);
+      color:var(--aqua);
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:11px; font-weight:700; letter-spacing:1.5px;
+      padding:2px 9px; border-radius:4px;
+      text-transform:uppercase; margin-bottom:10px;
+    }
+    .tf-area {
+      width:100%; resize:none; rows:2;
+      background:var(--navy); border:1.5px solid var(--border);
+      border-radius:8px; color:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:14px;
+      padding:10px 14px; outline:none; transition:border-color .18s;
+    }
+    .tf-area:focus { border-color:var(--aqua); }
+
+    .model-ans {
+      display:none; margin-top:10px; padding:10px 14px;
+      background:rgba(46,204,113,.07);
+      border-left:3px solid var(--correct);
+      border-radius:0 8px 8px 0; font-size:14px;
+      color:var(--correct); line-height:1.5;
+    }
+    .model-ans.show { display:block; }
+
+    /* ——— BUTTONS ——— */
+    .btn-row { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+
+    .btn {
+      padding:11px 24px; border:none; border-radius:8px;
+      font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600;
+      cursor:pointer; transition:all .18s;
+    }
+    .btn-primary { background:var(--aqua); color:var(--navy); }
+    .btn-primary:hover { background:var(--aqua-lt); transform:translateY(-1px); }
+    .btn-ghost {
+      background:transparent; color:var(--grey);
+      border:1.5px solid var(--border);
+    }
+    .btn-ghost:hover { color:var(--white); border-color:var(--grey); }
+
+    /* ——— RESULT BANNER ——— */
+    .result {
+      display:none; margin-top:16px;
+      background:var(--navy-2); border:1.5px solid var(--aqua);
+      border-radius:10px; padding:14px 20px;
+      font-size:15px; text-align:center;
+    }
+    .result.show { display:block; }
+    .result strong { color:var(--aqua); }
+
+    /* ——— RESPONSIVE ——— */
+    @media(max-width:600px){
+      .match-grid { grid-template-columns:1fr; }
+      .tab { min-width:90px; font-size:12px; padding:8px 6px; }
+      .sec-head h2 { font-size:22px; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header>
+    <div class="eyebrow">SwimSwam Podcast · Spire Academy</div>
+    <h1>Vocabulary <em>Exercises</em></h1>
+    <p>20 words · 4 exercises · B1–B2</p>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(0)"><span class="n">1</span>Matching</button>
+    <button class="tab" onclick="switchTab(1)"><span class="n">2</span>Gap-fill</button>
+    <button class="tab" onclick="switchTab(2)"><span class="n">3</span>Multiple Choice</button>
+    <button class="tab" onclick="switchTab(3)"><span class="n">4</span>Transformation</button>
+  </div>
+
+  <!-- ============================================================
+       PANEL 1 — MATCHING
+  ============================================================ -->
+  <div class="panel active" id="p0">
+    <div class="sec-head">
+      <div class="score-pill" id="m-score">0 / 10</div>
+      <h2>Match word → definition</h2>
+      <p>Click a word on the left, then its matching definition on the right.</p>
+    </div>
+    <div class="match-grid">
+      <div class="match-col" id="m-words"></div>
+      <div class="match-col" id="m-defs"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="buildMatching()">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PANEL 2 — GAP-FILL
+  ============================================================ -->
+  <div class="panel" id="p1">
+    <div class="sec-head">
+      <div class="score-pill" id="g-score">0 / 8</div>
+      <h2>Fill in the gaps</h2>
+      <p>Use a word from the bank to complete each sentence. Check your spelling!</p>
+    </div>
+    <div class="word-bank" id="g-bank"></div>
+    <div id="g-items"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkGap()">Check answers</button>
+      <button class="btn btn-ghost"  onclick="buildGap()">↺ Reset</button>
+    </div>
+    <div class="result" id="g-result"></div>
+  </div>
+
+  <!-- ============================================================
+       PANEL 3 — MULTIPLE CHOICE
+  ============================================================ -->
+  <div class="panel" id="p2">
+    <div class="sec-head">
+      <div class="score-pill" id="mc-score">0 / 8</div>
+      <h2>Choose the correct word</h2>
+      <p>Select the option that best completes each sentence.</p>
+    </div>
+    <div id="mc-items"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkMC()">Check answers</button>
+      <button class="btn btn-ghost"  onclick="buildMC()">↺ Reset</button>
+    </div>
+    <div class="result" id="mc-result"></div>
+  </div>
+
+  <!-- ============================================================
+       PANEL 4 — TRANSFORMATION
+  ============================================================ -->
+  <div class="panel" id="p3">
+    <div class="sec-head">
+      <h2>Sentence transformation</h2>
+      <p>Rewrite each sentence using the key word shown. Keep the same meaning.</p>
+    </div>
+    <div id="tf-items"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="showModelAnswers()">Show model answers</button>
+      <button class="btn btn-ghost"  onclick="buildTransform()">↺ Reset</button>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+/* ================================================================
+   DATA
+================================================================ */
+
+const MATCH = [
+  { word:'transformative',      def:'causing a major positive change in someone or something' },
+  { word:'kinesthetic',         def:'related to learning through physical movement and sensation' },
+  { word:'yardage-based',       def:'structured around the total distance covered in training' },
+  { word:'fortuitous',          def:'happening by a lucky chance, not through planning' },
+  { word:'pervasive',           def:'spreading widely and found throughout a situation or system' },
+  { word:'proponent',           def:'a person who actively supports or advocates an idea' },
+  { word:'resilience',          def:'the ability to recover quickly from difficulties or setbacks' },
+  { word:'pillars',             def:'the main principles or foundations that support a program' },
+  { word:'individualize',       def:'to adapt something specifically to one person\'s needs' },
+  { word:'on deck',             def:'at the poolside, where coaches and athletes prepare' },
+];
+
+const GAP = [
+  {
+    before:'The experience of training at Spire was truly',
+    after: 'for many athletes — they left as completely different people.',
+    answer:'transformative',
+    hint:'✓ transformative'
+  },
+  {
+    before:'The four',
+    after: 'of their program are academics, athletics, life skills, and personal development.',
+    answer:'pillars',
+    hint:'✓ pillars'
+  },
+  {
+    before:'Unlike most clubs, this is not a',
+    after: 'program — they care far more about technique than total distance.',
+    answer:'yardage-based',
+    hint:'✓ yardage-based'
+  },
+  {
+    before:'To become a true',
+    after: ', you need to understand not just how to swim, but why each technique works.',
+    answer:'student of the sport',
+    hint:'✓ student of the sport'
+  },
+  {
+    before:'The coaches',
+    after: 'sessions as much as possible, adapting every workout to each athlete\'s physiology.',
+    answer:'individualize',
+    hint:'✓ individualize'
+  },
+  {
+    before:'She showed incredible',
+    after: 'after her injury — she was back in the pool within three weeks.',
+    answer:'resilience',
+    hint:'✓ resilience'
+  },
+  {
+    before:'Caeleb Dressel is a well-known',
+    after: 'of technique-focused training and the Spire Academy philosophy.',
+    answer:'proponent',
+    hint:'✓ proponent'
+  },
+  {
+    before:'It was',
+    after: 'that the scout happened to be watching that day — he had almost cancelled his visit.',
+    answer:'fortuitous',
+    hint:'✓ fortuitous'
+  },
+];
+
+const GAP_BANK = ['transformative','pillars','yardage-based','student of the sport',
+                  'individualize','resilience','proponent','fortuitous'];
+
+const MC = [
+  {
+    sentence:'The problem of burnout among young swimmers is ___ — it affects athletes at every single level of the sport.',
+    opts:['fortuitous','pervasive','kinesthetic'], correct:1
+  },
+  {
+    sentence:'When planning a heavy training week, it\'s important to ___ your time carefully, especially before a big meet.',
+    opts:['time-manage','individualize','adapt to'], correct:0
+  },
+  {
+    sentence:'She was a ___ learner — she always needed to feel the movement in the water before she could understand the theory.',
+    opts:['yardage-based','project-based','kinesthetic'], correct:2
+  },
+  {
+    sentence:'At Spire, academics and athletics ___ — neither one takes priority over the other.',
+    opts:['think outside the box','work hand in hand','individualize'], correct:1
+  },
+  {
+    sentence:'His ___ allowed him to wake up at 5 a.m. for practice every single morning without anyone pushing him.',
+    opts:['resilience','self-discipline','elite lifestyle'], correct:1
+  },
+  {
+    sentence:'The discovery of her talent was entirely ___ — the coach only stopped by that pool because his car had broken down nearby.',
+    opts:['pervasive','transformative','fortuitous'], correct:2
+  },
+  {
+    sentence:'The head coach stood ___ and observed every swimmer carefully during the warm-up set.',
+    opts:['on deck','at boarding school','outside the box'], correct:0
+  },
+  {
+    sentence:'Moving to a new club, she had to ___ a completely different coaching style and daily routine.',
+    opts:['time-manage','adapt to','individualize'], correct:1
+  },
+];
+
+const TF = [
+  {
+    original:'"Their program focuses on how far swimmers go — the more metres, the better."',
+    keyword:'YARDAGE-BASED',
+    model:'Their program is yardage-based — it measures success by the total distance covered in training.'
+  },
+  {
+    original:'"She never gave up after her injury. She came back even stronger."',
+    keyword:'RESILIENCE',
+    model:'She showed great resilience after her injury, coming back even stronger.'
+  },
+  {
+    original:'"The head coach and the nutritionist cooperate very closely to improve athlete performance."',
+    keyword:'WORK HAND IN HAND',
+    model:'The head coach and the nutritionist work hand in hand to improve athlete performance.'
+  },
+  {
+    original:'"The problem of overtraining isn\'t limited to one level — you see it absolutely everywhere in sport."',
+    keyword:'PERVASIVE',
+    model:'Overtraining is a pervasive problem in sport — it can be found at every single level.'
+  },
+  {
+    original:'"By pure luck, the talent scout happened to be at the pool the day she broke the record."',
+    keyword:'FORTUITOUS',
+    model:'It was fortuitous that the talent scout was at the pool the day she broke the record.'
+  },
+  {
+    original:'"He\'s not afraid to try completely new, unconventional approaches to training."',
+    keyword:'THINK OUTSIDE THE BOX',
+    model:'He is not afraid to think outside the box when it comes to his approach to training.'
+  },
+];
+
+/* ================================================================
+   TAB SWITCHING
+================================================================ */
+const panels = document.querySelectorAll('.panel');
+const tabs   = document.querySelectorAll('.tab');
+
+function switchTab(i){
+  panels.forEach((p,j) => p.classList.toggle('active', i===j));
+  tabs.forEach((t,j)   => t.classList.toggle('active', i===j));
+}
+
+/* ================================================================
+   MATCHING
+================================================================ */
+let mSel = null;
+let mScore = 0;
+
+function buildMatching(){
+  mSel = null; mScore = 0;
+  updMScore();
+
+  const wCol = document.getElementById('m-words');
+  const dCol = document.getElementById('m-defs');
+  wCol.innerHTML = '';
+  dCol.innerHTML = '';
+
+  // Shuffle definitions
+  const shuffled = [...MATCH].sort(()=>Math.random()-.5);
+
+  MATCH.forEach((item,i)=>{
+    const w = mkEl('div','mi',item.word);
+    w.dataset.i = i;
+    w.addEventListener('click',()=>handleMatch('w',i,w));
+    wCol.appendChild(w);
+  });
+
+  shuffled.forEach(item=>{
+    const origIdx = MATCH.indexOf(item);
+    const d = mkEl('div','mi',item.def);
+    d.dataset.i = origIdx;
+    d.addEventListener('click',()=>handleMatch('d',origIdx,d));
+    dCol.appendChild(d);
+  });
+}
+
+function handleMatch(type,idx,el){
+  if(el.classList.contains('matched')) return;
+
+  if(!mSel){
+    clearMSel();
+    mSel = {type,idx,el};
+    el.classList.add('sel');
+    return;
+  }
+
+  // Same item clicked again — deselect
+  if(mSel.el === el){
+    clearMSel();
+    return;
+  }
+
+  // Same column — swap selection
+  if(mSel.type === type){
+    clearMSel();
+    mSel = {type,idx,el};
+    el.classList.add('sel');
+    return;
+  }
+
+  // Different columns — check match
+  if(mSel.idx === idx){
+    // ✓ Correct
+    el.classList.add('matched');
+    mSel.el.classList.add('matched');
+    mScore++;
+    updMScore();
+  } else {
+    // ✗ Wrong
+    el.classList.add('err');
+    mSel.el.classList.add('err');
+    const prevEl = mSel.el;
+    setTimeout(()=>{
+      el.classList.remove('err','sel');
+      prevEl.classList.remove('err','sel');
+    },500);
+  }
+  mSel = null;
+}
+
+function clearMSel(){
+  if(mSel){ mSel.el.classList.remove('sel'); mSel=null; }
+}
+
+function updMScore(){
+  document.getElementById('m-score').textContent = `${mScore} / ${MATCH.length}`;
+}
+
+/* ================================================================
+   GAP-FILL
+================================================================ */
+function buildGap(){
+  // Bank
+  document.getElementById('g-bank').innerHTML =
+    GAP_BANK.map(w=>`<span class="chip" data-w="${w}">${w}</span>`).join('');
+
+  // Sentences
+  document.getElementById('g-items').innerHTML = GAP.map((item,i)=>`
+    <div class="card" id="gc${i}">
+      <div class="q-lbl">Sentence ${i+1}</div>
+      <div class="gap-sentence">
+        ${item.before}&nbsp;<input class="gap-in" type="text"
+          autocomplete="off" autocorrect="off" spellcheck="false"
+          data-ans="${item.answer}"
+          placeholder="____________">&nbsp;${item.after}
+      </div>
+      <div class="hint">${item.hint}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('g-score').textContent = `0 / ${GAP.length}`;
+  document.getElementById('g-result').classList.remove('show');
+}
+
+function checkGap(){
+  let ok=0;
+  document.querySelectorAll('.gap-in').forEach((inp,i)=>{
+    const user = inp.value.trim().toLowerCase();
+    const ans  = inp.dataset.ans.toLowerCase();
+    inp.classList.remove('ok','bad');
+    inp.classList.add(user===ans?'ok':'bad');
+    if(user===ans) ok++;
+    document.getElementById(`gc${i}`).classList.add('revealed');
+  });
+  document.getElementById('g-score').textContent = `${ok} / ${GAP.length}`;
+
+  const usedWords = GAP.map(g=>g.answer.toLowerCase());
+  document.querySelectorAll('.chip').forEach(c=>{
+    if(usedWords.includes(c.dataset.w.toLowerCase())) c.classList.add('used');
+  });
+
+  const r = document.getElementById('g-result');
+  r.innerHTML = ok===GAP.length
+    ? `🎉 <strong>Perfect!</strong> All ${GAP.length} sentences correct.`
+    : `You got <strong>${ok} out of ${GAP.length}</strong> correct. Check the hints below each sentence.`;
+  r.classList.add('show');
+}
+
+/* ================================================================
+   MULTIPLE CHOICE
+================================================================ */
+const mcSel = {};
+
+function buildMC(){
+  Object.keys(mcSel).forEach(k=>delete mcSel[k]);
+  document.getElementById('mc-items').innerHTML = MC.map((q,i)=>`
+    <div class="card" id="mcq${i}">
+      <div class="q-lbl">Question ${i+1}</div>
+      <div class="mc-sentence">${q.sentence}</div>
+      <div class="mc-opts">
+        ${q.opts.map((opt,j)=>`
+          <div class="mc-opt" onclick="selMC(${i},${j},this)">
+            <span class="let">${'ABC'[j]}</span>${opt}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('mc-score').textContent = `0 / ${MC.length}`;
+  document.getElementById('mc-result').classList.remove('show');
+}
+
+function selMC(q,opt,el){
+  const card = document.getElementById(`mcq${q}`);
+  if(card.classList.contains('locked')) return;
+  mcSel[q]=opt;
+  card.querySelectorAll('.mc-opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function checkMC(){
+  let ok=0;
+  MC.forEach((q,i)=>{
+    const card = document.getElementById(`mcq${i}`);
+    card.classList.add('locked');
+    const sel = mcSel[i];
+    card.querySelectorAll('.mc-opt').forEach((opt,j)=>{
+      opt.classList.add('locked');
+      if(j===q.correct) opt.classList.add('right');
+      else if(j===sel && sel!==q.correct) opt.classList.add('wrong');
+    });
+    if(sel===q.correct) ok++;
+  });
+  document.getElementById('mc-score').textContent = `${ok} / ${MC.length}`;
+  const r = document.getElementById('mc-result');
+  r.innerHTML = ok===MC.length
+    ? `🎉 <strong>Excellent!</strong> All ${MC.length} correct!`
+    : `You got <strong>${ok} out of ${MC.length}</strong>. Green = correct answer.`;
+  r.classList.add('show');
+}
+
+/* ================================================================
+   TRANSFORMATION
+================================================================ */
+function buildTransform(){
+  document.getElementById('tf-items').innerHTML = TF.map((item,i)=>`
+    <div class="card">
+      <div class="q-lbl">Sentence ${i+1}</div>
+      <div class="original">${item.original}</div>
+      <div class="kw-tag">Use: ${item.keyword}</div>
+      <textarea class="tf-area" rows="2" id="tf${i}"
+        placeholder="Rewrite the sentence here…"></textarea>
+      <div class="model-ans" id="tfa${i}">
+        <strong>Model answer:</strong> ${item.model}
+      </div>
+    </div>
+  `).join('');
+}
+
+function showModelAnswers(){
+  document.querySelectorAll('.model-ans').forEach(el=>el.classList.add('show'));
+}
+
+/* ================================================================
+   UTILS
+================================================================ */
+function mkEl(tag,cls,text){
+  const el=document.createElement(tag);
+  el.className=cls; el.textContent=text; return el;
+}
+
+/* ================================================================
+   INIT
+================================================================ */
+buildMatching();
+buildGap();
+buildMC();
+buildTransform();
+</script>
+</body>
+</html>
