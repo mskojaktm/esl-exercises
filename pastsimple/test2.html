@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Simple — Exercises | Alexander Filippov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --teal:      #028090;
+  --teal-d:    #016676;
+  --teal-l:    #E8F5F7;
+  --teal-xl:   #F0FAFB;
+  --navy:      #0D2B35;
+  --navy-l:    #1A3D4A;
+  --white:     #FFFFFF;
+  --grey-50:   #F7FAFB;
+  --grey-100:  #EFF4F5;
+  --grey-200:  #D8E6E9;
+  --grey-400:  #8AAAB0;
+  --grey-600:  #4E6B72;
+  --text:      #0D2B35;
+  --text-sub:  #4E6B72;
+  --correct:   #1A7F5A;
+  --correct-bg:#E6F6EF;
+  --wrong:     #B02020;
+  --wrong-bg:  #FDEAEA;
+  --warn-bg:   #FFF8E6;
+  --warn:      #A06000;
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--grey-50); color: var(--text); min-height: 100vh; }
+
+/* ── TOP BAR ── */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy);
+  padding: 0 24px;
+  height: 52px;
+  display: flex; align-items: center; gap: 14px;
+  box-shadow: 0 2px 12px rgba(2,128,144,.18);
+}
+.topbar-logo {
+  width: 32px; height: 32px;
+  background: var(--teal);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -.5px;
+  flex-shrink: 0;
+}
+.topbar-title { color: #fff; font-size: 15px; font-weight: 600; }
+.topbar-sub   { color: var(--grey-400); font-size: 12px; }
+.topbar-score-wrap { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.topbar-score-label { color: var(--grey-400); font-size: 12px; }
+#topbar-score { color: #fff; font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ── PROGRESS BAR ── */
+.progress-bar { height: 3px; background: var(--grey-200); }
+.progress-fill { height: 100%; background: var(--teal); transition: width .4s ease; width: 0%; }
+
+/* ── LAYOUT ── */
+.page { max-width: 820px; margin: 0 auto; padding: 32px 20px 64px; }
+
+/* ── SECTION HEADERS ── */
+.section-header {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin-bottom: 20px; margin-top: 36px;
+}
+.section-header:first-child { margin-top: 0; }
+.section-num {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  background: var(--teal);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 15px; font-weight: 700;
+  box-shadow: 0 2px 8px rgba(2,128,144,.25);
+}
+.section-info {}
+.section-title { font-size: 17px; font-weight: 700; color: var(--navy); line-height: 1.3; }
+.section-desc  { font-size: 13px; color: var(--text-sub); margin-top: 3px; line-height: 1.5; }
+
+/* ── SLIDE BADGE ── */
+.slide-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--teal-l); color: var(--teal-d);
+  border: 1px solid var(--grey-200);
+  font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  padding: 2px 9px; border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--r-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: box-shadow .18s;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(2,128,144,.08); }
+.card-inner { padding: 16px 18px; }
+
+/* ── THEORY BOX ── */
+.theory-box {
+  background: var(--teal-xl);
+  border: 1px solid var(--grey-200);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px; line-height: 1.7; color: var(--text);
+}
+.theory-box strong { color: var(--teal-d); font-weight: 600; }
+.theory-box code { font-family: var(--mono); font-size: 12.5px; background: rgba(2,128,144,.1); padding: 1px 5px; border-radius: 4px; }
+
+/* ── TASK LABEL ── */
+.task-label {
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  color: var(--teal-d); margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+/* ── QUESTION WRAPPER ── */
+.q-wrap { margin-bottom: 14px; }
+.q-wrap:last-child { margin-bottom: 0; }
+.q-num {
+  display: inline-block;
+  width: 22px; height: 22px; line-height: 22px; text-align: center;
+  background: var(--grey-100); border-radius: 50%;
+  font-size: 11px; font-weight: 700; color: var(--text-sub);
+  margin-right: 6px; flex-shrink: 0;
+}
+.q-text { font-size: 14px; color: var(--text); line-height: 1.6; margin-bottom: 8px; }
+.q-text .blank {
+  display: inline-block;
+  border-bottom: 2px solid var(--teal);
+  min-width: 80px; text-align: center;
+  font-style: italic; color: var(--teal-d);
+  font-weight: 500;
+}
+
+/* ── TEXT INPUTS ── */
+.ans-input {
+  font-family: var(--mono); font-size: 13px;
+  border: 1.5px solid var(--grey-200);
+  border-radius: var(--r-sm);
+  padding: 5px 10px;
+  width: 130px;
+  background: var(--white);
+  color: var(--text);
+  transition: border-color .15s;
+  outline: none;
+}
+.ans-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(2,128,144,.10); }
+.ans-input.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
+.ans-input.wrong   { border-color: var(--wrong);   background: var(--wrong-bg);   color: var(--wrong); }
+.ans-input[readonly] { cursor: default; }
+
+/* ── RADIO / CHECKBOX OPTIONS ── */
+.options { display: flex; flex-direction: column; gap: 7px; margin-top: 4px; }
+.opt-label {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 13px;
+  border: 1.5px solid var(--grey-200);
+  border-radius: var(--r-sm);
+  cursor: pointer; font-size: 13.5px;
+  transition: all .15s;
+  user-select: none;
+}
+.opt-label:hover { border-color: var(--teal); background: var(--teal-xl); }
+.opt-label input { display: none; }
+.opt-dot {
+  width: 16px; height: 16px; flex-shrink: 0;
+  border: 2px solid var(--grey-400); border-radius: 50%;
+  background: var(--white);
+  transition: all .15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.opt-label.selected .opt-dot { border-color: var(--teal); background: var(--teal); }
+.opt-label.selected .opt-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+.opt-label.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
+.opt-label.wrong   { border-color: var(--wrong);   background: var(--wrong-bg);   color: var(--wrong); }
+.opt-label.show-correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
+
+/* ── PRONUNCIATION DRAG ── */
+.pron-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.pron-col {
+  border: 1.5px dashed var(--grey-200);
+  border-radius: var(--r-md);
+  padding: 10px;
+  min-height: 120px;
+  transition: border-color .15s;
+}
+.pron-col.dragover { border-color: var(--teal); background: var(--teal-xl); }
+.pron-col-head {
+  font-family: var(--mono); font-size: 15px; font-weight: 500;
+  color: var(--teal-d); text-align: center; margin-bottom: 8px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--grey-200);
+}
+.pron-col-sub { font-size: 10px; color: var(--text-sub); text-align: center; margin-bottom: 8px; }
+.pron-items { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+.drag-bank { display: flex; flex-wrap: wrap; gap: 7px; padding: 14px; background: var(--grey-50); border-radius: var(--r-md); border: 1px solid var(--grey-200); margin-bottom: 10px; justify-content: center; }
+
+.chip {
+  font-family: var(--mono); font-size: 12.5px;
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 20px;
+  padding: 4px 11px;
+  cursor: grab; user-select: none;
+  transition: all .15s;
+  touch-action: none;
+}
+.chip:hover { border-color: var(--teal); background: var(--teal-l); color: var(--teal-d); }
+.chip.dragging { opacity: .4; }
+.chip.correct-chip { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); cursor: default; }
+.chip.wrong-chip   { border-color: var(--wrong);   background: var(--wrong-bg);   color: var(--wrong); cursor: default; }
+
+/* ── INLINE SENTENCE SLOTS ── */
+.sent-line { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 14px; margin-bottom: 6px; }
+.sent-context { font-size: 12px; color: var(--text-sub); font-style: italic; margin-bottom: 10px; }
+
+/* ── CHECK BUTTONS ── */
+.btn-row { display: flex; gap: 10px; margin-top: 18px; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font); font-size: 13.5px; font-weight: 600;
+  padding: 9px 20px; border-radius: var(--r-md);
+  border: none; cursor: pointer; transition: all .15s;
+}
+.btn-primary { background: var(--teal); color: #fff; }
+.btn-primary:hover { background: var(--teal-d); box-shadow: 0 3px 10px rgba(2,128,144,.3); }
+.btn-ghost { background: transparent; color: var(--text-sub); border: 1.5px solid var(--grey-200); }
+.btn-ghost:hover { border-color: var(--teal); color: var(--teal-d); background: var(--teal-xl); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ── FEEDBACK BADGES ── */
+.fb-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12.5px; font-weight: 600; padding: 4px 11px;
+  border-radius: 20px;
+}
+.fb-badge.correct { background: var(--correct-bg); color: var(--correct); }
+.fb-badge.wrong   { background: var(--wrong-bg);   color: var(--wrong); }
+
+/* ── RESULT BOX ── */
+.result-box {
+  margin-top: 14px; padding: 14px 16px;
+  border-radius: var(--r-md); font-size: 13.5px; line-height: 1.6;
+  display: none;
+}
+.result-box.show { display: block; }
+.result-box.correct { background: var(--correct-bg); border: 1px solid #A8D9C0; color: var(--correct); }
+.result-box.wrong   { background: var(--wrong-bg);   border: 1px solid #EDB8B8; color: var(--wrong); }
+.result-box.partial { background: var(--warn-bg);    border: 1px solid #F0D58A; color: var(--warn); }
+.result-box strong { font-weight: 700; }
+
+/* ── FINAL SCORE ── */
+.final-card {
+  display: none;
+  background: var(--navy);
+  border-radius: var(--r-xl);
+  padding: 36px 32px;
+  text-align: center;
+  margin-top: 40px;
+  box-shadow: 0 8px 32px rgba(2,128,144,.18);
+}
+.final-card.show { display: block; }
+.final-emoji { font-size: 52px; margin-bottom: 12px; }
+.final-title { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+.final-sub   { color: var(--grey-400); font-size: 14px; margin-bottom: 22px; }
+.final-score-big { font-size: 56px; font-weight: 700; color: var(--teal); font-variant-numeric: tabular-nums; line-height: 1; margin-bottom: 8px; }
+.final-score-total { font-size: 16px; color: var(--grey-400); margin-bottom: 24px; }
+.final-bar { height: 8px; background: var(--navy-l); border-radius: 4px; margin: 0 auto 24px; max-width: 320px; overflow: hidden; }
+.final-bar-fill { height: 100%; background: linear-gradient(90deg, var(--teal), #00C8B0); border-radius: 4px; transition: width 1s ease; width: 0; }
+.final-hint { font-size: 13px; color: var(--grey-400); font-style: italic; }
+
+/* ── SMALL FEEDBACK INLINE ── */
+.inline-fb { font-size: 12px; margin-left: 8px; font-weight: 600; }
+.inline-fb.ok  { color: var(--correct); }
+.inline-fb.no  { color: var(--wrong); }
+
+/* ── DIVIDER ── */
+hr.sect-div { border: none; border-top: 1px solid var(--grey-200); margin: 32px 0; }
+
+/* ── REORDER ZONE ── */
+.reorder-source { display: flex; flex-wrap: wrap; gap: 7px; min-height: 42px; padding: 10px; background: var(--grey-50); border: 1.5px dashed var(--grey-200); border-radius: var(--r-md); margin-bottom: 8px; }
+.reorder-target { display: flex; flex-wrap: wrap; gap: 7px; min-height: 42px; padding: 10px; background: var(--teal-xl); border: 1.5px dashed var(--teal); border-radius: var(--r-md); }
+.word-chip {
+  font-size: 13px; font-weight: 500;
+  background: var(--white); border: 1.5px solid var(--grey-200);
+  border-radius: var(--r-sm); padding: 5px 11px;
+  cursor: pointer; user-select: none; transition: all .15s;
+}
+.word-chip:hover { border-color: var(--teal); background: var(--teal-xl); }
+.word-chip.in-target { background: var(--teal); color: #fff; border-color: var(--teal-d); }
+.reorder-label { font-size: 11px; color: var(--text-sub); margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">PS</div>
+  <div>
+    <div class="topbar-title">Past Simple — Exercises</div>
+    <div class="topbar-sub">Alexander Filippov · B1</div>
+  </div>
+  <div class="topbar-score-wrap">
+    <span class="topbar-score-label">Score:</span>
+    <span id="topbar-score">0 / 0</span>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<div class="page">
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 1 — When to use Past Simple  (Slide 3)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-info">
+      <div class="section-title">When to use Past Simple</div>
+      <div class="section-desc">Choose the sentence that correctly uses Past Simple — or identify why it's used.</div>
+    </div>
+  </div>
+  <div class="slide-badge">📋 Slide 3</div>
+
+  <div class="theory-box">
+    Past Simple describes <strong>completed facts or events in the past</strong> that are not connected to the present. Use it when the action is fully over and, often, when a <strong>specific past time</strong> is implied or stated.<br>
+    Examples: <code>Neil Armstrong walked on the Moon in 1969.</code> &nbsp;·&nbsp; <code>She called you 5 minutes ago.</code>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="task-label">Multiple choice — pick the best explanation</div>
+
+      <!-- Q1 -->
+      <div class="q-wrap" id="ex1-q1">
+        <div class="q-text"><span class="q-num">1</span>
+          "Scientists <strong>discovered</strong> gravitational waves in 2015." — Why is Past Simple used here?
+        </div>
+        <div class="options" data-correct="b">
+          <label class="opt-label"><input type="radio" name="ex1q1" value="a"><div class="opt-dot"></div>The action is still happening right now.</label>
+          <label class="opt-label"><input type="radio" name="ex1q1" value="b"><div class="opt-dot"></div>It was a completed event at a specific point in the past (2015).</label>
+          <label class="opt-label"><input type="radio" name="ex1q1" value="c"><div class="opt-dot"></div>The result matters more than when it happened.</label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q-wrap" id="ex1-q2" style="margin-top:18px;">
+        <div class="q-text"><span class="q-num">2</span>
+          Which sentence uses Past Simple <em>correctly</em>?
+        </div>
+        <div class="options" data-correct="c">
+          <label class="opt-label"><input type="radio" name="ex1q2" value="a"><div class="opt-dot"></div>Elon Musk has launched his first rocket in 2006.</label>
+          <label class="opt-label"><input type="radio" name="ex1q2" value="b"><div class="opt-dot"></div>The rover is landing on Mars last February.</label>
+          <label class="opt-label"><input type="radio" name="ex1q2" value="c"><div class="opt-dot"></div>SpaceX launched Falcon 9 for the first time in 2010.</label>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-wrap" id="ex1-q3" style="margin-top:18px;">
+        <div class="q-text"><span class="q-num">3</span>
+          "The team <strong>worked</strong> on the AI model for three years and finished it last month." — What does Past Simple tell us?
+        </div>
+        <div class="options" data-correct="a">
+          <label class="opt-label"><input type="radio" name="ex1q3" value="a"><div class="opt-dot"></div>The work is completely over — both actions are in the past.</label>
+          <label class="opt-label"><input type="radio" name="ex1q3" value="b"><div class="opt-dot"></div>The work is still ongoing.</label>
+          <label class="opt-label"><input type="radio" name="ex1q3" value="c"><div class="opt-dot"></div>The result of the work is important now.</label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkMC('ex1')">Check answers</button>
+        <button class="btn btn-ghost" onclick="resetMC('ex1')">Reset</button>
+      </div>
+      <div class="result-box" id="ex1-result"></div>
+    </div>
+  </div>
+
+
+  <hr class="sect-div">
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 2 — Affirmative form: gap-fill  (Slide 4)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-info">
+      <div class="section-title">Affirmative form — Regular verbs (+ed)</div>
+      <div class="section-desc">Write the correct Past Simple form of the verb in brackets. Use basic <code>+ed</code> rules.</div>
+    </div>
+  </div>
+  <div class="slide-badge">📋 Slide 4</div>
+
+  <div class="theory-box">
+    <strong>Formula:</strong> Subject + V2 (no auxiliary!)<br>
+    Regular verbs: add <code>-ed</code> to the base form. &nbsp;·&nbsp; <code>work → worked</code> &nbsp;·&nbsp; <code>launch → launched</code> &nbsp;·&nbsp; <code>call → called</code>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="task-label">Fill in the blanks</div>
+      <div id="ex2-questions"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkGapFill('ex2')">Check answers</button>
+        <button class="btn btn-ghost" onclick="resetGapFill('ex2')">Reset</button>
+      </div>
+      <div class="result-box" id="ex2-result"></div>
+    </div>
+  </div>
+
+
+  <hr class="sect-div">
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 3 — -ed spelling rules  (Slides 5–6)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-info">
+      <div class="section-title">Spelling rules for –ed</div>
+      <div class="section-desc">Three rules: verbs ending in <strong>-e</strong>, verbs ending in <strong>-y</strong>, and <strong>consonant doubling</strong>. Choose the correctly spelled form.</div>
+    </div>
+  </div>
+  <div class="slide-badge">📋 Slides 5 – 6</div>
+
+  <div class="theory-box">
+    <strong>–e ending:</strong> add <code>-d</code> only &nbsp;·&nbsp; <code>code → coded</code> &nbsp;·&nbsp; <code>agree → agreed</code><br>
+    <strong>Vowel + y:</strong> add <code>-ed</code> &nbsp;·&nbsp; <code>play → played</code><br>
+    <strong>Consonant + y:</strong> change to <code>-ied</code> &nbsp;·&nbsp; <code>study → studied</code><br>
+    <strong>CVC (short stressed syllable):</strong> double consonant + <code>-ed</code> &nbsp;·&nbsp; <code>stop → stopped</code><br>
+    <strong>Multi-syllable, stress on last:</strong> double + <code>-ed</code> &nbsp;·&nbsp; <code>transfer → transferred</code>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="task-label">Choose the correct Past Simple form</div>
+
+      <div id="ex3-questions"></div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkMC('ex3')">Check answers</button>
+        <button class="btn btn-ghost" onclick="resetMC('ex3')">Reset</button>
+      </div>
+      <div class="result-box" id="ex3-result"></div>
+    </div>
+  </div>
+
+
+  <hr class="sect-div">
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 4 — Pronunciation of -ed  (Slide 7)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-info">
+      <div class="section-title">Pronunciation of –ed: /t/, /ɪd/, or /d/</div>
+      <div class="section-desc">Drag each verb into the correct pronunciation column.</div>
+    </div>
+  </div>
+  <div class="slide-badge">📋 Slide 7</div>
+
+  <div class="theory-box">
+    <strong>/t/</strong> — after voiceless consonants /k f θ s ʃ tʃ p/ &nbsp;·&nbsp; <code>worked /wɜːkt/</code><br>
+    <strong>/ɪd/</strong> — after /d/ or /t/ &nbsp;·&nbsp; <code>needed /ˈniːdɪd/</code><br>
+    <strong>/d/</strong> — all other cases (voiced + vowels) &nbsp;·&nbsp; <code>called /kɔːld/</code>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="task-label">Drag & drop into the correct column</div>
+      <div class="drag-bank" id="pron-bank"></div>
+      <div class="pron-cols">
+        <div class="pron-col" id="pron-t" data-group="t" ondragover="ev.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="dropChip(event,'t')">
+          <div class="pron-col-head">/t/</div>
+          <div class="pron-col-sub">voiceless consonants</div>
+          <div class="pron-items" id="pron-t-items"></div>
+        </div>
+        <div class="pron-col" id="pron-id" data-group="id" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="dropChip(event,'id')">
+          <div class="pron-col-head">/ɪd/</div>
+          <div class="pron-col-sub">ends in /d/ or /t/</div>
+          <div class="pron-items" id="pron-id-items"></div>
+        </div>
+        <div class="pron-col" id="pron-d" data-group="d" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="dropChip(event,'d')">
+          <div class="pron-col-head">/d/</div>
+          <div class="pron-col-sub">voiced / vowels</div>
+          <div class="pron-items" id="pron-d-items"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkPron()">Check</button>
+        <button class="btn btn-ghost" onclick="resetPron()">Reset</button>
+      </div>
+      <div class="result-box" id="ex4-result"></div>
+    </div>
+  </div>
+
+
+  <hr class="sect-div">
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 5 — Irregular verbs  (Slide 8)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-info">
+      <div class="section-title">Irregular verbs — V2 form</div>
+      <div class="section-desc">Write the correct Past Simple form of the irregular verb in brackets.</div>
+    </div>
+  </div>
+  <div class="slide-badge">📋 Slide 8</div>
+
+  <div class="theory-box">
+    Irregular verbs have a <strong>unique V2 form</strong> — no -ed rule. You must memorise them.<br>
+    <code>go → went</code> &nbsp;·&nbsp; <code>see → saw</code> &nbsp;·&nbsp; <code>buy → bought</code> &nbsp;·&nbsp; <code>think → thought</code> &nbsp;·&nbsp; <code>make → made</code> &nbsp;·&nbsp; <code>write → wrote</code> &nbsp;·&nbsp; <code>take → took</code>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="task-label">Fill in the blanks with the correct V2 form</div>
+      <div id="ex5-questions"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkGapFill('ex5')">Check answers</button>
+        <button class="btn btn-ghost" onclick="resetGapFill('ex5')">Reset</button>
+      </div>
+      <div class="result-box" id="ex5-result"></div>
+    </div>
+  </div>
+
+
+  <hr class="sect-div">
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 6 — Negation  (Slide 9)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-info">
+      <div class="section-title">Negation: didn't + V1</div>
+      <div class="section-desc">Rewrite each sentence as a negative. Use the short form <strong>didn't</strong>.</div>
+    </div>
+  </div>
+  <div class="slide-badge">📋 Slide 9</div>
+
+  <div class="theory-box">
+    <strong>Formula:</strong> Subject + <code>didn't</code> + V1 (base form — no -ed!)<br>
+    ❗ The main verb goes back to V1: <code>She worked. → She didn't work.</code>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="task-label">Make these sentences negative</div>
+      <div id="ex6-questions"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkGapFill('ex6')">Check answers</button>
+        <button class="btn btn-ghost" onclick="resetGapFill('ex6')">Reset</button>
+      </div>
+      <div class="result-box" id="ex6-result"></div>
+    </div>
+  </div>
+
+
+  <hr class="sect-div">
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 7 — Questions  (Slide 10)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-info">
+      <div class="section-title">Questions: Did + Subject + V1?</div>
+      <div class="section-desc">Build questions and short answers from the prompts.</div>
+    </div>
+  </div>
+  <div class="slide-badge">📋 Slide 10</div>
+
+  <div class="theory-box">
+    <strong>Formula:</strong> <code>Did</code> + Subject + V1 + …?<br>
+    Short answers: <code>Yes, he did.</code> &nbsp;/&nbsp; <code>No, she didn't.</code><br>
+    ❗ Main verb is always V1 — never add -ed in questions.
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="task-label">Part A — Arrange the words into a correct question</div>
+      <div id="ex7a-questions"></div>
+      <div class="btn-row" style="margin-top:10px;">
+        <button class="btn btn-primary" onclick="checkReorder()">Check order</button>
+        <button class="btn btn-ghost" onclick="resetReorder()">Reset</button>
+      </div>
+      <div class="result-box" id="ex7a-result"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:10px;">
+    <div class="card-inner">
+      <div class="task-label">Part B — Error correction: find & fix the mistake</div>
+      <div id="ex7b-questions"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkMC('ex7b')">Check answers</button>
+        <button class="btn btn-ghost" onclick="resetMC('ex7b')">Reset</button>
+      </div>
+      <div class="result-box" id="ex7b-result"></div>
+    </div>
+  </div>
+
+
+  <hr class="sect-div">
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 8 — Mixed: affirmative / negative / question  (Slides 3–10)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-info">
+      <div class="section-title">Mixed practice — Transformation</div>
+      <div class="section-desc">Transform each sentence according to the instruction in brackets: (+), (–), or (?). All topics: space, AI, engineering, sport.</div>
+    </div>
+  </div>
+  <div class="slide-badge">📋 Slides 3 – 10 · Mixed</div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="task-label">Write the transformed sentence in the box</div>
+      <div id="ex8-questions"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkGapFill('ex8')">Check answers</button>
+        <button class="btn btn-ghost" onclick="resetGapFill('ex8')">Reset</button>
+      </div>
+      <div class="result-box" id="ex8-result"></div>
+    </div>
+  </div>
+
+  <!-- FINAL SCORE CARD -->
+  <div class="final-card" id="final-card">
+    <div class="final-emoji" id="final-emoji">🚀</div>
+    <div class="final-title">Exercises complete!</div>
+    <div class="final-sub">Here's how you did, Alexander:</div>
+    <div class="final-score-big" id="final-score-num">—</div>
+    <div class="final-score-total" id="final-score-total">out of — points</div>
+    <div class="final-bar"><div class="final-bar-fill" id="final-bar-fill"></div></div>
+    <div class="final-hint" id="final-hint"></div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ══════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════
+
+const ex2Data = [
+  { sent: "The engineers ___ (work) on the satellite for 18 months.", blank: "worked" },
+  { sent: "NASA ___ (launch) the James Webb telescope in December 2021.", blank: "launched" },
+  { sent: "The algorithm ___ (solve) the problem in 0.3 seconds.", blank: "solved" },
+  { sent: "The astronauts ___ (land) on the lunar surface at dawn.", blank: "landed" },
+  { sent: "He ___ (call) the control centre immediately after the anomaly.", blank: "called" },
+  { sent: "Our team ___ (finish) the coding sprint two days ahead of schedule.", blank: "finished" },
+];
+
+const ex3Data = [
+  { q: "The sensor <strong>___ (code)</strong> the data automatically.", opts: ["coded","codeed","codded"], correct: 0 },
+  { q: "After the match, the athlete <strong>___ (stop)</strong> running and stretched.", opts: ["stoped","stopped","stopted"], correct: 1 },
+  { q: "The research team <strong>___ (apply)</strong> a new neural-network method.", opts: ["applyed","applieded","applied"], correct: 2 },
+  { q: "She <strong>___ (transfer)</strong> all the files to the secure server.", opts: ["transfered","transferded","transferred"], correct: 2 },
+  { q: "The rover <strong>___ (use)</strong> solar panels to recharge overnight.", opts: ["useed","used","usen"], correct: 1 },
+  { q: "The developer <strong>___ (plan)</strong> the architecture before writing any code.", opts: ["planned","planed","planied"], correct: 0 },
+  { q: "Scientists <strong>___ (study)</strong> the black hole image for months.", opts: ["studyed","studied","studieed"], correct: 1 },
+];
+
+const pronData = [
+  { word: "launched", group: "t" },  // /tʃ/ voiceless
+  { word: "worked",   group: "t" },  // /k/ voiceless
+  { word: "watched",  group: "t" },  // /tʃ/ voiceless
+  { word: "crashed",  group: "t" },  // /ʃ/ voiceless
+  { word: "needed",   group: "id" }, // ends in /d/
+  { word: "tested",   group: "id" }, // ends in /t/
+  { word: "landed",   group: "id" }, // ends in /d/
+  { word: "coded",    group: "id" }, // ends in /d/
+  { word: "solved",   group: "d" },  // voiced /v/
+  { word: "called",   group: "d" },  // voiced /l/
+  { word: "trained",  group: "d" },  // voiced /n/
+  { word: "explored", group: "d" },  // voiced /r/
+];
+
+const ex5Data = [
+  { sent: "Einstein ___ (write) his special theory of relativity in 1905.", blank: "wrote" },
+  { sent: "The team ___ (fly) the drone over the construction site.", blank: "flew" },
+  { sent: "Yuri Gagarin ___ (become) the first human in space in 1961.", blank: "became" },
+  { sent: "The coach ___ (think) the athlete could break the record.", blank: "thought" },
+  { sent: "She ___ (take) detailed notes during the engineering lecture.", blank: "took" },
+  { sent: "The startup ___ (make) a breakthrough in battery technology.", blank: "made" },
+  { sent: "He ___ (see) the comet through his telescope last night.", blank: "saw" },
+  { sent: "They ___ (buy) a powerful GPU to train the model faster.", blank: "bought" },
+];
+
+const ex6Data = [
+  { pos: "The rover collected rock samples.", neg: "The rover didn't collect rock samples.", v1: "collect" },
+  { pos: "She wrote the algorithm from scratch.", neg: "She didn't write the algorithm from scratch.", v1: "write" },
+  { pos: "The satellite transmitted the signal.", neg: "The satellite didn't transmit the signal.", v1: "transmit" },
+  { pos: "He studied machine learning at university.", neg: "He didn't study machine learning at university.", v1: "study" },
+  { pos: "They launched the rocket on schedule.", neg: "They didn't launch the rocket on schedule.", v1: "launch" },
+];
+
+const ex7aData = [
+  { words: ["Did", "the", "team", "test", "the", "new", "AI", "model", "?"], answer: "Did the team test the new AI model ?" },
+  { words: ["go", "the", "astronaut", "Did", "on", "a", "spacewalk", "?"], answer: "Did the astronaut go on a spacewalk ?" },
+  { words: ["solve", "Did", "the", "engineer", "the", "bug", "?"], answer: "Did the engineer solve the bug ?" },
+];
+
+const ex7bData = [
+  { q: "Did she <strong>studied</strong> the orbital mechanics formula?", opts: ["study", "studied", "studies"], correct: 0, explain: "In questions with Did, the main verb must be V1 (base form): <em>Did she study?</em>" },
+  { q: "Did the robot <strong>completed</strong> all the assigned tasks?", opts: ["complete", "completed", "completes"], correct: 0, explain: "After Did, always use V1: <em>Did the robot complete?</em>" },
+  { q: "Did they <strong>went</strong> to the space museum last weekend?", opts: ["go", "went", "going"], correct: 0, explain: "After Did, the verb must be V1 (base form), not V2: <em>Did they go?</em>" },
+];
+
+const ex8Data = [
+  { instruction: "(?) — Make a question from this statement:", stmt: "The programmer wrote the whole app in Python.", answer: "Did the programmer write the whole app in Python?", hint:"Did + subject + V1 (base form)?" },
+  { instruction: "(–) — Make this sentence negative:", stmt: "The spacecraft reached Mars orbit in 2021.", answer: "The spacecraft didn't reach Mars orbit in 2021.", hint:"Subject + didn't + V1" },
+  { instruction: "(?) — Make a question:", stmt: "The athlete broke the world record.", answer: "Did the athlete break the world record?", hint:"Did + subject + V1?" },
+  { instruction: "(–) — Make this sentence negative:", stmt: "She understood the quantum physics lecture.", answer: "She didn't understand the quantum physics lecture.", hint:"Subject + didn't + V1" },
+  { instruction: "(?) — Make a question:", stmt: "They trained the neural network on a supercomputer.", answer: "Did they train the neural network on a supercomputer?", hint:"Did + subject + V1?" },
+];
+
+// ══════════════════════════════════════════════
+// SCORE TRACKING
+// ══════════════════════════════════════════════
+let totalPoints = 0;
+let earnedPoints = 0;
+const checkedSections = new Set();
+
+function addPoints(section, earned, total) {
+  if (checkedSections.has(section)) return;
+  checkedSections.add(section);
+  earnedPoints += earned;
+  totalPoints  += total;
+  updateTopScore();
+  if (checkedSections.size >= 8) showFinal();
+}
+
+function updateTopScore() {
+  document.getElementById('topbar-score').textContent = earnedPoints + ' / ' + totalPoints;
+  const pct = totalPoints > 0 ? (earnedPoints / totalPoints) * 100 : 0;
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+function showFinal() {
+  const pct = totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0;
+  const card = document.getElementById('final-card');
+  card.classList.add('show');
+  document.getElementById('final-score-num').textContent = earnedPoints;
+  document.getElementById('final-score-total').textContent = 'out of ' + totalPoints + ' points  (' + pct + '%)';
+  document.getElementById('final-emoji').textContent = pct >= 90 ? '🚀' : pct >= 70 ? '⭐' : pct >= 50 ? '💡' : '🔧';
+  document.getElementById('final-hint').textContent =
+    pct >= 90 ? 'Outstanding, Alexander! Past Simple is fully under control.' :
+    pct >= 70 ? 'Great work! Review the tricky spelling rules one more time.' :
+    pct >= 50 ? 'Good effort — focus on irregular verbs and negation.' :
+    'Keep practising! The rules will click with more repetition.';
+  setTimeout(() => {
+    document.getElementById('final-bar-fill').style.width = pct + '%';
+  }, 200);
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ══════════════════════════════════════════════
+// BUILD EXERCISES
+// ══════════════════════════════════════════════
+
+function buildGapFill(containerId, data) {
+  const container = document.getElementById(containerId + '-questions');
+  container.innerHTML = '';
+  data.forEach((item, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'q-wrap';
+    wrap.id = containerId + '-q' + i;
+    const hint = item.v1 ? ` <span style="color:var(--text-sub);font-size:12px;">(✎ ${item.v1} → ?)</span>` : '';
+    const prompt = item.sent || item.pos || '';
+    wrap.innerHTML = `
+      <div class="q-text">
+        <span class="q-num">${i+1}</span>
+        ${prompt.replace('___', `<input class="ans-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" data-answer="${item.blank}" placeholder="?">`) + hint}
+      </div>`;
+    if (item.neg) {
+      wrap.querySelector('.q-text').insertAdjacentHTML('beforeend',
+        `<div style="font-size:12px;color:var(--text-sub);margin-top:2px;margin-left:28px;">→ negative: <input class="ans-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" data-answer="${item.neg}" placeholder="full sentence" style="width:360px;"></div>`);
+    }
+    container.appendChild(wrap);
+  });
+}
+
+function buildMC(containerId, data) {
+  const container = document.getElementById(containerId + '-questions');
+  if (!container) return;
+  container.innerHTML = '';
+  data.forEach((item, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'q-wrap';
+    wrap.id = containerId + '-q' + i;
+    const correctVal = typeof item.correct === 'number' ? String.fromCharCode(97 + item.correct) : item.correct;
+    let optsHtml = item.opts.map((o, j) => {
+      const val = typeof item.correct === 'number' ? String.fromCharCode(97 + j) : o;
+      return `<label class="opt-label"><input type="radio" name="${containerId}q${i}" value="${val}"><div class="opt-dot"></div>${o}</label>`;
+    }).join('');
+    const explain = item.explain ? `<div style="font-size:12px;color:var(--text-sub);margin-top:4px;">${item.explain}</div>` : '';
+    wrap.innerHTML = `
+      <div class="q-text"><span class="q-num">${i+1}</span> ${item.q}</div>
+      <div class="options" data-correct="${correctVal}">${optsHtml}</div>${explain}`;
+    wrap.style.marginBottom = '16px';
+    container.appendChild(wrap);
+  });
+  // add radio interactivity
+  container.querySelectorAll('.opt-label').forEach(lbl => {
+    lbl.addEventListener('click', () => {
+      const name = lbl.querySelector('input').name;
+      document.querySelectorAll(`input[name="${name}"]`).forEach(r => r.closest('.opt-label').classList.remove('selected'));
+      lbl.classList.add('selected');
+    });
+  });
+}
+
+// Build pronunciation drag & drop
+function buildPron() {
+  const bank = document.getElementById('pron-bank');
+  bank.innerHTML = '';
+  // shuffle
+  const shuffled = [...pronData].sort(() => Math.random() - .5);
+  shuffled.forEach(item => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.textContent = item.word;
+    chip.draggable = true;
+    chip.dataset.word = item.word;
+    chip.dataset.group = item.group;
+    chip.addEventListener('dragstart', e => { e.dataTransfer.setData('word', item.word); chip.classList.add('dragging'); });
+    chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+    bank.appendChild(chip);
+  });
+}
+
+function dropChip(event, group) {
+  event.preventDefault();
+  const word = event.dataTransfer.getData('word');
+  const col  = document.getElementById('pron-' + group);
+  col.classList.remove('dragover');
+  // find chip in bank or other cols
+  const existing = document.querySelector(`.chip[data-word="${word}"]`);
+  if (!existing) return;
+  // move to new col items div
+  const itemsDiv = document.getElementById('pron-' + group + '-items');
+  existing.classList.remove('dragging');
+  itemsDiv.appendChild(existing);
+}
+
+function checkPron() {
+  let correct = 0;
+  document.querySelectorAll('.chip').forEach(chip => {
+    const placed = chip.closest('[data-group]');
+    if (!placed) return;
+    const pg = placed.dataset.group;
+    if (pg === chip.dataset.group) { chip.classList.add('correct-chip'); correct++; }
+    else { chip.classList.add('wrong-chip'); }
+    chip.draggable = false;
+  });
+  const total = pronData.length;
+  const rb = document.getElementById('ex4-result');
+  rb.className = 'result-box show ' + (correct === total ? 'correct' : correct >= total/2 ? 'partial' : 'wrong');
+  rb.innerHTML = `<strong>${correct} / ${total}</strong> correct. ${correct < total ? 'Wrong chips show in red — review the voiceless/voiced rule.' : 'Perfect! All pronunciations nailed.'}`;
+  addPoints('ex4', correct, total);
+}
+
+function resetPron() {
+  const bank = document.getElementById('pron-bank');
+  ['t','id','d'].forEach(g => { document.getElementById('pron-'+g+'-items').innerHTML = ''; });
+  document.getElementById('ex4-result').className = 'result-box';
+  buildPron();
+}
+
+// Build word-reorder exercise
+function buildReorder() {
+  const container = document.getElementById('ex7a-questions');
+  if (!container) return;
+  container.innerHTML = '';
+  ex7aData.forEach((item, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'q-wrap';
+    wrap.id = 'ex7a-q' + i;
+    const shuffled = [...item.words].sort(() => Math.random() - .5);
+    const chipsHtml = shuffled.map(w =>
+      `<div class="word-chip" data-word="${w}" onclick="moveWord(this,${i})">${w}</div>`
+    ).join('');
+    wrap.innerHTML = `
+      <div class="q-text" style="margin-bottom:6px;"><span class="q-num">${i+1}</span> Arrange into a correct question:</div>
+      <div class="reorder-label">Available words (click to add →)</div>
+      <div class="reorder-source" id="reorder-src-${i}">${chipsHtml}</div>
+      <div class="reorder-label">Your question:</div>
+      <div class="reorder-target" id="reorder-tgt-${i}" data-answer="${item.answer}"></div>`;
+    container.appendChild(wrap);
+  });
+}
+
+function moveWord(chip, qi) {
+  const src = document.getElementById('reorder-src-' + qi);
+  const tgt = document.getElementById('reorder-tgt-' + qi);
+  if (chip.parentElement === src) {
+    chip.classList.add('in-target');
+    tgt.appendChild(chip);
+  } else {
+    chip.classList.remove('in-target');
+    src.appendChild(chip);
+  }
+}
+
+function checkReorder() {
+  let correct = 0;
+  ex7aData.forEach((item, i) => {
+    const tgt = document.getElementById('reorder-tgt-' + i);
+    const chips = [...tgt.querySelectorAll('.word-chip')];
+    const built = chips.map(c => c.dataset.word).join(' ');
+    // normalise (remove trailing space before ?)
+    const norm = s => s.replace(/\s+\?/, '?').trim().toLowerCase();
+    if (norm(built) === norm(item.answer)) correct++;
+  });
+  const rb = document.getElementById('ex7a-result');
+  rb.className = 'result-box show ' + (correct === ex7aData.length ? 'correct' : 'partial');
+  rb.innerHTML = `<strong>${correct} / ${ex7aData.length}</strong> question(s) correct. ${correct < ex7aData.length ? 'Remember: Did + Subject + V1' : 'All correct!'}`;
+  addPoints('ex7a', correct, ex7aData.length);
+}
+
+function resetReorder() {
+  document.getElementById('ex7a-result').className = 'result-box';
+  buildReorder();
+}
+
+// ══════════════════════════════════════════════
+// GENERIC CHECK: Gap-fill
+// ══════════════════════════════════════════════
+function checkGapFill(id) {
+  const container = document.getElementById(id + '-questions');
+  const inputs = container.querySelectorAll('.ans-input');
+  let correct = 0, total = inputs.length;
+  inputs.forEach(inp => {
+    inp.readOnly = true;
+    const ans = (inp.value || '').trim().toLowerCase().replace(/['']/g,"'");
+    const expected = (inp.dataset.answer || '').trim().toLowerCase().replace(/['']/g,"'");
+    const ok = ans === expected;
+    if (ok) { inp.classList.add('correct'); correct++; }
+    else {
+      inp.classList.add('wrong');
+      // show answer hint
+      const hint = document.createElement('span');
+      hint.className = 'inline-fb no';
+      hint.textContent = '→ ' + inp.dataset.answer;
+      inp.insertAdjacentElement('afterend', hint);
+    }
+  });
+  const rb = document.getElementById(id + '-result');
+  rb.className = 'result-box show ' + (correct === total ? 'correct' : correct > 0 ? 'partial' : 'wrong');
+  rb.innerHTML = `<strong>${correct} / ${total}</strong> correct. ${correct < total ? 'Incorrect answers shown in red — correct forms appear next to them.' : 'All correct! Excellent work.'}`;
+  addPoints(id, correct, total);
+}
+
+function resetGapFill(id) {
+  const container = document.getElementById(id + '-questions');
+  container.querySelectorAll('.ans-input').forEach(inp => {
+    inp.value = '';
+    inp.readOnly = false;
+    inp.classList.remove('correct', 'wrong');
+  });
+  container.querySelectorAll('.inline-fb').forEach(el => el.remove());
+  document.getElementById(id + '-result').className = 'result-box';
+}
+
+// ══════════════════════════════════════════════
+// GENERIC CHECK: Multiple Choice
+// ══════════════════════════════════════════════
+function checkMC(id) {
+  const container = document.getElementById(id + '-questions');
+  const groups = container.querySelectorAll('.options[data-correct]');
+  let correct = 0;
+  groups.forEach(grp => {
+    const expected = grp.dataset.correct;
+    const radios = grp.querySelectorAll('input[type="radio"]');
+    let chosen = null;
+    radios.forEach(r => { if (r.checked) chosen = r.value; });
+    grp.querySelectorAll('.opt-label').forEach(lbl => {
+      const val = lbl.querySelector('input').value;
+      if (val === expected) lbl.classList.add('show-correct');
+      if (chosen === val && val !== expected) lbl.classList.add('wrong');
+      lbl.querySelector('input').disabled = true;
+    });
+    if (chosen === expected) correct++;
+  });
+  const total = groups.length;
+  const rb = document.getElementById(id + '-result');
+  rb.className = 'result-box show ' + (correct === total ? 'correct' : correct > 0 ? 'partial' : 'wrong');
+  rb.innerHTML = `<strong>${correct} / ${total}</strong> correct. ${correct < total ? 'Green = correct answer.' : 'Perfect!'}`;
+  addPoints(id, correct, total);
+}
+
+function resetMC(id) {
+  const container = document.getElementById(id + '-questions');
+  container.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.checked = false;
+    r.disabled = false;
+    r.closest('.opt-label').classList.remove('selected','correct','wrong','show-correct');
+  });
+  document.getElementById(id + '-result').className = 'result-box';
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Build exercises
+  buildGapFill('ex2', ex2Data);
+  buildMC('ex3', ex3Data);
+  buildPron();
+  buildGapFill('ex5', ex5Data);
+
+  // Ex6 — negation (custom: show positive, type full negative)
+  (() => {
+    const container = document.getElementById('ex6-questions');
+    ex6Data.forEach((item, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'q-wrap';
+      const v1hint = `<span style="color:var(--text-sub);font-size:12px;">(verb V1: <em>${item.v1}</em>)</span>`;
+      wrap.innerHTML = `
+        <div class="q-text">
+          <span class="q-num">${i+1}</span> <strong>${item.pos}</strong> ${v1hint}
+        </div>
+        <div style="margin-top:6px;margin-left:28px;font-size:13px;color:var(--text-sub);">→ Negative: <input class="ans-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" data-answer="${item.neg}" placeholder="write full sentence…" style="width:380px;"></div>`;
+      container.appendChild(wrap);
+    });
+  })();
+
+  // Ex7 MC
+  buildMC('ex7b', ex7bData);
+  buildReorder();
+
+  // Ex8 — mixed transformation
+  (() => {
+    const container = document.getElementById('ex8-questions');
+    ex8Data.forEach((item, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'q-wrap';
+      wrap.style.marginBottom = '16px';
+      wrap.innerHTML = `
+        <div class="q-text">
+          <span class="q-num">${i+1}</span> <em style="color:var(--teal-d);font-style:normal;font-weight:600;">${item.instruction}</em>
+        </div>
+        <div style="margin:6px 0 8px 28px; font-size:14px; font-style:italic; color:var(--text);">${item.stmt}</div>
+        <div style="margin-left:28px; font-size:12px; color:var(--text-sub); margin-bottom:6px;">Hint: ${item.hint}</div>
+        <div style="margin-left:28px;">
+          <input class="ans-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" data-answer="${item.answer}" placeholder="your answer…" style="width:480px;">
+        </div>`;
+      container.appendChild(wrap);
+    });
+  })();
+
+  // MC radio interactions for ex1
+  document.querySelectorAll('.options .opt-label').forEach(lbl => {
+    lbl.addEventListener('click', function() {
+      const name = this.querySelector('input').name;
+      document.querySelectorAll(`input[name="${name}"]`).forEach(r =>
+        r.closest('.opt-label').classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+});
+</script>
+</body>
+</html>
