@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Simple — Skills Practice | Alexander Filippov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:     #028090;
+  --teal-d:   #016676;
+  --teal-l:   #E8F5F7;
+  --teal-xl:  #F0FAFB;
+  --navy:     #0D2B35;
+  --navy-l:   #1A3D4A;
+  --white:    #FFFFFF;
+  --g50:      #F7FAFB;
+  --g100:     #EFF4F5;
+  --g200:     #D8E6E9;
+  --g400:     #8AAAB0;
+  --g600:     #4E6B72;
+  --text:     #0D2B35;
+  --tsub:     #4E6B72;
+  --ok:       #1A7F5A;  --ok-bg:  #E6F6EF;
+  --no:       #B02020;  --no-bg:  #FDEAEA;
+  --ng:       #7A5500;  --ng-bg:  #FFF3D6;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--g50);color:var(--text);min-height:100vh}
+
+/* TOP BAR */
+.topbar{position:sticky;top:0;z-index:100;background:var(--navy);height:52px;padding:0 24px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 12px rgba(2,128,144,.2)}
+.tb-logo{width:32px;height:32px;background:var(--teal);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.tb-title{color:#fff;font-size:15px;font-weight:600}
+.tb-sub{color:var(--g400);font-size:12px}
+.tb-pills{margin-left:auto;display:flex;gap:6px}
+.tb-pill{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.04em;border:1px solid transparent}
+.pill-r{background:#1a4a55;color:#7EC8D3;border-color:#1d5566}
+.pill-w{background:#1a3d1a;color:#6FCF6F;border-color:#1f4d1f}
+.pill-s{background:#3d2a00;color:#F5C36A;border-color:#4d3500}
+
+/* PROGRESS */
+.prog-bar{height:3px;background:var(--g200)}
+.prog-fill{height:100%;background:var(--teal);transition:width .4s}
+
+/* LAYOUT */
+.page{max-width:820px;margin:0 auto;padding:32px 20px 80px}
+
+/* SKILL DIVIDER */
+.skill-banner{display:flex;align-items:center;gap:16px;padding:14px 20px;border-radius:var(--r-lg);margin:36px 0 20px;border:1px solid var(--g200)}
+.skill-banner:first-child{margin-top:0}
+.sk-reading{background:linear-gradient(135deg,#e8f5f7,#d0ecf0)}
+.sk-writing{background:linear-gradient(135deg,#edf7ed,#d4efd4)}
+.sk-speaking{background:linear-gradient(135deg,#fff8e8,#fcedc8)}
+.skill-icon{font-size:28px;flex-shrink:0}
+.skill-name{font-size:19px;font-weight:700;color:var(--navy)}
+.skill-desc{font-size:13px;color:var(--tsub);margin-top:2px}
+.skill-time{margin-left:auto;font-size:12px;color:var(--tsub);white-space:nowrap;font-weight:500}
+
+/* SECTION HEADER */
+.sec-hdr{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;margin-top:22px}
+.sec-num{width:34px;height:34px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 2px 8px rgba(2,128,144,.2)}
+.sec-title{font-size:16px;font-weight:700;color:var(--navy)}
+.sec-desc{font-size:12.5px;color:var(--tsub);margin-top:2px;line-height:1.5}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--g200);border-radius:var(--r-lg);margin-bottom:10px;overflow:hidden}
+.card:hover{box-shadow:0 2px 12px rgba(2,128,144,.07)}
+.card-inner{padding:16px 18px}
+
+/* THEORY */
+.theory{background:var(--teal-xl);border:1px solid var(--g200);border-left:3px solid var(--teal);border-radius:0 var(--r-md) var(--r-md) 0;padding:11px 15px;margin-bottom:14px;font-size:13px;line-height:1.7;color:var(--text)}
+.theory strong{color:var(--teal-d)}
+
+/* READING TEXT */
+.reading-text{font-size:14.5px;line-height:1.85;color:var(--text);padding:18px 20px;background:var(--white);border:1px solid var(--g200);border-radius:var(--r-lg);margin-bottom:12px}
+.reading-text h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.reading-text p{margin-bottom:10px}
+.reading-text p:last-child{margin-bottom:0}
+.ps-verb{border-bottom:2px solid var(--teal);color:var(--teal-d);cursor:help}
+
+/* VOCAB TABLE */
+.vocab-table{width:100%;border-collapse:collapse;font-size:13px}
+.vocab-table th{background:var(--teal);color:#fff;padding:5px 10px;text-align:left;font-weight:600;font-size:12px}
+.vocab-table td{padding:6px 10px;border-bottom:1px solid var(--g200);vertical-align:top}
+.vocab-table tr:last-child td{border-bottom:none}
+.vocab-table tr:nth-child(even) td{background:var(--teal-xl)}
+
+/* TF BUTTONS */
+.tf-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.tf-row:last-child{margin-bottom:0}
+.tf-stmt{font-size:13.5px;flex:1;line-height:1.5}
+.tf-btns{display:flex;gap:5px;flex-shrink:0}
+.tf-btn{font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--r-sm);border:1.5px solid var(--g200);background:var(--white);cursor:pointer;letter-spacing:.04em;transition:all .15s}
+.tf-btn:hover{border-color:var(--teal);background:var(--teal-xl)}
+.tf-btn.sel-T{background:#d4efd4;border-color:#1A7F5A;color:var(--ok)}
+.tf-btn.sel-F{background:var(--no-bg);border-color:var(--no);color:var(--no)}
+.tf-btn.sel-NG{background:var(--ng-bg);border-color:#c49000;color:var(--ng)}
+.tf-btn.correct{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.tf-btn.wrong{background:var(--no-bg);border-color:var(--no);color:var(--no)}
+
+/* COMPREHENSION TEXT AREAS */
+.comp-q{margin-bottom:14px}
+.comp-q:last-child{margin-bottom:0}
+.comp-label{font-size:13.5px;margin-bottom:6px;line-height:1.5}
+.comp-q .q-num{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;background:var(--g100);border-radius:50%;font-size:11px;font-weight:700;color:var(--tsub);margin-right:6px}
+textarea.ans-ta{width:100%;min-height:64px;font-family:var(--font);font-size:13px;border:1.5px solid var(--g200);border-radius:var(--r-sm);padding:8px 11px;resize:vertical;outline:none;transition:border-color .15s;color:var(--text)}
+textarea.ans-ta:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(2,128,144,.1)}
+
+/* VERB HUNT */
+.vhunt-grid{display:flex;flex-wrap:wrap;gap:6px;font-size:13.5px;line-height:1.8}
+.vhunt-word{cursor:pointer;padding:2px 7px;border-radius:4px;border:1.5px solid transparent;transition:all .15s;user-select:none}
+.vhunt-word:hover{background:var(--teal-xl);border-color:var(--teal)}
+.vhunt-word.marked{background:var(--teal);color:#fff;border-color:var(--teal-d)}
+.vhunt-count{font-size:12px;color:var(--tsub);margin-top:8px}
+.vhunt-count span{font-weight:700;color:var(--teal-d)}
+
+/* WRITING */
+.wc-bar{display:flex;gap:10px;align-items:center;margin-top:6px}
+.wc-label{font-size:12px;color:var(--tsub)}
+.wc-num{font-weight:700;color:var(--teal-d)}
+.wc-target{color:var(--tsub)}
+textarea.write-area{width:100%;min-height:140px;font-family:var(--font);font-size:13.5px;border:1.5px solid var(--g200);border-radius:var(--r-md);padding:12px 14px;resize:vertical;outline:none;transition:border-color .15s;line-height:1.7}
+textarea.write-area:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(2,128,144,.1)}
+.writing-prompts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.wp-item{background:var(--teal-xl);border:1px solid var(--g200);border-radius:var(--r-md);padding:10px 12px;font-size:12.5px;color:var(--text);line-height:1.5}
+.wp-item strong{display:block;font-size:11px;color:var(--teal-d);letter-spacing:.05em;margin-bottom:3px;text-transform:uppercase}
+.checklist{margin-top:12px}
+.check-item{display:flex;align-items:flex-start;gap:9px;margin-bottom:7px;font-size:13px;cursor:pointer;user-select:none}
+.check-item:last-child{margin-bottom:0}
+.check-box{width:18px;height:18px;border:2px solid var(--g400);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.check-item.checked .check-box{background:var(--teal);border-color:var(--teal-d)}
+.check-item.checked .check-box::after{content:'✓';font-size:11px;color:#fff;font-weight:700}
+.check-item.checked .check-text{color:var(--tsub);text-decoration:line-through}
+.reveal-btn{font-family:var(--font);font-size:12.5px;font-weight:600;color:var(--teal-d);background:var(--teal-xl);border:1.5px solid var(--g200);border-radius:var(--r-sm);padding:6px 14px;cursor:pointer;transition:all .15s}
+.reveal-btn:hover{background:var(--teal-l);border-color:var(--teal)}
+.model-answer{display:none;margin-top:10px;padding:13px 15px;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r-md);font-size:13px;line-height:1.75}
+.model-answer.show{display:block}
+.model-answer strong{color:var(--teal-d);font-size:11px;letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:5px}
+
+/* SPEAKING */
+.speak-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.speak-card{background:var(--white);border:1px solid var(--g200);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all .2s;perspective:600px}
+.speak-card:hover{box-shadow:0 4px 14px rgba(2,128,144,.12);transform:translateY(-2px)}
+.speak-card-inner{position:relative;width:100%;transition:transform .5s;transform-style:preserve-3d}
+.speak-card.flipped .speak-card-inner{transform:rotateY(180deg)}
+.speak-front,.speak-back{border-radius:var(--r-lg);overflow:hidden}
+.speak-back{position:absolute;top:0;left:0;width:100%;backface-visibility:hidden;transform:rotateY(180deg);background:var(--navy)}
+.speak-front{backface-visibility:hidden}
+.speak-front-top{background:var(--teal);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.speak-card-num{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.05em}
+.speak-front-tag{font-size:11px;font-weight:600;color:#fff;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:12px;margin-left:auto}
+.speak-front-body{padding:14px}
+.speak-prompt{font-size:13.5px;font-weight:600;color:var(--navy);line-height:1.5;margin-bottom:8px}
+.speak-hint{font-size:12px;color:var(--tsub);line-height:1.5}
+.speak-flip-hint{font-size:11px;color:var(--g400);text-align:right;margin-top:8px}
+.speak-back-body{padding:14px}
+.speak-back-label{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
+.speak-back-qs{list-style:none}
+.speak-back-qs li{font-size:12.5px;color:rgba(255,255,255,.85);padding:4px 0;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.5}
+.speak-back-qs li:last-child{border-bottom:none}
+.speak-back-qs li::before{content:'→ ';color:var(--teal);font-weight:700}
+
+/* ROLEPLAY */
+.roleplay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.role-card{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--g200)}
+.role-card-head{padding:10px 14px;font-size:12px;font-weight:700;letter-spacing:.05em}
+.role-A .role-card-head{background:var(--teal);color:#fff}
+.role-B .role-card-head{background:var(--navy);color:#fff}
+.role-card-body{padding:13px 15px;font-size:13px;line-height:1.6}
+.role-card-body ul{padding-left:0;list-style:none}
+.role-card-body ul li{padding:3px 0;border-bottom:1px solid var(--g200)}
+.role-card-body ul li:last-child{border-bottom:none}
+.role-card-body ul li::before{content:'• ';color:var(--teal);font-weight:700}
+.role-situation{background:var(--teal-xl);border:1px solid var(--g200);border-radius:var(--r-md);padding:11px 14px;font-size:13px;line-height:1.6;margin-bottom:10px}
+
+/* TIMER */
+.timer-wrap{display:flex;align-items:center;gap:10px;margin-top:10px}
+.timer-display{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--navy);background:var(--g100);border-radius:var(--r-sm);padding:4px 14px;min-width:80px;text-align:center}
+.timer-display.running{color:var(--teal-d);background:var(--teal-xl)}
+.timer-display.done{color:var(--ok);background:var(--ok-bg)}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font);font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r-md);border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-d);box-shadow:0 3px 10px rgba(2,128,144,.3)}
+.btn-ghost{background:transparent;color:var(--tsub);border:1.5px solid var(--g200)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-d);background:var(--teal-xl)}
+.btn-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
+
+/* RESULT */
+.result-box{margin-top:12px;padding:12px 15px;border-radius:var(--r-md);font-size:13px;line-height:1.6;display:none}
+.result-box.show{display:block}
+.result-box.correct{background:var(--ok-bg);border:1px solid #A8D9C0;color:var(--ok)}
+.result-box.partial{background:#fff8e8;border:1px solid #f0d58a;color:var(--ng)}
+.result-box.wrong{background:var(--no-bg);border:1px solid #edb8b8;color:var(--no)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-logo">PS</div>
+  <div>
+    <div class="tb-title">Past Simple — Skills Practice</div>
+    <div class="tb-sub">Alexander Filippov · B1</div>
+  </div>
+  <div class="tb-pills">
+    <span class="tb-pill pill-r">📖 Reading</span>
+    <span class="tb-pill pill-w">✏️ Writing</span>
+    <span class="tb-pill pill-s">🎙 Speaking</span>
+  </div>
+</div>
+<div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+
+<div class="page">
+
+<!-- ═══════════════════════════════
+     READING
+════════════════════════════════ -->
+<div class="skill-banner sk-reading">
+  <div class="skill-icon">📖</div>
+  <div>
+    <div class="skill-name">Reading</div>
+    <div class="skill-desc">Text · Vocabulary · T/F/NG · Comprehension · Verb Hunt</div>
+  </div>
+  <div class="skill-time">⏱ ~20 min</div>
+</div>
+
+<!-- VOCAB PRE-TASK -->
+<div class="sec-hdr">
+  <div class="sec-num">A</div>
+  <div>
+    <div class="sec-title">Pre-reading: Key Vocabulary</div>
+    <div class="sec-desc">Study these words before you read. They appear in the text.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner">
+    <table class="vocab-table">
+      <thead><tr><th>Word / phrase</th><th>Part of speech</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>lightweight</strong></td><td>adjective</td><td>not heavy; low in mass relative to its size</td></tr>
+        <tr><td><strong>hover</strong></td><td>verb</td><td>to remain stationary in the air</td></tr>
+        <tr><td><strong>contingency plan</strong></td><td>noun phrase</td><td>a backup plan prepared in case something goes wrong</td></tr>
+        <tr><td><strong>proof of concept</strong></td><td>noun phrase</td><td>a demonstration that an idea actually works in practice</td></tr>
+        <tr><td><strong>scout</strong></td><td>verb</td><td>to explore an area in advance to gather useful information</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- READING TEXT -->
+<div class="sec-hdr" style="margin-top:22px;">
+  <div class="sec-num">B</div>
+  <div>
+    <div class="sec-title">Read the text</div>
+    <div class="sec-desc">Underlined words are Past Simple verbs. Click any word to highlight it.</div>
+  </div>
+</div>
+
+<div class="reading-text" id="reading-text">
+  <h3>The Day Ingenuity Flew on Mars</h3>
+  <p>On April 19, 2021, a small helicopter <span class="ps-verb" title="Past Simple: make → made">made</span> history. NASA's Ingenuity helicopter <span class="ps-verb" title="Past Simple: take off → took off">took off</span> from the Martian surface and <span class="ps-verb" title="Past Simple: fly → flew">flew</span> for 39.1 seconds. Engineers at the Jet Propulsion Laboratory in Pasadena, California <span class="ps-verb" title="Past Simple: watch → watched">watched</span> the live data with nervous excitement.</p>
+
+  <p>The team <span class="ps-verb" title="Past Simple: work → worked">worked</span> on the Ingenuity project for six years. They <span class="ps-verb" title="Past Simple: design → designed">designed</span> a lightweight helicopter that could operate in Mars' thin atmosphere — about 100 times thinner than Earth's. The aircraft <span class="ps-verb" title="Past Simple: weigh → weighed">weighed</span> only 1.8 kilograms and used two carbon-fibre rotor blades that <span class="ps-verb" title="Past Simple: spin → spun">spun</span> at 2,500 revolutions per minute.</p>
+
+  <p>On the morning of the flight, the blades <span class="ps-verb" title="Past Simple: start → started">started</span> spinning at 3:34 AM local time. Ingenuity <span class="ps-verb" title="Past Simple: climb → climbed">climbed</span> to a height of three metres, <span class="ps-verb" title="Past Simple: hover → hovered">hovered</span> steadily for about 30 seconds, then <span class="ps-verb" title="Past Simple: land → landed">landed</span> safely on the red dust. The flight lasted less than a minute, but the achievement was enormous.</p>
+
+  <p>After the flight, chief engineer MiMi Aung <span class="ps-verb" title="Past Simple: tear → tore">tore</span> up the contingency plan she had prepared in case Ingenuity failed. "We didn't need it," she <span class="ps-verb" title="Past Simple: announce → announced">announced</span> to her team.</p>
+
+  <p>Ingenuity originally <span class="ps-verb" title="Past Simple: fly → flew">flew</span> as a technology demonstration — a proof of concept. But it <span class="ps-verb" title="Past Simple: perform → performed">performed</span> so well that NASA <span class="ps-verb" title="Past Simple: extend → extended">extended</span> its mission. The helicopter <span class="ps-verb" title="Past Simple: complete → completed">completed</span> over 50 flights and <span class="ps-verb" title="Past Simple: scout → scouted">scouted</span> terrain for the Perseverance rover. What many people doubted <span class="ps-verb" title="Past Simple: become → became">became</span> one of the most inspiring engineering achievements of the decade.</p>
+</div>
+
+<!-- T/F/NG -->
+<div class="sec-hdr">
+  <div class="sec-num">C</div>
+  <div>
+    <div class="sec-title">True / False / Not Given</div>
+    <div class="sec-desc">Based on the text only. <strong>Not Given</strong> = the text does not say either way.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner">
+    <div id="tfng-questions"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkTFNG()">Check answers</button>
+      <button class="btn btn-ghost" onclick="resetTFNG()">Reset</button>
+    </div>
+    <div class="result-box" id="tfng-result"></div>
+  </div>
+</div>
+
+<!-- COMPREHENSION QUESTIONS -->
+<div class="sec-hdr">
+  <div class="sec-num">D</div>
+  <div>
+    <div class="sec-title">Comprehension Questions</div>
+    <div class="sec-desc">Answer in your own words. Use Past Simple where appropriate.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner" id="comp-questions"></div>
+</div>
+
+<!-- VERB HUNT -->
+<div class="sec-hdr">
+  <div class="sec-num">E</div>
+  <div>
+    <div class="sec-title">Verb Hunt</div>
+    <div class="sec-desc">Find and click <strong>10 Past Simple verbs</strong> in the text below. Regular and irregular both count.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner">
+    <div class="vhunt-grid" id="vhunt-text"></div>
+    <div class="vhunt-count">Found: <span id="vhunt-num">0</span> / 10 target verbs</div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkVHunt()">Check</button>
+      <button class="btn btn-ghost" onclick="resetVHunt()">Reset</button>
+    </div>
+    <div class="result-box" id="vhunt-result"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════
+     WRITING
+════════════════════════════════ -->
+<div class="skill-banner sk-writing" style="margin-top:40px;">
+  <div class="skill-icon">✏️</div>
+  <div>
+    <div class="skill-name">Writing</div>
+    <div class="skill-desc">Guided paragraph · Story continuation · Self-editing checklist</div>
+  </div>
+  <div class="skill-time">⏱ ~20 min</div>
+</div>
+
+<!-- WRITING TASK 1 -->
+<div class="sec-hdr">
+  <div class="sec-num">F</div>
+  <div>
+    <div class="sec-title">Guided Writing — A Past Achievement</div>
+    <div class="sec-desc">Write 100–150 words about a project, experiment, or goal you completed in the past. Use Past Simple throughout.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner">
+    <div class="writing-prompts">
+      <div class="wp-item"><strong>When?</strong>When did it happen? How long ago?</div>
+      <div class="wp-item"><strong>What?</strong>What exactly did you do or create?</div>
+      <div class="wp-item"><strong>Challenges?</strong>What problems did you face?</div>
+      <div class="wp-item"><strong>Result?</strong>How did it end? What did you learn?</div>
+    </div>
+    <textarea class="write-area" id="wt1" placeholder="Start writing here…" oninput="updateWC('wt1','wc1',100,150)"></textarea>
+    <div class="wc-bar">
+      <span class="wc-label">Word count:</span>
+      <span class="wc-num" id="wc1">0</span>
+      <span class="wc-target">/ target: 100–150 words</span>
+    </div>
+    <div class="checklist" id="cl1">
+      <div style="font-size:12px;font-weight:700;color:var(--tsub);letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase;">Self-editing checklist — tick when done:</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">All main verbs are in Past Simple (V2 / -ed)</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">No present tense verbs used by mistake</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">-ed spelling rules applied correctly (stop → stopped, study → studied)</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Irregular verbs use the correct V2 form (not "goed", "maked", etc.)</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Word count is in the 100–150 range</span></div>
+    </div>
+    <div class="btn-row" style="margin-top:16px;">
+      <button class="reveal-btn" onclick="toggleModel('model1')">👁 Show model answer</button>
+    </div>
+    <div class="model-answer" id="model1">
+      <strong>Model answer (100 words)</strong>
+      Last year I worked on a small robotics project for a university competition. I designed a line-following robot using an Arduino microcontroller. First, I wrote the control code in C++ and tested it on a simulator. Then I built the chassis from scratch and soldered the sensors onto the circuit board. The robot failed three times during practice runs because of a calibration error. I spent two evenings debugging the sensor readings and finally fixed the problem by adjusting the threshold values. At the competition, the robot completed the track in 14 seconds and finished second. I was really proud of the result.
+    </div>
+  </div>
+</div>
+
+<!-- WRITING TASK 2 -->
+<div class="sec-hdr">
+  <div class="sec-num">G</div>
+  <div>
+    <div class="sec-title">Story Continuation</div>
+    <div class="sec-desc">Continue the story for 3–5 sentences. Use Past Simple. Be specific — what did the engineer do next?</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner">
+    <div class="theory" style="margin-bottom:12px;">
+      <strong>Beginning of the story:</strong><br>
+      <em>"Late one night, a software engineer named Alex noticed something strange in the telemetry data from the Mars rover. The numbers didn't match. He checked the logs, ran a diagnostic script, and found an unexpected error in the navigation module. He had two hours before the rover's next command cycle…"</em>
+    </div>
+    <textarea class="write-area" id="wt2" placeholder="He immediately called his supervisor and…" oninput="updateWC('wt2','wc2',40,80)"></textarea>
+    <div class="wc-bar">
+      <span class="wc-label">Word count:</span>
+      <span class="wc-num" id="wc2">0</span>
+      <span class="wc-target">/ target: 40–80 words</span>
+    </div>
+    <div class="btn-row">
+      <button class="reveal-btn" onclick="toggleModel('model2')">👁 Show one possible continuation</button>
+    </div>
+    <div class="model-answer" id="model2">
+      <strong>One possible continuation</strong>
+      He immediately called his supervisor and explained the problem. Together, they wrote a patch and tested it on the backup system. The fix worked. Alex uploaded the corrected code to the rover just 15 minutes before the command window closed. The team breathed a collective sigh of relief. Later, they added a new monitoring alert to prevent the same issue from happening again.
+    </div>
+  </div>
+</div>
+
+<!-- WRITING TASK 3 -->
+<div class="sec-hdr">
+  <div class="sec-num">H</div>
+  <div>
+    <div class="sec-title">Rewrite in Past Simple</div>
+    <div class="sec-desc">The sentences below describe a process in the present tense. Rewrite each one in Past Simple. Change only the verb form.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner" id="rw-questions"></div>
+</div>
+
+
+<!-- ═══════════════════════════════
+     SPEAKING
+════════════════════════════════ -->
+<div class="skill-banner sk-speaking" style="margin-top:40px;">
+  <div class="skill-icon">🎙</div>
+  <div>
+    <div class="skill-name">Speaking</div>
+    <div class="skill-desc">Discussion cards · Roleplay · Timed storytelling</div>
+  </div>
+  <div class="skill-time">⏱ ~20 min</div>
+</div>
+
+<!-- SPEAKING CARDS -->
+<div class="sec-hdr">
+  <div class="sec-num">I</div>
+  <div>
+    <div class="sec-title">Discussion Cards</div>
+    <div class="sec-desc">Flip each card to reveal follow-up questions from your teacher. Speak for at least 1 minute per card.</div>
+  </div>
+</div>
+
+<div class="speak-cards" id="speak-cards"></div>
+
+<!-- ROLEPLAY -->
+<div class="sec-hdr" style="margin-top:22px;">
+  <div class="sec-num">J</div>
+  <div>
+    <div class="sec-title">Roleplay — The Engineering Interview</div>
+    <div class="sec-desc">Your teacher plays the journalist. You play the engineer. Use Past Simple throughout.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner">
+    <div class="role-situation">
+      <strong>Situation:</strong> A journalist is interviewing you about a successful engineering or tech project you recently completed — a piece of software, a machine, an experiment, or a competition entry. The journalist knows nothing about the project. Explain what you built, what steps you took, what went wrong, and how it ended.
+    </div>
+    <div class="roleplay-grid">
+      <div class="role-card role-A">
+        <div class="role-card-head">ROLE A — Journalist (Teacher)</div>
+        <div class="role-card-body">
+          Ask these questions (in any order):<br><br>
+          <ul>
+            <li>What project did you work on?</li>
+            <li>How long did it take you to complete it?</li>
+            <li>What tools or technologies did you use?</li>
+            <li>What was the hardest part? What went wrong?</li>
+            <li>How did you solve the problem?</li>
+            <li>What did you achieve in the end?</li>
+            <li>What did you learn from the experience?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="role-card role-B">
+        <div class="role-card-head">ROLE B — Engineer (Alexander)</div>
+        <div class="role-card-body">
+          <strong style="color:var(--teal)">Your goal:</strong> answer all questions in detail using Past Simple.<br><br>
+          Talk about a <em>real or invented</em> project. Use these verbs:<br><br>
+          <code style="font-size:12px;background:rgba(2,128,144,.1);padding:2px 6px;border-radius:4px;">designed · built · wrote · tested · fixed · solved · ran · completed · decided · worked · found · took · made · spent</code><br><br>
+          Try to speak for at least 3–4 minutes total.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMED STORYTELLING -->
+<div class="sec-hdr" style="margin-top:22px;">
+  <div class="sec-num">K</div>
+  <div>
+    <div class="sec-title">Timed Storytelling</div>
+    <div class="sec-desc">Pick one prompt, press Start, and speak until the timer ends. Use only Past Simple.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-inner">
+    <div id="storytelling-prompts"></div>
+    <div class="timer-wrap" style="margin-top:16px;">
+      <div class="timer-display" id="timer-display">1:30</div>
+      <button class="btn btn-primary" id="timer-btn" onclick="toggleTimer()">▶ Start</button>
+      <button class="btn btn-ghost" onclick="resetTimer()">↺ Reset</button>
+    </div>
+    <div style="font-size:12px;color:var(--tsub);margin-top:8px;">Target: speak for the full 1 minute 30 seconds without stopping. Focus on using Past Simple — not on perfection.</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+// ════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════
+
+const tfngData = [
+  { stmt: "The Ingenuity helicopter flew for exactly one minute.", answer: "F", explain: "It flew for 39.1 seconds — less than a minute." },
+  { stmt: "Engineers at the Jet Propulsion Laboratory watched the flight data in real time.", answer: "T", explain: "The text says they 'watched the live data'." },
+  { stmt: "Ingenuity used four rotor blades to generate lift.", answer: "F", explain: "The text says 'two carbon-fibre rotor blades'." },
+  { stmt: "MiMi Aung prepared a backup plan before the flight in case it failed.", answer: "T", explain: "The text says she 'prepared a contingency plan in case Ingenuity failed'." },
+  { stmt: "NASA planned from the beginning to fly Ingenuity more than 50 times.", answer: "NG", explain: "The text says it 'originally flew as a technology demonstration', and the extended mission came later — the original plan isn't described." },
+  { stmt: "Ingenuity later helped the Perseverance rover by exploring the terrain ahead.", answer: "T", explain: "The text says it 'scouted terrain for the Perseverance rover'." },
+];
+
+const compQs = [
+  "How long did the engineering team work on the Ingenuity project, and what was the main technical challenge?",
+  "What exactly happened during the first flight? Describe the sequence of events.",
+  "Why did MiMi Aung tear up her paper after the flight? What does this tell you about the team's feelings?",
+  "How did Ingenuity's role change after the first flight? What did it eventually do?",
+];
+
+const vhuntTargets = ["made","took","flew","watched","worked","designed","weighed","started","climbed","hovered","landed","tore","announced","performed","extended","completed","scouted","became"];
+
+const vhuntSentence = "On April 19 2021 a small helicopter made history NASA Ingenuity took off from the Martian surface and flew for 39 seconds Engineers watched the live data with nervous excitement The team worked on the project for six years They designed a lightweight helicopter that weighed only 1 8 kilograms The blades started spinning at 3 34 AM Ingenuity climbed to three metres hovered then landed safely After the flight MiMi Aung tore up her plan and announced the success NASA extended the mission The helicopter completed over 50 flights scouted terrain and became a historic achievement";
+
+const rwData = [
+  { present: "The engineers test the new thruster design in a vacuum chamber.", past: "The engineers tested the new thruster design in a vacuum chamber." },
+  { present: "She writes the navigation algorithm and uploads it to the system.", past: "She wrote the navigation algorithm and uploaded it to the system." },
+  { present: "The team discovers a critical flaw and stops the launch.", past: "The team discovered a critical flaw and stopped the launch." },
+  { present: "He trains the model on a large dataset and checks the accuracy.", past: "He trained the model on a large dataset and checked the accuracy." },
+];
+
+const speakCards = [
+  {
+    tag: "Personal experience",
+    prompt: "Tell me about a project or technical challenge you worked on. What did you do, and how did it go?",
+    hint: "Use: worked on, designed, built, wrote, tested, fixed, completed…",
+    followUps: ["How long did it take?", "What was the most difficult part?", "Did anything go wrong? What did you do?", "What did you learn from the experience?"]
+  },
+  {
+    tag: "Science & technology",
+    prompt: "Think of a famous scientific or engineering achievement from the past. Tell me what happened and why it was important.",
+    hint: "Ideas: moon landing, first computer, a scientific discovery, an AI breakthrough…",
+    followUps: ["Who was involved?", "What problems did they face?", "How long did it take to achieve?", "How did it change things?"]
+  },
+  {
+    tag: "Sport & achievement",
+    prompt: "Describe the last time you did a sport or physical activity. What did you do exactly? How did it go?",
+    hint: "Think about: where, when, who with, what happened, how you felt after",
+    followUps: ["Did you win or achieve your goal?", "What did you do to prepare?", "Was there a moment when things got difficult?", "Did you do anything differently afterwards?"]
+  },
+  {
+    tag: "Problem-solving",
+    prompt: "Describe a time when something didn't work the way you expected — in coding, engineering, or everyday life. What did you do to fix it?",
+    hint: "Use: noticed, found, tried, checked, fixed, decided, ended up…",
+    followUps: ["How long did the problem take to solve?", "Did you ask for help?", "What was the cause of the problem?", "What would you do differently next time?"]
+  },
+];
+
+const storytellingPrompts = [
+  { icon: "🚀", text: "Tell me about the most interesting science or technology story you read or heard about recently. What happened? Who was involved?" },
+  { icon: "💻", text: "Describe a time you wrote code or worked on a technical project. Walk me through everything you did, step by step." },
+  { icon: "🏆", text: "Tell me about a time you competed in something or set a personal goal. What did you do to prepare? How did it end?" },
+  { icon: "🔭", text: "Imagine you worked at a space agency in the 1960s. You just watched the first Moon landing. Describe what you saw, did, and felt." },
+];
+
+// ════════════════════════════════════════
+// BUILD TFNG
+// ════════════════════════════════════════
+function buildTFNG() {
+  const container = document.getElementById('tfng-questions');
+  container.innerHTML = '';
+  tfngData.forEach((item, i) => {
+    const row = document.createElement('div');
+    row.className = 'tf-row';
+    row.id = 'tfng-' + i;
+    row.innerHTML = `
+      <div class="tf-stmt"><span style="font-size:11px;font-weight:700;color:var(--tsub);margin-right:4px;">${i+1}.</span> ${item.stmt}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" data-val="T" onclick="selectTF(${i},'T')">T</button>
+        <button class="tf-btn" data-val="F" onclick="selectTF(${i},'F')">F</button>
+        <button class="tf-btn" data-val="NG" onclick="selectTF(${i},'NG')">NG</button>
+      </div>`;
+    container.appendChild(row);
+  });
+}
+
+function selectTF(i, val) {
+  const row = document.getElementById('tfng-' + i);
+  row.querySelectorAll('.tf-btn').forEach(b => {
+    b.className = 'tf-btn';
+    if (b.dataset.val === val) b.classList.add('sel-' + val);
+  });
+}
+
+function checkTFNG() {
+  let correct = 0;
+  tfngData.forEach((item, i) => {
+    const row = document.getElementById('tfng-' + i);
+    const btns = row.querySelectorAll('.tf-btn');
+    let chosen = null;
+    btns.forEach(b => { if (b.classList.contains('sel-' + b.dataset.val)) chosen = b.dataset.val; });
+    btns.forEach(b => {
+      b.className = 'tf-btn';
+      b.onclick = null;
+      if (b.dataset.val === item.answer) b.classList.add('correct');
+      else if (b.dataset.val === chosen) b.classList.add('wrong');
+    });
+    if (chosen === item.answer) correct++;
+    // show explanation
+    if (!row.querySelector('.tf-explain')) {
+      const exp = document.createElement('div');
+      exp.className = 'tf-explain';
+      exp.style.cssText = 'font-size:11.5px;color:var(--tsub);margin-top:4px;font-style:italic;flex-basis:100%;padding-left:4px;';
+      exp.textContent = '→ ' + item.explain;
+      row.appendChild(exp);
+    }
+  });
+  const rb = document.getElementById('tfng-result');
+  rb.className = 'result-box show ' + (correct === tfngData.length ? 'correct' : correct >= 4 ? 'partial' : 'wrong');
+  rb.innerHTML = `<strong>${correct} / ${tfngData.length}</strong> correct.`;
+  updateProg();
+}
+
+function resetTFNG() {
+  buildTFNG();
+  document.getElementById('tfng-result').className = 'result-box';
+}
+
+// ════════════════════════════════════════
+// BUILD COMPREHENSION
+// ════════════════════════════════════════
+function buildComp() {
+  const container = document.getElementById('comp-questions');
+  container.innerHTML = '';
+  compQs.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'comp-q';
+    div.innerHTML = `
+      <div class="comp-label"><span class="q-num">${i+1}</span> ${q}</div>
+      <textarea class="ans-ta" placeholder="Your answer…"></textarea>`;
+    container.appendChild(div);
+  });
+}
+
+// ════════════════════════════════════════
+// VERB HUNT
+// ════════════════════════════════════════
+const markedVerbs = new Set();
+const TARGET_COUNT = 10;
+
+function buildVHunt() {
+  const container = document.getElementById('vhunt-text');
+  container.innerHTML = '';
+  markedVerbs.clear();
+  const words = vhuntSentence.split(' ');
+  words.forEach((word, i) => {
+    const clean = word.toLowerCase().replace(/[^a-z]/g, '');
+    const span = document.createElement('span');
+    span.className = 'vhunt-word';
+    span.textContent = word + ' ';
+    span.dataset.word = clean;
+    span.dataset.idx = i;
+    span.onclick = function() {
+      if (span.classList.contains('marked')) {
+        span.classList.remove('marked');
+        markedVerbs.delete(i + '_' + clean);
+      } else {
+        span.classList.add('marked');
+        markedVerbs.add(i + '_' + clean);
+      }
+      document.getElementById('vhunt-num').textContent = markedVerbs.size;
+    };
+    container.appendChild(span);
+  });
+}
+
+function checkVHunt() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#vhunt-text .vhunt-word').forEach(span => {
+    const w = span.dataset.word;
+    const isTarget = vhuntTargets.includes(w);
+    const isMarked = span.classList.contains('marked');
+    if (isTarget) {
+      span.style.background = var_or('#E6F6EF');
+      span.style.borderColor = '#1A7F5A';
+      span.style.color = '#1A7F5A';
+      total++;
+      if (isMarked) correct++;
+    } else if (isMarked) {
+      span.style.background = '#FDEAEA';
+      span.style.borderColor = '#B02020';
+      span.style.color = '#B02020';
+    }
+    span.onclick = null;
+  });
+  const rb = document.getElementById('vhunt-result');
+  rb.className = 'result-box show ' + (correct >= TARGET_COUNT ? 'correct' : 'partial');
+  rb.innerHTML = `You found <strong>${correct}</strong> of ${total} Past Simple verbs. All verbs are now highlighted in green.`;
+  updateProg();
+}
+
+function var_or(v) { return v; }
+
+function resetVHunt() {
+  buildVHunt();
+  document.getElementById('vhunt-result').className = 'result-box';
+  document.getElementById('vhunt-num').textContent = '0';
+}
+
+// ════════════════════════════════════════
+// REWRITE EXERCISE
+// ════════════════════════════════════════
+function buildRW() {
+  const container = document.getElementById('rw-questions');
+  container.innerHTML = '<div class="task-label" style="margin-bottom:14px;">Rewrite in Past Simple</div>';
+  rwData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'comp-q';
+    div.style.marginBottom = '16px';
+    div.innerHTML = `
+      <div class="comp-label">
+        <span class="q-num">${i+1}</span>
+        <strong>Present:</strong> <em>${item.present}</em>
+      </div>
+      <div style="margin-top:6px;margin-left:28px;font-size:13px;color:var(--tsub);margin-bottom:6px;">→ Past Simple:</div>
+      <div style="margin-left:28px;">
+        <input type="text" class="ans-input"
+          style="width:100%;max-width:560px;font-family:var(--font);font-size:13px;border:1.5px solid var(--g200);border-radius:var(--r-sm);padding:7px 11px;outline:none;transition:border-color .15s;"
+          autocomplete="off" autocorrect="off" spellcheck="false"
+          data-answer="${item.past}"
+          placeholder="Rewrite here…"
+          onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--g200)'">
+      </div>`;
+    container.appendChild(div);
+  });
+  const btnRow = document.createElement('div');
+  btnRow.className = 'btn-row';
+  btnRow.innerHTML = `<button class="btn btn-primary" onclick="checkRW()">Check</button><button class="btn btn-ghost" onclick="buildRW()">Reset</button>
+  <div class="result-box" id="rw-result" style="margin-top:0;flex:1;"></div>`;
+  container.appendChild(btnRow);
+}
+
+function checkRW() {
+  const inputs = document.querySelectorAll('#rw-questions .ans-input');
+  let correct = 0;
+  inputs.forEach(inp => {
+    inp.readOnly = true;
+    const got = inp.value.trim().toLowerCase().replace(/[.!?]+$/,'');
+    const exp = inp.dataset.answer.trim().toLowerCase().replace(/[.!?]+$/,'');
+    const ok = got === exp;
+    inp.style.borderColor = ok ? 'var(--ok)' : 'var(--no)';
+    inp.style.background = ok ? 'var(--ok-bg)' : 'var(--no-bg)';
+    if (ok) correct++;
+    else {
+      const hint = document.createElement('div');
+      hint.style.cssText = 'font-size:11.5px;color:var(--ok);margin-top:3px;margin-left:28px;';
+      hint.textContent = '✓ ' + inp.dataset.answer;
+      inp.parentElement.appendChild(hint);
+    }
+  });
+  const rb = document.getElementById('rw-result');
+  rb.className = 'result-box show ' + (correct === rwData.length ? 'correct' : 'partial');
+  rb.innerHTML = `<strong>${correct} / ${rwData.length}</strong> correct.`;
+  updateProg();
+}
+
+// ════════════════════════════════════════
+// WRITING HELPERS
+// ════════════════════════════════════════
+function updateWC(taId, wcId, min, max) {
+  const text = document.getElementById(taId).value.trim();
+  const count = text === '' ? 0 : text.split(/\s+/).length;
+  const el = document.getElementById(wcId);
+  el.textContent = count;
+  el.style.color = count >= min && count <= max ? 'var(--ok)' : count > max ? 'var(--no)' : 'var(--teal-d)';
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+function toggleModel(id) {
+  const el = document.getElementById(id);
+  const btn = el.previousElementSibling.querySelector('.reveal-btn');
+  el.classList.toggle('show');
+  if (btn) btn.textContent = el.classList.contains('show') ? '🙈 Hide model answer' : '👁 Show model answer';
+}
+
+// ════════════════════════════════════════
+// SPEAKING CARDS
+// ════════════════════════════════════════
+function buildSpeakCards() {
+  const container = document.getElementById('speak-cards');
+  container.innerHTML = '';
+  speakCards.forEach((card, i) => {
+    const fuHtml = card.followUps.map(q => `<li>${q}</li>`).join('');
+    const el = document.createElement('div');
+    el.className = 'speak-card';
+    el.onclick = () => el.classList.toggle('flipped');
+    el.innerHTML = `
+      <div class="speak-card-inner">
+        <div class="speak-front">
+          <div class="speak-front-top">
+            <span class="speak-card-num">CARD ${i+1}</span>
+            <span class="speak-front-tag">${card.tag}</span>
+          </div>
+          <div class="speak-front-body">
+            <div class="speak-prompt">${card.prompt}</div>
+            <div class="speak-hint">💡 ${card.hint}</div>
+            <div class="speak-flip-hint">↩ flip for teacher questions</div>
+          </div>
+        </div>
+        <div class="speak-back">
+          <div class="speak-front-top" style="background:var(--navy-l);">
+            <span class="speak-card-num">CARD ${i+1}</span>
+            <span class="speak-front-tag" style="background:rgba(255,255,255,.1)">${card.tag}</span>
+          </div>
+          <div class="speak-back-body">
+            <div class="speak-back-label">Follow-up questions</div>
+            <ul class="speak-back-qs">${fuHtml}</ul>
+          </div>
+        </div>
+      </div>`;
+    container.appendChild(el);
+  });
+}
+
+// ════════════════════════════════════════
+// STORYTELLING PROMPTS
+// ════════════════════════════════════════
+function buildStorytelling() {
+  const container = document.getElementById('storytelling-prompts');
+  container.innerHTML = '<div style="font-size:13px;color:var(--tsub);margin-bottom:12px;">Choose one prompt, then speak for 1 minute 30 seconds. Click the timer to start.</div>';
+  storytellingPrompts.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;padding:10px 13px;background:var(--g50);border:1.5px solid var(--g200);border-radius:var(--r-md);cursor:pointer;transition:all .15s;';
+    div.onclick = function() {
+      document.querySelectorAll('#storytelling-prompts > div').forEach(d => {
+        d.style.borderColor = 'var(--g200)';
+        d.style.background = 'var(--g50)';
+      });
+      this.style.borderColor = 'var(--teal)';
+      this.style.background = 'var(--teal-xl)';
+    };
+    div.innerHTML = `<span style="font-size:20px;flex-shrink:0">${p.icon}</span><span style="font-size:13.5px;line-height:1.55">${p.text}</span>`;
+    container.appendChild(div);
+  });
+}
+
+// ════════════════════════════════════════
+// TIMER
+// ════════════════════════════════════════
+let timerInterval = null;
+let timerSeconds = 90;
+let timerRunning = false;
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timer-btn').textContent = '▶ Resume';
+    document.getElementById('timer-display').className = 'timer-display';
+  } else {
+    timerRunning = true;
+    document.getElementById('timer-btn').textContent = '⏸ Pause';
+    document.getElementById('timer-display').className = 'timer-display running';
+    timerInterval = setInterval(() => {
+      timerSeconds--;
+      const m = Math.floor(timerSeconds / 60);
+      const s = timerSeconds % 60;
+      document.getElementById('timer-display').textContent = m + ':' + String(s).padStart(2,'0');
+      if (timerSeconds <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById('timer-display').textContent = 'Done!';
+        document.getElementById('timer-display').className = 'timer-display done';
+        document.getElementById('timer-btn').textContent = '▶ Start';
+      }
+    }, 1000);
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 90;
+  document.getElementById('timer-display').textContent = '1:30';
+  document.getElementById('timer-display').className = 'timer-display';
+  document.getElementById('timer-btn').textContent = '▶ Start';
+}
+
+// ════════════════════════════════════════
+// PROGRESS
+// ════════════════════════════════════════
+let progressDone = 0;
+function updateProg() {
+  progressDone = Math.min(progressDone + 10, 100);
+  document.getElementById('prog').style.width = progressDone + '%';
+}
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildTFNG();
+  buildComp();
+  buildVHunt();
+  buildRW();
+  buildSpeakCards();
+  buildStorytelling();
+});
+</script>
+</body>
+</html>
