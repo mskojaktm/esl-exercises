@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2 Grammar Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal:    #028090;
+    --teal-dk: #016070;
+    --navy:    #0D2B35;
+    --navy-lt: #1a4050;
+    --snow:    #f7fafb;
+    --mist:    #e8f2f4;
+    --ink:     #1c2b30;
+    --slate:   #5a7a84;
+    --correct: #1e8c5a;
+    --wrong:   #c0392b;
+    --warn:    #e67e22;
+    --radius:  10px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--snow);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 36px 24px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 30px,
+      rgba(2,128,144,.07) 30px,
+      rgba(2,128,144,.07) 60px
+    );
+  }
+  header h1 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: .5px;
+    position: relative;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--teal);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .meta {
+    color: rgba(255,255,255,.55);
+    font-size: .85rem;
+    margin-top: 8px;
+    position: relative;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress-wrap {
+    background: var(--navy-lt);
+    height: 5px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  #progress-bar {
+    height: 100%;
+    background: var(--teal);
+    width: 0%;
+    transition: width .35s ease;
+  }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 16px 0;
+  }
+
+  /* ── SECTION CARD ── */
+  .section-card {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 12px rgba(13,43,53,.08);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--mist);
+    padding: 14px 20px;
+    border-bottom: 3px solid var(--teal);
+  }
+  .section-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--teal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: .75rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+  .section-title {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: .3px;
+  }
+
+  /* ── QUESTION ── */
+  .question-block {
+    padding: 18px 20px 16px;
+    border-bottom: 1px solid #eef2f3;
+  }
+  .question-block:last-child { border-bottom: none; }
+
+  .q-label {
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .q-text {
+    font-size: .97rem;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .q-text em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--wrong);
+    text-decoration: line-through;
+    margin-right: 4px;
+  }
+
+  /* ── OPTIONS ── */
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media (max-width: 500px) { .options { grid-template-columns: 1fr; } }
+
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 2px solid #dde6e9;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color .18s, background .18s;
+    user-select: none;
+    position: relative;
+  }
+  .opt:hover { border-color: var(--teal); background: #f0f9fa; }
+  .opt input[type="radio"] { display: none; }
+  .dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #b0c4ca;
+    flex-shrink: 0;
+    transition: border-color .18s, background .18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .opt input:checked ~ .dot {
+    border-color: var(--teal);
+    background: var(--teal);
+  }
+  .opt input:checked ~ .dot::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .opt-label { font-size: .9rem; color: var(--ink); }
+
+  /* ── FEEDBACK STATES (after submit) ── */
+  .opt.correct {
+    border-color: var(--correct);
+    background: #eefaf4;
+  }
+  .opt.correct .dot { border-color: var(--correct); background: var(--correct); }
+  .opt.wrong {
+    border-color: var(--wrong);
+    background: #fdf1f0;
+  }
+  .opt.wrong .dot { border-color: var(--wrong); background: var(--wrong); }
+  .opt.missed {
+    border-color: var(--correct);
+    background: #eefaf4;
+    opacity: .75;
+  }
+
+  .feedback-msg {
+    display: none;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: .83rem;
+    line-height: 1.45;
+  }
+  .feedback-msg.show { display: block; }
+  .feedback-msg.ok  { background: #d4eddf; color: #145a32; }
+  .feedback-msg.bad { background: #fde8e6; color: #7b241c; }
+
+  /* ── SUBMIT BUTTON ── */
+  #submit-wrap {
+    text-align: center;
+    padding: 8px 0 4px;
+  }
+  #submit-btn {
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 48px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+    box-shadow: 0 4px 16px rgba(2,128,144,.3);
+  }
+  #submit-btn:hover { background: var(--teal-dk); transform: translateY(-1px); }
+  #submit-btn:active { transform: translateY(0); }
+  #submit-btn:disabled { background: #9bbec4; cursor: not-allowed; box-shadow: none; transform: none; }
+
+  /* ── SCORE PANEL ── */
+  #score-panel {
+    display: none;
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 24px rgba(13,43,53,.12);
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    text-align: center;
+    animation: fadeUp .45s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #score-panel h2 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .score-ring {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 18px;
+    position: relative;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring circle.bg  { fill: none; stroke: #e0edef; stroke-width: 9; }
+  .score-ring circle.fg  { fill: none; stroke: var(--teal); stroke-width: 9;
+    stroke-linecap: round; stroke-dasharray: 283; stroke-dashoffset: 283;
+    transition: stroke-dashoffset 1s ease; }
+  .score-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--navy);
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+  .verdict {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .verdict.ex  { color: var(--correct); }
+  .verdict.gd  { color: var(--teal); }
+  .verdict.ok  { color: var(--warn); }
+  .verdict.low { color: var(--wrong); }
+  .verdict-sub { font-size: .85rem; color: var(--slate); margin-bottom: 22px; }
+
+  /* section breakdown */
+  .breakdown { text-align: left; }
+  .breakdown-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: .85rem;
+  }
+  .br-label { flex: 1; color: var(--slate); }
+  .br-bar-wrap { flex: 2; height: 8px; background: var(--mist); border-radius: 4px; overflow: hidden; }
+  .br-bar { height: 100%; background: var(--teal); border-radius: 4px; transition: width 1.1s ease; }
+  .br-num { width: 40px; text-align: right; font-weight: 600; color: var(--navy); }
+
+  #retry-btn {
+    margin-top: 20px;
+    background: transparent;
+    border: 2px solid var(--teal);
+    color: var(--teal);
+    font-family: 'Inter', sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 10px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background .18s, color .18s;
+  }
+  #retry-btn:hover { background: var(--teal); color: #fff; }
+
+  /* ── WARNING ── */
+  #warn-msg {
+    display: none;
+    background: #fff4e5;
+    border: 1.5px solid #e67e22;
+    color: #7d4e00;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: .87rem;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">CEFR · B2</div>
+  <h1>Grammar Test</h1>
+  <p class="meta">20 questions · Conditionals · Modal Verbs · Word Order · Relative Clauses · Phrasal Verbs · Error Correction</p>
+</header>
+
+<div id="progress-wrap"><div id="progress-bar"></div></div>
+
+<main>
+  <div id="score-panel">
+    <h2>Your Result</h2>
+    <div class="score-ring">
+      <svg viewBox="0 0 100 100" width="110" height="110">
+        <circle class="bg" cx="50" cy="50" r="45"/>
+        <circle class="fg" id="ring-fg" cx="50" cy="50" r="45"/>
+      </svg>
+      <div class="score-num" id="score-num">—</div>
+    </div>
+    <div class="verdict" id="verdict-text"></div>
+    <div class="verdict-sub" id="verdict-sub"></div>
+    <div class="breakdown" id="breakdown"></div>
+    <button id="retry-btn" onclick="retryTest()">Try Again</button>
+  </div>
+
+  <div id="warn-msg">⚠ Please answer all questions before submitting.</div>
+  <div id="quiz-form"></div>
+  <div id="submit-wrap">
+    <button id="submit-btn" onclick="submitTest()">Check My Answers</button>
+  </div>
+</main>
+
+<script>
+const SECTIONS = [
+  {
+    title: "Conditionals & Verb Tenses",
+    num: "01",
+    questions: [
+      {
+        q: "If I ______ more time, I would travel around the world.",
+        opts: ["have","had","will have","has"],
+        ans: 1,
+        exp: "<b>had</b> — Second conditional: <em>If + past simple, would + infinitive</em>."
+      },
+      {
+        q: "By next year, she ______ in this company for a decade.",
+        opts: ["will work","has worked","will have worked","is working"],
+        ans: 2,
+        exp: "<b>will have worked</b> — Future Perfect for an action completed before a future point."
+      },
+      {
+        q: "If he ______ harder, he would have passed the exam.",
+        opts: ["studies","studied","had studied","was studying"],
+        ans: 2,
+        exp: "<b>had studied</b> — Third conditional: <em>If + past perfect, would have + past participle</em>."
+      },
+      {
+        q: "I wish I ______ more languages when I was younger.",
+        opts: ["learned","had learned","have learned","learn"],
+        ans: 1,
+        exp: "<b>had learned</b> — <em>Wish + past perfect</em> expresses regret about a past situation."
+      }
+    ]
+  },
+  {
+    title: "Modal Verbs & Passive Voice",
+    num: "02",
+    questions: [
+      {
+        q: "The documents ______ yesterday, but I haven't received them yet.",
+        opts: ["should have been sent","should be sending","should send","should have sent"],
+        ans: 0,
+        exp: "<b>should have been sent</b> — Passive of a modal perfect: the action was expected but may not have happened."
+      },
+      {
+        q: "She ______ be at home because her car is not outside.",
+        opts: ["mustn't","can't","shouldn't","wouldn't"],
+        ans: 1,
+        exp: "<b>can't</b> — Logical deduction / near-certainty that something is NOT true."
+      },
+      {
+        q: "You ______ be exhausted after working all night.",
+        opts: ["must","may","could","can"],
+        ans: 0,
+        exp: "<b>must</b> — Strong logical deduction that something is almost certainly true."
+      },
+      {
+        q: "The match was postponed because it ______ heavily.",
+        opts: ["rained","was raining","had been raining","rains"],
+        ans: 2,
+        exp: "<b>had been raining</b> — Past Perfect Continuous: an ongoing action before a past event."
+      }
+    ]
+  },
+  {
+    title: "Inversion & Word Order",
+    num: "03",
+    questions: [
+      {
+        q: "Not until later ______ how serious the situation was.",
+        opts: ["I realized","did I realize","I have realized","had I realized"],
+        ans: 1,
+        exp: "<b>did I realize</b> — Negative inversion with <em>Not until</em>: auxiliary + subject + verb."
+      },
+      {
+        q: "Only after she had left ______ what she meant.",
+        opts: ["I understood","did I understand","I had understood","do I understand"],
+        ans: 1,
+        exp: "<b>did I understand</b> — Inversion after <em>Only after</em>: the main clause is inverted."
+      }
+    ]
+  },
+  {
+    title: "Relative Clauses & Prepositions",
+    num: "04",
+    questions: [
+      {
+        q: "The novel, ______ was written in the 19th century, is still popular today.",
+        opts: ["that","who","which","where"],
+        ans: 2,
+        exp: "<b>which</b> — Non-defining relative clause for a thing; <em>that</em> cannot be used in non-defining clauses."
+      },
+      {
+        q: "He's really good ______ solving difficult problems.",
+        opts: ["on","at","in","of"],
+        ans: 1,
+        exp: "<b>at</b> — Fixed collocation: <em>good at + gerund</em>."
+      },
+      {
+        q: "She's looking forward ______ her holiday next month.",
+        opts: ["to go","going","to going","go"],
+        ans: 2,
+        exp: "<b>to going</b> — <em>Look forward to</em> requires a gerund; <em>to</em> here is a preposition, not an infinitive marker."
+      }
+    ]
+  },
+  {
+    title: "Phrasal Verbs & Collocations",
+    num: "05",
+    questions: [
+      {
+        q: "I was so tired that I ______ in the middle of the meeting.",
+        opts: ["dropped out","dropped off","dropped in","dropped down"],
+        ans: 1,
+        exp: "<b>dropped off</b> — to fall asleep unintentionally."
+      },
+      {
+        q: "I couldn't ______ what he was saying because of the noise.",
+        opts: ["take in","take up","take over","take out"],
+        ans: 0,
+        exp: "<b>take in</b> — to understand or absorb information."
+      },
+      {
+        q: "She ran so fast that she ______ her competitors easily.",
+        opts: ["left behind","left out","left over","left in"],
+        ans: 0,
+        exp: "<b>left behind</b> — to go faster/further than others, leaving them behind."
+      }
+    ]
+  },
+  {
+    title: "Error Correction",
+    num: "06",
+    questions: [
+      {
+        q: "I wish I <em>know</em> the answer. — Choose the correct verb form:",
+        opts: ["knows","will know","knew","known"],
+        ans: 2,
+        exp: "<b>knew</b> — <em>Wish + past simple</em> expresses a desire about a present situation."
+      },
+      {
+        q: "He said he <em>will</em> be there on time. — Choose the correct form:",
+        opts: ["will","would","shall","might"],
+        ans: 1,
+        exp: "<b>would</b> — Reported speech shifts <em>will → would</em> (backshift rule)."
+      },
+      {
+        q: "If I <em>was</em> rich, I would buy a house. — Choose the correct form:",
+        opts: ["were","had been","be","was"],
+        ans: 0,
+        exp: "<b>were</b> — Second conditional uses <em>were</em> (not <em>was</em>) for all persons in formal/correct English."
+      },
+      {
+        q: "This is the book <em>who</em> I borrowed from the library. — Choose the correct word:",
+        opts: ["who","which","whom","whose"],
+        ans: 1,
+        exp: "<b>which</b> — Relative pronoun for a thing (not a person). <em>Who / whom</em> refer to people only."
+      }
+    ]
+  }
+];
+
+// ── BUILD QUIZ ──
+let globalIndex = 0;
+const allQuestions = []; // flat list: { section, q, opts, ans, exp, globalIdx }
+
+function buildQuiz() {
+  const form = document.getElementById('quiz-form');
+  form.innerHTML = '';
+  globalIndex = 0;
+
+  SECTIONS.forEach((sec, si) => {
+    const card = document.createElement('div');
+    card.className = 'section-card';
+
+    const hdr = document.createElement('div');
+    hdr.className = 'section-header';
+    hdr.innerHTML = `<div class="section-icon">${sec.num}</div><div class="section-title">${sec.title}</div>`;
+    card.appendChild(hdr);
+
+    sec.questions.forEach((item, qi) => {
+      globalIndex++;
+      const gi = globalIndex;
+
+      const block = document.createElement('div');
+      block.className = 'question-block';
+      block.id = `qb-${gi}`;
+
+      const optHTML = item.opts.map((o, oi) => `
+        <label class="opt" id="opt-${gi}-${oi}">
+          <input type="radio" name="q${gi}" value="${oi}" onchange="onPick(${gi})">
+          <span class="dot"></span>
+          <span class="opt-label">${String.fromCharCode(97+oi)}) ${o}</span>
+        </label>`).join('');
+
+      block.innerHTML = `
+        <div class="q-label">Question ${gi}</div>
+        <div class="q-text">${item.q}</div>
+        <div class="options" id="opts-${gi}">${optHTML}</div>
+        <div class="feedback-msg" id="fb-${gi}"></div>`;
+      card.appendChild(block);
+
+      allQuestions[gi] = { ...item, globalIdx: gi };
+    });
+
+    form.appendChild(card);
+  });
+
+  updateProgress();
+}
+
+function onPick(gi) { updateProgress(); }
+
+function updateProgress() {
+  const answered = Object.keys(getAnswers()).length;
+  const pct = (answered / allQuestions.filter(Boolean).length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+function getAnswers() {
+  const res = {};
+  allQuestions.forEach((item, gi) => {
+    if (!item) return;
+    const sel = document.querySelector(`input[name="q${gi}"]:checked`);
+    if (sel) res[gi] = parseInt(sel.value);
+  });
+  return res;
+}
+
+function submitTest() {
+  const answers = getAnswers();
+  const total = allQuestions.filter(Boolean).length;
+  const unanswered = [];
+  allQuestions.forEach((item, gi) => { if (item && answers[gi] === undefined) unanswered.push(gi); });
+
+  if (unanswered.length > 0) {
+    const w = document.getElementById('warn-msg');
+    w.style.display = 'block';
+    // scroll to first unanswered
+    document.getElementById(`qb-${unanswered[0]}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  document.getElementById('warn-msg').style.display = 'none';
+
+  let correct = 0;
+  const sectionScores = SECTIONS.map(() => ({ got: 0, total: 0 }));
+
+  let secOff = 0;
+  SECTIONS.forEach((sec, si) => {
+    sec.questions.forEach((item, qi) => {
+      const gi = secOff + qi + 1;
+      const chosen = answers[gi];
+      const right = item.ans;
+      if (chosen === right) { correct++; sectionScores[si].got++; }
+      sectionScores[si].total++;
+
+      // style options
+      for (let oi = 0; oi < item.opts.length; oi++) {
+        const el = document.getElementById(`opt-${gi}-${oi}`);
+        el.style.pointerEvents = 'none';
+        if (oi === right && chosen === right) el.classList.add('correct');
+        else if (oi === chosen && chosen !== right) el.classList.add('wrong');
+        else if (oi === right) el.classList.add('missed');
+      }
+
+      const fb = document.getElementById(`fb-${gi}`);
+      fb.innerHTML = chosen === right
+        ? `✅ Correct! ${item.exp}`
+        : `❌ The correct answer is: ${item.exp}`;
+      fb.className = `feedback-msg show ${chosen === right ? 'ok' : 'bad'}`;
+    });
+    secOff += sec.questions.length;
+  });
+
+  showScore(correct, total, sectionScores);
+  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('progress-bar').style.width = '100%';
+}
+
+function showScore(correct, total, sectionScores) {
+  const panel = document.getElementById('score-panel');
+  panel.style.display = 'block';
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  document.getElementById('score-num').textContent = `${correct}/${total}`;
+
+  // ring
+  const pct = correct / total;
+  const circ = 2 * Math.PI * 45; // ≈ 283
+  const offset = circ * (1 - pct);
+  setTimeout(() => { document.getElementById('ring-fg').style.strokeDashoffset = offset; }, 100);
+
+  // verdict
+  const vt = document.getElementById('verdict-text');
+  const vs = document.getElementById('verdict-sub');
+  if (pct >= .9)       { vt.textContent = '🎉 Excellent!';   vt.className = 'verdict ex';  vs.textContent = 'Outstanding B2 performance — you\'re ready for C1 challenges.'; }
+  else if (pct >= .75) { vt.textContent = '👍 Good job!';    vt.className = 'verdict gd';  vs.textContent = 'Solid B2 level. Review the items you missed to keep improving.'; }
+  else if (pct >= .55) { vt.textContent = '📚 Fair result.'; vt.className = 'verdict ok';  vs.textContent = 'Some B2 gaps remain. Focus on the red sections below.'; }
+  else                 { vt.textContent = '🔄 Keep going!';  vt.className = 'verdict low'; vs.textContent = 'More practice needed. Revisit the grammar topics and try again.'; }
+
+  // breakdown
+  const bd = document.getElementById('breakdown');
+  bd.innerHTML = '<div style="font-size:.8rem;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;">Section Breakdown</div>';
+  SECTIONS.forEach((sec, si) => {
+    const s = sectionScores[si];
+    const p = (s.got / s.total) * 100;
+    bd.innerHTML += `
+      <div class="breakdown-row">
+        <div class="br-label">${sec.title}</div>
+        <div class="br-bar-wrap"><div class="br-bar" style="width:0%" data-w="${p}%"></div></div>
+        <div class="br-num">${s.got}/${s.total}</div>
+      </div>`;
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.br-bar').forEach(b => b.style.width = b.dataset.w);
+  }, 200);
+}
+
+function retryTest() {
+  document.getElementById('score-panel').style.display = 'none';
+  document.getElementById('submit-btn').disabled = false;
+  document.getElementById('warn-msg').style.display = 'none';
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
