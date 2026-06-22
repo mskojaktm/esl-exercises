@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inversion – Translation Drill | B2–C1</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #0D2B35;
+    --teal:   #028090;
+    --teal2:  #03A6B5;
+    --card:   #112f3d;
+    --border: #1e4a5c;
+    --text:   #e8f4f7;
+    --muted:  #7fb8c8;
+    --gold:   #f5c842;
+    --coral:  #f4745b;
+    --green:  #3dbb7e;
+    --radius: 12px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--teal);
+    padding: 22px 32px 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .badge {
+    background: var(--navy);
+    color: var(--teal2);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+  }
+  header p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 2px;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    background: var(--card);
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--teal2));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: right;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: rgba(2,128,144,0.12);
+    border-bottom: 1px solid var(--border);
+  }
+  .card-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal2);
+    letter-spacing: 1px;
+    min-width: 32px;
+  }
+  .card-type {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+  .lvl-b2 { background: rgba(3,166,181,0.2); color: var(--teal2); }
+  .lvl-c1 { background: rgba(245,200,66,0.15); color: var(--gold); }
+
+  .trigger-tag {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .card-body { padding: 20px 20px 16px; }
+
+  .ru-sentence {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 3px solid var(--teal);
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hint span { opacity: 0.6; }
+  .hint strong { color: var(--gold); font-weight: 600; }
+
+  textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    padding: 12px 14px;
+    resize: vertical;
+    min-height: 72px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+  }
+  textarea:focus { border-color: var(--teal2); }
+  textarea::placeholder { color: var(--muted); opacity: 0.5; }
+
+  .card-actions {
+    padding: 12px 20px 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 18px;
+    transition: all 0.18s;
+  }
+  .btn-check {
+    background: var(--teal);
+    color: #fff;
+  }
+  .btn-check:hover:not(:disabled) { background: var(--teal2); }
+  .btn-check:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-hint-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .btn-hint-btn:hover { border-color: var(--teal); color: var(--teal2); }
+  .btn-show-ans {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .btn-show-ans:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── FEEDBACK BOX ── */
+  .feedback {
+    margin: 0 20px 18px;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+    border-left: 4px solid transparent;
+  }
+  .feedback.loading {
+    display: block;
+    background: rgba(2,128,144,0.1);
+    border-left-color: var(--teal);
+    color: var(--muted);
+    font-style: italic;
+  }
+  .feedback.shown {
+    display: block;
+  }
+  .feedback.good {
+    background: rgba(61,187,126,0.1);
+    border-left-color: var(--green);
+  }
+  .feedback.ok {
+    background: rgba(245,200,66,0.08);
+    border-left-color: var(--gold);
+  }
+  .feedback.poor {
+    background: rgba(244,116,91,0.1);
+    border-left-color: var(--coral);
+  }
+
+  /* ── MODEL ANSWER ── */
+  .model-answer {
+    display: none;
+    margin: 0 20px 18px;
+    background: rgba(245,200,66,0.06);
+    border: 1px solid rgba(245,200,66,0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .model-answer strong { color: var(--gold); }
+  .model-answer.shown { display: block; }
+  .model-answer p { margin-top: 6px; color: var(--text); font-size: 14px; font-style: italic; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+    padding: 14px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot-b2 { background: var(--teal2); }
+  .dot-c1 { background: var(--gold); }
+
+  /* ── SUMMARY ── */
+  #summary {
+    display: none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+  }
+  #summary h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    color: var(--teal2);
+    margin-bottom: 8px;
+  }
+  #summary p { color: var(--muted); font-size: 14px; }
+  #summary .score {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 16px 0 8px;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+      <span class="badge">B2 → C1</span>
+      <h1>Inversion — Translation Drill</h1>
+    </div>
+    <p>Translate each sentence into English using the inversion structure shown. AI feedback after each attempt.</p>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 14</div>
+</div>
+
+<main>
+
+  <div class="legend">
+    <div class="legend-item"><span class="dot dot-b2"></span> B2 — Negative adverbials, Not only, So/Such, Only + time</div>
+    <div class="legend-item"><span class="dot dot-c1"></span> C1 — No sooner/Hardly, Conditional inversion (Should/Were/Had), Not until</div>
+  </div>
+
+  <div id="exercise-container"></div>
+  <div id="summary">
+    <h2>Drill Complete 🎯</h2>
+    <div class="score" id="finalScore"></div>
+    <p id="summaryMsg"></p>
+  </div>
+
+</main>
+
+<script>
+const items = [
+  {
+    id: 1, level: "b2",
+    type: "Never before",
+    trigger: "никогда раньше",
+    ru: "Никогда раньше робототехника не развивалась так стремительно, как в последние десять лет.",
+    hint: "Start: Never before has...",
+    model: "Never before has robotics developed so rapidly as in the last ten years."
+  },
+  {
+    id: 2, level: "b2",
+    type: "Not only…but also",
+    trigger: "не только…но и",
+    ru: "Этот алгоритм не только оптимизирует маршрут дрона, но и значительно снижает потребление энергии.",
+    hint: "Start: Not only does this algorithm...",
+    model: "Not only does this algorithm optimise the drone's route, but it also significantly reduces energy consumption."
+  },
+  {
+    id: 3, level: "b2",
+    type: "Rarely",
+    trigger: "редко",
+    ru: "Редко встретишь инженера с таким глубоким пониманием нейронных сетей.",
+    hint: "Start: Rarely do you come across...",
+    model: "Rarely do you come across an engineer with such a deep understanding of neural networks."
+  },
+  {
+    id: 4, level: "b2",
+    type: "So + adjective",
+    trigger: "настолько…что",
+    ru: "Архитектура оказалась настолько сложной, что даже опытные разработчики не могли разобраться в ней.",
+    hint: "Start: So complex was the architecture that...",
+    model: "So complex was the architecture that even experienced developers could not make sense of it."
+  },
+  {
+    id: 5, level: "b2",
+    type: "Only after",
+    trigger: "только после",
+    ru: "Только после трёх итераций тестирования команда наконец поняла, в чём заключался баг.",
+    hint: "Start: Only after three iterations of testing did...",
+    model: "Only after three iterations of testing did the team finally understand where the bug was."
+  },
+  {
+    id: 6, level: "b2",
+    type: "Such…that",
+    trigger: "прогресс был таким…что",
+    ru: "Прогресс был настолько значительным, что проект привлёк внимание крупнейших технологических компаний.",
+    hint: "Start: Such was the progress that...",
+    model: "Such was the progress that the project attracted the attention of the world's leading tech companies."
+  },
+  {
+    id: 7, level: "b2",
+    type: "At no point",
+    trigger: "ни в коем случае / никогда",
+    ru: "Ни в какой момент данные пользователей не передавались третьим лицам.",
+    hint: "Start: At no point were...",
+    model: "At no point were user data shared with third parties."
+  },
+  {
+    id: 8, level: "b2",
+    type: "Seldom",
+    trigger: "редко бывает что",
+    ru: "Редко бывает, чтобы один разработчик справился со столь масштабным проектом в одиночку.",
+    hint: "Start: Seldom does a single developer...",
+    model: "Seldom does a single developer manage such a large-scale project on their own."
+  },
+  {
+    id: 9, level: "c1",
+    type: "Hardly…when",
+    trigger: "едва…как",
+    ru: "Мы едва успели развернуть обновление, как система обнаружила критическую ошибку.",
+    hint: "Start: Hardly had we deployed the update when...",
+    model: "Hardly had we deployed the update when the system detected a critical error."
+  },
+  {
+    id: 10, level: "c1",
+    type: "No sooner…than",
+    trigger: "не успели…как",
+    ru: "Не успели мы запустить прототип, как инвесторы запросили полную техническую документацию.",
+    hint: "Start: No sooner had we launched the prototype than...",
+    model: "No sooner had we launched the prototype than the investors requested full technical documentation."
+  },
+  {
+    id: 11, level: "c1",
+    type: "Not until",
+    trigger: "только когда (с усилением)",
+    ru: "Только когда был завершён финальный тест, команда смогла покинуть офис.",
+    hint: "Start: Not until the final test was completed could...",
+    model: "Not until the final test was completed could the team leave the office."
+  },
+  {
+    id: 12, level: "c1",
+    type: "Should (conditional)",
+    trigger: "если вдруг / на случай если",
+    ru: "Если возникнут какие-либо неполадки с сервером, немедленно свяжитесь с системным администратором.",
+    hint: "Start: Should any issues arise with the server...",
+    model: "Should any issues arise with the server, contact the system administrator immediately."
+  },
+  {
+    id: 13, level: "c1",
+    type: "Were (conditional)",
+    trigger: "если бы (нереальное условие, настоящее)",
+    ru: "Если бы система была более масштабируемой, мы могли бы обрабатывать вдвое больше запросов.",
+    hint: "Start: Were the system more scalable...",
+    model: "Were the system more scalable, we could handle twice as many requests."
+  },
+  {
+    id: 14, level: "c1",
+    type: "Had (conditional)",
+    trigger: "если бы (нереальное условие, прошедшее)",
+    ru: "Если бы мы протестировали API раньше, мы бы избежали этой утечки данных.",
+    hint: "Start: Had we tested the API earlier...",
+    model: "Had we tested the API earlier, we would have avoided this data breach."
+  }
+];
+
+let checked = 0;
+const TOTAL = items.length;
+
+function buildCards() {
+  const container = document.getElementById('exercise-container');
+  items.forEach(item => {
+    const lvlClass = item.level === 'b2' ? 'lvl-b2' : 'lvl-c1';
+    const lvlLabel = item.level.toUpperCase();
+    container.innerHTML += `
+    <div class="card" id="card-${item.id}">
+      <div class="card-top">
+        <span class="card-num">${String(item.id).padStart(2,'0')}</span>
+        <span class="card-type ${lvlClass}">${lvlLabel}</span>
+        <span class="card-type" style="background:rgba(255,255,255,0.06);color:var(--text);font-size:12px;font-weight:500;letter-spacing:0;">${item.type}</span>
+        <span class="trigger-tag">trigger: «${item.trigger}»</span>
+      </div>
+      <div class="card-body">
+        <div class="ru-sentence">${item.ru}</div>
+
+        <textarea id="ta-${item.id}" placeholder="Type your English translation here…" rows="3"></textarea>
+      </div>
+      <div class="card-actions">
+        <button class="btn-check" onclick="checkAnswer(${item.id})">Check with AI ✦</button>
+        <button class="btn-show-ans" onclick="toggleAnswer(${item.id})">Model answer</button>
+      </div>
+      <div class="feedback" id="fb-${item.id}"></div>
+      <div class="model-answer" id="ma-${item.id}">
+        <strong>Model answer:</strong>
+        <p>${item.model}</p>
+      </div>
+    </div>`;
+  });
+}
+
+function updateProgress() {
+  const pct = Math.round((checked / TOTAL) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${checked} / ${TOTAL}`;
+  if (checked === TOTAL) showSummary();
+}
+
+async function checkAnswer(id) {
+  const item = items.find(i => i.id === id);
+  const ta = document.getElementById(`ta-${id}`);
+  const fb = document.getElementById(`fb-${id}`);
+  const btn = document.querySelector(`#card-${id} .btn-check`);
+  const userAnswer = ta.value.trim();
+
+  if (!userAnswer) { ta.focus(); return; }
+
+  btn.disabled = true;
+  fb.className = 'feedback loading';
+  fb.textContent = 'Analysing your sentence…';
+
+  const systemPrompt = `You are an expert ESL grammar coach. A B2–C1 English learner is practising INVERSION. 
+Evaluate the student's English translation of a Russian sentence. 
+Focus on: (1) correct inversion structure, (2) grammar accuracy, (3) naturalness.
+Be concise — 3–5 lines max. Use this format:
+✅ [what's good] / ⚠️ [issues if any] / 💡 [one tip or corrected version if needed].
+Never give a full model answer — guide, don't solve.
+The target inversion type is: ${item.type}.
+Model answer for reference only (do NOT reveal it): ${item.model}`;
+
+  const userPrompt = `Russian original: "${item.ru}"
+Student's translation: "${userAnswer}"
+Evaluate the inversion and grammar.`;
+
+  try {
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: "user", content: userPrompt }]
+      })
+    });
+    const data = await resp.json();
+    const text = data.content?.map(b => b.text || '').join('') || 'No response received.';
+
+    const isGood = text.includes('✅') && !text.includes('⚠️');
+    const isPoor = !text.includes('✅') || (text.match(/⚠️/g) || []).length > 1;
+
+    fb.className = `feedback shown ${isGood ? 'good' : isPoor ? 'poor' : 'ok'}`;
+    fb.innerHTML = text.replace(/\n/g, '<br>');
+
+    if (!btn.dataset.counted) {
+      btn.dataset.counted = '1';
+      checked++;
+      updateProgress();
+    }
+  } catch(e) {
+    fb.className = 'feedback shown poor';
+    fb.textContent = 'Could not reach AI. Check your connection and try again.';
+    btn.disabled = false;
+  }
+}
+
+function toggleAnswer(id) {
+  const ma = document.getElementById(`ma-${id}`);
+  ma.classList.toggle('shown');
+  if (!document.getElementById(`fb-${id}`).dataset.counted) {
+    // count as checked if they peek at model answer
+  }
+}
+
+function showSummary() {
+  setTimeout(() => {
+    document.getElementById('summary').style.display = 'block';
+    document.getElementById('finalScore').textContent = `${TOTAL}/${TOTAL}`;
+    document.getElementById('summaryMsg').textContent = 'All sentences checked. Review the AI feedback above and focus on any ⚠️ points before your next session.';
+    document.getElementById('summary').scrollIntoView({ behavior: 'smooth' });
+  }, 600);
+}
+
+buildCards();
+updateProgress();
+</script>
+</body>
+</html>
