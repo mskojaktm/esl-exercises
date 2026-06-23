@@ -1,1 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles with Proper Names – Gap-fill Exercise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&family=Calibri&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --teal: #028090;
+    --teal-dark: #016d7d;
+    --teal-light: #E1F5EE;
+    --teal-mid: #5DCAA5;
+    --navy: #0D2B35;
+    --navy-mid: #1a3d4c;
+    --coral: #993C1D;
+    --coral-light: #FAECE7;
+    --green: #0F6E56;
+    --green-light: #E1F5EE;
+    --gray-bg: #f4f6f8;
+    --gray-card: #ffffff;
+    --gray-border: #d4dde3;
+    --text-main: #1a2d35;
+    --text-sub: #4a6070;
+    --radius: 8px;
+  }
+
+  body {
+    font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+    background: var(--gray-bg);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding-bottom: 3rem;
+  }
+
+  /* ── Header bar ── */
+  .top-bar {
+    background: var(--navy);
+    color: #fff;
+    padding: 18px 24px 16px;
+    border-bottom: 3px solid var(--teal);
+  }
+  .top-bar h1 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+  .top-bar p { font-size: 14px; color: rgba(255,255,255,0.7); }
+
+  /* ── Main container ── */
+  .container { max-width: 820px; margin: 0 auto; padding: 24px 16px; }
+
+  /* ── Tip card ── */
+  .tip-card {
+    background: var(--gray-card);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+  .tip-card strong { color: var(--text-main); font-weight: 600; }
+  .tip-card ul { margin: 6px 0 0 16px; }
+  .tip-card li { margin-bottom: 3px; }
+
+  /* ── Instructions ── */
+  .instructions {
+    font-size: 14px;
+    color: var(--text-sub);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .instructions code {
+    background: var(--teal-light);
+    color: var(--teal-dark);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* ── Sentence list ── */
+  .sentence-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .sentence-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--gray-card);
+    border: 1px solid var(--gray-border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .sentence-item.correct { border-color: var(--green); background: var(--green-light); }
+  .sentence-item.wrong   { border-color: var(--coral); background: var(--coral-light); }
+
+  .num {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    background: var(--teal);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+  .sentence-item.correct .num { background: var(--green); }
+  .sentence-item.wrong   .num { background: var(--coral); }
+
+  .sent-body {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-main);
+  }
+
+  /* ── Blank input ── */
+  .blank-wrap { display: inline-flex; align-items: center; gap: 4px; vertical-align: middle; }
+
+  .blank-input {
+    width: 64px; height: 28px;
+    border: 2px solid var(--teal);
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    padding: 0 4px;
+    background: #fff;
+    color: var(--text-main);
+    font-family: 'Calibri', Arial, sans-serif;
+    transition: border-color 0.15s, background 0.15s;
+    outline: none;
+  }
+  .blank-input:focus { box-shadow: 0 0 0 3px rgba(2,128,144,0.2); }
+  .blank-input.correct-input { border-color: var(--green); background: var(--green-light); color: #085041; }
+  .blank-input.wrong-input   { border-color: var(--coral); background: var(--coral-light); color: var(--coral); }
+
+  .feedback-tag {
+    display: inline-flex; align-items: center; gap: 2px;
+    font-size: 12px; font-weight: 700;
+    padding: 2px 7px; border-radius: 4px;
+    margin-left: 3px; vertical-align: middle;
+  }
+  .fb-ok  { background: var(--green-light); color: var(--green); }
+  .fb-err { background: var(--coral-light); color: var(--coral); }
+
+  /* ── Buttons ── */
+  .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+
+  .btn {
+    cursor: pointer;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 9px 22px;
+    border: 1.5px solid var(--gray-border);
+    background: #fff;
+    color: var(--text-main);
+    font-family: 'Trebuchet MS', sans-serif;
+    transition: background 0.13s, border-color 0.13s;
+  }
+  .btn:hover { background: var(--gray-bg); }
+  .btn.primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .btn.primary:hover { background: var(--teal-dark); }
+
+  /* ── Score box ── */
+  .score-box {
+    display: none;
+    margin-top: 20px;
+    background: var(--gray-card);
+    border: 1px solid var(--gray-border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+  }
+  .score-box.visible { display: block; }
+  .score-top { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+  .score-num { font-size: 26px; font-weight: 700; color: var(--teal); font-family: 'Trebuchet MS', sans-serif; }
+  .score-msg { font-size: 14px; color: var(--text-sub); }
+  .bar-bg { height: 8px; background: var(--gray-border); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--teal); border-radius: 4px; width: 0%; transition: width 0.5s ease; }
+
+  /* ── Section divider ── */
+  .section-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 22px 0 10px;
+    padding-bottom: 5px;
+    border-bottom: 1.5px solid var(--teal-light);
+  }
+
+  @media (max-width: 540px) {
+    .top-bar h1 { font-size: 18px; }
+    .sent-body  { font-size: 14px; }
+    .blank-input{ width: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>Articles with Proper Names</h1>
+  <p>Gap-fill exercise — 44 sentences</p>
+</div>
+
+<div class="container">
+
+  <p class="instructions">
+    Type <code>the</code> or <code>–</code> (a dash for zero article) in each blank.
+    Press <strong>Check answers</strong> when you're done. You can also press <kbd>Enter</kbd> from any blank.
+  </p>
+
+  <div class="tip-card">
+    <strong>Quick reference:</strong>
+    <ul>
+      <li>Universities, airports, streets, most colleges → <em>zero article</em> (–)</li>
+      <li>Palaces (named "the … Palace"), museums, theatres, rivers, mountain ranges → <em>the</em></li>
+      <li>Abbreviations pronounced as words (UNESCO, NATO) → zero &nbsp;|&nbsp; spelled out (FBI, UN) → <em>the</em></li>
+      <li>Months, days, seasons → zero &nbsp;|&nbsp; Historical periods (Middle Ages, Enlightenment) → <em>the</em></li>
+    </ul>
+  </div>
+
+  <div class="section-label">Sentences 1 – 44</div>
+  <div class="sentence-list" id="list"></div>
+
+  <div class="btn-row">
+    <button class="btn primary" onclick="checkAll()">Check answers</button>
+    <button class="btn" onclick="resetAll()">Reset</button>
+  </div>
+
+  <div class="score-box" id="score-box">
+    <div class="score-top">
+      <span class="score-num" id="score-num"></span>
+      <span class="score-msg" id="score-msg"></span>
+    </div>
+    <div class="bar-bg"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+</div>
+
+<script>
+const data = [
+  {s:"Diane and I are especially proud because Ivy was just accepted at ___ Stanford University.", a:["-"]},
+  {s:"The official time we stormed ___ Winter Palace.", a:["the"]},
+  {s:"I was trying to get to ___ Buckingham Palace.", a:["-"]},
+  {s:"And in Paris, you can buy a beer in ___ McDonald's.", a:["-"]},
+  {s:"Same way they built the pyramids and ___ Great Wall of China.", a:["the"]},
+  {s:"Probably thought she'd be working for some rich family on ___ Fifth Avenue.", a:["-"]},
+  {s:"A crowd thronged and murmured in the small garden opposite ___ Bolshoi Theatre.", a:["the"]},
+  {s:"All ___ NATO defences coordinated, sir, awaiting your command.", a:["-"]},
+  {s:"Is ___ Louvre security guard armed?", a:["the"]},
+  {s:"The time he got in this way he spent in ___ National Gallery.", a:["the"]},
+  {s:"I've been asked to become a Canon of ___ St Paul's Cathedral.", a:["-"]},
+  {s:"I'll have him call you the minute he gets back from ___ Lincoln Memorial.", a:["the"]},
+  {s:"You should enquire at ___ Ministry of Foreign Affairs.", a:["the"]},
+  {s:"Send for her to ___ Park Lane, do you hear?", a:["-"]},
+  {s:"And all I wanted was a romantic kiss picture in front of ___ Eiffel Tower.", a:["the"]},
+  {s:"All of them students at ___ Eton College.", a:["-"]},
+  {s:"I have a double degree from ___ Harvard University.", a:["-"]},
+  {s:"Have we been in touch with ___ Kremlin?", a:["the"]},
+  {s:"I suppose you're staying at ___ Grand Hotel?", a:["the"]},
+  {s:"And according to ___ Forbes Magazine, he's a drug trafficker.", a:["-"]},
+  {s:"The comrades are booked into ___ Beverly Hilton Hotel.", a:["the"]},
+  {s:"I'm sorry I'm late but, uh, I had to make a little pit stop at ___ Mayflower.", a:["the"]},
+  {s:"I beg of ___ United Nations.", a:["the"]},
+  {s:"But these are from the dean of ___ Canterbury Cathedral.", a:["-"]},
+  {s:"He is giving information to ___ FBI.", a:["the"]},
+  {s:"You call ___ Democratic party a rat hole?", a:["the"]},
+  {s:"___ UNESCO selected him as one of the best young artists.", a:["-"]},
+  {s:"An empty taxi pulled up at ___ House of Commons.", a:["the"]},
+  {s:"There's a huge ice rink in ___ Red Square.", a:["-"]},
+  {s:"I lost it at ___ Heathrow Airport two days ago.", a:["-"]},
+  {s:"The changes in ___ Supreme Court were new all right.", a:["the"]},
+  {s:"So ___ World Championships are coming up soon?", a:["the"]},
+  {s:"Oh, ___ French language is so expressive, don't you think, Kate?", a:["the"]},
+  {s:"Do you like the forest being in ___ Trafalgar Square?", a:["-"]},
+  {s:"He came home in ___ January.", a:["-"]},
+  {s:"There is no more of ___ Middle Ages in our constitution.", a:["the"]},
+  {s:"The line is written in ___ English.", a:["-"]},
+  {s:"Voltaire and the Age of ___ Enlightenment.", a:["the"]},
+  {s:"She walked slowly along and turned down ___ Air Street and so got through into ___ Regent Street.", a:["-","-"]},
+  {s:"You'll find us someplace along ___ Lincoln Highway.", a:["the"]},
+  {s:"I met someone in ___ Victoria Station.", a:["-"]},
+  {s:"As soon as ___ English saw that Scotland had a friend that would defend them, they stopped.", a:["the"]},
+  {s:"I'll tell you all about it ___ Monday.", a:["-"]},
+  {s:"Yes, two years ago, at ___ Easter.", a:["-"]}
+];
+
+const list = document.getElementById('list');
+
+function build() {
+  list.innerHTML = '';
+  data.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'sentence-item';
+    div.id = 'item-' + i;
+    let bc = 0;
+    const html = item.s.replace(/___/g, () => {
+      const id = `inp-${i}-${bc++}`;
+      return `<span class="blank-wrap"><input class="blank-input" id="${id}" type="text" placeholder="?" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" oninput="norm(this)" onkeydown="if(event.key==='Enter')checkAll()"></span>`;
+    });
+    div.innerHTML = `<span class="num">${i+1}</span><span class="sent-body">${html}</span>`;
+    list.appendChild(div);
+  });
+}
+
+function norm(el) {
+  const v = el.value.trim();
+  if (v === '–' || v === '—' || v === '-') el.value = '-';
+}
+
+function checkAll() {
+  let correct = 0, total = 0;
+  data.forEach((item, i) => {
+    const row = document.getElementById('item-' + i);
+    let allRight = true;
+    item.a.forEach((ans, j) => {
+      const inp = document.getElementById(`inp-${i}-${j}`);
+      if (!inp) return;
+      total++;
+      const raw = inp.value.trim().toLowerCase();
+      const v = (raw === '-' || raw === '–' || raw === '—') ? '-' : raw;
+      const ok = v === ans.toLowerCase();
+      inp.className = 'blank-input ' + (ok ? 'correct-input' : 'wrong-input');
+      const old = inp.parentNode.querySelector('.feedback-tag');
+      if (old) old.remove();
+      if (!ok) {
+        allRight = false;
+        const tag = document.createElement('span');
+        tag.className = 'feedback-tag fb-err';
+        tag.textContent = '→ ' + (ans === '-' ? '–' : ans);
+        inp.parentNode.appendChild(tag);
+      } else {
+        correct++;
+      }
+    });
+    row.className = 'sentence-item ' + (allRight ? 'correct' : 'wrong');
+  });
+  const pct = Math.round(correct / total * 100);
+  const sb = document.getElementById('score-box');
+  sb.className = 'score-box visible';
+  document.getElementById('score-num').textContent = `${correct} / ${total} (${pct}%)`;
+  let msg = 'Keep going — review the red sentences.';
+  if (pct === 100) msg = 'Perfect score! Well done!';
+  else if (pct >= 80) msg = 'Great work! Just a few to review.';
+  else if (pct >= 60) msg = 'Good effort — check the highlighted sentences.';
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('bar-fill').style.width = pct + '%';
+  sb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetAll() {
+  data.forEach((item, i) => {
+    document.getElementById('item-' + i).className = 'sentence-item';
+    item.a.forEach((_, j) => {
+      const inp = document.getElementById(`inp-${i}-${j}`);
+      if (!inp) return;
+      inp.value = '';
+      inp.className = 'blank-input';
+      const tag = inp.parentNode.querySelector('.feedback-tag');
+      if (tag) tag.remove();
+    });
+  });
+  const sb = document.getElementById('score-box');
+  sb.className = 'score-box';
+  document.getElementById('bar-fill').style.width = '0%';
+}
+
+build();
+</script>
+</body>
+</html>
