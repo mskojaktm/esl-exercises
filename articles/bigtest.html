@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles in English – Final Test</title>
+<style>
+  :root {
+    --teal: #028090;
+    --teal-light: #03a0b5;
+    --navy: #0D2B35;
+    --navy-mid: #163d4d;
+    --bg: #f4f8fa;
+    --card: #ffffff;
+    --border: #cde0e5;
+    --text: #1a1a2e;
+    --muted: #5a7a85;
+    --green: #1a8a5a;
+    --green-bg: #e6f7ef;
+    --red: #c0392b;
+    --red-bg: #fdf0ee;
+    --yellow: #d4a017;
+    --yellow-bg: #fdf9e6;
+    --shadow: 0 2px 12px rgba(2,128,144,0.10);
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: var(--navy);
+    padding: 22px 32px 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .header-badge {
+    background: var(--teal);
+    color: #fff;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .header h1 {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .header-meta {
+    margin-left: auto;
+    color: rgba(255,255,255,0.55);
+    font-size: 13px;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    background: var(--navy-mid);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 44px;
+  }
+  .progress-track {
+    flex: 1;
+    background: rgba(255,255,255,0.12);
+    border-radius: 20px;
+    height: 7px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: var(--teal-light);
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .progress-label {
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* Main layout */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* Section */
+  .section {
+    display: none;
+    animation: fadeIn 0.35s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .section-num {
+    width: 40px; height: 40px;
+    background: var(--teal);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 17px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-info h2 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    color: var(--navy);
+  }
+  .section-info p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 24px 26px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--teal);
+  }
+
+  /* Instruction box */
+  .instruction {
+    background: var(--yellow-bg);
+    border: 1px solid #e8d280;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #5a4a00;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .instruction-icon { font-size: 16px; margin-top: 1px; flex-shrink:0; }
+
+  /* Task items */
+  .task-item {
+    padding: 13px 0;
+    border-bottom: 1px solid #edf2f4;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-num {
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 13px;
+    min-width: 22px;
+    margin-top: 2px;
+  }
+  .task-content { flex: 1; }
+
+  /* MC buttons */
+  .mc-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 9px;
+  }
+  .mc-btn {
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    background: #fff;
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Calibri', sans-serif;
+  }
+  .mc-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .mc-btn.selected { border-color: var(--teal); background: var(--teal); color: #fff; }
+  .mc-btn.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+  .mc-btn.wrong { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+  .mc-btn.reveal-correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+  .mc-btn:disabled { cursor: default; }
+
+  /* Input */
+  .gap-input {
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 15px;
+    font-family: 'Calibri', sans-serif;
+    width: 80px;
+    text-align: center;
+    color: var(--navy);
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  .gap-input:focus { border-color: var(--teal); }
+  .gap-input.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); font-weight:700; }
+  .gap-input.wrong { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
+
+  /* Feedback inline */
+  .fb { font-size: 13px; margin-top: 5px; font-weight: 600; }
+  .fb.ok { color: var(--green); }
+  .fb.bad { color: var(--red); }
+
+  /* Categorize task */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 6px;
+  }
+  .cat-col {
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    min-height: 120px;
+  }
+  .cat-col h3 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    color: var(--teal);
+    margin-bottom: 10px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .cat-items-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    min-height: 40px;
+    padding: 10px;
+    background: var(--card);
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+  }
+  .cat-tag {
+    background: var(--navy);
+    color: #fff;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    user-select: none;
+  }
+  .cat-tag:hover { background: var(--teal); transform: translateY(-1px); }
+  .cat-tag.placed { background: var(--teal); }
+  .cat-col .placed-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 30px;
+  }
+  .cat-tag.correct-tag { background: var(--green) !important; cursor: default; }
+  .cat-tag.wrong-tag { background: var(--red) !important; cursor: default; }
+
+  /* Text task */
+  .reading-text {
+    background: #f9fcfd;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .text-input {
+    border: none;
+    border-bottom: 2px solid var(--teal);
+    background: transparent;
+    font-size: 15px;
+    font-family: 'Calibri', sans-serif;
+    width: 55px;
+    text-align: center;
+    padding: 0 2px 2px;
+    color: var(--navy);
+    outline: none;
+    font-weight: 700;
+  }
+  .text-input.correct { border-bottom-color: var(--green); color: var(--green); }
+  .text-input.wrong { border-bottom-color: var(--red); color: var(--red); }
+
+  /* Buttons */
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 11px 28px;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: all 0.15s;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #026e7c; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--teal);
+    border: 2px solid var(--teal);
+  }
+  .btn-secondary:hover { background: var(--teal); color: #fff; }
+  .btn:disabled { opacity: 0.45; cursor: default; }
+
+  /* Score badge */
+  .section-score {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 18px;
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+  .section-score.hidden { display: none; }
+
+  /* Results screen */
+  #results {
+    text-align: center;
+  }
+  .results-card {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 40px 32px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .results-card h2 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 26px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .total-score {
+    font-size: 64px;
+    font-weight: 900;
+    font-family: 'Trebuchet MS', sans-serif;
+    color: var(--teal);
+    line-height: 1;
+    margin: 18px 0 4px;
+  }
+  .total-label { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+  .score-breakdown {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 18px 20px;
+    text-align: left;
+    margin-bottom: 22px;
+  }
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .breakdown-row:last-child { border-bottom: none; }
+  .breakdown-pts {
+    font-weight: 700;
+    color: var(--teal);
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+  .verdict {
+    font-size: 16px;
+    color: var(--navy);
+    font-weight: 700;
+    font-family: 'Trebuchet MS', sans-serif;
+    margin-bottom: 6px;
+  }
+  .verdict-sub { font-size: 13px; color: var(--muted); }
+
+  /* Error correction specific */
+  .error-sentence {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--navy);
+    margin-bottom: 9px;
+  }
+  .correction-input {
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-family: 'Calibri', sans-serif;
+    width: 100%;
+    max-width: 400px;
+    color: var(--navy);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .correction-input:focus { border-color: var(--teal); }
+  .correction-input.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); font-weight: 700; }
+  .correction-input.wrong { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+
+  /* Time estimate tag */
+  .time-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(2,128,144,0.1);
+    color: var(--teal);
+    border-radius: 12px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 16px 16px 14px; flex-wrap: wrap; }
+    .header-meta { margin-left: 0; width: 100%; }
+    .container { padding: 20px 12px 50px; }
+    .cat-grid { grid-template-columns: 1fr; }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-badge">Final Test</span>
+  <h1>Articles in English</h1>
+  <span class="header-meta">5 sections · ~35 min</span>
+</div>
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-label" id="progressLabel">Section 1 of 5</span>
+</div>
+
+<div class="container">
+
+  <!-- ===== SECTION 1: A / An warm-up ===== -->
+  <div class="section active" id="sec1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-info">
+        <h2>Warm-Up: A or An? <span class="time-tag">⏱ ~5 min</span></h2>
+        <p>Choose the correct indefinite article for each noun or phrase.</p>
+      </div>
+    </div>
+    <div class="instruction">
+      <span class="instruction-icon">💡</span>
+      <span>Remember: the choice depends on the <strong>sound</strong> that follows — not the letter. "An hour" (silent H), "a university" (/juː/ sound).</span>
+    </div>
+    <div class="card">
+      <div id="aan-items"></div>
+    </div>
+    <div class="section-score hidden" id="score1"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="checkAan()" id="checkBtn1">Check answers</button>
+      <button class="btn btn-primary" onclick="goTo(2)" id="nextBtn1" style="display:none">Next Section →</button>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: Proper nouns – The or No Article ===== -->
+  <div class="section" id="sec2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-info">
+        <h2>Warm-Up: THE or No Article? <span class="time-tag">⏱ ~6 min</span></h2>
+        <p>Proper nouns — click a word, then click the correct column.</p>
+      </div>
+    </div>
+    <div class="instruction">
+      <span class="instruction-icon">💡</span>
+      <span>Click a word from the pool, then click the column where it belongs — <strong>THE</strong> or <strong>No Article</strong>. Use the rule: rivers, seas, mountain ranges, and countries with "Republic/Kingdom/States" → THE.</span>
+    </div>
+    <div class="card">
+      <div class="cat-items-pool" id="catPool"></div>
+      <div class="cat-grid">
+        <div class="cat-col" id="colThe" onclick="dropIntoCol('THE')">
+          <h3>🔵 Use THE</h3>
+          <div class="placed-items" id="placedThe"></div>
+        </div>
+        <div class="cat-col" id="colNo" onclick="dropIntoCol('NO')">
+          <h3>⭕ No Article</h3>
+          <div class="placed-items" id="placedNo"></div>
+        </div>
+      </div>
+    </div>
+    <div class="section-score hidden" id="score2"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="checkCat()" id="checkBtn2">Check answers</button>
+      <button class="btn btn-primary" onclick="goTo(3)" id="nextBtn2" style="display:none">Next Section →</button>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: Gap-fill ===== -->
+  <div class="section" id="sec3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-info">
+        <h2>Gap-Fill: A / An / The / — <span class="time-tag">⏱ ~8 min</span></h2>
+        <p>Fill each gap with the correct article. Type <strong>—</strong> (dash) if no article is needed.</p>
+      </div>
+    </div>
+    <div class="instruction">
+      <span class="instruction-icon">✏️</span>
+      <span>Type <strong>a</strong>, <strong>an</strong>, <strong>the</strong>, or a <strong>dash (—)</strong> for zero article. Capital letters are not required.</span>
+    </div>
+    <div class="card">
+      <div id="gapfill-items"></div>
+    </div>
+    <div class="section-score hidden" id="score3"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="checkGap()" id="checkBtn3">Check answers</button>
+      <button class="btn btn-primary" onclick="goTo(4)" id="nextBtn3" style="display:none">Next Section →</button>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 4: Error Correction ===== -->
+  <div class="section" id="sec4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-info">
+        <h2>Error Correction <span class="time-tag">⏱ ~8 min</span></h2>
+        <p>Each sentence has ONE article mistake. Type the corrected sentence.</p>
+      </div>
+    </div>
+    <div class="instruction">
+      <span class="instruction-icon">🔍</span>
+      <span>Find the article error and type the <strong>full corrected sentence</strong>. Only the article is wrong — everything else is correct.</span>
+    </div>
+    <div class="card">
+      <div id="error-items"></div>
+    </div>
+    <div class="section-score hidden" id="score4"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="checkErrors()" id="checkBtn4">Check answers</button>
+      <button class="btn btn-primary" onclick="goTo(5)" id="nextBtn4" style="display:none">Next Section →</button>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 5: Text task ===== -->
+  <div class="section" id="sec5">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-info">
+        <h2>Reading: Insert Articles <span class="time-tag">⏱ ~8 min</span></h2>
+        <p>Fill in all 15 gaps in the text. Type a / an / the / — in each box.</p>
+      </div>
+    </div>
+    <div class="instruction">
+      <span class="instruction-icon">📄</span>
+      <span>Read the text carefully. Fill each numbered gap with <strong>a</strong>, <strong>an</strong>, <strong>the</strong>, or <strong>—</strong> (zero article). Type a dash for no article.</span>
+    </div>
+    <div class="card">
+      <div class="reading-text" id="text-task"></div>
+    </div>
+    <div class="section-score hidden" id="score5"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="checkText()" id="checkBtn5">Check answers</button>
+      <button class="btn btn-primary" onclick="showResults()" id="nextBtn5" style="display:none">See Results →</button>
+    </div>
+  </div>
+
+  <!-- ===== RESULTS ===== -->
+  <div class="section" id="results">
+    <div class="results-card">
+      <h2>Test Complete! 🎉</h2>
+      <div class="total-score" id="totalScore">—</div>
+      <div class="total-label" id="totalLabel">out of 55 points</div>
+      <div class="score-breakdown" id="breakdown"></div>
+      <div class="verdict" id="verdict"></div>
+      <div class="verdict-sub" id="verdictSub"></div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const aanData = [
+  { phrase: "email", answer: "an", display: "___ email" },
+  { phrase: "unique opportunity", answer: "a", display: "___ unique opportunity" },
+  { phrase: "honest answer", answer: "an", display: "___ honest answer" },
+  { phrase: "user story", answer: "a", display: "___ user story" },
+  { phrase: "hour-long meeting", answer: "an", display: "___ hour-long meeting" },
+  { phrase: "European client", answer: "a", display: "___ European client" },
+  { phrase: "IT specialist", answer: "an", display: "___ IT specialist" },
+  { phrase: "useful tool", answer: "a", display: "___ useful tool" },
+  { phrase: "unexpected error", answer: "an", display: "___ unexpected error" },
+  { phrase: "one-page report", answer: "a", display: "___ one-page report" },
+];
+
+const catData = [
+  { word: "United States", correct: "THE" },
+  { word: "Amazon River", correct: "THE" },
+  { word: "Pacific Ocean", correct: "THE" },
+  { word: "Netherlands", correct: "THE" },
+  { word: "Alps", correct: "THE" },
+  { word: "Black Sea", correct: "THE" },
+  { word: "Russia", correct: "NO" },
+  { word: "London", correct: "NO" },
+  { word: "Mount Everest", correct: "NO" },
+  { word: "Asia", correct: "NO" },
+  { word: "Lake Baikal", correct: "NO" },
+  { word: "Central Park", correct: "NO" },
+];
+
+// Gap-fill: each item has parts array and answers
+const gapData = [
+  {
+    parts: ["I received ", null, " message from ", null, " client in ", null, " United States."],
+    answers: ["a", "a", "the"],
+    hint: "indefinite noun → THE + 'United States'"
+  },
+  {
+    parts: [null, " Amazon is ", null, " longest river in South America."],
+    answers: ["The", "the"],
+    hint: "the Amazon (river) + superlative → the"
+  },
+  {
+    parts: ["She works as ", null, " IT project manager at ", null, " large company."],
+    answers: ["an", "a"],
+    hint: "IT = /aɪ tiː/ → 'an'; first mention of company → 'a'"
+  },
+  {
+    parts: ["We had ", null, " meeting in ", null, " Netherlands last week."],
+    answers: ["a", "the"],
+    hint: "'the Netherlands' — countries with plural names take THE"
+  },
+  {
+    parts: [null, " Lake Baikal is in ", null, " Russia."],
+    answers: ["—", "—"],
+    hint: "individual lakes and single-word countries → no article"
+  },
+  {
+    parts: ["Can you send me ", null, " email with ", null, " agenda?"],
+    answers: ["an", "the"],
+    hint: "first mention → 'an email'; the specific agenda mentioned → 'the'"
+  },
+  {
+    parts: ["He climbed ", null, " Mont Blanc last summer."],
+    answers: ["—"],
+    hint: "individual mountains → no article"
+  },
+  {
+    parts: [null, " Pacific Ocean is larger than ", null, " Atlantic."],
+    answers: ["The", "the"],
+    hint: "oceans always take THE; 'the Atlantic (Ocean)' — implied noun"
+  },
+  {
+    parts: ["I need ", null, " hour to finish ", null, " report."],
+    answers: ["an", "the"],
+    hint: "'hour' starts with /aʊ/ → 'an'; 'the report' — specific, already known"
+  },
+  {
+    parts: [null, " Mount Fuji is in ", null, " Japan."],
+    answers: ["—", "—"],
+    hint: "individual mountains + single-word country → no article"
+  },
+  {
+    parts: ["We are opening ", null, " office in ", null, " Hague."],
+    answers: ["an", "the"],
+    hint: "'office' starts with /ɒ/ → 'an'; 'The Hague' — exception city with THE"
+  },
+  {
+    parts: [null, " Alps are popular with ", null, " tourists."],
+    answers: ["The", "—"],
+    hint: "mountain ranges → THE; 'tourists' in general → no article"
+  },
+];
+
+const errorData = [
+  {
+    sentence: "I have the meeting tomorrow at 10 AM.",
+    answer: "I have a meeting tomorrow at 10 AM.",
+    explanation: "First mention, no context → indefinite article 'a'"
+  },
+  {
+    sentence: "She is an unique specialist in her field.",
+    answer: "She is a unique specialist in her field.",
+    explanation: "'Unique' starts with /juː/ — a consonant sound → 'a'"
+  },
+  {
+    sentence: "The Russia is a large country.",
+    answer: "Russia is a large country.",
+    explanation: "Single-word country names do not take 'the'"
+  },
+  {
+    sentence: "Can you call me in a hour?",
+    answer: "Can you call me in an hour?",
+    explanation: "'Hour' starts with a vowel sound (silent H) → 'an'"
+  },
+  {
+    sentence: "We visited a Alps during our trip to Italy.",
+    answer: "We visited the Alps during our trip to Italy.",
+    explanation: "Mountain ranges always take 'the'"
+  },
+  {
+    sentence: "He sent me email with all the details.",
+    answer: "He sent me an email with all the details.",
+    explanation: "Count noun, first mention → 'an' (vowel sound)"
+  },
+  {
+    sentence: "The Lake Ontario is in Canada.",
+    answer: "Lake Ontario is in Canada.",
+    explanation: "Individual named lakes do not take 'the'"
+  },
+  {
+    sentence: "We need a honest feedback from the client.",
+    answer: "We need an honest feedback from the client.",
+    explanation: "'Honest' starts with a vowel sound (silent H) → 'an'"
+  },
+];
+
+// Text task — store [before_text, blank_answer] pairs
+const textParts = [
+  "Last month, I had ",                                   // gap 1 → an
+  " important project with ",                              // gap 2 → a
+  " team from ",                                           // gap 3 → the
+  " United States. ",                                      // gap 4 → The
+  " team was based in ",                                   // gap 5 → —
+  " New York, but we met online via ",                     // gap 6 → a
+  " video call. Before ",                                  // gap 7 → the
+  " meeting, I prepared ",                                 // gap 8 → an
+  " agenda and sent it by ",                               // gap 9 → —
+  " email.\n\n",
+  "  ",                                                    // gap 10 → The
+  " project manager on their side had worked in ",         // gap 11 → —
+  " Europe and ",                                          // gap 12 → —
+  " Asia. She was ",                                       // gap 13 → an
+  " experienced professional. We agreed on ",              // gap 14 → the
+  " deadline for ",                                        // gap 15 → the
+  " first milestone and decided to hold weekly status calls."
+];
+
+const textAnswers = ["an", "a", "the", "The", "—", "a", "the", "an", "—", "The", "—", "—", "an", "the", "the"];
+// positions where gaps appear: after index 0,2,4,6,8,10,12,14,16,20,22,24,26,28,30 in textParts
+// textParts has gaps interspersed: gap before parts[1], gap before parts[3], etc.
+// Actually let me restructure: alternate between text and gap
+// textParts[0] = text, gap[0], textParts[1] = text, gap[1], ... textParts[15] = text (last)
+
+const scores = {};
+
+// ============================================================
+// INIT
+// ============================================================
+
+function init() {
+  buildAan();
+  buildCat();
+  buildGap();
+  buildErrors();
+  buildText();
+  updateProgress(1);
+}
+
+function goTo(n) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  if (n > 5) { showResults(); return; }
+  document.getElementById('sec' + n).classList.add('active');
+  updateProgress(n);
+  window.scrollTo(0, 0);
+}
+
+function showResults() {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('results').classList.add('active');
+  updateProgress(6);
+  renderResults();
+  window.scrollTo(0, 0);
+}
+
+function updateProgress(n) {
+  const fill = Math.min(((n - 1) / 5) * 100, 100);
+  document.getElementById('progressFill').style.width = fill + '%';
+  document.getElementById('progressLabel').textContent = n <= 5 ? `Section ${n} of 5` : 'Finished';
+}
+
+function normalise(s) {
+  return s.trim().toLowerCase().replace(/—|-|–/g, '—').replace(/\s+/g, ' ');
+}
+
+// ============================================================
+// SECTION 1 — A / An
+// ============================================================
+
+function buildAan() {
+  const container = document.getElementById('aan-items');
+  aanData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'task-item';
+    div.innerHTML = `
+      <span class="task-num">${i+1}.</span>
+      <div class="task-content">
+        <div style="margin-bottom:6px; font-size:15px;">${item.display}</div>
+        <div class="mc-options">
+          <button class="mc-btn" onclick="selectAan(${i},'a',this)">a</button>
+          <button class="mc-btn" onclick="selectAan(${i},'an',this)">an</button>
+        </div>
+        <div class="fb" id="aanfb${i}"></div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+const aanSelected = {};
+function selectAan(i, val, btn) {
+  if (aanSelected[i] && aanSelected[i].locked) return;
+  aanSelected[i] = { val, btn };
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function checkAan() {
+  let correct = 0;
+  aanData.forEach((item, i) => {
+    const sel = aanSelected[i];
+    const fb = document.getElementById('aanfb' + i);
+    const btns = document.querySelectorAll(`#aan-items .task-item:nth-child(${i+1}) .mc-btn`);
+    btns.forEach(b => { b.disabled = true; b.classList.remove('selected'); });
+    if (!sel) {
+      fb.className = 'fb bad';
+      fb.textContent = `✗ No answer. Correct: ${item.answer}`;
+      btns.forEach(b => { if (b.textContent === item.answer) b.classList.add('reveal-correct'); });
+    } else if (normalise(sel.val) === normalise(item.answer)) {
+      correct++;
+      sel.btn.classList.add('correct');
+      fb.className = 'fb ok'; fb.textContent = '✓ Correct!';
+    } else {
+      sel.btn.classList.add('wrong');
+      btns.forEach(b => { if (b.textContent === item.answer) b.classList.add('reveal-correct'); });
+      fb.className = 'fb bad'; fb.textContent = `✗ Correct: ${item.answer}`;
+    }
+    aanSelected[i].locked = true;
+  });
+  scores[1] = { got: correct, max: aanData.length };
+  showSectionScore(1, correct, aanData.length);
+  document.getElementById('checkBtn1').disabled = true;
+  document.getElementById('nextBtn1').style.display = '';
+}
+
+// ============================================================
+// SECTION 2 — Categorise
+// ============================================================
+
+let catSelected = null;
+const catPlaced = {}; // word → 'THE' or 'NO'
+
+function buildCat() {
+  const pool = document.getElementById('catPool');
+  catData.forEach(item => {
+    const tag = document.createElement('span');
+    tag.className = 'cat-tag';
+    tag.textContent = item.word;
+    tag.id = 'ct_' + item.word.replace(/ /g, '_');
+    tag.onclick = (e) => { e.stopPropagation(); selectCatTag(tag, item.word); };
+    pool.appendChild(tag);
+  });
+}
+
+function selectCatTag(tag, word) {
+  if (tag.classList.contains('correct-tag') || tag.classList.contains('wrong-tag')) return;
+  document.querySelectorAll('.cat-tag').forEach(t => t.style.outline = '');
+  if (catSelected === word) { catSelected = null; return; }
+  catSelected = word;
+  tag.style.outline = '3px solid var(--yellow)';
+}
+
+function dropIntoCol(col) {
+  if (!catSelected) return;
+  const word = catSelected;
+  catSelected = null;
+  // move tag
+  const tag = document.getElementById('ct_' + word.replace(/ /g, '_'));
+  if (!tag) return;
+  tag.style.outline = '';
+  tag.classList.add('placed');
+  tag.onclick = (e) => { e.stopPropagation(); selectCatTag(tag, word); };
+  catPlaced[word] = col;
+  if (col === 'THE') document.getElementById('placedThe').appendChild(tag);
+  else document.getElementById('placedNo').appendChild(tag);
+}
+
+function checkCat() {
+  let correct = 0;
+  catData.forEach(item => {
+    const tag = document.getElementById('ct_' + item.word.replace(/ /g, '_'));
+    const placement = catPlaced[item.word];
+    tag.onclick = null;
+    if (!placement) {
+      tag.classList.add('wrong-tag');
+    } else if (placement === item.correct) {
+      correct++;
+      tag.classList.add('correct-tag');
+    } else {
+      tag.classList.add('wrong-tag');
+    }
+    tag.style.outline = '';
+  });
+  scores[2] = { got: correct, max: catData.length };
+  showSectionScore(2, correct, catData.length);
+  document.getElementById('checkBtn2').disabled = true;
+  document.getElementById('nextBtn2').style.display = '';
+}
+
+// ============================================================
+// SECTION 3 — Gap-fill
+// ============================================================
+
+function buildGap() {
+  const container = document.getElementById('gapfill-items');
+  gapData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'task-item';
+    let html = `<span class="task-num">${i+1}.</span><div class="task-content"><div style="line-height:2.2;">`;
+    let gIdx = 0;
+    item.parts.forEach(part => {
+      if (part === null) {
+        html += `<input class="gap-input" id="gap_${i}_${gIdx}" placeholder="?" autocomplete="off" autocorrect="off" spellcheck="false">`;
+        gIdx++;
+      } else {
+        html += part;
+      }
+    });
+    html += `</div><div class="hint" id="gaphint${i}" style="display:none">💡 ${item.hint}</div>`;
+    html += `<div class="fb" id="gapfb${i}"></div></div>`;
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+}
+
+function checkGap() {
+  let correct = 0;
+  gapData.forEach((item, i) => {
+    let allRight = true;
+    item.answers.forEach((ans, j) => {
+      const inp = document.getElementById(`gap_${i}_${j}`);
+      if (!inp) return;
+      const val = normalise(inp.value);
+      const expected = normalise(ans);
+      inp.disabled = true;
+      if (val === expected || (expected === '—' && (val === '-' || val === '—' || val === ''))) {
+        inp.classList.add('correct');
+      } else {
+        inp.classList.add('wrong');
+        inp.value = inp.value + ' → ' + ans;
+        allRight = false;
+      }
+    });
+    const fb = document.getElementById('gapfb' + i);
+    const hint = document.getElementById('gaphint' + i);
+    if (allRight) {
+      correct++;
+      fb.className = 'fb ok'; fb.textContent = '✓ Correct!';
+    } else {
+      fb.className = 'fb bad'; fb.textContent = '✗ See corrections above.';
+      hint.style.display = '';
+    }
+  });
+  scores[3] = { got: correct, max: gapData.length };
+  showSectionScore(3, correct, gapData.length);
+  document.getElementById('checkBtn3').disabled = true;
+  document.getElementById('nextBtn3').style.display = '';
+}
+
+// ============================================================
+// SECTION 4 — Error Correction
+// ============================================================
+
+function buildErrors() {
+  const container = document.getElementById('error-items');
+  errorData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'task-item';
+    div.style.flexDirection = 'column';
+    div.style.alignItems = 'flex-start';
+    div.innerHTML = `
+      <div style="display:flex;gap:12px;align-items:flex-start;width:100%">
+        <span class="task-num">${i+1}.</span>
+        <div class="task-content">
+          <div class="error-sentence">${item.sentence}</div>
+          <input class="correction-input" id="err${i}" placeholder="Type the corrected sentence..." autocorrect="off" spellcheck="false">
+          <div class="fb" id="errfb${i}"></div>
+          <div class="hint" id="errhint${i}" style="display:none; margin-top:6px;">💡 ${item.explanation}</div>
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function normaliseErr(s) {
+  return s.trim().toLowerCase().replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+}
+
+function checkErrors() {
+  let correct = 0;
+  errorData.forEach((item, i) => {
+    const inp = document.getElementById('err' + i);
+    const fb = document.getElementById('errfb' + i);
+    const hint = document.getElementById('errhint' + i);
+    inp.disabled = true;
+    if (normaliseErr(inp.value) === normaliseErr(item.answer)) {
+      correct++;
+      inp.classList.add('correct');
+      fb.className = 'fb ok'; fb.textContent = '✓ Correct!';
+    } else {
+      inp.classList.add('wrong');
+      fb.className = 'fb bad'; fb.textContent = `✗ Correct: ${item.answer}`;
+      hint.style.display = '';
+    }
+  });
+  scores[4] = { got: correct, max: errorData.length };
+  showSectionScore(4, correct, errorData.length);
+  document.getElementById('checkBtn4').disabled = true;
+  document.getElementById('nextBtn4').style.display = '';
+}
+
+// ============================================================
+// SECTION 5 — Text Task
+// ============================================================
+
+function buildText() {
+  const container = document.getElementById('text-task');
+  // textParts: alternating text / (gap) text / (gap) ...
+  // Structure: textParts[0] [gap0] textParts[1] [gap1] ... textParts[14] [gap14] textParts[15]
+  let html = '';
+  textParts.forEach((part, idx) => {
+    if (idx < textAnswers.length) {
+      html += part;
+      html += `<input class="text-input" id="txt${idx}" placeholder="?" autocomplete="off" autocorrect="off" spellcheck="false" size="4">`;
+    } else {
+      html += part;
+    }
+  });
+  container.innerHTML = html;
+}
+
+function checkText() {
+  let correct = 0;
+  textAnswers.forEach((ans, i) => {
+    const inp = document.getElementById('txt' + i);
+    if (!inp) return;
+    const val = normalise(inp.value);
+    const expected = normalise(ans);
+    inp.disabled = true;
+    const ok = val === expected || (expected === '—' && (val === '-' || val === '—' || val === ''));
+    if (ok) { correct++; inp.classList.add('correct'); }
+    else { inp.classList.add('wrong'); inp.value = ans; }
+  });
+  scores[5] = { got: correct, max: textAnswers.length };
+  showSectionScore(5, correct, textAnswers.length);
+  document.getElementById('checkBtn5').disabled = true;
+  document.getElementById('nextBtn5').style.display = '';
+}
+
+// ============================================================
+// SCORES / RESULTS
+// ============================================================
+
+function showSectionScore(n, got, max) {
+  const el = document.getElementById('score' + n);
+  el.className = 'section-score';
+  el.textContent = `Score: ${got} / ${max}`;
+}
+
+function renderResults() {
+  let total = 0, maxTotal = 0;
+  const names = ['A or An', 'The or No Article', 'Gap-Fill', 'Error Correction', 'Reading Text'];
+  const maxes = [aanData.length, catData.length, gapData.length, errorData.length, textAnswers.length];
+  let bhtml = '';
+  for (let i = 1; i <= 5; i++) {
+    const s = scores[i] || { got: 0, max: maxes[i-1] };
+    total += s.got;
+    maxTotal += s.max;
+    bhtml += `<div class="breakdown-row"><span>${i}. ${names[i-1]}</span><span class="breakdown-pts">${s.got} / ${s.max}</span></div>`;
+  }
+  document.getElementById('totalScore').textContent = total;
+  document.getElementById('totalLabel').textContent = `out of ${maxTotal} points`;
+  document.getElementById('breakdown').innerHTML = bhtml;
+
+  const pct = total / maxTotal;
+  let verdict, sub;
+  if (pct >= 0.9) { verdict = '🏆 Excellent!'; sub = 'You have a strong command of articles. Keep up the great work!'; }
+  else if (pct >= 0.75) { verdict = '👍 Good job!'; sub = 'You understand most rules well. Review the sections where you lost points.'; }
+  else if (pct >= 0.6) { verdict = '📚 Keep practising!'; sub = 'You know the basics, but some rules need more attention. Go over the hints again.'; }
+  else { verdict = '💪 More work needed'; sub = 'Articles can be tricky! Focus on the rules for proper nouns and vowel sounds.'; }
+  document.getElementById('verdict').textContent = verdict;
+  document.getElementById('verdictSub').textContent = sub;
+}
+
+// ============================================================
+init();
+</script>
+</body>
+</html>
