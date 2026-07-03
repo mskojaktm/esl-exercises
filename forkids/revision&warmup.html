@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Quiz — A2</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Trebuchet MS', Tahoma, sans-serif;
+      background: #f0f4f6;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    #game {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(2,128,144,0.10);
+      max-width: 600px;
+      width: 100%;
+      padding: 2rem 1.75rem;
+    }
+
+    /* ── intro ──────────────────────────────────────── */
+    #intro { text-align: center; }
+    #intro h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #0D2B35;
+      margin-bottom: 0.4rem;
+    }
+    #intro p { font-size: 15px; color: #5a7080; margin-bottom: 1.5rem; }
+    .cats { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.75rem; }
+    .cat-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+    .cv { background: #d4f5e8; color: #0a6644; }
+    .cg { background: #d6eaff; color: #0c4a8a; }
+    .cs { background: #fde8c0; color: #7a4800; }
+    .cr { background: #e8e0fc; color: #3d2a9e; }
+
+    #start-btn {
+      padding: 14px 48px;
+      background: #028090;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    #start-btn:hover { background: #026d7b; }
+
+    /* ── quiz area ───────────────────────────────────── */
+    #quiz-area { display: none; }
+
+    #header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .hd-pill {
+      background: #f0f4f6;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 14px;
+      color: #5a7080;
+    }
+    .hd-pill span { font-size: 17px; font-weight: 700; color: #0D2B35; }
+
+    #progress-bar {
+      height: 7px;
+      background: #e2ebee;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+    #progress-fill {
+      height: 7px;
+      background: #028090;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    #timer-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; }
+    #timer-bar { flex: 1; height: 5px; background: #e2ebee; border-radius: 3px; }
+    #timer-fill { height: 5px; background: #028090; border-radius: 3px; transition: width 0.1s linear; }
+    #timer-text { font-size: 13px; font-weight: 600; color: #5a7080; min-width: 24px; text-align: right; }
+
+    #cat-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.3px;
+    }
+
+    #question-card {
+      background: #f6fafc;
+      border: 1.5px solid #cde0e5;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.1rem;
+    }
+    #q-num { font-size: 12px; color: #8aa5af; margin-bottom: 6px; }
+    #q-text {
+      font-size: 17px;
+      font-weight: 600;
+      color: #0D2B35;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+    #q-hint { font-size: 13px; color: #6a8a98; margin-top: 10px; font-style: italic; }
+
+    #options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+    .opt-btn {
+      background: #ffffff;
+      border: 1.5px solid #cde0e5;
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 15px;
+      cursor: pointer;
+      text-align: left;
+      color: #0D2B35;
+      font-family: inherit;
+      transition: background 0.12s, border-color 0.12s;
+      line-height: 1.4;
+    }
+    .opt-btn:hover:not(:disabled) { background: #eaf4f6; border-color: #028090; }
+    .opt-btn.correct { background: #d8f5e4; border-color: #1a8a4a; color: #0a3d20; }
+    .opt-btn.wrong   { background: #fde8e8; border-color: #c0392b; color: #5a1010; }
+    .opt-btn.reveal  { background: #d8f5e4; border-color: #1a8a4a; color: #0a3d20; opacity: 0.65; }
+
+    #spelling-area { display: none; margin-bottom: 1rem; }
+    #spell-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #cde0e5;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #0D2B35;
+      font-family: inherit;
+      background: #fff;
+      margin-bottom: 10px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    #spell-input:focus { border-color: #028090; }
+    #spell-submit {
+      padding: 11px 28px;
+      background: #028090;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    #spell-submit:hover:not(:disabled) { background: #026d7b; }
+    #spell-submit:disabled { opacity: 0.5; cursor: default; }
+
+    #feedback {
+      display: none;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    #feedback.correct { display: block; background: #d8f5e4; border: 1.5px solid #1a8a4a; color: #0a3d20; }
+    #feedback.wrong   { display: block; background: #fde8e8; border: 1.5px solid #c0392b; color: #5a1010; }
+
+    #next-btn {
+      display: none;
+      width: 100%;
+      padding: 13px;
+      background: #028090;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    #next-btn:hover { background: #026d7b; }
+
+    /* ── end screen ─────────────────────────────────── */
+    #end-screen { display: none; text-align: center; }
+    #end-screen h2 { font-size: 20px; color: #0D2B35; margin-bottom: 0.25rem; }
+    #end-score { font-size: 56px; font-weight: 700; color: #028090; margin: 0.5rem 0; }
+    #end-msg { font-size: 15px; color: #5a7080; margin-bottom: 1.5rem; }
+    #cat-breakdown { text-align: left; margin-bottom: 1.75rem; }
+    .cat-row { margin-bottom: 12px; }
+    .cat-row-label { display: flex; justify-content: space-between; font-size: 13px; color: #5a7080; margin-bottom: 4px; }
+    .cat-bar-bg { height: 8px; background: #e2ebee; border-radius: 4px; }
+    .cat-bar-fill { height: 8px; background: #028090; border-radius: 4px; }
+    #restart-btn {
+      padding: 13px 44px;
+      background: #028090;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    #restart-btn:hover { background: #026d7b; }
+
+    @media (max-width: 480px) {
+      #game { padding: 1.25rem 1rem; }
+      #options { grid-template-columns: 1fr; }
+      #end-score { font-size: 44px; }
+    }
+  </style>
+</head>
+<body>
+<div id="game">
+
+  <!-- INTRO -->
+  <div id="intro">
+    <h1>English Quiz</h1>
+    <p>15 questions &middot; 4 categories &middot; Score points for fast answers!</p>
+    <div class="cats">
+      <span class="cat-pill cv">Vocabulary</span>
+      <span class="cat-pill cg">Grammar</span>
+      <span class="cat-pill cs">Spell it!</span>
+      <span class="cat-pill cr">Reading</span>
+    </div>
+    <button id="start-btn" onclick="startGame()">Start game</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div id="header">
+      <div class="hd-pill">Score: <span id="score-val">0</span></div>
+      <div class="hd-pill">Q <span id="q-counter">1</span> / 15</div>
+    </div>
+    <div id="progress-bar"><div id="progress-fill" style="width:0%"></div></div>
+    <div id="timer-row">
+      <div id="timer-bar"><div id="timer-fill" style="width:100%"></div></div>
+      <div id="timer-text">15</div>
+    </div>
+    <span id="cat-badge"></span>
+    <div id="question-card">
+      <div id="q-num"></div>
+      <div id="q-text"></div>
+      <div id="q-hint"></div>
+    </div>
+    <div id="options"></div>
+    <div id="spelling-area">
+      <input id="spell-input" type="text" placeholder="Type your answer here..." autocomplete="off" spellcheck="false" />
+      <button id="spell-submit" onclick="checkSpelling()">Check answer</button>
+    </div>
+    <div id="feedback"></div>
+    <button id="next-btn" onclick="nextQuestion()">Next question &rarr;</button>
+  </div>
+
+  <!-- END SCREEN -->
+  <div id="end-screen">
+    <h2>Game over!</h2>
+    <div id="end-score"></div>
+    <div id="end-msg"></div>
+    <div id="cat-breakdown"></div>
+    <button id="restart-btn" onclick="restartGame()">Play again</button>
+  </div>
+
+</div>
+
+<script>
+/* ── QUESTIONS ─────────────────────────────────────────────────────── */
+const questions = [
+  {
+    cat: 'vocab',
+    q: 'What is the opposite of "old"?',
+    opts: ['New', 'Young', 'Big', 'Fast'],
+    ans: 0,
+    hint: 'Think about something just bought.'
+  },
+  {
+    cat: 'grammar',
+    q: 'She ___ to school every day.',
+    opts: ['go', 'goes', 'is going', 'went'],
+    ans: 1,
+    hint: 'Present Simple — 3rd person singular.'
+  },
+  {
+    cat: 'vocab',
+    q: 'Which word means a place where you can borrow books?',
+    opts: ['Museum', 'Library', 'Hospital', 'Stadium'],
+    ans: 1,
+    hint: 'You can read there for free.'
+  },
+  {
+    cat: 'spelling',
+    q: 'Spell the word:\na place where you cook food at home.',
+    spell: 'kitchen',
+    hint: 'It starts with "k" and has 7 letters.'
+  },
+  {
+    cat: 'grammar',
+    q: '___ you like pizza?',
+    opts: ['Is', 'Are', 'Do', 'Does'],
+    ans: 2,
+    hint: 'Question word for "I / You / We / They".'
+  },
+  {
+    cat: 'reading',
+    q: 'Tom wakes up at 7 am. He brushes his teeth and eats breakfast. Then he walks to school.\n\nWhat does Tom do FIRST?',
+    opts: ['Eats breakfast', 'Walks to school', 'Wakes up', 'Brushes his teeth'],
+    ans: 2,
+    hint: 'Read carefully — what happens at 7 am?'
+  },
+  {
+    cat: 'vocab',
+    q: 'Which word means "very happy and excited"?',
+    opts: ['Tired', 'Bored', 'Excited', 'Angry'],
+    ans: 2,
+    hint: 'You feel this before a birthday party!'
+  },
+  {
+    cat: 'grammar',
+    q: 'They ___ watching TV right now.',
+    opts: ['is', 'are', 'do', 'was'],
+    ans: 1,
+    hint: 'Present Continuous — "they" uses...?'
+  },
+  {
+    cat: 'spelling',
+    q: 'Spell the word:\nthe day after Monday.',
+    spell: 'tuesday',
+    hint: 'It starts with "T" and has 7 letters.'
+  },
+  {
+    cat: 'vocab',
+    q: 'What do you use to send a message online?',
+    opts: ['Pen', 'Phone', 'Newspaper', 'Radio'],
+    ans: 1,
+    hint: 'You probably have one in your pocket!'
+  },
+  {
+    cat: 'grammar',
+    q: 'He ___ have a dog. He has a cat.',
+    opts: ["doesn't", "don't", "isn't", "aren't"],
+    ans: 0,
+    hint: 'Negative for he / she / it in Present Simple.'
+  },
+  {
+    cat: 'reading',
+    q: 'Anna loves animals. She has two cats and a fish. She wants a dog but her flat is too small.\n\nWhy doesn\'t Anna have a dog?',
+    opts: ["She doesn't like dogs", 'She is allergic', 'Her flat is too small', 'Dogs are expensive'],
+    ans: 2,
+    hint: 'The answer is in the last sentence.'
+  },
+  {
+    cat: 'vocab',
+    q: 'Which word means the same as "begin"?',
+    opts: ['Finish', 'Stop', 'Start', 'End'],
+    ans: 2,
+    hint: 'You do this when you open a new book.'
+  },
+  {
+    cat: 'grammar',
+    q: 'How ___ brothers do you have?',
+    opts: ['many', 'much', 'long', 'often'],
+    ans: 0,
+    hint: 'Use "many" for things you can count.'
+  },
+  {
+    cat: 'spelling',
+    q: 'Spell the word:\nthe school subject where you learn about numbers.',
+    spell: 'mathematics',
+    hint: 'Also called "maths" for short. 11 letters.'
+  }
+];
+
+/* ── STATE ────────────────────────────────────────────────────────── */
+let current = 0, score = 0, timer = null, timeLeft = 15, answered = false, results = [];
+
+/* ── CAT STYLES ───────────────────────────────────────────────────── */
+const catStyle = {
+  vocab:    { label: 'Vocabulary', cls: 'cv' },
+  grammar:  { label: 'Grammar',    cls: 'cg' },
+  spelling: { label: 'Spell it!',  cls: 'cs' },
+  reading:  { label: 'Reading',    cls: 'cr' }
+};
+
+/* ── START ────────────────────────────────────────────────────────── */
+function startGame() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  showQuestion();
+}
+
+/* ── SHOW QUESTION ────────────────────────────────────────────────── */
+function showQuestion() {
+  answered = false;
+  const q = questions[current];
+
+  document.getElementById('q-counter').textContent = current + 1;
+  document.getElementById('progress-fill').style.width = (current / questions.length * 100) + '%';
+
+  const badge = document.getElementById('cat-badge');
+  badge.textContent = catStyle[q.cat].label;
+  badge.className = 'cat-pill ' + catStyle[q.cat].cls;
+
+  document.getElementById('q-num').textContent = 'Question ' + (current + 1) + ' of ' + questions.length;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('q-hint').textContent = '';
+
+  document.getElementById('feedback').className = '';
+  document.getElementById('next-btn').style.display = 'none';
+
+  if (q.cat === 'spelling') {
+    document.getElementById('options').style.display = 'none';
+    document.getElementById('spelling-area').style.display = 'block';
+    const inp = document.getElementById('spell-input');
+    inp.value = '';
+    inp.disabled = false;
+    document.getElementById('spell-submit').disabled = false;
+    setTimeout(() => inp.focus(), 80);
+    inp.onkeydown = (e) => { if (e.key === 'Enter') checkSpelling(); };
+  } else {
+    document.getElementById('options').style.display = 'grid';
+    document.getElementById('spelling-area').style.display = 'none';
+    const opts = document.getElementById('options');
+    opts.innerHTML = '';
+    q.opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.className = 'opt-btn';
+      b.textContent = o;
+      b.onclick = () => selectOption(i, b);
+      opts.appendChild(b);
+    });
+  }
+
+  startTimer();
+}
+
+/* ── TIMER ────────────────────────────────────────────────────────── */
+function startTimer() {
+  clearInterval(timer);
+  timeLeft = 15;
+  updateTimerUI();
+  timer = setInterval(() => {
+    timeLeft--;
+    updateTimerUI();
+    if (timeLeft <= 0) { clearInterval(timer); if (!answered) timeUp(); }
+  }, 1000);
+}
+
+function updateTimerUI() {
+  document.getElementById('timer-text').textContent = timeLeft;
+  document.getElementById('timer-fill').style.width = (timeLeft / 15 * 100) + '%';
+  document.getElementById('timer-fill').style.background = timeLeft <= 5 ? '#c0392b' : '#028090';
+}
+
+/* ── TIME UP ──────────────────────────────────────────────────────── */
+function timeUp() {
+  answered = true;
+  const q = questions[current];
+  const rightAnswer = q.cat === 'spelling' ? q.spell : q.opts[q.ans];
+  showFeedback(false, "Time's up! The answer is: " + rightAnswer);
+  results.push({ cat: q.cat, correct: false });
+  if (q.cat !== 'spelling') {
+    document.querySelectorAll('.opt-btn').forEach((b, j) => {
+      b.disabled = true;
+      if (j === q.ans) b.classList.add('reveal');
+    });
+  } else {
+    document.getElementById('spell-input').disabled = true;
+    document.getElementById('spell-submit').disabled = true;
+  }
+  document.getElementById('next-btn').style.display = 'block';
+}
+
+/* ── SELECT OPTION ────────────────────────────────────────────────── */
+function selectOption(i, btn) {
+  if (answered) return;
+  answered = true;
+  clearInterval(timer);
+  const q = questions[current];
+  const isCorrect = i === q.ans;
+  const pts = isCorrect ? (Math.ceil(timeLeft / 3) + 5) : 0;
+  if (isCorrect) score += pts;
+  document.getElementById('score-val').textContent = score;
+  document.querySelectorAll('.opt-btn').forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.ans) b.classList.add('correct');
+    else if (j === i && !isCorrect) b.classList.add('wrong');
+  });
+  showFeedback(isCorrect,
+    isCorrect ? '✓ Correct! +' + pts + ' points' : '✗ Not quite. The answer is: ' + q.opts[q.ans]);
+  if (!isCorrect && q.hint) document.getElementById('q-hint').textContent = '💡 ' + q.hint;
+  results.push({ cat: q.cat, correct: isCorrect });
+  document.getElementById('next-btn').style.display = 'block';
+}
+
+/* ── CHECK SPELLING ───────────────────────────────────────────────── */
+function checkSpelling() {
+  if (answered) return;
+  const val = document.getElementById('spell-input').value.trim().toLowerCase();
+  if (!val) return;
+  answered = true;
+  clearInterval(timer);
+  document.getElementById('spell-input').disabled = true;
+  document.getElementById('spell-submit').disabled = true;
+  const q = questions[current];
+  const isCorrect = val === q.spell;
+  const pts = isCorrect ? (Math.ceil(timeLeft / 3) + 5) : 0;
+  if (isCorrect) score += pts;
+  document.getElementById('score-val').textContent = score;
+  showFeedback(isCorrect,
+    isCorrect ? '✓ Perfect spelling! +' + pts + ' points' : '✗ The correct spelling is: ' + q.spell);
+  if (!isCorrect && q.hint) document.getElementById('q-hint').textContent = '💡 ' + q.hint;
+  results.push({ cat: q.cat, correct: isCorrect });
+  document.getElementById('next-btn').style.display = 'block';
+}
+
+/* ── FEEDBACK ─────────────────────────────────────────────────────── */
+function showFeedback(correct, msg) {
+  const fb = document.getElementById('feedback');
+  fb.textContent = msg;
+  fb.className = correct ? 'correct' : 'wrong';
+}
+
+/* ── NEXT ─────────────────────────────────────────────────────────── */
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) { endGame(); return; }
+  showQuestion();
+}
+
+/* ── END GAME ─────────────────────────────────────────────────────── */
+function endGame() {
+  clearInterval(timer);
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('end-screen').style.display = 'block';
+  document.getElementById('end-score').textContent = score;
+  const pct = Math.round(results.filter(r => r.correct).length / results.length * 100);
+  const msg = pct >= 80
+    ? 'Excellent! You are a star student! ⭐'
+    : pct >= 60
+    ? 'Good job! Keep practising! 👍'
+    : 'Nice try! Let\'s review the tricky parts. 📚';
+  document.getElementById('end-msg').textContent = pct + '% correct · ' + msg;
+
+  const cats = {};
+  Object.keys(catStyle).forEach(k => { cats[k] = { c: 0, t: 0 }; });
+  results.forEach(r => { cats[r.cat].t++; if (r.correct) cats[r.cat].c++; });
+  let html = '';
+  Object.keys(cats).forEach(k => {
+    if (!cats[k].t) return;
+    const p = Math.round(cats[k].c / cats[k].t * 100);
+    html += `
+      <div class="cat-row">
+        <div class="cat-row-label">
+          <span>${catStyle[k].label}</span>
+          <span>${cats[k].c} / ${cats[k].t}</span>
+        </div>
+        <div class="cat-bar-bg">
+          <div class="cat-bar-fill" style="width:${p}%"></div>
+        </div>
+      </div>`;
+  });
+  document.getElementById('cat-breakdown').innerHTML = html;
+}
+
+/* ── RESTART ──────────────────────────────────────────────────────── */
+function restartGame() {
+  current = 0; score = 0; results = [];
+  document.getElementById('end-screen').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('score-val').textContent = 0;
+  showQuestion();
+}
+</script>
+</body>
+</html>
