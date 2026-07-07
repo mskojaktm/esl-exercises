@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BST Interview Prep — 45-Minute Session</title>
+<style>
+  :root {
+    --teal: #028090;
+    --teal-light: #04a5b8;
+    --teal-pale: #e3f4f5;
+    --navy: #0D2B35;
+    --navy-light: #1a4552;
+    --green: #2e7d32;
+    --green-pale: #e8f5e9;
+    --red: #c62828;
+    --red-pale: #fdecea;
+    --amber: #b8860b;
+    --amber-pale: #fdf6e3;
+    --border: #d3e4e5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    background: linear-gradient(180deg, var(--teal-pale) 0%, #ffffff 220px);
+    color: var(--navy);
+    margin: 0;
+    padding: 0 0 60px 0;
+  }
+  h1, h2, h3, .headline {
+    font-family: 'Trebuchet MS', Calibri, sans-serif;
+  }
+  header.top {
+    background: var(--navy);
+    color: #fff;
+    padding: 28px 20px 22px;
+    text-align: center;
+  }
+  header.top h1 {
+    margin: 0 0 6px 0;
+    font-size: 1.6em;
+    letter-spacing: 0.3px;
+  }
+  header.top p {
+    margin: 0;
+    color: #b7d9dd;
+    font-size: 0.95em;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 18px;
+  }
+  .agenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: -18px auto 30px;
+    max-width: 780px;
+    padding: 0 18px;
+  }
+  .agenda-item {
+    background: #fff;
+    border: 2px solid var(--teal);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 0.85em;
+    font-weight: bold;
+    color: var(--navy);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .agenda-item span.time {
+    display: block;
+    color: var(--teal);
+    font-size: 0.85em;
+    font-weight: normal;
+  }
+  section.card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 22px;
+    margin-bottom: 24px;
+    box-shadow: 0 3px 12px rgba(13,43,53,0.08);
+    border-top: 5px solid var(--teal);
+  }
+  section.card h2 {
+    color: var(--navy);
+    margin-top: 0;
+    font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .badge {
+    background: var(--teal);
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    flex-shrink: 0;
+  }
+  .subtle {
+    color: #4d6b72;
+    font-size: 0.92em;
+    line-height: 1.5;
+  }
+  .teacher-note {
+    background: var(--amber-pale);
+    border-left: 4px solid var(--amber);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.88em;
+    margin: 12px 0;
+    color: #5c4a12;
+  }
+  ul.chat-starters {
+    padding-left: 20px;
+    margin: 10px 0;
+  }
+  ul.chat-starters li {
+    margin-bottom: 6px;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--teal);
+    background: #fff;
+    color: var(--teal);
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-family: inherit;
+  }
+  .tab-btn.active {
+    background: var(--teal);
+    color: #fff;
+  }
+
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .progress-bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: 120px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--teal);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .score-pill {
+    background: var(--navy);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .question-box {
+    background: var(--teal-pale);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+  .question-box .qtype {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--teal);
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .question-box .qtext {
+    font-size: 1.15em;
+    font-weight: bold;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  @media (max-width: 480px) {
+    .options-grid { grid-template-columns: 1fr; }
+  }
+  .option-btn {
+    background: #fff;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: left;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--navy);
+    transition: all 0.15s ease;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--teal);
+    background: var(--teal-pale);
+  }
+  .option-btn.correct {
+    background: var(--green-pale);
+    border-color: var(--green);
+    color: var(--green);
+    font-weight: bold;
+  }
+  .option-btn.incorrect {
+    background: var(--red-pale);
+    border-color: var(--red);
+    color: var(--red);
+  }
+  .option-btn:disabled { cursor: default; }
+
+  .explanation {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--navy);
+    color: #d9edee;
+    border-radius: 8px;
+    font-size: 0.9em;
+    line-height: 1.5;
+    display: none;
+  }
+  .explanation.show { display: block; }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    gap: 10px;
+  }
+  .nav-btn {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95em;
+  }
+  .nav-btn:disabled {
+    background: #b0bfc3;
+    cursor: not-allowed;
+  }
+  .nav-btn.secondary {
+    background: #fff;
+    color: var(--navy);
+    border: 2px solid var(--border);
+  }
+
+  /* Speaking section */
+  .category-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .cat-btn {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 2px solid var(--teal);
+    background: #fff;
+    color: var(--teal);
+    font-size: 0.85em;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .cat-btn.active { background: var(--teal); color: #fff; }
+
+  .speak-card {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 26px 22px;
+    text-align: center;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+  .speak-card .cat-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #7fc8d0;
+  }
+  .speak-card .question {
+    font-size: 1.25em;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+  .timer-display {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: var(--teal);
+    text-align: center;
+    margin: 14px 0 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .timer-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 2px solid var(--teal);
+    background: #fff;
+    color: var(--teal);
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .timer-btn.primary { background: var(--teal); color: #fff; }
+
+  .hint-toggle {
+    text-align: center;
+    margin-top: 8px;
+  }
+  .hint-toggle button {
+    background: none;
+    border: none;
+    color: var(--teal);
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.88em;
+  }
+  .hint-box {
+    display: none;
+    background: var(--teal-pale);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 10px;
+    font-size: 0.88em;
+    color: var(--navy);
+  }
+  .hint-box.show { display: block; }
+  .hint-box ul { margin: 4px 0 0 18px; padding: 0; }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--teal);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .checklist label { font-size: 0.95em; line-height: 1.4; }
+
+  footer {
+    text-align: center;
+    color: #6b8b91;
+    font-size: 0.82em;
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>BST Interview Prep</h1>
+  <p>45-Minute Practice Session · Verbal Reasoning + Spoken English</p>
+</header>
+
+<div class="agenda">
+  <div class="agenda-item">Warm-Up<span class="time">5 min</span></div>
+  <div class="agenda-item">Verbal Reasoning<span class="time">20 min</span></div>
+  <div class="agenda-item">Speaking Practice<span class="time">15 min</span></div>
+  <div class="agenda-item">Wrap-Up<span class="time">5 min</span></div>
+</div>
+
+<div class="container">
+
+  <!-- WARM UP -->
+  <section class="card">
+    <h2><span class="badge">1</span> Warm-Up Chat (5 min)</h2>
+    <p class="subtle">Start relaxed — this mirrors the informal "meet the teachers" moment at BST. Goal: get him talking in full sentences before the harder tasks.</p>
+    <ul class="chat-starters">
+      <li>Tell me about your family — who's in it?</li>
+      <li>What do you usually do after school?</li>
+      <li>What's your favourite subject, and why?</li>
+      <li>Have you moved schools before? How did you feel?</li>
+    </ul>
+    <div class="teacher-note">💡 Don't correct grammar here — just get him comfortable speaking and used to open questions. Note down 2–3 weak spots to revisit later.</div>
+  </section>
+
+  <!-- VERBAL REASONING -->
+  <section class="card">
+    <h2><span class="badge">2</span> Verbal Reasoning Drill (20 min)</h2>
+    <p class="subtle">CAT4-style questions (Level D, ages 11–12) — the same reasoning style used in BST's entrance assessment. These test word relationships, not memorised facts, but a strong English vocabulary makes them much easier.</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tabClass" onclick="switchTab('classification')">Word Classification</button>
+      <button class="tab-btn" id="tabAnalogy" onclick="switchTab('analogy')">Verbal Analogies</button>
+    </div>
+
+    <div class="progress-row">
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="progFill"></div></div>
+      <div class="score-pill" id="scorePill">Score: 0 / 0</div>
+    </div>
+
+    <div class="question-box">
+      <div class="qtype" id="qType">Word Classification</div>
+      <div class="qtext" id="qText">Loading...</div>
+    </div>
+    <div class="options-grid" id="optionsGrid"></div>
+    <div class="explanation" id="explainBox"></div>
+
+    <div class="nav-row">
+      <button class="nav-btn secondary" id="prevBtn" onclick="prevQuestion()">← Previous</button>
+      <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+
+    <div class="teacher-note">💡 If he gets stuck: ask him to say the connection between the given words out loud in English first ("They're all... "). Verbalising the pattern is itself great speaking practice.</div>
+  </section>
+
+  <!-- SPEAKING PRACTICE -->
+  <section class="card">
+    <h2><span class="badge">3</span> Spoken Interview Practice (15 min)</h2>
+    <p class="subtle">Practise answering out loud, in full sentences, with a time limit — just like the real meeting. Pick a category, read the question, start the timer, and let him answer before you show the hint.</p>
+
+    <div class="category-select" id="categorySelect"></div>
+
+    <div class="speak-card">
+      <div class="cat-label" id="speakCatLabel">Category</div>
+      <div class="question" id="speakQuestion">Click "New Question" to begin</div>
+    </div>
+
+    <div class="timer-display" id="timerDisplay">00:45</div>
+    <div class="timer-controls">
+      <button class="timer-btn primary" id="startTimerBtn" onclick="startTimer()">▶ Start</button>
+      <button class="timer-btn" onclick="resetTimer()">↺ Reset</button>
+      <button class="timer-btn" onclick="newSpeakQuestion()">🔀 New Question</button>
+    </div>
+
+    <div class="hint-toggle">
+      <button onclick="toggleHint()">Show sentence starters (if he's stuck)</button>
+    </div>
+    <div class="hint-box" id="hintBox"></div>
+  </section>
+
+  <!-- WRAP UP -->
+  <section class="card">
+    <h2><span class="badge">4</span> Wrap-Up & Confidence Check (5 min)</h2>
+    <p class="subtle">Quick review before you finish. Tick off together:</p>
+    <ul class="checklist">
+      <li><input type="checkbox" id="c1"><label for="c1">Answered in full sentences, not one word</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">Kept eye contact / looked at the "interviewer"</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">Asked politely to repeat a question when unsure ("Sorry, could you say that again?")</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">Explained the pattern out loud during reasoning questions</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">Stayed calm when a question was hard — didn't rush or panic</label></li>
+    </ul>
+    <div class="teacher-note">💡 End on something he got right today — confidence going into the real meeting matters as much as accuracy.</div>
+  </section>
+
+</div>
+
+<footer>Built for individual ESL interview prep · BST Tashkent entrance assessment</footer>
+
+<script>
+// ============ VERBAL REASONING DATA ============
+const classificationQs = [
+  { text: "Which word belongs with: apple, banana, orange?", options: ["Carrot", "Grape", "Chair", "River", "Pencil"], answer: 1, explain: "Apple, banana, orange and grape are all fruits. Carrot is a vegetable." },
+  { text: "Which word belongs with: hammer, screwdriver, wrench?", options: ["Nail", "Wood", "Pliers", "Table", "Paint"], answer: 2, explain: "Hammer, screwdriver, wrench and pliers are all tools. Nail and wood are things you use tools ON, not tools themselves." },
+  { text: "Which word belongs with: whisper, shout, mumble?", options: ["Listen", "Ear", "Speak", "Yell", "Quiet"], answer: 3, explain: "Whisper, shout, mumble and yell are all ways of speaking (verbs describing HOW you talk)." },
+  { text: "Which word belongs with: triangle, square, circle?", options: ["Draw", "Pentagon", "Colour", "Paper", "Corner"], answer: 1, explain: "Triangle, square, circle and pentagon are all shapes." },
+  { text: "Which word belongs with: brave, honest, kind?", options: ["Angry", "Generous", "Loudly", "Running", "Happiness"], answer: 1, explain: "Brave, honest, kind and generous are all adjectives describing character/personality traits." },
+  { text: "Which word belongs with: lion, tiger, wolf?", options: ["Sheep", "Rabbit", "Leopard", "Grass", "Farm"], answer: 2, explain: "Lion, tiger, wolf and leopard are all predators/carnivorous wild animals." },
+  { text: "Which word belongs with: novel, magazine, newspaper?", options: ["Write", "Comic", "Library", "Pen", "Read"], answer: 1, explain: "Novel, magazine, newspaper and comic are all things you read (printed publications)." },
+  { text: "Which word belongs with: sprint, jog, stroll?", options: ["Foot", "Race", "Walk", "Marathon", "Shoes"], answer: 2, explain: "Sprint, jog, stroll and walk are all ways of moving on foot at different speeds." }
+];
+
+const analogyQs = [
+  { text: "Cat is to Kitten as Dog is to ___", options: ["Bark", "Puppy", "Bone", "Leash", "Pet"], answer: 1, explain: "A kitten is a baby cat; a puppy is a baby dog. This is a 'baby animal' relationship." },
+  { text: "Book is to Read as Fork is to ___", options: ["Kitchen", "Spoon", "Eat", "Plate", "Sharp"], answer: 2, explain: "A book is used to READ; a fork is used to EAT. This is a 'tool → purpose' relationship." },
+  { text: "Doctor is to Hospital as Teacher is to ___", options: ["Student", "Book", "School", "Lesson", "Homework"], answer: 2, explain: "A doctor works in a hospital; a teacher works in a school. This is a 'person → workplace' relationship." },
+  { text: "Big is to Small as Fast is to ___", options: ["Quick", "Slow", "Run", "Car", "Speed"], answer: 1, explain: "Big and small are opposites; fast and slow are opposites. This is an antonym relationship." },
+  { text: "Finger is to Hand as Toe is to ___", options: ["Shoe", "Walk", "Leg", "Foot", "Sock"], answer: 3, explain: "A finger is part of a hand; a toe is part of a foot. This is a 'part → whole' relationship." },
+  { text: "Water is to Drink as Bread is to ___", options: ["Bake", "Eat", "Wheat", "Butter", "Kitchen"], answer: 1, explain: "You drink water; you eat bread. This is an 'object → action' relationship." },
+  { text: "Puppy is to Dog as Cub is to ___", options: ["Bear", "Forest", "Small", "Wild", "Zoo"], answer: 0, explain: "A puppy grows into a dog; a cub grows into a bear (or lion/tiger). This is a 'young → adult' relationship." },
+  { text: "Pencil is to Write as Scissors is to ___", options: ["Sharp", "Paper", "Cut", "Craft", "Hand"], answer: 2, explain: "A pencil is used to write; scissors are used to cut. This is a 'tool → function' relationship." }
+];
+
+let currentTab = 'classification';
+let currentIndex = 0;
+let answered = {};   // tracks answered state per tab+index
+let correctCount = { classification: 0, analogy: 0 };
+let totalAnswered = { classification: 0, analogy: 0 };
+
+function getCurrentSet() {
+  return currentTab === 'classification' ? classificationQs : analogyQs;
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  currentIndex = 0;
+  document.getElementById('tabClass').classList.toggle('active', tab === 'classification');
+  document.getElementById('tabAnalogy').classList.toggle('active', tab === 'analogy');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const set = getCurrentSet();
+  const q = set[currentIndex];
+  document.getElementById('qType').textContent = currentTab === 'classification' ? 'Word Classification' : 'Verbal Analogy';
+  document.getElementById('qText').textContent = q.text;
+
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  const key = currentTab + '-' + currentIndex;
+  const wasAnswered = answered[key];
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectOption(i);
+    if (wasAnswered !== undefined) {
+      btn.disabled = true;
+      if (i === q.answer) btn.classList.add('correct');
+      else if (i === wasAnswered) btn.classList.add('incorrect');
+    }
+    grid.appendChild(btn);
+  });
+
+  const explainBox = document.getElementById('explainBox');
+  if (wasAnswered !== undefined) {
+    explainBox.textContent = q.explain;
+    explainBox.classList.add('show');
+  } else {
+    explainBox.classList.remove('show');
+    explainBox.textContent = '';
+  }
+
+  document.getElementById('prevBtn').disabled = currentIndex === 0;
+  document.getElementById('nextBtn').textContent = currentIndex === set.length - 1 ? 'Finish' : 'Next →';
+
+  updateProgress();
+}
+
+function selectOption(i) {
+  const key = currentTab + '-' + currentIndex;
+  if (answered[key] !== undefined) return;
+  answered[key] = i;
+  const set = getCurrentSet();
+  const q = set[currentIndex];
+  totalAnswered[currentTab]++;
+  if (i === q.answer) correctCount[currentTab]++;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  const set = getCurrentSet();
+  if (currentIndex < set.length - 1) {
+    currentIndex++;
+    renderQuestion();
+  }
+}
+function prevQuestion() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderQuestion();
+  }
+}
+
+function updateProgress() {
+  const set = getCurrentSet();
+  const pct = ((currentIndex + 1) / set.length) * 100;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('scorePill').textContent =
+    `Score: ${correctCount[currentTab]} / ${totalAnswered[currentTab]} answered (Q${currentIndex+1}/${set.length})`;
+}
+
+renderQuestion();
+
+// ============ SPEAKING PRACTICE DATA ============
+const speakingCategories = {
+  "About Him & Family": {
+    hints: ["I live with...", "There are ___ people in my family.", "My favourite thing to do with my family is..."],
+    questions: [
+      "Can you tell me a little about your family?",
+      "What do you like to do together on weekends?",
+      "Do you have any brothers or sisters? What are they like?"
+    ]
+  },
+  "School & Interests": {
+    hints: ["My favourite subject is ___ because...", "In my free time, I enjoy...", "I'm good at... / I'd like to get better at..."],
+    questions: [
+      "What is your favourite subject at school, and why?",
+      "What do you enjoy doing in your free time?",
+      "Tell me about something you're proud of."
+    ]
+  },
+  "Opinions & Values": {
+    hints: ["I think a good friend is someone who...", "Kindness means...", "It's important because..."],
+    questions: [
+      "What makes a good friend?",
+      "Why do you want to join this school?",
+      "What does being kind to others mean to you?"
+    ]
+  },
+  "Imagination & Hypotheticals": {
+    hints: ["If I could..., I would...", "I would choose ___ because...", "First I would..., then I would..."],
+    questions: [
+      "If you could visit any country, where would you go and why?",
+      "If you were a teacher for one day, what would you teach?",
+      "Describe your perfect weekend."
+    ]
+  }
+};
+
+let currentCat = null;
+let currentQ = null;
+let timerSeconds = 45;
+let timerInterval = null;
+let timerRunning = false;
+
+function buildCategoryButtons() {
+  const wrap = document.getElementById('categorySelect');
+  wrap.innerHTML = '';
+  Object.keys(speakingCategories).forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = cat;
+    btn.onclick = () => selectCategory(cat, btn);
+    wrap.appendChild(btn);
+  });
+}
+buildCategoryButtons();
+
+function selectCategory(cat, btnEl) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  newSpeakQuestion();
+}
+
+function newSpeakQuestion() {
+  if (!currentCat) {
+    // pick a random category if none selected
+    const cats = Object.keys(speakingCategories);
+    currentCat = cats[Math.floor(Math.random() * cats.length)];
+    const buttons = document.querySelectorAll('.cat-btn');
+    buttons.forEach(b => { if (b.textContent === currentCat) b.classList.add('active'); });
+  }
+  const pool = speakingCategories[currentCat].questions;
+  currentQ = pool[Math.floor(Math.random() * pool.length)];
+  document.getElementById('speakCatLabel').textContent = currentCat;
+  document.getElementById('speakQuestion').textContent = currentQ;
+  document.getElementById('hintBox').classList.remove('show');
+  resetTimer();
+}
+
+function toggleHint() {
+  if (!currentCat) return;
+  const box = document.getElementById('hintBox');
+  if (!box.classList.contains('show')) {
+    const hints = speakingCategories[currentCat].hints;
+    box.innerHTML = '<strong>Sentence starters:</strong><ul>' + hints.map(h => `<li>${h}</li>`).join('') + '</ul>';
+  }
+  box.classList.toggle('show');
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+  const s = (timerSeconds % 60).toString().padStart(2, '0');
+  document.getElementById('timerDisplay').textContent = `${m}:${s}`;
+}
+
+function startTimer() {
+  if (timerRunning) return;
+  timerRunning = true;
+  document.getElementById('startTimerBtn').textContent = '⏸ Running...';
+  timerInterval = setInterval(() => {
+    if (timerSeconds > 0) {
+      timerSeconds--;
+      updateTimerDisplay();
+    } else {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      document.getElementById('startTimerBtn').textContent = '▶ Start';
+      document.getElementById('timerDisplay').style.color = 'var(--red)';
+    }
+  }, 1000);
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 45;
+  document.getElementById('timerDisplay').style.color = 'var(--teal)';
+  document.getElementById('startTimerBtn').textContent = '▶ Start';
+  updateTimerDisplay();
+}
+
+updateTimerDisplay();
+</script>
+
+</body>
+</html>
