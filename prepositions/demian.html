@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prepositions Lesson — Demian</title>
+<style>
+  :root {
+    --teal: #028090;
+    --teal-dark: #016b78;
+    --navy: #0D2B35;
+    --bg: #f4f9fa;
+    --card: #ffffff;
+    --border: #d7e6e8;
+    --correct: #1e8e5a;
+    --correct-bg: #e6f6ee;
+    --wrong: #c0392b;
+    --wrong-bg: #fdecea;
+    --shadow: 0 2px 10px rgba(13,43,53,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Calibri, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.55;
+    padding: 0 0 60px;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    color: #fff;
+    padding: 32px 20px 26px;
+    text-align: center;
+  }
+  header h1 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  }
+  header p {
+    margin-top: 8px;
+    opacity: 0.9;
+    font-size: 1rem;
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 18px;
+  }
+
+  .score-row {
+    display: flex;
+    gap: 10px;
+    margin: 22px 0 8px;
+    position: sticky;
+    top: 10px;
+    z-index: 5;
+  }
+  .badge {
+    flex: 1;
+    background: var(--card);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    padding: 10px 6px;
+  }
+  .badge .num { font-family: "Trebuchet MS", sans-serif; font-size: 1.4rem; font-weight: bold; }
+  .badge .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: .5px; color: #5a7480; }
+  .badge.correct .num { color: var(--correct); }
+  .badge.wrong .num { color: var(--wrong); }
+  .badge.total .num { color: var(--teal); }
+
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin: 16px 0 30px;
+    flex-wrap: wrap;
+  }
+  button {
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: bold;
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background: var(--teal);
+    transition: background .2s;
+  }
+  button:hover { background: var(--teal-dark); }
+  button.secondary { background: var(--navy); }
+  button.secondary:hover { background: #06181f; }
+
+  section {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--teal);
+    padding: 22px 24px;
+    margin-bottom: 22px;
+  }
+
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #fff;
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    display: flex;
+    align-items: center;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .step-sub {
+    font-size: 0.88rem;
+    color: #5a7480;
+    margin-bottom: 16px;
+    margin-left: 40px;
+  }
+
+  .item {
+    margin-bottom: 14px;
+    font-size: 1rem;
+  }
+  .item-num { font-weight: bold; color: var(--teal-dark); margin-right: 4px; }
+
+  select.gap {
+    font-family: Calibri, sans-serif;
+    font-size: 0.98rem;
+    padding: 4px 8px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--navy);
+    margin: 0 3px;
+  }
+  select.gap.correct { border-color: var(--correct); background: var(--correct-bg); }
+  select.gap.wrong { border-color: var(--wrong); background: var(--wrong-bg); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+  }
+  th {
+    background: var(--teal);
+    color: #fff;
+    padding: 8px 10px;
+    text-align: left;
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: normal;
+  }
+  td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:nth-child(even) td { background: #f7fbfb; }
+
+  .info-box {
+    background: #f7fbfb;
+    border: 1px dashed var(--teal);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 0.95rem;
+  }
+  .info-box strong { color: var(--teal-dark); }
+  .checklist { list-style: none; margin-top: 10px; }
+  .checklist li { margin-bottom: 6px; padding-left: 24px; position: relative; }
+  .checklist li::before {
+    content: "☐";
+    position: absolute; left: 0;
+    color: var(--teal);
+    font-size: 1.1rem;
+  }
+
+  .answer-reveal {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--teal-dark);
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .answer-reveal.show { display: block; }
+
+  footer {
+    text-align: center;
+    color: #5a7480;
+    font-size: 0.85rem;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Prepositions: in / on / at — and beyond</h1>
+  <p>Demian · B1–B2 · Swimming &amp; biology focus</p>
+</header>
+
+<main>
+
+  <div class="score-row">
+    <div class="badge correct"><div class="num" id="scoreCorrect">0</div><div class="lbl">Correct</div></div>
+    <div class="badge wrong"><div class="num" id="scoreWrong">0</div><div class="lbl">Wrong</div></div>
+    <div class="badge total"><div class="num" id="scoreTotal">0</div><div class="lbl">Checked</div></div>
+  </div>
+  <div class="controls">
+    <button onclick="checkAnswers()">Check answers</button>
+    <button class="secondary" onclick="showAnswers()">Show answers</button>
+    <button class="secondary" onclick="resetAll()">Reset</button>
+  </div>
+
+  <!-- STEP 1 -->
+  <section>
+    <div class="step-title"><span class="step-badge">1</span>Warm-up diagnostic</div>
+    <div class="step-sub">Fill in each gap with <em>in, on,</em> or <em>at</em>. Work quickly.</div>
+
+    <div class="item"><span class="item-num">1.</span> My next competition is <select class="gap" data-answer="on"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> Saturday.</div>
+    <div class="item"><span class="item-num">2.</span> I train <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the pool every morning <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> 6 AM.</div>
+    <div class="item"><span class="item-num">3.</span> She was born <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> 2009.</div>
+    <div class="item"><span class="item-num">4.</span> There's a swim camp <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> Spire Academy <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the summer.</div>
+    <div class="item"><span class="item-num">5.</span> The coach put a new drill <select class="gap" data-answer="on"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the whiteboard.</div>
+    <div class="item"><span class="item-num">6.</span> His resting heart rate changes <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> altitude.</div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section>
+    <div class="step-title"><span class="step-badge">2</span>Quick consolidation</div>
+    <div class="step-sub">Reference recap — only teach in full if Step 1 revealed real gaps.</div>
+    <table>
+      <tr><th>Preposition</th><th>Use</th><th>Example</th></tr>
+      <tr><td><strong>AT</strong></td><td>precise point (time/place)</td><td>at 6 AM, at the finish line, at practice</td></tr>
+      <tr><td><strong>ON</strong></td><td>day, surface</td><td>on Monday, on the starting block, on race day</td></tr>
+      <tr><td><strong>IN</strong></td><td>period, enclosed space/medium</td><td>in the water, in July, in the muscle tissue</td></tr>
+    </table>
+  </section>
+
+  <!-- STEP 3 -->
+  <section>
+    <div class="step-title"><span class="step-badge">3</span>Practice — time &amp; place</div>
+    <div class="step-sub">Complete with <em>in, on,</em> or <em>at</em>.</div>
+
+    <div class="item"><span class="item-num">1.</span> Lactic acid builds up <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the muscles during a sprint.</div>
+    <div class="item"><span class="item-num">2.</span> The championship is <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> October, <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> Tashkent.</div>
+    <div class="item"><span class="item-num">3.</span> He stands <select class="gap" data-answer="on"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the block, ready to dive <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the signal.</div>
+    <div class="item"><span class="item-num">4.</span> Her VO2 max improved a lot <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the training camp.</div>
+    <div class="item"><span class="item-num">5.</span> We have team meetings <select class="gap" data-answer="on"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> Fridays, <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> 5 PM.</div>
+    <div class="item"><span class="item-num">6.</span> Oxygen levels rise <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the bloodstream after a race.</div>
+    <div class="item"><span class="item-num">7.</span> The podcast episode was recorded <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> a training camp.</div>
+    <div class="item"><span class="item-num">8.</span> I want to study biology <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> university <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> two years.</div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section>
+    <div class="step-title"><span class="step-badge">4</span>Dependent prepositions</div>
+    <div class="step-sub">Part A — match each word to its preposition.</div>
+
+    <div class="item"><span class="item-num">1.</span> interested <select class="gap" data-answer="in"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>to</option></select></div>
+    <div class="item"><span class="item-num">2.</span> capable <select class="gap" data-answer="of"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>to</option></select></div>
+    <div class="item"><span class="item-num">3.</span> good <select class="gap" data-answer="at"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>to</option></select></div>
+    <div class="item"><span class="item-num">4.</span> responsible <select class="gap" data-answer="for"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>to</option></select></div>
+    <div class="item"><span class="item-num">5.</span> focused <select class="gap" data-answer="on"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>to</option></select></div>
+    <div class="item"><span class="item-num">6.</span> proud <select class="gap" data-answer="of"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>to</option></select></div>
+    <div class="item"><span class="item-num">7.</span> prepared <select class="gap" data-answer="for"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>to</option></select></div>
+    <div class="item"><span class="item-num">8.</span> resilient <select class="gap" data-answer="to"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>to</option></select></div>
+
+    <div class="step-sub" style="margin-top:20px;">Part B — complete each sentence with the right word + preposition.</div>
+
+    <div class="item"><span class="item-num">1.</span> I've always been
+      <select class="gap" data-answer="interested in"><option value="">–</option><option>interested in</option><option>good at</option><option>responsible for</option><option>focused on</option><option>proud of</option><option>resilient to</option></select>
+      marine biology.
+    </div>
+    <div class="item"><span class="item-num">2.</span> She's
+      <select class="gap" data-answer="good at"><option value="">–</option><option>interested in</option><option>good at</option><option>responsible for</option><option>focused on</option><option>proud of</option><option>resilient to</option></select>
+      handling pressure during finals.
+    </div>
+    <div class="item"><span class="item-num">3.</span> Our coach is
+      <select class="gap" data-answer="responsible for"><option value="">–</option><option>interested in</option><option>good at</option><option>responsible for</option><option>focused on</option><option>proud of</option><option>resilient to</option></select>
+      planning every training cycle.
+    </div>
+    <div class="item"><span class="item-num">4.</span> He stayed
+      <select class="gap" data-answer="focused on"><option value="">–</option><option>interested in</option><option>good at</option><option>responsible for</option><option>focused on</option><option>proud of</option><option>resilient to</option></select>
+      his goal despite the injury.
+    </div>
+    <div class="item"><span class="item-num">5.</span> I'm
+      <select class="gap" data-answer="proud of"><option value="">–</option><option>interested in</option><option>good at</option><option>responsible for</option><option>focused on</option><option>proud of</option><option>resilient to</option></select>
+      my progress this season.
+    </div>
+    <div class="item"><span class="item-num">6.</span> Elite swimmers are usually very
+      <select class="gap" data-answer="resilient to"><option value="">–</option><option>interested in</option><option>good at</option><option>responsible for</option><option>focused on</option><option>proud of</option><option>resilient to</option></select>
+      setbacks.
+    </div>
+  </section>
+
+  <!-- STEP 5 -->
+  <section>
+    <div class="step-title"><span class="step-badge">5</span>Prepositional phrases &amp; connectors</div>
+    <div class="step-sub">Replace the underlined idea with the correct preposition-based phrase.</div>
+
+    <div class="item"><span class="item-num">1.</span> Even though he was exhausted, he still hit a personal best. →
+      <select class="gap" data-answer="Despite"><option value="">–</option><option>Despite</option><option>In terms of</option><option>With regard to</option><option>On top of</option></select>
+      being exhausted, he still hit a personal best.
+    </div>
+    <div class="item"><span class="item-num">2.</span> He improved a lot, especially endurance. → He improved a lot,
+      <select class="gap" data-answer="in terms of"><option value="">–</option><option>in terms of</option><option>despite</option><option>due to</option><option>in addition to</option></select>
+      endurance.
+    </div>
+    <div class="item"><span class="item-num">3.</span> Also, extra sleep and hydration made a huge difference. →
+      <select class="gap" data-answer="In addition to"><option value="">–</option><option>In addition to</option><option>In the event of</option><option>Due to</option><option>With regard to</option></select>
+      extra sleep, hydration made a huge difference.
+    </div>
+    <div class="item"><span class="item-num">4.</span> The meet was postponed because of the weather. → The meet was postponed
+      <select class="gap" data-answer="due to"><option value="">–</option><option>due to</option><option>in terms of</option><option>despite</option><option>with regard to</option></select>
+      the weather.
+    </div>
+    <div class="item"><span class="item-num">5.</span> Concerning university applications, swimming stats really help. →
+      <select class="gap" data-answer="With regard to"><option value="">–</option><option>With regard to</option><option>In addition to</option><option>Due to</option><option>Despite</option></select>
+      university applications, swimming stats really help.
+    </div>
+  </section>
+
+  <!-- STEP 6 -->
+  <section>
+    <div class="step-title"><span class="step-badge">6</span>Speaking production</div>
+    <div class="step-sub">Not scored — teacher-led. 30 sec prep, then 2 minutes uninterrupted.</div>
+    <div class="info-box">
+      <strong>Prompt:</strong> "Imagine you're talking to an admissions officer about your swimming career alongside your academics. Describe your training routine, what you're good at, what you're focused on this season, and how you stay resilient despite setbacks."
+      <ul class="checklist">
+        <li>At least 1 dependent preposition (interested in / good at / focused on…)</li>
+        <li>At least 1 time or place preposition used correctly</li>
+        <li>At least 1 connector (despite / in terms of / in addition to…)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- STEP 7 -->
+  <section>
+    <div class="step-title"><span class="step-badge">7</span>Wrap-up &amp; homework</div>
+    <div class="info-box">
+      <strong>Recap:</strong> Rapid-fire, no notes — produce 5 dependent-preposition pairs from Step 4 on the spot.<br><br>
+      <strong>Homework:</strong> Write 5 sentences about training or academics, each using a different dependent preposition (interested in, good at, responsible for, focused on, proud of). Bonus: use <em>despite</em> or <em>in terms of</em> at least once.
+    </div>
+  </section>
+
+  <footer>Kojak's ESL Exercises · Demian · Prepositions</footer>
+</main>
+
+<script>
+function checkAnswers() {
+  const selects = document.querySelectorAll('select.gap');
+  let correct = 0, wrong = 0, total = 0;
+  selects.forEach(sel => {
+    if (!sel.value) return;
+    total++;
+    sel.classList.remove('correct', 'wrong');
+    if (sel.value === sel.dataset.answer) {
+      sel.classList.add('correct');
+      correct++;
+    } else {
+      sel.classList.add('wrong');
+      wrong++;
+    }
+  });
+  document.getElementById('scoreCorrect').textContent = correct;
+  document.getElementById('scoreWrong').textContent = wrong;
+  document.getElementById('scoreTotal').textContent = total;
+}
+
+function showAnswers() {
+  document.querySelectorAll('select.gap').forEach(sel => {
+    sel.value = sel.dataset.answer;
+  });
+  checkAnswers();
+}
+
+function resetAll() {
+  document.querySelectorAll('select.gap').forEach(sel => {
+    sel.value = '';
+    sel.classList.remove('correct', 'wrong');
+  });
+  document.getElementById('scoreCorrect').textContent = 0;
+  document.getElementById('scoreWrong').textContent = 0;
+  document.getElementById('scoreTotal').textContent = 0;
+}
+</script>
+
+</body>
+</html>
