@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prepositions Lesson — Dmitry</title>
+<style>
+  :root {
+    --teal: #028090;
+    --teal-dark: #016b78;
+    --navy: #0D2B35;
+    --bg: #f4f9fa;
+    --card: #ffffff;
+    --border: #d7e6e8;
+    --correct: #1e8e5a;
+    --correct-bg: #e6f6ee;
+    --wrong: #c0392b;
+    --wrong-bg: #fdecea;
+    --shadow: 0 2px 10px rgba(13,43,53,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Calibri, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.55;
+    padding: 0 0 60px;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    color: #fff;
+    padding: 32px 20px 26px;
+    text-align: center;
+  }
+  header h1 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  }
+  header p {
+    margin-top: 8px;
+    opacity: 0.9;
+    font-size: 1rem;
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 18px;
+  }
+
+  .score-row {
+    display: flex;
+    gap: 10px;
+    margin: 22px 0 8px;
+    position: sticky;
+    top: 10px;
+    z-index: 5;
+  }
+  .badge {
+    flex: 1;
+    background: var(--card);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    padding: 10px 6px;
+  }
+  .badge .num { font-family: "Trebuchet MS", sans-serif; font-size: 1.4rem; font-weight: bold; }
+  .badge .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: .5px; color: #5a7480; }
+  .badge.correct .num { color: var(--correct); }
+  .badge.wrong .num { color: var(--wrong); }
+  .badge.total .num { color: var(--teal); }
+
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin: 16px 0 30px;
+    flex-wrap: wrap;
+  }
+  button {
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: bold;
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background: var(--teal);
+    transition: background .2s;
+  }
+  button:hover { background: var(--teal-dark); }
+  button.secondary { background: var(--navy); }
+  button.secondary:hover { background: #06181f; }
+
+  section {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--teal);
+    padding: 22px 24px;
+    margin-bottom: 22px;
+  }
+
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #fff;
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    display: flex;
+    align-items: center;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .step-sub {
+    font-size: 0.88rem;
+    color: #5a7480;
+    margin-bottom: 16px;
+    margin-left: 40px;
+  }
+
+  .item {
+    margin-bottom: 14px;
+    font-size: 1rem;
+  }
+  .item-num { font-weight: bold; color: var(--teal-dark); margin-right: 4px; }
+
+  select.gap {
+    font-family: Calibri, sans-serif;
+    font-size: 0.98rem;
+    padding: 4px 8px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--navy);
+    margin: 0 3px;
+  }
+  select.gap.correct { border-color: var(--correct); background: var(--correct-bg); }
+  select.gap.wrong { border-color: var(--wrong); background: var(--wrong-bg); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+  }
+  th {
+    background: var(--teal);
+    color: #fff;
+    padding: 8px 10px;
+    text-align: left;
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: normal;
+  }
+  td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:nth-child(even) td { background: #f7fbfb; }
+
+  .info-box {
+    background: #f7fbfb;
+    border: 1px dashed var(--teal);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 0.95rem;
+  }
+  .info-box strong { color: var(--teal-dark); }
+  .checklist { list-style: none; margin-top: 10px; }
+  .checklist li { margin-bottom: 6px; padding-left: 24px; position: relative; }
+  .checklist li::before {
+    content: "☐";
+    position: absolute; left: 0;
+    color: var(--teal);
+    font-size: 1.1rem;
+  }
+
+  .answer-reveal {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--teal-dark);
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .answer-reveal.show { display: block; }
+
+  footer {
+    text-align: center;
+    color: #5a7480;
+    font-size: 0.85rem;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Prepositions: in / on / at — and beyond</h1>
+  <p>Dmitry · B2 · Robotics &amp; IT focus</p>
+</header>
+
+<main>
+
+  <div class="score-row">
+    <div class="badge correct"><div class="num" id="scoreCorrect">0</div><div class="lbl">Correct</div></div>
+    <div class="badge wrong"><div class="num" id="scoreWrong">0</div><div class="lbl">Wrong</div></div>
+    <div class="badge total"><div class="num" id="scoreTotal">0</div><div class="lbl">Checked</div></div>
+  </div>
+  <div class="controls">
+    <button onclick="checkAnswers()">Check answers</button>
+    <button class="secondary" onclick="showAnswers()">Show answers</button>
+    <button class="secondary" onclick="resetAll()">Reset</button>
+  </div>
+
+  <!-- STEP 1 -->
+  <section>
+    <div class="step-title"><span class="step-badge">1</span>Warm-up diagnostic</div>
+    <div class="step-sub">Fill in each gap with <em>in, on,</em> or <em>at</em>. Work quickly.</div>
+
+    <div class="item"><span class="item-num">1.</span> The system update is scheduled <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the weekend.</div>
+    <div class="item"><span class="item-num">2.</span> We found the bug <select class="gap" data-answer="on"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the network.</div>
+    <div class="item"><span class="item-num">3.</span> He joined the company <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> 2022.</div>
+    <div class="item"><span class="item-num">4.</span> The meeting starts <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> 10 sharp.</div>
+    <div class="item"><span class="item-num">5.</span> I'll send you the report <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the end of the day.</div>
+    <div class="item"><span class="item-num">6.</span> There's a strange process running <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the background.</div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section>
+    <div class="step-title"><span class="step-badge">2</span>Quick consolidation</div>
+    <div class="step-sub">Reference recap — only teach in full if Step 1 revealed real gaps.</div>
+    <table>
+      <tr><th>Preposition</th><th>Use</th><th>Example</th></tr>
+      <tr><td><strong>AT</strong></td><td>precise point (time/place)</td><td>at 9 PM, at the deadline, at the terminal</td></tr>
+      <tr><td><strong>ON</strong></td><td>day, surface, connected system</td><td>on Monday, on the server, on the network</td></tr>
+      <tr><td><strong>IN</strong></td><td>period, enclosed space</td><td>in March, in the codebase, in the building</td></tr>
+    </table>
+  </section>
+
+  <!-- STEP 3 -->
+  <section>
+    <div class="step-title"><span class="step-badge">3</span>Practice — time &amp; place</div>
+    <div class="step-sub">Complete with <em>in, on,</em> or <em>at</em>.</div>
+
+    <div class="item"><span class="item-num">1.</span> The server crashed <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> midnight.</div>
+    <div class="item"><span class="item-num">2.</span> He landed a job <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> a robotics lab <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> 2021.</div>
+    <div class="item"><span class="item-num">3.</span> I'll be <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the airport <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> 6 AM sharp.</div>
+    <div class="item"><span class="item-num">4.</span> The conference takes place <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> Berlin, <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> September.</div>
+    <div class="item"><span class="item-num">5.</span> Our stand-up call is <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> 9:30, <select class="gap" data-answer="on"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the second floor.</div>
+    <div class="item"><span class="item-num">6.</span> There's a memory leak somewhere <select class="gap" data-answer="in"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the firmware.</div>
+    <div class="item"><span class="item-num">7.</span> He raised the concern <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the client meeting.</div>
+    <div class="item"><span class="item-num">8.</span> The prototype should be ready <select class="gap" data-answer="at"><option value="">–</option><option>in</option><option>on</option><option>at</option></select> the end of the quarter.</div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section>
+    <div class="step-title"><span class="step-badge">4</span>Dependent prepositions</div>
+    <div class="step-sub">Part A — match each word to its preposition.</div>
+
+    <div class="item"><span class="item-num">1.</span> responsible <select class="gap" data-answer="for"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>with</option></select></div>
+    <div class="item"><span class="item-num">2.</span> interested <select class="gap" data-answer="in"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>with</option></select></div>
+    <div class="item"><span class="item-num">3.</span> capable <select class="gap" data-answer="of"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>with</option></select></div>
+    <div class="item"><span class="item-num">4.</span> familiar <select class="gap" data-answer="with"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>with</option></select></div>
+    <div class="item"><span class="item-num">5.</span> involved <select class="gap" data-answer="in"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>with</option></select></div>
+    <div class="item"><span class="item-num">6.</span> dependent <select class="gap" data-answer="on"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>with</option></select></div>
+    <div class="item"><span class="item-num">7.</span> applied <select class="gap" data-answer="for"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>with</option></select></div>
+    <div class="item"><span class="item-num">8.</span> qualified <select class="gap" data-answer="for"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option><option>on</option><option>with</option></select></div>
+
+    <div class="step-sub" style="margin-top:20px;">Part B — complete each sentence with the right word + preposition.</div>
+
+    <div class="item"><span class="item-num">1.</span> I'm
+      <select class="gap" data-answer="responsible for"><option value="">–</option><option>responsible for</option><option>interested in</option><option>capable of</option><option>familiar with</option></select>
+      the network infrastructure at my current job.
+    </div>
+    <div class="item"><span class="item-num">2.</span> He's very
+      <select class="gap" data-answer="familiar with"><option value="">–</option><option>responsible for</option><option>familiar with</option><option>applied for</option><option>dependent on</option></select>
+      Python and C++.
+    </div>
+    <div class="item"><span class="item-num">3.</span> She
+      <select class="gap" data-answer="applied for"><option value="">–</option><option>applied for</option><option>involved in</option><option>interested in</option><option>qualified for</option></select>
+      a position at a robotics startup in Munich.
+    </div>
+    <div class="item"><span class="item-num">4.</span> The results are heavily
+      <select class="gap" data-answer="dependent on"><option value="">–</option><option>dependent on</option><option>capable of</option><option>responsible for</option><option>familiar with</option></select>
+      the initial configuration.
+    </div>
+    <div class="item"><span class="item-num">5.</span> Our team is
+      <select class="gap" data-answer="involved in"><option value="">–</option><option>involved in</option><option>qualified for</option><option>dependent on</option><option>applied for</option></select>
+      developing the new automation module.
+    </div>
+    <div class="item"><span class="item-num">6.</span> I'm genuinely
+      <select class="gap" data-answer="interested in"><option value="">–</option><option>interested in</option><option>capable of</option><option>familiar with</option><option>responsible for</option></select>
+      working abroad next year.
+    </div>
+  </section>
+
+  <!-- STEP 5 -->
+  <section>
+    <div class="step-title"><span class="step-badge">5</span>Prepositional phrases &amp; connectors</div>
+    <div class="step-sub">Replace the underlined idea with the correct preposition-based phrase. Target: stop overusing <em>however</em> and <em>as a result</em>.</div>
+
+    <div class="item"><span class="item-num">1.</span> The deadline was tight; <u>however</u>, we delivered on time. →
+      <select class="gap" data-answer="In spite of"><option value="">–</option><option>In spite of</option><option>In terms of</option><option>With regard to</option><option>On top of</option></select>
+      the tight deadline, we delivered on time.
+    </div>
+    <div class="item"><span class="item-num">2.</span> The new system is faster <u>and also</u> more secure. →
+      <select class="gap" data-answer="In addition to"><option value="">–</option><option>In addition to</option><option>In the event of</option><option>On account of</option><option>In terms of</option></select>
+      being faster, the new system is more secure.
+    </div>
+    <div class="item"><span class="item-num">3.</span> <u>Concerning</u> your question about salary, we'll discuss it next round. →
+      <select class="gap" data-answer="With regard to"><option value="">–</option><option>With regard to</option><option>In spite of</option><option>In addition to</option><option>On account of</option></select>
+      your question about salary, we'll discuss it next round.
+    </div>
+    <div class="item"><span class="item-num">4.</span> <u>If</u> the server fails, we have a backup ready. →
+      <select class="gap" data-answer="In the event of"><option value="">–</option><option>In the event of</option><option>In terms of</option><option>Due to</option><option>Despite</option></select>
+      a server failure, we have a backup ready.
+    </div>
+    <div class="item"><span class="item-num">5.</span> The old code was messy; <u>however</u>, it worked reliably. →
+      <select class="gap" data-answer="Despite"><option value="">–</option><option>Despite</option><option>In terms of</option><option>In addition to</option><option>With regard to</option></select>
+      being messy, the old code worked reliably.
+    </div>
+    <div class="item"><span class="item-num">6.</span> The outage was the cause of hours of data loss. →
+      <select class="gap" data-answer="Due to"><option value="">–</option><option>Due to</option><option>In terms of</option><option>In spite of</option><option>With regard to</option></select>
+      the outage, we lost several hours of data.
+    </div>
+  </section>
+
+  <!-- STEP 6 -->
+  <section>
+    <div class="step-title"><span class="step-badge">6</span>Multiple choice — general prepositions</div>
+    <div class="step-sub">Choose the correct preposition for each sentence.</div>
+
+    <div class="item"><span class="item-num">1.</span> He wrote the report
+      <select class="gap" data-answer="with"><option value="">–</option><option>about</option><option>by</option><option>for</option><option>with</option></select>
+      a colleague from the QA team.
+    </div>
+    <div class="item"><span class="item-num">2.</span> The client asked
+      <select class="gap" data-answer="for"><option value="">–</option><option>about</option><option>by</option><option>for</option><option>with</option></select>
+      a status update.
+    </div>
+    <div class="item"><span class="item-num">3.</span> This design was inspired
+      <select class="gap" data-answer="by"><option value="">–</option><option>about</option><option>by</option><option>from</option><option>with</option></select>
+      an older prototype.
+    </div>
+    <div class="item"><span class="item-num">4.</span> We migrated the data
+      <select class="gap" data-answer="from"><option value="">–</option><option>by</option><option>from</option><option>into</option><option>with</option></select>
+      the old server
+      <select class="gap" data-answer="to"><option value="">–</option><option>at</option><option>for</option><option>into</option><option>to</option></select>
+      the new one.
+    </div>
+    <div class="item"><span class="item-num">5.</span> I couldn't fix the issue
+      <select class="gap" data-answer="without"><option value="">–</option><option>about</option><option>through</option><option>with</option><option>without</option></select>
+      checking the logs first.
+    </div>
+    <div class="item"><span class="item-num">6.</span> Let's talk
+      <select class="gap" data-answer="about"><option value="">–</option><option>about</option><option>by</option><option>for</option><option>through</option></select>
+      the deployment plan.
+    </div>
+  </section>
+
+  <!-- STEP 7 -->
+  <section>
+    <div class="step-title"><span class="step-badge">7</span>Error correction</div>
+    <div class="step-sub">Each sentence has one wrong preposition (underlined). Choose the correct one.</div>
+
+    <div class="item"><span class="item-num">1.</span> He is responsible <u>on</u>
+      <select class="gap" data-answer="for"><option value="">–</option><option>at</option><option>for</option><option>of</option><option>with</option></select>
+      the whole infrastructure team.
+    </div>
+    <div class="item"><span class="item-num">2.</span> She's very interested <u>for</u>
+      <select class="gap" data-answer="in"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>with</option></select>
+      robotics.
+    </div>
+    <div class="item"><span class="item-num">3.</span> This solution depends <u>of</u>
+      <select class="gap" data-answer="on"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>on</option></select>
+      a stable connection.
+    </div>
+    <div class="item"><span class="item-num">4.</span> I'm not familiar <u>of</u>
+      <select class="gap" data-answer="with"><option value="">–</option><option>at</option><option>in</option><option>on</option><option>with</option></select>
+      that framework yet.
+    </div>
+    <div class="item"><span class="item-num">5.</span> He qualified <u>of</u>
+      <select class="gap" data-answer="for"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>with</option></select>
+      the senior role after the review.
+    </div>
+    <div class="item"><span class="item-num">6.</span> The team is involved <u>with</u>
+      <select class="gap" data-answer="in"><option value="">–</option><option>at</option><option>for</option><option>in</option><option>of</option></select>
+      testing the new API.
+    </div>
+  </section>
+
+  <!-- STEP 8 -->
+  <section>
+    <div class="step-title"><span class="step-badge">8</span>Sentence transformation</div>
+    <div class="step-sub">Combine the two sentences into one using the correct connector.</div>
+
+    <div class="item"><span class="item-num">1.</span> The server crashed unexpectedly. He worked through the night to fix it. →
+      <select class="gap" data-answer="As a result of"><option value="">–</option><option>As a result of</option><option>Despite</option><option>Regardless of</option><option>On the basis of</option></select>
+      the unexpected crash, he worked through the night to fix it.
+    </div>
+    <div class="item"><span class="item-num">2.</span> There was no documentation available. He still deployed the fix. →
+      <select class="gap" data-answer="Despite"><option value="">–</option><option>As a result of</option><option>Despite</option><option>Regardless of</option><option>On the basis of</option></select>
+      the lack of documentation, he still deployed the fix.
+    </div>
+    <div class="item"><span class="item-num">3.</span> Experience level doesn't matter. Everyone must follow the same protocol. →
+      <select class="gap" data-answer="Regardless of"><option value="">–</option><option>As a result of</option><option>Despite</option><option>Regardless of</option><option>On the basis of</option></select>
+      experience level, everyone must follow the same protocol.
+    </div>
+    <div class="item"><span class="item-num">4.</span> Test results were positive. The team approved the release. →
+      <select class="gap" data-answer="On the basis of"><option value="">–</option><option>As a result of</option><option>Despite</option><option>Regardless of</option><option>On the basis of</option></select>
+      the positive test results, the team approved the release.
+    </div>
+  </section>
+
+  <!-- STEP 9 -->
+  <section>
+    <div class="step-title"><span class="step-badge">9</span>Speaking production</div>
+    <div class="step-sub">Not scored — teacher-led. 30 sec prep, then 2 minutes uninterrupted.</div>
+    <div class="info-box">
+      <strong>Prompt:</strong> "Imagine you're in a job interview for a robotics engineering role in Europe. Describe a project you're proud of — what you were responsible for, what tools you're familiar with, and any challenges you dealt with despite tight deadlines."
+      <ul class="checklist">
+        <li>At least 1 dependent preposition (responsible for / familiar with / involved in…)</li>
+        <li>At least 1 time or place preposition used correctly</li>
+        <li>At least 1 preposition-based connector (in spite of / despite / in terms of…)</li>
+        <li>Avoided defaulting to "however" or "as a result"</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- STEP 7 -->
+  <section>
+    <div class="step-title"><span class="step-badge">10</span>Wrap-up &amp; homework</div>
+    <div class="info-box">
+      <strong>Recap:</strong> Rapid-fire, no notes — produce 5 dependent-preposition pairs from Step 4 on the spot.<br><br>
+      <strong>Homework:</strong> Write 5 sentences about your current work or job search, each using a different dependent preposition (responsible for, interested in, capable of, familiar with, applied for). Bonus: use <em>despite</em> or <em>in terms of</em> in at least one sentence.
+    </div>
+  </section>
+
+  <footer>Kojak's ESL Exercises · Dmitry · Prepositions</footer>
+</main>
+
+<script>
+function checkAnswers() {
+  const selects = document.querySelectorAll('select.gap');
+  let correct = 0, wrong = 0, total = 0;
+  selects.forEach(sel => {
+    if (!sel.value) return;
+    total++;
+    sel.classList.remove('correct', 'wrong');
+    if (sel.value === sel.dataset.answer) {
+      sel.classList.add('correct');
+      correct++;
+    } else {
+      sel.classList.add('wrong');
+      wrong++;
+    }
+  });
+  document.getElementById('scoreCorrect').textContent = correct;
+  document.getElementById('scoreWrong').textContent = wrong;
+  document.getElementById('scoreTotal').textContent = total;
+}
+
+function showAnswers() {
+  document.querySelectorAll('select.gap').forEach(sel => {
+    sel.value = sel.dataset.answer;
+  });
+  checkAnswers();
+}
+
+function resetAll() {
+  document.querySelectorAll('select.gap').forEach(sel => {
+    sel.value = '';
+    sel.classList.remove('correct', 'wrong');
+  });
+  document.getElementById('scoreCorrect').textContent = 0;
+  document.getElementById('scoreWrong').textContent = 0;
+  document.getElementById('scoreTotal').textContent = 0;
+}
+</script>
+
+</body>
+</html>
