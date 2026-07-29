@@ -1,71 +1,718 @@
-# Inversion Speaking Practice — Dmitry Timoshenko
-**Level:** B2 | **Focus:** Register expansion beyond *however / as a result*; C1-level contrast nuance; speaking fluency with inversion structures
-**Context:** robotics, network engineering, IT, career abroad
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inversion Speaking Practice | Dmitry</title>
+<style>
+  :root{
+    --teal:#028090;
+    --teal-dark:#016a77;
+    --navy:#0D2B35;
+    --navy-light:#16414f;
+    --card-bg:#ffffff;
+    --bg:#f2f7f8;
+    --accent:#e8a33d;
+    --text-light:#f2f7f8;
+    --border-soft:#d8e6e8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    font-family:'Calibri','Segoe UI',sans-serif;
+    color:var(--navy);
+    min-height:100vh;
+  }
+  header{
+    background:var(--navy);
+    color:var(--text-light);
+    padding:26px 20px 20px;
+    text-align:center;
+  }
+  header h1{
+    font-family:'Trebuchet MS',sans-serif;
+    margin:0 0 6px;
+    font-size:1.55rem;
+    letter-spacing:0.5px;
+  }
+  header p{
+    margin:0;
+    font-size:0.92rem;
+    color:#bcd4d9;
+  }
 
----
+  /* Tabs */
+  .tabs{
+    position:sticky;
+    top:0;
+    z-index:20;
+    display:flex;
+    background:var(--navy-light);
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  }
+  .tab-btn{
+    flex:1;
+    background:transparent;
+    border:none;
+    color:#cfe4e8;
+    font-family:'Trebuchet MS',sans-serif;
+    font-size:0.85rem;
+    font-weight:bold;
+    padding:14px 6px;
+    cursor:pointer;
+    border-bottom:4px solid transparent;
+    transition:all 0.2s ease;
+  }
+  .tab-btn:hover{ background:rgba(255,255,255,0.06); }
+  .tab-btn.active{
+    color:#fff;
+    border-bottom:4px solid var(--accent);
+    background:rgba(255,255,255,0.05);
+  }
 
-## Exercise 1 — Emphatic Reformulation Drill (Contrast → Inversion Upgrade)
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:24px 18px 60px;
+  }
+  .exercise-section{ display:none; }
+  .exercise-section.active{ display:block; }
 
-**How to run it:** Read each sentence aloud. Dmitry reformulates it using an inversion structure instead of the contrast connector, keeping the meaning intact. Push for immediate, spoken responses — no writing. If he freezes, offer the starter word only (e.g., "Rarely...").
+  .section-intro{
+    background:#fff;
+    border-left:5px solid var(--teal);
+    border-radius:8px;
+    padding:16px 18px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(13,43,53,0.06);
+  }
+  .section-intro h2{
+    font-family:'Trebuchet MS',sans-serif;
+    font-size:1.15rem;
+    margin:0 0 6px;
+    color:var(--navy);
+  }
+  .section-intro p{
+    margin:4px 0;
+    font-size:0.9rem;
+    color:var(--navy-light);
+    line-height:1.5;
+  }
+  .target-structs{
+    margin-top:8px;
+    font-size:0.85rem;
+    color:var(--teal-dark);
+    font-style:italic;
+  }
 
-**Target structures to rotate through:** *Rarely... / Never... / Not once... / Only when... / Little did... / So... that... / Under no circumstances...*
+  /* Sticky tracker */
+  .tracker{
+    position:sticky;
+    top:52px;
+    z-index:10;
+    background:#ffffffee;
+    backdrop-filter:blur(4px);
+    border:1px solid var(--border-soft);
+    border-radius:10px;
+    padding:8px 16px;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:0.85rem;
+    box-shadow:0 2px 6px rgba(13,43,53,0.07);
+  }
+  .tracker .count-badge{
+    background:var(--teal);
+    color:#fff;
+    padding:3px 10px;
+    border-radius:12px;
+    font-weight:bold;
+  }
+  .tracker-bar{
+    flex:1;
+    height:6px;
+    background:var(--border-soft);
+    border-radius:4px;
+    margin:0 12px;
+    overflow:hidden;
+  }
+  .tracker-fill{
+    height:100%;
+    background:var(--teal);
+    width:0%;
+    transition:width 0.3s ease;
+  }
 
-| # | Prompt (with however/despite/as a result) | Target inversion (model answer) |
-|---|---|---|
-| 1 | However, the network held up despite the heavy load. | Rarely has a network held up so well despite such a heavy load. |
-| 2 | Despite the tight deadline, the team delivered the prototype on time. | So tight was the deadline that few believed the prototype would arrive on time. |
-| 3 | However, we hadn't tested the sensor properly, and as a result, it failed in the field. | Not until we lost the sensor in the field did we realize how poorly it had been tested. |
-| 4 | Despite his lack of experience, he was promoted to lead engineer. | Rarely does someone with so little experience get promoted to lead engineer. |
-| 5 | However, the client was satisfied, and as a result, they extended the contract. | Only after seeing the results did the client agree to extend the contract. |
-| 6 | Despite the budget cuts, the robotics division kept innovating. | Under no circumstances did the robotics division let budget cuts slow its innovation. |
-| 7 | However, I had never worked with this framework before, so it was difficult at first. | Never had I worked with this framework before, so the first weeks were difficult. |
-| 8 | Despite multiple failures, the team refused to abandon the project. | Not once did the team consider abandoning the project, despite multiple failures. |
-| 9 | However, the code passed all tests, and as a result, we were confident to deploy. | Only once the code had passed all tests did we feel confident enough to deploy. |
-| 10 | Despite moving abroad, he kept in close contact with his old team. | Rarely does someone stay as close to a former team as he did after moving abroad. |
+  /* Item cards for Ex1 / Ex2 */
+  .item-card{
+    background:var(--card-bg);
+    border-radius:12px;
+    box-shadow:0 3px 12px rgba(13,43,53,0.08);
+    padding:18px 20px;
+    margin-bottom:14px;
+    border-top:4px solid var(--teal);
+  }
+  .item-num{
+    display:inline-block;
+    background:var(--teal);
+    color:#fff;
+    font-size:0.75rem;
+    font-weight:bold;
+    width:22px;
+    height:22px;
+    line-height:22px;
+    text-align:center;
+    border-radius:50%;
+    margin-right:8px;
+  }
+  .item-prompt{
+    font-size:1.02rem;
+    color:var(--navy);
+    margin:8px 0 12px;
+    line-height:1.5;
+  }
+  .item-prompt .starter{
+    font-weight:bold;
+    color:var(--teal-dark);
+  }
+  .item-controls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  button{
+    font-family:'Trebuchet MS',sans-serif;
+    font-size:0.85rem;
+    font-weight:bold;
+    border:none;
+    border-radius:8px;
+    padding:9px 16px;
+    cursor:pointer;
+    transition:transform 0.15s ease, background 0.2s ease;
+  }
+  button:active{ transform:scale(0.97); }
+  .reveal-btn-sm{
+    background:var(--navy);
+    color:#fff;
+  }
+  .reveal-btn-sm:hover{ background:var(--navy-light); }
+  .practiced-label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:0.85rem;
+    color:var(--navy-light);
+    cursor:pointer;
+    margin-left:auto;
+  }
+  .practiced-label input{
+    width:16px;
+    height:16px;
+    accent-color:var(--teal);
+    cursor:pointer;
+  }
+  .answer-box{
+    display:none;
+    margin-top:12px;
+    background:#fff9ec;
+    border:1px solid var(--accent);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:0.95rem;
+    color:var(--navy);
+    font-style:italic;
+  }
+  .answer-box.shown{ display:block; }
+  .item-card.done{
+    border-top-color:#4caf50;
+    opacity:0.75;
+  }
 
-**Follow-up:** Ask Dmitry to produce 2 more of his own — one about a real project, one about his plans to work abroad.
+  .followup-box{
+    background:#eef6f7;
+    border-left:4px solid var(--teal);
+    border-radius:8px;
+    padding:14px 16px;
+    margin-top:16px;
+    font-size:0.88rem;
+    color:var(--navy-light);
+  }
+  .followup-box strong{ color:var(--navy); }
 
----
+  /* Exercise 3 - debate cards (reused pattern) */
+  .debate-card{
+    background:var(--card-bg);
+    border-radius:14px;
+    box-shadow:0 4px 18px rgba(13,43,53,0.12);
+    padding:26px 24px 22px;
+    border-top:5px solid var(--teal);
+  }
+  .topic-label{
+    font-family:'Trebuchet MS',sans-serif;
+    font-size:0.78rem;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--teal);
+    margin-bottom:6px;
+  }
+  .claim{
+    font-size:1.2rem;
+    line-height:1.5;
+    margin:0 0 18px;
+    color:var(--navy);
+    font-weight:600;
+  }
+  .instructions{
+    background:#eef6f7;
+    border-left:4px solid var(--teal);
+    padding:12px 16px;
+    border-radius:6px;
+    font-size:0.88rem;
+    color:var(--navy-light);
+    margin-bottom:18px;
+  }
+  .timer-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:18px;
+  }
+  .timer-display{
+    font-family:'Trebuchet MS',sans-serif;
+    font-size:1.7rem;
+    font-weight:bold;
+    color:var(--navy);
+    min-width:60px;
+  }
+  .btn-timer{
+    background:var(--teal);
+    color:#fff;
+  }
+  .btn-timer:hover{ background:var(--teal-dark); }
+  .btn-timer.running{ background:var(--accent); }
+  .reveal-btn{
+    background:var(--navy);
+    color:#fff;
+    width:100%;
+    padding:12px;
+    margin-bottom:16px;
+  }
+  .reveal-btn:hover{ background:var(--navy-light); }
+  .reveal-box{
+    display:none;
+    background:#fff9ec;
+    border:1px solid var(--accent);
+    border-radius:8px;
+    padding:16px 18px;
+    margin-bottom:18px;
+  }
+  .reveal-box.shown{ display:block; }
+  .reveal-box .label{
+    font-size:0.72rem;
+    font-weight:bold;
+    color:#a86f16;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin-bottom:6px;
+  }
+  .reveal-box .opener{
+    font-size:1.02rem;
+    color:var(--navy);
+    font-style:italic;
+  }
+  .nav-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+  }
+  .nav-btn{
+    background:transparent;
+    color:var(--teal);
+    border:2px solid var(--teal);
+    padding:9px 18px;
+  }
+  .nav-btn:hover{ background:var(--teal); color:#fff; }
+  .nav-btn:disabled{
+    opacity:0.35;
+    cursor:default;
+    border-color:#bbb;
+    color:#bbb;
+  }
+  .nav-btn:disabled:hover{ background:transparent; }
+  .counter-prompt{
+    margin-top:16px;
+    font-size:0.86rem;
+    color:var(--navy-light);
+    background:#eef6f7;
+    padding:10px 14px;
+    border-radius:6px;
+  }
+  .end-card{
+    text-align:center;
+    padding:36px 20px;
+  }
+  .end-card h2{
+    font-family:'Trebuchet MS',sans-serif;
+    color:var(--navy);
+  }
 
-## Exercise 2 — Finish the Inversion (IT / Robotics Prompts)
+  footer{
+    text-align:center;
+    font-size:0.76rem;
+    color:#7d9aa1;
+    padding:20px;
+  }
 
-**How to run it:** Give the starter clause only. Dmitry completes it spontaneously and speaks the full sentence. Encourage technical/robotics vocabulary. Do 2–3 rounds per starter if time allows, pushing for different content each time.
+  @media (max-width:480px){
+    .tab-btn{ font-size:0.72rem; padding:12px 4px; }
+    header h1{ font-size:1.3rem; }
+    .claim{ font-size:1.05rem; }
+  }
+</style>
+</head>
+<body>
 
-1. Not only does this system...
-2. So complex was the architecture that...
-3. Rarely have I worked with a team that...
-4. Never before had the sensors...
-5. Only by running extensive tests can we...
-6. Little did the client know that...
-7. No sooner had we deployed the update than...
-8. Under no circumstances should a developer...
-9. Not until the final review did we...
-10. So unreliable was the connection that...
-11. Only when the firmware was rewritten did...
-12. Seldom does a network engineer encounter...
+<header>
+  <h1>Inversion Speaking Practice</h1>
+  <p>Dmitry Timoshenko · B2 · Register expansion beyond "however / as a result"</p>
+</header>
 
-**Extension task:** Choose any 3 completed sentences and link them into a short 4–5 sentence account of a real or imagined project — practicing flow, not just isolated lines.
+<div class="tabs">
+  <button class="tab-btn active" data-tab="ex1">1 · Reformulation Drill</button>
+  <button class="tab-btn" data-tab="ex2">2 · Finish the Inversion</button>
+  <button class="tab-btn" data-tab="ex3">3 · Debate Stance Cards</button>
+</div>
 
----
+<main>
 
-## Exercise 3 — Debate Stance Cards (Inversion as Rebuttal Opener)
+  <!-- EXERCISE 1 -->
+  <section class="exercise-section active" id="ex1">
+    <div class="section-intro">
+      <h2>Exercise 1 — Emphatic Reformulation Drill</h2>
+      <p>Read each prompt aloud (or have your tutor read it). Reformulate it using an inversion structure instead of the contrast connector, keeping the same meaning. Speak first — reveal the model answer only after you've tried.</p>
+      <div class="target-structs">Target structures: Rarely... / Never... / Not once... / Only when... / Little did... / So... that... / Under no circumstances...</div>
+    </div>
 
-**How to run it:** Present each topic/claim. Dmitry must open his response (agreeing or disagreeing) with an inversion structure, then defend the stance for 30–60 seconds. These double as Debate&Beyond Team 0 prep.
+    <div class="tracker">
+      <span>Practiced</span>
+      <div class="tracker-bar"><div class="tracker-fill" id="fill-ex1"></div></div>
+      <span class="count-badge" id="count-ex1">0 / 10</span>
+    </div>
 
-| Topic | Claim | Suggested inversion opener |
-|---|---|---|
-| IoT & Security | "Companies should be allowed to deploy IoT devices without strict security regulation." | Under no circumstances should companies deploy IoT devices without proper regulation. |
-| Robots & Robotics | "Robots will eventually replace most engineering jobs." | Only when robots can reason independently will they truly replace engineers. |
-| Entrepreneurship | "Anyone can become a successful entrepreneur with enough hard work." | Rarely does hard work alone guarantee entrepreneurial success. |
-| Money & Finances | "Job security matters more than salary when choosing a career abroad." | Not only does salary matter, but so does long-term job security. |
-| Time Management | "Multitasking makes engineers more productive." | Seldom does multitasking actually improve an engineer's productivity. |
-| Staying Healthy | "Remote work is better for a person's health than office work." | Only with strict self-discipline is remote work genuinely healthier than office work. |
+    <div id="list-ex1"></div>
 
-**Follow-up:** After each stance, ask Dmitry to counter his own argument using a second inversion structure — practicing balanced, C1-level argumentation.
+    <div class="followup-box">
+      <strong>Follow-up:</strong> Produce 2 more reformulations of your own — one about a real project, one about your plans to work abroad.
+    </div>
+  </section>
 
----
+  <!-- EXERCISE 2 -->
+  <section class="exercise-section" id="ex2">
+    <div class="section-intro">
+      <h2>Exercise 2 — Finish the Inversion</h2>
+      <p>Each item gives you the starter clause only. Complete it spontaneously and say the full sentence aloud. Use robotics/IT vocabulary where you can. Reveal the example only if you get stuck — try to produce your own version first.</p>
+    </div>
 
-### Teacher notes
-- Sequence used: Exercise 4 (Reformulation) → Exercise 6 (Finish the Inversion) → Exercise 3 (Debate Stance Cards) — increasing in spontaneity and cognitive load.
-- Correct only after each full turn, not mid-sentence, to protect fluency.
-- Flag any recurring return to *however/as a result* for follow-up in the next writing lesson.
+    <div class="tracker">
+      <span>Practiced</span>
+      <div class="tracker-bar"><div class="tracker-fill" id="fill-ex2"></div></div>
+      <span class="count-badge" id="count-ex2">0 / 12</span>
+    </div>
+
+    <div id="list-ex2"></div>
+
+    <div class="followup-box">
+      <strong>Extension task:</strong> Choose any 3 completed sentences and link them into a short 4–5 sentence account of a real or imagined project — practicing flow, not just isolated lines.
+    </div>
+  </section>
+
+  <!-- EXERCISE 3 -->
+  <section class="exercise-section" id="ex3">
+    <div class="section-intro">
+      <h2>Exercise 3 — Debate Stance Cards</h2>
+      <p>Open your response to each claim with an inversion structure, then defend or challenge it for 30–45 seconds. These double as Debate&amp;Beyond Team 0 prep.</p>
+    </div>
+
+    <div class="progress-wrap" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;font-size:0.88rem;color:var(--navy-light);">
+      <span id="progressText">Card 1 of 6</span>
+      <div class="tracker-bar" style="flex:1;margin:0 12px;"><div class="tracker-fill" id="progressFill"></div></div>
+      <span id="timerLabel">45s</span>
+    </div>
+
+    <div class="debate-card" id="cardView">
+      <div class="topic-label" id="topicLabel"></div>
+      <div class="claim" id="claimText"></div>
+      <div class="instructions" id="instructionsText"></div>
+
+      <div class="timer-row">
+        <button class="btn-timer" id="timerBtn">Start 45s</button>
+        <span class="timer-display" id="timerDisplay">0:45</span>
+      </div>
+
+      <button class="reveal-btn" id="revealBtn">Reveal suggested inversion opener</button>
+      <div class="reveal-box" id="revealBox">
+        <div class="label">Suggested opener</div>
+        <div class="opener" id="openerText"></div>
+      </div>
+
+      <div class="counter-prompt" id="counterPrompt"></div>
+
+      <div class="nav-row">
+        <button class="nav-btn" id="prevBtn">&larr; Previous</button>
+        <button class="nav-btn" id="nextBtn">Next &rarr;</button>
+      </div>
+    </div>
+
+    <div class="debate-card end-card" id="endCard" style="display:none;">
+      <h2>Well done, Dmitry!</h2>
+      <p>You've worked through all 6 debate stances. Go back to any card to try a different angle or counter-argument.</p>
+      <button class="nav-btn" id="restartBtn">Restart from Card 1</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>ESL Speaking Practice · Inversion &amp; Debate &middot; Dmitry Timoshenko</footer>
+
+<script>
+/* ---------- TAB SWITCHING ---------- */
+const tabBtns = document.querySelectorAll('.tab-btn');
+const sections = document.querySelectorAll('.exercise-section');
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    sections.forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---------- EXERCISE 1 DATA ---------- */
+const ex1Data = [
+  { prompt: "However, the network held up despite the heavy load.", answer: "Rarely has a network held up so well despite such a heavy load." },
+  { prompt: "Despite the tight deadline, the team delivered the prototype on time.", answer: "So tight was the deadline that few believed the prototype would arrive on time." },
+  { prompt: "However, we hadn't tested the sensor properly, and as a result, it failed in the field.", answer: "Not until we lost the sensor in the field did we realize how poorly it had been tested." },
+  { prompt: "Despite his lack of experience, he was promoted to lead engineer.", answer: "Rarely does someone with so little experience get promoted to lead engineer." },
+  { prompt: "However, the client was satisfied, and as a result, they extended the contract.", answer: "Only after seeing the results did the client agree to extend the contract." },
+  { prompt: "Despite the budget cuts, the robotics division kept innovating.", answer: "Under no circumstances did the robotics division let budget cuts slow its innovation." },
+  { prompt: "However, I had never worked with this framework before, so it was difficult at first.", answer: "Never had I worked with this framework before, so the first weeks were difficult." },
+  { prompt: "Despite multiple failures, the team refused to abandon the project.", answer: "Not once did the team consider abandoning the project, despite multiple failures." },
+  { prompt: "However, the code passed all tests, and as a result, we were confident to deploy.", answer: "Only once the code had passed all tests did we feel confident enough to deploy." },
+  { prompt: "Despite moving abroad, he kept in close contact with his old team.", answer: "Rarely does someone stay as close to a former team as he did after moving abroad." }
+];
+
+/* ---------- EXERCISE 2 DATA ---------- */
+const ex2Data = [
+  { starter: "Not only does this system...", answer: "Not only does this system detect faults automatically, but it also reroutes traffic in real time." },
+  { starter: "So complex was the architecture that...", answer: "So complex was the architecture that even senior engineers needed a week to understand it." },
+  { starter: "Rarely have I worked with a team that...", answer: "Rarely have I worked with a team that communicated so clearly under pressure." },
+  { starter: "Never before had the sensors...", answer: "Never before had the sensors recorded such inconsistent readings." },
+  { starter: "Only by running extensive tests can we...", answer: "Only by running extensive tests can we guarantee the firmware is stable." },
+  { starter: "Little did the client know that...", answer: "Little did the client know that the update had already been rolled back." },
+  { starter: "No sooner had we deployed the update than...", answer: "No sooner had we deployed the update than the servers crashed." },
+  { starter: "Under no circumstances should a developer...", answer: "Under no circumstances should a developer push untested code to production." },
+  { starter: "Not until the final review did we...", answer: "Not until the final review did we notice the memory leak." },
+  { starter: "So unreliable was the connection that...", answer: "So unreliable was the connection that the demo had to be postponed." },
+  { starter: "Only when the firmware was rewritten did...", answer: "Only when the firmware was rewritten did the robot respond accurately." },
+  { starter: "Seldom does a network engineer encounter...", answer: "Seldom does a network engineer encounter a failure this hard to trace." }
+];
+
+/* ---------- RENDER ITEM LISTS (Ex1 / Ex2) ---------- */
+function renderList(containerId, data, mode){
+  const container = document.getElementById(containerId);
+  data.forEach((item, i)=>{
+    const card = document.createElement('div');
+    card.className = 'item-card';
+    card.id = containerId + '-item-' + i;
+
+    const promptHTML = mode === 'ex1'
+      ? item.prompt
+      : '<span class="starter">' + item.starter + '</span>';
+
+    card.innerHTML = `
+      <div><span class="item-num">${i+1}</span></div>
+      <div class="item-prompt">${promptHTML}</div>
+      <div class="item-controls">
+        <button class="reveal-btn-sm">${mode === 'ex1' ? 'Reveal model answer' : 'Show example completion'}</button>
+        <label class="practiced-label">
+          <input type="checkbox" />
+          Practiced
+        </label>
+      </div>
+      <div class="answer-box">${item.answer}</div>
+    `;
+
+    const revealBtn = card.querySelector('.reveal-btn-sm');
+    const answerBox = card.querySelector('.answer-box');
+    revealBtn.addEventListener('click', ()=>{
+      const shown = answerBox.classList.toggle('shown');
+      revealBtn.textContent = shown
+        ? 'Hide answer'
+        : (mode === 'ex1' ? 'Reveal model answer' : 'Show example completion');
+    });
+
+    const checkbox = card.querySelector('input[type="checkbox"]');
+    checkbox.addEventListener('change', ()=>{
+      card.classList.toggle('done', checkbox.checked);
+      updateTracker(containerId === 'list-ex1' ? 'ex1' : 'ex2', data.length);
+    });
+
+    container.appendChild(card);
+  });
+}
+
+function updateTracker(exId, total){
+  const checked = document.querySelectorAll('#list-' + exId + ' input[type="checkbox"]:checked').length;
+  document.getElementById('count-' + exId).textContent = checked + ' / ' + total;
+  document.getElementById('fill-' + exId).style.width = (checked / total * 100) + '%';
+}
+
+renderList('list-ex1', ex1Data, 'ex1');
+renderList('list-ex2', ex2Data, 'ex2');
+
+/* ---------- EXERCISE 3: DEBATE STANCE CARDS ---------- */
+const cards = [
+  {
+    topic: "IoT & Security",
+    claim: "Companies should be allowed to deploy IoT devices without strict security regulation.",
+    opener: "Under no circumstances should companies deploy IoT devices without proper regulation.",
+    counter: "Now argue the opposite side using a second inversion structure (e.g. Only when... / Rarely...)."
+  },
+  {
+    topic: "Robots & Robotics",
+    claim: "Robots will eventually replace most engineering jobs.",
+    opener: "Only when robots can reason independently will they truly replace engineers.",
+    counter: "Counter this stance with your own inversion opener before moving on."
+  },
+  {
+    topic: "Entrepreneurship",
+    claim: "Anyone can become a successful entrepreneur with enough hard work.",
+    opener: "Rarely does hard work alone guarantee entrepreneurial success.",
+    counter: "Defend the opposite view — try starting with 'Not only...'."
+  },
+  {
+    topic: "Money & Finances",
+    claim: "Job security matters more than salary when choosing a career abroad.",
+    opener: "Not only does salary matter, but so does long-term job security.",
+    counter: "Give a counter-argument starting with 'Seldom...' or 'Only if...'."
+  },
+  {
+    topic: "Time Management",
+    claim: "Multitasking makes engineers more productive.",
+    opener: "Seldom does multitasking actually improve an engineer's productivity.",
+    counter: "Now build the case for multitasking — try 'So... that...'."
+  },
+  {
+    topic: "Staying Healthy",
+    claim: "Remote work is better for a person's health than office work.",
+    opener: "Only with strict self-discipline is remote work genuinely healthier than office work.",
+    counter: "Argue for office work using an inversion opener of your choice."
+  }
+];
+
+let current = 0;
+let timerInterval = null;
+let timeLeft = 45;
+let timerRunning = false;
+
+const topicLabel = document.getElementById('topicLabel');
+const claimText = document.getElementById('claimText');
+const instructionsText = document.getElementById('instructionsText');
+const openerText = document.getElementById('openerText');
+const revealBox = document.getElementById('revealBox');
+const revealBtn = document.getElementById('revealBtn');
+const counterPrompt = document.getElementById('counterPrompt');
+const progressText = document.getElementById('progressText');
+const progressFill = document.getElementById('progressFill');
+const timerDisplay = document.getElementById('timerDisplay');
+const timerBtn = document.getElementById('timerBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const cardView = document.getElementById('cardView');
+const endCard = document.getElementById('endCard');
+const restartBtn = document.getElementById('restartBtn');
+
+function resetTimer(){
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timeLeft = 45;
+  timerDisplay.textContent = '0:45';
+  timerBtn.textContent = 'Start 45s';
+  timerBtn.classList.remove('running');
+}
+
+function loadCard(index){
+  const c = cards[index];
+  topicLabel.textContent = c.topic;
+  claimText.textContent = c.claim;
+  instructionsText.textContent = "Open your response with an inversion structure, then defend or challenge the claim for 30-45 seconds.";
+  openerText.textContent = c.opener;
+  counterPrompt.textContent = c.counter;
+  revealBox.classList.remove('shown');
+  revealBtn.textContent = 'Reveal suggested inversion opener';
+  progressText.textContent = 'Card ' + (index + 1) + ' of ' + cards.length;
+  progressFill.style.width = ((index + 1) / cards.length * 100) + '%';
+  prevBtn.disabled = (index === 0);
+  resetTimer();
+}
+
+revealBtn.addEventListener('click', function(){
+  const isShown = revealBox.classList.toggle('shown');
+  revealBtn.textContent = isShown ? 'Hide suggested opener' : 'Reveal suggested inversion opener';
+});
+
+timerBtn.addEventListener('click', function(){
+  if(timerRunning){
+    resetTimer();
+    return;
+  }
+  timerRunning = true;
+  timerBtn.textContent = 'Stop';
+  timerBtn.classList.add('running');
+  timerInterval = setInterval(function(){
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60);
+    const s = timeLeft % 60;
+    timerDisplay.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    if(timeLeft <= 0){
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerBtn.textContent = "Time's up!";
+      timerBtn.classList.remove('running');
+    }
+  }, 1000);
+});
+
+prevBtn.addEventListener('click', function(){
+  if(current > 0){
+    current--;
+    loadCard(current);
+  }
+});
+
+nextBtn.addEventListener('click', function(){
+  if(current < cards.length - 1){
+    current++;
+    loadCard(current);
+  } else {
+    cardView.style.display = 'none';
+    endCard.style.display = 'block';
+  }
+});
+
+restartBtn.addEventListener('click', function(){
+  current = 0;
+  endCard.style.display = 'none';
+  cardView.style.display = 'block';
+  loadCard(current);
+});
+
+loadCard(current);
+</script>
+
+</body>
+</html>
