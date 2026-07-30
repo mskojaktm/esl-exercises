@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rancho Life & Cowboys — Emma's Lesson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#EFD3A6;
+    --sand-dark:#E3BE85;
+    --leather:#7B4B27;
+    --leather-dark:#5C3418;
+    --rust:#C1622B;
+    --rust-dark:#9C4A1E;
+    --denim:#3F6583;
+    --cactus:#5C7A52;
+    --cream:#FBF4E4;
+    --ink:#3A2418;
+    --wrong:#B4432F;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Baloo 2', sans-serif;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.25), transparent 40%),
+      repeating-linear-gradient(135deg, var(--sand) 0px, var(--sand) 22px, var(--sand-dark) 22px, var(--sand-dark) 24px);
+    color:var(--ink);
+    padding:0 0 60px 0;
+  }
+  .wrap{max-width:820px; margin:0 auto; padding:0 18px;}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(180deg, var(--leather) 0%, var(--leather-dark) 100%);
+    border-bottom:8px solid var(--rust);
+    padding:34px 18px 26px 18px;
+    text-align:center;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  }
+  .hero h1{
+    font-family:'Rye', serif;
+    color:var(--cream);
+    font-size:2.6rem;
+    margin:0 0 6px 0;
+    letter-spacing:1px;
+    text-shadow:2px 2px 0 rgba(0,0,0,0.35);
+  }
+  .hero p{
+    color:var(--sand);
+    font-weight:600;
+    margin:0;
+    font-size:1.05rem;
+  }
+
+  /* TRAIL TRACKER */
+  .trail{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:820px;
+    margin:-18px auto 26px auto;
+    padding:10px 22px;
+    background:var(--cream);
+    border-radius:50px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.18);
+    position:sticky;
+    top:10px;
+    z-index:50;
+  }
+  .station{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:0.68rem;
+    font-weight:700;
+    color:var(--leather-dark);
+    opacity:0.4;
+    flex:1;
+  }
+  .station .icon{
+    font-size:1.4rem;
+    width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background:var(--sand-dark);
+    margin-bottom:3px;
+    transition:all 0.3s ease;
+  }
+  .station.done{opacity:1;}
+  .station.done .icon{background:var(--cactus); color:white;}
+  .trail-line{
+    position:absolute; height:3px; background:var(--sand-dark); left:40px; right:40px; top:33px; z-index:-1;
+  }
+
+  /* SECTIONS */
+  .section{
+    background:var(--cream);
+    border-radius:16px;
+    margin:0 0 26px 0;
+    padding:22px 22px 26px 22px;
+    box-shadow:0 4px 14px rgba(60,30,10,0.15);
+    border-left:8px solid var(--rust);
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--rust);
+    color:white;
+    font-weight:800;
+    padding:5px 14px;
+    border-radius:20px;
+    font-size:0.85rem;
+    margin-bottom:10px;
+  }
+  .section h2{
+    font-family:'Rye', serif;
+    color:var(--leather-dark);
+    font-size:1.6rem;
+    margin:0 0 4px 0;
+  }
+  .section .sub{
+    color:var(--denim);
+    font-weight:600;
+    font-size:0.92rem;
+    margin-bottom:16px;
+  }
+
+  /* FLASHCARDS */
+  .flash-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(130px, 1fr));
+    gap:12px;
+  }
+  .flash{
+    perspective:800px;
+    height:110px;
+    cursor:pointer;
+  }
+  .flash-inner{
+    position:relative; width:100%; height:100%;
+    transition:transform 0.5s;
+    transform-style:preserve-3d;
+  }
+  .flash.flipped .flash-inner{transform:rotateY(180deg);}
+  .flash-face{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    border-radius:12px;
+    backface-visibility:hidden;
+    padding:6px;
+    text-align:center;
+  }
+  .flash-front{
+    background:var(--sand-dark);
+    border:2px solid var(--leather);
+  }
+  .flash-front .emoji{font-size:2rem;}
+  .flash-front .word{font-weight:800; color:var(--leather-dark); font-size:0.95rem; margin-top:2px;}
+  .flash-back{
+    background:var(--denim);
+    color:white;
+    transform:rotateY(180deg);
+    font-size:0.8rem;
+    font-weight:600;
+    line-height:1.3;
+  }
+  .cat-label{
+    font-weight:800; color:var(--leather-dark); margin:14px 0 8px 0; font-size:0.95rem;
+  }
+  .cat-label:first-child{margin-top:0;}
+
+  /* MATCHING GAME */
+  .match-area{display:flex; gap:24px; flex-wrap:wrap;}
+  .match-col{flex:1; min-width:150px; display:flex; flex-direction:column; gap:8px;}
+  .match-item{
+    background:var(--sand-dark);
+    border:2px solid var(--leather);
+    border-radius:10px;
+    padding:10px;
+    text-align:center;
+    font-weight:700;
+    cursor:pointer;
+    transition:all 0.2s;
+    font-size:0.95rem;
+  }
+  .match-item.selected{background:var(--rust); color:white; transform:scale(1.05);}
+  .match-item.matched{background:var(--cactus); color:white; cursor:default; opacity:0.85;}
+  .match-item.wrong{background:var(--wrong); color:white;}
+
+  /* READING */
+  .reading-text{
+    background:white;
+    border-radius:12px;
+    padding:18px 20px;
+    line-height:1.8;
+    font-size:1.05rem;
+    font-weight:500;
+    border:2px dashed var(--leather);
+  }
+  .reading-text strong{color:var(--rust-dark);}
+  .mcq{margin-top:16px;}
+  .mcq-q{font-weight:700; margin:14px 0 8px 0;}
+  .mcq-opts{display:flex; flex-direction:column; gap:6px;}
+  .opt{
+    background:white;
+    border:2px solid var(--sand-dark);
+    border-radius:8px;
+    padding:9px 12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:all 0.15s;
+  }
+  .opt:hover{border-color:var(--rust);}
+  .opt.correct{background:var(--cactus); color:white; border-color:var(--cactus);}
+  .opt.incorrect{background:var(--wrong); color:white; border-color:var(--wrong);}
+
+  /* SPEAKING */
+  .campfire{
+    background:linear-gradient(180deg, #2C1810, #1A0E08);
+    border-radius:14px;
+    padding:24px;
+    text-align:center;
+    color:var(--sand);
+  }
+  .campfire .flame{font-size:2.6rem;}
+  .prompt-card{
+    background:var(--cream);
+    color:var(--ink);
+    border-radius:10px;
+    padding:16px;
+    font-weight:700;
+    font-size:1.1rem;
+    margin:14px 0;
+    min-height:60px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+  }
+  .campfire button{margin:4px;}
+
+  /* WRITING */
+  .wordbank{
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;
+  }
+  .wb-item{
+    background:var(--denim); color:white; font-weight:700;
+    padding:6px 14px; border-radius:20px; font-size:0.9rem;
+  }
+  .fill-row{
+    display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;
+    font-weight:600; font-size:1rem;
+  }
+  .fill-row input{
+    border:2px solid var(--leather);
+    border-radius:6px;
+    padding:5px 8px;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    width:110px;
+    text-align:center;
+  }
+  .fill-row input.correct{background:#DCEEDC; border-color:var(--cactus);}
+  .fill-row input.incorrect{background:#F6DCD8; border-color:var(--wrong);}
+
+  /* BUTTONS */
+  button.btn{
+    background:var(--rust);
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:24px;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:0.95rem;
+    cursor:pointer;
+    box-shadow:0 3px 0 var(--rust-dark);
+    transition:transform 0.1s;
+  }
+  button.btn:active{transform:translateY(2px); box-shadow:0 1px 0 var(--rust-dark);}
+  button.btn.secondary{background:var(--denim); box-shadow:0 3px 0 #2a475e;}
+  button.btn.secondary:active{box-shadow:0 1px 0 #2a475e;}
+
+  .score-line{
+    font-weight:800;
+    color:var(--leather-dark);
+    margin-top:12px;
+  }
+
+  /* FINAL */
+  .final{
+    text-align:center;
+    background:linear-gradient(180deg, var(--rust), var(--rust-dark));
+    color:white;
+    border-radius:16px;
+    padding:30px 20px;
+  }
+  .final h2{font-family:'Rye', serif; font-size:2rem; margin:0 0 10px 0;}
+  .stars{font-size:2.4rem; letter-spacing:6px;}
+
+  @media (max-width:480px){
+    .hero h1{font-size:1.9rem;}
+    .match-area{gap:12px;}
+    .station{font-size:0.58rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🤠 Rancho Life & Cowboys</h1>
+  <p>Emma's English Adventure • 45 minutes</p>
+</div>
+
+<div class="trail" id="trail">
+  <div class="station" data-s="vocab"><div class="icon">🐴</div>Words</div>
+  <div class="station" data-s="match"><div class="icon">🔗</div>Match</div>
+  <div class="station" data-s="reading"><div class="icon">📖</div>Read</div>
+  <div class="station" data-s="speaking"><div class="icon">🔥</div>Talk</div>
+  <div class="station" data-s="writing"><div class="icon">✏️</div>Write</div>
+  <div class="station" data-s="quiz"><div class="icon">🏆</div>Quiz</div>
+</div>
+
+<div class="wrap">
+
+  <!-- SECTION 1: VOCAB -->
+  <div class="section">
+    <span class="badge">1 · 8 min</span>
+    <h2>Round Up the Words</h2>
+    <div class="sub">Tap each card. Flip it back and say the word out loud!</div>
+    <div class="cat-label">🐾 Animals</div>
+    <div class="flash-grid" id="cat-animals"></div>
+    <div class="cat-label">🏠 Places</div>
+    <div class="flash-grid" id="cat-places"></div>
+    <div class="cat-label">🧢 Gear</div>
+    <div class="flash-grid" id="cat-gear"></div>
+    <div class="cat-label">🏃 Actions</div>
+    <div class="flash-grid" id="cat-actions"></div>
+    <div class="cat-label">💪 People & Words</div>
+    <div class="flash-grid" id="cat-desc"></div>
+  </div>
+
+  <!-- SECTION 2: MATCHING -->
+  <div class="section">
+    <span class="badge">2 · 7 min</span>
+    <h2>Match the Ranch</h2>
+    <div class="sub">Click a picture, then click its word. Match them all!</div>
+    <div class="match-area">
+      <div class="match-col" id="match-emojis"></div>
+      <div class="match-col" id="match-words"></div>
+    </div>
+    <div class="score-line" id="match-score">Matched: 0 / 9</div>
+  </div>
+
+  <!-- SECTION 3: READING -->
+  <div class="section">
+    <span class="badge">3 · 10 min</span>
+    <h2>Read on the Range</h2>
+    <div class="sub">Read about Sam the cowboy. Then answer the questions.</div>
+    <div class="reading-text">
+      <strong>Meet Sam the Cowboy</strong><br><br>
+      Sam lives on a big ranch. He has a brown horse. Her name is Star.<br><br>
+      Every day, Sam rides Star across the field. He wears a cowboy hat and brown boots.<br><br>
+      Sam feeds the cows and the sheep. He milks the cow every morning.<br><br>
+      Sam is brave and strong. He is not afraid of the wild wind.<br><br>
+      At night, Sam and his dog sit by the fire. They look at the stars.
+    </div>
+    <div class="mcq" id="mcq-area"></div>
+    <div class="score-line" id="mcq-score">Score: 0 / 5</div>
+  </div>
+
+  <!-- SECTION 4: SPEAKING -->
+  <div class="section">
+    <span class="badge">4 · 8 min</span>
+    <h2>Campfire Chat</h2>
+    <div class="sub">Tell your teacher! Click "Next" for a new question.</div>
+    <div class="campfire">
+      <div class="flame">🔥</div>
+      <div class="prompt-card" id="speak-prompt">Click "Start" to begin!</div>
+      <button class="btn" id="speak-btn" onclick="nextPrompt()">Start</button>
+    </div>
+  </div>
+
+  <!-- SECTION 5: WRITING -->
+  <div class="section">
+    <span class="badge">5 · 7 min</span>
+    <h2>Write It Down</h2>
+    <div class="sub">Fill in the blanks. Use the words in the box!</div>
+    <div class="wordbank">
+      <span class="wb-item">ranch</span>
+      <span class="wb-item">horse</span>
+      <span class="wb-item">hat</span>
+      <span class="wb-item">boots</span>
+      <span class="wb-item">feeds</span>
+    </div>
+    <div id="fill-area"></div>
+    <button class="btn" onclick="checkFill()">Check Answers</button>
+    <div class="score-line" id="fill-score">Score: 0 / 5</div>
+  </div>
+
+  <!-- SECTION 6: QUIZ -->
+  <div class="section">
+    <span class="badge">6 · 5 min</span>
+    <h2>Round-Up Quiz</h2>
+    <div class="sub">The final challenge! How many can you get right?</div>
+    <div id="quiz-area"></div>
+    <button class="btn" onclick="checkQuiz()">Finish Quiz</button>
+    <div class="score-line" id="quiz-score">Score: 0 / 6</div>
+  </div>
+
+  <div class="final" id="final-screen" style="display:none;">
+    <h2>Yeehaw! Great Job, Emma!</h2>
+    <div class="stars">⭐⭐⭐</div>
+    <p id="final-msg">You finished the ranch adventure!</p>
+  </div>
+
+</div>
+
+<script>
+/* ---------- DATA ---------- */
+const vocab = {
+  animals: [
+    {w:"horse", e:"🐴", d:"A big animal you can ride."},
+    {w:"cow", e:"🐄", d:"A farm animal that gives milk."},
+    {w:"sheep", e:"🐑", d:"A farm animal with wool."},
+    {w:"chicken", e:"🐔", d:"A small farm bird."},
+    {w:"dog", e:"🐕", d:"A cowboy's best friend."}
+  ],
+  places: [
+    {w:"ranch", e:"🏡", d:"A big farm with animals."},
+    {w:"barn", e:"🛖", d:"A building for animals and hay."},
+    {w:"corral", e:"🚧", d:"A fenced place for horses."},
+    {w:"fence", e:"🪵", d:"It keeps animals inside."}
+  ],
+  gear: [
+    {w:"cowboy hat", e:"🤠", d:"A hat cowboys wear."},
+    {w:"boots", e:"👢", d:"Cowboys wear these on their feet."},
+    {w:"rope", e:"🪢", d:"Cowboys use this to catch cows."},
+    {w:"saddle", e:"🐎", d:"You sit on this on a horse."}
+  ],
+  actions: [
+    {w:"ride", e:"🏇", d:"To sit on a horse and go."},
+    {w:"feed", e:"🌾", d:"To give food to animals."},
+    {w:"milk", e:"🥛", d:"To get milk from a cow."},
+    {w:"herd", e:"🐄🐄", d:"To move animals together."}
+  ],
+  desc: [
+    {w:"cowboy", e:"🤠", d:"A person who works on a ranch."},
+    {w:"brave", e:"🦸", d:"Not afraid."},
+    {w:"strong", e:"💪", d:"Has a lot of power."},
+    {w:"dusty", e:"🌫️", d:"Covered with dust."}
+  ]
+};
+
+function buildFlash(containerId, list){
+  const c = document.getElementById(containerId);
+  list.forEach(item=>{
+    const div = document.createElement('div');
+    div.className = 'flash';
+    div.innerHTML = `
+      <div class="flash-inner">
+        <div class="flash-face flash-front">
+          <div class="emoji">${item.e}</div>
+          <div class="word">${item.w}</div>
+        </div>
+        <div class="flash-face flash-back">${item.d}</div>
+      </div>`;
+    div.onclick = ()=> div.classList.toggle('flipped');
+    c.appendChild(div);
+  });
+}
+buildFlash('cat-animals', vocab.animals);
+buildFlash('cat-places', vocab.places);
+buildFlash('cat-gear', vocab.gear);
+buildFlash('cat-actions', vocab.actions);
+buildFlash('cat-desc', vocab.desc);
+markDone('vocab');
+
+/* ---------- MATCHING ---------- */
+const matchPairs = [
+  {e:"🐴", w:"horse"},
+  {e:"🐄", w:"cow"},
+  {e:"🐑", w:"sheep"},
+  {e:"🐔", w:"chicken"},
+  {e:"🐕", w:"dog"},
+  {e:"🤠", w:"cowboy hat"},
+  {e:"👢", w:"boots"},
+  {e:"🪢", w:"rope"},
+  {e:"🏡", w:"ranch"}
+];
+let matchedCount = 0;
+let selectedEmoji = null, selectedWord = null;
+
+function shuffle(arr){return arr.slice().sort(()=>Math.random()-0.5);}
+
+function buildMatch(){
+  const emojiCol = document.getElementById('match-emojis');
+  const wordCol = document.getElementById('match-words');
+  const emojis = shuffle(matchPairs);
+  const words = shuffle(matchPairs);
+  emojis.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = p.e;
+    el.dataset.word = p.w;
+    el.onclick = ()=> selectEmoji(el);
+    emojiCol.appendChild(el);
+  });
+  words.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = p.w;
+    el.dataset.word = p.w;
+    el.onclick = ()=> selectWord(el);
+    wordCol.appendChild(el);
+  });
+}
+function selectEmoji(el){
+  if(el.classList.contains('matched')) return;
+  document.querySelectorAll('#match-emojis .match-item').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedEmoji = el;
+  tryMatch();
+}
+function selectWord(el){
+  if(el.classList.contains('matched')) return;
+  document.querySelectorAll('#match-words .match-item').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedWord = el;
+  tryMatch();
+}
+function tryMatch(){
+  if(!selectedEmoji || !selectedWord) return;
+  if(selectedEmoji.dataset.word === selectedWord.dataset.word){
+    selectedEmoji.classList.add('matched'); selectedEmoji.classList.remove('selected');
+    selectedWord.classList.add('matched'); selectedWord.classList.remove('selected');
+    matchedCount++;
+    document.getElementById('match-score').textContent = `Matched: ${matchedCount} / 9`;
+    if(matchedCount === 9) markDone('match');
+  } else {
+    selectedEmoji.classList.add('wrong'); selectedWord.classList.add('wrong');
+    setTimeout(()=>{
+      selectedEmoji.classList.remove('wrong','selected');
+      selectedWord.classList.remove('wrong','selected');
+    }, 500);
+  }
+  selectedEmoji = null; selectedWord = null;
+}
+buildMatch();
+
+/* ---------- READING MCQ ---------- */
+const mcqs = [
+  {q:"What is the horse's name?", opts:["Sam","Star","Fire","Cow"], correct:1},
+  {q:"What does Sam wear?", opts:["A crown","Shoes and a coat","A cowboy hat and boots","A cape"], correct:2},
+  {q:"What does Sam do every morning?", opts:["He sleeps","He milks the cow","He plays games","He reads books"], correct:1},
+  {q:"How is Sam?", opts:["Afraid","Tired","Brave and strong","Sad"], correct:2},
+  {q:"Who sits with Sam at night?", opts:["A cow","A sheep","His dog","A chicken"], correct:2}
+];
+let mcqScore = 0;
+let mcqAnswered = new Set();
+function buildMcq(){
+  const area = document.getElementById('mcq-area');
+  mcqs.forEach((item, i)=>{
+    const qDiv = document.createElement('div');
+    qDiv.innerHTML = `<div class="mcq-q">${i+1}. ${item.q}</div>`;
+    const optsDiv = document.createElement('div');
+    optsDiv.className = 'mcq-opts';
+    item.opts.forEach((opt, oi)=>{
+      const b = document.createElement('div');
+      b.className = 'opt';
+      b.textContent = opt;
+      b.onclick = ()=> answerMcq(i, oi, b, optsDiv);
+      optsDiv.appendChild(b);
+    });
+    qDiv.appendChild(optsDiv);
+    area.appendChild(qDiv);
+  });
+}
+function answerMcq(qi, oi, btn, optsDiv){
+  if(mcqAnswered.has(qi)) return;
+  mcqAnswered.add(qi);
+  const correctIdx = mcqs[qi].correct;
+  optsDiv.querySelectorAll('.opt').forEach((o, idx)=>{
+    if(idx === correctIdx) o.classList.add('correct');
+    else if(idx === oi) o.classList.add('incorrect');
+  });
+  if(oi === correctIdx) mcqScore++;
+  document.getElementById('mcq-score').textContent = `Score: ${mcqScore} / 5`;
+  if(mcqAnswered.size === mcqs.length) markDone('reading');
+}
+buildMcq();
+
+/* ---------- SPEAKING ---------- */
+const prompts = [
+  "What is your favorite farm animal? Why?",
+  "Do you want to ride a horse? Why or why not?",
+  "What color is the cowboy hat in the story?",
+  "Describe a cowboy in 3 words!",
+  "Imagine you live on a ranch. What do you do every day?"
+];
+let promptIndex = -1;
+function nextPrompt(){
+  promptIndex++;
+  if(promptIndex >= prompts.length){
+    document.getElementById('speak-prompt').textContent = "Great talking! You finished the campfire chat 🔥";
+    document.getElementById('speak-btn').style.display = 'none';
+    markDone('speaking');
+    return;
+  }
+  document.getElementById('speak-prompt').textContent = prompts[promptIndex];
+  document.getElementById('speak-btn').textContent = "Next";
+}
+
+/* ---------- WRITING ---------- */
+const fillSentences = [
+  {before:"Sam lives on a", after:".", answer:"ranch"},
+  {before:"Sam rides his", after:".", answer:"horse"},
+  {before:"He wears a cowboy", after:".", answer:"hat"},
+  {before:"He wears brown", after:".", answer:"boots"},
+  {before:"Sam", after:"the cows and sheep.", answer:"feeds"}
+];
+function buildFill(){
+  const area = document.getElementById('fill-area');
+  fillSentences.forEach((s,i)=>{
+    const row = document.createElement('div');
+    row.className = 'fill-row';
+    row.innerHTML = `${i+1}. ${s.before} <input type="text" id="fill-${i}" autocomplete="off"> ${s.after}`;
+    area.appendChild(row);
+  });
+}
+buildFill();
+function checkFill(){
+  let score = 0;
+  fillSentences.forEach((s,i)=>{
+    const input = document.getElementById(`fill-${i}`);
+    const val = input.value.trim().toLowerCase();
+    if(val === s.answer){
+      input.classList.add('correct'); input.classList.remove('incorrect');
+      score++;
+    } else {
+      input.classList.add('incorrect'); input.classList.remove('correct');
+    }
+  });
+  document.getElementById('fill-score').textContent = `Score: ${score} / 5`;
+  if(score === fillSentences.length) markDone('writing');
+}
+
+/* ---------- FINAL QUIZ ---------- */
+const quiz = [
+  {q:"A cowboy rides a...", opts:["cow","horse","chicken"], correct:1},
+  {q:"You wear this on your feet:", opts:["boots","hat","rope"], correct:0},
+  {q:"A big farm with animals is a...", opts:["barn","fence","ranch"], correct:2},
+  {q:"To catch a cow, a cowboy uses a...", opts:["rope","saddle","boots"], correct:0},
+  {q:"Not afraid means...", opts:["dusty","brave","wild"], correct:1},
+  {q:"A place for horses with a fence is a...", opts:["corral","chicken","hat"], correct:0}
+];
+let quizAnswers = {};
+function buildQuiz(){
+  const area = document.getElementById('quiz-area');
+  quiz.forEach((item,i)=>{
+    const qDiv = document.createElement('div');
+    qDiv.innerHTML = `<div class="mcq-q">${i+1}. ${item.q}</div>`;
+    const optsDiv = document.createElement('div');
+    optsDiv.className = 'mcq-opts';
+    item.opts.forEach((opt, oi)=>{
+      const b = document.createElement('div');
+      b.className = 'opt';
+      b.textContent = opt;
+      b.onclick = ()=>{
+        optsDiv.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+        b.classList.add('selected');
+        b.style.background = 'var(--sand-dark)';
+        optsDiv.querySelectorAll('.opt').forEach(o=>{ if(o!==b) o.style.background=''; });
+        quizAnswers[i] = oi;
+      };
+      optsDiv.appendChild(b);
+    });
+    qDiv.appendChild(optsDiv);
+    area.appendChild(qDiv);
+  });
+}
+buildQuiz();
+function checkQuiz(){
+  let score = 0;
+  quiz.forEach((item,i)=>{
+    const area = document.getElementById('quiz-area');
+    const qBlocks = area.querySelectorAll('.mcq-opts');
+    const optsDiv = qBlocks[i];
+    const opts = optsDiv.querySelectorAll('.opt');
+    opts.forEach((o,oi)=>{
+      o.style.background = '';
+      if(oi === item.correct) o.classList.add('correct');
+      else if(quizAnswers[i] === oi) o.classList.add('incorrect');
+    });
+    if(quizAnswers[i] === item.correct) score++;
+  });
+  document.getElementById('quiz-score').textContent = `Score: ${score} / 6`;
+  markDone('quiz');
+  document.getElementById('final-screen').style.display = 'block';
+  document.getElementById('final-msg').textContent = `You scored ${score} out of 6 on the Round-Up Quiz. Yeehaw!`;
+  document.getElementById('final-screen').scrollIntoView({behavior:'smooth'});
+}
+
+/* ---------- TRAIL PROGRESS ---------- */
+function markDone(stationName){
+  const el = document.querySelector(`.station[data-s="${stationName}"]`);
+  if(el) el.classList.add('done');
+}
+</script>
+
+</body>
+</html>
