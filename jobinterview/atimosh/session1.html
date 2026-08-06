@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 1 — Interview Fundamentals & Pacing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  :root{
+    --teal:#028090;
+    --navy:#0D2B35;
+    --teal-light:#e3f3f4;
+    --success:#1e8e5a;
+    --error:#c0392b;
+    --bg:#f7fafa;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Calibri','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--navy);
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:28px 20px 22px;
+    text-align:center;
+  }
+  header .badge{
+    display:inline-block;
+    background:var(--teal);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:4px 14px;
+    border-radius:20px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+  }
+  header h1{
+    font-family:'Trebuchet MS',sans-serif;
+    margin:6px 0 4px;
+    font-size:26px;
+  }
+  header p{margin:0;opacity:0.85;font-size:14px;}
+
+  .score-tracker{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:#fff;
+    border-bottom:2px solid var(--teal);
+    padding:10px 20px;
+    display:flex;
+    justify-content:center;
+    gap:26px;
+    font-family:'Trebuchet MS',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--navy);
+  }
+  .score-tracker span{color:var(--teal);}
+
+  main{max-width:760px;margin:0 auto;padding:22px 16px;}
+
+  .card{
+    background:#fff;
+    border-left:6px solid var(--teal);
+    border-radius:6px;
+    box-shadow:0 2px 10px rgba(13,43,53,0.08);
+    padding:20px 22px;
+    margin-bottom:26px;
+  }
+  .section-title{
+    font-family:'Trebuchet MS',sans-serif;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:0;
+    font-size:19px;
+    color:var(--navy);
+  }
+  .section-num{
+    background:var(--teal);
+    color:#fff;
+    width:28px;height:28px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;flex-shrink:0;
+  }
+  .instructions{font-size:14px;color:#3a5560;margin-bottom:16px;}
+
+  /* Matching exercise */
+  .match-wrap{display:flex;gap:24px;flex-wrap:wrap;}
+  .match-col{flex:1;min-width:230px;display:flex;flex-direction:column;gap:8px;}
+  .chip{
+    padding:10px 14px;
+    border:2px solid #cfe3e5;
+    border-radius:8px;
+    background:#fff;
+    cursor:pointer;
+    font-size:14.5px;
+    transition:all .15s;
+    user-select:none;
+  }
+  .chip:hover{border-color:var(--teal);}
+  .chip.selected{border-color:var(--teal);background:var(--teal-light);}
+  .chip.correct{border-color:var(--success);background:#e6f6ee;color:var(--success);cursor:default;}
+  .chip.wrong{border-color:var(--error);background:#fbeaea;color:var(--error);}
+  .chip.locked{cursor:default;}
+
+  /* Chunking drill */
+  .sentence-box{margin-bottom:22px;}
+  .sentence-num{font-weight:700;color:var(--teal);font-family:'Trebuchet MS',sans-serif;font-size:13px;margin-bottom:6px;}
+  .word-row{line-height:2.4;font-size:16px;}
+  .word{
+    display:inline-block;
+    padding:2px 3px;
+    cursor:pointer;
+    border-radius:3px;
+  }
+  .word:hover{background:var(--teal-light);}
+  .pause-mark{
+    color:var(--teal);
+    font-weight:900;
+    margin:0 3px;
+  }
+  .model-answer{
+    display:none;
+    margin-top:8px;
+    padding:10px 12px;
+    background:var(--teal-light);
+    border-radius:6px;
+    font-size:15px;
+    color:var(--navy);
+  }
+  .model-answer.show{display:block;}
+
+  button{
+    font-family:'Trebuchet MS',sans-serif;
+    background:var(--teal);
+    color:#fff;
+    border:none;
+    padding:9px 18px;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+    margin-right:8px;
+    margin-top:6px;
+  }
+  button.secondary{background:#fff;color:var(--teal);border:2px solid var(--teal);padding:7px 16px;}
+  button:hover{opacity:0.9;}
+
+  .checklist-item{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid #eef3f3;
+    font-size:14.5px;
+  }
+  .checklist-item:last-child{border-bottom:none;}
+  .checklist-item input{margin-top:3px;width:17px;height:17px;accent-color:var(--teal);}
+
+  .feedback-banner{
+    text-align:center;
+    padding:10px;
+    border-radius:6px;
+    font-weight:700;
+    margin-top:10px;
+    display:none;
+  }
+  .feedback-banner.show{display:block;}
+  .feedback-banner.good{background:#e6f6ee;color:var(--success);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Session 1</div>
+  <h1>Interview Fundamentals &amp; Pacing</h1>
+  <p>Artyom Timoshenko · Vocabulary + pause-and-chunk practice</p>
+</header>
+
+<div class="score-tracker">
+  <div>Matched: <span id="matchScore">0</span>/8</div>
+</div>
+
+<main>
+
+  <!-- SECTION 1: VOCABULARY MATCHING -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">1</span>Vocabulary: Interview Stages</h2>
+    <p class="instructions">Click a term, then click its matching definition.</p>
+    <div class="match-wrap">
+      <div class="match-col" id="termsCol"></div>
+      <div class="match-col" id="defsCol"></div>
+    </div>
+    <div class="feedback-banner good" id="matchDone">All matched! Nice work — try using three of these terms in your own sentences out loud.</div>
+  </div>
+
+  <!-- SECTION 2: CHUNKING DRILL -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">2</span>Pause &amp; Chunk Practice</h2>
+    <p class="instructions">Click on a word to mark a pause <em>after</em> it. Build your own version, then reveal the model pausing to compare.</p>
+    <div id="sentencesContainer"></div>
+  </div>
+
+  <!-- SECTION 3: SELF-INTRO CHECKLIST -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">3</span>Before You Record: Checklist</h2>
+    <p class="instructions">Tick these off mentally before your diagnostic recording.</p>
+    <div id="checklist"></div>
+  </div>
+
+</main>
+
+<script>
+// ---------- SECTION 1: MATCHING ----------
+const pairs = [
+  ["recruiter","a person who finds and screens candidates for a company"],
+  ["hiring manager","the person who will actually manage you if you're hired"],
+  ["screening call","a short first interview, usually to check basic fit"],
+  ["shortlist","the small group of candidates chosen to move to the next round"],
+  ["panel interview","an interview with several interviewers at once"],
+  ["technical round","an interview focused on testing job-specific skills"],
+  ["job offer","a formal proposal of employment"],
+  ["notice period","the time you must work after resigning before you can leave"]
+];
+
+function shuffle(arr){return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]);}
+
+const terms = shuffle(pairs.map(p=>p[0]));
+const defs = shuffle(pairs.map(p=>p[1]));
+
+const termsCol = document.getElementById('termsCol');
+const defsCol = document.getElementById('defsCol');
+let selectedTerm = null, selectedDef = null, matchedCount = 0;
+
+terms.forEach(term=>{
+  const el = document.createElement('div');
+  el.className='chip';
+  el.textContent=term;
+  el.dataset.value=term;
+  el.addEventListener('click',()=>selectChip(el,'term'));
+  termsCol.appendChild(el);
+});
+defs.forEach(def=>{
+  const el = document.createElement('div');
+  el.className='chip';
+  el.textContent=def;
+  el.dataset.value=def;
+  el.addEventListener('click',()=>selectChip(el,'def'));
+  defsCol.appendChild(el);
+});
+
+function selectChip(el,type){
+  if(el.classList.contains('locked')) return;
+  if(type==='term'){
+    if(selectedTerm) selectedTerm.classList.remove('selected');
+    selectedTerm = el;
+  } else {
+    if(selectedDef) selectedDef.classList.remove('selected');
+    selectedDef = el;
+  }
+  el.classList.add('selected');
+
+  if(selectedTerm && selectedDef){
+    const correctDef = pairs.find(p=>p[0]===selectedTerm.dataset.value)[1];
+    if(correctDef === selectedDef.dataset.value){
+      selectedTerm.classList.add('correct','locked');
+      selectedDef.classList.add('correct','locked');
+      selectedTerm.classList.remove('selected');
+      selectedDef.classList.remove('selected');
+      matchedCount++;
+      document.getElementById('matchScore').textContent = matchedCount;
+      selectedTerm=null; selectedDef=null;
+      if(matchedCount===pairs.length){
+        document.getElementById('matchDone').classList.add('show');
+      }
+    } else {
+      selectedTerm.classList.add('wrong');
+      selectedDef.classList.add('wrong');
+      setTimeout(()=>{
+        selectedTerm.classList.remove('selected','wrong');
+        selectedDef.classList.remove('selected','wrong');
+        selectedTerm=null; selectedDef=null;
+      },600);
+    }
+  }
+}
+
+// ---------- SECTION 2: CHUNKING DRILL ----------
+const sentences = [
+  {
+    text:"I recently graduated with a master's degree in mechatronics and robotics from a university in Bulgaria.",
+    model:"I recently graduated / with a master's degree / in mechatronics and robotics / from a university in Bulgaria."
+  },
+  {
+    text:"During my studies I worked on several projects involving sensors and control systems.",
+    model:"During my studies / I worked on several projects / involving sensors and control systems."
+  },
+  {
+    text:"I'm looking for a role where I can apply my technical skills in a real engineering team.",
+    model:"I'm looking for a role / where I can apply my technical skills / in a real engineering team."
+  },
+  {
+    text:"One of the biggest challenges I faced was integrating hardware and software into a single working prototype.",
+    model:"One of the biggest challenges I faced / was integrating hardware and software / into a single working prototype."
+  }
+];
+
+const container = document.getElementById('sentencesContainer');
+sentences.forEach((s,i)=>{
+  const box = document.createElement('div');
+  box.className='sentence-box';
+
+  const num = document.createElement('div');
+  num.className='sentence-num';
+  num.textContent='Sentence '+(i+1);
+  box.appendChild(num);
+
+  const row = document.createElement('div');
+  row.className='word-row';
+  s.text.split(' ').forEach((word,wi)=>{
+    const span = document.createElement('span');
+    span.className='word';
+    span.textContent=word;
+    span.addEventListener('click',()=>{
+      const existingMark = span.nextSibling;
+      if(existingMark && existingMark.classList && existingMark.classList.contains('pause-mark')){
+        existingMark.remove();
+      } else {
+        const mark = document.createElement('span');
+        mark.className='pause-mark';
+        mark.textContent='/';
+        span.after(mark);
+      }
+    });
+    row.appendChild(span);
+    row.appendChild(document.createTextNode(' '));
+  });
+  box.appendChild(row);
+
+  const modelDiv = document.createElement('div');
+  modelDiv.className='model-answer';
+  modelDiv.textContent='Model pausing: '+s.model;
+  box.appendChild(modelDiv);
+
+  const btn = document.createElement('button');
+  btn.className='secondary';
+  btn.textContent='Show Model Pauses';
+  btn.addEventListener('click',()=>{
+    modelDiv.classList.toggle('show');
+    btn.textContent = modelDiv.classList.contains('show') ? 'Hide Model Pauses' : 'Show Model Pauses';
+  });
+  box.appendChild(btn);
+
+  container.appendChild(box);
+});
+
+// ---------- SECTION 3: CHECKLIST ----------
+const checklistItems = [
+  "I know roughly what I want to say (not memorized word-for-word)",
+  "I've decided on 2-3 pause points in my introduction",
+  "I'm not rushing to fill silence — a short pause is fine",
+  "I'm speaking at a volume and pace I could sustain for 2 minutes"
+];
+const checklistDiv = document.getElementById('checklist');
+checklistItems.forEach((item,i)=>{
+  const row = document.createElement('div');
+  row.className='checklist-item';
+  row.innerHTML = `<input type="checkbox" id="ck${i}"><label for="ck${i}">${item}</label>`;
+  checklistDiv.appendChild(row);
+});
+</script>
+
+</body>
+</html>
