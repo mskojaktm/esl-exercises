@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 3 — STAR Method Builder</title>
+<style>
+  :root{
+    --teal:#028090;
+    --navy:#0D2B35;
+    --teal-light:#e3f3f4;
+    --success:#1e8e5a;
+    --error:#c0392b;
+    --bg:#f7fafa;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Calibri','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--navy);
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:28px 20px 22px;
+    text-align:center;
+  }
+  header .badge{
+    display:inline-block;
+    background:var(--teal);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:4px 14px;
+    border-radius:20px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+  }
+  header h1{
+    font-family:'Trebuchet MS',sans-serif;
+    margin:6px 0 4px;
+    font-size:26px;
+  }
+  header p{margin:0;opacity:0.85;font-size:14px;}
+
+  main{max-width:760px;margin:0 auto;padding:22px 16px;}
+
+  .card{
+    background:#fff;
+    border-left:6px solid var(--teal);
+    border-radius:6px;
+    box-shadow:0 2px 10px rgba(13,43,53,0.08);
+    padding:20px 22px;
+    margin-bottom:26px;
+  }
+  .section-title{
+    font-family:'Trebuchet MS',sans-serif;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:0;
+    font-size:19px;
+    color:var(--navy);
+  }
+  .section-num{
+    background:var(--teal);
+    color:#fff;
+    width:28px;height:28px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;flex-shrink:0;
+  }
+  .instructions{font-size:14px;color:#3a5560;margin-bottom:16px;}
+
+  /* Vocabulary: which STAR part */
+  .phrase-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 12px;
+    border:2px solid #cfe3e5;
+    border-radius:8px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
+  }
+  .phrase-text{font-size:14.5px;font-weight:600;}
+  .star-options{display:flex;gap:6px;flex-wrap:wrap;}
+  .star-btn{
+    padding:5px 12px;
+    border:2px solid #cfe3e5;
+    border-radius:16px;
+    background:#fff;
+    cursor:pointer;
+    font-size:13px;
+    font-family:'Trebuchet MS',sans-serif;
+    font-weight:700;
+    color:var(--navy);
+  }
+  .star-btn.correct{background:#e6f6ee;border-color:var(--success);color:var(--success);}
+  .star-btn.wrong{background:#fbeaea;border-color:var(--error);color:var(--error);}
+  .star-btn:disabled{cursor:default;}
+
+  /* Gap fill */
+  .gap-item{margin-bottom:14px;font-size:15px;line-height:1.7;}
+  .gap-item input{
+    border:none;
+    border-bottom:2px solid var(--teal);
+    background:var(--teal-light);
+    font-family:inherit;
+    font-size:15px;
+    padding:3px 6px;
+    width:170px;
+    color:var(--navy);
+  }
+  .gap-item input.correct{background:#e6f6ee;border-color:var(--success);color:var(--success);font-weight:700;}
+  .gap-item input.wrong{background:#fbeaea;border-color:var(--error);color:var(--error);}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+  .word-bank span{
+    background:var(--teal-light);border:1px solid #b9dcdf;border-radius:16px;
+    padding:4px 12px;font-size:13.5px;color:var(--teal);
+  }
+
+  /* STAR builder */
+  .star-part{margin-bottom:16px;}
+  .star-label{
+    font-family:'Trebuchet MS',sans-serif;
+    font-weight:700;
+    color:var(--teal);
+    font-size:14px;
+    margin-bottom:4px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .star-letter{
+    background:var(--teal);color:#fff;width:22px;height:22px;border-radius:5px;
+    display:flex;align-items:center;justify-content:center;font-size:12px;
+  }
+  .pitch-hint{font-size:12.5px;color:#5a7580;margin-bottom:6px;}
+  textarea{
+    width:100%;
+    min-height:56px;
+    border:2px solid #cfe3e5;
+    border-radius:6px;
+    padding:10px 12px;
+    font-family:'Calibri',sans-serif;
+    font-size:15px;
+    resize:vertical;
+  }
+  textarea:focus{outline:none;border-color:var(--teal);}
+  #action{min-height:80px;}
+
+  .assembled-box{
+    background:var(--teal-light);
+    border-radius:6px;
+    padding:16px;
+    font-size:15.5px;
+    line-height:1.8;
+    margin-top:10px;
+    min-height:40px;
+  }
+  .assembled-box.empty{color:#8aa3ab;font-style:italic;}
+
+  /* Chunked model example */
+  .word-row{line-height:2.4;font-size:15.5px;}
+  .word{display:inline-block;padding:2px 3px;}
+  .pause-mark{color:var(--teal);font-weight:900;margin:0 3px;}
+  .star-tag{
+    display:inline-block;
+    background:var(--navy);
+    color:#fff;
+    font-size:11px;
+    font-family:'Trebuchet MS',sans-serif;
+    padding:1px 7px;
+    border-radius:4px;
+    margin-right:6px;
+    vertical-align:middle;
+  }
+
+  /* Timer */
+  .timer-display{
+    font-family:'Trebuchet MS',sans-serif;
+    font-size:42px;
+    font-weight:700;
+    color:var(--navy);
+    text-align:center;
+    margin:10px 0;
+  }
+  .timer-zone{text-align:center;font-size:13px;color:#5a7580;margin-bottom:10px;}
+  .timer-controls{text-align:center;}
+
+  button{
+    font-family:'Trebuchet MS',sans-serif;
+    background:var(--teal);
+    color:#fff;
+    border:none;
+    padding:9px 18px;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+    margin-right:8px;
+    margin-top:6px;
+  }
+  button.secondary{background:#fff;color:var(--teal);border:2px solid var(--teal);padding:7px 16px;}
+  button:hover{opacity:0.9;}
+  button:disabled{opacity:0.5;cursor:not-allowed;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Session 3</div>
+  <h1>STAR Method Builder</h1>
+  <p>Artyom Timoshenko · Structuring behavioral answers</p>
+</header>
+
+<main>
+
+  <!-- SECTION 1: WHICH STAR PART -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">1</span>Which Part of STAR?</h2>
+    <p class="instructions">For each phrase, click the STAR part it usually introduces.</p>
+    <div id="phraseContainer"></div>
+  </div>
+
+  <!-- SECTION 2: VOCAB GAP FILL -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">2</span>Vocabulary: Linking &amp; Result Phrases</h2>
+    <p class="instructions">Type the correct phrase in each gap, then click Check.</p>
+    <div class="word-bank">
+      <span>I was responsible for</span><span>my role was to</span><span>I decided to</span>
+      <span>as a result</span><span>this led to</span><span>ultimately</span>
+    </div>
+    <div id="gapContainer"></div>
+    <button onclick="checkGaps()">Check Answers</button>
+    <button class="secondary" onclick="showGapAnswers()">Show Answers</button>
+  </div>
+
+  <!-- SECTION 3: MODEL EXAMPLE, CHUNKED -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">3</span>Model Example — Read &amp; Notice the Pauses</h2>
+    <p class="instructions">Each slash (/) marks a natural pause point. Read this aloud, pausing at every slash.</p>
+    <div class="word-row" id="modelExample"></div>
+  </div>
+
+  <!-- SECTION 4: STAR BUILDER -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">4</span>Build Your Own STAR Story</h2>
+    <p class="instructions">Use a real project or situation. Keep Action as the most detailed part.</p>
+
+    <div class="star-part">
+      <span class="star-label"><span class="star-letter">S</span>SITUATION — Set the scene</span>
+      <span class="pitch-hint">e.g. "During my final-year project, our team was building an autonomous robot for a competition."</span>
+      <textarea id="situation" oninput="assembleStar()"></textarea>
+    </div>
+
+    <div class="star-part">
+      <span class="star-label"><span class="star-letter">T</span>TASK — What were you responsible for?</span>
+      <span class="pitch-hint">e.g. "I was responsible for the sensor integration and obstacle detection."</span>
+      <textarea id="task" oninput="assembleStar()"></textarea>
+    </div>
+
+    <div class="star-part">
+      <span class="star-label"><span class="star-letter">A</span>ACTION — What did you actually do?</span>
+      <span class="pitch-hint">e.g. "I tested three sensor types, chose the most accurate and cost-effective one, and wrote the calibration code myself."</span>
+      <textarea id="action" oninput="assembleStar()"></textarea>
+    </div>
+
+    <div class="star-part">
+      <span class="star-label"><span class="star-letter">R</span>RESULT — What happened?</span>
+      <span class="pitch-hint">e.g. "As a result, our robot had the most reliable obstacle detection in the competition, and we placed in the top three."</span>
+      <textarea id="result" oninput="assembleStar()"></textarea>
+    </div>
+
+    <span class="star-label" style="margin-top:6px;">YOUR ASSEMBLED STORY</span>
+    <div class="assembled-box empty" id="assembledStar">Fill in the four boxes above to see your story here.</div>
+  </div>
+
+  <!-- SECTION 5: TIMER -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">5</span>Delivery Timer</h2>
+    <p class="instructions">Deliver your STAR story aloud, pausing between S / T / A / R. Target: 60–90 seconds.</p>
+    <div class="timer-display" id="timerDisplay">0.0s</div>
+    <div class="timer-zone" id="timerZone">Start speaking when you press Start</div>
+    <div class="timer-controls">
+      <button id="startBtn" onclick="startTimer()">Start</button>
+      <button id="stopBtn" onclick="stopTimer()" disabled>Stop</button>
+      <button class="secondary" onclick="resetTimer()">Reset</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ---------- SECTION 1: WHICH STAR PART ----------
+const phraseData = [
+  {phrase:"I was responsible for", answer:"T"},
+  {phrase:"my role was to", answer:"T"},
+  {phrase:"I decided to", answer:"A"},
+  {phrase:"as a result", answer:"R"},
+  {phrase:"this led to", answer:"R"},
+  {phrase:"ultimately", answer:"R"}
+];
+const starLetters = ["S","T","A","R"];
+
+const phraseContainer = document.getElementById('phraseContainer');
+phraseData.forEach((item,i)=>{
+  const row = document.createElement('div');
+  row.className='phrase-row';
+  const text = document.createElement('div');
+  text.className='phrase-text';
+  text.textContent = '"' + item.phrase + '"';
+  row.appendChild(text);
+
+  const optWrap = document.createElement('div');
+  optWrap.className='star-options';
+  starLetters.forEach(letter=>{
+    const btn = document.createElement('button');
+    btn.className='star-btn';
+    btn.type='button';
+    btn.textContent=letter;
+    btn.addEventListener('click',()=>{
+      const buttons = optWrap.querySelectorAll('.star-btn');
+      buttons.forEach(b=>b.disabled=true);
+      if(letter === item.answer){
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('wrong');
+        [...buttons].find(b=>b.textContent===item.answer).classList.add('correct');
+      }
+    });
+    optWrap.appendChild(btn);
+  });
+  row.appendChild(optWrap);
+  phraseContainer.appendChild(row);
+});
+
+// ---------- SECTION 2: GAP FILL ----------
+const gaps = [
+  {before:"", answer:"I was responsible for", after:" testing the sensor accuracy across different lighting conditions."},
+  {before:"For this project, ", answer:"my role was to", after:" manage the integration between hardware and software."},
+  {before:"After comparing the options, ", answer:"I decided to", after:" use an infrared sensor instead of ultrasonic."},
+  {before:"", answer:"As a result", after:", the detection accuracy improved by over 30%."},
+  {before:"That change ", answer:"this led to", after:" fewer false readings during testing."},
+  {before:"", answer:"Ultimately", after:", the team placed in the top three at the competition."}
+];
+const gapContainer = document.getElementById('gapContainer');
+gaps.forEach((g,i)=>{
+  const div = document.createElement('div');
+  div.className='gap-item';
+  div.innerHTML = `${g.before}<input type="text" id="gap${i}" size="20">${g.after}`;
+  gapContainer.appendChild(div);
+});
+function normalize(s){return s.trim().toLowerCase().replace(/\s+/g,' ');}
+function checkGaps(){
+  gaps.forEach((g,i)=>{
+    const input = document.getElementById('gap'+i);
+    if(normalize(input.value) === normalize(g.answer)){
+      input.classList.add('correct'); input.classList.remove('wrong');
+    } else {
+      input.classList.add('wrong'); input.classList.remove('correct');
+    }
+  });
+}
+function showGapAnswers(){
+  gaps.forEach((g,i)=>{
+    const input = document.getElementById('gap'+i);
+    input.value = g.answer;
+    input.classList.add('correct'); input.classList.remove('wrong');
+  });
+}
+
+// ---------- SECTION 3: CHUNKED MODEL EXAMPLE ----------
+const modelParts = [
+  {tag:"S", text:"During my final-year project, our team was building a small autonomous robot for a competition."},
+  {tag:"T", text:"I was responsible for the sensor integration and obstacle detection."},
+  {tag:"A", text:"I researched and tested three different sensor types, then implemented the one with the best accuracy-to-cost ratio, and wrote the calibration code myself."},
+  {tag:"R", text:"As a result, our robot had the most reliable obstacle detection in the competition, and we placed in the top three teams."}
+];
+const modelDiv = document.getElementById('modelExample');
+modelParts.forEach(part=>{
+  const p = document.createElement('div');
+  p.style.marginBottom='10px';
+  const tag = document.createElement('span');
+  tag.className='star-tag';
+  tag.textContent=part.tag;
+  p.appendChild(tag);
+  const span = document.createElement('span');
+  span.textContent = part.text + ' /';
+  p.appendChild(span);
+  modelDiv.appendChild(p);
+});
+
+// ---------- SECTION 4: STAR ASSEMBLER ----------
+function assembleStar(){
+  const s = document.getElementById('situation').value.trim();
+  const t = document.getElementById('task').value.trim();
+  const a = document.getElementById('action').value.trim();
+  const r = document.getElementById('result').value.trim();
+  const box = document.getElementById('assembledStar');
+  if(!s && !t && !a && !r){
+    box.textContent = "Fill in the four boxes above to see your story here.";
+    box.classList.add('empty');
+    return;
+  }
+  box.classList.remove('empty');
+  box.innerHTML = [s,t,a,r].filter(Boolean).join('&nbsp;&nbsp;/&nbsp;&nbsp;');
+}
+
+// ---------- SECTION 5: TIMER ----------
+let timerInterval = null;
+let elapsed = 0;
+function startTimer(){
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('stopBtn').disabled = false;
+  const startTime = Date.now() - elapsed;
+  timerInterval = setInterval(()=>{
+    elapsed = Date.now() - startTime;
+    document.getElementById('timerDisplay').textContent = (elapsed/1000).toFixed(1)+'s';
+  },100);
+}
+function stopTimer(){
+  clearInterval(timerInterval);
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+  const seconds = elapsed/1000;
+  const zone = document.getElementById('timerZone');
+  if(seconds < 50){
+    zone.textContent = "Quite fast for a STAR answer — make sure Action has enough detail.";
+    zone.style.color = 'var(--error)';
+  } else if(seconds <= 90){
+    zone.textContent = "Good pace — right in the target zone.";
+    zone.style.color = 'var(--success)';
+  } else {
+    zone.textContent = "A bit long — see if Situation or Task can be trimmed.";
+    zone.style.color = 'var(--teal)';
+  }
+}
+function resetTimer(){
+  clearInterval(timerInterval);
+  elapsed = 0;
+  document.getElementById('timerDisplay').textContent = '0.0s';
+  document.getElementById('timerZone').textContent = 'Start speaking when you press Start';
+  document.getElementById('timerZone').style.color = '#5a7580';
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+}
+</script>
+
+</body>
+</html>
