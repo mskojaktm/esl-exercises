@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workaholism Vocabulary — B2</title>
+<style>
+  :root {
+    --teal: #028090;
+    --navy: #0D2B35;
+    --teal-light: #e6f4f5;
+    --correct: #2e7d32;
+    --wrong: #c62828;
+    --wrong-bg: #fdecea;
+    --correct-bg: #eaf5ea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    background: #f4f7f8;
+    color: var(--navy);
+    margin: 0;
+    padding: 0 0 60px 0;
+    line-height: 1.6;
+  }
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 30px 20px 40px 20px;
+    text-align: center;
+  }
+  header h1 {
+    font-family: 'Trebuchet MS', sans-serif;
+    margin: 0 0 8px 0;
+    font-size: 1.9em;
+  }
+  header p {
+    margin: 0;
+    color: #cfe8ea;
+    font-size: 1.05em;
+  }
+  .container {
+    max-width: 850px;
+    margin: -20px auto 0 auto;
+    padding: 0 20px;
+  }
+  .card {
+    background: white;
+    border-left: 6px solid var(--teal);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 24px 26px;
+    margin-bottom: 26px;
+  }
+  .section-title {
+    font-family: 'Trebuchet MS', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 0;
+    color: var(--navy);
+    font-size: 1.3em;
+  }
+  .badge {
+    background: var(--teal);
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .instructions {
+    background: var(--teal-light);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.95em;
+    margin-bottom: 18px;
+  }
+  .word-bank {
+    background: var(--teal-light);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-size: 0.95em;
+  }
+  .word-bank strong { color: var(--teal); }
+  .gap-item, .mcq-item {
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #eee;
+  }
+  .gap-item:last-child, .mcq-item:last-child { border-bottom: none; }
+  .qnum { font-weight: bold; color: var(--teal); margin-right: 4px; }
+  input[type="text"] {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-size: 1em;
+    font-family: Calibri, sans-serif;
+    min-width: 140px;
+  }
+  input[type="text"]:focus { outline: none; border-color: var(--teal); }
+  .feedback-icon { margin-left: 6px; font-weight: bold; }
+  .feedback-icon.correct { color: var(--correct); }
+  .feedback-icon.wrong { color: var(--wrong); }
+  .correct-answer-note {
+    display: none;
+    font-size: 0.88em;
+    color: var(--wrong);
+    margin-top: 4px;
+  }
+  .options { margin-top: 6px; display: flex; flex-direction: column; gap: 6px; }
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #eee;
+  }
+  .option-label:hover { background: var(--teal-light); }
+  .option-label.correct-highlight { background: var(--correct-bg); border-color: var(--correct); }
+  .option-label.wrong-highlight { background: var(--wrong-bg); border-color: var(--wrong); }
+  textarea {
+    width: 100%;
+    min-height: 60px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    font-family: Calibri, sans-serif;
+    font-size: 1em;
+    resize: vertical;
+  }
+  textarea:focus { outline: none; border-color: var(--teal); }
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 20px 0 30px 0;
+    justify-content: center;
+  }
+  button.action-btn {
+    font-family: 'Trebuchet MS', sans-serif;
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button.action-btn:hover { background: #026672; }
+  button.action-btn.secondary { background: var(--navy); }
+  button.action-btn.secondary:hover { background: #081f27; }
+  .score-tracker {
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    background: white;
+    border: 2px solid var(--teal);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 16px auto;
+    max-width: 850px;
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .score-tracker div span { display: block; font-size: 1.3em; }
+  .score-tracker .sc-correct span { color: var(--correct); }
+  .score-tracker .sc-wrong span { color: var(--wrong); }
+  .score-tracker .sc-checked span { color: var(--teal); }
+  .word-ref {
+    font-size: 0.85em;
+    color: #667;
+    font-style: italic;
+    margin-left: 6px;
+  }
+  .example-block {
+    background: #fafafa;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 4px;
+    font-size: 0.9em;
+    color: #444;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Workaholism: Vocabulary in Context</h1>
+  <p>B2 level — target vocabulary practice</p>
+</header>
+
+<div class="score-tracker" id="scoreTracker">
+  <div class="sc-correct">Correct<span id="scCorrect">0</span></div>
+  <div class="sc-wrong">Wrong<span id="scWrong">0</span></div>
+  <div class="sc-checked">Checked<span id="scChecked">0</span> / 25</div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: Word bank reference -->
+  <div class="card">
+    <h2 class="section-title"><span class="badge">1</span> Target Vocabulary</h2>
+    <div class="word-bank">
+      <strong>edge</strong> (n) · <strong>striver</strong> (n) · <strong>deleterious</strong> (adj) ·
+      <strong>to exhibit behaviour</strong> · <strong>merit</strong> (n) · <strong>to come to fruition</strong> ·
+      <strong>to excel</strong> (v) · <strong>divine</strong> (adj) · <strong>to double down on</strong> ·
+      <strong>to substitute for</strong> (v)
+    </div>
+    <p style="font-size:0.92em; color:#556;">Review these before starting. You'll use every item at least once below.</p>
+  </div>
+
+  <!-- SECTION 2: Gap fill -->
+  <div class="card">
+    <h2 class="section-title"><span class="badge">2</span> Gap Fill</h2>
+    <div class="instructions">Complete each sentence with the correct form of a word/phrase from the vocabulary list above. Change the grammatical form if necessary (e.g. tense, plural).</div>
+
+    <div class="gap-item" data-id="g1" data-answers="edge">
+      <span class="qnum">1.</span> Being fluent in three languages gave her a real
+      <input type="text" class="gap-input"> over the other candidates during the interview.
+      <div class="correct-answer-note">Correct answer: <em>edge</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g2" data-answers="striver">
+      <span class="qnum">2.</span> He's a true
+      <input type="text" class="gap-input"> — forever chasing promotions, bonuses, and recognition at work.
+      <div class="correct-answer-note">Correct answer: <em>striver</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g3" data-answers="deleterious">
+      <span class="qnum">3.</span> Working eighty-hour weeks for months on end can have a
+      <input type="text" class="gap-input"> effect on your relationships and health.
+      <div class="correct-answer-note">Correct answer: <em>deleterious</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g4a" data-answers="exhibit,exhibited,exhibits,exhibiting">
+      <span class="qnum">4.</span> During the audit, several managers were found to
+      <input type="text" class="gap-input" style="min-width:100px;"> controlling
+      <input type="text" class="gap-input2" style="min-width:100px;" data-partner="g4b"> towards their subordinates.
+      <div class="correct-answer-note">Correct answer: <em>exhibit(ed) ... behaviour</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g5" data-answers="merit">
+      <span class="qnum">5.</span> This proposal's greatest
+      <input type="text" class="gap-input"> is that it finally gives remote workers a genuine voice in company decisions.
+      <div class="correct-answer-note">Correct answer: <em>merit</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g6" data-answers="come to fruition,came to fruition">
+      <span class="qnum">6.</span> After years of planning, the CEO's vision for a four-day work week finally
+      <input type="text" class="gap-input" style="min-width:220px;">.
+      <div class="correct-answer-note">Correct answer: <em>came to fruition</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g7" data-answers="excels,excel">
+      <span class="qnum">7.</span> Naomi doesn't just work hard — she
+      <input type="text" class="gap-input"> at everything she takes on, from spreadsheets to public speaking.
+      <div class="correct-answer-note">Correct answer: <em>excels</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g8" data-answers="divine">
+      <span class="qnum">8.</span> Some workaholics describe their drive to succeed in almost
+      <input type="text" class="gap-input"> terms, as though it were a calling rather than a choice.
+      <div class="correct-answer-note">Correct answer: <em>divine</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g9" data-answers="doubled down on,double down on">
+      <span class="qnum">9.</span> Rather than easing off after burning out, he
+      <input type="text" class="gap-input" style="min-width:220px;"> his punishing schedule, working even longer hours.
+      <div class="correct-answer-note">Correct answer: <em>doubled down on</em></div>
+    </div>
+
+    <div class="gap-item" data-id="g10" data-answers="substitute for">
+      <span class="qnum">10.</span> No amount of overtime pay can
+      <input type="text" class="gap-input" style="min-width:180px;"> real work-life balance.
+      <div class="correct-answer-note">Correct answer: <em>substitute for</em></div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Matching definitions -->
+  <div class="card">
+    <h2 class="section-title"><span class="badge">3</span> Choose the Correct Definition</h2>
+    <div class="instructions">Select the option that correctly defines each word or phrase.</div>
+
+    <div class="mcq-item" data-id="m1" data-correct="a">
+      <span class="qnum">1. striver</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m1" value="a"> An ambitious person who seeks power, status, and wealth</label>
+        <label class="option-label"><input type="radio" name="m1" value="b"> A person who avoids competition at all costs</label>
+        <label class="option-label"><input type="radio" name="m1" value="c"> Someone who works only when supervised</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m2" data-correct="c">
+      <span class="qnum">2. deleterious</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m2" value="a"> Extremely beneficial</label>
+        <label class="option-label"><input type="radio" name="m2" value="b"> Difficult to notice</label>
+        <label class="option-label"><input type="radio" name="m2" value="c"> Causing harm or damage</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m3" data-correct="b">
+      <span class="qnum">3. edge (noun)</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m3" value="a"> A sharp physical boundary</label>
+        <label class="option-label"><input type="radio" name="m3" value="b"> An advantage over other people</label>
+        <label class="option-label"><input type="radio" name="m3" value="c"> A state of nervous tension</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m4" data-correct="a">
+      <span class="qnum">4. merit (noun)</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m4" value="a"> A quality deserving reward or praise</label>
+        <label class="option-label"><input type="radio" name="m4" value="b"> A formal complaint or criticism</label>
+        <label class="option-label"><input type="radio" name="m4" value="c"> A financial bonus for overtime</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m5" data-correct="c">
+      <span class="qnum">5. to come to fruition</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m5" value="a"> To fail completely after effort</label>
+        <label class="option-label"><input type="radio" name="m5" value="b"> To be postponed indefinitely</label>
+        <label class="option-label"><input type="radio" name="m5" value="c"> To be realized or achieved after planning or effort</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m6" data-correct="b">
+      <span class="qnum">6. to excel</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m6" value="a"> To struggle constantly</label>
+        <label class="option-label"><input type="radio" name="m6" value="b"> To be extremely good at something</label>
+        <label class="option-label"><input type="radio" name="m6" value="c"> To give up on a task</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m7" data-correct="a">
+      <span class="qnum">7. divine (adjective)</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m7" value="a"> Relating to or coming from God</label>
+        <label class="option-label"><input type="radio" name="m7" value="b"> Related to money or profit</label>
+        <label class="option-label"><input type="radio" name="m7" value="c"> Extremely rare or unusual</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m8" data-correct="c">
+      <span class="qnum">8. to double down on something</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m8" value="a"> To reduce effort by half</label>
+        <label class="option-label"><input type="radio" name="m8" value="b"> To copy someone else's strategy</label>
+        <label class="option-label"><input type="radio" name="m8" value="c"> To continue doing something in an even more determined way than before</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m9" data-correct="b">
+      <span class="qnum">9. to substitute for</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m9" value="a"> To improve the quality of something</label>
+        <label class="option-label"><input type="radio" name="m9" value="b"> To replace or take the place of</label>
+        <label class="option-label"><input type="radio" name="m9" value="c"> To compete directly against</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="m10" data-correct="a">
+      <span class="qnum">10. to exhibit behaviour</span>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="m10" value="a"> To demonstrate or show a particular kind of behaviour</label>
+        <label class="option-label"><input type="radio" name="m10" value="b"> To hide one's true feelings</label>
+        <label class="option-label"><input type="radio" name="m10" value="c"> To punish someone for misconduct</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Usage in context (collocation choice) -->
+  <div class="card">
+    <h2 class="section-title"><span class="badge">4</span> Which Word Fits the Situation?</h2>
+    <div class="instructions">Read each short workplace scenario and choose the word/phrase that best completes it.</div>
+
+    <div class="mcq-item" data-id="c1" data-correct="b">
+      <span class="qnum">1.</span> After the merger, Sam's team lost two members but kept the same targets. Rather than asking for help, Sam decided to
+      <div class="options">
+        <label class="option-label"><input type="radio" name="c1" value="a"> excel his hours</label>
+        <label class="option-label"><input type="radio" name="c1" value="b"> double down on his own overtime</label>
+        <label class="option-label"><input type="radio" name="c1" value="c"> substitute for the new deadline</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="c2" data-correct="a">
+      <span class="qnum">2.</span> No app or productivity tool can truly
+      <div class="options">
+        <label class="option-label"><input type="radio" name="c2" value="a"> substitute for genuine rest</label>
+        <label class="option-label"><input type="radio" name="c2" value="b"> exhibit genuine rest</label>
+        <label class="option-label"><input type="radio" name="c2" value="c"> come to fruition with genuine rest</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="c3" data-correct="c">
+      <span class="qnum">3.</span> Colleagues noticed that Priya began arriving at 6 a.m. and skipping lunch — clear signs that she was starting to
+      <div class="options">
+        <label class="option-label"><input type="radio" name="c3" value="a"> have the edge over the team</label>
+        <label class="option-label"><input type="radio" name="c3" value="b"> come to fruition</label>
+        <label class="option-label"><input type="radio" name="c3" value="c"> exhibit workaholic behaviour</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="c4" data-correct="b">
+      <span class="qnum">4.</span> After five years of unpaid overtime, the founder's dream of taking the company public finally
+      <div class="options">
+        <label class="option-label"><input type="radio" name="c4" value="a"> excelled</label>
+        <label class="option-label"><input type="radio" name="c4" value="b"> came to fruition</label>
+        <label class="option-label"><input type="radio" name="c4" value="c"> had the merit</label>
+      </div>
+    </div>
+
+    <div class="mcq-item" data-id="c5" data-correct="a">
+      <span class="qnum">5.</span> Some workaholics talk about their careers in near-
+      <div class="options">
+        <label class="option-label"><input type="radio" name="c5" value="a"> divine terms, as if success were a sacred mission</label>
+        <label class="option-label"><input type="radio" name="c5" value="b"> deleterious terms, as if success were a sacred mission</label>
+        <label class="option-label"><input type="radio" name="c5" value="c"> striver terms, as if success were a sacred mission</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="action-btn" onclick="checkAnswers()">Check Answers</button>
+    <button class="action-btn secondary" onclick="showAnswers()">Show Answers</button>
+    <button class="action-btn secondary" onclick="resetAll()">Reset</button>
+  </div>
+
+  <!-- SECTION 5: Free production -->
+  <div class="card">
+    <h2 class="section-title"><span class="badge">5</span> Over to You</h2>
+    <div class="instructions">Write your own sentences about workaholism using the vocabulary. Aim for natural, personal examples — think of someone you know, a job you've had, or your own habits. This section is for discussion with your teacher, not auto-checked.</div>
+
+    <p><strong>1.</strong> Use <em>striver</em> and <em>edge</em> in one sentence about a competitive workplace.</p>
+    <textarea></textarea>
+
+    <p style="margin-top:16px;"><strong>2.</strong> Use <em>deleterious</em> to describe the effect of overwork on either physical health or personal relationships.</p>
+    <textarea></textarea>
+
+    <p style="margin-top:16px;"><strong>3.</strong> Use <em>double down on</em> and <em>come to fruition</em> to describe a personal or professional goal.</p>
+    <textarea></textarea>
+
+    <p style="margin-top:16px;"><strong>4.</strong> Do you think workaholism has any <em>merit</em>, or is it purely <em>deleterious</em>? Give your opinion in 2–3 sentences.</p>
+    <textarea></textarea>
+  </div>
+
+</div>
+
+<script>
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function checkAnswers() {
+  let correct = 0, wrong = 0, checked = 0;
+
+  // Gap fill
+  document.querySelectorAll('.gap-item').forEach(item => {
+    const answers = item.dataset.answers.split(',').map(a => normalize(a));
+    const inputs = item.querySelectorAll('input[type="text"]');
+    // remove old icons/highlights
+    item.querySelectorAll('.feedback-icon').forEach(i => i.remove());
+    const noteEl = item.querySelector('.correct-answer-note');
+
+    if (inputs.length === 1) {
+      const val = normalize(inputs[0].value);
+      checked++;
+      const isCorrect = answers.includes(val) && val.length > 0;
+      const icon = document.createElement('span');
+      icon.className = 'feedback-icon ' + (isCorrect ? 'correct' : 'wrong');
+      icon.textContent = isCorrect ? '✓' : '✗';
+      inputs[0].insertAdjacentElement('afterend', icon);
+      inputs[0].style.borderColor = isCorrect ? 'var(--correct)' : 'var(--wrong)';
+      if (isCorrect) correct++; else { wrong++; if (noteEl) noteEl.style.display = 'block'; }
+    } else if (inputs.length === 2) {
+      // two-part answer (exhibit ... behaviour)
+      const combined = normalize(inputs[0].value + ' ' + inputs[1].value);
+      checked++;
+      const isCorrect = /^(exhibit|exhibited|exhibits|exhibiting)\s+behaviour$/.test(combined) ||
+                         /^(exhibit|exhibited|exhibits|exhibiting)\s+behavior$/.test(combined);
+      const icon = document.createElement('span');
+      icon.className = 'feedback-icon ' + (isCorrect ? 'correct' : 'wrong');
+      icon.textContent = isCorrect ? '✓' : '✗';
+      inputs[1].insertAdjacentElement('afterend', icon);
+      inputs.forEach(inp => inp.style.borderColor = isCorrect ? 'var(--correct)' : 'var(--wrong)');
+      if (isCorrect) correct++; else { wrong++; if (noteEl) noteEl.style.display = 'block'; }
+    }
+  });
+
+  // MCQ (definitions + collocations)
+  document.querySelectorAll('.mcq-item').forEach(item => {
+    const name = item.querySelector('input[type="radio"]').name;
+    const selected = item.querySelector(`input[name="${name}"]:checked`);
+    const correctVal = item.dataset.correct;
+    item.querySelectorAll('.option-label').forEach(l => {
+      l.classList.remove('correct-highlight', 'wrong-highlight');
+    });
+    if (selected) {
+      checked++;
+      const label = selected.closest('.option-label');
+      if (selected.value === correctVal) {
+        label.classList.add('correct-highlight');
+        correct++;
+      } else {
+        label.classList.add('wrong-highlight');
+        item.querySelector(`input[value="${correctVal}"]`).closest('.option-label').classList.add('correct-highlight');
+        wrong++;
+      }
+    }
+  });
+
+  document.getElementById('scCorrect').textContent = correct;
+  document.getElementById('scWrong').textContent = wrong;
+  document.getElementById('scChecked').textContent = checked;
+}
+
+function showAnswers() {
+  document.querySelectorAll('.gap-item').forEach(item => {
+    const answers = item.dataset.answers.split(',');
+    const inputs = item.querySelectorAll('input[type="text"]');
+    if (inputs.length === 1) {
+      inputs[0].value = answers[0];
+      inputs[0].style.borderColor = 'var(--correct)';
+    } else if (inputs.length === 2) {
+      inputs[0].value = 'exhibited';
+      inputs[1].value = 'behaviour';
+      inputs.forEach(i => i.style.borderColor = 'var(--correct)');
+    }
+  });
+  document.querySelectorAll('.mcq-item').forEach(item => {
+    const correctVal = item.dataset.correct;
+    const name = item.querySelector('input[type="radio"]').name;
+    const radio = item.querySelector(`input[name="${name}"][value="${correctVal}"]`);
+    radio.checked = true;
+    radio.closest('.option-label').classList.add('correct-highlight');
+  });
+  checkAnswers();
+}
+
+function resetAll() {
+  document.querySelectorAll('input[type="text"]').forEach(i => {
+    i.value = '';
+    i.style.borderColor = '#ccc';
+  });
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option-label').forEach(l => l.classList.remove('correct-highlight', 'wrong-highlight'));
+  document.querySelectorAll('.feedback-icon').forEach(i => i.remove());
+  document.querySelectorAll('.correct-answer-note').forEach(n => n.style.display = 'none');
+  document.querySelectorAll('textarea').forEach(t => t.value = '');
+  document.getElementById('scCorrect').textContent = '0';
+  document.getElementById('scWrong').textContent = '0';
+  document.getElementById('scChecked').textContent = '0';
+}
+</script>
+
+</body>
+</html>
