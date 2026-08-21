@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 4 — Technical Skills Explainer</title>
+<style>
+  :root{
+    --teal:#028090;
+    --navy:#0D2B35;
+    --teal-light:#e3f3f4;
+    --success:#1e8e5a;
+    --error:#c0392b;
+    --bg:#f7fafa;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Calibri','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--navy);
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:28px 20px 22px;
+    text-align:center;
+  }
+  header .badge{
+    display:inline-block;
+    background:var(--teal);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:4px 14px;
+    border-radius:20px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+  }
+  header h1{
+    font-family:'Trebuchet MS',sans-serif;
+    margin:6px 0 4px;
+    font-size:26px;
+  }
+  header p{margin:0;opacity:0.85;font-size:14px;}
+
+  .score-tracker{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:#fff;
+    border-bottom:2px solid var(--teal);
+    padding:10px 20px;
+    display:flex;
+    justify-content:center;
+    gap:26px;
+    font-family:'Trebuchet MS',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--navy);
+  }
+  .score-tracker span{color:var(--teal);}
+
+  main{max-width:760px;margin:0 auto;padding:22px 16px;}
+
+  .card{
+    background:#fff;
+    border-left:6px solid var(--teal);
+    border-radius:6px;
+    box-shadow:0 2px 10px rgba(13,43,53,0.08);
+    padding:20px 22px;
+    margin-bottom:26px;
+  }
+  .section-title{
+    font-family:'Trebuchet MS',sans-serif;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:0;
+    font-size:19px;
+    color:var(--navy);
+  }
+  .section-num{
+    background:var(--teal);
+    color:#fff;
+    width:28px;height:28px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;flex-shrink:0;
+  }
+  .instructions{font-size:14px;color:#3a5560;margin-bottom:16px;}
+
+  /* Gap fill */
+  .gap-item{margin-bottom:14px;font-size:15px;line-height:1.7;}
+  .gap-item input{
+    border:none;
+    border-bottom:2px solid var(--teal);
+    background:var(--teal-light);
+    font-family:inherit;
+    font-size:15px;
+    padding:3px 6px;
+    width:190px;
+    color:var(--navy);
+  }
+  .gap-item input.correct{background:#e6f6ee;border-color:var(--success);color:var(--success);font-weight:700;}
+  .gap-item input.wrong{background:#fbeaea;border-color:var(--error);color:var(--error);}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+  .word-bank span{
+    background:var(--teal-light);border:1px solid #b9dcdf;border-radius:16px;
+    padding:4px 12px;font-size:13.5px;color:var(--teal);
+  }
+
+  /* Matching exercise */
+  .match-wrap{display:flex;gap:24px;flex-wrap:wrap;}
+  .match-col{flex:1;min-width:230px;display:flex;flex-direction:column;gap:8px;}
+  .chip{
+    padding:10px 14px;
+    border:2px solid #cfe3e5;
+    border-radius:8px;
+    background:#fff;
+    cursor:pointer;
+    font-size:14px;
+    transition:all .15s;
+    user-select:none;
+  }
+  .chip:hover{border-color:var(--teal);}
+  .chip.selected{border-color:var(--teal);background:var(--teal-light);}
+  .chip.correct{border-color:var(--success);background:#e6f6ee;color:var(--success);cursor:default;}
+  .chip.wrong{border-color:var(--error);background:#fbeaea;color:var(--error);}
+  .chip.locked{cursor:default;}
+
+  .feedback-banner{
+    text-align:center;padding:10px;border-radius:6px;font-weight:700;margin-top:10px;display:none;
+  }
+  .feedback-banner.show{display:block;}
+  .feedback-banner.good{background:#e6f6ee;color:var(--success);}
+
+  /* Chunked model example */
+  .model-line{margin-bottom:10px;font-size:15.5px;line-height:1.7;}
+  .stage-tag{
+    display:inline-block;
+    background:var(--navy);
+    color:#fff;
+    font-size:11px;
+    font-family:'Trebuchet MS',sans-serif;
+    padding:1px 8px;
+    border-radius:4px;
+    margin-right:6px;
+    vertical-align:middle;
+  }
+
+  /* Builder */
+  .part{margin-bottom:16px;}
+  .part-label{
+    font-family:'Trebuchet MS',sans-serif;
+    font-weight:700;
+    color:var(--teal);
+    font-size:14px;
+    margin-bottom:4px;
+    display:block;
+  }
+  .part-hint{font-size:12.5px;color:#5a7580;margin-bottom:6px;}
+  textarea{
+    width:100%;
+    min-height:56px;
+    border:2px solid #cfe3e5;
+    border-radius:6px;
+    padding:10px 12px;
+    font-family:'Calibri',sans-serif;
+    font-size:15px;
+    resize:vertical;
+  }
+  textarea:focus{outline:none;border-color:var(--teal);}
+
+  .assembled-box{
+    background:var(--teal-light);
+    border-radius:6px;
+    padding:16px;
+    font-size:15.5px;
+    line-height:1.8;
+    margin-top:10px;
+    min-height:40px;
+  }
+  .assembled-box.empty{color:#8aa3ab;font-style:italic;}
+
+  /* Timer */
+  .timer-display{
+    font-family:'Trebuchet MS',sans-serif;
+    font-size:42px;
+    font-weight:700;
+    color:var(--navy);
+    text-align:center;
+    margin:10px 0;
+  }
+  .timer-zone{text-align:center;font-size:13px;color:#5a7580;margin-bottom:10px;}
+  .timer-controls{text-align:center;}
+
+  button{
+    font-family:'Trebuchet MS',sans-serif;
+    background:var(--teal);
+    color:#fff;
+    border:none;
+    padding:9px 18px;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+    margin-right:8px;
+    margin-top:6px;
+  }
+  button.secondary{background:#fff;color:var(--teal);border:2px solid var(--teal);padding:7px 16px;}
+  button:hover{opacity:0.9;}
+  button:disabled{opacity:0.5;cursor:not-allowed;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Session 4</div>
+  <h1>Technical Skills Explainer</h1>
+  <p>Artyom Timoshenko · Plain-English technical vocabulary + 60-second project pitch</p>
+</header>
+
+<div class="score-tracker">
+  <div>Matched: <span id="matchScore">0</span>/6</div>
+</div>
+
+<main>
+
+  <!-- SECTION 1: VOCAB GAP-FILL -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">1</span>Vocabulary: Technical Skills in Plain English</h2>
+    <p class="instructions">Type the correct word or phrase in each gap, then click Check.</p>
+    <div class="word-bank">
+      <span>automation</span><span>control systems</span><span>sensors and actuators</span>
+      <span>prototyping</span><span>troubleshooting</span><span>cross-functional team</span>
+      <span>embedded systems</span><span>iterated</span>
+    </div>
+    <div id="gapContainer"></div>
+    <button onclick="checkGaps()">Check Answers</button>
+    <button class="secondary" onclick="showGapAnswers()">Show Answers</button>
+  </div>
+
+  <!-- SECTION 2: JARGON MATCHING -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">2</span>Jargon → Plain English</h2>
+    <p class="instructions">Click a technical term, then click its plain-English explanation.</p>
+    <div class="match-wrap">
+      <div class="match-col" id="termsCol"></div>
+      <div class="match-col" id="defsCol"></div>
+    </div>
+    <div class="feedback-banner good" id="matchDone">All matched! Try saying each technical term followed immediately by its plain version — that's exactly how to use this in an interview.</div>
+  </div>
+
+  <!-- SECTION 3: MODEL EXAMPLE -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">3</span>Model Example — Problem → Solution → Outcome</h2>
+    <p class="instructions">Notice how technical detail is simplified and delivered in short chunks.</p>
+    <div id="modelExample"></div>
+  </div>
+
+  <!-- SECTION 4: 60-SECOND BUILDER -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">4</span>Build Your 60-Second Project Explainer</h2>
+    <p class="instructions">One or two short sentences per box. Imagine explaining this to a smart friend outside engineering.</p>
+
+    <div class="part">
+      <span class="part-label">THE PROBLEM — What challenge were you addressing?</span>
+      <span class="part-hint">e.g. "Small robots often struggle to detect obstacles reliably and cheaply."</span>
+      <textarea id="problem" oninput="assembleExplainer()"></textarea>
+    </div>
+
+    <div class="part">
+      <span class="part-label">WHAT I BUILT — Plain description of your solution</span>
+      <span class="part-hint">e.g. "I built a low-cost obstacle detection system for a small autonomous robot."</span>
+      <textarea id="built" oninput="assembleExplainer()"></textarea>
+    </div>
+
+    <div class="part">
+      <span class="part-label">HOW IT WORKS — One or two simplified technical details</span>
+      <span class="part-hint">e.g. "It uses sensors to detect nearby objects, and a control system that automatically adjusts the robot's path."</span>
+      <textarea id="how" oninput="assembleExplainer()"></textarea>
+    </div>
+
+    <div class="part">
+      <span class="part-label">WHY IT MATTERS — Outcome or relevance to the job</span>
+      <span class="part-hint">e.g. "It made the robot's navigation significantly more reliable, and it's the kind of hands-on sensor work I want to keep doing."</span>
+      <textarea id="why" oninput="assembleExplainer()"></textarea>
+    </div>
+
+    <span class="part-label">YOUR ASSEMBLED EXPLAINER</span>
+    <div class="assembled-box empty" id="assembledExplainer">Fill in the four boxes above to see your explainer here.</div>
+  </div>
+
+  <!-- SECTION 5: TIMER -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">5</span>Delivery Timer</h2>
+    <p class="instructions">Deliver your explainer aloud, pausing between each part. Target: 45–60 seconds.</p>
+    <div class="timer-display" id="timerDisplay">0.0s</div>
+    <div class="timer-zone" id="timerZone">Start speaking when you press Start</div>
+    <div class="timer-controls">
+      <button id="startBtn" onclick="startTimer()">Start</button>
+      <button id="stopBtn" onclick="stopTimer()" disabled>Stop</button>
+      <button class="secondary" onclick="resetTimer()">Reset</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ---------- SECTION 1: GAP FILL ----------
+const gaps = [
+  {before:"I worked on ", answer:"automation", after:" of a manual testing process."},
+  {before:"I designed ", answer:"control systems", after:" that keep the robot stable while moving."},
+  {before:"The robot uses ", answer:"sensors and actuators", after:" to sense its environment and move."},
+  {before:"We went through several rounds of ", answer:"prototyping", after:" before the final design."},
+  {before:"A lot of my time went into ", answer:"troubleshooting", after:" hardware issues."},
+  {before:"I worked with a ", answer:"cross-functional team", after:" of mechanical and software engineers."},
+  {before:"I programmed the ", answer:"embedded systems", after:" that control the robot."},
+  {before:"We ", answer:"iterated", after:" on the design after every test."}
+];
+const gapContainer = document.getElementById('gapContainer');
+gaps.forEach((g,i)=>{
+  const div = document.createElement('div');
+  div.className='gap-item';
+  div.innerHTML = `${g.before}<input type="text" id="gap${i}" size="22">${g.after}`;
+  gapContainer.appendChild(div);
+});
+function normalize(s){return s.trim().toLowerCase().replace(/\s+/g,' ');}
+function checkGaps(){
+  gaps.forEach((g,i)=>{
+    const input = document.getElementById('gap'+i);
+    if(normalize(input.value) === normalize(g.answer)){
+      input.classList.add('correct'); input.classList.remove('wrong');
+    } else {
+      input.classList.add('wrong'); input.classList.remove('correct');
+    }
+  });
+}
+function showGapAnswers(){
+  gaps.forEach((g,i)=>{
+    const input = document.getElementById('gap'+i);
+    input.value = g.answer;
+    input.classList.add('correct'); input.classList.remove('wrong');
+  });
+}
+
+// ---------- SECTION 2: JARGON MATCHING ----------
+const pairs = [
+  ["closed-loop feedback control","a system that automatically corrects itself based on sensor data"],
+  ["PID controller tuning","adjusting the settings so the robot's movements are smooth and accurate"],
+  ["SLAM algorithm","software that lets a robot map its surroundings while moving through them"],
+  ["kinematics","the math that describes how a robot's parts move in relation to each other"],
+  ["actuator response time","how quickly a motor or part reacts after receiving a command"],
+  ["sensor fusion","combining data from several sensors to get a more accurate picture"]
+];
+function shuffle(arr){return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]);}
+const terms = shuffle(pairs.map(p=>p[0]));
+const defs = shuffle(pairs.map(p=>p[1]));
+const termsCol = document.getElementById('termsCol');
+const defsCol = document.getElementById('defsCol');
+let selectedTerm = null, selectedDef = null, matchedCount = 0;
+
+terms.forEach(term=>{
+  const el = document.createElement('div');
+  el.className='chip'; el.textContent=term; el.dataset.value=term;
+  el.addEventListener('click',()=>selectChip(el,'term'));
+  termsCol.appendChild(el);
+});
+defs.forEach(def=>{
+  const el = document.createElement('div');
+  el.className='chip'; el.textContent=def; el.dataset.value=def;
+  el.addEventListener('click',()=>selectChip(el,'def'));
+  defsCol.appendChild(el);
+});
+
+function selectChip(el,type){
+  if(el.classList.contains('locked')) return;
+  if(type==='term'){
+    if(selectedTerm) selectedTerm.classList.remove('selected');
+    selectedTerm = el;
+  } else {
+    if(selectedDef) selectedDef.classList.remove('selected');
+    selectedDef = el;
+  }
+  el.classList.add('selected');
+  if(selectedTerm && selectedDef){
+    const correctDef = pairs.find(p=>p[0]===selectedTerm.dataset.value)[1];
+    if(correctDef === selectedDef.dataset.value){
+      selectedTerm.classList.add('correct','locked');
+      selectedDef.classList.add('correct','locked');
+      selectedTerm.classList.remove('selected');
+      selectedDef.classList.remove('selected');
+      matchedCount++;
+      document.getElementById('matchScore').textContent = matchedCount;
+      selectedTerm=null; selectedDef=null;
+      if(matchedCount===pairs.length){
+        document.getElementById('matchDone').classList.add('show');
+      }
+    } else {
+      selectedTerm.classList.add('wrong');
+      selectedDef.classList.add('wrong');
+      setTimeout(()=>{
+        selectedTerm.classList.remove('selected','wrong');
+        selectedDef.classList.remove('selected','wrong');
+        selectedTerm=null; selectedDef=null;
+      },600);
+    }
+  }
+}
+
+// ---------- SECTION 3: MODEL EXAMPLE ----------
+const modelLines = [
+  {tag:"PROBLEM", text:"Small robots often struggle to detect obstacles both reliably and cheaply."},
+  {tag:"SOLUTION", text:"I built a low-cost obstacle detection system using infrared sensors and a simple control algorithm."},
+  {tag:"HOW", text:"The sensors constantly check the distance to nearby objects, and the control system automatically adjusts the robot's direction."},
+  {tag:"OUTCOME", text:"As a result, the robot's navigation became significantly more reliable, even in tight spaces."}
+];
+const modelDiv = document.getElementById('modelExample');
+modelLines.forEach(line=>{
+  const p = document.createElement('div');
+  p.className='model-line';
+  const tag = document.createElement('span');
+  tag.className='stage-tag';
+  tag.textContent=line.tag;
+  p.appendChild(tag);
+  p.appendChild(document.createTextNode(line.text));
+  modelDiv.appendChild(p);
+});
+
+// ---------- SECTION 4: BUILDER ----------
+function assembleExplainer(){
+  const problem = document.getElementById('problem').value.trim();
+  const built = document.getElementById('built').value.trim();
+  const how = document.getElementById('how').value.trim();
+  const why = document.getElementById('why').value.trim();
+  const box = document.getElementById('assembledExplainer');
+  if(!problem && !built && !how && !why){
+    box.textContent = "Fill in the four boxes above to see your explainer here.";
+    box.classList.add('empty');
+    return;
+  }
+  box.classList.remove('empty');
+  box.innerHTML = [problem, built, how, why].filter(Boolean).join('&nbsp;&nbsp;/&nbsp;&nbsp;');
+}
+
+// ---------- SECTION 5: TIMER ----------
+let timerInterval = null;
+let elapsed = 0;
+function startTimer(){
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('stopBtn').disabled = false;
+  const startTime = Date.now() - elapsed;
+  timerInterval = setInterval(()=>{
+    elapsed = Date.now() - startTime;
+    document.getElementById('timerDisplay').textContent = (elapsed/1000).toFixed(1)+'s';
+  },100);
+}
+function stopTimer(){
+  clearInterval(timerInterval);
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+  const seconds = elapsed/1000;
+  const zone = document.getElementById('timerZone');
+  if(seconds < 35){
+    zone.textContent = "Quite fast — make sure a non-engineer could follow every part.";
+    zone.style.color = 'var(--error)';
+  } else if(seconds <= 60){
+    zone.textContent = "Good pace — right in the target zone.";
+    zone.style.color = 'var(--success)';
+  } else {
+    zone.textContent = "A bit long — see if 'How It Works' can be trimmed to one sentence.";
+    zone.style.color = 'var(--teal)';
+  }
+}
+function resetTimer(){
+  clearInterval(timerInterval);
+  elapsed = 0;
+  document.getElementById('timerDisplay').textContent = '0.0s';
+  document.getElementById('timerZone').textContent = 'Start speaking when you press Start';
+  document.getElementById('timerZone').style.color = '#5a7580';
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+}
+</script>
+
+</body>
+</html>
