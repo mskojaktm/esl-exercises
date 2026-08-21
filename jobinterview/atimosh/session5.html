@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 5 — Strengths, Weaknesses & Motivation</title>
+<style>
+  :root{
+    --teal:#028090;
+    --navy:#0D2B35;
+    --teal-light:#e3f3f4;
+    --success:#1e8e5a;
+    --error:#c0392b;
+    --bg:#f7fafa;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Calibri','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--navy);
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:28px 20px 22px;
+    text-align:center;
+  }
+  header .badge{
+    display:inline-block;
+    background:var(--teal);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:4px 14px;
+    border-radius:20px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+  }
+  header h1{
+    font-family:'Trebuchet MS',sans-serif;
+    margin:6px 0 4px;
+    font-size:26px;
+  }
+  header p{margin:0;opacity:0.85;font-size:14px;}
+
+  main{max-width:760px;margin:0 auto;padding:22px 16px;}
+
+  .card{
+    background:#fff;
+    border-left:6px solid var(--teal);
+    border-radius:6px;
+    box-shadow:0 2px 10px rgba(13,43,53,0.08);
+    padding:20px 22px;
+    margin-bottom:26px;
+  }
+  .section-title{
+    font-family:'Trebuchet MS',sans-serif;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:0;
+    font-size:19px;
+    color:var(--navy);
+  }
+  .section-num{
+    background:var(--teal);
+    color:#fff;
+    width:28px;height:28px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;flex-shrink:0;
+  }
+  .instructions{font-size:14px;color:#3a5560;margin-bottom:16px;}
+
+  /* Gap fill */
+  .gap-item{margin-bottom:14px;font-size:15px;line-height:1.7;}
+  .gap-item input{
+    border:none;
+    border-bottom:2px solid var(--teal);
+    background:var(--teal-light);
+    font-family:inherit;
+    font-size:15px;
+    padding:3px 6px;
+    width:190px;
+    color:var(--navy);
+  }
+  .gap-item input.correct{background:#e6f6ee;border-color:var(--success);color:var(--success);font-weight:700;}
+  .gap-item input.wrong{background:#fbeaea;border-color:var(--error);color:var(--error);}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+  .word-bank span{
+    background:var(--teal-light);border:1px solid #b9dcdf;border-radius:16px;
+    padding:4px 12px;font-size:13.5px;color:var(--teal);
+  }
+
+  /* Filler word drill */
+  .filler-box{margin-bottom:20px;}
+  .filler-num{font-weight:700;color:var(--teal);font-family:'Trebuchet MS',sans-serif;font-size:13px;margin-bottom:6px;}
+  .filler-text{font-size:15.5px;line-height:2.2;}
+  .filler-word{
+    background:#fbeaea;
+    color:var(--error);
+    border-radius:4px;
+    padding:1px 6px;
+    cursor:pointer;
+    font-weight:700;
+    transition:all .15s;
+  }
+  .filler-word.removed{
+    background:var(--teal-light);
+    color:var(--teal);
+    text-decoration:none;
+  }
+  .filler-word.removed::after{
+    content:"[pause]";
+    font-size:12px;
+  }
+  .filler-word span.original-text{display:inline;}
+  .filler-word.removed span.original-text{display:none;}
+  .filler-hint{font-size:12px;color:#5a7580;margin-top:6px;font-style:italic;}
+
+  /* Chunked model example */
+  .model-line{margin-bottom:6px;font-size:15.5px;line-height:1.7;}
+  .stage-tag{
+    display:inline-block;
+    background:var(--navy);
+    color:#fff;
+    font-size:11px;
+    font-family:'Trebuchet MS',sans-serif;
+    padding:1px 8px;
+    border-radius:4px;
+    margin-right:6px;
+    vertical-align:middle;
+  }
+
+  /* PREP builder */
+  .question-toggle{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+  .q-btn{
+    padding:8px 16px;
+    border:2px solid var(--teal);
+    border-radius:20px;
+    background:#fff;
+    color:var(--teal);
+    font-family:'Trebuchet MS',sans-serif;
+    font-weight:700;
+    font-size:13.5px;
+    cursor:pointer;
+  }
+  .q-btn.active{background:var(--teal);color:#fff;}
+
+  .part{margin-bottom:16px;}
+  .part-label{
+    font-family:'Trebuchet MS',sans-serif;
+    font-weight:700;
+    color:var(--teal);
+    font-size:14px;
+    margin-bottom:4px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .part-letter{
+    background:var(--teal);color:#fff;width:22px;height:22px;border-radius:5px;
+    display:flex;align-items:center;justify-content:center;font-size:12px;
+  }
+  .part-hint{font-size:12.5px;color:#5a7580;margin-bottom:6px;}
+  textarea{
+    width:100%;
+    min-height:50px;
+    border:2px solid #cfe3e5;
+    border-radius:6px;
+    padding:10px 12px;
+    font-family:'Calibri',sans-serif;
+    font-size:15px;
+    resize:vertical;
+  }
+  textarea:focus{outline:none;border-color:var(--teal);}
+
+  .assembled-box{
+    background:var(--teal-light);
+    border-radius:6px;
+    padding:16px;
+    font-size:15.5px;
+    line-height:1.8;
+    margin-top:10px;
+    min-height:40px;
+  }
+  .assembled-box.empty{color:#8aa3ab;font-style:italic;}
+
+  /* Timer */
+  .timer-display{
+    font-family:'Trebuchet MS',sans-serif;
+    font-size:42px;
+    font-weight:700;
+    color:var(--navy);
+    text-align:center;
+    margin:10px 0;
+  }
+  .timer-zone{text-align:center;font-size:13px;color:#5a7580;margin-bottom:10px;}
+  .timer-controls{text-align:center;}
+
+  button{
+    font-family:'Trebuchet MS',sans-serif;
+    background:var(--teal);
+    color:#fff;
+    border:none;
+    padding:9px 18px;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+    margin-right:8px;
+    margin-top:6px;
+  }
+  button.secondary{background:#fff;color:var(--teal);border:2px solid var(--teal);padding:7px 16px;}
+  button:hover{opacity:0.9;}
+  button:disabled{opacity:0.5;cursor:not-allowed;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Session 5</div>
+  <h1>Strengths, Weaknesses &amp; Motivation</h1>
+  <p>Artyom Timoshenko · PREP structure + hedging language + filler-word control</p>
+</header>
+
+<main>
+
+  <!-- SECTION 1: HEDGING VOCAB GAP-FILL -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">1</span>Vocabulary: Hedging &amp; Softening Language</h2>
+    <p class="instructions">Type the correct phrase in each gap, then click Check.</p>
+    <div class="word-bank">
+      <span>one area I'm working on</span><span>I'd say</span><span>to some extent</span>
+      <span>I tend to</span><span>I'm mindful of</span><span>I've been actively improving</span>
+    </div>
+    <div id="gapContainer"></div>
+    <button onclick="checkGaps()">Check Answers</button>
+    <button class="secondary" onclick="showGapAnswers()">Show Answers</button>
+  </div>
+
+  <!-- SECTION 2: FILLER WORD DRILL -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">2</span>Filler Words → Deliberate Pauses</h2>
+    <p class="instructions">Click each highlighted filler word to "remove" it and replace it with a silent pause. Read the cleaned-up version aloud afterward.</p>
+    <div id="fillerContainer"></div>
+    <p class="filler-hint">Tip: the urge to say "um" is usually the urge to fill silence. Let the silence stay instead.</p>
+  </div>
+
+  <!-- SECTION 3: MODEL EXAMPLE -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">3</span>Model Example — Weakness Question, PREP Structure</h2>
+    <p class="instructions">Notice how the final Point shows self-awareness and forward action.</p>
+    <div id="modelExample"></div>
+  </div>
+
+  <!-- SECTION 4: PREP BUILDER -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">4</span>Build Your PREP Answers</h2>
+    <p class="instructions">Choose a question, then fill in the four boxes.</p>
+    <div class="question-toggle">
+      <button class="q-btn active" onclick="switchQuestion('strength')">Greatest Strength</button>
+      <button class="q-btn" onclick="switchQuestion('weakness')">Area to Improve</button>
+    </div>
+    <p style="font-size:14px;color:#3a5560;margin-bottom:14px;" id="questionPrompt">
+      "What would you say is your greatest strength?"
+    </p>
+
+    <div class="part">
+      <span class="part-label"><span class="part-letter">P</span>POINT — State your answer directly</span>
+      <span class="part-hint" id="hint-point">e.g. "I'd say my greatest strength is troubleshooting technical problems methodically."</span>
+      <textarea id="point" oninput="assemblePrep()"></textarea>
+    </div>
+
+    <div class="part">
+      <span class="part-label"><span class="part-letter">R</span>REASON — Briefly explain why</span>
+      <span class="part-hint" id="hint-reason">e.g. "I tend to break a problem down into smaller parts instead of guessing at a fix."</span>
+      <textarea id="reason" oninput="assemblePrep()"></textarea>
+    </div>
+
+    <div class="part">
+      <span class="part-label"><span class="part-letter">E</span>EXAMPLE — One short, concrete example</span>
+      <span class="part-hint" id="hint-example">e.g. "During my thesis project, this approach helped me find a sensor calibration issue that had been causing inconsistent readings."</span>
+      <textarea id="example" oninput="assemblePrep()"></textarea>
+    </div>
+
+    <div class="part">
+      <span class="part-label"><span class="part-letter">P</span>POINT — Restate, connect forward</span>
+      <span class="part-hint" id="hint-point2">e.g. "It's a strength I rely on any time I'm facing an unfamiliar technical problem."</span>
+      <textarea id="point2" oninput="assemblePrep()"></textarea>
+    </div>
+
+    <span class="part-label">YOUR ASSEMBLED ANSWER</span>
+    <div class="assembled-box empty" id="assembledPrep">Fill in the four boxes above to see your answer here.</div>
+  </div>
+
+  <!-- SECTION 5: TIMER -->
+  <div class="card">
+    <h2 class="section-title"><span class="section-num">5</span>Delivery Timer</h2>
+    <p class="instructions">Deliver your PREP answer aloud, pausing between each part. Target: 30–40 seconds.</p>
+    <div class="timer-display" id="timerDisplay">0.0s</div>
+    <div class="timer-zone" id="timerZone">Start speaking when you press Start</div>
+    <div class="timer-controls">
+      <button id="startBtn" onclick="startTimer()">Start</button>
+      <button id="stopBtn" onclick="stopTimer()" disabled>Stop</button>
+      <button class="secondary" onclick="resetTimer()">Reset</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ---------- SECTION 1: GAP FILL ----------
+const gaps = [
+  {before:"", answer:"I'd say", after:" my biggest strength is staying calm under pressure."},
+  {before:"", answer:"One area I'm working on", after:" is speaking up more in group discussions."},
+  {before:"I'm comfortable with public speaking, ", answer:"to some extent", after:", though large audiences still make me nervous."},
+  {before:"", answer:"I tend to", after:" go into more technical detail than necessary — I'm working on being more concise."},
+  {before:"", answer:"I'm mindful of", after:" how much detail I give in a technical explanation."},
+  {before:"Since noticing this pattern, ", answer:"I've been actively improving", after:" by practicing shorter explanations."}
+];
+const gapContainer = document.getElementById('gapContainer');
+gaps.forEach((g,i)=>{
+  const div = document.createElement('div');
+  div.className='gap-item';
+  div.innerHTML = `${g.before}<input type="text" id="gap${i}" size="26">${g.after}`;
+  gapContainer.appendChild(div);
+});
+function normalize(s){return s.trim().toLowerCase().replace(/\s+/g,' ');}
+function checkGaps(){
+  gaps.forEach((g,i)=>{
+    const input = document.getElementById('gap'+i);
+    if(normalize(input.value) === normalize(g.answer)){
+      input.classList.add('correct'); input.classList.remove('wrong');
+    } else {
+      input.classList.add('wrong'); input.classList.remove('correct');
+    }
+  });
+}
+function showGapAnswers(){
+  gaps.forEach((g,i)=>{
+    const input = document.getElementById('gap'+i);
+    input.value = g.answer;
+    input.classList.add('correct'); input.classList.remove('wrong');
+  });
+}
+
+// ---------- SECTION 2: FILLER WORD DRILL ----------
+const fillerSamples = [
+  {
+    parts: [
+      {text:"So, ", filler:false},
+      {text:"um", filler:true},
+      {text:", I'd say my biggest strength is, ", filler:false},
+      {text:"like", filler:true},
+      {text:", problem-solving. I ", filler:false},
+      {text:"you know", filler:true},
+      {text:", tend to stay calm when something goes wrong."}
+    ]
+  },
+  {
+    parts: [
+      {text:"One area I'm working on is, ", filler:false},
+      {text:"um", filler:true},
+      {text:", public speaking. In my program, ", filler:false},
+      {text:"like", filler:true},
+      {text:", presentations were mostly in small groups, so, ", filler:false},
+      {text:"you know", filler:true},
+      {text:", I didn't get much practice with larger audiences."}
+    ]
+  }
+];
+
+const fillerContainer = document.getElementById('fillerContainer');
+fillerSamples.forEach((sample,i)=>{
+  const box = document.createElement('div');
+  box.className='filler-box';
+  const num = document.createElement('div');
+  num.className='filler-num';
+  num.textContent='Sample '+(i+1);
+  box.appendChild(num);
+
+  const textDiv = document.createElement('div');
+  textDiv.className='filler-text';
+  sample.parts.forEach(part=>{
+    if(part.filler){
+      const span = document.createElement('span');
+      span.className='filler-word';
+      const inner = document.createElement('span');
+      inner.className='original-text';
+      inner.textContent = part.text;
+      span.appendChild(inner);
+      span.addEventListener('click',()=>{
+        span.classList.toggle('removed');
+      });
+      textDiv.appendChild(span);
+    } else {
+      textDiv.appendChild(document.createTextNode(part.text));
+    }
+  });
+  box.appendChild(textDiv);
+  fillerContainer.appendChild(box);
+});
+
+// ---------- SECTION 3: MODEL EXAMPLE ----------
+const modelLines = [
+  {tag:"P", text:"One area I'm working on is public speaking in front of large groups."},
+  {tag:"R", text:"In my program, presentations were usually in small groups, so I didn't have many chances to practice speaking to a bigger audience."},
+  {tag:"E", text:"That's why I've been looking for more opportunities to present, like volunteering to lead updates in group projects."},
+  {tag:"P", text:"It's something I'm actively improving, and I'm already noticing more confidence each time."}
+];
+const modelDiv = document.getElementById('modelExample');
+modelLines.forEach(line=>{
+  const p = document.createElement('div');
+  p.className='model-line';
+  const tag = document.createElement('span');
+  tag.className='stage-tag';
+  tag.textContent=line.tag;
+  p.appendChild(tag);
+  p.appendChild(document.createTextNode(line.text));
+  modelDiv.appendChild(p);
+});
+
+// ---------- SECTION 4: PREP BUILDER ----------
+const questionData = {
+  strength: {
+    prompt: '"What would you say is your greatest strength?"',
+    hints: {
+      point: 'e.g. "I\'d say my greatest strength is troubleshooting technical problems methodically."',
+      reason: 'e.g. "I tend to break a problem down into smaller parts instead of guessing at a fix."',
+      example: 'e.g. "During my thesis project, this approach helped me find a sensor calibration issue that had been causing inconsistent readings."',
+      point2: 'e.g. "It\'s a strength I rely on any time I\'m facing an unfamiliar technical problem."'
+    }
+  },
+  weakness: {
+    prompt: '"What\'s an area you\'re currently working on improving?"',
+    hints: {
+      point: 'e.g. "One area I\'m working on is public speaking in front of large groups."',
+      reason: 'e.g. "In my program, presentations were usually in small groups, so I had limited practice with bigger audiences."',
+      example: 'e.g. "That\'s why I\'ve been looking for chances to present more, like leading updates in group projects."',
+      point2: 'e.g. "It\'s something I\'m actively improving, and I\'m already noticing more confidence."'
+    }
+  }
+};
+
+function switchQuestion(type){
+  document.querySelectorAll('.q-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('questionPrompt').textContent = questionData[type].prompt;
+  document.getElementById('hint-point').textContent = questionData[type].hints.point;
+  document.getElementById('hint-reason').textContent = questionData[type].hints.reason;
+  document.getElementById('hint-example').textContent = questionData[type].hints.example;
+  document.getElementById('hint-point2').textContent = questionData[type].hints.point2;
+}
+
+function assemblePrep(){
+  const p1 = document.getElementById('point').value.trim();
+  const r = document.getElementById('reason').value.trim();
+  const e = document.getElementById('example').value.trim();
+  const p2 = document.getElementById('point2').value.trim();
+  const box = document.getElementById('assembledPrep');
+  if(!p1 && !r && !e && !p2){
+    box.textContent = "Fill in the four boxes above to see your answer here.";
+    box.classList.add('empty');
+    return;
+  }
+  box.classList.remove('empty');
+  box.innerHTML = [p1, r, e, p2].filter(Boolean).join('&nbsp;&nbsp;/&nbsp;&nbsp;');
+}
+
+// ---------- SECTION 5: TIMER ----------
+let timerInterval = null;
+let elapsed = 0;
+function startTimer(){
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('stopBtn').disabled = false;
+  const startTime = Date.now() - elapsed;
+  timerInterval = setInterval(()=>{
+    elapsed = Date.now() - startTime;
+    document.getElementById('timerDisplay').textContent = (elapsed/1000).toFixed(1)+'s';
+  },100);
+}
+function stopTimer(){
+  clearInterval(timerInterval);
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+  const seconds = elapsed/1000;
+  const zone = document.getElementById('timerZone');
+  if(seconds < 22){
+    zone.textContent = "Quite fast — make sure the Example has enough detail.";
+    zone.style.color = 'var(--error)';
+  } else if(seconds <= 40){
+    zone.textContent = "Good pace — right in the target zone.";
+    zone.style.color = 'var(--success)';
+  } else {
+    zone.textContent = "A bit long — see if the Reason can be trimmed to one sentence.";
+    zone.style.color = 'var(--teal)';
+  }
+}
+function resetTimer(){
+  clearInterval(timerInterval);
+  elapsed = 0;
+  document.getElementById('timerDisplay').textContent = '0.0s';
+  document.getElementById('timerZone').textContent = 'Start speaking when you press Start';
+  document.getElementById('timerZone').style.color = '#5a7580';
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+}
+</script>
+
+</body>
+</html>
