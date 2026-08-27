@@ -1,1 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emma's Back-to-School English Round-Up (Challenge Edition) 🤠</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap');
 
+  :root {
+    --navy: #0D2B35;
+    --teal: #028090;
+    --gold: #E0A458;
+    --cream: #FFF8EC;
+    --green: #2E7D32;
+    --green-bg: #E8F5E9;
+    --red: #C62828;
+    --red-bg: #FDECEA;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+    background: linear-gradient(180deg, var(--cream) 0%, #FCEFD9 100%);
+    color: var(--navy);
+    margin: 0;
+    padding: 0 0 60px 0;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, #164a5c 100%);
+    color: white;
+    padding: 28px 20px 24px;
+    text-align: center;
+    border-bottom: 6px solid var(--gold);
+  }
+
+  header h1 { font-family: 'Trebuchet MS', sans-serif; margin: 0 0 6px; font-size: 1.7em; }
+  header p { margin: 0; font-size: 1.02em; opacity: 0.95; }
+
+  .score-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--teal); color: white;
+    padding: 12px 20px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  }
+  .score-bar .score { font-family: 'Trebuchet MS', sans-serif; font-size: 1.1em; font-weight: bold; }
+  .score-bar .buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+  .score-bar button {
+    background: var(--gold); color: var(--navy); border: none;
+    padding: 9px 16px; border-radius: 8px; font-weight: bold; cursor: pointer;
+    font-size: 0.9em; transition: transform 0.1s;
+  }
+  .score-bar button:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .score-bar button.secondary { background: #ffffffdd; }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 20px; }
+
+  .section {
+    background: white; border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(13,43,53,0.12);
+    margin-bottom: 24px; border-left: 7px solid var(--teal); overflow: hidden;
+  }
+  .section-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #F0F7F8; }
+  .badge {
+    background: var(--teal); color: white; width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Trebuchet MS', sans-serif; font-weight: bold; flex-shrink: 0;
+  }
+  .section-header h2 { font-family: 'Trebuchet MS', sans-serif; margin: 0; font-size: 1.15em; color: var(--navy); }
+  .section-body { padding: 18px 20px 22px; }
+  .instruction { font-style: italic; color: #5a6b6f; margin: 0 0 14px; font-size: 0.93em; }
+
+  .item {
+    margin-bottom: 14px; padding: 10px 12px; border-radius: 8px;
+    background: #fafcfc; border: 1px solid #e5eef0;
+  }
+  .item.correct { background: var(--green-bg); border-color: var(--green); }
+  .item.incorrect { background: var(--red-bg); border-color: var(--red); }
+  .item label { display: block; margin-bottom: 6px; font-size: 1em; line-height: 1.5; }
+
+  .item input[type="text"] {
+    padding: 7px 10px; border: 2px solid #cfe0e2; border-radius: 6px;
+    font-size: 1em; width: 140px; font-family: Calibri, sans-serif;
+  }
+  .item input[type="text"]:focus { outline: none; border-color: var(--teal); }
+
+  .feedback-icon { font-weight: bold; margin-left: 8px; }
+  .feedback-icon.ok { color: var(--green); }
+  .feedback-icon.no { color: var(--red); }
+  .correct-answer-hint { color: var(--teal); font-size: 0.86em; margin-left: 8px; font-style: italic; }
+
+  .mcq-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .mcq-btn {
+    background: white; border: 2px solid var(--teal); color: var(--teal);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 0.93em; font-weight: bold;
+    transition: all 0.15s;
+  }
+  .mcq-btn:hover { background: #e6f4f5; }
+  .mcq-btn.selected { background: var(--teal); color: white; }
+  .mcq-btn.correct-flag { background: var(--green); border-color: var(--green); color: white; }
+  .mcq-btn.incorrect-flag { background: var(--red); border-color: var(--red); color: white; }
+  .mcq-btn:disabled { cursor: default; opacity: 0.85; }
+
+  .emoji-lg { font-size: 1.5em; margin-right: 6px; }
+  .scenario-box {
+    background: var(--cream); border-radius: 8px; padding: 10px 14px;
+    margin-bottom: 14px; font-size: 0.95em; border: 1px solid #f0dcb8;
+  }
+
+  textarea {
+    width: 100%; min-height: 100px; padding: 10px; border: 2px solid #cfe0e2;
+    border-radius: 8px; font-family: Calibri, sans-serif; font-size: 1em; resize: vertical;
+  }
+  textarea:focus { outline: none; border-color: var(--teal); }
+  .checklist { list-style: none; padding: 0; margin: 12px 0 0; }
+  .checklist li { margin-bottom: 6px; font-size: 0.93em; }
+  .checklist input { margin-right: 8px; }
+
+  footer { text-align: center; color: #7a8a8d; font-size: 0.85em; margin-top: 20px; padding: 0 20px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🤠 Emma's Back-to-School Round-Up — Challenge Edition ⭐</h1>
+  <p>You know a lot already! Let's push a little further before 3rd grade starts.</p>
+</header>
+
+<div class="score-bar">
+  <div class="score">Score: <span id="scoreDisplay">0</span> / <span id="totalDisplay">0</span></div>
+  <div class="buttons">
+    <button onclick="checkAll()">✅ Check Answers</button>
+    <button class="secondary" onclick="showAll()">👀 Show Answers</button>
+    <button class="secondary" onclick="resetAll()">🔄 Reset</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 1: ALPHABET -->
+  <div class="section">
+    <div class="section-header"><div class="badge">1</div><h2>Alphabet Challenge 🔤</h2></div>
+    <div class="section-body">
+      <p class="instruction">Type the letter (capital) that each word starts with. No hints this time!</p>
+
+      <div class="item" data-type="text" data-answer="g"><label><span class="emoji-lg">🦒</span> starts with <input type="text" placeholder="?"></label></div>
+      <div class="item" data-type="text" data-answer="u"><label><span class="emoji-lg">☂️</span> starts with <input type="text" placeholder="?"></label></div>
+      <div class="item" data-type="text" data-answer="q"><label><span class="emoji-lg">👑</span> starts with <input type="text" placeholder="?"></label></div>
+      <div class="item" data-type="text" data-answer="z"><label><span class="emoji-lg">🦓</span> starts with <input type="text" placeholder="?"></label></div>
+      <div class="item" data-type="text" data-answer="w"><label><span class="emoji-lg">🐺</span> starts with <input type="text" placeholder="?"></label></div>
+    </div>
+  </div>
+
+  <!-- 2: PERSONAL INTRO -->
+  <div class="section">
+    <div class="section-header"><div class="badge">2</div><h2>Personal Introduction 👋</h2></div>
+    <div class="section-body">
+      <p class="instruction">Complete the conversation. Think carefully — no word bank this time.</p>
+
+      <div class="item" data-type="text" data-answer="hello"><label>A: <input type="text" placeholder="..."> ! My name is Tom.</label></div>
+      <div class="item" data-type="text" data-answer="is"><label>B: Hi Tom! My name <input type="text" placeholder="..."> Emma.</label></div>
+      <div class="item" data-type="text" data-answer="old"><label>A: How <input type="text" placeholder="..."> are you?</label></div>
+      <div class="item" data-type="text" data-answer="am"><label>B: I <input type="text" placeholder="..."> ten years old.</label></div>
+      <div class="item" data-type="text" data-answer="from"><label>A: Where are you <input type="text" placeholder="..."> ?</label></div>
+
+      <div class="scenario-box">✍️ Now YOU answer for real: <em>Where are you from?</em></div>
+      <div class="item" data-type="text" data-answer="russia"><label>I am from <input type="text" placeholder="type your country"> .</label></div>
+    </div>
+  </div>
+
+  <!-- 3: NUMBERS BOTH WAYS -->
+  <div class="section">
+    <div class="section-header"><div class="badge">3</div><h2>Number Ranch — Both Ways 🔢</h2></div>
+    <div class="section-body">
+      <p class="instruction">Some questions give you a word — type the digit. Some give you a digit — type the word.</p>
+
+      <div class="item" data-type="text" data-answer="16"><label>sixteen = <input type="text" placeholder="digit"></label></div>
+      <div class="item" data-type="text" data-answer="twenty-two"><label>22 = <input type="text" placeholder="word"></label></div>
+      <div class="item" data-type="text" data-answer="19"><label>nineteen = <input type="text" placeholder="digit"></label></div>
+      <div class="item" data-type="text" data-answer="thirty"><label>30 = <input type="text" placeholder="word"></label></div>
+      <div class="item" data-type="text" data-answer="14"><label>fourteen = <input type="text" placeholder="digit"></label></div>
+      <div class="item" data-type="text" data-answer="twenty-five"><label>25 = <input type="text" placeholder="word"></label></div>
+    </div>
+  </div>
+
+  <!-- 4: COLORFUL DESCRIPTIONS -->
+  <div class="section">
+    <div class="section-header"><div class="badge">4</div><h2>Colorful Descriptions 🎨</h2></div>
+    <div class="section-body">
+      <p class="instruction">Build the full phrase: color + noun. Example: 🔴🎩 → <em>a red hat</em></p>
+
+      <div class="item" data-type="text" data-answer="a brown horse"><label>🟤🐎 → <input type="text" placeholder="a ... ..."></label></div>
+      <div class="item" data-type="text" data-answer="a yellow star"><label>🟡⭐ → <input type="text" placeholder="a ... ..."></label></div>
+      <div class="item" data-type="text" data-answer="a green apple"><label>🟢🍏 → <input type="text" placeholder="a ... ..."></label></div>
+      <div class="item" data-type="text" data-answer="a black cat"><label>⚫🐱 → <input type="text" placeholder="a ... ..."></label></div>
+      <div class="item" data-type="text" data-answer="a white horse"><label>⚪🐎 → <input type="text" placeholder="a ... ..."></label></div>
+    </div>
+  </div>
+
+  <!-- 5: FAMILY + POSSESSIVES -->
+  <div class="section">
+    <div class="section-header"><div class="badge">5</div><h2>Family &amp; Possessives 🌳</h2></div>
+    <div class="section-body">
+      <p class="instruction">Type the family word, then complete the possessive sentences with 's.</p>
+
+      <div class="item" data-type="text" data-answer="grandmother"><label>👵 = <input type="text" placeholder="..."></label></div>
+      <div class="item" data-type="text" data-answer="grandfather"><label>👴 = <input type="text" placeholder="..."></label></div>
+
+      <div class="scenario-box">Now complete with the correct name + 's:</div>
+      <div class="item" data-type="text" data-answer="emma's"><label>This hat is <input type="text" placeholder="..."> (Emma). It's her hat.</label></div>
+      <div class="item" data-type="text" data-answer="tom's"><label>That horse is <input type="text" placeholder="..."> (Tom). It's his horse.</label></div>
+    </div>
+  </div>
+
+  <!-- 6: PLURALS -->
+  <div class="section">
+    <div class="section-header"><div class="badge">6</div><h2>Plural Power ➕</h2></div>
+    <div class="section-body">
+      <p class="instruction">Type the plural form. Watch out — some are tricky!</p>
+
+      <div class="item" data-type="text" data-answer="cats"><label>one cat → two <input type="text" placeholder="..."></label></div>
+      <div class="item" data-type="text" data-answer="boxes"><label>one box → two <input type="text" placeholder="..."></label></div>
+      <div class="item" data-type="text" data-answer="horses"><label>one horse → two <input type="text" placeholder="..."></label></div>
+      <div class="item" data-type="text" data-answer="children"><label>one child → two <input type="text" placeholder="..."> (tricky!)</label></div>
+      <div class="item" data-type="text" data-answer="mice"><label>one mouse → two <input type="text" placeholder="..."> (tricky!)</label></div>
+    </div>
+  </div>
+
+  <!-- 7: THIS/THAT/THESE/THOSE -->
+  <div class="section">
+    <div class="section-header"><div class="badge">7</div><h2>This / That / These / Those 👉</h2></div>
+    <div class="section-body">
+      <p class="instruction">Choose the correct word: near or far, one or many?</p>
+
+      <div class="item" data-type="mcq" data-answer="This">
+        <label><span class="emoji-lg">📍🐴</span> ___ is my horse. (one, near you)</label>
+        <div class="mcq-row"><button class="mcq-btn" data-value="This">This</button><button class="mcq-btn" data-value="That">That</button><button class="mcq-btn" data-value="These">These</button><button class="mcq-btn" data-value="Those">Those</button></div>
+      </div>
+      <div class="item" data-type="mcq" data-answer="That">
+        <label><span class="emoji-lg">🔭🏔️</span> ___ is a mountain far away. (one, far away)</label>
+        <div class="mcq-row"><button class="mcq-btn" data-value="This">This</button><button class="mcq-btn" data-value="That">That</button><button class="mcq-btn" data-value="These">These</button><button class="mcq-btn" data-value="Those">Those</button></div>
+      </div>
+      <div class="item" data-type="mcq" data-answer="These">
+        <label><span class="emoji-lg">📍🐄🐄</span> ___ are my cows. (many, near you)</label>
+        <div class="mcq-row"><button class="mcq-btn" data-value="This">This</button><button class="mcq-btn" data-value="That">That</button><button class="mcq-btn" data-value="These">These</button><button class="mcq-btn" data-value="Those">Those</button></div>
+      </div>
+      <div class="item" data-type="mcq" data-answer="Those">
+        <label><span class="emoji-lg">🔭🐑🐑</span> ___ are sheep far away. (many, far away)</label>
+        <div class="mcq-row"><button class="mcq-btn" data-value="This">This</button><button class="mcq-btn" data-value="That">That</button><button class="mcq-btn" data-value="These">These</button><button class="mcq-btn" data-value="Those">Those</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8: PREPOSITIONS -->
+  <div class="section">
+    <div class="section-header"><div class="badge">8</div><h2>Where Is It? 📍</h2></div>
+    <div class="section-body">
+      <p class="instruction">Type the correct preposition: in, on, under, or next to.</p>
+
+      <div class="item" data-type="text" data-answer="on"><label>The hat is <input type="text" placeholder="..."> the table. 🎩🪑</label></div>
+      <div class="item" data-type="text" data-answer="under"><label>The cat is <input type="text" placeholder="..."> the bed. 🐱🛏️</label></div>
+      <div class="item" data-type="text" data-answer="in"><label>The book is <input type="text" placeholder="..."> the bag. 📕🎒</label></div>
+      <div class="item" data-type="text" data-answer="next to"><label>The dog is <input type="text" placeholder="..."> the horse. 🐕🐎</label></div>
+    </div>
+  </div>
+
+  <!-- 9: TO BE — statements, negatives, questions -->
+  <div class="section">
+    <div class="section-header"><div class="badge">9</div><h2>Verb "To Be" — Full Power 🚂</h2></div>
+    <div class="section-body">
+      <p class="instruction">Fill in the correct form: am / is / are, or the negative (isn't / aren't), or reorder for a question.</p>
+
+      <div class="item" data-type="text" data-answer="am"><label>I <input type="text" placeholder="..."> a student.</label></div>
+      <div class="item" data-type="text" data-answer="isn't"><label>He <input type="text" placeholder="..."> (is not) my brother. He is my friend.</label></div>
+      <div class="item" data-type="text" data-answer="aren't"><label>They <input type="text" placeholder="..."> (are not) cowboys. They are teachers.</label></div>
+      <div class="item" data-type="text" data-answer="is she"><label>Question: ___ your sister? (she / is) → <input type="text" placeholder="type the 2 words"></label></div>
+      <div class="item" data-type="text" data-answer="are you"><label>Question: How old ___ ? (you / are) → <input type="text" placeholder="type the 2 words"></label></div>
+    </div>
+  </div>
+
+  <!-- 10: HAVE GOT — statements, negatives, questions -->
+  <div class="section">
+    <div class="section-header"><div class="badge">10</div><h2>"Have Got" — Full Power 🛒</h2></div>
+    <div class="section-body">
+      <p class="instruction">Fill in have / has, or the negative (haven't / hasn't), or reorder for a question.</p>
+
+      <div class="item" data-type="text" data-answer="have"><label>I <input type="text" placeholder="..."> got a hat. 🤠</label></div>
+      <div class="item" data-type="text" data-answer="hasn't"><label>She <input type="text" placeholder="..."> (has not) got a dog. She has got a cat.</label></div>
+      <div class="item" data-type="text" data-answer="haven't"><label>We <input type="text" placeholder="..."> (have not) got a car. We have got a horse.</label></div>
+      <div class="item" data-type="text" data-answer="have you"><label>Question: ___ got a horse? (you / have) → <input type="text" placeholder="type the 2 words"></label></div>
+    </div>
+  </div>
+
+  <!-- 11: ANIMAL COUNT (plurals in context) -->
+  <div class="section">
+    <div class="section-header"><div class="badge">11</div><h2>Animal Count 🐄</h2></div>
+    <div class="section-body">
+      <p class="instruction">Complete each sentence with the plural animal word.</p>
+
+      <div class="item" data-type="text" data-answer="cows"><label>There are three <input type="text" placeholder="..."> in the field. 🐄🐄🐄</label></div>
+      <div class="item" data-type="text" data-answer="hens"><label>There are five <input type="text" placeholder="..."> near the barn. 🐔🐔🐔🐔🐔</label></div>
+      <div class="item" data-type="text" data-answer="sheep"><label>There are ten <input type="text" placeholder="..."> on the hill. 🐑 (tricky — no change!)</label></div>
+    </div>
+  </div>
+
+  <!-- 12: WRITING CHALLENGE (not auto-scored) -->
+  <div class="section">
+    <div class="section-header"><div class="badge">12</div><h2>Writing Challenge ✍️</h2></div>
+    <div class="section-body">
+      <p class="instruction">Write 3–4 sentences about yourself and your family. Try to use: <strong>to be</strong>, <strong>have got</strong>, a color, and a number. This part is not auto-checked — show it to your teacher!</p>
+      <textarea id="writingTask" placeholder="Example: My name is Emma. I am ten years old. I have got a brown dog..."></textarea>
+      <ul class="checklist">
+        <li><label><input type="checkbox"> I used "am / is / are"</label></li>
+        <li><label><input type="checkbox"> I used "have got / has got"</label></li>
+        <li><label><input type="checkbox"> I used a color word</label></li>
+        <li><label><input type="checkbox"> I used a number</label></li>
+        <li><label><input type="checkbox"> I checked my spelling</label></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer>🌟 Amazing work, Emma! You're more than ready for 3rd grade English! 🌟</footer>
+
+<script>
+  document.querySelectorAll('.item[data-type="mcq"]').forEach(item => {
+    const buttons = item.querySelectorAll('.mcq-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        buttons.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        item.dataset.selected = btn.dataset.value;
+      });
+    });
+  });
+
+  function normalize(str) {
+    return (str || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  }
+
+  function checkAll() {
+    let correct = 0;
+    let total = 0;
+
+    document.querySelectorAll('.item[data-type]').forEach(item => {
+      total++;
+      const type = item.dataset.type;
+      const answer = normalize(item.dataset.answer);
+      item.classList.remove('correct', 'incorrect');
+      item.querySelectorAll('.feedback-icon, .correct-answer-hint').forEach(el => el.remove());
+
+      if (type === 'text') {
+        const input = item.querySelector('input[type="text"]');
+        const val = normalize(input.value);
+        const isCorrect = val === answer;
+        item.classList.add(isCorrect ? 'correct' : 'incorrect');
+        const icon = document.createElement('span');
+        icon.className = 'feedback-icon ' + (isCorrect ? 'ok' : 'no');
+        icon.textContent = isCorrect ? '✓' : '✗';
+        input.insertAdjacentElement('afterend', icon);
+        if (!isCorrect) {
+          const hint = document.createElement('span');
+          hint.className = 'correct-answer-hint';
+          hint.textContent = '(' + item.dataset.answer + ')';
+          icon.insertAdjacentElement('afterend', hint);
+        }
+        if (isCorrect) correct++;
+      } else if (type === 'mcq') {
+        const selected = item.dataset.selected;
+        const buttons = item.querySelectorAll('.mcq-btn');
+        const isCorrect = selected === item.dataset.answer;
+        item.classList.add(isCorrect ? 'correct' : 'incorrect');
+        buttons.forEach(b => {
+          b.disabled = true;
+          if (b.dataset.value === item.dataset.answer) b.classList.add('correct-flag');
+          else if (b.dataset.value === selected) b.classList.add('incorrect-flag');
+        });
+        if (isCorrect) correct++;
+      }
+    });
+
+    document.getElementById('scoreDisplay').textContent = correct;
+    document.getElementById('totalDisplay').textContent = total;
+  }
+
+  function showAll() {
+    document.querySelectorAll('.item[data-type]').forEach(item => {
+      const type = item.dataset.type;
+      item.classList.remove('correct', 'incorrect');
+      item.querySelectorAll('.feedback-icon, .correct-answer-hint').forEach(el => el.remove());
+
+      if (type === 'text') {
+        item.querySelector('input[type="text"]').value = item.dataset.answer;
+      } else if (type === 'mcq') {
+        const buttons = item.querySelectorAll('.mcq-btn');
+        buttons.forEach(b => {
+          b.classList.remove('selected', 'incorrect-flag');
+          if (b.dataset.value === item.dataset.answer) b.classList.add('correct-flag');
+        });
+        item.dataset.selected = item.dataset.answer;
+      }
+    });
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.item[data-type]').forEach(item => {
+      item.classList.remove('correct', 'incorrect');
+      item.querySelectorAll('.feedback-icon, .correct-answer-hint').forEach(el => el.remove());
+      const type = item.dataset.type;
+      if (type === 'text') {
+        item.querySelector('input[type="text"]').value = '';
+      } else if (type === 'mcq') {
+        item.querySelectorAll('.mcq-btn').forEach(b => {
+          b.classList.remove('selected', 'correct-flag', 'incorrect-flag');
+          b.disabled = false;
+        });
+        delete item.dataset.selected;
+      }
+    });
+    document.getElementById('scoreDisplay').textContent = '0';
+    document.getElementById('totalDisplay').textContent = document.querySelectorAll('.item[data-type]').length;
+  }
+
+  document.getElementById('totalDisplay').textContent = document.querySelectorAll('.item[data-type]').length;
+</script>
+
+</body>
+</html>
