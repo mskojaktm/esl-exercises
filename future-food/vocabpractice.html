@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Food — Vocabulary Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#028090;
+    --teal-dark:#016472;
+    --navy:#0D2B35;
+    --bg:#f4f8f8;
+    --card:#ffffff;
+    --correct:#2e7d32;
+    --correct-bg:#e8f5e9;
+    --wrong:#c62828;
+    --wrong-bg:#fdecea;
+    --gray:#7a8a90;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Calibri, "Trebuchet MS", sans-serif;
+    background:var(--bg);
+    color:var(--navy);
+    padding-bottom:80px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:28px 20px 22px;
+    text-align:center;
+  }
+  header h1{
+    font-family:"Trebuchet MS", sans-serif;
+    margin:0 0 6px;
+    font-size:1.6em;
+  }
+  header p{
+    margin:0;
+    color:#bcd7db;
+    font-size:0.95em;
+  }
+  .container{
+    max-width:780px;
+    margin:0 auto;
+    padding:20px 16px;
+  }
+  .section{
+    background:var(--card);
+    border-left:6px solid var(--teal);
+    border-radius:8px;
+    box-shadow:0 2px 10px rgba(13,43,53,0.08);
+    margin-bottom:26px;
+    padding:20px 22px 24px;
+  }
+  .section-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .badge{
+    background:var(--teal);
+    color:#fff;
+    font-family:"Trebuchet MS", sans-serif;
+    font-weight:bold;
+    width:30px;height:30px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    font-size:0.95em;
+  }
+  .section-title{
+    font-family:"Trebuchet MS", sans-serif;
+    font-size:1.2em;
+    color:var(--navy);
+    margin:0;
+  }
+  .section-sub{
+    margin:0 0 16px 42px;
+    color:var(--gray);
+    font-size:0.92em;
+  }
+  .item{
+    margin-bottom:14px;
+    padding:12px 14px;
+    background:#fafcfc;
+    border-radius:6px;
+    border:1px solid #e4edee;
+  }
+  .item.correct{background:var(--correct-bg); border-color:#b7dfba;}
+  .item.wrong{background:var(--wrong-bg); border-color:#f3c2be;}
+  .item-text{margin-bottom:8px; font-size:1em;}
+  .item-text b{color:var(--teal-dark);}
+  select, input[type=text]{
+    font-family:Calibri, sans-serif;
+    font-size:0.98em;
+    padding:6px 8px;
+    border-radius:5px;
+    border:1px solid #c7d6d8;
+    width:100%;
+    max-width:340px;
+  }
+  select:focus, input[type=text]:focus{outline:2px solid var(--teal);}
+  .mcq-options{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;}
+  .mcq-btn{
+    padding:7px 14px;
+    border:1px solid var(--teal);
+    color:var(--teal-dark);
+    background:#fff;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:0.92em;
+    transition:0.15s;
+  }
+  .mcq-btn:hover{background:#e6f4f5;}
+  .mcq-btn.selected{background:var(--teal); color:#fff;}
+  .mcq-btn.correct-answer{background:var(--correct); border-color:var(--correct); color:#fff;}
+  .mcq-btn.wrong-answer{background:var(--wrong); border-color:var(--wrong); color:#fff;}
+  .cat-row{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+  .cat-word{font-weight:bold; color:var(--navy); min-width:160px;}
+  .cat-buttons{display:flex; gap:6px;}
+  .cat-btn{
+    padding:6px 12px;
+    border:1px solid var(--gray);
+    background:#fff;
+    border-radius:16px;
+    cursor:pointer;
+    font-size:0.88em;
+  }
+  .cat-btn.selected{background:var(--navy); color:#fff; border-color:var(--navy);}
+  .feedback{
+    margin-top:6px;
+    font-size:0.88em;
+    font-weight:bold;
+  }
+  .feedback.ok{color:var(--correct);}
+  .feedback.no{color:var(--wrong);}
+  textarea{
+    width:100%;
+    min-height:60px;
+    font-family:Calibri, sans-serif;
+    font-size:0.98em;
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #c7d6d8;
+    resize:vertical;
+  }
+  .wordbank{
+    background:#e6f4f5;
+    border-radius:6px;
+    padding:10px 14px;
+    margin-bottom:16px;
+    font-size:0.92em;
+    color:var(--teal-dark);
+  }
+  .wordbank b{color:var(--navy);}
+  .controls{
+    display:flex;
+    gap:12px;
+    margin:10px 0 30px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    padding:11px 22px;
+    border-radius:24px;
+    border:none;
+    font-family:"Trebuchet MS", sans-serif;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:0.95em;
+  }
+  .btn-primary{background:var(--teal); color:#fff;}
+  .btn-primary:hover{background:var(--teal-dark);}
+  .btn-secondary{background:#fff; color:var(--teal-dark); border:1px solid var(--teal);}
+  .btn-reset{background:#fff; color:var(--wrong); border:1px solid var(--wrong);}
+  .tracker{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--navy);
+    color:#fff;
+    padding:10px 20px;
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    font-family:"Trebuchet MS", sans-serif;
+    font-size:0.9em;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  }
+  .tracker span{display:flex; align-items:center; gap:6px;}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+  .dot-correct{background:#6fcf97;}
+  .dot-wrong{background:#eb5757;}
+  .dot-checked{background:#56ccf2;}
+  .model-answer{
+    margin-top:8px;
+    padding:10px 12px;
+    background:#f0f0f0;
+    border-radius:6px;
+    font-size:0.9em;
+    color:var(--navy);
+    display:none;
+  }
+  footer{
+    text-align:center;
+    color:var(--gray);
+    font-size:0.85em;
+    padding:20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🍽 Future Food — Vocabulary Practice</h1>
+  <p>Lev · B1 → B2 · Based on "Future Food — The Menu of 2030"</p>
+</header>
+
+<div class="tracker">
+  <span><span class="dot dot-correct"></span> Correct: <b id="scoreCorrect">0</b></span>
+  <span><span class="dot dot-wrong"></span> Wrong: <b id="scoreWrong">0</b></span>
+  <span><span class="dot dot-checked"></span> Checked: <b id="scoreChecked">0</b>/40</span>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: MATCHING -->
+  <div class="section" id="section1">
+    <div class="section-header"><div class="badge">1</div><h2 class="section-title">Match the word to its definition</h2></div>
+    <p class="section-sub">Choose the correct definition for each word.</p>
+    <div id="matchList"></div>
+  </div>
+
+  <!-- SECTION 2: GAP FILL -->
+  <div class="section" id="section2">
+    <div class="section-header"><div class="badge">2</div><h2 class="section-title">Complete the sentences</h2></div>
+    <p class="section-sub">Type the correct word from the box. Watch the word form!</p>
+    <div class="wordbank"><b>Word bank:</b> edible, abundantly, synthetic, bland, algae, tweaking, sustainable, texture</div>
+    <div id="gapList"></div>
+  </div>
+
+  <!-- SECTION 3: MULTIPLE CHOICE -->
+  <div class="section" id="section3">
+    <div class="section-header"><div class="badge">3</div><h2 class="section-title">Choose the correct word</h2></div>
+    <p class="section-sub">Click the option that best completes the sentence.</p>
+    <div id="mcqList"></div>
+  </div>
+
+  <!-- SECTION 4: CATEGORIZE -->
+  <div class="section" id="section4">
+    <div class="section-header"><div class="badge">4</div><h2 class="section-title">Categorize the words</h2></div>
+    <p class="section-sub">Is the word about Food, Science, or General life? (Same categories as the vocab page.)</p>
+    <div id="catList"></div>
+  </div>
+
+  <!-- SECTION 5: FREE PRODUCTION -->
+  <div class="section" id="section5">
+    <div class="section-header"><div class="badge">5</div><h2 class="section-title">Your turn — write about the future</h2></div>
+    <p class="section-sub">Write one sentence for each prompt using the target word. There's no auto-check here — click "Show model answer" to compare after you write.</p>
+    <div id="writeList"></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-primary" onclick="checkAll()">Check Answers</button>
+    <button class="btn btn-secondary" onclick="showAll()">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetAll()">Reset</button>
+  </div>
+
+</div>
+
+<footer>Future Food · Vocabulary Practice · mskojaktm / esl-exercises</footer>
+
+<script>
+// ---------- DATA ----------
+const matchData = [
+  {word:"edible", def:"safe or suitable to be eaten", options:["safe or suitable to be eaten","made by artificial or chemical processes","having little or no flavor","in large quantities"]},
+  {word:"stem cells", def:"basic cells that can develop into many different cell types", options:["basic cells that can develop into many different cell types","animals kept on a farm for meat or milk","simple water plants without roots or leaves","fuel produced from living matter"]},
+  {word:"aquaculture", def:"the farming of fish and other water creatures", options:["the farming of fish and other water creatures","the way something feels when touched or eaten","able to continue without damaging the environment","having DNA changed artificially"]},
+  {word:"genetically modified", def:"having DNA changed artificially to give specific characteristics", options:["having DNA changed artificially to give specific characteristics","not easily affected by illness","made by artificial or chemical processes","in large quantities; plentifully"]},
+  {word:"disease-resistant", def:"not easily affected or damaged by illness", options:["not easily affected or damaged by illness","safe or suitable to be eaten","the part of food that helps digestion","to change something to suit personal needs"]},
+  {word:"livestock", def:"animals kept on a farm for meat, milk, etc.", options:["animals kept on a farm for meat, milk, etc.","simple water plants without roots or leaves","basic cells that can develop into other cells","making small adjustments or improvements"]},
+  {word:"to customize", def:"to change something to suit personal needs", options:["to change something to suit personal needs","to continue without damaging the environment","to make small adjustments or improvements","to have little or no flavor"]},
+  {word:"bio fuel", def:"fuel produced from living matter, like plants", options:["fuel produced from living matter, like plants","the part of food that helps digestion","a synthetic material used in cooking","a chemical added to preserve food"]},
+];
+
+const gapData = [
+  {sentence:"By 2030, insect protein might be a common ___ food source in many countries.", answer:"edible"},
+  {sentence:"In the future, fresh vegetables could grow ___ in vertical city farms.", answer:"abundantly"},
+  {sentence:"Some lab-grown meat is made from ___ ingredients rather than real animals.", answer:"synthetic"},
+  {sentence:"Early plant-based meat was criticized for being ___ and lacking real flavor.", answer:"bland"},
+  {sentence:"___ is being explored as a sustainable source of protein and biofuel.", answer:"algae"},
+  {sentence:"Food scientists are ___ recipes constantly to improve taste and nutrition.", answer:"tweaking"},
+  {sentence:"A more ___ food system would reduce the environmental damage caused by farming.", answer:"sustainable"},
+  {sentence:"3D-printed food can be designed to have almost any ___ , from crunchy to smooth.", answer:"texture"},
+];
+
+const mcqData = [
+  {sentence:"Farmers are developing ___ crops that survive droughts and floods.", options:["disease-resistant","bland","synthetic"], answer:"disease-resistant"},
+  {sentence:"Instead of eating meat from ___ , some people now choose plant-based alternatives.", options:["livestock","fiber","aquaculture"], answer:"livestock"},
+  {sentence:"Whole grains and vegetables are rich in dietary ___ , which is good for digestion.", options:["fiber","texture","bio fuel"], answer:"fiber"},
+  {sentence:"Apps may soon let you ___ your meal plan based on your DNA and health data.", options:["customize","tweak","abundant"], answer:"customize"},
+  {sentence:"Fish farming, or ___ , could become the main source of seafood by 2030.", options:["aquaculture","livestock","stem cells"], answer:"aquaculture"},
+  {sentence:"Scientists can grow real meat in a lab using animal ___ .", options:["stem cells","algae","fiber"], answer:"stem cells"},
+  {sentence:"Crops that have been genetically ___ can grow faster and resist pests.", options:["modified","edible","sustainable"], answer:"modified"},
+  {sentence:"Used cooking oil and plants can be turned into ___ to power vehicles.", options:["bio fuel","texture","stem cells"], answer:"bio fuel"},
+];
+
+const catData = [
+  {word:"edible", cat:"Food"},
+  {word:"fiber", cat:"Food"},
+  {word:"bland", cat:"Food"},
+  {word:"algae", cat:"Food"},
+  {word:"livestock", cat:"Food"},
+  {word:"texture", cat:"Food"},
+  {word:"synthetic", cat:"Science"},
+  {word:"stem cells", cat:"Science"},
+  {word:"aquaculture", cat:"Science"},
+  {word:"genetically modified", cat:"Science"},
+  {word:"disease-resistant", cat:"Science"},
+  {word:"bio fuel", cat:"Science"},
+  {word:"abundantly", cat:"General"},
+  {word:"tweaking", cat:"General"},
+  {word:"sustainable", cat:"General"},
+  {word:"to customize", cat:"General"},
+];
+
+const writeData = [
+  {prompt:"Use <b>sustainable</b> to describe a change you'd like to see in food production.", model:"I think supermarkets should sell more sustainable food that doesn't harm the environment."},
+  {prompt:"Use <b>genetically modified</b> to give your opinion about GMO food.", model:"I'm not sure I'd feel comfortable eating genetically modified fruit, even if it tastes the same."},
+  {prompt:"Use <b>to customize</b> to describe a future food technology idea.", model:"In the future, people might be able to customize their meals using an app connected to their fridge."},
+];
+
+// ---------- STATE ----------
+let checkedCount = 0, correctCount = 0, wrongCount = 0;
+const totalAutoItems = matchData.length + gapData.length + mcqData.length + catData.length; // 32
+
+// ---------- RENDER MATCH ----------
+const matchList = document.getElementById('matchList');
+matchData.forEach((d,i)=>{
+  const div = document.createElement('div');
+  div.className='item';
+  div.id='match-'+i;
+  const shuffled = [...d.options].sort(()=>Math.random()-0.5);
+  div.innerHTML = `<div class="item-text"><b>${d.word}</b></div>
+    <select id="match-select-${i}">
+      <option value="">-- choose definition --</option>
+      ${shuffled.map(o=>`<option value="${o.replace(/"/g,'&quot;')}">${o}</option>`).join('')}
+    </select>
+    <div class="feedback" id="match-fb-${i}"></div>`;
+  matchList.appendChild(div);
+});
+
+// ---------- RENDER GAP FILL ----------
+const gapList = document.getElementById('gapList');
+gapData.forEach((d,i)=>{
+  const div = document.createElement('div');
+  div.className='item';
+  div.id='gap-'+i;
+  div.innerHTML = `<div class="item-text">${i+1}. ${d.sentence.replace('___','<b>_____</b>')}</div>
+    <input type="text" id="gap-input-${i}" placeholder="type your answer">
+    <div class="feedback" id="gap-fb-${i}"></div>`;
+  gapList.appendChild(div);
+});
+
+// ---------- RENDER MCQ ----------
+const mcqList = document.getElementById('mcqList');
+mcqData.forEach((d,i)=>{
+  const div = document.createElement('div');
+  div.className='item';
+  div.id='mcq-'+i;
+  div.innerHTML = `<div class="item-text">${i+1}. ${d.sentence.replace('___','_____')}</div>
+    <div class="mcq-options" id="mcq-opts-${i}">
+      ${d.options.map(o=>`<button class="mcq-btn" data-val="${o}" onclick="selectMCQ(${i},'${o}')">${o}</button>`).join('')}
+    </div>
+    <div class="feedback" id="mcq-fb-${i}"></div>`;
+  mcqList.appendChild(div);
+});
+const mcqSelections = new Array(mcqData.length).fill(null);
+function selectMCQ(i,val){
+  mcqSelections[i]=val;
+  document.querySelectorAll(`#mcq-opts-${i} .mcq-btn`).forEach(b=>{
+    b.classList.toggle('selected', b.dataset.val===val);
+  });
+}
+
+// ---------- RENDER CATEGORIZE ----------
+const catList = document.getElementById('catList');
+const catSelections = new Array(catData.length).fill(null);
+catData.forEach((d,i)=>{
+  const div = document.createElement('div');
+  div.className='item cat-row';
+  div.id='cat-'+i;
+  div.innerHTML = `<div class="cat-word">${d.word}</div>
+    <div class="cat-buttons" id="cat-btns-${i}">
+      ${["Food","Science","General"].map(c=>`<button class="cat-btn" data-val="${c}" onclick="selectCat(${i},'${c}')">${c}</button>`).join('')}
+    </div>`;
+  catList.appendChild(div);
+});
+function selectCat(i,val){
+  catSelections[i]=val;
+  document.querySelectorAll(`#cat-btns-${i} .cat-btn`).forEach(b=>{
+    b.classList.toggle('selected', b.dataset.val===val);
+  });
+}
+
+// ---------- RENDER WRITE ----------
+const writeList = document.getElementById('writeList');
+writeData.forEach((d,i)=>{
+  const div = document.createElement('div');
+  div.className='item';
+  div.innerHTML = `<div class="item-text">${i+1}. ${d.prompt}</div>
+    <textarea id="write-${i}" placeholder="Write your sentence here..."></textarea>
+    <button class="btn btn-secondary" style="margin-top:8px; padding:6px 14px; font-size:0.85em;" onclick="toggleModel(${i})">Show model answer</button>
+    <div class="model-answer" id="write-model-${i}">💡 Example: "${d.model}"</div>`;
+  writeList.appendChild(div);
+});
+function toggleModel(i){
+  const el = document.getElementById('write-model-'+i);
+  el.style.display = el.style.display==='block' ? 'none' : 'block';
+}
+
+// ---------- SCORING ----------
+function updateTracker(){
+  document.getElementById('scoreCorrect').textContent = correctCount;
+  document.getElementById('scoreWrong').textContent = wrongCount;
+  document.getElementById('scoreChecked').textContent = checkedCount;
+}
+
+function checkAll(){
+  checkedCount=0; correctCount=0; wrongCount=0;
+
+  matchData.forEach((d,i)=>{
+    const sel = document.getElementById('match-select-'+i).value;
+    const item = document.getElementById('match-'+i);
+    const fb = document.getElementById('match-fb-'+i);
+    if(!sel){ item.className='item'; fb.textContent=''; return; }
+    checkedCount++;
+    if(sel===d.def){ item.className='item correct'; fb.className='feedback ok'; fb.textContent='✓ Correct'; correctCount++; }
+    else { item.className='item wrong'; fb.className='feedback no'; fb.textContent='✗ Not quite'; wrongCount++; }
+  });
+
+  gapData.forEach((d,i)=>{
+    const val = document.getElementById('gap-input-'+i).value.trim().toLowerCase();
+    const item = document.getElementById('gap-'+i);
+    const fb = document.getElementById('gap-fb-'+i);
+    if(!val){ item.className='item'; fb.textContent=''; return; }
+    checkedCount++;
+    if(val===d.answer.toLowerCase()){ item.className='item correct'; fb.className='feedback ok'; fb.textContent='✓ Correct'; correctCount++; }
+    else { item.className='item wrong'; fb.className='feedback no'; fb.textContent=`✗ Correct answer: ${d.answer}`; wrongCount++; }
+  });
+
+  mcqData.forEach((d,i)=>{
+    const val = mcqSelections[i];
+    const item = document.getElementById('mcq-'+i);
+    const fb = document.getElementById('mcq-fb-'+i);
+    const btns = document.querySelectorAll(`#mcq-opts-${i} .mcq-btn`);
+    if(!val){ item.className='item'; fb.textContent=''; btns.forEach(b=>b.className='mcq-btn'); return; }
+    checkedCount++;
+    btns.forEach(b=>{
+      b.classList.remove('correct-answer','wrong-answer');
+      if(b.dataset.val===d.answer) b.classList.add('correct-answer');
+      else if(b.dataset.val===val) b.classList.add('wrong-answer');
+    });
+    if(val===d.answer){ item.className='item correct'; fb.className='feedback ok'; fb.textContent='✓ Correct'; correctCount++; }
+    else { item.className='item wrong'; fb.className='feedback no'; fb.textContent=`✗ Correct answer: ${d.answer}`; wrongCount++; }
+  });
+
+  catData.forEach((d,i)=>{
+    const val = catSelections[i];
+    const item = document.getElementById('cat-'+i);
+    if(!val){ item.className='item cat-row'; return; }
+    checkedCount++;
+    if(val===d.cat){ item.className='item cat-row correct'; correctCount++; }
+    else { item.className='item cat-row wrong'; wrongCount++; }
+  });
+
+  updateTracker();
+}
+
+function showAll(){
+  matchData.forEach((d,i)=>{ document.getElementById('match-select-'+i).value = d.def; });
+  gapData.forEach((d,i)=>{ document.getElementById('gap-input-'+i).value = d.answer; });
+  mcqData.forEach((d,i)=>{ selectMCQ(i, d.answer); });
+  catData.forEach((d,i)=>{ selectCat(i, d.cat); });
+  checkAll();
+}
+
+function resetAll(){
+  matchData.forEach((d,i)=>{
+    document.getElementById('match-select-'+i).value='';
+    document.getElementById('match-'+i).className='item';
+    document.getElementById('match-fb-'+i).textContent='';
+  });
+  gapData.forEach((d,i)=>{
+    document.getElementById('gap-input-'+i).value='';
+    document.getElementById('gap-'+i).className='item';
+    document.getElementById('gap-fb-'+i).textContent='';
+  });
+  mcqData.forEach((d,i)=>{
+    mcqSelections[i]=null;
+    document.getElementById('mcq-'+i).className='item';
+    document.getElementById('mcq-fb-'+i).textContent='';
+    document.querySelectorAll(`#mcq-opts-${i} .mcq-btn`).forEach(b=>b.className='mcq-btn');
+  });
+  catData.forEach((d,i)=>{
+    catSelections[i]=null;
+    document.getElementById('cat-'+i).className='item cat-row';
+    document.querySelectorAll(`#cat-btns-${i} .cat-btn`).forEach(b=>b.className='cat-btn');
+  });
+  writeData.forEach((d,i)=>{
+    document.getElementById('write-'+i).value='';
+    document.getElementById('write-model-'+i).style.display='none';
+  });
+  checkedCount=0; correctCount=0; wrongCount=0;
+  updateTracker();
+}
+</script>
+</body>
+</html>
