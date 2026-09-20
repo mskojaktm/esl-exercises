@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Alphabet & Sounds — Click to Listen</title>
+<style>
+:root{
+  --teal:#028090; --teal-strong:#016673; --navy:#0D2B35;
+  --bg:#F1F7F8; --card:#FFFFFF; --ink:#0D2B35; --muted:#4A6872; --line:#CFE1E5;
+  --soft:#E2F2F4; --vowel:#E0A100; --vowel-bg:#FFF5D6; --on-teal:#FFFFFF;
+  --shadow:0 2px 6px rgba(13,43,53,.12);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --teal:#35B8CA; --teal-strong:#6AD0DE; --navy:#E8F4F6;
+    --bg:#0A1A20; --card:#12303A; --ink:#E8F4F6; --muted:#9CBBC3; --line:#24505C;
+    --soft:#143C47; --vowel:#F2B92E; --vowel-bg:#3A3110; --on-teal:#062028;
+    --shadow:0 2px 6px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --teal:#35B8CA; --teal-strong:#6AD0DE; --navy:#E8F4F6;
+  --bg:#0A1A20; --card:#12303A; --ink:#E8F4F6; --muted:#9CBBC3; --line:#24505C;
+  --soft:#143C47; --vowel:#F2B92E; --vowel-bg:#3A3110; --on-teal:#062028;
+  --shadow:0 2px 6px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Calibri,"Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.45}
+h1,h2,h3{font-family:"Trebuchet MS","Segoe UI",sans-serif;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px 60px}
+
+.hero{padding:26px 0 8px}
+.hero h1{font-size:clamp(1.7rem,4.5vw,2.5rem);color:var(--teal-strong)}
+.hero p{margin:8px 0 0;color:var(--muted);max-width:640px}
+.nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.nav a{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--soft);color:var(--teal-strong);text-decoration:none;font-weight:600;font-size:.92rem;border:1px solid var(--line)}
+.nav a:hover{background:var(--teal);color:var(--on-teal)}
+
+.bar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0;margin-top:14px}
+.bar-in{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.ctl{display:flex;align-items:center;gap:8px;font-size:.92rem;color:var(--muted)}
+.ctl select{max-width:230px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.92rem}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:var(--card);color:var(--ink);padding:6px 14px;font:inherit;font-size:.92rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--teal);color:var(--on-teal);font-weight:700}
+.btn{border:0;border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer;background:var(--teal);color:var(--on-teal)}
+.btn.ghost{background:var(--card);color:var(--teal-strong);border:1px solid var(--teal)}
+.btn:hover{filter:brightness(1.08)}
+button:focus-visible{outline:3px solid var(--vowel);outline-offset:2px}
+
+.warn{display:none;margin:14px 0;padding:12px 14px;border-radius:10px;background:var(--vowel-bg);border-left:5px solid var(--vowel)}
+
+section{margin-top:34px;scroll-margin-top:70px}
+.sec-head{display:flex;align-items:center;gap:12px;border-left:6px solid var(--teal);padding-left:12px;margin-bottom:6px}
+.badge{flex:none;width:34px;height:34px;border-radius:50%;background:var(--teal);color:var(--on-teal);display:grid;place-items:center;font-weight:800;font-family:"Trebuchet MS",sans-serif}
+.sec-head h2{font-size:1.45rem;color:var(--navy)}
+.sec-sub{margin:0 0 12px;color:var(--muted)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--muted);margin:8px 0 14px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+h3.grp{font-size:1.05rem;color:var(--teal-strong);margin:18px 0 8px}
+
+/* alphabet */
+.abc{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px}
+.lcard{background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:2px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+.lcard.vowel{border-color:var(--vowel);background:var(--vowel-bg)}
+.lcard button{border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;width:100%}
+.lcard .main{padding:10px 4px 4px;font-family:"Trebuchet MS",sans-serif;font-size:2.7rem;font-weight:800;line-height:1.05;color:var(--teal-strong)}
+.lcard.vowel .main{color:var(--vowel)}
+.lcard .main small{font-size:.5em;font-weight:700;opacity:.9;margin-left:2px}
+.lcard .nm{display:block;font-size:.8rem;font-weight:600;color:var(--muted);font-family:Calibri,sans-serif;padding-bottom:4px}
+.lcard .word{padding:7px 4px;border-top:1px dashed var(--line);font-size:.95rem}
+.lcard .word b,.tile .wd b{color:var(--teal-strong);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:2px}
+.lcard.vowel .word b{color:var(--vowel)}
+.lcard .word:hover,.lcard .main:hover{background:var(--soft)}
+.playing{outline:4px solid var(--vowel);outline-offset:-2px;transform:scale(1.04);transition:transform .12s}
+.lcard.playing{outline-offset:2px}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tiles.wide{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.tile{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 8px;cursor:pointer;color:var(--ink);font:inherit;box-shadow:var(--shadow)}
+.tile:hover{border-color:var(--teal);background:var(--soft)}
+.tile .lab{font-family:"Trebuchet MS",sans-serif;font-size:1.9rem;font-weight:800;color:var(--teal-strong);line-height:1.15}
+.tile .n{font-size:.78rem;color:var(--muted);min-height:1em}
+.tile .wd{font-size:.98rem;margin-top:2px}
+.tile .ico{font-size:.9rem;opacity:.7}
+.tile.playing{border-color:var(--vowel)}
+
+footer{margin-top:44px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:14px}
+@media (max-width:520px){
+  body{font-size:16px}
+  .abc{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:9px}
+  .lcard .main{font-size:2.3rem}
+}
+@media (prefers-reduced-motion:reduce){.playing{transition:none;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>🔊 English Alphabet &amp; Sounds</h1>
+  <p>Click any letter to hear its name. Click the picture word under it to hear the word. Below the alphabet, click the letter combinations to hear how they sound in real words.</p>
+  <ul class="nav">
+    <li><a href="#alphabet">A–Z</a></li>
+    <li><a href="#pairs">Consonant pairs</a></li>
+    <li><a href="#vowels">Vowel combinations</a></li>
+    <li><a href="#blends">Blends</a></li>
+    <li><a href="#families">Word families</a></li>
+    <li><a href="#magic">Magic e</a></li>
+    <li><a href="#parts">Word parts</a></li>
+  </ul>
+</header>
+
+<div class="bar">
+  <div class="bar-in">
+    <label class="ctl">Voice
+      <select id="voiceSel" aria-label="Voice"><option>Default voice</option></select>
+    </label>
+    <div class="ctl">Speed
+      <div class="seg" role="group" aria-label="Speed">
+        <button id="spNormal" aria-pressed="true">Normal</button>
+        <button id="spSlow" aria-pressed="false">Slow</button>
+      </div>
+    </div>
+    <button class="btn ghost" id="stopBtn">■ Stop</button>
+  </div>
+</div>
+
+<div class="warn" id="warn">Your browser can't play speech. Please try Chrome, Edge, Safari or Firefox on a device with sound turned on.</div>
+
+<section id="alphabet">
+  <div class="sec-head"><span class="badge">1</span><h2>The Alphabet</h2></div>
+  <p class="sec-sub">26 letters. Big letter = capital, small letter = lowercase.</p>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--vowel)"></span>Vowels: A E I O U</span>
+    <span><span class="dot" style="background:var(--teal)"></span>Consonants</span>
+  </div>
+  <div style="margin-bottom:12px"><button class="btn" id="playAll">▶ Play A–Z</button></div>
+  <div class="abc" id="abc"></div>
+</section>
+
+<div id="rest"></div>
+
+<footer>
+  Sounds are produced by your device's built-in voice, so the exact accent depends on the voice you choose above. Choose an English (US) or English (UK) voice. For the sound inside a word, listen to the example word: the highlighted letters show where the sound is.
+</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- DATA ---------- */
+  // [letter, spoken name, example word (highlight in []), emoji]
+  var LETTERS = [
+    ["A","ay","[a]pple","🍎"],["B","bee","[b]all","⚽"],["C","see","[c]at","🐱"],["D","dee","[d]og","🐶"],
+    ["E","ee","[e]gg","🥚"],["F","eff","[f]ish","🐟"],["G","jee","[g]oat","🐐"],["H","aitch","[h]orse","🐴"],
+    ["I","eye","[i]nsect","🐛"],["J","jay","[j]uice","🧃"],["K","kay","[k]ite","🪁"],["L","el","[l]ion","🦁"],
+    ["M","em","[m]oon","🌙"],["N","en","[n]ose","👃"],["O","oh","[o]ctopus","🐙"],["P","pee","[p]izza","🍕"],
+    ["Q","cue","[q]ueen","👑"],["R","are","[r]abbit","🐰"],["S","ess","[s]un","☀️"],["T","tee","[t]iger","🐯"],
+    ["U","you","[u]mbrella","☂️"],["V","vee","[v]an","🚐"],["W","double you","[w]atch","⌚"],["X","ex","bo[x]","📦"],
+    ["Y","why","[y]o-yo","🪀"],["Z","zee","[z]ebra","🦓"]
+  ];
+  var VOWELS = "AEIOU";
+
+  // tile: {l: label, s: spoken sound (optional), w: [words], n: small note}
+  function T(l,s,w,n){ return {l:l,s:s,w:Array.isArray(w)?w:[w],n:n||""}; }
+
+  var SECTIONS = [
+    { id:"pairs", num:2, title:"Consonant pairs",
+      sub:"Two consonants together make one new sound. Click to hear the sound, then the word.",
+      groups:[{ items:[
+        T("sh","shh","[sh]ip"), T("ch","chuh","[ch]air"), T("th",null,"[th]in","soft th"), T("th",null,"[th]is","voiced th"),
+        T("wh","wuh","[wh]ale"), T("ph","fuh","[ph]one"), T("ck","kuh","du[ck]"), T("ng",null,"ri[ng]"),
+        T("nk",null,"ba[nk]"), T("qu","kwuh","[qu]een"), T("kn","nuh","[kn]ee","k is silent"), T("wr","ruh","[wr]ite","w is silent"),
+        T("tch","chuh","ma[tch]"), T("dge","juh","bri[dge]")
+      ]}]},
+    { id:"vowels", num:3, title:"Vowel combinations",
+      sub:"Two vowels (or a vowel + r) working together. Listen to the sound, then the word.",
+      groups:[
+        { title:"Vowel teams", items:[
+          T("ai","ay","r[ai]n"), T("ay","ay","d[ay]"), T("ee","ee","tr[ee]"), T("ea","ee","[ea]t"),
+          T("oa","oh","b[oa]t"), T("ow","oh","sn[ow]","long o"), T("ow","ow","c[ow]","like “ow!”"), T("ou","ow","[ou]t"),
+          T("oo","oo","m[oo]n","long oo"), T("oo",null,"b[oo]k","short oo"), T("oi","oy","c[oi]n"), T("oy","oy","b[oy]"),
+          T("au",null,"s[au]ce"), T("aw","aw","s[aw]"), T("ie","eye","p[ie]"), T("igh","eye","l[igh]t"),
+          T("ew","you","n[ew]"), T("ue","oo","bl[ue]")
+        ]},
+        { title:"Vowel + R", items:[
+          T("ar","are","c[ar]"), T("or","or","f[or]k"), T("er","er","h[er]"), T("ir","er","b[ir]d"),
+          T("ur","er","t[ur]n"), T("air","air","ch[air]")
+        ]}
+      ]},
+    { id:"blends", num:4, title:"Blends",
+      sub:"Two or three consonants at the start or end of a word. You can hear each letter — listen to the word.",
+      groups:[
+        { title:"Beginning blends", items:[
+          T("bl",null,"[bl]ue"), T("br",null,"[br]own"), T("cl",null,"[cl]ap"), T("cr",null,"[cr]ab"),
+          T("dr",null,"[dr]um"), T("fl",null,"[fl]ag"), T("fr",null,"[fr]og"), T("gl",null,"[gl]ass"),
+          T("gr",null,"[gr]een"), T("pl",null,"[pl]ane"), T("pr",null,"[pr]ince"), T("sc",null,"[sc]arf"),
+          T("sk",null,"[sk]ate"), T("sl",null,"[sl]eep"), T("sm",null,"[sm]ile"), T("sn",null,"[sn]ake"),
+          T("sp",null,"[sp]oon"), T("st",null,"[st]ar"), T("sw",null,"[sw]im"), T("tr",null,"[tr]ee"), T("tw",null,"[tw]in")
+        ]},
+        { title:"Three-letter blends", items:[
+          T("str",null,"[str]eet"), T("spr",null,"[spr]ing"), T("scr",null,"[scr]een"), T("spl",null,"[spl]it")
+        ]},
+        { title:"Ending blends", items:[
+          T("nd",null,"ha[nd]"), T("nt",null,"te[nt]"), T("mp",null,"la[mp]"), T("st",null,"ne[st]"),
+          T("ft",null,"li[ft]"), T("lk",null,"mi[lk]"), T("ld",null,"co[ld]"), T("sk",null,"ma[sk]")
+        ]}
+      ]},
+    { id:"families", num:5, title:"Word families (short vowels)",
+      sub:"Words with the same ending sound the same at the end. Click to hear three words from each family.",
+      groups:[
+        { title:"Short A", wide:true, items:[
+          T("-at",null,["c[at]","h[at]","m[at]"]), T("-an",null,["f[an]","m[an]","p[an]"]), T("-ap",null,["c[ap]","m[ap]","n[ap]"]),
+          T("-ad",null,["d[ad]","s[ad]","b[ad]"]), T("-ag",null,["b[ag]","t[ag]","fl[ag]"]), T("-am",null,["h[am]","j[am]","r[am]"])
+        ]},
+        { title:"Short E", wide:true, items:[
+          T("-et",null,["n[et]","p[et]","w[et]"]), T("-en",null,["p[en]","h[en]","t[en]"]),
+          T("-ed",null,["b[ed]","r[ed]","f[ed]"]), T("-eg",null,["l[eg]","p[eg]","b[eg]"])
+        ]},
+        { title:"Short I", wide:true, items:[
+          T("-it",null,["s[it]","h[it]","b[it]"]), T("-in",null,["p[in]","w[in]","t[in]"]), T("-ig",null,["p[ig]","b[ig]","d[ig]"]),
+          T("-ip",null,["l[ip]","h[ip]","z[ip]"]), T("-id",null,["k[id]","l[id]","h[id]"])
+        ]},
+        { title:"Short O", wide:true, items:[
+          T("-ot",null,["h[ot]","p[ot]","d[ot]"]), T("-op",null,["t[op]","h[op]","m[op]"]),
+          T("-og",null,["d[og]","l[og]","f[og]"]), T("-ob",null,["j[ob]","m[ob]","s[ob]"])
+        ]},
+        { title:"Short U", wide:true, items:[
+          T("-ut",null,["c[ut]","h[ut]","n[ut]"]), T("-un",null,["s[un]","f[un]","r[un]"]), T("-ug",null,["b[ug]","h[ug]","m[ug]"]),
+          T("-up",null,["c[up]","p[up]","s[up]"]), T("-ub",null,["t[ub]","c[ub]","r[ub]"])
+        ]}
+      ]},
+    { id:"magic", num:6, title:"Magic e (long vowels)",
+      sub:"A silent e at the end makes the vowel say its name.",
+      groups:[
+        { title:"Vowel + consonant + e", wide:true, items:[
+          T("a_e",null,["c[a]k[e]","m[a]k[e]","n[a]m[e]"]), T("i_e",null,["b[i]k[e]","l[i]k[e]","f[i]v[e]"]),
+          T("o_e",null,["h[o]m[e]","n[o]s[e]","b[o]n[e]"]), T("u_e",null,["c[u]b[e]","c[u]t[e]","t[u]n[e]"])
+        ]},
+        { title:"Add a magic e — the sound changes!", wide:true, items:[
+          T("cap → cape",null,["cap","cap[e]"]), T("tap → tape",null,["tap","tap[e]"]), T("pin → pine",null,["pin","pin[e]"]),
+          T("kit → kite",null,["kit","kit[e]"]), T("hop → hope",null,["hop","hop[e]"]), T("cub → cube",null,["cub","cub[e]"])
+        ]}
+      ]},
+    { id:"parts", num:7, title:"Common word beginnings & endings",
+      sub:"Small pieces you will see in many English words.",
+      groups:[
+        { title:"Beginnings", items:[
+          T("un-",null,"[un]happy"), T("re-",null,"[re]play"), T("pre-",null,"[pre]view"), T("dis-",null,"[dis]like")
+        ]},
+        { title:"Endings", items:[
+          T("-ing","ing","play[ing]"), T("-er",null,"teach[er]"), T("-est",null,"fast[est]"), T("-ly",null,"slow[ly]"),
+          T("-ful",null,"help[ful]"), T("-less",null,"care[less]"), T("-ness",null,"kind[ness]"), T("-ment",null,"move[ment]"),
+          T("-able",null,"read[able]"), T("-tion","shun","ac[tion]"), T("-sion",null,"vi[sion]"), T("-ture",null,"pic[ture]")
+        ]},
+        { title:"Three sounds of -ed", items:[
+          T("-ed",null,"play[ed]","sounds like d"), T("-ed",null,"jump[ed]","sounds like t"), T("-ed",null,"want[ed]","sounds like id")
+        ]}
+      ]}
+  ];
+
+  /* ---------- SPEECH ---------- */
+  var synth = window.speechSynthesis;
+  var voices = [], voice = null, rate = 0.85, gen = 0, activeEl = null;
+
+  function fmt(s){ return s.replace(/\[(.+?)\]/g,"<b>$1</b>"); }
+  function plain(s){ return s.replace(/[\[\]]/g,""); }
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
+
+  function setActive(el){ clearActive(); if(el){ el.classList.add("playing"); activeEl = el; } }
+  function clearActive(){ if(activeEl){ activeEl.classList.remove("playing"); activeEl = null; } }
+
+  function speakOnce(text){
+    return new Promise(function(resolve){
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = voice ? voice.lang : "en-US";
+      if(voice) u.voice = voice;
+      u.rate = rate;
+      var done = false;
+      function fin(){ if(!done){ done = true; clearTimeout(t); resolve(); } }
+      var t = setTimeout(fin, 8000);
+      u.onend = fin; u.onerror = fin;
+      synth.speak(u);
+    });
+  }
+
+  // steps: [{t: text, pause: ms, el: element to highlight}]
+  function run(steps, el){
+    if(!synth) return;
+    var my = ++gen;
+    synth.cancel();
+    setActive(el || null);
+    setTimeout(function(){
+      (async function(){
+        for(var i=0;i<steps.length;i++){
+          if(my !== gen) return;
+          if(steps[i].el) setActive(steps[i].el);
+          await speakOnce(steps[i].t);
+          if(my !== gen) return;
+          await sleep(steps[i].pause == null ? 350 : steps[i].pause);
+        }
+        if(my === gen) clearActive();
+      })();
+    }, 60);
+  }
+
+  function stopAll(){ gen++; if(synth) synth.cancel(); clearActive(); playAllBtn.textContent = "▶ Play A–Z"; }
+
+  /* ---------- VOICES ---------- */
+  var sel = document.getElementById("voiceSel");
+  function loadVoices(){
+    if(!synth) return;
+    var all = synth.getVoices() || [];
+    voices = all.filter(function(v){ return /^en/i.test(v.lang); });
+    voices.sort(function(a,b){
+      var ua = /en[-_]US/i.test(a.lang) ? 0 : 1, ub = /en[-_]US/i.test(b.lang) ? 0 : 1;
+      return ua - ub || a.name.localeCompare(b.name);
+    });
+    if(!voices.length) return;
+    var saved = null;
+    try { saved = localStorage.getItem("abcVoice"); } catch(e){}
+    var current = voice ? voice.name : saved;
+    sel.innerHTML = "";
+    voices.forEach(function(v,i){
+      var o = document.createElement("option");
+      o.value = i; o.textContent = v.name + " (" + v.lang + ")";
+      sel.appendChild(o);
+    });
+    var idx = 0;
+    for(var i=0;i<voices.length;i++){ if(voices[i].name === current){ idx = i; break; } }
+    sel.value = idx; voice = voices[idx];
+  }
+  sel.addEventListener("change", function(){
+    voice = voices[+sel.value] || null;
+    try { if(voice) localStorage.setItem("abcVoice", voice.name); } catch(e){}
+    run([{t:"Hello! Let's learn English."}]);
+  });
+
+  /* ---------- SPEED ---------- */
+  var spN = document.getElementById("spNormal"), spS = document.getElementById("spSlow");
+  function setSpeed(slow){
+    rate = slow ? 0.55 : 0.85;
+    spN.setAttribute("aria-pressed", String(!slow));
+    spS.setAttribute("aria-pressed", String(slow));
+  }
+  spN.addEventListener("click", function(){ setSpeed(false); });
+  spS.addEventListener("click", function(){ setSpeed(true); });
+  document.getElementById("stopBtn").addEventListener("click", stopAll);
+
+  /* ---------- ALPHABET ---------- */
+  var abc = document.getElementById("abc");
+  var cards = [];
+  LETTERS.forEach(function(L){
+    var card = document.createElement("div");
+    card.className = "lcard" + (VOWELS.indexOf(L[0]) > -1 ? " vowel" : "");
+
+    var main = document.createElement("button");
+    main.className = "main";
+    main.type = "button";
+    main.setAttribute("aria-label", "Letter " + L[0] + ", click to hear its name");
+    main.innerHTML = L[0] + "<small>" + L[0].toLowerCase() + "</small>";
+    main.addEventListener("click", function(){ run([{t:L[1]}], card); });
+
+    var word = document.createElement("button");
+    word.className = "word";
+    word.type = "button";
+    word.setAttribute("aria-label", "Example word " + plain(L[2]) + ", click to hear it");
+    word.innerHTML = L[3] + " " + fmt(L[2]);
+    word.addEventListener("click", function(){ run([{t:plain(L[2])}], card); });
+
+    card.appendChild(main);
+    card.appendChild(word);
+    abc.appendChild(card);
+    cards.push({card:card, say:L[1]});
+  });
+
+  var playAllBtn = document.getElementById("playAll");
+  playAllBtn.addEventListener("click", function(){
+    if(playAllBtn.textContent.indexOf("Stop") > -1){ stopAll(); return; }
+    playAllBtn.textContent = "■ Stop";
+    var steps = cards.map(function(c){ return {t:c.say, pause:650, el:c.card}; });
+    run(steps.concat([{t:"That's the alphabet!", pause:0}]));
+    // reset label when finished
+    var my = gen;
+    var timer = setInterval(function(){
+      if(my !== gen){ clearInterval(timer); playAllBtn.textContent = "▶ Play A–Z"; }
+      else if(!synth.speaking && !synth.pending && !activeEl){ clearInterval(timer); playAllBtn.textContent = "▶ Play A–Z"; }
+    }, 600);
+  });
+
+  /* ---------- OTHER SECTIONS ---------- */
+  var rest = document.getElementById("rest");
+  SECTIONS.forEach(function(S){
+    var sec = document.createElement("section");
+    sec.id = S.id;
+    var head = '<div class="sec-head"><span class="badge">' + S.num + '</span><h2>' + S.title + '</h2></div>' +
+               '<p class="sec-sub">' + S.sub + '</p>';
+    sec.innerHTML = head;
+    S.groups.forEach(function(G){
+      if(G.title){
+        var h = document.createElement("h3");
+        h.className = "grp"; h.textContent = G.title;
+        sec.appendChild(h);
+      }
+      var grid = document.createElement("div");
+      grid.className = "tiles" + (G.wide ? " wide" : "");
+      G.items.forEach(function(it){
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "tile";
+        var words = it.w.map(fmt).join(" · ");
+        b.innerHTML = '<span class="lab">' + it.l + '</span><span class="n">' + it.n + '</span>' +
+                      '<span class="wd">' + words + '</span><span class="ico">🔊</span>';
+        b.setAttribute("aria-label", it.l + ", " + it.w.map(plain).join(", ") + ". Click to listen.");
+        b.addEventListener("click", function(){
+          var steps = [];
+          if(it.s) steps.push({t:it.s, pause:450});
+          it.w.forEach(function(w){ steps.push({t:plain(w), pause:450}); });
+          run(steps, b);
+        });
+        grid.appendChild(b);
+      });
+      sec.appendChild(grid);
+    });
+    rest.appendChild(sec);
+  });
+
+  /* ---------- INIT ---------- */
+  if(!synth || typeof SpeechSynthesisUtterance === "undefined"){
+    document.getElementById("warn").style.display = "block";
+  } else {
+    loadVoices();
+    if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
+  }
+})();
+</script>
+</body>
+</html>
