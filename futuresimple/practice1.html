@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Future Simple — Practice B1-B2</title>
+<link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&family=Calibri&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--tint:#F0F6F7;--mint:#E6F5F7;--gray:#607080;--good:#2E8B57;--bad:#C0392B;}
+*{box-sizing:border-box;}
+body{font-family:Calibri,Arial,sans-serif;background:#fafcfc;color:var(--navy);margin:0;padding-bottom:60px;}
+header{background:var(--navy);color:#fff;padding:28px 20px 22px;text-align:center;}
+header h1{font-family:'Trebuchet MS',sans-serif;margin:0 0 6px;font-size:26px;}
+header p{margin:0;color:#9fd4dc;font-size:14px;}
+.score-bar{position:sticky;top:0;z-index:50;background:var(--teal);color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;font-family:'Trebuchet MS',sans-serif;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,.15);}
+.score-bar span{font-size:15px;}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px;}
+.section{background:#fff;border:1px solid #d8e8ea;border-radius:10px;margin:22px 0;overflow:hidden;box-shadow:0 2px 8px rgba(13,43,53,.06);}
+.sec-head{background:var(--teal);color:#fff;padding:12px 18px;display:flex;align-items:center;gap:10px;}
+.sec-num{background:#fff;color:var(--teal);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-family:'Trebuchet MS',sans-serif;flex-shrink:0;}
+.sec-head h2{font-family:'Trebuchet MS',sans-serif;font-size:16px;margin:0;}
+.sec-body{padding:16px 18px;}
+.sec-note{color:var(--gray);font-size:13px;margin:0 0 14px;font-style:italic;}
+.item{padding:10px 0;border-bottom:1px solid #eef3f4;}
+.item:last-child{border-bottom:none;}
+.item p{margin:0 0 8px;font-size:14.5px;line-height:1.4;}
+.item .num{color:var(--teal);font-weight:bold;margin-right:4px;}
+input[type=text]{width:100%;max-width:360px;padding:7px 10px;border:1.5px solid #c9dee1;border-radius:6px;font-size:14px;font-family:inherit;}
+input[type=text]:focus{outline:none;border-color:var(--teal);}
+.opts{display:flex;flex-wrap:wrap;gap:8px;}
+.opt-btn{background:var(--tint);border:1.5px solid #c9dee1;border-radius:6px;padding:6px 14px;font-size:13.5px;cursor:pointer;font-family:inherit;color:var(--navy);}
+.opt-btn:hover{background:var(--mint);}
+.opt-btn.selected{background:var(--teal);color:#fff;border-color:var(--teal);}
+.fb{display:inline-block;margin-left:8px;font-weight:bold;font-size:13px;}
+.fb.correct{color:var(--good);}
+.fb.wrong{color:var(--bad);}
+.answer-reveal{display:none;color:var(--gray);font-size:12.5px;margin-top:4px;}
+.controls{max-width:820px;margin:22px auto;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap;}
+button.act{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:14px;padding:10px 20px;border:none;border-radius:7px;cursor:pointer;color:#fff;background:var(--teal);}
+button.act.secondary{background:var(--navy);}
+button.act.reset{background:#8a9aa3;}
+footer{text-align:center;color:var(--gray);font-size:12px;margin-top:10px;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>FUTURE SIMPLE — Практика B1–B2</h1>
+<p>will / won&rsquo;t · will vs be going to · перевод с русского</p>
+</header>
+
+<div class="score-bar"><span>Счёт:</span><span id="scoreDisplay">0 / 0</span></div>
+
+<div class="wrap">
+
+<div class="section">
+<div class="sec-head"><div class="sec-num">1</div><h2>Will или be going to?</h2></div>
+<div class="sec-body">
+<p class="sec-note">Выберите правильный вариант для каждой ситуации.</p>
+<div id="sec1"></div>
+</div>
+</div>
+
+<div class="section">
+<div class="sec-head"><div class="sec-num">2</div><h2>Обещания и прогнозы — заполните пропуски</h2></div>
+<div class="sec-body">
+<p class="sec-note">Впишите глагол в форме will / won&rsquo;t + глагол. Регистр не важен.</p>
+<div id="sec2"></div>
+</div>
+</div>
+
+<div class="section">
+<div class="sec-head"><div class="sec-num">3</div><h2>Найдите и исправьте ошибку</h2></div>
+<div class="sec-body">
+<p class="sec-note">В каждом предложении одна ошибка на Future Simple. Впишите исправленное предложение целиком.</p>
+<div id="sec3"></div>
+</div>
+</div>
+
+<div class="section">
+<div class="sec-head"><div class="sec-num">4</div><h2>Переведите с русского на английский</h2></div>
+<div class="sec-body">
+<p class="sec-note">Используйте Future Simple (will / won&rsquo;t). Допускаются полные и краткие формы (I will = I&rsquo;ll).</p>
+<div id="sec4"></div>
+</div>
+</div>
+
+<div class="section">
+<div class="sec-head"><div class="sec-num">5</div><h2>Мини-дискуссия: жизнь в 2050 году</h2></div>
+<div class="sec-body">
+<p class="sec-note">Устно или письменно — составьте 3 прогноза о будущем, используя слова-подсказки. Автопроверки нет — это задание для разговорной практики.</p>
+<div class="item"><p><span class="num">1.</span> by 2050 / robots / do</p></div>
+<div class="item"><p><span class="num">2.</span> people / probably / live / Mars</p></div>
+<div class="item"><p><span class="num">3.</span> I think / never / use / cash</p></div>
+</div>
+</div>
+
+</div>
+
+<div class="controls">
+<button class="act" onclick="checkAll()">Проверить всё</button>
+<button class="act secondary" onclick="showAll()">Показать ответы</button>
+<button class="act reset" onclick="resetAll()">Сбросить</button>
+</div>
+<footer>Future Simple практика · B1–B2</footer>
+
+<script>
+// ---------- DATA ----------
+const s1 = [
+ {q:"A: The phone's ringing! B: Don't worry, I ___ it.", opts:["'ll get","'m going to get"], ans:"'ll get"},
+ {q:"Look at those clouds! It ___ rain soon.", opts:["will","'s going to"], ans:"'s going to"},
+ {q:"I've already booked the tickets — we ___ to Rome in July.", opts:["will fly","'re going to fly"], ans:"'re going to fly"},
+ {q:"A: We're out of milk. B: Really? I ___ some from the shop.", opts:["'ll get","'m going to get"], ans:"'ll get"},
+ {q:"I think Brazil ___ the next World Cup.", opts:["will win","is going to win"], ans:"will win"},
+ {q:"Careful, that ladder is loose — you ___ fall!", opts:["will","'re going to"], ans:"'re going to"},
+ {q:"I promise I ___ you tonight.", opts:["'ll call","'m going to call"], ans:"'ll call"},
+ {q:"She's studying medicine — she ___ a doctor.", opts:["will be","'s going to be"], ans:"'s going to be"},
+];
+
+const s2 = [
+ {sent:"I promise I ___ (not / forget) your birthday.", ans:["won't forget","will not forget"]},
+ {sent:"Don't worry, everything ___ (be) fine.", ans:["will be","'ll be"]},
+ {sent:"I'm sure she ___ (pass) the exam — she's studied hard.", ans:["will pass","'ll pass"]},
+ {sent:"It's late — I think it ___ (rain) before we get home.", ans:["will rain","'ll rain"]},
+ {sent:"He ___ (not / be) happy about the news.", ans:["won't be","will not be"]},
+ {sent:"A: The bag looks heavy. B: I ___ (carry) it for you.", ans:["'ll carry","will carry"]},
+ {sent:"By 2050 people probably ___ (not / use) cash at all.", ans:["won't use","will not use"]},
+ {sent:"___ you ___ (help) me tomorrow?", ans:["will you help"]},
+];
+
+const s3 = [
+ {sent:"She will comes to the party tomorrow.", ans:"she will come to the party tomorrow"},
+ {sent:"If it will rain, we will stay home.", ans:"if it rains, we will stay home"},
+ {sent:"Will you to help me with this box?", ans:"will you help me with this box"},
+ {sent:"They wont be at home this evening.", ans:"they won't be at home this evening"},
+ {sent:"I think it going to be a great trip.", ans:"i think it will be a great trip", alt:["i think it's going to be a great trip"]},
+ {sent:"He will works late tonight.", ans:"he will work late tonight"},
+];
+
+const s4 = [
+ {ru:"Я позвоню тебе завтра.", ans:["i will call you tomorrow","i'll call you tomorrow"]},
+ {ru:"Завтра дождя не будет.", ans:["it won't rain tomorrow","it will not rain tomorrow"]},
+ {ru:"Ты поможешь мне с этим?", ans:["will you help me with this","will you help me with it"]},
+ {ru:"Думаю, она выиграет.", ans:["i think she will win","i think she'll win"]},
+ {ru:"Когда я приеду, я тебе позвоню.", ans:["when i arrive, i will call you","when i arrive i will call you","when i arrive, i'll call you","when i arrive i'll call you"]},
+ {ru:"Они, вероятно, опоздают.", ans:["they will probably be late","they'll probably be late","probably they will be late"]},
+];
+
+let total=0, correct=0;
+
+function norm(t){return t.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!?]+$/,'');}
+
+function buildSec1(){
+ const el=document.getElementById('sec1');
+ s1.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML=`<p><span class="num">${i+1}.</span> ${it.q} <span class="fb" id="fb1-${i}"></span></p>
+   <div class="opts" id="opts1-${i}">${it.opts.map(o=>`<button class="opt-btn" data-val="${o}" onclick="selectOpt(1,${i},this)">${o}</button>`).join('')}</div>
+   <div class="answer-reveal" id="rev1-${i}">Ответ: ${it.ans}</div>`;
+  el.appendChild(d);
+ });
+}
+function selectOpt(sec,i,btn){
+ document.querySelectorAll(`#opts${sec}-${i} .opt-btn`).forEach(b=>b.classList.remove('selected'));
+ btn.classList.add('selected');
+}
+function buildSec2(){
+ const el=document.getElementById('sec2');
+ s2.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML=`<p><span class="num">${i+1}.</span> ${it.sent} <span class="fb" id="fb2-${i}"></span></p>
+   <input type="text" id="in2-${i}" placeholder="ваш ответ">
+   <div class="answer-reveal" id="rev2-${i}">Ответ: ${it.ans[0]}</div>`;
+  el.appendChild(d);
+ });
+}
+function buildSec3(){
+ const el=document.getElementById('sec3');
+ s3.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML=`<p><span class="num">${i+1}.</span> ${it.sent} <span class="fb" id="fb3-${i}"></span></p>
+   <input type="text" id="in3-${i}" placeholder="исправленное предложение">
+   <div class="answer-reveal" id="rev3-${i}">Ответ: ${it.ans}</div>`;
+  el.appendChild(d);
+ });
+}
+function buildSec4(){
+ const el=document.getElementById('sec4');
+ s4.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML=`<p><span class="num">${i+1}.</span> ${it.ru} <span class="fb" id="fb4-${i}"></span></p>
+   <input type="text" id="in4-${i}" placeholder="English translation">
+   <div class="answer-reveal" id="rev4-${i}">Возможный ответ: ${it.ans[0]}</div>`;
+  el.appendChild(d);
+ });
+}
+buildSec1();buildSec2();buildSec3();buildSec4();
+
+function checkAll(){
+ total=0;correct=0;
+ // sec1
+ s1.forEach((it,i)=>{
+  total++;
+  const sel=document.querySelector(`#opts1-${i} .opt-btn.selected`);
+  const fb=document.getElementById(`fb1-${i}`);
+  if(sel && sel.dataset.val===it.ans){fb.textContent='✓';fb.className='fb correct';correct++;}
+  else{fb.textContent='✗';fb.className='fb wrong';}
+ });
+ // sec2
+ s2.forEach((it,i)=>{
+  total++;
+  const v=norm(document.getElementById(`in2-${i}`).value);
+  const fb=document.getElementById(`fb2-${i}`);
+  const ok=it.ans.some(a=>norm(a)===v);
+  if(v && ok){fb.textContent='✓';fb.className='fb correct';correct++;}
+  else{fb.textContent='✗';fb.className='fb wrong';}
+ });
+ // sec3
+ s3.forEach((it,i)=>{
+  total++;
+  const v=norm(document.getElementById(`in3-${i}`).value);
+  const fb=document.getElementById(`fb3-${i}`);
+  const accepted=[it.ans].concat(it.alt||[]).map(norm);
+  if(v && accepted.includes(v)){fb.textContent='✓';fb.className='fb correct';correct++;}
+  else{fb.textContent='✗';fb.className='fb wrong';}
+ });
+ // sec4
+ s4.forEach((it,i)=>{
+  total++;
+  const v=norm(document.getElementById(`in4-${i}`).value);
+  const fb=document.getElementById(`fb4-${i}`);
+  const ok=it.ans.some(a=>norm(a)===v);
+  if(v && ok){fb.textContent='✓';fb.className='fb correct';correct++;}
+  else{fb.textContent='✗';fb.className='fb wrong';}
+ });
+ document.getElementById('scoreDisplay').textContent=`${correct} / ${total}`;
+}
+function showAll(){
+ document.querySelectorAll('.answer-reveal').forEach(e=>e.style.display='block');
+}
+function resetAll(){
+ document.querySelectorAll('input[type=text]').forEach(i=>i.value='');
+ document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+ document.querySelectorAll('.fb').forEach(f=>{f.textContent='';f.className='fb';});
+ document.querySelectorAll('.answer-reveal').forEach(e=>e.style.display='none');
+ document.getElementById('scoreDisplay').textContent='0 / 0';
+}
+</script>
+</body>
+</html>
