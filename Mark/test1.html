@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mark – End of Unit 1 Test Prep</title>
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#f2f7f8;--card:#fff;--ok:#1b8a4b;--bad:#c0392b;--tx:#16272d}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1a1f;--card:#12272e;--tx:#e6f1f3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Arial,sans-serif;font-size:17px}
+header{background:var(--navy);color:#fff;padding:18px 16px}
+h1,h2{font-family:"Trebuchet MS",sans-serif;margin:0}
+h1{font-size:22px}header p{margin:4px 0 0;opacity:.85}
+#bar{position:sticky;top:0;z-index:5;background:var(--teal);color:#fff;padding:8px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#bar b{flex:1;min-width:140px}
+button{background:#fff;color:var(--navy);border:0;border-radius:6px;padding:7px 12px;font-weight:700;cursor:pointer}
+main{max-width:760px;margin:0 auto;padding:12px}
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.12);padding:14px 16px;margin:14px 0}
+h2{font-size:19px;color:var(--teal)}
+.tip{background:rgba(2,128,144,.12);border-radius:6px;padding:8px 10px;margin:8px 0;font-size:15px}
+ol{padding-left:24px}li{margin:10px 0;line-height:1.9}
+input,select{font:inherit;padding:3px 6px;border:2px solid #9bb;border-radius:5px;background:var(--card);color:var(--tx);max-width:100%}
+input{width:150px}input.w{width:260px}
+.ok{border-color:var(--ok)!important}.no{border-color:var(--bad)!important}
+.fb{font-size:14px;margin-left:6px;font-weight:700}.fb.ok{color:var(--ok)}.fb.no{color:var(--bad)}
+ul.sp li{line-height:1.5}
+</style></head><body>
+<header><h1>Mark – End of Unit 1: Test Prep</h1><p>Greetings • Family • Past Simple • Present Perfect • Apostrophes (40 marks)</p></header>
+<div id="bar"><b id="score">Score: 0 / 0</b><button onclick="check()">Check Answers</button><button onclick="show()">Show Answers</button><button onclick="reset()">Reset</button></div>
+<main id="m"></main>
+<script>
+const S=[
+{t:"1. Greetings (10 marks)",tip:"Morning → <i>Good morning</i>; 12–5 pm → <i>Good afternoon</i>; evening → <i>Good evening</i>; going to bed → <i>Good night</i>.",it:[
+["You meet your teacher at 8 am. “Good ___, Mr Brown!”","s","morning",["morning","afternoon","night"]],
+["It is 3 pm. “Good ___, Anna!”","s","afternoon",["morning","afternoon","night"]],
+["You go to bed. You say to your mum: “Good ___!”","s","night",["evening","night","morning"]],
+["“How are you?” – best answer:","s","I’m fine, thanks. And you?",["I’m 11.","I’m fine, thanks. And you?","My name is Mark."]],
+["“What’s your name?” – best answer:","s","My name is Mark.",["My name is Mark.","I’m fine.","Nice to meet you."]],
+["You meet a new boy. You say: “Nice to ___ you.”","s","meet",["meet","know","see"]],
+["“Thank you!” – “___.”","s","You’re welcome.",["Sorry.","You’re welcome.","Hello."]],
+["You stand on a friend’s foot. You say: “___!”","s","Sorry",["Sorry","Please","Hello"]],
+["Goodbye! See you ___ (the next day).","s","tomorrow",["yesterday","tomorrow","before"]],
+["How ___ you?","i",["are"]]]},
+{t:"2. Family (10 marks)",tip:"Type the family word. Remember: <i>mum/mother, dad/father, grandma/grandmother</i> are both OK.",it:[
+["Your mother’s mother is your ___.","i",["grandmother","grandma"]],
+["Your father’s father is your ___.","i",["grandfather","grandpa"]],
+["Your mum’s brother is your ___.","i",["uncle"]],
+["Your dad’s sister is your ___.","i",["aunt","auntie"]],
+["Your aunt’s son is your ___.","i",["cousin"]],
+["Your brother’s son is your ___.","i",["nephew"]],
+["Your brother’s daughter is your ___.","i",["niece"]],
+["Your mum and dad are your ___.","i",["parents"]],
+["Your brothers and sisters are your ___.","i",["siblings","brothers and sisters"]],
+["My dad’s wife is my ___.","i",["mum","mother","mom"]]]},
+{t:"3. Past Simple (10 marks)",tip:"+ verb2 / verb‑ed &nbsp;|&nbsp; − <i>didn’t</i> + verb1 &nbsp;|&nbsp; ? <i>Did</i> + subject + verb1. Irregular: go→went, eat→ate, have→had, see→saw, buy→bought.",it:[
+["Yesterday I ___ (go) to school by bus.","i",["went"]],
+["She ___ (watch) a film last night.","i",["watched"]],
+["We ___ (eat) pizza on Saturday.","i",["ate"]],
+["He ___ (have) a big party last year.","i",["had"]],
+["I ___ (not / see) my cousin last week.","i",["didn't see","did not see"]],
+["They ___ (not / play) football yesterday.","i",["didn't play","did not play"]],
+["He ___ (not / buy) a new phone.","i",["didn't buy","did not buy"]],
+["Make a question: you / visit / your grandma / last weekend →","w",["did you visit your grandma last weekend","did you visit your grandmother last weekend"]],
+["Make a question: he / go / to school / yesterday →","w",["did he go to school yesterday"]],
+["___ they come to the party?","s","Did",["Do","Did","Does"]],
+["Which is correct?","s","I didn’t go.",["I didn’t went.","I didn’t go.","I not went."]],
+["Did she ___ the answer?","s","know",["know","knew","knows"]]]},
+{t:"4. Present Perfect (5 marks)",tip:"<i>have/has</i> + verb3. Use it for life experience (<i>ever, never, already, yet</i>). With <i>yesterday, last week</i> → Past Simple!",it:[
+["I ___ (visit) London three times.","i",["have visited","'ve visited","ve visited"]],
+["She ___ (finish) her homework.","i",["has finished","'s finished"]],
+["They ___ (not / see) this film.","i",["haven't seen","have not seen"]],
+["___ you ever eaten sushi?","s","Have",["Have","Has","Did"]],
+["He has ___ (write) a long email.","i",["written"]],
+["Which is correct?","s","I saw him yesterday.",["I have seen him yesterday.","I saw him yesterday."]]]},
+{t:"5. Apostrophes (5 marks)",tip:"Short forms: <i>don’t, isn’t, it’s, I’m</i>. Owner: <i>Anna’s book</i>; plural owners ending in s: <i>brothers’</i>; irregular plural: <i>children’s</i>. Never use ’ for a plain plural (two cats).",it:[
+["This is ___ book. (Anna)","s","Anna’s",["Annas","Anna’s","Annas’"]],
+["The ___ toys are on the floor. (the children)","s","children’s",["childrens","children’s","childrens’"]],
+["___ a sunny day today.","s","It’s",["Its","It’s"]],
+["do not → ___","i",["don't"]],
+["she is not → ___ (short form)","i",["she isn't","she's not"]],
+["Which sentence is wrong?","s","I have two cat’s.",["Tom’s mum is nice.","I have two cat’s.","That’s my dog."]]]}
+];
+S[0].it.push(
+["It is 7 pm. You meet a neighbour. “Good ___!”","s","evening",["morning","evening","night"]],
+["“Hi, I’m Kate.” – “Hi Kate, ___ Mark.”","s","I’m",["I’m","you’re","he’s"]],
+["“Hello, how are you?” – “___, thanks.”","s","Very well",["Very well","Very welcome","Nice to meet"]],
+["Which is a goodbye?","s","See you later!",["See you later!","Nice to meet you!","How do you do?"]],
+["“Pleased to meet you.” – “___.”","s","Pleased to meet you too.",["You’re welcome.","Pleased to meet you too.","Good night."]],
+["“Hi! How’s it going?” – “___”","s","Not bad, thanks!",["Not bad, thanks!","My name is Tom.","Goodbye!"]]);
+S[1].it.push(
+["father – mother, brother – ___","i",["sister"]],
+["grandfather – grandmother, uncle – ___","i",["aunt","auntie"]],
+["son – daughter, nephew – ___","i",["niece"]],
+["husband – wife, father – ___","i",["mother","mum","mom"]],
+["Odd one out:","s","teacher",["cousin","teacher","uncle","niece"]],
+["My mum’s mum and dad are my ___.","i",["grandparents"]],
+["My sister’s husband is my brother‑in‑___.","i",["law"]]);
+S[2].it.push(
+["Write the past: see →","i",["saw"]],["Write the past: buy →","i",["bought"]],["Write the past: take →","i",["took"]],["Write the past: write →","i",["wrote"]],
+["Write the past: come →","i",["came"]],["Write the past: make →","i",["made"]],["Write the past: drink →","i",["drank"]],["Write the past: give →","i",["gave"]],
+["Make it negative: She played tennis. → She ___ tennis.","i",["didn't play","did not play"]],
+["Make it negative: We watched TV. → We ___ TV.","i",["didn't watch","did not watch"]],
+["Make it a question: They went home. → (write the full question)","w",["did they go home"]],
+["Make it a question: She called her aunt. → (write the full question)","w",["did she call her aunt"]],
+["My grandma ___ (be) at home yesterday.","i",["was"]],
+["We ___ (be) at school last Monday.","i",["were"]]);
+S[3].it.push(
+["I ___ (never / be) to Paris.","i",["have never been","'ve never been","ve never been"]],
+["___ she ever met a famous person?","s","Has",["Have","Has","Did"]],
+["We ___ (already / eat) lunch.","i",["have already eaten","'ve already eaten","ve already eaten"]],
+["He ___ (not / do) his homework yet.","i",["hasn't done","has not done"]],
+["Have you ___ (see) my keys?","i",["seen"]],
+["Make a question: you / ever / visit / Russia →","w",["have you ever visited russia"]]);
+S[4].it.push(
+["I ___ like tomatoes.","s","don’t",["dont","don’t","do’nt"]],
+["My ___ room is big. (my brother)","s","brother’s",["brothers","brother’s","brothers’"]],
+["The ___ car is new. (my parents)","s","parents’",["parent’s","parents’","parents"]],
+["they are not → ___ (short form)","i",["they aren't","they're not"]],
+["I am → ___ (short form)","i",["i'm"]],
+["Which is correct?","s","It’s Tom’s bag.",["Its Tom’s bag.","It’s Toms bag.","It’s Tom’s bag."]],
+["Which is correct?","s","She isn’t here.",["She is’nt here.","She isn’t here.","She isnt’ here."]]);
+S.push(
+{t:"6. Reading: Mark’s Sunday (Past Simple + Family)",tip:"<p>Last Sunday, Mark visited his grandparents. His grandma made a big lunch and his grandpa told funny stories. Mark’s cousin Alex came too. They played chess, but they didn’t watch TV. Mark has never met his uncle from Canada, but he has seen photos of him.</p>",it:[
+["Who did Mark visit?","s","His grandparents",["His parents","His grandparents","His aunt"]],
+["Who made lunch?","s","His grandma",["His grandma","His grandpa","Alex"]],
+["Alex is Mark’s ___.","s","cousin",["brother","cousin","nephew"]],
+["Did they watch TV?","s","No, they didn’t.",["Yes, they did.","No, they didn’t."]],
+["Has Mark met his uncle?","s","No, he hasn’t.",["Yes, he has.","No, he hasn’t."]],
+["The past of “tell” in the text is ___.","i",["told"]],
+["Find a possessive with an apostrophe in the text (two words):","i",["mark's cousin"]]]},
+{t:"7. Find and fix the mistake",tip:"Rewrite each sentence correctly. Check: verb form, <i>did</i>, apostrophes, have/has.",it:[
+["I goed to the cinema yesterday.","w",["i went to the cinema yesterday"]],
+["She didn’t went to school.","w",["she didn't go to school"]],
+["Did he played football?","w",["did he play football"]],
+["I have seen him yesterday.","w",["i saw him yesterday"]],
+["My brothers room is big.","w",["my brother's room is big","my brothers' room is big"]],
+["Its a nice day.","w",["it's a nice day"]],
+["She have finished her work.","w",["she has finished her work"]],
+["They dont like pizza.","w",["they don't like pizza"]]]},
+{t:"8. Mixed review",tip:"Greetings, family and all three grammar topics together.",it:[
+["My sister ___ (not / come) to school yesterday.","i",["didn't come","did not come"]],
+["___ you have breakfast this morning?","s","Did",["Do","Did","Have"]],
+["That’s my ___ (parents) car.","i",["parents'"]],
+["She ___ (buy) a new bag last week.","i",["bought"]],
+["Has she ___ (clean) her room yet?","i",["cleaned"]],
+["My dad’s brother is my ___.","i",["uncle"]],
+["“Nice to meet you.” – “___.”","s","Nice to meet you too.",["Nice to meet you too.","See you.","I’m fine."]],
+["I ___ (visit) my aunt last summer.","i",["visited"]],
+["My cousin ___ (never / eat) sushi.","i",["has never eaten","'s never eaten","hasn't eaten"]],
+["Make a question: your uncle / live / in Canada →","w",["does your uncle live in canada","did your uncle live in canada"]]]}
+);
+const SP=["What do you say when you meet a new friend?","Tell me about your family. Who is in it?","What did you do last weekend?","What did you eat yesterday?","Have you ever been abroad? Where?","Whose bag / pen / phone is this? (Use ’s)"];
+const m=document.getElementById("m");let all=[];
+S.forEach((s,si)=>{let h=`<div class="card"><h2>${s.t}</h2><div class="tip">${s.tip}</div><ol>`;
+s.it.forEach(x=>{const id=all.length;const [q,ty]=x;all.push(x);let c;
+if(ty=="s"){c=`<select id="e${id}"><option value="">…</option>${x[3].map(o=>`<option>${o}</option>`).join("")}</select>`}
+else c=`<input id="e${id}" class="${ty=="w"?"w":""}" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+h+=`<li>${q.includes("___")?q.replace("___",c):q+" "+c}<span class="fb" id="f${id}"></span></li>`});
+m.innerHTML+=h+"</ol></div>"});
+m.innerHTML+=`<div class="card"><h2>Speaking warm‑up (not scored)</h2><ul class="sp">${SP.map(q=>`<li>${q}</li>`).join("")}</ul></div>`;
+const n=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z' -]/g,"").replace(/\s+/g," ").trim();
+function ans(x){return x[1]=="s"?x[2]:x[2][0]}
+function check(){let ok=0;all.forEach((x,i)=>{const e=document.getElementById("e"+i),f=document.getElementById("f"+i);
+const v=e.value;let r=x[1]=="s"?v==x[2]:x[2].map(n).includes(n(v));
+e.classList.remove("ok","no");f.className="fb";
+if(!v.trim()){f.textContent="";return}
+e.classList.add(r?"ok":"no");f.classList.add(r?"ok":"no");f.textContent=r?"✓":"✗ try again";if(r)ok++});
+document.getElementById("score").textContent=`Score: ${ok} / ${all.length}`}
+function show(){all.forEach((x,i)=>document.getElementById("e"+i).value=ans(x));check()}
+function reset(){all.forEach((x,i)=>{const e=document.getElementById("e"+i);e.value="";e.classList.remove("ok","no");document.getElementById("f"+i).textContent=""});document.getElementById("score").textContent=`Score: 0 / ${all.length}`}
+reset();
+</script></body></html>
