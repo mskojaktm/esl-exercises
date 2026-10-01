@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plural Nouns – Emma</title>
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#F1F8F9;--sun:#FFC857;--ok:#1B8A4B;--bad:#C0392B;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--navy);font:17px/1.5 Calibri,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:"Trebuchet MS",sans-serif;margin:0}
+header{background:var(--navy);color:#fff;padding:26px 20px 20px;text-align:center}
+header h1{font-size:2rem}
+header p{margin:6px 0 14px;opacity:.85}
+.plan{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font-size:.85rem}
+.plan span{background:rgba(255,255,255,.12);border-radius:20px;padding:3px 11px}
+.plan b{color:var(--sun)}
+main{max-width:1000px;margin:0 auto;padding:18px 14px 60px}
+.sec{margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+.badge{background:var(--teal);color:#fff;border-radius:50%;width:34px;height:34px;display:grid;place-items:center;font:700 1rem "Trebuchet MS",sans-serif;flex:none}
+.sec small{margin-left:auto;color:var(--teal);font-weight:700;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:10px;padding:14px 16px;box-shadow:0 3px 10px rgba(13,43,53,.12)}
+.card h3{font-size:1.05rem;color:var(--teal)}
+.card p{margin:6px 0}
+.ru{color:#5b7580;font-size:.9rem;font-style:italic}
+.ex{display:inline-block;background:#E3F3F5;border-radius:6px;padding:1px 8px;margin:2px 3px 2px 0;font-size:.95rem;white-space:nowrap}
+.ex.no{background:#FFF1CF}
+.warn{border-left-color:var(--sun)}
+.warn h3{color:#a9780a}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+td,th{padding:4px 6px;border-bottom:1px solid #dbe8ea;text-align:left}
+th{color:var(--teal)}
+.exbox{background:var(--card);border-radius:10px;padding:8px 16px 14px;box-shadow:0 3px 10px rgba(13,43,53,.12);border-left:6px solid var(--teal)}
+.instr{margin:8px 0 10px;color:#35505b}
+.it{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:6px 0;border-bottom:1px dashed #dbe8ea}
+.it:last-child{border:0}
+.it .t{flex:1 1 280px;font-size:1.05rem}
+input,select{font:inherit;padding:5px 9px;border:2px solid #b7d3d8;border-radius:8px;min-width:120px;background:#fff;color:var(--navy)}
+input:focus,select:focus{outline:3px solid var(--sun);border-color:var(--teal)}
+input.ok,select.ok{border-color:var(--ok);background:#E7F6EC}
+input.bad,select.bad{border-color:var(--bad);background:#FCEAE8}
+input.shown,select.shown{border-color:var(--sun);background:#FFF6DC}
+.fb{width:1.6em;font-weight:700}
+.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+#bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:3px solid var(--teal);padding:8px 14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center}
+#bar .sc{font:700 1.1rem "Trebuchet MS",sans-serif}
+#prog{flex:1 1 140px;max-width:260px;height:12px;background:#dbe8ea;border-radius:8px;overflow:hidden}
+#prog i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+button{font:700 .95rem "Trebuchet MS",sans-serif;border:0;border-radius:8px;padding:8px 14px;cursor:pointer;color:#fff;background:var(--teal)}
+button.s{background:#5b7580}button.r{background:var(--navy)}
+button:focus-visible{outline:3px solid var(--sun)}
+#msg{text-align:center;font:700 1.2rem "Trebuchet MS",sans-serif;margin-top:20px;min-height:1.5em;color:var(--teal)}
+</style></head><body>
+
+<header>
+<h1>Plural Nouns 🔤</h1>
+<p>Множественное число существительных · повторение · 40 minutes</p>
+<div class="plan"><span><b>7</b> min Rules</span><span><b>4</b> Regular</span><span><b>4</b> Exceptions</span><span><b>4</b> Irregular</span><span><b>5</b> Sentences</span><span><b>3</b> is / are</span><span><b>3</b> Sounds</span><span><b>4</b> Pictures</span><span><b>4</b> Mistakes</span><span><b>2</b> Wrap-up</span></div>
+</header>
+
+<div id="bar">
+<span class="sc" id="score">Score: 0 / 0</span><div id="prog"><i></i></div>
+<button onclick="check()">Check answers</button><button class="s" onclick="show()">Show answers</button><button class="r" onclick="reset()">Reset</button>
+</div>
+
+<main>
+<div class="sec"><span class="badge">📖</span><h2>The rules · Правила</h2></div>
+<div class="grid">
+
+<div class="card"><h3>1. Most nouns: + s</h3>
+<p><span class="ex">cat → cats</span><span class="ex">book → books</span><span class="ex">girl → girls</span><span class="ex">dog → dogs</span></p>
+<p class="ru">Обычное правило: просто добавляем -s.</p></div>
+
+<div class="card"><h3>2. Hissing endings: + es</h3>
+<p>Words ending in <b>-s, -ss, -sh, -ch, -x, -z</b>:</p>
+<p><span class="ex">bus → buses</span><span class="ex">glass → glasses</span><span class="ex">dish → dishes</span><span class="ex">watch → watches</span><span class="ex">box → boxes</span><span class="ex">quiz → quizzes</span></p>
+<p class="ru">Шипящие и -x: добавляем -es (читается [ɪz]). Слово quiz удваивает z.</p></div>
+
+<div class="card"><h3>3. Ending in -y</h3>
+<p><b>consonant + y</b> → <b>-ies</b></p>
+<p><span class="ex">baby → babies</span><span class="ex">city → cities</span><span class="ex">party → parties</span></p>
+<p><b>vowel + y</b> (a, e, o, u + y) → just <b>+ s</b></p>
+<p><span class="ex">boy → boys</span><span class="ex">day → days</span><span class="ex">key → keys</span><span class="ex">toy → toys</span></p>
+<p class="ru">После согласной y меняется на -ies. После гласной — просто -s.</p></div>
+
+<div class="card"><h3>4. Ending in -f / -fe → -ves</h3>
+<p><span class="ex">leaf → leaves</span><span class="ex">knife → knives</span><span class="ex">wolf → wolves</span><span class="ex">shelf → shelves</span><span class="ex">wife → wives</span><span class="ex">life → lives</span><span class="ex">half → halves</span><span class="ex">thief → thieves</span><span class="ex">loaf → loaves</span><span class="ex">calf → calves</span></p>
+<p><b>Exceptions – only + s:</b></p>
+<p><span class="ex no">roof → roofs</span><span class="ex no">cliff → cliffs</span><span class="ex no">chief → chiefs</span><span class="ex no">belief → beliefs</span><span class="ex no">giraffe → giraffes</span><span class="ex no">safe → safes</span></p>
+<p class="ru">f / fe меняются на v + es. Но у roof, cliff, chief, belief — просто -s. (Scarf: scarfs или scarves.)</p></div>
+
+<div class="card"><h3>5. Ending in -o</h3>
+<p><b>+ es:</b> <span class="ex">potato → potatoes</span><span class="ex">tomato → tomatoes</span><span class="ex">hero → heroes</span><span class="ex">echo → echoes</span></p>
+<p><b>+ s</b> (short words, vowel + o, words from other languages):</p>
+<p><span class="ex no">photo → photos</span><span class="ex no">piano → pianos</span><span class="ex no">zoo → zoos</span><span class="ex no">video → videos</span><span class="ex no">radio → radios</span><span class="ex no">kilo → kilos</span></p>
+<p class="ru">Их надо запомнить: potato, tomato, hero, echo — с -es; остальные в основном с -s. Volcano и mosquito допускают оба варианта.</p></div>
+
+<div class="card warn"><h3>6. Irregular plurals ⚠️</h3>
+<table><tr><th>Singular</th><th>Plural</th><th>Singular</th><th>Plural</th></tr>
+<tr><td>man</td><td>men</td><td>foot</td><td>feet</td></tr>
+<tr><td>woman</td><td>women</td><td>tooth</td><td>teeth</td></tr>
+<tr><td>child</td><td>children</td><td>goose</td><td>geese</td></tr>
+<tr><td>person</td><td>people</td><td>mouse</td><td>mice</td></tr>
+<tr><td>ox</td><td>oxen</td><td></td><td></td></tr></table>
+<p class="ru">Меняется слово целиком. Pronunciation: woman [ˈwʊmən] – women [ˈwɪmɪn].</p></div>
+
+<div class="card warn"><h3>7. Same form: one = many ⚠️</h3>
+<p><span class="ex no">one sheep → two sheep</span><span class="ex no">one fish → two fish</span><span class="ex no">one deer → two deer</span><span class="ex no">one series → two series</span><span class="ex no">one species → two species</span><span class="ex no">one aircraft → two aircraft</span></p>
+<p class="ru">Форма не меняется. (Fish → fishes тоже бывает, но только про разные виды рыб — пока не нужно.)</p></div>
+
+<div class="card warn"><h3>8. Always plural: pairs 👖</h3>
+<p><span class="ex">jeans</span><span class="ex">trousers</span><span class="ex">shorts</span><span class="ex">scissors</span><span class="ex">glasses</span><span class="ex">pyjamas</span><span class="ex">clothes</span></p>
+<p>They use <b>are</b>: “My jeans <b>are</b> blue.” To count: <span class="ex">a pair of jeans</span><span class="ex">two pairs of scissors</span></p>
+<p class="ru">Парные предметы всегда во множественном числе. Один предмет — a pair of…</p></div>
+
+<div class="card warn"><h3>9. No plural: uncountable ⚠️</h3>
+<p><span class="ex">water</span><span class="ex">milk</span><span class="ex">money</span><span class="ex">news</span><span class="ex">hair</span><span class="ex">homework</span><span class="ex">information</span><span class="ex">advice</span></p>
+<p>They use <b>is</b>: “The news <b>is</b> good.” Never: <span class="ex no">newses ✗</span><span class="ex no">homeworks ✗</span></p>
+<p class="ru">Неисчисляемые: без -s и без числа. News выглядит как множественное, но это единственное число.</p></div>
+
+<div class="card"><h3>10. How the ending sounds 🔊</h3>
+<table><tr><th>Sound</th><th>After…</th><th>Examples</th></tr>
+<tr><td><b>[s]</b></td><td>p, t, k, f</td><td>cats, books, cups</td></tr>
+<tr><td><b>[z]</b></td><td>other sounds, vowels</td><td>dogs, pens, days</td></tr>
+<tr><td><b>[ɪz]</b></td><td>s, z, sh, ch, x, ge</td><td>buses, dishes, boxes</td></tr></table>
+<p class="ru">Окончание читается по-разному: [s], [z] или [ɪz] — зависит от последнего звука слова.</p></div>
+
+</div>
+
+<div id="ex"></div>
+<div id="msg"></div>
+</main>
+
+<script>
+const EX=[
+{t:"Regular plurals: -s, -es, -ies",m:4,d:"Write the plural. Напиши множественное число.",it:[
+["🐱 cat","cats"],["🚌 bus","buses"],["📦 box","boxes"],["🍽️ dish","dishes"],["⌚ watch","watches"],["👶 baby","babies"],["🏙️ city","cities"],["🧸 toy","toys"],["🔑 key","keys"],["🥛 glass","glasses"]]},
+{t:"Exceptions: -f/-fe and -o",m:4,d:"Careful! Some words have -ves, some have -oes.",it:[
+["🍃 leaf","leaves"],["🔪 knife","knives"],["🐺 wolf","wolves"],["🏠 roof","roofs"],["📷 photo","photos"],["🍅 tomato","tomatoes"],["🎹 piano","pianos"],["👰 wife","wives"],["🥔 potato","potatoes"],["🦁 zoo","zoos"]]},
+{t:"Irregular and same-form plurals",m:4,d:"These words change completely – or do not change at all!",it:[
+["man","men"],["woman","women"],["child","children"],["foot","feet"],["tooth","teeth"],["mouse","mice"],["person","people"],["goose","geese"],["ox","oxen"],["🐑 sheep","sheep"]]},
+{t:"Sentences",m:5,d:"Write the plural of the word in brackets.",it:[
+["Two __ (child) are playing in the garden.","children"],["I can see five __ (butterfly) on the flower.","butterflies"],["She has three __ (box) of toys.","boxes"],["My __ (foot) are cold.","feet"],["There are many __ (sheep) on the farm.","sheep"],["We eat __ (potato) for dinner.","potatoes"],["The __ (woman) are in the shop.","women"],["Four __ (knife) are on the table.","knives"]]},
+{t:"Is or are?",m:3,d:"Pairs are plural. Uncountable words are singular. Choose is or are.",it:[
+["My jeans __ blue.","are",["is","are"]],["The news __ good today.","is",["is","are"]],["The scissors __ on the desk.","are",["is","are"]],["Water __ cold.","is",["is","are"]],["My trousers __ new.","are",["is","are"]],["Money __ important.","is",["is","are"]]]},
+{t:"Sounds: [s], [z] or [ɪz]?",m:3,d:"Say the word aloud. What is the sound of the ending?",it:[
+["cats","[s]",["[s]","[z]","[ɪz]"]],["dogs","[z]",["[s]","[z]","[ɪz]"]],["boxes","[ɪz]",["[s]","[z]","[ɪz]"]],["books","[s]",["[s]","[z]","[ɪz]"]],["pens","[z]",["[s]","[z]","[ɪz]"]],["buses","[ɪz]",["[s]","[z]","[ɪz]"]],["days","[z]",["[s]","[z]","[ɪz]"]],["hats","[s]",["[s]","[z]","[ɪz]"]]]},
+{t:"Count the pictures",m:4,d:"Look and write the plural word.",it:[
+["🍎🍎🍎 three __","apples"],["🐟🐟 two __","fish"],["🦶🦶 two __","feet"],["👶👶👶 three __","babies"],["🍅🍅 two __","tomatoes"],["🐑🐑🐑🐑 four __","sheep"],["👧👦 two __","children"],["🦷🦷🦷 three __","teeth"]]},
+{t:"Find and fix the mistake",m:4,d:"Each sentence has one wrong plural. Write the correct word.",it:[
+["There are three <u>mans</u> in the car. →  __","men"],["She has two <u>babys</u>. →  __","babies"],["I see four <u>mouses</u>. →  __","mice"],["The <u>tomatos</u> are red. →  __","tomatoes"],["Two <u>leafs</u> fell down. →  __","leaves"],["Five <u>peoples</u> are here. →  __","people"]]}
+];
+let h="",N=0;
+EX.forEach((e,i)=>{
+ h+=`<div class="sec"><span class="badge">${i+1}</span><h2>${e.t}</h2><small>⏱ ${e.m} min</small></div><div class="exbox"><p class="instr">${e.d}</p>`;
+ e.it.forEach(([p,a,o])=>{
+  const f=o?`<select data-a="${a}"><option value="">–</option>${o.map(x=>`<option>${x}</option>`).join("")}</select>`:`<input data-a="${a}" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+  const row=p.includes("__")?p.replace("__",f):p+" → "+f;
+  h+=`<div class="it"><span class="t">${row}</span><span class="fb"></span></div>`;N++;
+ });
+ h+="</div>";
+});
+document.getElementById("ex").innerHTML=h;
+const F=()=>[...document.querySelectorAll("#ex [data-a]")];
+function mark(el,cls,sym){el.className=cls;const b=el.closest(".it").querySelector(".fb");b.textContent=sym;b.className="fb "+cls}
+function upd(c,txt){document.getElementById("score").textContent=txt||`Score: ${c} / ${N}`;document.querySelector("#prog i").style.width=(c/N*100)+"%"}
+function check(){let c=0;F().forEach(el=>{const v=el.value.trim().toLowerCase();if(!v){mark(el,"","");return}
+ if(v===el.dataset.a.toLowerCase()){c++;mark(el,"ok","✓")}else mark(el,"bad","✗")});
+ upd(c);document.getElementById("msg").textContent=c===N?"🎉 Perfect! Excellent work, Emma!":c>=N*.8?"👏 Great job! Fix the red ones and try again.":"💪 Good try! Read the rules again and fix the red answers."}
+function show(){F().forEach(el=>{el.value=el.dataset.a;mark(el,"shown","")});upd(0,"Answers shown");document.querySelector("#prog i").style.width="0";document.getElementById("msg").textContent=""}
+function reset(){F().forEach(el=>{el.value="";mark(el,"","")});upd(0);document.getElementById("msg").textContent=""}
+upd(0);
+</script>
+</body></html>
