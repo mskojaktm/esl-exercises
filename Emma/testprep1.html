@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emma's Round-Up: Test Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D2B35;--teal:#028090;--gold:#E8B33A;--gold-d:#B8861B;--bg:#EAF4F4;--card:#fff;--ok:#1f9d55;--bad:#d64545;--ink:#0D2B35}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1d24;--card:#12323d;--ink:#eaf4f4}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:700 18px/1.4 Nunito,Trebuchet MS,Calibri,sans-serif}
+h1,h2{font-family:Rye,Georgia,serif;font-weight:400;margin:0}
+header{background:var(--navy);color:var(--gold);text-align:center;padding:22px 14px 18px;border-bottom:6px dashed var(--gold)}
+header h1{font-size:clamp(26px,6vw,40px)}
+header p{color:#cfe8ea;margin:6px 0 0;font-size:16px}
+#bar{position:sticky;top:0;z-index:5;background:var(--teal);color:#fff;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:8px 14px;box-shadow:0 3px 8px #0003}
+#bar .sc{font-size:20px}
+#bar button{font:800 15px Nunito,sans-serif;border:0;border-radius:20px;padding:8px 14px;cursor:pointer;background:var(--gold);color:var(--navy)}
+#bar button.g{background:#fff}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+main{max-width:860px;margin:0 auto;padding:16px 12px 60px}
+section{background:var(--card);border-left:10px solid var(--teal);border-radius:14px;padding:16px 16px 12px;margin:18px 0;box-shadow:0 4px 12px #0002}
+section h2{font-size:24px;color:var(--teal)}
+section .tip{margin:6px 0 12px;font-size:16px;opacity:.85}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.item{border:2px solid #0d2b3522;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;background:var(--card)}
+.item .q{font-size:20px}
+.item .big{font-size:44px;line-height:1}
+.item svg{display:block}
+.item input{width:100%;font:800 20px Nunito,sans-serif;text-align:center;padding:8px;border:2px solid var(--teal);border-radius:10px;background:var(--card);color:var(--ink)}
+.opts{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.opt{font:800 17px Nunito,sans-serif;padding:8px 12px;border-radius:10px;border:2px solid var(--teal);background:var(--card);color:var(--ink);cursor:pointer}
+.opt.sel{background:var(--gold);border-color:var(--gold-d);color:var(--navy)}
+.item.ok{border-color:var(--ok);background:#1f9d5518}
+.item.bad{border-color:var(--bad);background:#d6454518}
+.fb{min-height:22px;font-size:15px}
+.ok .fb{color:var(--ok)}.bad .fb{color:var(--bad)}
+.wide{grid-column:1/-1}
+.bank{background:#e8b33a33;border-radius:10px;padding:8px 12px;margin-bottom:12px;font-size:16px}
+#res{display:none;text-align:center;background:var(--navy);color:#fff;border:5px solid var(--gold);border-radius:16px;padding:20px;margin:20px 0}
+#res h2{color:var(--gold);font-size:30px}
+#res .st{font-size:40px;letter-spacing:6px}
+footer{text-align:center;font-size:14px;opacity:.7;padding:10px}
+</style>
+</head>
+<body>
+<header><h1>🤠 Emma's Round-Up</h1><p>Practise for your test, partner! Do each corral, then press <b>Check answers</b>.</p></header>
+<div id="bar">
+ <span class="sc">⭐ <span id="score">0</span> / <span id="total">0</span> &nbsp; ✍️ <span id="ans">0</span> answered</span>
+ <span><button onclick="check()">Check answers</button> <button class="g" onclick="showAns()">Show answers</button> <button class="g" onclick="build()">Reset</button></span>
+</div>
+<main>
+<div id="app"></div>
+<div id="res"></div>
+</main>
+<footer>School test practice · school things, lessons, numbers, to be, shapes, about me, classroom commands</footer>
+<script>
+const $=s=>document.querySelector(s);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const norm=s=>(s||'').toLowerCase().replace(/[’‘ʼ`]/g,"'").replace(/\s+/g,' ').trim().replace(/[.!?]+$/,'');
+const SH={circle:['<circle cx="40" cy="40" r="32" fill="#2bbfa8" stroke="#0D2B35" stroke-width="2"/>'],
+ square:['<rect x="12" y="12" width="56" height="56" fill="#ee1c1c" stroke="#0D2B35" stroke-width="2"/>'],
+ triangle:['<polygon points="40,8 72,68 8,68" fill="#8fd01b" stroke="#0D2B35" stroke-width="2"/>'],
+ rectangle:['<rect x="4" y="22" width="72" height="38" fill="#a020c8" stroke="#0D2B35" stroke-width="2"/>'],
+ star:['<polygon points="40,6 49,30 75,30 54,46 62,72 40,56 18,72 26,46 5,30 31,30" fill="#f6e21b" stroke="#0D2B35" stroke-width="2"/>'],
+ diamond:['<polygon points="40,4 72,40 40,76 8,40" fill="#ff6a00" stroke="#0D2B35" stroke-width="2"/>']};
+const svg=n=>`<svg viewBox="0 0 80 80" width="84" height="84" role="img" aria-label="shape">${SH[n][0]}</svg>`;
+const T=(big,a,q='Write the word:')=>({t:'text',big,a:[].concat(a),q});
+const M=(big,a,o,q)=>({t:'mc',big,a:[a],o,q:q||''});
+const nums='one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty'.split(' ');
+const S=[
+{title:'🎒 Corral 1: School things',tip:'Look at the picture. Write the word. Mind the spelling!',bank:'pen · pencil · book · notebook · ruler · scissors · bag',cls:'',
+ items:[T('📖','book'),T('🖊️','pen'),T('✏️','pencil'),T('📏','ruler'),T('🎒',['bag','schoolbag','backpack']),T('📓','notebook'),T('✂️','scissors')]},
+{title:'📚 Corral 2: School lessons',tip:'Which lesson is it? Pick one. Then spell three lessons.',
+ items:[M('🔢','Maths',['Maths','Music','Art']),M('🎨','Art',['Art','Science','English']),M('🎵','Music',['Music','Maths','PE']),M('🔬','Science',['Science','History','Art']),M('⚽','PE',['PE','Music','English']),M('🗣️','English',['English','Geography','Maths']),
+ T('🎵',['music'],'Spell it:'),T('🔬',['science'],'Spell it:'),T('🎨',['art'],'Spell it:'),T('🔢',['maths','math'],'Spell it:')]},
+{title:'🔢 Corral 3: Numbers 1–20',tip:'Write each number in words. Then solve the sums and write the answer in words.',
+ items:nums.map((w,i)=>T(i+1,w,'Write in words:')).concat([['7 + 5','twelve'],['10 + 9','nineteen'],['20 − 4','sixteen'],['8 + 8','sixteen'],['13 + 4','seventeen'],['3 + 11','fourteen']].map(([q,a])=>T(q+' =',a,'Write the answer in words:')))},
+{title:'🐴 Corral 4: Short and long forms of “to be”',tip:'I am = I’m. Write the short form, then the long form, then choose am / is / are.',
+ items:[['I am',"i'm"],['he is',"he's"],['she is',"she's"],['it is',"it's"],['we are',"we're"],['you are',"you're"],['they are',"they're"]].map(([q,a])=>T(q+' =',a,'Short form:'))
+ .concat([["she's",'she is'],["we're",'we are'],["I'm",'i am'],["they're",'they are'],["it's",'it is']].map(([q,a])=>T(q+' =',a,'Long form:')))
+ .concat([['I ___ ten.','am'],['She ___ my friend.','is'],['We ___ at school.','are'],['They ___ cowboys.','are'],['It ___ a pencil.','is'],['You ___ my friend.','are'],['He ___ a teacher.','is']].map(([q,a])=>M('',a,['am','is','are'],q)))},
+{title:'🔷 Corral 5: Shapes',tip:'Choose the name. Then write the name of each shape.',
+ items:Object.keys(SH).map(n=>({t:'mc',svg:n,a:[n[0].toUpperCase()+n.slice(1)],o:['Circle','Square','Triangle','Rectangle','Star','Diamond'],q:'What shape is it?'}))
+ .concat(Object.keys(SH).map(n=>({t:'text',svg:n,a:[n],q:'Write the word:'})))},
+{title:'🪪 Corral 6: About me',tip:'Match the question and the answer. Then write about YOU!',
+ items:[M('','What’s your name?',['What’s your name?','How old are you?','What class are you in?'],'“My name is Emma.” is the answer to…'),
+ M('','How old are you?',['What’s your name?','How old are you?','What class are you in?'],'“I’m ten.” is the answer to…'),
+ M('','What class are you in?',['What’s your name?','How old are you?','What class are you in?'],'“I’m in class 3.” is the answer to…'),
+ M('','I’m ten.',['My name is Emma.','I’m ten.','I’m in class 3.'],'How old are you?'),
+ M('','My name is Emma.',['My name is Emma.','I’m ten.','I’m in class 3.'],'What’s your name?'),
+ M('','I’m in class 3.',['My name is Emma.','I’m ten.','I’m in class 3.'],'What class are you in?'),
+ {t:'re',re:/^my name is [a-z]+$/,ex:'My name is Emma.',q:'What’s your name? Write the full answer:',wide:1},
+ {t:'re',re:/^(i am|i'm) [a-z0-9\-]+( years old)?$/,ex:"I'm ten.",q:'How old are you? Write the full answer:',wide:1},
+ {t:'re',re:/^(i am|i'm) in (class|grade) [a-z0-9]+$/,ex:"I'm in class 3.",q:'What class are you in? Write the full answer:',wide:1}]},
+{title:'📣 Corral 7: Classroom commands',tip:'Textbook page 16, exercise 1. Pick the English command, then write four of them.',
+ items:[M('🧍','Stand up.',['Stand up.','Sit down.','Listen.'],'Встань!'),M('🪑','Sit down.',['Sit down.','Stand up.','Write.'],'Сядь!'),M('📖','Open your book.',['Open your book.','Close your book.','Read.'],'Открой книгу!'),M('📕','Close your book.',['Close your book.','Open your book.','Draw.'],'Закрой книгу!'),
+ M('👂','Listen.',['Listen.','Look.','Read.'],'Слушай!'),M('✍️','Write.',['Write.','Draw.','Stand up.'],'Пиши!'),M('🖍️','Draw.',['Draw.','Write.','Sit down.'],'Рисуй!'),M('👀','Look.',['Look.','Listen.','Close your book.'],'Смотри!'),
+ T('🧍','stand up','Write the command: «Встань!»'),T('🪑','sit down','Write the command: «Сядь!»'),T('📖','open your book','Write the command: «Открой книгу!»'),T('👂','listen','Write the command: «Слушай!»')]}
+];
+let ITEMS=[];
+function build(){
+ ITEMS=[];$('#res').style.display='none';
+ $('#app').innerHTML=S.map((s,si)=>`<section><h2>${s.title}</h2><p class="tip">${s.tip}</p>${s.bank?`<div class="bank">Word bank: ${s.bank}</div>`:''}<div class="grid">${
+ s.items.map(it=>{const id=ITEMS.push(it)-1;it.id=id;it.val='';
+  const vis=it.svg?svg(it.svg):(it.big!==''&&it.big!==undefined?`<div class="big">${it.big}</div>`:'');
+  let ctl='';
+  if(it.t==='mc')ctl=`<div class="opts">${shuf(it.o).map(o=>`<button class="opt" data-v="${o.replace(/"/g,'&quot;')}">${o}</button>`).join('')}</div>`;
+  else ctl=`<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="answer">`;
+  return `<div class="item${it.wide?' wide':''}" id="i${id}"><div class="q">${it.q||''}</div>${vis}${ctl}<div class="fb"></div></div>`}).join('')}</div></section>`).join('');
+ document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const box=b.closest('.item');box.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');clr(box);upd()});
+ document.querySelectorAll('.item input').forEach(i=>i.oninput=()=>{clr(i.closest('.item'));upd()});
+ $('#total').textContent=ITEMS.length;$('#score').textContent=0;upd();
+}
+function clr(box){box.classList.remove('ok','bad');box.querySelector('.fb').textContent=''}
+function val(it){const box=$('#i'+it.id);return it.t==='mc'?(box.querySelector('.sel')?.dataset.v||''):box.querySelector('input').value}
+function upd(){$('#ans').textContent=ITEMS.filter(it=>val(it).trim()!=='').length}
+function good(it){const v=val(it);if(it.t==='re')return it.re.test(norm(v));
+ if(it.t==='mc')return v===it.a[0];return it.a.map(norm).includes(norm(v))}
+function check(){let s=0;
+ ITEMS.forEach(it=>{const box=$('#i'+it.id),ok=good(it);box.classList.remove('ok','bad');box.classList.add(ok?'ok':'bad');
+  const fb=box.querySelector('.fb');
+  if(ok){s++;fb.textContent='✅ Yee-haw!'}else if(val(it).trim()==='')fb.textContent='👉 Answer me, partner!';else fb.textContent='❌ Try again'});
+ $('#score').textContent=s;
+ const p=s/ITEMS.length,r=p===1?['🏆 Marshal','Perfect! You are ready for the test!']:p>=.8?['🤠 Sheriff','Great job! Fix the red ones and you are ready.']:p>=.5?['⭐ Deputy','Good! Practise the red ones again.']:['🐎 Tenderfoot','Keep going! Try one corral at a time.'];
+ const st='⭐'.repeat(Math.round(p*5))+'☆'.repeat(5-Math.round(p*5));
+ const res=$('#res');res.style.display='block';res.innerHTML=`<h2>${r[0]}</h2><div class="st">${st}</div><p>${s} / ${ITEMS.length} — ${r[1]}</p>`;
+ res.scrollIntoView({behavior:'smooth',block:'center'})}
+function showAns(){ITEMS.forEach(it=>{const box=$('#i'+it.id);clr(box);
+ if(it.t==='mc'){box.querySelectorAll('.opt').forEach(b=>b.classList.toggle('sel',b.dataset.v===it.a[0]))}
+ else box.querySelector('input').value=it.t==='re'?it.ex:it.a[0];});
+ upd();check()}
+build();
+</script>
+</body>
+</html>
