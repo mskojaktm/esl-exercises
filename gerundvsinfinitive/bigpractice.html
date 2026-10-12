@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerund vs. Infinitive — Practice Exercises (B2)</title>
+<style>
+  :root {
+    --teal:#028090; --teal-light:#e5f3f4; --navy:#0D2B35; --navy-soft:#1c3f4c;
+    --paper:#fbfaf7; --card:#fff; --border:#d9e3e4; --shadow:0 2px 10px rgba(13,43,53,.08);
+    --ok:#1b7f4b; --ok-bg:#e8f6ee; --bad:#b3261e; --bad-bg:#fdecea; --show:#1c5f9e; --show-bg:#e9f1fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--navy);font-family:Calibri,"Segoe UI",Verdana,sans-serif;line-height:1.55}
+  h1,h2,h3{font-family:"Trebuchet MS",Trebuchet,sans-serif;margin:0;color:var(--navy)}
+  header{background:var(--navy);color:#fff;text-align:center;padding:30px 20px 24px}
+  header h1{color:#fff;font-size:1.8rem}
+  header p{color:#bfe3e6;margin:8px 0 0}
+  .tracker{position:sticky;top:0;z-index:20;background:var(--navy-soft);color:#fff;padding:10px 16px;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+  .tracker-in{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
+  .stat{font-family:"Trebuchet MS",sans-serif;font-size:.95rem}
+  .stat b{color:#7fe3ea;font-size:1.1rem}
+  .bar{flex:1 1 140px;height:8px;background:rgba(255,255,255,.2);border-radius:5px;overflow:hidden;min-width:120px}
+  .bar i{display:block;height:100%;width:0;background:#4fd1c5;transition:width .25s}
+  .btns{display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:"Trebuchet MS",sans-serif;font-size:.85rem;border:0;border-radius:6px;padding:7px 13px;cursor:pointer;background:var(--teal);color:#fff}
+  .btn:hover{filter:brightness(1.12)}
+  .btn.ghost{background:transparent;border:1px solid #7fb9c0;color:#d6f0f2}
+  .msg{flex-basis:100%;font-size:.9rem;color:#d6f0f2;min-height:1.2em}
+  nav.jump{max-width:900px;margin:16px auto 0;padding:0 16px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  nav.jump span{font-size:.85rem;color:var(--navy-soft);margin-right:4px}
+  nav.jump a{width:30px;height:30px;border-radius:50%;background:var(--teal-light);color:var(--teal);text-decoration:none;font-family:"Trebuchet MS",sans-serif;font-weight:bold;font-size:.85rem;display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
+  nav.jump a:hover{background:var(--teal);color:#fff}
+  main{max-width:900px;margin:0 auto;padding:18px 16px 60px}
+  .section{background:var(--card);border-left:5px solid var(--teal);border-radius:8px;box-shadow:var(--shadow);padding:20px 22px 12px;margin-bottom:24px;scroll-margin-top:90px}
+  .section-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .badge{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;font-family:"Trebuchet MS",sans-serif;font-weight:bold;display:flex;align-items:center;justify-content:center}
+  .section h2{font-size:1.15rem;flex:1}
+  .chip{font-family:"Trebuchet MS",sans-serif;font-size:.8rem;border-radius:12px;padding:3px 10px;display:none}
+  .chip.on{display:inline-block}.chip.good{background:var(--ok-bg);color:var(--ok)}.chip.mid{background:#fff4d6;color:#8a6500}.chip.low{background:var(--bad-bg);color:var(--bad)}
+  .recap{background:var(--teal-light);border-left:4px solid var(--teal);border-radius:6px;padding:10px 14px;font-size:.93rem;margin-bottom:14px}
+  .ex{margin:0 0 20px}
+  .ex h3{font-size:1rem;color:var(--teal)}
+  .instr{margin:3px 0 8px;font-size:.9rem;color:var(--navy-soft);font-style:italic}
+  .ex ol{margin:0;padding-left:0;list-style:none;counter-reset:q}
+  .ex li{counter-increment:q;position:relative;padding:8px 10px 8px 38px;border-left:4px solid transparent;border-radius:4px;margin-bottom:4px}
+  .ex li::before{content:counter(q);position:absolute;left:8px;top:8px;width:22px;height:22px;border-radius:50%;background:#eef3f3;color:var(--navy-soft);font-size:.78rem;font-weight:bold;display:flex;align-items:center;justify-content:center}
+  .ex li:nth-child(odd){background:#f8fbfb}
+  .q{font-size:1rem}
+  input.gap{font:inherit;font-size:.97rem;border:0;border-bottom:2px solid var(--teal);background:#f1f9f9;padding:1px 6px;margin:0 2px;color:var(--navy);border-radius:3px 3px 0 0;min-width:70px;max-width:100%}
+  input.gap:focus{outline:2px solid #7fd0d8;background:#fff}
+  .arrow{color:var(--teal);font-weight:bold;margin:0 2px}
+  .blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--navy-soft);text-align:center;color:transparent;user-select:none}
+  .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .opts.long{flex-direction:column}
+  .opt{position:relative;cursor:pointer}
+  .opt input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+  .opt span{display:block;border:1.5px solid var(--border);background:#fff;border-radius:18px;padding:4px 14px;font-size:.95rem}
+  .opt:hover span{border-color:var(--teal)}
+  .opt input:checked+span{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .opt input:focus-visible+span{outline:2px solid #7fd0d8;outline-offset:1px}
+  select{font:inherit;font-size:.95rem;margin-top:6px;padding:4px 8px;border:1.5px solid var(--border);border-radius:6px;background:#fff;color:var(--navy);max-width:100%}
+  .fb{font-size:.88rem;margin-top:4px;min-height:0}
+  li.ok{border-left-color:var(--ok);background:var(--ok-bg)!important}
+  li.ok .fb{color:var(--ok)}
+  li.ok .opt input:checked+span{background:var(--ok);border-color:var(--ok)}
+  li.bad{border-left-color:var(--bad);background:var(--bad-bg)!important}
+  li.bad .fb{color:var(--bad)}
+  li.bad .opt input:checked+span{background:var(--bad);border-color:var(--bad)}
+  li.show{border-left-color:var(--show);background:var(--show-bg)!important}
+  li.show .fb{color:var(--show)}
+  li.un{border-left-color:#c9a227}
+  li.un .fb{color:#8a6500}
+  footer{text-align:center;color:var(--navy-soft);font-size:.85rem;padding:10px 16px 40px}
+  @media(max-width:560px){header h1{font-size:1.45rem}.section{padding:16px 12px 8px}.ex li{padding-left:34px}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Gerund vs. Infinitive — Practice Exercises</h1>
+  <p>14 rules · several exercise types for each · level B2</p>
+</header>
+
+<div class="tracker" role="status" aria-live="polite">
+  <div class="tracker-in">
+    <div class="stat">Score: <b id="score">0</b> / <span id="total">0</span></div>
+    <div class="stat">Answered: <b id="answered">0</b></div>
+    <div class="bar"><i id="barfill"></i></div>
+    <div class="btns">
+      <button class="btn" id="btnCheck">Check Answers</button>
+      <button class="btn ghost" id="btnShow">Show Answers</button>
+      <button class="btn ghost" id="btnReset">Reset</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+
+<nav class="jump" id="jump"><span>Jump to rule:</span></nav>
+<main id="sections"></main>
+<footer>Companion to the “Gerund vs. Infinitive — Complete Grammar Reference”. Answers are not case-sensitive.</footer>
+
+<script>
+/* Item formats
+   gap / fix : [text, "answer|alt answer"]            (gap: ___ becomes an input; fix: input after the sentence)
+   mc / sort : [text, "opt1|opt2|opt3", correctIndex] (mc: option buttons; sort: dropdown)            */
+const D = [
+{id:1,title:"Verbs followed only by the gerund",short:"Gerund only",
+ recap:"<b>enjoy, avoid, consider, suggest, mind, finish, deny, admit, risk, miss, give up, put off, keep, carry on, can’t help</b> + <b>-ing</b>.",
+ ex:[
+ {t:"gap",title:"A. Put the verb in the correct form",instr:"Write the gerund.",items:[
+  ["She avoided ___ (answer) the question.","answering"],
+  ["They suggested ___ (postpone) the meeting.","postponing"],
+  ["I can’t help ___ (feel) nervous before exams.","feeling"],
+  ["He admitted ___ (take) the money.","taking"],
+  ["We finished ___ (paint) the kitchen at midnight.","painting"],
+  ["Would you mind ___ (open) the window?","opening"]]},
+ {t:"mc",title:"B. Choose the correct form",instr:"Click the right option.",items:[
+  ["She enjoys ___ in the garden.","to work|working|work",1],
+  ["I’m seriously considering ___ my job.","to change|changing|change",1],
+  ["He kept ___ even though everyone told him to stop.","to talk|talking|talk",1],
+  ["You shouldn’t put off ___ the dentist.","to call|calling|call",1],
+  ["She gave up ___ after twenty years.","to smoke|smoking|smoke",1]]},
+ {t:"fix",title:"C. Find and fix the mistake",instr:"Each sentence has a mistake in the bold part. Type the correct form of the verb.",items:[
+  ["He denied <b>to break</b> the window.","breaking"],
+  ["I miss <b>to play</b> football with my old friends.","playing"],
+  ["They risked <b>to lose</b> everything.","losing"],
+  ["She dreads <b>to speak</b> in public.","speaking"],
+  ["We carried on <b>to work</b> until dark.","working"]]}
+ ]},
+{id:2,title:"Verbs followed only by the infinitive",short:"Infinitive only",
+ recap:"<b>want, decide, hope, plan, agree, promise, refuse, manage, afford, seem, tend, fail, learn, expect, pretend</b> + <b>to</b> + base verb.",
+ ex:[
+ {t:"gap",title:"A. Put the verb in the correct form",instr:"Write the infinitive with <i>to</i>.",items:[
+  ["We decided ___ (leave) early.","to leave"],
+  ["He refused ___ (apologise).","to apologise|to apologize"],
+  ["She managed ___ (finish) on time.","to finish"],
+  ["They can’t afford ___ (buy) a new car.","to buy"],
+  ["I hope ___ (see) you again soon.","to see"],
+  ["He promised ___ (call) me back.","to call"]]},
+ {t:"mc",title:"B. Choose the correct form",instr:"Click the right option.",items:[
+  ["She agreed ___ us with the move.","helping|to help|help",1],
+  ["He seems ___ tired today.","being|to be|be",1],
+  ["They planned ___ a surprise party.","having|to have|have",1],
+  ["I expect ___ the results next week.","getting|to get|get",1],
+  ["She pretended ___ asleep.","being|to be|be",1]]},
+ {t:"fix",title:"C. Find and fix the mistake",instr:"Type the correct form of the bold verb.",items:[
+  ["We decided <b>moving</b> abroad.","to move"],
+  ["He refused <b>paying</b> the fine.","to pay"],
+  ["She tends <b>forgetting</b> names.","to forget"],
+  ["They failed <b>reaching</b> the summit.","to reach"],
+  ["I’m learning <b>driving</b>.","to drive"]]}
+ ]},
+{id:3,title:"Either form — no change in meaning",short:"Either form",
+ recap:"<b>begin, start, continue, like, love, hate, prefer</b> take both forms with (almost) the same meaning. Avoid two <i>-ing</i> forms in a row: <i>It’s starting <b>to rain</b>.</i>",
+ ex:[
+ {t:"gap",title:"A. Complete with either form",instr:"Both forms are correct — type one of them.",items:[
+  ["It began ___ (snow) as we left.","snowing|to snow"],
+  ["I love ___ (walk) by the sea.","walking|to walk"],
+  ["She prefers ___ (travel) by train.","travelling|traveling|to travel"],
+  ["He continued ___ (work) after the bell rang.","working|to work"],
+  ["I hate ___ (get) up early.","getting|to get"]]},
+ {t:"mc",title:"B. Which sentence is NOT correct?",instr:"Click the incorrect sentence.",items:[
+  ["","It’s starting to rain.|It’s starting raining.|It started raining.",1],
+  ["","She began to cry.|She began crying.|She began to crying.",2],
+  ["","I can’t bear waiting.|I can’t bear to wait.|I can’t bear to waiting.",2],
+  ["","He continued to speak.|He continued speaking.|He continued speak.",2]]},
+ {t:"sort",title:"C. Same meaning or different meaning?",instr:"Does the meaning change when you swap the gerund and the infinitive?",items:[
+  ["<b>begin</b> + -ing / to-infinitive","Same meaning|Meaning changes",0],
+  ["<b>remember</b> + -ing / to-infinitive","Same meaning|Meaning changes",1],
+  ["<b>prefer</b> + -ing / to-infinitive","Same meaning|Meaning changes",0],
+  ["<b>try</b> + -ing / to-infinitive","Same meaning|Meaning changes",1],
+  ["<b>continue</b> + -ing / to-infinitive","Same meaning|Meaning changes",0],
+  ["<b>stop</b> + -ing / to-infinitive","Same meaning|Meaning changes",1],
+  ["<b>love</b> + -ing / to-infinitive","Same meaning|Meaning changes",0],
+  ["<b>forget</b> + -ing / to-infinitive","Same meaning|Meaning changes",1]]}
+ ]},
+{id:4,title:"Either form — the meaning CHANGES",short:"Meaning changes",
+ recap:"<b>remember/forget</b>: -ing = memory, to = task · <b>stop</b>: -ing = quit, to = pause in order to · <b>try</b>: -ing = experiment, to = make an effort · <b>regret</b>: -ing = past action, to = formal news · <b>go on</b>: -ing = continue, to = move on to something new · <b>mean</b>: -ing = involve, to = intend · <b>need</b>: -ing = passive meaning.",
+ ex:[
+ {t:"mc",title:"A. Choose the form that fits the meaning",instr:"Read the cue in brackets.",items:[
+  ["I’ll never forget ___ the Northern Lights. (a memory)","seeing|to see",0],
+  ["Don’t forget ___ the milk. (a task)","buying|to buy",1],
+  ["He stopped ___ because he wanted to get healthier. (he no longer smokes)","smoking|to smoke",0],
+  ["On the walk he stopped ___ a cigarette outside the shop. (he paused in order to)","smoking|to smoke",1],
+  ["If your phone freezes, try ___ it off and on. (an experiment)","turning|to turn",0],
+  ["I tried ___ the heavy box, but I couldn’t. (an effort)","lifting|to lift",1],
+  ["I regret ___ you that the flight has been cancelled. (formal news)","telling|to tell",1],
+  ["I regret ___ him my secret. (a past action I’m sorry about)","telling|to tell",0]]},
+ {t:"gap",title:"B. Put the verb in the correct form",instr:"Think about the meaning.",items:[
+  ["I remember ___ (lock) the door, so I’m sure it’s locked.","locking"],
+  ["Sorry, I forgot ___ (bring) your book.","to bring"],
+  ["After the introduction, she went on ___ (explain) the main results.","to explain"],
+  ["He went on ___ (talk) for two hours without a break.","talking"],
+  ["This job means ___ (travel) a lot.","travelling|traveling"],
+  ["I didn’t mean ___ (hurt) you.","to hurt"],
+  ["The windows need ___ (clean).","cleaning|to be cleaned"]]},
+ {t:"mc",title:"C. Which meaning is correct?",instr:"Choose the sentence that explains the meaning.",items:[
+  ["“She remembered to post the letter.”","She didn’t forget — and she posted it.|She has a memory of posting it in the past.",0],
+  ["“I’ll always remember meeting her.”","I have a lasting memory of the meeting.|I won’t forget to meet her.",0],
+  ["“Try adding some salt.”","Make an effort to add salt.|Experiment: add some salt and see if it tastes better.",1],
+  ["“She stopped to talk to him.”","She paused something in order to talk to him.|She no longer talked to him.",0],
+  ["“He went on to become a doctor.”","Later, as a new step, he became a doctor.|He continued working as a doctor.",0]]}
+ ]},
+{id:5,title:"used to / be used to / get used to",short:"used to",
+ recap:"<b>used to + base verb</b> = a past habit or state that has stopped · <b>be used to + -ing</b> = accustomed · <b>get used to + -ing</b> = becoming accustomed.",
+ ex:[
+ {t:"mc",title:"A. Choose the correct form",instr:"Click the right option.",items:[
+  ["I ___ play the piano when I was a child.","used to|am used to|get used to",0],
+  ["She’s lived in Moscow for years, so she ___ the cold.","used to|is used to|gets used to",1],
+  ["It takes time to ___ living abroad.","used to|be used to|get used to",2],
+  ["We ___ live in a small village, but we moved to the city.","used to|are used to|get used to",0],
+  ["I’m not used to ___ so early.","get up|getting up",1]]},
+ {t:"gap",title:"B. Put the verb in the correct form",instr:"Write the missing form.",items:[
+  ["When I was young, I used ___ (play) outside until dark.","to play"],
+  ["He’s a night-shift nurse, so he is used to ___ (sleep) during the day.","sleeping"],
+  ["I’m gradually getting used to ___ (drive) on the left.","driving"],
+  ["Did you use ___ (have) long hair?","to have"],
+  ["She wasn’t used to ___ (work) in an open-plan office.","working"],
+  ["We never got used to ___ (live) so far from the centre.","living"]]},
+ {t:"fix",title:"C. Find and fix the mistake",instr:"Type the correct form of the bold verb.",items:[
+  ["I used to <b>getting</b> up early, but now I sleep late.","get"],
+  ["I’m used to <b>work</b> long hours.","working"],
+  ["She is getting used to <b>live</b> alone.","living"],
+  ["They used to <b>going</b> to the beach every summer.","go"],
+  ["He didn’t use to <b>liking</b> coffee.","like"]]}
+ ]},
+{id:6,title:"Verb + object + infinitive",short:"Verb + object + to",
+ recap:"ask, tell, advise, allow, encourage, expect, invite, order, persuade, remind, warn, force, teach + <b>object + to + base verb</b>. Negative: <b>not to</b> + verb.",
+ ex:[
+ {t:"gap",title:"A. Put the verb in the correct form",instr:"Write the infinitive with <i>to</i>.",items:[
+  ["She asked him ___ (wait) outside.","to wait"],
+  ["The doctor advised me ___ (rest) for a week.","to rest"],
+  ["They encouraged her ___ (apply) for the job.","to apply"],
+  ["My boss allowed us ___ (leave) early.","to leave"],
+  ["I reminded him ___ (lock) the door.","to lock"],
+  ["The police warned drivers ___ (avoid) the area.","to avoid"]]},
+ {t:"mc",title:"B. Choose the correct form",instr:"Click the right option.",items:[
+  ["He told me ___ the report by Friday.","finishing|to finish|finish",1],
+  ["She persuaded him ___ the course.","taking|to take|take",1],
+  ["They invited us ___ to the party.","to come|coming|come",0],
+  ["My dad taught me ___ when I was five.","swimming|to swim|swim",1],
+  ["I didn’t expect him ___ so quickly.","answering|to answer|answer",1]]},
+ {t:"gap",title:"C. Report the instruction",instr:"Complete the second sentence.",items:[
+  ["“Please sit down,” the teacher said to us.<br>The teacher asked us ___ down.","to sit"],
+  ["“Don’t touch the wire!” he told the children.<br>He told the children ___ the wire.","not to touch"],
+  ["“You should see a doctor,” my friend said.<br>My friend advised me ___ a doctor.","to see"],
+  ["“Remember to call Mum,” my sister said.<br>My sister reminded me ___ Mum.","to call"],
+  ["“You can’t park here,” the officer told us.<br>The officer didn’t allow us ___ here.","to park"]]}
+ ]},
+{id:7,title:"make / let / help + object + bare infinitive",short:"make / let / help",
+ recap:"<b>make / let</b> + object + base verb (no <i>to</i>). <b>help</b> + object + base verb or <i>to</i>-infinitive. In the passive, <b>make</b> needs <i>to</i>: <i>He was made <b>to</b> wait.</i>",
+ ex:[
+ {t:"mc",title:"A. Choose the correct form",instr:"Click the right option.",items:[
+  ["My boss made me ___ the report again.","to redo|redo|redoing",1],
+  ["Her parents don’t let her ___ out late.","to go|go|going",1],
+  ["Can you help me ___ these boxes?","carry|carrying|carried",0],
+  ["The film made everyone ___.","to cry|cry|crying",1],
+  ["The teacher let us ___ early.","to leave|leave|leaving",1]]},
+ {t:"gap",title:"B. Put the verb in the correct form",instr:"Watch out for the passive!",items:[
+  ["The joke made us ___ (laugh) out loud.","laugh"],
+  ["He let the children ___ (stay) up late.","stay"],
+  ["She helped me ___ (find) my keys.","find|to find"],
+  ["We were made ___ (wait) for two hours.","to wait"],
+  ["Don’t make me ___ (repeat) myself.","repeat"],
+  ["The students were made ___ (stay) after class.","to stay"]]},
+ {t:"mc",title:"C. Find the correct (or incorrect) sentence",instr:"Read each question carefully.",items:[
+  ["Which sentence is correct?","He made me to wait.|He made me wait.|He made me waiting.",1],
+  ["Which sentence is correct?","I was made wait.|I was made to wait.|I was made waiting.",1],
+  ["Which sentence is correct?","She let me to go.|She let me go.|She let me going.",1],
+  ["Which sentence is NOT correct?","She helped me finish.|She helped me to finish.|She helped me finishing.",2]]}
+ ]},
+{id:8,title:"Verbs of perception + object",short:"see / hear / watch",
+ recap:"see, hear, watch, feel, notice + object + <b>base verb</b> = the <b>whole</b> action · + <b>-ing</b> = the action <b>in progress</b> (or only part of it).",
+ ex:[
+ {t:"mc",title:"A. Whole action or in progress?",instr:"Use the cue in brackets.",items:[
+  ["I saw him ___ the street and get into a taxi. (whole action)","cross|crossing",0],
+  ["I saw him ___ the street when the accident happened. (in progress)","cross|crossing",1],
+  ["We heard her ___ the whole song. (whole action)","sing|singing",0],
+  ["We heard her ___ as we walked past. (in progress)","sing|singing",1],
+  ["She watched the plane ___ off. (whole action)","take|taking",0],
+  ["I smelled something ___ in the kitchen. (in progress)","burn|burning",1]]},
+ {t:"gap",title:"B. Put the verb in the correct form",instr:"Use the cue in brackets.",items:[
+  ["I noticed a man ___ (follow) me home. (in progress)","following"],
+  ["I heard the door ___ (slam) and then he was gone. (whole action)","slam"],
+  ["We watched the sun ___ (set) from beginning to end. (whole action)","set"],
+  ["She saw a bird ___ (sit) on the fence when she looked out. (in progress)","sitting"]]},
+ {t:"sort",title:"C. Which meaning does the sentence have?",instr:"Choose from the drop-down list.",items:[
+  ["I saw her <b>fall</b> off the bike.","Whole action|Action in progress",0],
+  ["I saw him <b>walking</b> along the river as I drove past.","Whole action|Action in progress",1],
+  ["We heard the glass <b>break</b>.","Whole action|Action in progress",0],
+  ["We heard them <b>arguing</b> through the wall.","Whole action|Action in progress",1],
+  ["I watched him <b>paint</b> the whole house.","Whole action|Action in progress",0],
+  ["She noticed a child <b>standing</b> alone in the corner.","Whole action|Action in progress",1]]}
+ ]},
+{id:9,title:"Preposition + gerund",short:"Preposition + -ing",
+ recap:"After a preposition always use <b>-ing</b> — including the preposition <b>to</b> (<i>look forward to, be used to, object to</i>). Compare: <i>I want <b>to</b> go</i> (infinitive) / <i>I look forward <b>to</b> going</i> (preposition).",
+ ex:[
+ {t:"gap",title:"A. Put the verb in the correct form",instr:"Write the gerund.",items:[
+  ["I’m looking forward to ___ (see) you.","seeing"],
+  ["She insisted on ___ (pay) for dinner.","paying"],
+  ["He apologised for ___ (be) late.","being"],
+  ["Are you interested in ___ (join) our club?","joining"],
+  ["She’s good at ___ (solve) puzzles.","solving"],
+  ["They succeeded in ___ (finish) the project on time.","finishing"]]},
+ {t:"sort",title:"B. Preposition or infinitive marker?",instr:"What kind of “to” is in bold?",items:[
+  ["I look forward <b>to</b> meeting you.","Preposition → -ing follows|Infinitive marker → base verb follows",0],
+  ["I want <b>to</b> meet you.","Preposition → -ing follows|Infinitive marker → base verb follows",1],
+  ["She’s used <b>to</b> working nights.","Preposition → -ing follows|Infinitive marker → base verb follows",0],
+  ["He promised <b>to</b> call.","Preposition → -ing follows|Infinitive marker → base verb follows",1],
+  ["We object <b>to</b> paying extra.","Preposition → -ing follows|Infinitive marker → base verb follows",0],
+  ["They managed <b>to</b> escape.","Preposition → -ing follows|Infinitive marker → base verb follows",1]]},
+ {t:"mc",title:"C. Choose the correct form",instr:"Click the right option.",items:[
+  ["She is afraid of ___ alone.","to travel|travelling|travel",1],
+  ["He is tired of ___ the same thing every day.","to hear|hearing|hear",1],
+  ["There’s no excuse for ___ rude.","to be|being|be",1],
+  ["Thank you for ___ me.","to help|helping|help",1],
+  ["I’m thinking about ___ a new laptop.","to buy|buying|buy",1],
+  ["He’s keen on ___ photography.","to take up|taking up|take up",1]]}
+ ]},
+{id:10,title:"Gerund as the subject",short:"Gerund subject",
+ recap:"When an activity is the subject of the sentence, use a <b>gerund</b>: <i><b>Smoking</b> is bad for you.</i> (<i>To smoke…</i> is possible but formal and rare.)",
+ ex:[
+ {t:"gap",title:"A. Complete with a gerund subject",instr:"Write the gerund (start with a capital letter if you like — it doesn’t matter).",items:[
+  ["___ (smoke) is bad for your health.","smoking"],
+  ["___ (learn) a language takes time.","learning"],
+  ["___ (eat) late at night can disrupt your sleep.","eating"],
+  ["___ (swim) is a great way to stay fit.","swimming"],
+  ["___ (get) a good job isn’t easy these days.","getting"]]},
+ {t:"mc",title:"B. Choose the correct / more natural sentence",instr:"Click the right sentence.",items:[
+  ["","To learn a language takes time.|Learning a language takes time.",1],
+  ["","Walking in the rain can be fun.|To walk in the rain can be fun.",0],
+  ["","Spend too much time online is unhealthy.|Spending too much time online is unhealthy.",1],
+  ["","Wake up early gives you more time.|Waking up early gives you more time.",1],
+  ["","Be late is rude.|Being late is rude.",1]]},
+ {t:"gap",title:"C. Rewrite with a gerund subject",instr:"Complete the second sentence.",items:[
+  ["It is dangerous to drive fast.<br>___ fast is dangerous.","driving"],
+  ["It is fun to cook with friends.<br>___ with friends is fun.","cooking"],
+  ["It is hard to quit sugar.<br>___ sugar is hard.","quitting"],
+  ["It isn’t easy to find a flat in London.<br>___ a flat in London isn’t easy.","finding"],
+  ["It’s relaxing to read before bed.<br>___ before bed is relaxing.","reading"]]}
+ ]},
+{id:11,title:"Infinitive of purpose",short:"Purpose",
+ recap:"To say <b>why</b> someone does something use <b>to + verb</b>, <b>in order to</b> or <b>so as to</b>. Negative: <b>in order not to / so as not to</b>. Don’t use <i>for + verb</i> for this.",
+ ex:[
+ {t:"mc",title:"A. Choose the correct form",instr:"Click the right option.",items:[
+  ["I went to the bank ___ some money.","for withdraw|to withdraw|withdrawing",1],
+  ["She called ___ about the job.","to ask|for ask|asking",0],
+  ["He whispered ___ the baby.","so as not to wake|so as to not waking|for not waking",0],
+  ["We left early ___ the traffic.","in order to avoid|in order avoiding|for to avoid",0],
+  ["I use this app ___ English.","for learn|to learning|to learn",2]]},
+ {t:"gap",title:"B. Complete the sentences",instr:"Express the purpose.",items:[
+  ["She studies hard ___ (pass) the exam.","to pass|in order to pass|so as to pass"],
+  ["He went to the shop ___ (buy) milk.","to buy|in order to buy|so as to buy"],
+  ["We took a taxi so as ___ (not / be) late.","not to be"],
+  ["I’m saving money ___ (travel) around Asia.","to travel|in order to travel|so as to travel"],
+  ["She turned the music down in order ___ (not / disturb) the neighbours.","not to disturb"]]},
+ {t:"fix",title:"C. Find and fix the mistake",instr:"Type the correct form of the bold part.",items:[
+  ["I came here <b>for learning</b> English.","to learn"],
+  ["She went out <b>for buy</b> bread.","to buy"],
+  ["He saved money <b>for to buy</b> a bike.","to buy"],
+  ["They called <b>for to ask</b> about the price.","to ask"]]}
+ ]},
+{id:12,title:"Adjective + infinitive",short:"Adjective + to",
+ recap:"It’s + adjective + (<b>of / for</b> + person) + <b>to</b> + verb. Use <b>of</b> for adjectives about character (kind, rude, silly, generous); use <b>for</b> for adjectives about the situation (difficult, important, necessary, easy).",
+ ex:[
+ {t:"gap",title:"A. Put the verb in the correct form",instr:"Write the infinitive with <i>to</i>.",items:[
+  ["It was nice ___ (meet) you.","to meet"],
+  ["It’s important ___ (arrive) on time.","to arrive"],
+  ["I’m happy ___ (help) you.","to help"],
+  ["She was surprised ___ (see) him there.","to see"],
+  ["He was afraid ___ (tell) the truth.","to tell"]]},
+ {t:"mc",title:"B. of or for?",instr:"Click the right word.",items:[
+  ["It was kind ___ you to help me.","of|for",0],
+  ["It’s difficult ___ beginners to understand this rule.","of|for",1],
+  ["It was rude ___ him to interrupt.","of|for",0],
+  ["It’s important ___ everyone to be on time.","of|for",1],
+  ["It was silly ___ me to forget my keys.","of|for",0],
+  ["It’s necessary ___ students to register.","of|for",1],
+  ["It was generous ___ her to share.","of|for",0]]},
+ {t:"fix",title:"C. Find and fix the mistake",instr:"Type the correct form of the bold word.",items:[
+  ["It’s easy <b>learning</b> this rule.","to learn"],
+  ["We were glad <b>hearing</b> the news.","to hear"],
+  ["She’s ready <b>starting</b>.","to start"],
+  ["It was kind <b>for</b> you to help.","of"],
+  ["It’s difficult <b>of</b> beginners to understand.","for"]]}
+ ]},
+{id:13,title:"too / enough + infinitive",short:"too / enough",
+ recap:"<b>too</b> + adjective + <i>to</i>-infinitive (a negative result) · adjective + <b>enough</b> + <i>to</i>-infinitive · <b>enough</b> + noun + <i>to</i>-infinitive.",
+ ex:[
+ {t:"gap",title:"A. too or enough?",instr:"Write <i>too</i> or <i>enough</i>.",items:[
+  ["This coffee is ___ hot to drink.","too"],
+  ["He’s old ___ to vote.","enough"],
+  ["We don’t have ___ time to finish.","enough"],
+  ["The bag was ___ heavy for me to carry.","too"],
+  ["She isn’t tall ___ to reach the shelf.","enough"],
+  ["It’s ___ late to call him now.","too"]]},
+ {t:"gap",title:"B. Rewrite the sentence",instr:"Complete the second sentence.",items:[
+  ["The tea is so hot that I can’t drink it.<br>The tea is too hot ___.","to drink|for me to drink|to drink it|for me to drink it"],
+  ["She is so tired that she can’t drive.<br>She is too tired ___.","to drive"],
+  ["He is so young that he can’t vote.<br>He is not old enough ___.","to vote"],
+  ["The exam was so difficult that I couldn’t finish it.<br>The exam was too difficult ___.","to finish|for me to finish|to finish it|for me to finish it"]]},
+ {t:"mc",title:"C. Choose the correct form",instr:"Click the right option.",items:[
+  ["She isn’t ___ to join the army.","enough old|old enough|too old enough",1],
+  ["It’s ___ cold to go swimming.","too|enough|very enough",0],
+  ["We have ___ chairs for everyone.","enough|too",0],
+  ["He speaks ___ quickly for me to understand.","too|enough",0],
+  ["Is the water warm ___ to swim in?","too|enough|very",1]]}
+ ]},
+{id:14,title:"Perfect, passive & continuous forms",short:"Complex forms",
+ recap:"<b>Perfect:</b> having + V3 / to have + V3 · <b>Passive:</b> being + V3 / to be + V3 · <b>Continuous infinitive:</b> to be + -ing.",
+ ex:[
+ {t:"gap",title:"A. Put the verb in the form shown",instr:"Follow the cue in brackets.",items:[
+  ["He denied ___ (steal — perfect gerund) the money.","having stolen"],
+  ["I’m glad ___ (finish — perfect infinitive) the project.","to have finished"],
+  ["He hates ___ (tell — passive gerund) what to do.","being told"],
+  ["This place needs ___ (clean — passive infinitive).","to be cleaned"],
+  ["She is proud of ___ (win — perfect gerund) the award.","having won"],
+  ["The children are excited ___ (take — passive infinitive) to the zoo.","to be taken"],
+  ["He seems ___ (work — continuous infinitive) hard these days.","to be working"]]},
+ {t:"mc",title:"B. Choose the correct form",instr:"Click the right option.",items:[
+  ["I don’t like ___ like a child.","treating|being treated|to treat",1],
+  ["He claims ___ the president once.","to have met|having met|to meeting",0],
+  ["The documents are said ___ in the fire.","to have been lost|having been lost|to lose",0],
+  ["She appears ___ the news already — she isn’t surprised.","to hear|to have heard|hearing",1],
+  ["Nobody likes ___ at in public.","being laughed|laughing|to laugh",0]]},
+ {t:"sort",title:"C. Name the form",instr:"What is the form in bold?",items:[
+  ["She is proud of <b>having won</b> the prize.","Perfect gerund|Passive gerund|Perfect infinitive|Passive infinitive|Continuous infinitive",0],
+  ["He hates <b>being interrupted</b>.","Perfect gerund|Passive gerund|Perfect infinitive|Passive infinitive|Continuous infinitive",1],
+  ["They seem <b>to be waiting</b> for someone.","Perfect gerund|Passive gerund|Perfect infinitive|Passive infinitive|Continuous infinitive",4],
+  ["The window needs <b>to be fixed</b>.","Perfect gerund|Passive gerund|Perfect infinitive|Passive infinitive|Continuous infinitive",3],
+  ["I’m glad <b>to have met</b> you.","Perfect gerund|Passive gerund|Perfect infinitive|Passive infinitive|Continuous infinitive",2],
+  ["She denied <b>having seen</b> him.","Perfect gerund|Passive gerund|Perfect infinitive|Passive infinitive|Continuous infinitive",0]]}
+ ]},
+{id:15,b:"★",title:"Mixed review — all rules together",short:"Mixed review",
+ recap:"Now there are no hints about the rule — decide for yourself: gerund, infinitive, bare infinitive, or something else?",
+ ex:[
+ {t:"gap",title:"A. Put the verb in the correct form",instr:"Write what is missing.",items:[
+  ["She suggested ___ (go) to the cinema.","going"],
+  ["I forgot ___ (lock) the door, so the house was open all night.","to lock"],
+  ["He’s used to ___ (work) night shifts.","working"],
+  ["They made us ___ (wait) outside.","wait"],
+  ["I’m looking forward to ___ (hear) from you.","hearing"],
+  ["We’re saving money ___ (buy) a house.","to buy|in order to buy|so as to buy"],
+  ["He decided ___ (not / go) to the party.","not to go"],
+  ["___ (swim) in the sea is wonderful.","swimming"]]},
+ {t:"mc",title:"B. Choose the correct form",instr:"Click the right option.",items:[
+  ["It was rude ___ him to leave without a word.","of|for",0],
+  ["He’s not old enough ___ a car.","driving|to drive|drive",1],
+  ["I saw her ___ the cake, so I know who ate it. (whole action)","eat|eating",0],
+  ["She’s good at ___ people laugh.","make|making|to make",1],
+  ["I regret ___ you that your application was unsuccessful.","to tell|telling",0],
+  ["My parents didn’t let me ___ out on school nights.","to go|go|going",1]]}
+ ]}
+];
+
+/* ---------- build ---------- */
+const norm = s => s.toLowerCase().replace(/[’‘`]/g,"'").replace(/[.!?]+$/,"").replace(/\s+/g," ").trim();
+const items = [];
+(function build(){
+  let html = '', nav = '';
+  D.forEach(sec => {
+    nav += `<a href="#s${sec.id}" title="${sec.short}">${sec.b || sec.id}</a>`;
+    html += `<section class="section" id="s${sec.id}"><div class="section-head"><div class="badge">${sec.b || sec.id}</div><h2>${sec.title}</h2><span class="chip" id="chip${sec.id}"></span></div><div class="recap">${sec.recap}</div>`;
+    sec.ex.forEach(ex => {
+      html += `<div class="ex"><h3>${ex.title}</h3><p class="instr">${ex.instr}</p><ol>`;
+      ex.items.forEach(it => {
+        const id = items.length;
+        if (ex.t === 'gap' || ex.t === 'fix') {
+          const ans = it[1].split('|');
+          const size = Math.max(6, ...ans.map(a => a.length)) + 1;
+          const inp = `<input type="text" class="gap" data-i="${id}" size="${size}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Your answer">`;
+          let q = it[0];
+          q = ex.t === 'gap' ? q.replace('___', inp) : q + ` <span class="arrow">→</span> ${inp}`;
+          html += `<li data-i="${id}"><div class="q">${q}</div><div class="fb"></div></li>`;
+          items.push({t: ex.t, ans, sec: sec.id});
+        } else {
+          const opts = it[1].split('|');
+          const q = it[0].replace('___', '<span class="blank">______</span>');
+          let ctl;
+          if (ex.t === 'mc') {
+            const long = opts.some(o => o.length > 26);
+            ctl = `<div class="opts${long ? ' long' : ''}">` + opts.map((o, k) =>
+              `<label class="opt"><input type="radio" name="q${id}" value="${k}" data-i="${id}"><span>${o}</span></label>`).join('') + `</div>`;
+          } else {
+            ctl = `<select data-i="${id}" aria-label="Choose"><option value="">— choose —</option>` +
+              opts.map((o, k) => `<option value="${k}">${o}</option>`).join('') + `</select>`;
+          }
+          html += `<li data-i="${id}">${q ? `<div class="q">${q}</div>` : ''}${ctl}<div class="fb"></div></li>`;
+          items.push({t: ex.t, opts, idx: it[2], sec: sec.id});
+        }
+      });
+      html += `</ol></div>`;
+    });
+    html += `</section>`;
+  });
+  document.getElementById('sections').innerHTML = html;
+  document.getElementById('jump').insertAdjacentHTML('beforeend', nav);
+  document.getElementById('total').textContent = items.length;
+})();
+
+/* ---------- state ---------- */
+let checked = false, shown = false;
+const $ = id => document.getElementById(id);
+const li = i => document.querySelector(`li[data-i="${i}"]`);
+
+function getVal(i) {
+  const it = items[i], el = li(i);
+  if (it.t === 'gap' || it.t === 'fix') return el.querySelector('input.gap').value;
+  if (it.t === 'mc') { const c = el.querySelector('input:checked'); return c ? c.value : ''; }
+  return el.querySelector('select').value;
+}
+const isAnswered = i => getVal(i).trim() !== '';
+function isCorrect(i) {
+  const it = items[i], v = getVal(i);
+  if (it.t === 'gap' || it.t === 'fix') return it.ans.map(norm).includes(norm(v));
+  return v !== '' && +v === it.idx;
+}
+const answerText = i => { const it = items[i]; return it.ans ? it.ans.join(' / ') : it.opts[it.idx]; };
+
+function grade() {
+  let score = 0, answered = 0;
+  const perSec = {};
+  items.forEach((it, i) => {
+    const el = li(i), fb = el.querySelector('.fb');
+    el.classList.remove('ok', 'bad', 'show', 'un'); fb.textContent = '';
+    const a = isAnswered(i); if (a) answered++;
+    const c = a && isCorrect(i);
+    perSec[it.sec] = perSec[it.sec] || {c: 0, t: 0};
+    perSec[it.sec].t++;
+    if (c) { score++; perSec[it.sec].c++; }
+    if (!checked) return;
+    if (shown) { el.classList.add('show'); fb.textContent = 'Answer: ' + answerText(i); return; }
+    if (!a) { el.classList.add('un'); fb.textContent = 'Not answered — ' + answerText(i); }
+    else if (c) { el.classList.add('ok'); fb.textContent = '✓ Correct'; }
+    else { el.classList.add('bad'); fb.textContent = '✗ Correct answer: ' + answerText(i); }
+  });
+  D.forEach(sec => {
+    const chip = $('chip' + sec.id), p = perSec[sec.id];
+    if (checked && !shown) {
+      const r = p.c / p.t;
+      chip.textContent = p.c + ' / ' + p.t;
+      chip.className = 'chip on ' + (r >= .85 ? 'good' : r >= .6 ? 'mid' : 'low');
+    } else { chip.className = 'chip'; chip.textContent = ''; }
+  });
+  $('score').textContent = checked && !shown ? score : (shown ? '—' : score);
+  $('answered').textContent = answered + ' / ' + items.length;
+  $('barfill').style.width = (answered / items.length * 100) + '%';
+  const msg = $('msg');
+  if (shown) msg.textContent = 'Answers are shown — press Reset to try again.';
+  else if (checked) {
+    const left = items.length - answered, pct = Math.round(score / items.length * 100);
+    msg.textContent = (left ? left + ' unanswered. ' : '') + pct + '% correct — ' +
+      (pct >= 90 ? 'excellent work!' : pct >= 70 ? 'good, review the red items.' : 'keep practising: re-read the rule boxes of the sections with low scores.');
+  } else msg.textContent = '';
+}
+
+function onChange(e) {
+  if (!e.target.dataset || e.target.dataset.i === undefined) return;
+  if (shown) shown = false;
+  grade();
+}
+document.addEventListener('input', onChange);
+document.addEventListener('change', onChange);
+
+$('btnCheck').addEventListener('click', () => { checked = true; shown = false; grade(); });
+$('btnShow').addEventListener('click', () => {
+  items.forEach((it, i) => {
+    const el = li(i);
+    if (it.t === 'gap' || it.t === 'fix') el.querySelector('input.gap').value = it.ans[0];
+    else if (it.t === 'mc') el.querySelectorAll('input[type=radio]')[it.idx].checked = true;
+    else el.querySelector('select').value = String(it.idx);
+  });
+  checked = true; shown = true; grade();
+});
+$('btnReset').addEventListener('click', () => {
+  document.querySelectorAll('input.gap').forEach(x => x.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(x => x.checked = false);
+  document.querySelectorAll('select').forEach(x => x.value = '');
+  checked = false; shown = false; grade();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+grade();
+</script>
+</body>
+</html>
