@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indefinite pronouns: some / any / no / every + body, one, thing, where</title>
+<style>
+:root{
+  --teal:#028090; --teal-d:#016573; --navy:#0D2B35; --bg:#EEF5F6; --card:#fff;
+  --soft:#E3F2F4; --ink:#14333D; --muted:#5A7580;
+  --ok:#17784A; --ok-bg:#DDF3E6; --bad:#B3261E; --bad-bg:#FBE3E1; --gold:#F2B134;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3,h4{font-family:"Trebuchet MS",Verdana,sans-serif;color:var(--navy);line-height:1.25}
+a{color:var(--teal-d)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;padding:38px 0 30px;border-bottom:6px solid var(--teal)}
+.hero h1{color:#fff;font-size:clamp(26px,5vw,40px);margin:0 0 8px}
+.hero p{margin:4px 0;color:#CFE6EA}
+.hero .meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.hero .meta span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:3px 12px;font-size:15px}
+
+/* sticky bar */
+.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:2px solid var(--teal);box-shadow:0 2px 8px rgba(13,43,53,.15)}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-top:8px;padding-bottom:8px}
+.bar nav{display:flex;gap:12px;font-weight:700;font-family:"Trebuchet MS",sans-serif;font-size:15px}
+.stats{flex:1;min-width:190px;font-size:15px}
+.stats .row{display:flex;justify-content:space-between;gap:10px}
+.prog{height:7px;background:#CFE0E3;border-radius:5px;overflow:hidden;margin-top:3px}
+.prog i{display:block;height:100%;width:0;background:var(--teal);transition:width .25s}
+.btns{display:flex;gap:6px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer}
+.btn{border:2px solid var(--teal);background:#fff;color:var(--teal-d);border-radius:8px;padding:5px 12px;font-weight:700;font-size:15px}
+.btn.main{background:var(--teal);color:#fff}
+.btn:hover{background:var(--teal-d);color:#fff;border-color:var(--teal-d)}
+.btn.tog[aria-pressed="false"]{border-style:dashed;color:var(--muted);border-color:var(--muted)}
+
+/* cards */
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:10px;box-shadow:0 2px 9px rgba(13,43,53,.12);padding:20px 24px;margin:20px 0}
+.card h2,.card h3{margin:0 0 10px;font-size:22px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.badge{display:inline-grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:17px;margin-right:8px}
+.part{font-size:26px;margin:38px 0 0;color:var(--navy);border-bottom:3px solid var(--teal);padding-bottom:6px}
+.k{font-weight:700;color:var(--teal-d);background:var(--soft);border-radius:4px;padding:0 4px}
+ul.eg{list-style:none;margin:8px 0;padding:0}
+ul.eg li{background:var(--soft);border-radius:6px;padding:6px 12px;margin:6px 0}
+ul.eg li.n{background:var(--bad-bg)}
+.ru{color:var(--muted);font-style:italic;margin:6px 0 0;padding-left:10px;border-left:3px solid #BFD3D8}
+body.no-ru .ru{display:none}
+.tip{background:#FFF6DC;border:1px solid #F0D58A;border-radius:8px;padding:8px 14px;margin:12px 0}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{border:1px solid #BFD3D8;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--teal);color:#fff;font-family:"Trebuchet MS",sans-serif}
+td.pre{background:var(--soft);font-weight:700;color:var(--navy)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps>li{counter-increment:s;position:relative;padding:8px 0 8px 46px;border-bottom:1px dashed #BFD3D8}
+.steps>li:last-child{border-bottom:0}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:8px;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+@media(max-width:700px){.cols{grid-template-columns:1fr}.card{padding:16px 16px}}
+
+/* exercises */
+.ex .sub{margin-left:auto;font-size:15px;color:var(--teal-d);font-weight:700}
+.instr{margin:0 0 10px;color:var(--muted)}
+h4.head{margin:16px 0 4px;font-size:17px;color:var(--teal-d)}
+.item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #E3EDEF}
+.item:last-of-type{border-bottom:0}
+.item .n{flex:none;width:28px;color:var(--muted);font-weight:700;text-align:right}
+.item .body{flex:1;min-width:0}
+.src{color:var(--muted);font-style:italic;margin-bottom:2px}
+.sp{display:inline-block;font-weight:700;color:var(--teal-d);margin-right:6px}
+.line{line-height:2.1}
+.gn{color:var(--muted);font-size:12px;margin:0 2px 0 4px}
+input[type=text]{font:inherit;color:var(--navy);border:0;border-bottom:2px solid var(--teal);background:#F4FAFB;padding:1px 6px;margin:0 3px;border-radius:4px 4px 0 0;text-align:center;min-width:5ch}
+input[type=text].right{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:700}
+input[type=text].wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+input[type=text].shown{background:#FFF6DC;border-color:var(--gold);color:var(--navy);font-weight:700}
+.blank{display:inline-block;width:3.2em;border-bottom:2px solid var(--navy);margin:0 2px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.opt{border:2px solid #BFD3D8;background:#fff;color:var(--navy);border-radius:8px;padding:5px 14px;text-align:left}
+.opt:hover{border-color:var(--teal)}
+.opt.sel{border-color:var(--teal);background:var(--soft);font-weight:700}
+.opt.right{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.opts.stack{flex-direction:column}
+.fb{display:none;margin-top:5px;font-size:15px;border-radius:6px;padding:4px 10px}
+.fb.ok{display:block;background:var(--ok-bg);color:#10583A}
+.fb.no{display:block;background:var(--bad-bg);color:#7D1B15}
+.fb.info{display:block;background:#FFF6DC;color:#5C4500}
+
+/* speaking */
+.talk{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #E3EDEF}
+.talk:last-child{border-bottom:0}
+.talk input{width:22px;height:22px;margin-top:4px;accent-color:var(--teal);flex:none}
+.talk .starter{color:var(--muted);font-style:italic;display:block}
+footer{padding:26px 0 50px;color:var(--muted);font-size:14px;text-align:center}
+@media(max-width:600px){.bar nav{display:none}.bar .wrap{gap:6px 10px;padding-top:6px;padding-bottom:6px}.btn{padding:3px 8px;font-size:13px}.stats{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Somebody, anything, nowhere</h1>
+    <p>Indefinite pronouns: <b>some- · any- · no- · every-</b> + <b>-body / -one / -thing / -where</b></p>
+    <div class="meta"><span>Level B1–B2</span><span>Part A: rules</span><span>Part B: 6 exercises + speaking</span></div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <nav><a href="#rules">Rules</a><a href="#practice">Practice</a><a href="#speaking">Speaking</a></nav>
+    <div class="stats" aria-live="polite">
+      <div class="row"><span id="answered">Answered: 0 / 0</span><span id="score">Score: –</span></div>
+      <div class="prog"><i id="bar"></i></div>
+    </div>
+    <div class="btns">
+      <button class="btn main" id="bCheck" type="button">Check Answers</button>
+      <button class="btn" id="bShow" type="button">Show Answers</button>
+      <button class="btn" id="bReset" type="button">Reset</button>
+      <button class="btn tog" id="bRu" type="button" aria-pressed="true">RU hints</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<h2 class="part" id="rules">Part A. The rules</h2>
+
+<section class="card">
+  <h2><span class="badge">1</span>The word family</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Prefix</th><th>People<br>(-body / -one)</th><th>Things<br>(-thing)</th><th>Places<br>(-where)</th><th>Main idea</th></tr></thead>
+    <tbody>
+      <tr><td class="pre">some-</td><td>somebody<br>someone</td><td>something</td><td>somewhere</td><td>one, but we don't say which</td></tr>
+      <tr><td class="pre">any-</td><td>anybody<br>anyone</td><td>anything</td><td>anywhere</td><td>even one (questions, negatives) or no matter which</td></tr>
+      <tr><td class="pre">no-</td><td>nobody<br>no one</td><td>nothing</td><td>nowhere</td><td>not one</td></tr>
+      <tr><td class="pre">every-</td><td>everybody<br>everyone</td><td>everything</td><td>everywhere</td><td>all</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <ul class="eg">
+    <li><span class="k">-body</span> and <span class="k">-one</span> mean exactly the same: <i>somebody = someone</i>.</li>
+    <li><span class="k">no one</span> is written as two words. <span class="k">nobody</span> is one word.</li>
+    <li>People → <i>-body / -one</i>. Things and ideas → <i>-thing</i>. Places → <i>-where</i>.</li>
+  </ul>
+  <p class="ru">some: что-то, кто-то, где-то · any: что-нибудь, кто-нибудь, где-нибудь · no: ничего, никто, нигде · every: всё, все, везде.</p>
+</section>
+
+<section class="card">
+  <h2><span class="badge">2</span>Which one do I need? Four questions</h2>
+  <ol class="steps">
+    <li><b>Is there already a negative word</b> (<i>not, n't, never, hardly, without</i>)?<br>→ use <span class="k">any-</span>: <i>I didn't see <b>anybody</b>.</i></li>
+    <li><b>Is it a question?</b><br>→ a neutral question uses <span class="k">any-</span>: <i>Did you see <b>anybody</b>?</i><br>→ an offer or request uses <span class="k">some-</span>: <i>Would you like <b>something</b> to drink?</i></li>
+    <li><b>Do you want a negative idea, but a positive verb?</b><br>→ use <span class="k">no-</span>: <i>I saw <b>nobody</b>.</i> = <i><b>Nobody</b> came.</i></li>
+    <li><b>A positive statement.</b><br>→ a person / thing / place we don't know or don't name: <span class="k">some-</span>: <i><b>Somebody</b> called.</i><br>→ it doesn't matter which one (free choice): <span class="k">any-</span>: <i><b>Anybody</b> can join.</i></li>
+  </ol>
+</section>
+
+<section class="card">
+  <h2><span class="badge">3</span>some- : positive sentences, offers and requests</h2>
+  <div class="cols">
+    <div>
+      <p><b>Positive statements</b> — the person, thing or place exists, but we don't say exactly which.</p>
+      <ul class="eg">
+        <li><span class="k">Somebody</span> left a message for you.</li>
+        <li>I've left my phone <span class="k">somewhere</span> in the office.</li>
+        <li>There's <span class="k">something</span> wrong with the server.</li>
+      </ul>
+    </div>
+    <div>
+      <p><b>Questions that are offers or requests</b> — we expect the answer “yes”.</p>
+      <ul class="eg">
+        <li>Would you like <span class="k">something</span> to drink?</li>
+        <li>Could you give me <span class="k">something</span> to write with?</li>
+        <li>Can <span class="k">someone</span> help me with this?</li>
+      </ul>
+    </div>
+  </div>
+  <p class="ru">some- в утверждениях и в вежливых предложениях / просьбах (ожидаем ответ «да»).</p>
+</section>
+
+<section class="card">
+  <h2><span class="badge">4</span>any- : negatives, questions, “it doesn't matter”</h2>
+  <div class="cols">
+    <div>
+      <p><b>After a negative word</b></p>
+      <ul class="eg">
+        <li>I <b>don't</b> know <span class="k">anything</span> about it.</li>
+        <li>We <b>haven't</b> been <span class="k">anywhere</span> this year.</li>
+        <li>She <b>never</b> tells <span class="k">anybody</span>.</li>
+        <li>He left <b>without</b> saying <span class="k">anything</span>.</li>
+        <li>There's <b>hardly</b> <span class="k">anything</span> left.</li>
+      </ul>
+    </div>
+    <div>
+      <p><b>In neutral questions and after <i>if</i></b></p>
+      <ul class="eg">
+        <li>Is there <span class="k">anything</span> interesting on TV?</li>
+        <li>Did you go <span class="k">anywhere</span> at the weekend?</li>
+        <li>If <span class="k">anyone</span> calls, say I'm in a meeting.</li>
+        <li>If you need <span class="k">anything</span>, ask me.</li>
+      </ul>
+    </div>
+  </div>
+  <p><b>Free choice (positive sentence):</b> any- means “it doesn't matter who / what / where”.</p>
+  <ul class="eg">
+    <li><span class="k">Anyone</span> can learn English if they practise.</li>
+    <li>You can sit <span class="k">anywhere</span> you like.</li>
+    <li>Ask me <span class="k">anything</span>!</li>
+  </ul>
+  <p class="ru">any-: в вопросах и после отрицания = «-нибудь»; в утверждении = «любой, кто угодно, где угодно».</p>
+</section>
+
+<section class="card">
+  <h2><span class="badge">5</span>no- : a negative meaning with a positive verb</h2>
+  <ul class="eg">
+    <li><span class="k">Nobody</span> knows the answer.</li>
+    <li>There is <span class="k">nothing</span> in the box.</li>
+    <li>I have <span class="k">nowhere</span> to go tonight.</li>
+    <li>“Who called?” — “<span class="k">No one</span>.”  “What did you say?” — “<span class="k">Nothing</span>.”</li>
+  </ul>
+  <div class="tip"><b>One negative per clause!</b> English never uses two negatives together.
+    <ul class="eg">
+      <li class="n">✗ I don't know <b>nothing</b>.</li>
+      <li>✓ I know <span class="k">nothing</span>. &nbsp;or&nbsp; ✓ I don't know <span class="k">anything</span>.</li>
+    </ul>
+  </div>
+  <p class="ru">Осторожно: по-русски два отрицания («Я ничего не знаю»), по-английски — только одно.</p>
+</section>
+
+<section class="card">
+  <h2><span class="badge">6</span>every- : all</h2>
+  <ul class="eg">
+    <li><span class="k">Everybody</span> is here. Let's start.</li>
+    <li><span class="k">Everything</span> was clean and the staff were friendly.</li>
+    <li>I've looked <span class="k">everywhere</span>, but I can't find my passport.</li>
+  </ul>
+  <p>The verb is <b>singular</b> even though the meaning is “all”: <i>Everyone <u>has</u> a laptop.</i></p>
+  <p class="ru">every-: все, всё, везде. Глагол всегда в единственном числе: Everybody is…</p>
+</section>
+
+<section class="card">
+  <h2><span class="badge">7</span>Grammar details (B2 level)</h2>
+  <div class="cols">
+    <div>
+      <h4>Singular verb</h4>
+      <ul class="eg"><li>Nobody <b>knows</b>. Something <b>is</b> wrong.</li></ul>
+      <h4>“They / their” for a person</h4>
+      <ul class="eg">
+        <li>Someone left <span class="k">their</span> umbrella here.</li>
+        <li>If anybody calls, tell <span class="k">them</span> I'm busy.</li>
+      </ul>
+      <p class="ru">Если пол неизвестен, используем they / them / their.</p>
+    </div>
+    <div>
+      <h4>Adjective goes AFTER the word</h4>
+      <ul class="eg">
+        <li>something <span class="k">interesting</span> (✗ interesting something)</li>
+        <li>nothing <span class="k">special</span>, anyone <span class="k">new</span>, somewhere <span class="k">quiet</span></li>
+      </ul>
+      <h4>to + verb after the word</h4>
+      <ul class="eg">
+        <li>something <span class="k">to eat</span>, nothing <span class="k">to do</span></li>
+        <li>somewhere <span class="k">to stay</span>, anyone <span class="k">to talk to</span></li>
+      </ul>
+    </div>
+  </div>
+  <h4>+ else = “other / more”</h4>
+  <ul class="eg">
+    <li>Do you need <span class="k">anything else</span>? &nbsp;·&nbsp; Let's ask <span class="k">someone else</span>. &nbsp;·&nbsp; It's <span class="k">someone else's</span> laptop.</li>
+  </ul>
+  <h4>No “to” and no “of”</h4>
+  <ul class="eg">
+    <li>We went <span class="k">somewhere</span> nice. (✗ went <i>to</i> somewhere)</li>
+    <li><span class="k">None of us</span> knows. / <span class="k">One of us</span> knows. (✗ nobody <i>of</i> us, someone <i>of</i> us)</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2><span class="badge">8</span>Typical mistakes</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>✗ Wrong</th><th>✓ Correct</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>I don't know nothing.</td><td>I don't know anything. / I know nothing.</td><td>one negative only</td></tr>
+      <tr><td>Nobody don't like Mondays.</td><td>Nobody likes Mondays.</td><td>no- is already negative; singular verb</td></tr>
+      <tr><td>Everybody are ready.</td><td>Everybody is ready.</td><td>every- + singular verb</td></tr>
+      <tr><td>I saw anyone at the door.</td><td>I saw someone at the door. / I didn't see anyone.</td><td>any- does not work in a plain positive fact</td></tr>
+      <tr><td>Is there interesting anything?</td><td>Is there anything interesting?</td><td>adjective after the word</td></tr>
+      <tr><td>We went to somewhere nice.</td><td>We went somewhere nice.</td><td>no “to” before -where words</td></tr>
+      <tr><td>Nobody of us knows.</td><td>None of us knows. / Nobody knows.</td><td>“of” + group → none / one</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<h2 class="part" id="practice">Part B. Practice</h2>
+<p>Use the buttons at the top: <b>Check Answers</b> marks everything, <b>Show Answers</b> fills in the key, <b>Reset</b> starts again. Type full words (e.g. <i>anything</i>). Capital letters do not matter.</p>
+<div id="practice-host"></div>
+
+<h2 class="part" id="speaking">Part C. Speak</h2>
+<section class="card">
+  <h3><span class="badge">7</span>Say it out loud</h3>
+  <p class="instr">Answer each prompt for 30–60 seconds. Tick the box when you are happy with your answer. Remember: <b>one negative per clause</b>.</p>
+  <div id="talk-host"></div>
+</section>
+
+</main>
+<footer>Indefinite pronouns · B1–B2 · self-contained page, no internet needed</footer>
+
+<script>
+"use strict";
+/* ---------- DATA ---------- */
+const EX = [
+ { title:"Choose the correct word", instr:"Click the best answer.", type:"mc", items:[
+  {q:"I'm hungry. Is there ___ to eat in the fridge?", o:["something","anything","nothing"], a:1, w:"A neutral question → any-."},
+  {q:"Would you like ___ to drink? We have tea and coffee.", o:["something","anything","nothing"], a:0, w:"An offer → some- (we expect “yes”)."},
+  {q:"There isn't ___ in the office. Everybody is at the meeting.", o:["somebody","anybody","nobody"], a:1, w:"Negative verb (isn't) → any-. Not “isn't nobody”."},
+  {q:"___ called while you were out. He left a message.", o:["Somebody","Anybody","Nobody"], a:0, w:"Positive statement, a person we don't know → some-."},
+  {q:"I have ___ to wear to the wedding! My wardrobe is empty.", o:["something","anything","nothing"], a:2, w:"“Nothing” = not one thing. The verb “have” stays positive."},
+  {q:"You can sit ___ you like. All the seats are free.", o:["somewhere","anywhere","nowhere"], a:1, w:"any- = it doesn't matter where (free choice)."},
+  {q:"Could you give me ___ to write with? I need a pen.", o:["something","anything","nothing"], a:0, w:"A request → some-."},
+  {q:"She didn't tell ___ about the problem.", o:["somebody","anybody","nobody"], a:1, w:"After didn't → any-."},
+  {q:"___ knows the answer. It's too difficult for all of us.", o:["Somebody","Anybody","Nobody"], a:2, w:"Positive verb (knows) + negative meaning → no-."},
+  {q:"Did you go ___ interesting at the weekend?", o:["somewhere","anywhere","nowhere"], a:1, w:"Neutral question → any-. Note: the adjective comes after."},
+  {q:"___ can learn English if they practise every day.", o:["Someone","Anyone","No one"], a:1, w:"Free choice: any person, it doesn't matter who."},
+  {q:"I looked for my passport ___, but I couldn't find it.", o:["everywhere","somewhere","nowhere"], a:0, w:"“Everywhere” = in all places."},
+  {q:"The hotel was perfect. ___ was clean and the staff were friendly.", o:["Everything","Anything","Something"], a:0, w:"every- = all, and the verb is singular (was)."}
+ ]},
+ { title:"At the hotel (dialogue)", instr:"Type the correct word: some-, any-, no- or every- + body / one / thing / where.", type:"fill", items:[
+  {sp:"Guest", t:"Excuse me, is there ___ I can ask about the Wi-Fi?", a:[["anyone","anybody"]], w:"Question → any-."},
+  {sp:"Receptionist", t:"Of course. Is there ___ wrong with the connection?", a:[["anything"]], w:"Question → any-."},
+  {sp:"Guest", t:"There is ___ wrong with my laptop. It works fine in the café across the street.", a:[["nothing"]], w:"no- + positive verb. Not “there isn't nothing”."},
+  {sp:"Receptionist", t:"Let me check. ___ from IT is coming this afternoon. I'll ask them to look at it.", a:[["someone","somebody"]], w:"Positive statement, a person we don't name → some-."},
+  {sp:"Guest", t:"Thanks. I also need ___ quiet to work for an hour.", a:[["somewhere"]], w:"Positive statement, a place → some-. Adjective (quiet) after."},
+  {sp:"Receptionist", t:"I'm afraid there is ___ free until four o'clock.", a:[["nowhere"]], w:"“Nowhere” = not anywhere; the verb “is” is positive."},
+  {sp:"Guest", t:"That's fine. I don't need ___ special. A table in the lobby is OK.", a:[["anything"]], w:"After don't → any-."}
+ ]},
+ { title:"Daily stand-up (dialogue)", instr:"Type the correct word.", type:"fill", items:[
+  {sp:"PM", t:"Good morning, team. Does ___ have a problem to report today?", a:[["anyone","anybody"]], w:"Question → any-."},
+  {sp:"Dev 1", t:"I have ___ to report. Everything is on track.", a:[["nothing"]], w:"no- + positive verb."},
+  {sp:"Dev 2", t:"I'm waiting for ___ from the design team: the final icons.", a:[["something"]], w:"Positive statement, a thing → some-."},
+  {sp:"PM", t:"I'll ask ___ to send them today.", a:[["someone","somebody"]], w:"Positive statement → some-."},
+  {sp:"Dev 3", t:"___ has tested the new login page yet, so I can't say if it works.", a:[["nobody","no one","no-one"]], w:"Positive verb (has) + negative meaning → no-."},
+  {sp:"PM", t:"Okay, let's test it today. Is there ___ else we should discuss?", a:[["anything"]], w:"Question → any- (+ else)."},
+  {sp:"PM", t:"Good. Thanks, ___! See you tomorrow.", a:[["everyone","everybody"]], w:"every- = all the people."}
+ ]},
+ { title:"Which sentence is correct?", instr:"Click the correct sentence.", type:"mc", stack:true, items:[
+  {q:"", o:["I don't know nothing about it.","I don't know anything about it.","I know anything about it."], a:1, w:"One negative only: don't + anything."},
+  {q:"", o:["Nobody don't like Mondays.","Nobody likes Mondays.","Nobody like Mondays."], a:1, w:"no- is negative already; singular verb + -s."},
+  {q:"", o:["Everybody are ready.","Everybody am ready.","Everybody is ready."], a:2, w:"every- + singular verb."},
+  {q:"", o:["Is there anything interesting on TV?","Is there interesting anything on TV?","Is there nothing on interesting TV?"], a:0, w:"The adjective goes after the pronoun."},
+  {q:"", o:["I want to tell you something important.","I want to tell you important something.","I want to tell you something importantly."], a:0, w:"something + adjective (not an adverb)."},
+  {q:"", o:["She didn't say nothing to anybody.","She said anything to nobody.","She said nothing to anybody."], a:2, w:"Only one negative: said nothing."},
+  {q:"", o:["There isn't no one in the room.","There isn't anyone in the room.","There is anyone in the room."], a:1, w:"isn't + anyone. (Or: There is no one in the room.)"},
+  {q:"", o:["Do you need else anything?","Do you need anything others?","Do you need anything else?"], a:2, w:"else comes AFTER the pronoun."}
+ ]},
+ { title:"Say the same thing differently", instr:"Rewrite the sentence so that the meaning stays the same. Type the missing word.", type:"fill", items:[
+  {head:"A. Use a no- word (nothing, nobody, no one, nowhere)"},
+  {src:"I haven't got anything to say.", t:"I've got ___ to say.", a:[["nothing"]], w:"haven't … anything = have … nothing."},
+  {src:"There wasn't anybody at the station.", t:"There was ___ at the station.", a:[["nobody","no one","no-one"]], w:"wasn't … anybody = was … nobody."},
+  {src:"He didn't go anywhere last summer.", t:"He went ___ last summer.", a:[["nowhere"]], w:"didn't go anywhere = went nowhere."},
+  {src:"She doesn't know anything about the project.", t:"She knows ___ about the project.", a:[["nothing"]], w:"doesn't know anything = knows nothing."},
+  {src:"We didn't see anyone we knew.", t:"We saw ___ we knew.", a:[["no one","nobody","no-one"]], w:"didn't see anyone = saw no one."},
+  {head:"B. Use an any- word after a negative verb"},
+  {src:"I told nobody about it.", t:"I didn't tell ___ about it.", a:[["anybody","anyone"]], w:"told nobody = didn't tell anybody."},
+  {src:"She found nothing in the files.", t:"She didn't find ___ in the files.", a:[["anything"]], w:"found nothing = didn't find anything."},
+  {src:"They went nowhere on Sunday.", t:"They didn't go ___ on Sunday.", a:[["anywhere"]], w:"went nowhere = didn't go anywhere."},
+  {src:"Nobody answered my email.", t:"I didn't get an answer from ___.", a:[["anyone","anybody"]], w:"after a preposition with a negative verb → any-."},
+  {src:"He eats nothing in the morning.", t:"He doesn't eat ___ in the morning.", a:[["anything"]], w:"eats nothing = doesn't eat anything."}
+ ]},
+ { title:"A business trip (story)", instr:"Type one word in every gap (some-, any-, no- or every- word).", type:"fill", numbered:true, items:[
+  {t:"Last week I flew to Berlin to meet a client. When I arrived, there was ___ waiting for me at the airport: the driver was late. I didn't have ___ to read, so I looked at my phone. After ten minutes ___ finally came and apologised for the traffic. At the hotel I asked if ___ had left a message for me. The receptionist said, “Yes, ___ called this morning, but he didn't leave a name.” I was surprised because I didn't know ___ in Berlin. In the evening I wanted to eat ___ local, so I walked around the old town. It was Monday, and ___ was open: all the restaurants were closed! Finally I found a small café, but I couldn't find ___ to sit because it was full. In the end I had ___ quick at the station and went to bed early.",
+   a:[["nobody","no one","no-one"],["anything"],["somebody","someone"],["anybody","anyone"],["somebody","someone"],["anybody","anyone"],["something"],["nowhere","nothing"],["anywhere"],["something"]],
+   wl:["Positive verb (was) + nobody waiting.","didn't have → anything.","Positive statement → somebody.","Question word “if” → anybody.","Positive statement → somebody.","didn't know → anybody.","wanted to eat → something (+ adjective after).","Positive verb (was) + negative meaning → nowhere / nothing.","couldn't find → anywhere.","Positive statement → something (+ adjective after)."]}
+ ]}
+];
+
+const TALK = [
+ ["Your current project: Is there anything that worries you? Is there anyone you can ask for help?","“There is nothing … / Something is …”"],
+ ["Tell me about something interesting that happened at work this week.","“Yesterday somebody …  Nobody …”"],
+ ["You are in a new city. Ask the hotel receptionist for somewhere to eat and something to do in the evening.","“Is there anywhere near here …? Could you recommend something …?”"],
+ ["Open an online call with a client. Check that everyone is there and ask if anyone has questions.","“Is everybody here? Does anyone have …? If anyone needs anything …”"],
+ ["Describe your perfect weekend: where you go, who you see, what you do.","“I'd like to go somewhere … with someone … I don't want to do anything …”"],
+ ["Tell the story of your last holiday with three negative ideas (one negative per clause!).","“I didn't go anywhere … We saw nothing … Nobody …”"],
+ ["Role-play: you can't find your wallet. Explain to a hotel manager.","“I've looked everywhere. I think somebody took it. Nobody saw anything.”"],
+ ["60-second challenge: describe your office using all of these: everyone, nobody, someone, anything, somewhere, nothing, everything, anywhere.","Aim for 8 sentences."]
+];
+
+/* ---------- ENGINE ---------- */
+const regs = [];
+let total = 0;
+const $ = id => document.getElementById(id);
+function el(tag, cls, txt){ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+function norm(s){ return s.toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g," ").trim(); }
+
+function build(){
+  const host = $("practice-host"); host.innerHTML=""; regs.length=0; total=0;
+  EX.forEach((ex,ei)=>{
+    const card = el("section","card ex");
+    const h = el("h3"); h.appendChild(el("span","badge",String(ei+1))); h.appendChild(document.createTextNode(ex.title));
+    const sc = el("span","sub"); h.appendChild(sc); card.appendChild(h);
+    card.appendChild(el("p","instr",ex.instr));
+    const reg = {ex, items:[], sc}; let n=0;
+    ex.items.forEach(it=>{
+      if(it.head){ card.appendChild(el("h4","head",it.head)); return; }
+      n++;
+      const row = el("div","item"); row.appendChild(el("span","n",n+"."));
+      const body = el("div","body"); row.appendChild(body);
+      const fb = el("div","fb"); fb.setAttribute("role","status");
+      if(it.src) body.appendChild(el("div","src",it.src));
+      const line = el("div","line"); body.appendChild(line);
+      if(ex.type==="mc"){
+        if(it.q){
+          it.q.split("___").forEach((p,k,arr)=>{ line.appendChild(document.createTextNode(p)); if(k<arr.length-1) line.appendChild(el("span","blank")); });
+        }
+        const opts = el("div","opts"+(ex.stack?" stack":"")); 
+        const m = {kind:"mc", btns:[], a:it.a, sel:-1, fb, w:it.w, o:it.o};
+        it.o.forEach((t,k)=>{
+          const b = el("button","opt",t); b.type="button"; b.setAttribute("aria-pressed","false");
+          b.addEventListener("click",()=>{
+            m.sel=k; clearMc(m);
+            m.btns.forEach((x,j)=>{ x.classList.toggle("sel",j===k); x.setAttribute("aria-pressed",j===k?"true":"false"); });
+            updateAnswered();
+          });
+          m.btns.push(b); opts.appendChild(b);
+        });
+        body.appendChild(opts); total++; reg.items.push(m);
+      } else {
+        if(it.sp) line.appendChild(el("span","sp",it.sp+":"));
+        const gs = [];
+        it.t.split("___").forEach((p,k,arr)=>{
+          line.appendChild(document.createTextNode(p));
+          if(k<arr.length-1){
+            if(ex.numbered) line.appendChild(el("sup","gn","("+(k+1)+")"));
+            const inp = document.createElement("input"); inp.type="text";
+            inp.setAttribute("aria-label","Gap "+(k+1)+" of sentence "+n);
+            inp.autocomplete="off"; inp.spellcheck=false; inp.setAttribute("autocapitalize","off");
+            const ans = it.a[k]; inp.style.width = (Math.max(...ans.map(s=>s.length))+3)+"ch";
+            const g = {inp, ans};
+            inp.addEventListener("input",()=>{ inp.classList.remove("right","wrong","shown"); fb.className="fb"; updateAnswered(); });
+            line.appendChild(inp); gs.push(g); total++;
+          }
+        });
+        reg.items.push({kind:"fill", gs, fb, w:it.w, wl:it.wl});
+      }
+      body.appendChild(fb); card.appendChild(row);
+    });
+    regs.push(reg); host.appendChild(card);
+  });
+  updateAnswered();
+}
+function clearMc(m){ m.btns.forEach(b=>b.classList.remove("right","wrong")); m.fb.className="fb"; }
+
+function updateAnswered(){
+  let a=0;
+  regs.forEach(r=>r.items.forEach(it=>{
+    if(it.kind==="mc"){ if(it.sel>=0) a++; }
+    else it.gs.forEach(g=>{ if(g.inp.value.trim()) a++; });
+  }));
+  $("answered").textContent = "Answered: "+a+" / "+total;
+  $("bar").style.width = (total? a/total*100 : 0)+"%";
+}
+
+function fbSet(it, ok, text){ it.fb.className = "fb "+(ok?"ok":"no"); it.fb.textContent = text; }
+
+function check(){
+  let score=0;
+  regs.forEach(r=>{
+    let s=0,t=0;
+    r.items.forEach(it=>{
+      if(it.kind==="mc"){
+        t++; clearMc(it);
+        const ok = it.sel===it.a; if(ok) s++;
+        if(it.sel>=0) it.btns[it.sel].classList.add(ok?"right":"wrong");
+        fbSet(it, ok, ok ? "✓ "+it.w : "✗ Correct answer: “"+it.o[it.a]+"”. "+it.w);
+      } else {
+        let ok=0; const bad=[];
+        it.gs.forEach((g,k)=>{
+          t++; g.inp.classList.remove("right","wrong","shown");
+          const good = g.ans.map(norm).includes(norm(g.inp.value));
+          g.inp.classList.add(good?"right":"wrong"); if(good) ok++; else bad.push(k);
+        });
+        s+=ok;
+        if(bad.length===0){ fbSet(it,true,"✓ "+(it.w||"All correct.")); }
+        else if(it.gs.length===1){ fbSet(it,false,"✗ Answer: "+it.gs[0].ans.join(" / ")+". "+it.w); }
+        else { fbSet(it,false,"✗ "+bad.map(k=>"("+(k+1)+") "+it.gs[k].ans.join(" / ")+" — "+it.wl[k]).join("   ")); }
+      }
+    });
+    r.sc.textContent = s+" / "+t; score+=s;
+  });
+  $("score").textContent = "Score: "+score+" / "+total+" ("+Math.round(score/total*100)+"%)";
+}
+
+function showAnswers(){
+  regs.forEach(r=>{
+    r.items.forEach(it=>{
+      if(it.kind==="mc"){
+        clearMc(it); it.sel=it.a;
+        it.btns.forEach((b,j)=>{ b.classList.toggle("sel",false); b.classList.toggle("right",j===it.a); b.setAttribute("aria-pressed",j===it.a?"true":"false"); });
+        it.fb.className="fb info"; it.fb.textContent="Why: "+it.w;
+      } else {
+        it.gs.forEach(g=>{ g.inp.value=g.ans[0]; g.inp.classList.remove("right","wrong"); g.inp.classList.add("shown"); });
+        it.fb.className="fb info";
+        it.fb.textContent = it.gs.length===1 ? "Why: "+it.w : it.wl.map((x,k)=>"("+(k+1)+") "+x).join("   ");
+      }
+    });
+    r.sc.textContent="";
+  });
+  updateAnswered(); $("score").textContent="Answers shown";
+}
+
+function resetAll(){
+  regs.forEach(r=>{
+    r.items.forEach(it=>{
+      it.fb.className="fb";
+      if(it.kind==="mc"){ it.sel=-1; it.btns.forEach(b=>{ b.classList.remove("sel","right","wrong"); b.setAttribute("aria-pressed","false"); }); }
+      else it.gs.forEach(g=>{ g.inp.value=""; g.inp.classList.remove("right","wrong","shown"); });
+    });
+    r.sc.textContent="";
+  });
+  updateAnswered(); $("score").textContent="Score: –";
+}
+
+function buildTalk(){
+  const host=$("talk-host");
+  TALK.forEach((t,i)=>{
+    const row=el("label","talk"); const cb=document.createElement("input"); cb.type="checkbox";
+    const d=el("div"); d.appendChild(document.createTextNode(t[0])); d.appendChild(el("span","starter",t[1]));
+    row.appendChild(cb); row.appendChild(d); host.appendChild(row);
+  });
+}
+
+$("bCheck").addEventListener("click",check);
+$("bShow").addEventListener("click",showAnswers);
+$("bReset").addEventListener("click",resetAll);
+$("bRu").addEventListener("click",e=>{
+  const on = document.body.classList.toggle("no-ru");
+  e.currentTarget.setAttribute("aria-pressed", on?"false":"true");
+});
+build(); buildTalk();
+</script>
+</body>
+</html>
