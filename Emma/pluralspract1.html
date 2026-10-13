@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plural Exceptions – Emma</title>
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#F1F8F9;--sun:#FFC857;--ok:#1B8A4B;--bad:#C0392B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--navy);font:18px/1.5 Calibri,"Segoe UI",sans-serif}
+h1,h2,button{font-family:"Trebuchet MS",sans-serif}
+header{background:var(--navy);color:#fff;text-align:center;padding:22px 16px 16px}
+header h1{margin:0;font-size:1.9rem}
+header p{margin:4px 0 0;opacity:.85}
+#bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:3px solid var(--teal);padding:8px 14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}
+#bar .sc{font:700 1.1rem "Trebuchet MS",sans-serif}
+#stars{font-size:1.3rem;letter-spacing:2px}
+#prog{flex:1 1 120px;max-width:240px;height:12px;background:#dbe8ea;border-radius:8px;overflow:hidden}
+#prog i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+button{font-weight:700;font-size:1rem;border:0;border-radius:10px;padding:8px 16px;cursor:pointer;color:#fff;background:var(--teal)}
+button.r{background:var(--navy)}
+button:focus-visible,.m:focus-visible,.chip:focus-visible,.bk:focus-visible{outline:3px solid var(--sun)}
+main{max-width:920px;margin:0 auto;padding:10px 14px 60px}
+.sec{display:flex;align-items:center;gap:10px;margin:28px 0 8px}
+.sec h2{margin:0;font-size:1.3rem}
+.badge{background:var(--teal);color:#fff;border-radius:50%;width:36px;height:36px;display:grid;place-items:center;font-weight:700;flex:none}
+.box{background:#fff;border-left:6px solid var(--teal);border-radius:12px;padding:12px 18px 16px;box-shadow:0 3px 10px rgba(13,43,53,.12)}
+.in{margin:2px 0 12px;color:#35505b}
+.ru{color:#5b7580;font-style:italic;font-size:.92rem}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px 40px}
+.m,.chip,.o{font:inherit;font-weight:700;font-size:1.1rem;border:2px solid #b7d3d8;background:#fff;color:var(--navy);border-radius:12px;padding:9px 12px;cursor:pointer}
+.m{width:100%}
+.m:hover,.chip:hover,.o:hover:not(:disabled){border-color:var(--teal);background:#E3F3F5}
+.sel{border-color:var(--teal)!important;background:#CDEBEF!important;transform:scale(1.03)}
+.done{border-color:var(--ok)!important;background:#E7F6EC!important;color:var(--ok);cursor:default}
+.no{animation:sh .35s;border-color:var(--bad)!important;background:#FCEAE8!important}
+@keyframes sh{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+#pool{display:flex;flex-wrap:wrap;gap:10px;min-height:56px;padding:10px;background:#F6FBFC;border-radius:12px;margin-bottom:12px}
+.bks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bk{border:3px dashed #9fc6cc;border-radius:14px;padding:8px;min-height:150px;cursor:pointer;background:#fff;font:inherit;text-align:center;color:var(--navy)}
+.bk:hover{background:#EEF8FA}
+.bk b{display:block;font-family:"Trebuchet MS",sans-serif;color:var(--teal);font-size:1.02rem}
+.bk small{display:block;color:#5b7580;margin-bottom:6px}
+.bk .chip{margin:3px;padding:4px 10px;font-size:1rem}
+.q{padding:10px 0;border-bottom:1px dashed #dbe8ea}
+.q:last-child{border:0}
+.q .t{font-size:1.1rem;margin-bottom:6px}
+.blank{display:inline-block;min-width:90px;border-bottom:3px solid var(--teal);text-align:center;font-weight:700;color:var(--ok)}
+.o{margin-right:8px;margin-top:4px}
+.o.ok{border-color:var(--ok);background:#E7F6EC;color:var(--ok)}
+.o.bad{border-color:var(--bad);background:#FCEAE8;color:var(--bad)}
+.it{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:8px 0;border-bottom:1px dashed #dbe8ea}
+.it:last-child{border:0}
+.it .t{flex:1 1 300px;font-size:1.1rem}
+input{font:inherit;padding:5px 9px;border:2px solid #b7d3d8;border-radius:8px;width:130px}
+input:focus{outline:3px solid var(--sun);border-color:var(--teal)}
+input.ok{border-color:var(--ok);background:#E7F6EC}
+input.bad{border-color:var(--bad);background:#FCEAE8}
+.fb{width:1.4em;font-weight:700}
+#msg{text-align:center;font:700 1.3rem "Trebuchet MS",sans-serif;color:var(--teal);margin-top:24px;min-height:1.6em}
+@media(max-width:620px){.bks{grid-template-columns:1fr}.cols{gap:10px 14px}}
+</style></head><body>
+<header><h1>Plural Exceptions ⭐</h1><p>Irregular · Same form · Always plural &nbsp;|&nbsp; Исключения по правилам 6, 7, 8</p></header>
+<div id="bar"><span class="sc" id="score"></span><span id="stars"></span><div id="prog"><i></i></div><span class="sc" id="mis"></span><button class="r" onclick="location.reload()">Start again</button></div>
+<main>
+
+<div class="sec"><span class="badge">1</span><h2>Match the pairs</h2></div>
+<div class="box"><p class="in">Click a word, then click its plural. <span class="ru">Нажми на слово, затем на его множественное число.</span></p><div class="cols" id="e1"></div></div>
+
+<div class="sec"><span class="badge">2</span><h2>Sort the words</h2></div>
+<div class="box"><p class="in">Click a word, then click the right box. <span class="ru">Выбери слово и нажми на нужную коробку.</span></p>
+<div id="pool"></div>
+<div class="bks">
+<button class="bk" data-c="irr"><b>Irregular</b><small>word changes · слово меняется</small><span class="in2"></span></button>
+<button class="bk" data-c="same"><b>Same form</b><small>one = many · не меняется</small><span class="in2"></span></button>
+<button class="bk" data-c="pair"><b>Always plural</b><small>pairs · парные предметы</small><span class="in2"></span></button>
+</div></div>
+
+<div class="sec"><span class="badge">3</span><h2>Choose the right answer</h2></div>
+<div class="box"><p class="in">Click the correct word. <span class="ru">Выбери правильный вариант.</span></p><div id="e3"></div></div>
+
+<div class="sec"><span class="badge">4</span><h2>Write and fix</h2></div>
+<div class="box"><p class="in">Write the missing word. <span class="ru">Впиши слово. Заглавные буквы не важны.</span></p><div id="e4"></div>
+<p style="text-align:center;margin:14px 0 0"><button onclick="chk()">Check answers</button></p></div>
+<div id="msg"></div>
+</main>
+
+<script>
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+let T=0,S=0,M=0;
+const E1=[["man","men"],["woman","women"],["child","children"],["person","people"],["foot","feet"],["tooth","teeth"],["goose","geese"],["mouse","mice"],["ox","oxen"]];
+const E2=[["child","irr"],["foot","irr"],["mouse","irr"],["woman","irr"],["sheep","same"],["fish","same"],["deer","same"],["jeans","pair"],["scissors","pair"],["trousers","pair"],["glasses","pair"],["shorts","pair"]];
+const E3=[
+["Two __ are in the garden.","children",["childs","children","childrens"]],
+["Look! Three __ on the farm.","sheep",["sheeps","sheep","sheepes"]],
+["My __ are cold.","feet",["foots","feet","feets"]],
+["She brushes her __ every day.","teeth",["tooths","teeth","teeths"]],
+["Two __ are in the kitchen.","mice",["mouses","mice","mouse"]],
+["There are five __ in the room.","people",["persons","people","peoples"]],
+["My jeans __ new.","are",["is","are","am"]],
+["I need a __ of scissors.","pair",["pair","piece","couple"]],
+["Two __ swim in the lake.","fish",["fishes","fish","fishs"]],
+["Three __ are in the shop.","women",["womans","women","womens"]]];
+const E4=[
+["one tooth → two __","teeth"],["one deer → three __","deer"],["one goose → two __","geese"],
+["a __ of trousers (1 штука)","pair"],["I have two <u>foots</u>. → __","feet"],
+["Three <u>mans</u> run. → __","men"],["Look at those <u>sheeps</u>! → __","sheep"],
+["My glasses __ on the table. (is / are)","are"]];
+T=E1.length+E2.length+E3.length+E4.length;
+
+function upd(){
+ document.getElementById("score").textContent=`Score: ${S} / ${T}`;
+ document.getElementById("mis").textContent=`✗ ${M}`;
+ document.getElementById("prog").firstChild.style.width=(S/T*100)+"%";
+ const k=Math.floor(S/T*5);document.getElementById("stars").textContent="⭐".repeat(k)+"☆".repeat(5-k);
+ if(S===T)document.getElementById("msg").textContent="🏆 All done! Fantastic work, Emma!";
+}
+const ok=()=>{S++;upd()},bad=el=>{M++;upd();el.classList.add("no");setTimeout(()=>el.classList.remove("no"),400)};
+
+// 1 match
+let sel=null;
+const e1=document.getElementById("e1");
+[sh(E1.map(p=>p[0])),sh(E1.map(p=>p[1]))].forEach((col,ci)=>{
+ const d=document.createElement("div");d.style.cssText="display:grid;gap:8px";
+ col.forEach(w=>{const b=document.createElement("button");b.className="m";b.textContent=w;
+  b.dataset.k=ci?E1.find(p=>p[1]===w)[0]:w;b.dataset.s=ci;
+  b.onclick=()=>{ if(b.classList.contains("done"))return;
+   if(sel&&sel!==b&&sel.dataset.s!==b.dataset.s){
+    if(sel.dataset.k===b.dataset.k){[sel,b].forEach(x=>{x.classList.remove("sel");x.classList.add("done")});ok()}
+    else{bad(b);bad(sel);sel.classList.remove("sel")}
+    sel=null;
+   }else{if(sel)sel.classList.remove("sel");sel=b;b.classList.add("sel")}};
+  d.appendChild(b)});
+ e1.appendChild(d)});
+
+// 2 sort
+let cur=null;
+const pool=document.getElementById("pool");
+sh(E2).forEach(([w,c])=>{const b=document.createElement("button");b.className="chip";b.textContent=w;b.dataset.c=c;
+ b.onclick=()=>{if(cur)cur.classList.remove("sel");cur=b;b.classList.add("sel")};pool.appendChild(b)});
+document.querySelectorAll(".bk").forEach(bk=>bk.onclick=()=>{
+ if(!cur)return;
+ if(cur.dataset.c===bk.dataset.c){cur.classList.remove("sel");cur.classList.add("done");cur.onclick=null;bk.querySelector(".in2").appendChild(cur);cur=null;ok()}
+ else bad(bk)});
+
+// 3 choose
+const e3=document.getElementById("e3");
+E3.forEach(([s,a,o],i)=>{
+ const q=document.createElement("div");q.className="q";
+ q.innerHTML=`<div class="t">${i+1}. ${s.replace("__",'<span class="blank">&nbsp;</span>')}</div>`;
+ sh(o).forEach(x=>{const b=document.createElement("button");b.className="o";b.textContent=x;
+  b.onclick=()=>{ if(x===a){b.classList.add("ok");q.querySelector(".blank").textContent=a;q.querySelectorAll(".o").forEach(y=>y.disabled=true);ok()}
+   else{b.classList.add("bad");b.disabled=true;M++;upd()}};q.appendChild(b)});
+ e3.appendChild(q)});
+
+// 4 write
+const e4=document.getElementById("e4");
+E4.forEach(([p,a])=>{const d=document.createElement("div");d.className="it";
+ d.innerHTML=`<span class="t">${p.replace("__",'<input data-a="'+a+'" autocomplete="off" autocapitalize="off" spellcheck="false">')}</span><span class="fb"></span>`;e4.appendChild(d)});
+function chk(){e4.querySelectorAll("input").forEach(el=>{
+ const v=el.value.trim().toLowerCase(),fb=el.nextSibling?el.parentNode.nextSibling:null,f=el.closest(".it").querySelector(".fb");
+ if(el.dataset.s||!v)return;
+ if(v===el.dataset.a){el.className="ok";el.dataset.s=1;el.disabled=true;f.textContent="✓";f.style.color="var(--ok)";ok()}
+ else{el.className="bad";f.textContent="✗";f.style.color="var(--bad)";M++;upd()}})}
+upd();
+</script>
+</body></html>
