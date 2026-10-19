@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crossword: Southern Hemisphere</title>
+<style>
+:root{
+  --teal:#028090; --teal-d:#016573; --teal-l:#d9f0f2; --navy:#0D2B35; --ink:#1d3a45;
+  --bg:#f3f8f9; --card:#fff; --line:#b7d3d8; --ok:#1b8a4b; --ok-bg:#dff3e7; --bad:#c0392b; --bad-bg:#fbe3e0; --hl:#fff3c4;
+  --cell:40px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.45}
+h1,h2,.btn,.score{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif}
+header{background:var(--navy);color:#fff;padding:22px 16px 18px}
+header .in{max-width:1000px;margin:0 auto}
+h1{margin:0 0 4px;font-size:1.6rem;letter-spacing:.2px}
+header p{margin:0;color:#b9dde2;max-width:62ch}
+.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:3px solid var(--teal);box-shadow:0 2px 8px rgba(13,43,53,.12)}
+.bar .in{max-width:1000px;margin:0 auto;padding:8px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.score{font-weight:700;color:var(--navy);margin-right:auto}
+.score b{color:var(--teal)}
+.meter{height:6px;width:120px;background:var(--teal-l);border-radius:3px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:8px}
+.meter i{display:block;height:100%;width:0;background:var(--teal);transition:width .25s}
+.btn{border:2px solid var(--teal);background:#fff;color:var(--teal-d);padding:6px 12px;border-radius:6px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn:hover{background:var(--teal-l)}
+.btn.main{background:var(--teal);color:#fff}
+.btn.main:hover{background:var(--teal-d)}
+.btn:focus-visible,.clue:focus-visible{outline:3px solid #f2a900;outline-offset:2px}
+main{max-width:1000px;margin:0 auto;padding:18px 16px 40px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start}
+@media (max-width:820px){main{grid-template-columns:1fr}}
+.board{background:var(--card);border-left:6px solid var(--teal);border-radius:8px;box-shadow:0 3px 10px rgba(13,43,53,.12);padding:14px;overflow-x:auto}
+#grid{display:grid;gap:2px;width:max-content;margin:0 auto}
+.c{position:relative;width:var(--cell);height:var(--cell)}
+.c.blank{visibility:hidden}
+.c input{width:100%;height:100%;border:2px solid var(--navy);border-radius:3px;background:#fff;text-align:center;font:700 calc(var(--cell)*.52) "Trebuchet MS",Arial,sans-serif;color:var(--navy);text-transform:uppercase;padding:0;caret-color:transparent;cursor:pointer}
+.c input:focus{outline:none}
+.c.word input{background:var(--hl)}
+.c.active input{background:var(--teal);color:#fff;border-color:var(--teal-d)}
+.c.right input{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.c.wrong input{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.c.revealed input{font-style:italic;color:#7a5a00}
+.n{position:absolute;top:1px;left:3px;font-size:calc(var(--cell)*.27);font-weight:700;color:var(--teal-d);pointer-events:none;line-height:1;z-index:2}
+.c.active .n{color:#fff}
+.clues h2{margin:0 0 6px;font-size:1.05rem;color:var(--navy);border-bottom:2px solid var(--teal-l);padding-bottom:4px}
+.clues section{margin-bottom:18px}
+.clue{display:flex;gap:8px;padding:7px 10px;border-radius:6px;cursor:pointer;border:2px solid transparent;align-items:baseline}
+.clue:hover{background:var(--teal-l)}
+.clue.on{background:var(--hl);border-color:#e6c84a}
+.clue.done{color:var(--ok)}
+.clue.done .num::after{content:" ✓"}
+.num{font-family:"Trebuchet MS",Arial,sans-serif;font-weight:700;color:var(--teal-d);min-width:2.8em;white-space:nowrap;flex:none}
+.clue .len{color:#6a8790;font-size:.85em;white-space:nowrap}
+.ru{display:none;color:#6a8790;font-style:italic;font-size:.92em}
+body.showru .ru{display:block}
+.msg{margin-top:12px;padding:10px 14px;border-radius:6px;background:var(--ok-bg);border-left:5px solid var(--ok);color:#0f5a30;font-weight:700;display:none}
+.msg.on{display:block}
+.help{font-size:.9rem;color:#58737c;margin:10px 0 0;max-width:46ch}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <h1>Crossword: Southern Hemisphere</h1>
+  <p>Read the clues and type the English words. Click a clue or a square to start. Click the same square again to switch between across and down.</p>
+</div></header>
+
+<div class="bar"><div class="in">
+  <div class="score" aria-live="polite">Solved: <b id="solved">0</b> / <span id="total">0</span><span class="meter"><i id="meter"></i></span></div>
+  <button class="btn" id="ru">Russian hints</button>
+  <button class="btn main" id="check">Check answers</button>
+  <button class="btn" id="hint">Reveal letter</button>
+  <button class="btn" id="show">Show answers</button>
+  <button class="btn" id="reset">Reset</button>
+</div></div>
+
+<main>
+  <div>
+    <div class="board"><div id="grid" role="application" aria-label="Crossword grid"></div></div>
+    <div class="msg" id="msg">Well done! You solved the whole crossword.</div>
+    <p class="help">Keys: letters to type, arrow keys to move, Backspace to delete, Space or Enter to switch direction.</p>
+  </div>
+  <div class="clues">
+    <section><h2>Across</h2><div id="across"></div></section>
+    <section><h2>Down</h2><div id="down"></div></section>
+  </div>
+</main>
+
+<script>
+(function(){
+  // word, row, col, direction, clue, Russian hint
+  var WORDS = [
+    ["MOST",0,0,"D","The greatest number or amount of something","большинство"],
+    ["HUNTER",1,2,"D","A person or animal that chases other animals for food","охотник"],
+    ["SOUTHERN",2,0,"A","In or from the part of a place that is toward the bottom of a map","южный"],
+    ["CREATURE",3,8,"D","Any living animal, including strange or imaginary ones","существо"],
+    ["OCEAN",3,10,"D","A very large area of salt water","океан"],
+    ["DISCOVER",4,4,"D","To find or learn about something for the first time","открывать"],
+    ["HEMISPHERE",5,1,"A","Half of a globe, such as the area north or south of the equator","полушарие"],
+    ["PLACE",5,6,"D","A particular position or area","место"],
+    ["EARTH",9,6,"A","The planet where we live","земля"],
+    ["DIVE",10,1,"A","To jump or go down into water, usually head first","нырять"],
+    ["ROCK",11,4,"A","A large piece of hard natural stone","скала"]
+  ];
+
+  var ROWS=0, COLS=0;
+  WORDS.forEach(function(w){
+    var len=w[0].length;
+    ROWS=Math.max(ROWS, w[1]+(w[3]==="D"?len:1));
+    COLS=Math.max(COLS, w[2]+(w[3]==="A"?len:1));
+  });
+
+  var cells={}, gridEl=document.getElementById("grid");
+  function key(r,c){return r+","+c}
+
+  // Build word objects and cell map
+  var words=WORDS.map(function(w,i){
+    var o={id:i,text:w[0],r:w[1],c:w[2],dir:w[3],clue:w[4],ru:w[5],cells:[],num:0};
+    for(var k=0;k<o.text.length;k++){
+      var r=o.dir==="A"?o.r:o.r+k, c=o.dir==="A"?o.c+k:o.c;
+      o.cells.push([r,c]);
+      var cell=cells[key(r,c)];
+      if(!cell){cell=cells[key(r,c)]={r:r,c:c,ch:o.text[k],words:{},num:0,el:null,input:null};}
+      cell.words[o.dir]=o;
+    }
+    return o;
+  });
+
+  // Numbering (row-major over starting cells)
+  var n=0;
+  for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){
+    var cell=cells[key(r,c)]; if(!cell)continue;
+    var starts=words.filter(function(w){return w.r===r&&w.c===c});
+    if(starts.length){n++;cell.num=n;starts.forEach(function(w){w.num=n});}
+  }
+
+  // Render grid
+  gridEl.style.gridTemplateColumns="repeat("+COLS+", var(--cell))";
+  for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){
+    var d=document.createElement("div"), cell=cells[key(r,c)];
+    d.className="c"+(cell?"":" blank");
+    if(cell){
+      var inp=document.createElement("input");
+      inp.maxLength=1; inp.autocomplete="off"; inp.autocapitalize="characters"; inp.spellcheck=false;
+      inp.setAttribute("aria-label","Row "+(r+1)+", column "+(c+1));
+      d.appendChild(inp);
+      if(cell.num){var s=document.createElement("span");s.className="n";s.textContent=cell.num;d.appendChild(s);}
+      cell.el=d; cell.input=inp;
+      (function(cell){
+        inp.addEventListener("focus",function(){select(cell,false)});
+        inp.addEventListener("mousedown",function(e){
+          if(active===cell){e.preventDefault();toggleDir();}
+        });
+        inp.addEventListener("input",function(){onInput(cell)});
+        inp.addEventListener("keydown",function(e){onKey(e,cell)});
+      })(cell);
+    }
+    gridEl.appendChild(d);
+  }
+
+  // Responsive cell size
+  function resize(){
+    var avail=Math.min(window.innerWidth-64, 560);
+    var size=Math.max(24,Math.min(44,Math.floor((avail-(COLS-1)*2)/COLS)));
+    document.documentElement.style.setProperty("--cell",size+"px");
+  }
+  window.addEventListener("resize",resize); resize();
+
+  // Clue lists
+  var clueEls={};
+  function buildClues(dir,el){
+    words.filter(function(w){return w.dir===dir}).sort(function(a,b){return a.num-b.num}).forEach(function(w){
+      var d=document.createElement("div");
+      d.className="clue"; d.tabIndex=0;
+      d.innerHTML='<span class="num">'+w.num+'</span><span><span>'+w.clue+' <span class="len">('+w.text.length+')</span></span><span class="ru">'+w.ru+'</span></span>';
+      d.addEventListener("click",function(){selectWord(w)});
+      d.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();selectWord(w);}});
+      el.appendChild(d); clueEls[w.id]=d;
+    });
+  }
+  buildClues("A",document.getElementById("across"));
+  buildClues("D",document.getElementById("down"));
+  document.getElementById("total").textContent=words.length;
+
+  // State
+  var active=null, dir="A";
+
+  function currentWord(){
+    if(!active)return null;
+    return active.words[dir]||active.words[dir==="A"?"D":"A"]||null;
+  }
+  function select(cell,focus){
+    active=cell;
+    if(!cell.words[dir]) dir=cell.words.A?"A":"D";
+    paint();
+    if(focus)cell.input.focus();
+  }
+  function selectWord(w){
+    dir=w.dir;
+    var target=w.cells.map(function(p){return cells[key(p[0],p[1])]}).filter(function(c){return !c.input.value})[0]
+              ||cells[key(w.cells[0][0],w.cells[0][1])];
+    active=target; paint(); target.input.focus();
+  }
+  function toggleDir(){
+    if(!active)return;
+    var other=dir==="A"?"D":"A";
+    if(active.words[other]){dir=other;paint();}
+  }
+  function paint(){
+    var w=currentWord();
+    Object.keys(cells).forEach(function(k){
+      var c=cells[k]; c.el.classList.remove("active","word");
+    });
+    Object.keys(clueEls).forEach(function(k){clueEls[k].classList.remove("on")});
+    if(w){
+      w.cells.forEach(function(p){cells[key(p[0],p[1])].el.classList.add("word")});
+      clueEls[w.id].classList.add("on");
+    }
+    if(active)active.el.classList.add("active");
+  }
+  function step(cell,dr,dc){
+    var r=cell.r+dr,c=cell.c+dc;
+    while(r>=0&&r<ROWS&&c>=0&&c<COLS){
+      var nx=cells[key(r,c)]; if(nx)return nx;
+      r+=dr;c+=dc;
+    }
+    return null;
+  }
+  function nextInWord(cell,delta){
+    var w=cell.words[dir]; if(!w)return null;
+    var i=w.cells.findIndex(function(p){return p[0]===cell.r&&p[1]===cell.c});
+    var p=w.cells[i+delta]; return p?cells[key(p[0],p[1])]:null;
+  }
+  function clearMarks(cell){cell.el.classList.remove("right","wrong","revealed")}
+
+  function onInput(cell){
+    var v=cell.input.value.replace(/[^a-zA-Z]/g,"");
+    v=v.slice(-1).toUpperCase();
+    cell.input.value=v;
+    clearMarks(cell);
+    document.getElementById("msg").classList.remove("on");
+    if(v){var nx=nextInWord(cell,1); if(nx)nx.input.focus();}
+    update();
+  }
+  function onKey(e,cell){
+    var k=e.key;
+    if(k==="ArrowRight"||k==="ArrowLeft"||k==="ArrowUp"||k==="ArrowDown"){
+      e.preventDefault();
+      var horiz=(k==="ArrowRight"||k==="ArrowLeft");
+      var want=horiz?"A":"D";
+      if(dir!==want&&cell.words[want]){dir=want;paint();return;}
+      var d={ArrowRight:[0,1],ArrowLeft:[0,-1],ArrowUp:[-1,0],ArrowDown:[1,0]}[k];
+      var nx=step(cell,d[0],d[1]); if(nx){dir=cell.words[want]&&nx.words[want]?want:dir;nx.input.focus();}
+    }else if(k==="Backspace"){
+      if(!cell.input.value){
+        e.preventDefault();
+        var pv=nextInWord(cell,-1);
+        if(pv){pv.input.value="";clearMarks(pv);pv.input.focus();update();}
+      }else{clearMarks(cell);}
+    }else if(k===" "||k==="Enter"){
+      e.preventDefault();toggleDir();
+    }else if(k==="Tab"){
+      e.preventDefault();
+      var list=words.slice().sort(function(a,b){return a.dir===b.dir?a.num-b.num:(a.dir==="A"?-1:1)});
+      var cw=currentWord(), i=list.indexOf(cw), nw=list[(i+(e.shiftKey?-1:1)+list.length)%list.length];
+      selectWord(nw);
+    }
+  }
+
+  function wordState(w){
+    var full=true,ok=true;
+    w.cells.forEach(function(p,i){
+      var v=cells[key(p[0],p[1])].input.value;
+      if(!v)full=false;
+      if(v!==w.text[i])ok=false;
+    });
+    return {full:full,ok:ok};
+  }
+  function update(){
+    var solved=0;
+    words.forEach(function(w){
+      var s=wordState(w);
+      clueEls[w.id].classList.toggle("done",s.ok);
+      if(s.ok)solved++;
+    });
+    document.getElementById("solved").textContent=solved;
+    document.getElementById("meter").style.width=(solved/words.length*100)+"%";
+    document.getElementById("msg").classList.toggle("on",solved===words.length);
+  }
+
+  document.getElementById("check").addEventListener("click",function(){
+    Object.keys(cells).forEach(function(k){
+      var c=cells[k]; clearMarks(c);
+      if(c.input.value){c.el.classList.add(c.input.value===c.ch?"right":"wrong");}
+    });
+    update();
+  });
+  document.getElementById("hint").addEventListener("click",function(){
+    var w=currentWord(); if(!w)return;
+    for(var i=0;i<w.cells.length;i++){
+      var c=cells[key(w.cells[i][0],w.cells[i][1])];
+      if(c.input.value!==c.ch){c.input.value=c.ch;clearMarks(c);c.el.classList.add("revealed");break;}
+    }
+    update();
+  });
+  document.getElementById("show").addEventListener("click",function(){
+    Object.keys(cells).forEach(function(k){
+      var c=cells[k]; if(c.input.value!==c.ch){c.input.value=c.ch;clearMarks(c);c.el.classList.add("revealed");}
+    });
+    update();
+  });
+  document.getElementById("reset").addEventListener("click",function(){
+    Object.keys(cells).forEach(function(k){var c=cells[k];c.input.value="";clearMarks(c);});
+    update();
+  });
+  document.getElementById("ru").addEventListener("click",function(){
+    document.body.classList.toggle("showru");
+  });
+
+  update();
+  selectWord(words.filter(function(w){return w.num===1&&w.dir==="D"})[0]||words[0]);
+  document.activeElement&&document.activeElement.blur&&document.activeElement.blur();
+})();
+</script>
+</body>
+</html>
