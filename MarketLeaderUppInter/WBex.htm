@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Business Collocations: Match the Words</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#f2f7f8;--card:#fff;--text:#1d2b30;--line:#d5e3e6;--ok:#1b7f4b;--okbg:#e5f5ec;--bad:#b3261e;--badbg:#fdeceb;--ex:#eef4f5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1d23;--card:#112a32;--text:#e4eef0;--line:#24434d;--ok:#6fd49b;--okbg:#14382b;--bad:#ff8f88;--badbg:#401a18;--ex:#17333c;--teal:#2bb3c4}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Calibri,'Open Sans',sans-serif;font-size:17px;line-height:1.6;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+header{background:var(--navy);color:#fff;padding:24px 16px}
+header h1{font-family:'Trebuchet MS',sans-serif;margin:0 auto;max-width:760px;font-size:1.5rem}
+header p{max-width:760px;margin:6px auto 0;opacity:.85}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:2px solid var(--teal);padding:8px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+.score{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);margin-right:auto}
+button{font:inherit;font-size:.9rem;border:0;border-radius:6px;padding:7px 14px;cursor:pointer;background:var(--teal);color:#fff}
+button.alt{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+main{max-width:760px;margin:0 auto;padding:18px 14px 40px}
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:16px 18px;margin-bottom:16px}
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.box{border:1.5px solid var(--line);border-radius:8px;overflow:hidden}
+.box h3{margin:0;background:var(--navy);color:#fff;text-align:center;font-family:'Trebuchet MS',sans-serif;padding:4px}
+.box ul{list-style:none;margin:0;padding:8px 14px}
+.q{display:flex;gap:10px}
+.q .n{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);min-width:1.2em}
+.q.ex{background:var(--ex);border-radius:8px;padding:10px}
+input{font:inherit;width:9.5em;max-width:42vw;padding:2px 8px;border:0;border-bottom:2px solid var(--teal);background:var(--ex);color:var(--text);border-radius:4px 4px 0 0;text-align:center}
+input:focus{outline:2px solid var(--teal)}
+input.ok{border-color:var(--ok);background:var(--okbg);color:var(--ok)}
+input.bad{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.fb{display:block;font-size:.88rem;margin-top:4px;min-height:1px}
+.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+@media (max-width:480px){.boxes{grid-template-columns:1fr}}
+</style></head><body>
+<header><h1>Business Collocations</h1><p>Match a word from box A with a word from box B to complete the sentences.</p></header>
+<div class="bar"><span class="score" id="score">Score: 0 / 5</span>
+<button id="check">Check Answers</button><button class="alt" id="show">Show Answers</button><button class="alt" id="reset">Reset</button></div>
+<main>
+<div class="card"><div class="boxes">
+<div class="box"><h3>A</h3><ul><li>competitive</li><li>product</li><li>marketing</li><li>market</li><li>customer</li><li>brand</li></ul></div>
+<div class="box"><h3>B</h3><ul><li>segmentation</li><li>retention</li><li>portfolio</li><li>strategy</li><li>identity</li><li>advantage</li></ul></div>
+</div><p style="margin:10px 0 0;font-size:.9rem">Each blank needs one word from A followed by one word from B. Use each pair only once.</p></div>
+<div class="card" id="items"></div>
+</main>
+<script>
+const items=[
+{t:'In order to secure a <b>competitive advantage</b>, companies will try to make their products and services stand out from their competitors’.',ex:true},
+{t:'The company’s aggressive [] targets numerous trade fairs around the world.',a:['marketing','strategy']},
+{t:'The CEO described industrial services as one of the three main growth drivers for Siemens, alongside its green [] and sales in emerging markets such as China, India, Brazil and the Middle East.',a:['product','portfolio']},
+{t:'A survey by a German car magazine showed that customers were worried that mass market carmaker VW could damage the Porsche [].',a:['brand','identity']},
+{t:'By ‘[]’, we mean the process of defining and subdividing a large homogeneous market into clearly identifiable segments having similar needs, wants or characteristics.',a:['market','segmentation']},
+{t:'The key to success is not in just securing the first order, but in fixing problems and offering new services. So we reward our sales staff for [] rather than just for the initial sale.',a:['customer','retention']}];
+const box=document.getElementById('items');let n=0;
+const inp='<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="word from A"> <input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="word from B">';
+items.forEach((it,i)=>{const d=document.createElement('div');d.className='q'+(it.ex?' ex':'');d.style.marginBottom='14px';
+ if(it.ex){d.innerHTML='<span class="n">1</span><div>'+it.t+' <em>(example)</em></div>';}
+ else{n++;d.dataset.i=i;d.innerHTML='<span class="n">'+(i+1)+'</span><div>'+it.t.replace('[]',inp)+'<span class="fb"></span></div>';}
+ box.appendChild(d)});
+const rows=()=>[...document.querySelectorAll('.q[data-i]')];
+const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ');
+function check(){let s=0;rows().forEach(r=>{const a=items[r.dataset.i].a,ins=r.querySelectorAll('input'),fb=r.querySelector('.fb');
+ const oks=[...ins].map((x,k)=>norm(x.value)===a[k]);
+ ins.forEach((x,k)=>{x.className=x.value.trim()?(oks[k]?'ok':'bad'):''});
+ if(oks[0]&&oks[1]){s++;fb.className='fb ok';fb.textContent='✓ Correct: '+a.join(' ')}
+ else if(!ins[0].value.trim()&&!ins[1].value.trim()){fb.textContent=''}
+ else{fb.className='fb bad';fb.textContent='✗ Not quite. Check both words and their order (A + B).'}});
+ document.getElementById('score').textContent='Score: '+s+' / '+n;}
+document.getElementById('check').onclick=check;
+document.getElementById('show').onclick=()=>{rows().forEach(r=>{const a=items[r.dataset.i].a;r.querySelectorAll('input').forEach((x,k)=>x.value=a[k])});check()};
+document.getElementById('reset').onclick=()=>{rows().forEach(r=>{r.querySelectorAll('input').forEach(x=>{x.value='';x.className=''});r.querySelector('.fb').textContent=''});document.getElementById('score').textContent='Score: 0 / '+n};
+</script></body></html>
