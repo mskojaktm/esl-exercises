@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UNIT 1 — Communication</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#f2f7f8;--card:#fff;--text:#1d2b30;--line:#d5e3e6;--ok:#1b7f4b;--okbg:#e5f5ec;--bad:#b3261e;--badbg:#fdeceb;--ex:#eef4f5;--pl:88%}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1d23;--card:#112a32;--text:#e4eef0;--line:#24434d;--ok:#6fd49b;--okbg:#14382b;--bad:#ff8f88;--badbg:#401a18;--ex:#17333c;--teal:#2bb3c4;--pl:26%}}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 60px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Calibri,'Open Sans',sans-serif;font-size:17px;line-height:1.65;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+header{background:var(--navy);color:#fff;padding:26px 16px}
+header h1{font-family:'Trebuchet MS',sans-serif;margin:0 auto;max-width:800px;font-size:1.7rem}
+header p{max-width:800px;margin:4px auto 0;opacity:.85}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:2px solid var(--teal);padding:8px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.score{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);margin-right:auto}
+.ctl{font:inherit;font-size:.88rem;border:0;border-radius:6px;padding:6px 13px;cursor:pointer;background:var(--teal);color:#fff}
+.ctl.alt{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+main{max-width:800px;margin:0 auto;padding:10px 14px 50px}
+.grp{font-family:'Trebuchet MS',sans-serif;color:var(--navy);margin:30px 0 10px;font-size:1.2rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--line)}
+@media (prefers-color-scheme:dark){.grp{color:var(--text)}}
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:16px 18px;margin-bottom:18px}
+.sh{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.sh h2{font-size:1.02rem;margin:0;font-weight:600}
+.badge{flex:none;background:var(--teal);color:#fff;font-family:'Trebuchet MS',sans-serif;font-weight:700;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px}
+.sc{margin-left:auto;font-weight:700;color:var(--teal);white-space:nowrap}
+.cr{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.q{display:flex;gap:10px;margin-bottom:12px}
+.q .n{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);min-width:1.4em}
+.q.ex{background:var(--ex);border-radius:8px;padding:8px 10px}
+.exw{color:var(--teal);border-bottom:2px solid var(--teal)}
+input[type=text],textarea{font:inherit;padding:2px 8px;border:0;border-bottom:2px solid var(--teal);background:var(--ex);color:var(--text);border-radius:4px 4px 0 0;max-width:100%}
+input[type=text]{width:9em;text-align:center}input.ph{width:20em}
+textarea{width:100%;border:2px solid var(--line);border-radius:6px;min-height:3.4em;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--teal)}
+.ok{border-color:var(--ok)!important}.bad{border-color:var(--bad)!important}
+input.ok,textarea.ok{background:var(--okbg);color:var(--ok)}input.bad,textarea.bad{background:var(--badbg);color:var(--bad)}
+.fb{display:block;font-size:.88rem;margin-top:2px}.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.opt{font:inherit;font-size:.95rem;padding:3px 12px;border:2px solid var(--line);border-radius:18px;background:var(--card);color:var(--text);cursor:pointer}
+.opt:hover{border-color:var(--teal)}.opt.sel{background:var(--teal);border-color:var(--teal);color:#fff}
+.opt.ok{background:var(--okbg);color:var(--ok)}.opt.bad{background:var(--badbg);color:var(--bad);text-decoration:line-through}
+.gap{white-space:nowrap}
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.list{display:flex;flex-direction:column;gap:7px}
+.w{font:inherit;display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:6px 10px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;min-height:42px;line-height:1.3}
+.w:hover:not(:disabled){border-color:var(--teal)}
+.w .lab{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);min-width:1.1em}
+.w .tx{flex:1}
+.w.sel{border-color:var(--teal);box-shadow:0 0 0 3px rgba(2,128,144,.35);font-weight:600}
+.w.pr{background:hsl(var(--h) 60% var(--pl));border-color:hsl(var(--h) 55% 45%)}
+.w.ok{box-shadow:inset 0 0 0 1px var(--ok)}.w.bad{box-shadow:inset 0 0 0 1px var(--bad)}
+.tag{font-family:'Trebuchet MS',sans-serif;font-size:.78rem;font-weight:700;min-width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:hsl(var(--h) 55% 38%);color:#fff}
+.slots,.pool{display:flex;flex-wrap:wrap;gap:6px;min-height:40px}
+.slots{border-bottom:2px solid var(--teal);padding:2px 0 4px;margin:4px 0 6px}
+.slots.ok{background:var(--okbg)}.slots.bad{background:var(--badbg)}
+.tile{font:inherit;padding:2px 11px;border:2px solid var(--line);border-radius:8px;background:var(--ex);color:var(--text);cursor:pointer}
+.tile:hover{border-color:var(--teal)}.tile.used{visibility:hidden}
+.ex-s{border:2px solid var(--line);border-radius:8px;padding:8px 12px;margin:0 0 8px;background:var(--ex)}
+.cx{display:block;width:100%;text-align:left;font:inherit;padding:8px 12px;margin-bottom:8px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--text);cursor:pointer}
+.cx.on{text-decoration:line-through;opacity:.6;background:var(--ex)}
+.tk{display:flex;gap:10px;align-items:flex-start;padding:6px 10px;margin-bottom:6px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tk input{margin-top:.45em;width:1.1em;height:1.1em;accent-color:var(--teal)}
+.tk.ex{background:var(--ex);cursor:default}
+.note{font-size:.88rem;opacity:.8;margin:8px 0 0}
+@media (max-width:520px){.card{padding:14px 11px}.boxes{gap:8px}.w{padding:5px 7px;font-size:.93rem}input.ph{width:100%}}
+</style></head><body>
+<header><h1>UNIT 1 — Communication</h1><p>Language work: vocabulary, idioms and linking ideas. Do each exercise, then press Check.</p></header>
+<div class="bar"><span class="score" id="tot">Score: 0 / 0</span>
+<button class="ctl" id="gc">Check All</button><button class="ctl alt" id="gs">Show Answers</button><button class="ctl alt" id="gr">Reset All</button></div>
+<main id="main"></main>
+<script>
+const $=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const N=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/-/g,' ').replace(/[.!?]+$/,'').replace(/\s+/g,' ').trim();
+const LET='abcdefghij';
+
+/* ---------- engines ---------- */
+function fill(body,items){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'+(it.ex?' ex':'')),d=$('div'),ins=[];
+  const A=it.ex?null:(Array.isArray(it.a[0])?it.a:[it.a]);
+  it.t.split('[]').forEach((p,k,arr)=>{d.insertAdjacentHTML('beforeend',p);
+   if(k<arr.length-1){if(it.ex)d.insertAdjacentHTML('beforeend','<b class="exw">'+it.ex+'</b>');
+    else{const x=$('input');x.type='text';x.autocomplete='off';x.spellcheck=false;x.setAttribute('autocapitalize','off');
+     x.className=A[k][0].includes(' ')?'ph':'';x.setAttribute('aria-label','answer '+(i+1));ins.push(x);d.appendChild(x)}}});
+  const fb=$('span','fb');d.appendChild(fb);
+  r.append($('span','n',i+1),d);body.appendChild(r);
+  if(!it.ex)rows.push({ins,A,fb});
+ });
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{let all=true,any=false;
+    r.ins.forEach((x,k)=>{const v=N(x.value);if(v)any=true;const g=r.A[k].some(a=>N(a)===v);x.classList.remove('ok','bad');if(v)x.classList.add(g?'ok':'bad');if(!g)all=false});
+    if(all){ok++;r.fb.className='fb ok';r.fb.textContent='✓ Correct'}
+    else if(any){r.fb.className='fb bad';r.fb.textContent='✗ Not quite. Try again.'}else{r.fb.className='fb';r.fb.textContent=''}});return ok},
+  show(){rows.forEach(r=>r.ins.forEach((x,k)=>x.value=r.A[k][0]))},
+  reset(){rows.forEach(r=>{r.ins.forEach(x=>{x.value='';x.className=x.className.replace(/\b(ok|bad)\b/g,'').trim()});r.fb.textContent='';r.fb.className='fb'})}};
+}
+function choice(body,items,inline){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'+(it.ex?' ex':'')),d=$('div'),row={it,btns:[],sel:it.ex?it.a:null};
+  const mk=()=>{const w=$('span',inline?'gap':'opts');it.o.forEach((v,k)=>{const b=$('button','opt',(inline?'':LET[k]+') ')+v);b.type='button';
+    b.onclick=()=>{if(it.ex)return;row.sel=v;paint(row)};row.btns.push(b);w.appendChild(b)});return w};
+  const parts=it.t.split('[]');d.insertAdjacentHTML('beforeend',parts[0]);
+  if(inline){d.appendChild(mk())}else{d.insertAdjacentHTML('beforeend','<b>………</b>')}
+  d.insertAdjacentHTML('beforeend',parts[1]||'');
+  if(!inline)d.appendChild(mk());
+  row.fb=$('span','fb');d.appendChild(row.fb);r.append($('span','n',i+1),d);body.appendChild(r);rows.push(row);paint(row);
+ });
+ function paint(r,chk){r.btns.forEach((b,k)=>{b.className='opt';if(r.it.o[k]===r.sel){b.classList.add(r.it.ex?'ok':chk?(r.sel===r.it.a?'ok':'bad'):'sel')}})}
+ return{max:rows.filter(r=>!r.it.ex).length,
+  check(){let ok=0;rows.forEach(r=>{if(r.it.ex)return;paint(r,true);const g=r.sel===r.it.a;if(g)ok++;
+    r.fb.className='fb '+(r.sel?(g?'ok':'bad'):'');r.fb.textContent=r.sel?(g?'✓ Correct':'✗ Not quite. Try again.'):''});return ok},
+  show(){rows.forEach(r=>{if(!r.it.ex){r.sel=r.it.a;paint(r)}})},
+  reset(){rows.forEach(r=>{if(!r.it.ex){r.sel=null;paint(r);r.fb.textContent='';r.fb.className='fb'}})}};
+}
+function match(body,c){
+ let pairs={},sel=null,chk=false;if(c.ex!=null)pairs[c.ex]=c.key[c.ex];
+ const wrap=$('div','boxes'),LA=$('div','list'),LB=$('div','list'),fb=$('p','fb');wrap.append(LA,LB);body.append(wrap,fb);
+ const left=r=>Object.keys(pairs).find(k=>pairs[k]===r);
+ const H=i=>[190,28,285,140,340,55][i%6];
+ function btn(side,i){const L=side==='L';const pi=L?(i in pairs?pairs[i]:null):(left(i)!=null?+left(i):null);
+  const b=$('button','w');b.type='button';b.innerHTML='<span class="lab">'+(L?i+1:LET[i])+'</span><span class="tx">'+(L?c.L[i]:c.R[i])+'</span>';
+  const li=L?i:pi;
+  if(pi!=null){b.classList.add('pr');b.style.setProperty('--h',H(li));b.insertAdjacentHTML('beforeend','<span class="tag">'+(L?LET[pi]:+pi+1)+'</span>');
+   if(chk)b.classList.add(c.key[li]===pairs[li]?'ok':'bad')}
+  if(L&&sel===i)b.classList.add('sel');
+  if(li===c.ex&&pi!=null){b.disabled=true}
+  b.onclick=()=>{chk=false;fb.textContent='';
+   if(L){if(sel===i)sel=null;else{delete pairs[i];sel=i}}
+   else{const o=left(i);if(sel!=null){if(o!=null)delete pairs[o];pairs[sel]=i;sel=null}else if(o!=null)delete pairs[o]}
+   rend()};return b}
+ function rend(){LA.innerHTML='';LB.innerHTML='';c.L.forEach((_,i)=>LA.appendChild(btn('L',i)));c.R.forEach((_,i)=>LB.appendChild(btn('R',i)))}
+ rend();
+ return{max:c.L.length-(c.ex!=null?1:0),
+  check(){chk=true;let ok=0,t=0;c.L.forEach((_,i)=>{if(i===c.ex||!(i in pairs))return;t++;if(pairs[i]===c.key[i])ok++});rend();
+   fb.className='fb '+(t&&ok===t?'ok':'bad');fb.textContent=t?ok+' of '+t+' pairs correct'+(t<this.max?' ('+(this.max-t)+' still to match)':'')+'.':'';return ok},
+  show(){pairs={};c.L.forEach((_,i)=>pairs[i]=c.key[i]);sel=null;rend()},
+  reset(){pairs={};if(c.ex!=null)pairs[c.ex]=c.key[c.ex];sel=null;chk=false;fb.textContent='';rend()}};
+}
+function reorder(body,items){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'),d=$('div'),slots=$('div','slots'),pool=$('div','pool'),fb=$('span','fb');
+  const st={placed:[]};d.style.flex='1';d.append(slots,pool,fb);r.append($('span','n',i+1),d);body.appendChild(r);
+  const rend=(c)=>{slots.innerHTML='';pool.innerHTML='';slots.className='slots'+(c?(c==='ok'?' ok':' bad'):'');
+   st.placed.forEach(k=>{const b=$('button','tile',it.w[k]);b.type='button';b.onclick=()=>{st.placed=st.placed.filter(x=>x!==k);fb.textContent='';rend()};slots.appendChild(b)});
+   it.w.forEach((w,k)=>{const b=$('button','tile'+(st.placed.includes(k)?' used':''),w);b.type='button';b.onclick=()=>{st.placed.push(k);fb.textContent='';rend()};pool.appendChild(b)})};
+  rows.push({it,st,rend,fb});rend();
+ });
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{const s=r.st.placed.map(k=>r.it.w[k]).join(' ');const g=N(s)===N(r.it.a);if(g)ok++;
+    r.rend(r.st.placed.length?(g?'ok':'bad'):'');r.fb.className='fb '+(r.st.placed.length?(g?'ok':'bad'):'');r.fb.textContent=r.st.placed.length?(g?'✓ Correct':'✗ Not quite. Try again.'):''});return ok},
+  show(){rows.forEach(r=>{const used=[];r.st.placed=r.it.a.split(' ').map(w=>{const k=r.it.w.findIndex((x,j)=>x===w&&!used.includes(j));used.push(k);return k});r.rend()})},
+  reset(){rows.forEach(r=>{r.st.placed=[];r.fb.textContent='';r.rend()})}};
+}
+
+/* ---------- data ---------- */
+const VA=[
+{t:'Good presenters rarely ramble. They usually try to be [] as possible.',o:['inarticulate','hesitant','succinct'],a:'succinct',ex:1},
+{t:'Her arguments were so [] that we all agreed to her proposal.',o:['fluent','extrovert','persuasive'],a:'persuasive'},
+{t:'The audience were very [] and carried him through his difficult presentation.',o:['responsive','eloquent','coherent'],a:'responsive'},
+{t:'She is a very [] person. She always keeps her attention fixed on what she wants to achieve.',o:['sensitive','focused','fluent'],a:'focused'},
+{t:'He never says what he thinks or shows what he feels. How can anybody be so []?',o:['rambling','fluent','reserved'],a:'reserved'},
+{t:'Everybody seems so [] here. They behave and speak freely, and do not really care what other people think.',o:['incoherent','articulate','uninhibited'],a:'uninhibited'},
+{t:'We know that not all politicians are []. Some of them even use an autocue.',o:['eloquent','inhibited','hesitant'],a:'eloquent'}];
+const ST=(t,a,ex)=>({t,o:['say','tell'],a,ex});
+const VC=[ST('[] a story','tell'),ST('[] the time','tell'),ST('as far as I can []','tell'),ST('[] yes or no','say'),ST('[] somebody to do something','tell'),
+ ST('[] somebody what to do','tell'),ST('[] hello / goodbye','say'),ST('[] a lie / lies','tell'),ST('[] what you mean','say'),ST('[] something under your breath','say')];
+VC[0].ex='tell';
+const VD=[
+{t:'Can you think of situations when it might be better not to [] the truth?',ex:'tell'},
+{t:'How easy or difficult do you find it to [] other people to do things for you?',a:['tell']},
+{t:'In meetings, how often do you [] what you think?',a:['say']},
+{t:'Have you ever [] a joke in English?',a:['told']},
+{t:'How easy or difficult is it to [] the difference between the banknotes used in your country?',a:['tell']},
+{t:'Can you [] ‘How are you?’ in more than three languages?',a:['say']},
+{t:'When you were a child, did you use to do as you were []?',a:['told']}];
+const IA=[
+{t:'They sent us a very long reply with all the details. But to put it in a [], that’s it, we’ve won the contract!',ex:'nutshell'},
+{t:'I wish my boss would stop beating about the [] and tell me clearly whether or not I stand a chance of being promoted soon.',a:['bush']},
+{t:'She expected profit figures and I was going on about sales figures. Once again, we were just talking at cross [].',a:['purposes']},
+{t:'Not official yet, but it seems we’re going to relocate. Just heard it on the [].',a:['grapevine']},
+{t:'If you think you can give a good presentation just because you know your subject inside out, well, I’m afraid you’ve got the wrong [] of the [].',a:[['end'],['stick']]},
+{t:'This is a very badly written report. I just can’t make [] or [] of it.',a:[['head'],['tail']]},
+{t:'I’ve tried to tell my boss, but it’s like talking to a [] []. No reaction!',a:[['brick'],['wall']]}];
+const IB=[
+{w:['to','the','in','loop','someone','keep'],a:'to keep someone in the loop'},
+{w:['to','straight','the','get','mouth','it','horse’s','from'],a:'to get it straight from the horse’s mouth'},
+{w:['to','point','come','the','straight','to'],a:'to come straight to the point'},
+{w:['to','picture','somebody','in','the','put'],a:'to put somebody in the picture'},
+{w:['to','on','wavelength','same','be','the'],a:'to be on the same wavelength'}];
+const IC=[
+{t:'I know you couldn’t attend the meeting, so here’s a summary of the main points just to [].',ex:'put you in the picture'},
+{t:'Let me []: I think your performance is totally unsatisfactory.',a:['get straight to the point','come straight to the point']},
+{t:'I want to be []: I don’t want important decisions to be taken without me.',a:['kept in the loop']},
+{t:'I thought it was a rumour, but today I []. Andrew told me he was resigning.',a:['got it straight from the horse’s mouth']},
+{t:'Fortunately Sue and I [] so we hardly ever disagree about anything.',a:['are on the same wavelength']}];
+const IE=[
+{t:'E-mail me every day to [] with the latest developments, will you?',ex:'keep me up to date'},
+{t:'When she was told she’d been nominated Businesswoman of the Year, she [].',a:['was at a loss for words']},
+{t:'Could you briefly [] on their financial situation before our meeting this afternoon?',a:['give me the low-down','give me the lowdown','give us the low-down','give us the lowdown']},
+{t:'Every week in our department there’s a meeting where the administrative staff can [] and discuss problems.',a:['air their views']},
+{t:'We can’t be sure, but management [] that there might be redundancies.',a:['dropped a hint','have dropped a hint','has dropped a hint']}];
+const WB=[
+['I managed to follow their conversation, <i>although</i> my attention had drifted away.',1],
+['<i>Even though</i> the talk was awfully boring, I left the room after a couple of minutes.',0],
+['<i>Despite</i> he knew he was wrong, he refused to admit it.',0],
+['<i>In spite of</i> their criticisms, I didn’t lose my confidence.',1],
+['I was unable to express my disagreement <i>although</i> I am generally assertive.',1],
+['I felt sleepy throughout the meeting <i>in spite of</i> my tiredness.',0]];
+const L1='(even though|although|despite the fact that|in spite of the fact that)';
+const WC=[
+{o:'Even though the talk was awfully boring, I left the room after a couple of minutes.',
+ p:[new RegExp(L1+'.*(interesting|fascinating|enjoyable|engaging).*left the room'),new RegExp(L1+'.*(boring|dull).*(sat through|stayed|remained|did not leave|didn\'t leave)'),new RegExp('left the room.*'+L1+'.*(interesting|fascinating|enjoyable)'),new RegExp('(sat through|stayed).*'+L1+'.*(boring|dull)')],
+ s:['Even though the talk was extremely interesting, I left the room after a couple of minutes.','Even though the talk was awfully boring, I sat through it.']},
+{o:'Despite he knew he was wrong, he refused to admit it.',
+ p:[/^(despite|in spite of) the fact that he knew he was wrong,? he refused to admit (it|this)$/,/^(although|even though) he knew he was wrong,? he refused to admit (it|this)$/,/^(despite|in spite of) knowing he was wrong,? he refused to admit (it|this)$/,/^he refused to admit (it|this),? (although|even though|despite the fact that|in spite of the fact that) he knew he was wrong$/],
+ s:['Despite the fact that he knew he was wrong, he refused to admit it.']},
+{o:'I felt sleepy throughout the meeting in spite of my tiredness.',
+ p:[/alert.*(in spite of|despite).*tired/,/(in spite of|despite).*tired.*alert/,/(sleepy|drowsy).*(because of|due to|owing to).*tired/,/(because of|due to|owing to) my tiredness.*(sleepy|drowsy)/],
+ s:['I felt alert throughout the meeting in spite of my tiredness.','I felt sleepy throughout the meeting because of my tiredness.']}];
+
+/* ---------- sections ---------- */
+const S=[];const sec=(g,l,i,b)=>S.push({g,l,i,b});
+sec('Vocabulary','A','Complete each sentence with the best word.',b=>choice(b,VA,false));
+sec('Vocabulary','B','Match these words to make compounds and collocations relating to communication.',b=>match(b,{L:['extensive','eye','body','grammatical','sense of','effective'],R:['accuracy','communication','contact','humour','language','vocabulary'],key:[5,2,4,0,3,1],ex:0}));
+sec('Vocabulary +','C','Complete the following phrases with <i>say</i> or <i>tell</i> as appropriate.',b=>choice(b,VC,true));
+sec('Vocabulary +','D','Complete the following sentences with the appropriate form of <i>say</i> or <i>tell</i>.',b=>{const o=fill(b,VD);
+ b.insertAdjacentHTML('beforeend','<p class="note">Now answer the questions for yourself (not scored):</p>');const t=$('textarea');t.placeholder='Your own answers…';b.appendChild(t);return o});
+sec('Language review: Idioms','A','Complete the idioms in the sentences below with the correct nouns.',b=>fill(b,IA));
+sec('Language review: Idioms','B','Reorder the words to make idioms. Tap the words in the right order; tap a placed word to take it back.',b=>reorder(b,IB));
+sec('Language review: Idioms','C','Complete the sentences with the correct form of an idiom from exercise B.',b=>fill(b,IC));
+sec('Language review: Idioms','D','Match these new idioms with their definitions.',b=>match(b,{L:['air your views','be at a loss for words','drop a hint','give somebody the low-down','keep somebody up to date'],R:['tell somebody all the information they want or need to know','unable to say anything because something surprising or totally unexpected has happened','express your opinions about something in public','give somebody regular information about things','make a suggestion in an indirect way'],key:[2,1,4,0,3],ex:0}));
+sec('Language review: Idioms','E','Complete the sentences with the appropriate form of an idiom from exercise D.',b=>fill(b,IE));
+sec('Writing: Linking ideas','A','Study the examples of linking words. Then cross out the two explanations which are not correct.',b=>{
+ ['<i>Despite</i> his great sense of humour, he often finds it difficult to respond to this audience.'.replace('this','his'),'<i>In spite of</i> his shyness, he is a brilliant speaker.','<i>Although</i> he generally communicates his ideas clearly, I often find it hard to follow him.','<i>Even though</i> I’d put them in the picture, they didn’t seem to grasp what I was on about.']
+  .forEach((s,i)=>b.appendChild($('p','ex-s',(i+1)+'&nbsp; '+s)));
+ b.insertAdjacentHTML('beforeend','<p><b>The words in <i>italics</i> are used to…</b> (tap to cross out)</p>');
+ const T=['express the cause of something, the reason for something.','reinforce an idea, add information.','contrast ideas.'],on=[0,0,0],fb=$('p','fb'),bs=T.map((t,k)=>{const x=$('button','cx',LET[k]+') '+t);x.type='button';x.onclick=()=>{on[k]^=1;x.classList.toggle('on',!!on[k]);fb.textContent=''};b.appendChild(x);return x});
+ b.appendChild(fb);
+ const set=v=>{v.forEach((z,k)=>{on[k]=z;bs[k].classList.toggle('on',!!z);bs[k].classList.remove('ok','bad')})};
+ return{max:1,check(){const g=on[0]&&on[1]&&!on[2];bs.forEach((x,k)=>{x.classList.remove('ok','bad');if(on[k])x.classList.add(k<2?'ok':'bad')});
+  fb.className='fb '+(g?'ok':'bad');fb.textContent=g?'✓ Correct: the words are used to contrast ideas.':'✗ Not quite. Cross out the TWO wrong explanations.';return g?1:0},
+  show(){set([1,1,0])},reset(){set([0,0,0]);fb.textContent=''}}});
+sec('Writing: Linking ideas','B','Tick the three sentences which make sense. Sentence 1 is done for you.',b=>{
+ const cs=[],fb=$('p','fb');
+ WB.forEach((w,i)=>{const l=$('label','tk'+(i?'':' ex'));const c=$('input');c.type='checkbox';if(!i){c.checked=true;c.disabled=true}
+  c.onchange=()=>{fb.textContent='';l.classList.remove('ok','bad')};l.append(c,$('span',null,(i+1)+'&nbsp; '+w[0]));b.appendChild(l);cs.push([c,l])});
+ b.appendChild(fb);
+ return{max:2,check(){let ok=0,wr=0;cs.forEach(([c,l],i)=>{if(!i)return;l.classList.remove('ok','bad');if(c.checked){l.classList.add(WB[i][1]?'ok':'bad');WB[i][1]?ok++:wr++}});
+  fb.className='fb '+(ok===2&&!wr?'ok':'bad');fb.textContent=ok===2&&!wr?'✓ Correct: sentences 1, 4 and 5 make sense.':'✗ '+ok+' correct tick(s)'+(wr?'; '+wr+' wrong (red).':'. Tick one more.');return ok},
+  show(){cs.forEach(([c],i)=>c.checked=!!WB[i][1])},reset(){cs.forEach(([c,l],i)=>{if(i)c.checked=false;l.classList.remove('ok','bad')});fb.textContent=''}}});
+sec('Writing: Linking ideas','C','Rewrite the three incorrect sentences from exercise B (2, 3 and 6) so that they make sense.',b=>{
+ const rs=WC.map((w,i)=>{const r=$('div','q'),d=$('div'),t=$('textarea'),fb=$('span','fb');t.value=w.o;t.rows=2;d.style.flex='1';d.append(t,fb);r.append($('span','n',[2,3,6][i]),d);b.appendChild(r);return{w,t,fb}});
+ b.insertAdjacentHTML('beforeend','<p class="note">Edit each sentence. Different correct answers are possible; the check looks for common ones.</p>');
+ return{max:3,check(){let ok=0;rs.forEach(r=>{const v=N(r.t.value);r.t.classList.remove('ok','bad');
+   if(v===N(r.w.o)){r.fb.className='fb bad';r.fb.textContent='✗ This is still the original sentence. Change it.';r.t.classList.add('bad')}
+   else if(r.w.p.some(p=>p.test(v))){ok++;r.t.classList.add('ok');r.fb.className='fb ok';r.fb.textContent='✓ Correct'}
+   else{r.t.classList.add('bad');r.fb.className='fb bad';r.fb.textContent='✗ Not matched. Compare with: '+r.w.s.join('  OR  ')}});return ok},
+  show(){rs.forEach(r=>r.t.value=r.w.s[0])},reset(){rs.forEach(r=>{r.t.value=r.w.o;r.t.className='';r.fb.textContent='';r.fb.className='fb'})}}});
+
+/* ---------- page ---------- */
+const main=document.getElementById('main'),tot=document.getElementById('tot');let last='';
+function upd(){let s=0,m=0;S.forEach(x=>{s+=x.res;m+=x.o.max});tot.textContent='Score: '+s+' / '+m}
+function chk(x){x.res=x.o.check();x.sc.textContent=x.res+' / '+x.o.max;upd()}
+S.forEach(x=>{
+ if(x.g!==last){main.appendChild($('h2','grp',x.g));last=x.g}
+ const c=$('section','card'),h=$('div','sh'),b=$('div');x.res=0;
+ x.sc=$('span','sc');h.append($('span','badge',x.l.length>1?'':x.l),$('h2',null,x.i),x.sc);c.append(h,b);
+ x.o=x.b(b);
+ const cr=$('div','cr');
+ [['Check','ctl',()=>chk(x)],['Show Answers','ctl alt',()=>{x.o.show();chk(x)}],['Reset','ctl alt',()=>{x.o.reset();x.res=0;x.sc.textContent='';upd()}]]
+  .forEach(([t,k,f])=>{const bt=$('button',k,t);bt.type='button';bt.onclick=f;cr.appendChild(bt)});
+ c.appendChild(cr);main.appendChild(c);
+});
+document.getElementById('gc').onclick=()=>S.forEach(chk);
+document.getElementById('gs').onclick=()=>S.forEach(x=>{x.o.show();chk(x)});
+document.getElementById('gr').onclick=()=>S.forEach(x=>{x.o.reset();x.res=0;x.sc.textContent=''});
+document.getElementById('gr').addEventListener('click',upd);
+upd();
+</script></body></html>
