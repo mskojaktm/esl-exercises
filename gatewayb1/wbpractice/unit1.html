@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gateway B1 — UNIT 1 — Family Life</title>
+<style>
+:root{--t:#028090;--n:#0D2B35;--ok:#1b8a3a;--bad:#c0392b}
+body{margin:0;font:16px Calibri,Arial,sans-serif;background:#eef4f5;color:var(--n)}
+h1,h2,h3{font-family:'Trebuchet MS',sans-serif}
+header{background:var(--n);color:#fff;padding:18px 20px}header h1{margin:0;font-size:1.5rem}header p{margin:4px 0 0;opacity:.8}
+#bar{position:sticky;top:0;background:#fff;box-shadow:0 2px 6px #0003;padding:8px 16px;display:flex;gap:8px;align-items:center;z-index:9;flex-wrap:wrap}
+#bar b{flex:1}
+button{background:var(--t);color:#fff;border:0;border-radius:6px;padding:6px 12px;cursor:pointer;font:inherit}
+button.g{background:#6b7f86}
+main{max-width:880px;margin:auto;padding:12px}
+h2{border-bottom:3px solid var(--t);margin:30px 0 4px}
+.ex{background:#fff;border-left:5px solid var(--t);border-radius:8px;box-shadow:0 2px 6px #0002;padding:12px 16px;margin:12px 0}
+.ex h3{margin:0 0 4px;font-size:1.05rem}.i{color:#456;font-size:.92rem;margin-bottom:8px;white-space:pre-line}
+.q{margin:6px 0;line-height:1.9}
+input,select,textarea{font:inherit;border:1.5px solid #9bb;border-radius:5px;padding:2px 6px}
+input{width:9em}select{max-width:100%}
+.ok{border-color:var(--ok)!important;background:#e6f6ea}.bad{border-color:var(--bad)!important;background:#fdecea}.sh{background:#fff6d6}
+.b{margin-top:8px;display:flex;gap:6px;align-items:center}.r{margin-left:8px;font-weight:bold}
+</style></head><body>
+<header><h1>Gateway B1 — UNIT 1 — Family Life</h1><p>Interactive practice · Workbook pp. 4–11</p></header>
+<div id="bar"><b id="sc">Score: 0 / 0</b><button onclick="all_('chk')">Check all</button><button class="g" onclick="all_('rst')">Reset all</button></div>
+<main id="m"></main>
+<script>
+const Z="0|-",S=s=>s.split("|"),
+q=(p,a,s)=>[p,a,S(s).map((x,i)=>"abc"[i]+") "+x)],
+L=s=>S(s).map((x,i)=>"abcdefgh"[i]+") "+x),
+GB=["G","B"],TF=["✓","✗"];
+const E=[
+"Vocabulary (p. 4)",
+["1 Crossword clues","Write the words from the clues. The last item is the word in the shaded column.","f",0,[
+["1 He's 72. He's a __.","senior citizen"],
+["2 & 3 She's 55. She's a __ __ woman.","middle;aged"],
+["4 The period of life when you change from being a child to being a young adult","adolescence"],
+["5 A very young child who can't talk or walk","baby"],
+["6 The stage of life when you are 70, for example","old age"],
+["7 The opposite of life","death"],
+["8 The beginning of life","birth"],
+["9 Shaded column word:","teenager"]]],
+["2 Complete the sentences with words from the puzzle","","f",0,[
+["1 We're celebrating the __ of our new sister.","birth"],
+["2 I was very sad at the __ of my aunt.","death"],
+["3 __ is a difficult time for many people. They aren't children, but they aren't adults either.","adolescence"],
+["4 When you're sitting on the bus, you should always offer your seat to a __.","senior citizen"],
+["5 It's important to look after your parents in their __.","old age"]]],
+["3 Family tree","Tree: John = Natasha → Ian (= Susan → Simon), Sandra (= Luke → James, Sophie), Daniel.","f",0,[
+["1 John and Natasha are Simon's __.","grandparents"],["2 Susan is Ian's __.","wife"],["3 James is Simon's __.","cousin"],
+["4 Natasha is Luke's __.","mother-in-law"],["5 Luke is Ian's __.","brother-in-law"],["6 Daniel is Simon's __.","uncle"],
+["7 Sophie is Ian's __.","niece"],["8 James is Daniel's __.","nephew"],["9 Sophie is John's __.","granddaughter"],["10 Luke is Sandra's __.","husband"]]],
+["4 Match the halves","Choose the correct ending for each beginning.","p",L("his parents didn't want any more children.|they don't want to get married at the moment.|my parents got divorced and I live with my mum.|my mum got married again.|she's my sister Elizabeth's daughter.|he separated from his wife legally last year.|she never wants to get married."),[
+["1 I've got a stepfather because","d"],["2 My aunt is 50 and single because","g"],["3 She's my niece because","e"],["4 Paul is an only child because","a"],
+["5 I come from a one-parent family because","c"],["6 Peter is my cousin's partner, not her husband, because","b"],["7 Samuel is divorced because","f"]]],
+["5 Vocabulary extension","Box: graduate · infant · orphan · pensioner · toddler · tween · twin","f",0,[
+["1 A __ has a sister or brother with the same birth date.","twin"],["2 An __ is a child with no parents.","orphan"],["3 When you finish university you are a __.","graduate"],
+["4 After you retire, you become a __ and get money from the government.","pensioner"],["5 A __ is a child between two and four.","toddler"],
+["6 An __ is a child in its first year.","infant"],["7 A __ is a child who is not yet a teenager (about 10–12 years old).","tween"]]],
+"Reading (p. 5) — Ella's blog",
+["1 Why is Ella angry with her sister?","Read the blog quickly (in your book) to check.","p",L("because she shares the same room|because she never leaves her alone|because she borrows her clothes"),[["Ella is angry","c"]]],
+["2 Choose the best answers","","p",0,[
+q("1 Ella is quite happy at the moment because …","a","she's got more freedom than before|she likes going out with her family|she's getting on well with her school work"),
+q("2 Ella's sister wants …","b","to use Ella's laptop all the time|to look just like Ella|to copy all Ella's work"),
+q("3 Ella gets angry because …","a","her parents always agree with her sister|she has to share a room with her sister|her parents don't buy her new clothes"),
+q("4 Ella's brother is …","b","unkind to his sister|good with computers|away at university a lot"),
+q("5 Best title for the blog?","c","My brother's amazing!|My parents don't understand me!|My sister's annoying!")]],
+["3 Critical thinking: good (G) or bad (B) advice?","","p",GB,[
+["1 Shout at your sister so she doesn't do it again.","B"],["2 Borrow some of her clothes and throw them away.","B"],["3 Tell your parents every time she takes something.","B"],
+["4 Talk to her and say she can borrow some things, but not others.","G"],["5 Put a lock on your door so no one can go in.","B"],["6 Give her some of your old clothes.","G"],["7 Offer her style advice.","G"]]],
+["4 Match the underlined words in the blog with the definitions","","f",0,[
+["1 makes me upset","gets me down"],["2 very angry","furious"],["3 a big problem","absolute nightmare"],
+["4 uses something that belongs to someone else, then gives it back later","borrows"],["5 fixes something broken","repairs"]]],
+["5 Complete the sentences with the correct form of the words from 4","","f",0,[
+["1 If I get bad results in a test it __.","gets me down"],["2 I've got to rewrite an essay for the teacher. It's an __.","absolute nightmare"],
+["3 My mum was __ when Dad crashed her car.","furious"],["4 When I dropped my mobile phone on the floor, it was impossible to __ it.","repair"],["5 I don't like to __ money from friends.","borrow"]]],
+"Grammar in context (p. 6)",
+["1 Present simple (S) or present continuous (C)?","","p",["S","C"],[
+["a actions happening now or temporary situations","C"],["b regular habits and routines","S"],["c things that are generally true","S"],["d verbs like love, hate, know, understand","S"]]],
+["2 Match the sentences with the uses from 1","Choose a, b, c or d.","p",["a","b","c","d"],[
+["1 She's lying on the grass at the moment.","a"],["2 My laptop sometimes breaks.","b"],["3 I see my friends three times a week.","b"],["4 She makes me furious.","c"],
+["5 She's wearing my T-shirt and jeans.","a"],["6 I have a really good group of friends.","d"],["7 He loves playing computer games.","d"],["8 We go swimming every weekend.","b"]]],
+["3 Complete the dialogues (present simple or continuous)","","f",0,[
+["1 A: Why has he got his hand up? B: He __ (want) the teacher to ask him. He __ (know) the answer.","wants;knows"],
+["2 A: Why __ you __ (study)? B: I've got an exam tomorrow.","are;studying"],
+["3 A: How do you prepare for exams? B: I __ (read) my notes and then I __ (write) questions for myself.","read;write"],
+["4 A: Who __ (sing) downstairs? B: That's my sister.","'s singing|is singing"],
+["5 A: Bonjour, Mademoiselle. B: Sorry, I __ (not speak) French.","don't speak|do not speak"],
+["6 A: What's that smell? Is it pizza? B: Yes. My dad __ (cook) dinner.","'s cooking|is cooking"],
+["7 A: Why isn't your mum here at the moment? B: She __ (finish) work late on Thursdays.","finishes"],
+["8 A: Can I speak to the director? B: No. He __ (speak) to someone.","'s speaking|is speaking"]]],
+["4 Write questions using the prompts","Example: Where / you / live? → Where do you live?","f",0,[
+["2 Where / your mother / work?","Where does your mother work?"],["3 you / have / a best friend / at the moment?","Do you have a best friend at the moment?"],
+["4 your friend / speak English / well?","Does your friend speak English well?"],["5 you / do / your homework / at the moment?","Are you doing your homework at the moment?"],
+["6 What / sports / you / do?","What sports do you do?"],["7 What / your friend / read / at the moment?","What is your friend reading at the moment?|What's your friend reading at the moment?"],
+["8 Who / you / usually / sit next to / in English lessons?","Who do you usually sit next to in English lessons?"]]],
+["5 Grammar challenge: correct the mistakes","Rewrite the correct sentence. Write 'correct' if there is no mistake (two are correct).","f",0,[
+["1 Are you writting your essay at the moment?","Are you writing your essay at the moment?"],["2 She doesn't have her books with her today?","correct"],
+["3 Do you studying for your exam now?","Are you studying for your exam now?"],["4 Why are you and Joe walking to school today?","correct"],
+["5 Do your brother plays in the basketball team?","Does your brother play in the basketball team?"],["6 My cousin studies at this school.","correct"],
+["7 My sister and I are having two bikes at the moment.","My sister and I have two bikes at the moment."],
+["8 A: What do you do now? B: I listen to my MP3 player.","What are you doing now? I'm listening to my MP3 player.|What are you doing now? I am listening to my MP3 player."],
+["9 Does your parents work at the hospital?","Do your parents work at the hospital?"],["10 I am loving listening to music.","I love listening to music."]]],
+"Developing vocabulary and listening (p. 7)",
+["1 Write the noun form","","f",0,[
+["1 concentrate (v)","concentration"],["2 describe (v)","description"],["3 argue (v)","argument"],["4 independent (adj)","independence"],["5 discuss (v)","discussion"],["6 improve (v)","improvement"],
+["7 retire (v)","retirement"],["8 move (v)","movement"],["9 adolescent (adj)","adolescence"],["10 inform (v)","information"],["11 different (adj)","difference"],["12 confident (adj)","confidence"]]],
+["2 Match words from 1 with the definitions","Write the correct form of the word.","f",0,[
+["1 facts about someone or something","information"],["2 make something better","improve"],["3 something that makes one thing not the same as another","difference"],
+["4 a bad disagreement with someone","argument"],["5 talk about something with others","discuss"],["6 young, growing into an adult","adolescent"]]],
+["3 Listening 01: what change are the speakers talking about?","Audio is in your course materials.","p",L("moving to a different town|moving away from home|moving to another country"),[["Change","b"]]],
+["4 Listening 01: match each person to two statements","a sees their parents regularly · b lives closer to their friends now · c would prefer a bigger place · d doesn't get so tired now · e does better work now · f doesn't like housework · g works in the evening · h has a big family\nWrite two letters, e.g. a f.","f",0,[
+["1 Anna","b c|c b"],["2 Ethan","a f|f a"],["3 Alex","h e|e h"],["4 Grace","d g|g d"]]],
+["5 Vocabulary extension: nouns for people (-er, -or, -ist)","Example: art → artist","f",0,[
+["2 sing","singer"],["3 drive","driver"],["4 invent","inventor"],["5 science","scientist"],["6 economy","economist"],["7 teach","teacher"],
+["8 play","player"],["9 photograph","photographer"],["10 direct","director"],["11 write","writer"],["12 build","builder"]]],
+["6 Complete the sentences with words from 5","","f",0,[
+["1 He always wins at tennis. He's a very good __.","player"],["2 Steven Spielberg is a very famous film __.","director"],["3 Albert Einstein was a great __.","scientist"],
+["4 Is your dad a taxi __?","driver"],["5 I hate that __. All her songs are the same.","singer"],["6 I'd like to be an __ one day. I love studying finance and markets.","economist"],
+["7 It was his job to create new things. He was an __.","inventor"],["8 She asks us lots of questions. She's a really good __.","teacher"],["9 I like that __. He takes really good photographs.","photographer"],
+["10 He writes really good books for teenagers. He's a __.","writer"],["11 He's my favourite __. He paints beautiful pictures of the countryside.","artist"],["12 I called a __ when there was a problem with the roof of my house.","builder"]]],
+"Articles (p. 8)",
+["1 Complete with the correct article","Use a/an or 0 (no article) or the.","f",0,[
+["1 Now I live in __ flat.","a"],["2 I was having a lot of arguments about __ politics.",Z],["3 I'm __ restaurant manager.","a"],["4 __ flat's a bit small.","The"],["5 I recently moved into my own flat near __ beach.","the"]]],
+["2 Match the rules with the sentences from 1","Choose the sentence number (1–5).","p",["1","2","3","4","5"],[
+["a We use no article when we talk about things in general.","2"],["b We use the to talk about a specific person or thing or previously mentioned person or thing.","4"],
+["c We use a/an to talk about a singular, countable person or thing for the first time.","1"],["d We use the to talk about someone or something that is unique.","5"],["e We use a/an to say what somebody's profession is.","3"]]],
+["3 Complete with a/an or the","","f",0,[
+["1 __ teacher in the photo looks very clever.","The"],["2 My brother has got __ new mobile phone!","a"],["3 What's __ title of that song?","the"],["4 He works for __ organisation that helps people.","an"],
+["5 __ boy behind you is Paul's cousin.","The"],["6 What's on TV? Can you pass __ remote control?","the"],["7 She's single. She hasn't got __ husband.","a"],["8 I have __ idea! Why don't we go out tomorrow?","an"],
+["9 Alex is __ name of my nephew.","the"],["10 My stepfather is __ builder.","a"],["11 He is __ director of the film we saw yesterday.","the"],["12 My sister wants to be __ economist.","an"],
+["13 Have you got __ new hat? I haven't seen it before.","a"],["14 __ coat you are wearing looks very warm.","The"]]],
+["4 Famous quotes: a/an, the or 0","","f",0,[
+["1 'I have __ dream.' (Martin Luther King)","a"],["2 '__ Earth goes round __ Sun.' (Copernicus)","The;the"],["3 'I paint __ objects as I think them, not as I see them.' (Picasso)",Z],
+["4 'To be or not to be, that is __ question.' (Shakespeare)","the"],["5 '__ imagination is more important than __ knowledge.' (Einstein)",Z+";"+Z],
+["6 'Nothing is more responsible for __ good old days than __ bad memory.' (F. P. Adams)","the;a"],["7 '__ only problem with common sense is that it is not very common.' (Voltaire)","The"],["8 '__ life is a dream.' (Calderón de la Barca)",Z]]],
+["5 Grammar challenge: write the extra word","Each sentence has one extra word. Write it.","f",0,[
+["1 I love the Italian food.","the"],["2 The English people I am know are really nice.","am"],["3 We are go to the shopping centre on Saturdays.","are"],
+["4 All you need is the love.","the"],["5 Is the food in this restaurant is good?","is"],["6 Does your brother is enjoy pop music?","is"],["7 Where do you are going now?","do"],
+["8 The vegetarians don't eat meat.","The"],["9 We don't not like the new restaurant.","not"]]],
+"Developing speaking (p. 9)",
+["1 Listening 02: tick (✓) the correct information","Audio is in your course materials. Choose ✓ or ✗.","p",TF,[
+["1 The girl's name is Marie.","✓"],["2 She has two sisters.","✗"],["3 She sees her sister, Jenny, every month.","✓"],["4 The girl usually does her homework with a friend.","✓"],
+["5 The boy plays a lot of computer games.","✓"],["6 The girl watches films on television.","✗"]]],
+["2 Put the words in order to make questions","Add question marks.","f",0,[
+["1 your what's name","What's your name?"],["2 often you how see them do","How often do you see them?"],["3 you like games computer do","Do you like computer games?"],
+["4 any you sisters got or brothers have","Have you got any brothers or sisters?"],["5 they school to do your go","Do they go to your school?"],["6 you what evenings in do the do","What do you do in the evenings?"]]],
+["3 Put the questions from 2 in the order the boy asks them","Write the numbers, e.g. 1 2 3 4 5 6.","f",0,[["Order","1 4 5 2 6 3|145263"]]],
+["4 Complete the dialogue with the correct questions (a–g)","","p",L("Do you like swimming?|Are you a new student?|What do you think of the shops in town?|How often do you go swimming?|Do they go to this school, too?|What do you do at weekends?|Have you got any brothers or sisters?"),[
+["(1) after 'Hi! I'm Sofie.' – 'I'm Edward.'","b"],["(2) after 'Yes, I am. I'm starting today with my brother.'","g"],["(3) after 'Yes, I've got two brothers.'","e"],
+["(4) after 'Yes. But they're not in my class, thank goodness!'","a"],["(5) after 'I've joined the swimming club.' – 'Not really. I prefer football.'","d"],
+["(6) 'At the moment, I go twice a week in the evenings.'","f"],["(7) 'They're really good and not too expensive.'","c"]]],
+"Developing writing (p. 10)",
+["1 Put the email in the order of the paragraph plan","Plan: 1 basic personal information · 2 family · 3 hobbies · 4 favourite subject(s) at school · 5 asking for a reply.","p",
+["A) Hobbies: sport with friends, reading, TV","B) Family: mum, little brother Tom, parents divorced","C) Closing: homework, write back soon, Best wishes","D) Greeting: Hi! I'm Steve, 15, Portsmouth","E) School: favourite subject English, American literature, art"],[
+["Paragraph 1","D"],["Paragraph 2","B"],["Paragraph 3","A"],["Paragraph 4","E"],["Paragraph 5","C"]]],
+["2 Complete with the correct items","Box: Anyway · Best wishes · ☺ · Hi · I'm","f",0,[
+["1 We often finish emails with this phrase.","Best wishes"],["2 We can use this to show how we're feeling.","☺|:)|:-)"],["3 We use this to change the subject.","Anyway"],
+["4 We use contractions like this in an informal email.","I'm"],["5 We usually start informal emails with this word.","Hi"]]],
+["3 Write an informal email","Mariela, 14, Buenos Aires, Argentina. P2: mother and father, two sisters (one 21, other 19), both at university, go out with them at weekends. P3: main hobby – cinema (Italian films), go often, also likes books. P4: favourite subject – geography, good teacher, also history. P5: ask for a reply. (Free writing – no automatic check.)","w",0,[["",""]]],
+"Revision: Unit 1 (p. 11)",
+["Grammar 1 Present simple","","f",0,[
+["1 Elizabeth __ (watch) the news twice a day.","watches"],["2 My friends __ (not read) magazines.","don't read|do not read"],["3 Sunny weather __ (make) me feel happy.","makes"],
+["4 A: __ it __ (rain) a lot in your country? B: Yes, it __.","Does;rain;does"],["5 My brother usually __ (study) in his bedroom.","studies"],["6 __ you __ (see) friends every weekend?","Do;see"],
+["7 I __ (not think) that's a good idea.","don't think|do not think"],["8 How often __ your grandparents __ (visit) you?","do;visit"]]],
+["Grammar 2 Present continuous","Verbs: begin · carry · come · not stay · put","f",0,[
+["(a) Why __ you __ your books in your bag?","are;putting"],["(b) The lesson __ now.","is beginning|'s beginning"],["(c) I __ because I have a doctor's appointment.","'m not staying|am not staying"],
+["(d) He __ now.","'s coming|is coming"],["(e) He's walking slowly because he __ the laptop and some dictionaries.","'s carrying|is carrying"]]],
+["Grammar 3 a/an, the or 0","I've got (a) sister called Polly. My sister loves (b) Italian food. She's got (c) Italian friend who has (d) restaurant. (e) restaurant is near our house. We went to (f) restaurant last week. We had (g) lovely waiter. I'd like to be (h) waiter. It's (i) good job. I think (j) tips are good at their restaurant, too.","f",0,[
+["a","a"],["b",Z],["c","an"],["d","a"],["e","The"],["f","the"],["g","a"],["h","a"],["i","a"],["j","the"]]],
+["Vocabulary 1 Family","","f",0,[
+["1 the brother of your father","uncle"],["2 the brother of your husband or wife","brother-in-law"],["3 your father's new wife","stepmother"],["4 your sister's daughter","niece"],
+["5 the man a woman is married to","husband"],["6 the father of your father","grandfather"],["7 the daughter of your aunt","cousin"],["8 a person with no brothers or sisters","only child"]]],
+["Vocabulary 2 Life stages","","f",0,[
+["1 the beginning of life (5 letters)","birth"],["2 the period between child and adult (11 letters)","adolescence"],["3 the end of life (5 letters)","death"],["4 the time when you are a young child (9 letters)","childhood"],["5 the stage when you are 70, for example (7 letters)","old age"]]],
+["Vocabulary 3 Match the words with the definitions","a a person over the age of 65 · b a person who was married, but isn't now · c a person who is about 50 · d a person who isn't in a relationship · e a boyfriend, girlfriend, wife or husband","p",["a","b","c","d","e"],[
+["1 divorced","b"],["2 partner","e"],["3 senior citizen","a"],["4 middle-aged man/woman","c"],["5 single","d"]]],
+["Vocabulary 4 Nouns with -ence, -ment, -ion","","f",0,[
+["1 discuss","discussion"],["2 different","difference"],["3 improve","improvement"],["4 argue","argument"],["5 inform","information"],["6 describe","description"],["7 concentrate","concentration"],["8 confident","confidence"]]]
+];
+const n=s=>s.toLowerCase().replace(/[’`]/g,"'").replace(/-/g," ").replace(/[.?!,]/g,"").replace(/\s+/g," ").trim();
+const els=d=>[...d.querySelectorAll("[data-a]")];
+const ck=e=>e.tagName=="SELECT"?e.value==e.dataset.a:e.dataset.a.split("|").some(x=>n(x)==n(e.value));
+function upd(){const a=[...document.querySelectorAll("[data-a]")];document.getElementById("sc").textContent="Score: "+a.filter(e=>e.classList.contains("ok")).length+" / "+a.length}
+function act(d,c){
+ els(d).forEach(e=>{e.classList.remove("ok","bad","sh");
+  if(c=="chk"){const o=ck(e);e.classList.add(o?"ok":"bad")}
+  else if(c=="show"){e.value=e.tagName=="SELECT"?e.dataset.a:e.dataset.a.split("|")[0];e.classList.add("sh")}
+  else e.value=""});
+ const r=d.querySelector(".r");if(r)r.textContent=c=="chk"?d.querySelectorAll(".ok").length+" / "+els(d).length:"";
+ upd()}
+function all_(c){document.querySelectorAll(".ex").forEach(d=>els(d).length&&act(d,c))}
+const m=document.getElementById("m");
+E.forEach(e=>{
+ if(typeof e=="string"){m.insertAdjacentHTML("beforeend","<h2>"+e+"</h2>");return}
+ const [h,ins,k,o,it]=e,d=document.createElement("div");d.className="ex";
+ let t="<h3>"+h+"</h3>"+(ins?"<div class=i>"+ins+"</div>":"");
+ it.forEach(([p,a,oo])=>{
+  if(k=="w"){t+="<textarea rows=9 style='width:100%'></textarea>";return}
+  if(k=="p"){const op=oo||o,an=op.find(y=>y.startsWith(a+") "))||a;
+   t+="<div class=q>"+p+" <select data-a=\""+an+"\"><option value=''>—</option>"+op.map(y=>"<option>"+y+"</option>").join("")+"</select></div>";return}
+  const as=a.split(";"),ps=p.split("__");let s=ps[0];
+  if(ps.length==1)s+=" <input data-a=\""+a+"\">";
+  else for(let i=1;i<ps.length;i++)s+="<input data-a=\""+(as[i-1]||"")+"\">"+ps[i];
+  t+="<div class=q>"+s+"</div>"});
+ if(k!="w")t+="<div class=b><button data-c=chk>Check</button><button class=g data-c=show>Show answers</button><button class=g data-c=rst>Reset</button><span class=r></span></div>";
+ d.innerHTML=t;m.appendChild(d);
+ d.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>act(d,b.dataset.c));
+ d.addEventListener("input",ev=>{ev.target.classList.remove("ok","bad","sh");upd()});
+});
+upd();
+</script></body></html>
