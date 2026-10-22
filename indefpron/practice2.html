@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indefinite pronouns: practice set (B1–B2)</title>
+<style>
+:root{
+  --teal:#028090; --teal-d:#016573; --navy:#0D2B35; --bg:#EEF5F6; --card:#fff;
+  --soft:#E3F2F4; --ink:#14333D; --muted:#5A7580;
+  --ok:#17784A; --ok-bg:#DDF3E6; --bad:#B3261E; --bad-bg:#FBE3E1; --gold:#F2B134;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3,h4{font-family:"Trebuchet MS",Verdana,sans-serif;color:var(--navy);line-height:1.25}
+a{color:var(--teal-d)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;padding:38px 0 30px;border-bottom:6px solid var(--teal)}
+.hero h1{color:#fff;font-size:clamp(26px,5vw,40px);margin:0 0 8px}
+.hero p{margin:4px 0;color:#CFE6EA}
+.hero .meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.hero .meta span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:3px 12px;font-size:15px}
+
+/* sticky bar */
+.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:2px solid var(--teal);box-shadow:0 2px 8px rgba(13,43,53,.15)}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-top:8px;padding-bottom:8px}
+.bar nav{display:flex;gap:12px;font-weight:700;font-family:"Trebuchet MS",sans-serif;font-size:15px}
+.stats{flex:1;min-width:190px;font-size:15px}
+.stats .row{display:flex;justify-content:space-between;gap:10px}
+.prog{height:7px;background:#CFE0E3;border-radius:5px;overflow:hidden;margin-top:3px}
+.prog i{display:block;height:100%;width:0;background:var(--teal);transition:width .25s}
+.btns{display:flex;gap:6px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer}
+.btn{border:2px solid var(--teal);background:#fff;color:var(--teal-d);border-radius:8px;padding:5px 12px;font-weight:700;font-size:15px}
+.btn.main{background:var(--teal);color:#fff}
+.btn:hover{background:var(--teal-d);color:#fff;border-color:var(--teal-d)}
+.btn.tog[aria-pressed="false"]{border-style:dashed;color:var(--muted);border-color:var(--muted)}
+
+/* cards */
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:10px;box-shadow:0 2px 9px rgba(13,43,53,.12);padding:20px 24px;margin:20px 0}
+.card h2,.card h3{margin:0 0 10px;font-size:22px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.badge{display:inline-grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:17px;margin-right:8px}
+.part{font-size:26px;margin:38px 0 0;color:var(--navy);border-bottom:3px solid var(--teal);padding-bottom:6px}
+.k{font-weight:700;color:var(--teal-d);background:var(--soft);border-radius:4px;padding:0 4px}
+ul.eg{list-style:none;margin:8px 0;padding:0}
+ul.eg li{background:var(--soft);border-radius:6px;padding:6px 12px;margin:6px 0}
+ul.eg li.n{background:var(--bad-bg)}
+.ru{color:var(--muted);font-style:italic;margin:6px 0 0;padding-left:10px;border-left:3px solid #BFD3D8}
+body.no-ru .ru{display:none}
+.tip{background:#FFF6DC;border:1px solid #F0D58A;border-radius:8px;padding:8px 14px;margin:12px 0}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{border:1px solid #BFD3D8;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--teal);color:#fff;font-family:"Trebuchet MS",sans-serif}
+td.pre{background:var(--soft);font-weight:700;color:var(--navy)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps>li{counter-increment:s;position:relative;padding:8px 0 8px 46px;border-bottom:1px dashed #BFD3D8}
+.steps>li:last-child{border-bottom:0}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:8px;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+@media(max-width:700px){.cols{grid-template-columns:1fr}.card{padding:16px 16px}}
+
+/* exercises */
+.ex .sub{margin-left:auto;font-size:15px;color:var(--teal-d);font-weight:700}
+.instr{margin:0 0 10px;color:var(--muted)}
+h4.head{margin:16px 0 4px;font-size:17px;color:var(--teal-d)}
+.item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #E3EDEF}
+.item:last-of-type{border-bottom:0}
+.item .n{flex:none;width:28px;color:var(--muted);font-weight:700;text-align:right}
+.item .body{flex:1;min-width:0}
+.src{color:var(--muted);font-style:italic;margin-bottom:2px}
+.sp{display:inline-block;font-weight:700;color:var(--teal-d);margin-right:6px}
+.line{line-height:2.1}
+.gn{color:var(--muted);font-size:12px;margin:0 2px 0 4px}
+input[type=text]{font:inherit;color:var(--navy);border:0;border-bottom:2px solid var(--teal);background:#F4FAFB;padding:1px 6px;margin:0 3px;border-radius:4px 4px 0 0;text-align:center;min-width:5ch}
+input[type=text].right{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:700}
+input[type=text].wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+input[type=text].shown{background:#FFF6DC;border-color:var(--gold);color:var(--navy);font-weight:700}
+.blank{display:inline-block;width:3.2em;border-bottom:2px solid var(--navy);margin:0 2px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.opt{border:2px solid #BFD3D8;background:#fff;color:var(--navy);border-radius:8px;padding:5px 14px;text-align:left}
+.opt:hover{border-color:var(--teal)}
+.opt.sel{border-color:var(--teal);background:var(--soft);font-weight:700}
+.opt.right{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.opts.stack{flex-direction:column}
+.fb{display:none;margin-top:5px;font-size:15px;border-radius:6px;padding:4px 10px}
+.fb.ok{display:block;background:var(--ok-bg);color:#10583A}
+.fb.no{display:block;background:var(--bad-bg);color:#7D1B15}
+.fb.info{display:block;background:#FFF6DC;color:#5C4500}
+
+/* speaking */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}.chip{background:var(--soft);border:1px solid #BFD3D8;border-radius:16px;padding:1px 12px;font-weight:700;color:var(--navy)}
+.ruq{font-style:normal;color:var(--navy);font-weight:700;margin-bottom:2px}
+input.wide{width:100%;max-width:640px;text-align:left}
+details{margin-top:6px}summary{cursor:pointer;color:var(--teal-d);font-weight:700}
+.talk{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #E3EDEF}
+.talk:last-child{border-bottom:0}
+.talk input{width:22px;height:22px;margin-top:4px;accent-color:var(--teal);flex:none}
+.talk .starter{color:var(--muted);font-style:italic;display:block}
+footer{padding:26px 0 50px;color:var(--muted);font-size:14px;text-align:center}
+@media(max-width:600px){.bar nav{display:none}.bar .wrap{gap:6px 10px;padding-top:6px;padding-bottom:6px}.btn{padding:3px 8px;font-size:13px}.stats{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Somebody, anything, nowhere: more practice</h1>
+    <p>some- · any- · no- · every- + -body / -one / -thing / -where</p>
+    <div class="meta"><span>Level B1–B2</span><span>8 exercises</span><span>Russian → English included</span></div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <nav><a href="#practice">Practice</a><a href="#speaking">Speaking</a></nav>
+    <div class="stats" aria-live="polite">
+      <div class="row"><span id="answered">Answered: 0 / 0</span><span id="score">Score: –</span></div>
+      <div class="prog"><i id="bar"></i></div>
+    </div>
+    <div class="btns">
+      <button class="btn main" id="bCheck" type="button">Check Answers</button>
+      <button class="btn" id="bShow" type="button">Show Answers</button>
+      <button class="btn" id="bReset" type="button">Reset</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+<h2 class="part" id="practice">Practice</h2>
+<p>Type full words (e.g. <i>anything</i>). Capital letters and contractions (<i>didn't</i> / <i>did not</i>) do not matter. In the translation exercises other correct versions are possible: if your answer is not matched, compare it with the model and check that you used <b>only one negative</b>.</p>
+<div id="practice-host"></div>
+
+<h2 class="part" id="speaking">Speaking and translation aloud</h2>
+<section class="card">
+  <h3><span class="badge">8</span>Say it in English</h3>
+  <p class="instr">Say each Russian sentence in English, then open the model answer. Tick the box when you got it.</p>
+  <div id="talk-host"></div>
+</section>
+</main>
+<footer>Indefinite pronouns · practice set · B1–B2 · works offline</footer>
+
+<script>
+"use strict";
+const EX = [
+ { title:"Russian → English: choose the correct translation", instr:"Click the correct English version.", type:"mc", ru:true, stack:true, items:[
+  {src:"Я ничего не понял.", o:["I didn't understand nothing.","I didn't understand anything.","I understood anything."], a:1, w:"One negative only: didn't … anything."},
+  {src:"Никто мне не позвонил.", o:["Nobody called me.","Nobody didn't call me.","Anybody didn't call me."], a:0, w:"no- already makes the sentence negative; the verb stays positive."},
+  {src:"Ты куда-нибудь ходил на выходных?", o:["Did you go nowhere at the weekend?","Did you go to anywhere at the weekend?","Did you go anywhere at the weekend?"], a:2, w:"Neutral question → any-; no “to” before -where."},
+  {src:"Кто-то оставил здесь свой зонт.", o:["Somebody left their umbrella here.","Anybody left his umbrella here.","Nobody left their umbrella here."], a:0, w:"Positive statement → some-; “their” for an unknown person."},
+  {src:"Мне нечего надеть.", o:["I don't have nothing to wear.","I have nothing to wear.","I have anything to wear."], a:1, w:"“I have nothing” (or “I don't have anything”)."},
+  {src:"Любой может выучить английский.", o:["Somebody can learn English.","Anybody can learn English.","Nobody can learn English."], a:1, w:"“Любой” = free choice → any-."},
+  {src:"Хотите что-нибудь выпить?", o:["Would you like something to drink?","Would you like nothing to drink?","Would you like drink something?"], a:0, w:"An offer → some- (+ to-infinitive)."},
+  {src:"Мы нигде не нашли хорошего кафе.", o:["We found nowhere a good café.","We didn't find a good café anywhere.","We didn't find a good café nowhere."], a:1, w:"Negative verb → anywhere; never two negatives."}
+ ]},
+ { title:"Russian → English: complete the translation", instr:"Read the Russian sentence and type the missing word.", type:"fill", ru:true, items:[
+  {src:"Мне нужно кое-что тебе сказать.", t:"I need to tell you ___.", a:[["something"]], w:"Positive statement, a thing → something."},
+  {src:"Здесь никого нет.", t:"There isn't ___ here.", a:[["anyone","anybody"]], w:"isn't → any-."},
+  {src:"Всё было отлично.", t:"___ was great.", a:[["everything"]], w:"every- = all; singular verb."},
+  {src:"Я нигде не могу найти ключи.", t:"I can't find my keys ___.", a:[["anywhere"]], w:"can't → anywhere."},
+  {src:"Есть кто-нибудь, кто говорит по-немецки?", t:"Is there ___ who speaks German?", a:[["anyone","anybody"]], w:"Question → any-."},
+  {src:"Ничего особенного не произошло.", t:"___ special happened.", a:[["nothing"]], w:"Positive verb + no- (nothing happened)."},
+  {src:"Давай спросим кого-нибудь ещё.", t:"Let's ask ___ else.", a:[["someone","somebody","anyone","anybody"]], w:"someone else (or anyone else). “else” comes after the pronoun."},
+  {src:"Если что-нибудь случится, звони мне.", t:"If ___ happens, call me.", a:[["anything","something"]], w:"After “if” both are possible; anything is the neutral choice."},
+  {src:"Мне нужно где-то тихо поработать.", t:"I need ___ quiet to work.", a:[["somewhere"]], w:"Positive statement, a place → somewhere; the adjective comes after."},
+  {src:"Все уже здесь.", t:"___ is already here.", a:[["everyone","everybody"]], w:"every- + singular verb."}
+ ]},
+ { title:"Russian → English: translate the sentence", instr:"Type the whole sentence in English. The page accepts several correct versions; if yours is different, compare with the model.", type:"trans", ru:true, items:[
+  {src:"Я никому об этом не говорил.", p:["I did not tell (anyone|anybody) about (it|this)","I have not told (anyone|anybody) about (it|this)","I told (nobody|no one) about (it|this)"], model:"I didn't tell anyone about it."},
+  {src:"В холодильнике ничего нет.", p:["There is nothing in the (fridge|refrigerator)","There is not anything in the (fridge|refrigerator)"], model:"There is nothing in the fridge."},
+  {src:"Мне нужно где-то остановиться на ночь.", p:["I need (somewhere|a place) to (stay|sleep) (tonight|overnight|for the night)","I need somewhere to spend the night"], model:"I need somewhere to stay for the night."},
+  {src:"Кто-нибудь знает ответ?", p:["Does (anyone|anybody|someone|somebody) know (the answer|it)"], model:"Does anyone know the answer?"},
+  {src:"Мы везде искали, но ничего не нашли.", p:["We (looked|searched) everywhere (but|and|) (we|) (did not find anything|found nothing|could not find anything)"], model:"We looked everywhere but didn't find anything."},
+  {src:"Никто из нас не знал, что делать.", p:["(None of us|Nobody|No one) knew what (to|we should|we could) do"], model:"None of us knew what to do."},
+  {src:"Не говори об этом никому.", p:["Do not tell (anyone|anybody) about (it|this|that)","Tell (no one|nobody) about (it|this|that)"], model:"Don't tell anyone about it."}
+ ]},
+ { title:"Find and fix the mistake", instr:"The word(s) in bold are wrong. Type the correct word(s).", type:"fill", items:[
+  {src:"She doesn't know **nobody** here.", t:"Correct word: ___", a:[["anybody","anyone"]], w:"doesn't → any-."},
+  {src:"**Anybody** called while you were out. He didn't leave a name.", t:"Correct word: ___", a:[["somebody","someone"]], w:"A positive fact about an unknown person → some-."},
+  {src:"Is there **nothing** interesting on TV tonight?", t:"Correct word: ___", a:[["anything"]], w:"Neutral question → any-."},
+  {src:"I have **anything** to do today, so I'm free.", t:"Correct word: ___", a:[["nothing"]], w:"“I'm free” → I have nothing to do."},
+  {src:"**Everybody are** ready for the meeting.", t:"Correct: Everybody ___ ready.", a:[["is"]], w:"every- + singular verb."},
+  {src:"We went **to somewhere** nice on Saturday.", t:"Correct word: ___", a:[["somewhere"]], w:"No “to” before -where words."},
+  {src:"There's **anybody** at the door. Can you open it?", t:"Correct word: ___", a:[["somebody","someone"]], w:"Positive statement → some-."},
+  {src:"I didn't see **no one** at the station.", t:"Correct word: ___", a:[["anyone","anybody"]], w:"One negative only: didn't … anyone."},
+  {src:"Do you need anything **other**?", t:"Correct word: ___", a:[["else"]], w:"anything else, someone else, nowhere else."}
+ ]},
+ { title:"Choose the reply that fits", instr:"Click the best word for the gap.", type:"mc", items:[
+  {q:"“Where did you go on Sunday?” — “___. I stayed at home all day.”", o:["Nowhere","Anywhere","Somewhere"], a:0, w:"The answer is negative and the verb is not repeated → nowhere."},
+  {q:"“Who was at the door?” — “___. It was just the wind.”", o:["Nobody","Anybody","Somebody"], a:0, w:"Short negative answer → nobody."},
+  {q:"“What's the matter?” — “___. I'm just tired.”", o:["Nothing","Anything","Something"], a:0, w:"Short negative answer → nothing."},
+  {q:"“Would you like ___ to eat?” — “Yes, please, a sandwich.”", o:["something","anything","nothing"], a:0, w:"An offer → something."},
+  {q:"“Does ___ have a charger? My phone is dead.” — “Yes, take mine.”", o:["anyone","no one","everyone"], a:0, w:"A neutral question → anyone."},
+  {q:"“Can we sit here?” — “Sure! You can sit ___ you like.”", o:["anywhere","somewhere","nowhere"], a:0, w:"Free choice → anywhere."}
+ ]},
+ { title:"Email: word box", instr:"Fill every gap with a word from the box. Some words can be used twice, some not at all.", type:"fill", numbered:true, bank:["everything","nobody","someone","everywhere","anyone","anything","nothing","everyone"], items:[
+  {t:"Hi Anna, I have good news and bad news. The good news: ___ is ready for tomorrow's demo: the code, the tests and the documents. The bad news: ___ in the team knows how to run the old server, so we need to find ___ who does. I've looked ___ for the old manual, but it isn't on the shared drive. If you can think of ___ who worked on it, please tell me. I don't want to tell the client ___ yet because they are already worried. Honestly, there is ___ else we can do before Friday. Thanks for your help: ___ in the team really appreciates it!",
+   a:[["everything"],["nobody","no one"],["someone","somebody","anyone","anybody"],["everywhere"],["anyone","anybody"],["anything"],["nothing"],["everyone","everybody"]],
+   wl:["every- = all things.","Positive verb (knows) + negative meaning → nobody.","We need to find a person → someone (anyone also possible).","“Everywhere” = in all places.","After “if” → anyone.","After don't → anything.","“nothing else” = no other thing; positive verb “is”.","every- = all the people."]}
+ ]},
+ { title:"Put the words in order", instr:"Write the correct sentence. Remember: adjectives and else go after the pronoun.", type:"trans", strict:true, items:[
+  {src:"something / happened / interesting / yesterday", p:["Something interesting happened yesterday","Yesterday something interesting happened"], model:"Something interesting happened yesterday."},
+  {src:"to / nothing / do / there / is / today", p:["There is nothing to do today","Today there is nothing to do"], model:"There is nothing to do today."},
+  {src:"else / is / there / anyone / who / wants / coffee", p:["Is there anyone else who wants coffee"], model:"Is there anyone else who wants coffee?"},
+  {src:"didn't / anything / we / hear / at / all", p:["We did not hear anything at all"], model:"We didn't hear anything at all."},
+  {src:"somewhere / quiet / need / I / to / work", p:["I need somewhere quiet to work"], model:"I need somewhere quiet to work."},
+  {src:"of / none / us / the / answer / knew", p:["None of us knew the answer"], model:"None of us knew the answer."},
+  {src:"everyone / their / has / own / laptop", p:["Everyone has their own laptop","Everybody has their own laptop"], model:"Everyone has their own laptop."}
+ ]}
+];
+
+const TALK = [
+ ["Я никуда не ходил в выходные. Никто мне не звонил. Мне нечего было делать.","I didn't go anywhere at the weekend. Nobody called me. I had nothing to do. (or: There was nothing to do.)"],
+ ["Кто-нибудь знает, где здесь можно поесть?","Does anyone know where we can get something to eat around here? / Is there anywhere to eat near here?"],
+ ["Все ушли, но кто-то забыл здесь свой телефон.","Everyone has left, but somebody forgot their phone here."],
+ ["Расскажите о дне, когда ничего не получалось. Используйте: nothing, nobody, nowhere, anything.","Model: Last Monday nothing went right. Nobody answered my emails, I couldn't find my keys anywhere, and there was nowhere to park."]
+];
+
+/* ---------- ENGINE ---------- */
+const regs=[]; let total=0;
+const $=id=>document.getElementById(id);
+function el(t,c,x){const e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e;}
+function rich(parent,str){ str.split("**").forEach((p,i)=>{ if(!p)return; if(i%2){const b=el("strong",null,p); b.style.color="#B3261E"; parent.appendChild(b);} else parent.appendChild(document.createTextNode(p)); }); }
+function norm(s){return s.toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g," ").trim();}
+function nsent(s){
+  s=s.toLowerCase().replace(/[’‘]/g,"'").replace(/won't/g,"will not").replace(/can't/g,"can not").replace(/cannot/g,"can not")
+   .replace(/n't/g," not").replace(/there's/g,"there is").replace(/i'm/g,"i am").replace(/'ve/g," have").replace(/'ll/g," will").replace(/'d/g," would");
+  return s.replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
+}
+function expand(p){const m=p.match(/\(([^()]*)\)/); if(!m) return [p]; const out=[]; m[1].split("|").forEach(o=>expand(p.replace(m[0],o)).forEach(x=>out.push(x))); return out;}
+
+function build(){
+  const host=$("practice-host"); host.innerHTML=""; regs.length=0; total=0;
+  EX.forEach((ex,ei)=>{
+    const card=el("section","card ex"); const h=el("h3");
+    h.appendChild(el("span","badge",String(ei+1))); h.appendChild(document.createTextNode(ex.title));
+    const sc=el("span","sub"); h.appendChild(sc); card.appendChild(h); card.appendChild(el("p","instr",ex.instr));
+    if(ex.bank){const c=el("div","chips"); ex.bank.forEach(w=>c.appendChild(el("span","chip",w))); card.appendChild(c);}
+    const reg={ex,items:[],sc}; let n=0;
+    ex.items.forEach(it=>{
+      n++; const row=el("div","item"); row.appendChild(el("span","n",n+"."));
+      const body=el("div","body"); row.appendChild(body); const fb=el("div","fb"); fb.setAttribute("role","status");
+      if(it.src){ const s=el("div",ex.ru?"src ruq":"src"); rich(s,it.src); if(!ex.ru) s.style.fontStyle="normal"; body.appendChild(s); }
+      const line=el("div","line"); body.appendChild(line);
+      if(ex.type==="mc"){
+        if(it.q) it.q.split("___").forEach((p,k,a)=>{line.appendChild(document.createTextNode(p)); if(k<a.length-1) line.appendChild(el("span","blank"));});
+        const opts=el("div","opts"+(ex.stack?" stack":"")); const m={kind:"mc",btns:[],a:it.a,sel:-1,fb,w:it.w,o:it.o};
+        it.o.forEach((t,k)=>{ const b=el("button","opt",t); b.type="button"; b.setAttribute("aria-pressed","false");
+          b.addEventListener("click",()=>{m.sel=k; clearMc(m); m.btns.forEach((x,j)=>{x.classList.toggle("sel",j===k); x.setAttribute("aria-pressed",j===k?"true":"false");}); updateAnswered();});
+          m.btns.push(b); opts.appendChild(b);});
+        body.appendChild(opts); total++; reg.items.push(m);
+      } else if(ex.type==="trans"){
+        const inp=document.createElement("input"); inp.type="text"; inp.className="wide"; inp.autocomplete="off"; inp.spellcheck=false;
+        inp.setAttribute("aria-label","Your sentence "+n); inp.setAttribute("autocapitalize","off");
+        inp.addEventListener("input",()=>{inp.classList.remove("right","wrong","shown"); fb.className="fb"; updateAnswered();});
+        line.appendChild(inp); total++;
+        reg.items.push({kind:"trans",inp,fb,pats:it.p.flatMap(expand).map(nsent),model:it.model,strict:!!ex.strict});
+      } else {
+        const gs=[];
+        it.t.split("___").forEach((p,k,a)=>{ line.appendChild(document.createTextNode(p));
+          if(k<a.length-1){
+            if(ex.numbered) line.appendChild(el("sup","gn","("+(k+1)+")"));
+            const inp=document.createElement("input"); inp.type="text"; inp.autocomplete="off"; inp.spellcheck=false; inp.setAttribute("autocapitalize","off");
+            inp.setAttribute("aria-label","Gap "+(k+1)+" of item "+n);
+            const ans=it.a[k]; inp.style.width=(Math.max(...ans.map(s=>s.length))+3)+"ch";
+            inp.addEventListener("input",()=>{inp.classList.remove("right","wrong","shown"); fb.className="fb"; updateAnswered();});
+            line.appendChild(inp); gs.push({inp,ans}); total++;
+          }});
+        reg.items.push({kind:"fill",gs,fb,w:it.w,wl:it.wl});
+      }
+      body.appendChild(fb); card.appendChild(row);
+    });
+    regs.push(reg); host.appendChild(card);
+  });
+  updateAnswered();
+}
+function clearMc(m){m.btns.forEach(b=>b.classList.remove("right","wrong")); m.fb.className="fb";}
+function fbSet(it,cls,txt){it.fb.className="fb "+cls; it.fb.textContent=txt;}
+function updateAnswered(){
+  let a=0;
+  regs.forEach(r=>r.items.forEach(it=>{
+    if(it.kind==="mc"){ if(it.sel>=0)a++; }
+    else if(it.kind==="trans"){ if(it.inp.value.trim())a++; }
+    else it.gs.forEach(g=>{ if(g.inp.value.trim())a++; });
+  }));
+  $("answered").textContent="Answered: "+a+" / "+total; $("bar").style.width=(total?a/total*100:0)+"%";
+}
+function check(){
+  let score=0;
+  regs.forEach(r=>{ let s=0,t=0;
+    r.items.forEach(it=>{
+      if(it.kind==="mc"){
+        t++; clearMc(it); const ok=it.sel===it.a; if(ok)s++;
+        if(it.sel>=0) it.btns[it.sel].classList.add(ok?"right":"wrong");
+        fbSet(it,ok?"ok":"no",ok?"✓ "+it.w:"✗ Correct answer: “"+it.o[it.a]+"”. "+it.w);
+      } else if(it.kind==="trans"){
+        t++; it.inp.classList.remove("right","wrong","shown");
+        const v=nsent(it.inp.value), ok=it.pats.includes(v);
+        if(ok){ s++; it.inp.classList.add("right"); fbSet(it,"ok","✓ Model: "+it.model); }
+        else if(it.strict||!v){ it.inp.classList.add("wrong"); fbSet(it,"no","✗ Model: "+it.model); }
+        else fbSet(it,"info","≈ Not matched automatically. Compare with the model: "+it.model+" Other correct versions are possible; check that you used only one negative.");
+      } else {
+        let ok=0; const bad=[];
+        it.gs.forEach((g,k)=>{ t++; g.inp.classList.remove("right","wrong","shown");
+          const good=g.ans.map(norm).includes(norm(g.inp.value)); g.inp.classList.add(good?"right":"wrong"); if(good)ok++; else bad.push(k); });
+        s+=ok;
+        if(!bad.length) fbSet(it,"ok","✓ "+(it.w||"All correct."));
+        else if(it.gs.length===1) fbSet(it,"no","✗ Answer: "+it.gs[0].ans.join(" / ")+". "+it.w);
+        else fbSet(it,"no","✗ "+bad.map(k=>"("+(k+1)+") "+it.gs[k].ans.join(" / ")+" — "+it.wl[k]).join("   "));
+      }
+    });
+    r.sc.textContent=s+" / "+t; score+=s;
+  });
+  $("score").textContent="Score: "+score+" / "+total+" ("+Math.round(score/total*100)+"%)";
+}
+function showAnswers(){
+  regs.forEach(r=>{
+    r.items.forEach(it=>{
+      if(it.kind==="mc"){ clearMc(it); it.sel=it.a; it.btns.forEach((b,j)=>{b.classList.remove("sel"); b.classList.toggle("right",j===it.a); b.setAttribute("aria-pressed",j===it.a?"true":"false");}); fbSet(it,"info","Why: "+it.w); }
+      else if(it.kind==="trans"){ it.inp.value=it.model; it.inp.classList.remove("right","wrong"); it.inp.classList.add("shown"); fbSet(it,"info","Model: "+it.model); }
+      else { it.gs.forEach(g=>{g.inp.value=g.ans[0]; g.inp.classList.remove("right","wrong"); g.inp.classList.add("shown");});
+        fbSet(it,"info",it.gs.length===1?"Why: "+it.w:it.wl.map((x,k)=>"("+(k+1)+") "+x).join("   ")); }
+    });
+    r.sc.textContent="";
+  });
+  updateAnswered(); $("score").textContent="Answers shown";
+}
+function resetAll(){
+  regs.forEach(r=>{ r.items.forEach(it=>{ it.fb.className="fb";
+      if(it.kind==="mc"){ it.sel=-1; it.btns.forEach(b=>{b.classList.remove("sel","right","wrong"); b.setAttribute("aria-pressed","false");}); }
+      else if(it.kind==="trans"){ it.inp.value=""; it.inp.classList.remove("right","wrong","shown"); }
+      else it.gs.forEach(g=>{g.inp.value=""; g.inp.classList.remove("right","wrong","shown");});
+    }); r.sc.textContent=""; });
+  updateAnswered(); $("score").textContent="Score: –";
+}
+function buildTalk(){
+  const host=$("talk-host");
+  TALK.forEach(t=>{
+    const row=el("div","talk"); const cb=document.createElement("input"); cb.type="checkbox"; cb.setAttribute("aria-label","Done");
+    const d=el("div"); d.appendChild(el("div","ruq",t[0]));
+    const det=document.createElement("details"); det.appendChild(el("summary",null,"Model answer")); det.appendChild(el("p",null,t[1]));
+    d.appendChild(det); row.appendChild(cb); row.appendChild(d); host.appendChild(row);
+  });
+}
+$("bCheck").addEventListener("click",check);
+$("bShow").addEventListener("click",showAnswers);
+$("bReset").addEventListener("click",resetAll);
+build(); buildTalk();
+</script>
+</body>
+</html>
