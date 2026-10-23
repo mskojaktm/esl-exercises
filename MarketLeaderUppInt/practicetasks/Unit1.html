@@ -261,6 +261,15 @@ sec('Writing: Linking ideas','C','Rewrite the three incorrect sentences from exe
    else{r.t.classList.add('bad');r.fb.className='fb bad';r.fb.textContent='✗ Not matched. Compare with: '+r.w.s.join('  OR  ')}});return ok},
   show(){rs.forEach(r=>r.t.value=r.w.s[0])},reset(){rs.forEach(r=>{r.t.value=r.w.o;r.t.className='';r.fb.textContent='';r.fb.className='fb'})}}});
 
+sec('Writing: Linking ideas','D','Use your knowledge of linkers to guess the meaning of the words and phrases in <i>italics</i>. Match each sentence to the meaning.',b=>match(b,{
+ L:['<i>Although</i> Sue is usually very direct, this time she was really <b><i>beating about the bush</i></b>.',
+    '<i>Despite</i> the market’s <b><i>bearish</i></b> trend, he was optimistic about share prices going up again soon.',
+    '<i>Although</i> he often tends to <b><i>waffle</i></b>, today he made a presentation that was clear, concise and to the point.',
+    'Their new product sold quite well <i>even though</i> the advertising campaign was a complete <b><i>flop</i></b>.',
+    'They managed to find a huge site for the new factory <i>in spite of</i> the <b><i>scarcity</i></b> of land in that part of the country.'],
+ R:['a failure','to delay talking about the most important part of a subject','a situation in which there is not enough of something','to talk a lot without making any clear or important points','said of a stock market when prices are expected to fall and people sell a lot of shares'],
+ key:[1,4,3,0,2]}));
+
 /* ---------- page ---------- */
 const main=document.getElementById('main'),tot=document.getElementById('tot');let last='';
 function upd(){let s=0,m=0;S.forEach(x=>{s+=x.res;m+=x.o.max});tot.textContent='Score: '+s+' / '+m}
