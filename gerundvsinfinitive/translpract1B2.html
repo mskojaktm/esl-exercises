@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerunds &amp; Infinitives — Translation Workout (RU → EN)</title>
+<style>
+  :root{
+    --teal:#028090; --teal-light:#e5f3f4; --navy:#0D2B35; --navy-soft:#1c3f4c;
+    --paper:#fbfaf7; --card:#fff; --border:#d9e3e4; --shadow:0 2px 10px rgba(13,43,53,.08);
+    --ok:#1b7f4b; --ok-bg:#e8f6ee; --bad:#b3261e; --bad-bg:#fdecea; --mid:#8a6500; --mid-bg:#fff4d6; --show:#1c5f9e; --show-bg:#e9f1fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--navy);font-family:Calibri,"Segoe UI",Verdana,sans-serif;line-height:1.55}
+  h1,h2,h3{font-family:"Trebuchet MS",Trebuchet,sans-serif;margin:0;color:var(--navy)}
+  header{background:var(--navy);color:#fff;text-align:center;padding:28px 20px 22px}
+  header h1{color:#fff;font-size:1.7rem}
+  header p{color:#bfe3e6;margin:6px 0 0}
+  .tracker{position:sticky;top:0;z-index:20;background:var(--navy-soft);color:#fff;padding:10px 16px;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+  .tracker-in{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
+  .stat{font-family:"Trebuchet MS",sans-serif;font-size:.93rem}
+  .stat b{color:#7fe3ea;font-size:1.1rem}
+  .bar{flex:1 1 130px;height:8px;background:rgba(255,255,255,.2);border-radius:5px;overflow:hidden;min-width:110px}
+  .bar i{display:block;height:100%;width:0;background:#4fd1c5;transition:width .25s}
+  .btns{display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:"Trebuchet MS",sans-serif;font-size:.85rem;border:0;border-radius:6px;padding:7px 13px;cursor:pointer;background:var(--teal);color:#fff}
+  .btn:hover{filter:brightness(1.12)}
+  .btn.ghost{background:transparent;border:1px solid #7fb9c0;color:#d6f0f2}
+  .msg{flex-basis:100%;font-size:.88rem;color:#d6f0f2;min-height:1.2em}
+  .tabs{max-width:900px;margin:16px auto 0;padding:0 16px;display:flex;flex-wrap:wrap;gap:6px}
+  .tab{font-family:"Trebuchet MS",sans-serif;font-size:.92rem;border:1.5px solid var(--border);background:#fff;color:var(--navy-soft);border-radius:8px 8px 0 0;padding:9px 16px;cursor:pointer;display:flex;gap:8px;align-items:center}
+  .tab[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+  .tab .tchip{font-size:.75rem;border-radius:10px;padding:1px 8px;background:rgba(255,255,255,.9);color:var(--navy);display:none}
+  .tab .tchip.on{display:inline-block}
+  main{max-width:900px;margin:0 auto;padding:0 16px 60px}
+  .panel{display:none;background:var(--card);border-left:5px solid var(--teal);border-radius:0 8px 8px 8px;box-shadow:var(--shadow);padding:20px 22px 14px}
+  .panel.on{display:block}
+  .intro{background:var(--teal-light);border-left:4px solid var(--teal);border-radius:6px;padding:10px 14px;font-size:.93rem;margin-bottom:14px}
+  .panel h2{font-size:1.18rem;margin-bottom:8px}
+  details.rules{margin:0 0 14px;border:1px solid var(--border);border-radius:6px;background:#f6fafa;padding:6px 12px;font-size:.88rem}
+  details.rules summary{cursor:pointer;font-family:"Trebuchet MS",sans-serif;color:var(--teal);padding:3px 0}
+  details.rules ol{margin:6px 0 4px;padding-left:20px;columns:2;column-gap:28px}
+  details.rules li{break-inside:avoid;margin-bottom:3px}
+  .unit{border:1px solid var(--border);border-left:4px solid var(--border);border-radius:6px;padding:12px 14px 12px;margin-bottom:14px;background:#fff}
+  .unit.ok{border-left-color:var(--ok);background:var(--ok-bg)}
+  .unit.part{border-left-color:#c9a227;background:#fffaf0}
+  .unit.bad{border-left-color:var(--bad);background:var(--bad-bg)}
+  .unit.un{border-left-color:#c9a227}
+  .unit.show{border-left-color:var(--show);background:var(--show-bg)}
+  .unit-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .num{width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-family:"Trebuchet MS",sans-serif;font-weight:bold;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .tcount{font-size:.8rem;color:var(--navy-soft);font-style:italic}
+  .ru{font-size:1.06rem;margin:4px 0 6px;color:var(--navy)}
+  details.help{margin-bottom:8px;font-size:.88rem}
+  details.help summary{cursor:pointer;color:var(--teal);font-family:"Trebuchet MS",sans-serif;font-size:.85rem}
+  details.help p{margin:4px 0 0;color:var(--navy-soft)}
+  textarea{width:100%;font:inherit;font-size:.98rem;border:1.5px solid var(--border);border-radius:6px;padding:8px 10px;color:var(--navy);resize:vertical;background:#fcfefe}
+  textarea:focus{outline:2px solid #7fd0d8;background:#fff}
+  ul.tgt{list-style:none;margin:8px 0 0;padding:0;font-size:.88rem}
+  ul.tgt li{padding:2px 0}
+  ul.tgt li.hit{color:var(--ok)} ul.tgt li.miss{color:var(--bad)} ul.tgt li.info{color:var(--show)}
+  .model{margin-top:8px;padding:9px 12px;border-radius:6px;background:#fff;border:1px dashed var(--show);font-size:.95rem}
+  .model b.lbl{font-family:"Trebuchet MS",sans-serif;font-size:.78rem;color:var(--show);display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px}
+  .model mark{background:#fff0b3;padding:0 2px;border-radius:2px}
+  .model .note{display:block;margin-top:6px;font-size:.85rem;color:var(--navy-soft)}
+  .caveat{font-size:.82rem;color:var(--navy-soft);margin:2px 0 12px;font-style:italic}
+  .storytitle{font-family:"Trebuchet MS",sans-serif;font-size:1.05rem;margin:2px 0 10px;color:var(--teal)}
+  /* error hunt */
+  ol.hunt{margin:0;padding:0;list-style:none;counter-reset:q}
+  ol.hunt li{counter-increment:q;position:relative;padding:8px 10px 8px 38px;border-left:4px solid transparent;border-radius:4px;margin-bottom:4px}
+  ol.hunt li::before{content:counter(q);position:absolute;left:8px;top:9px;width:22px;height:22px;border-radius:50%;background:#eef3f3;color:var(--navy-soft);font-size:.78rem;font-weight:bold;display:flex;align-items:center;justify-content:center}
+  ol.hunt li:nth-child(odd){background:#f8fbfb}
+  ol.hunt li b{color:var(--bad)}
+  .arrow{color:var(--teal);font-weight:bold;margin:0 3px}
+  input.gap{font:inherit;font-size:.97rem;border:0;border-bottom:2px solid var(--teal);background:#f1f9f9;padding:1px 6px;margin:0 2px;color:var(--navy);border-radius:3px 3px 0 0;min-width:90px;max-width:100%}
+  input.gap:focus{outline:2px solid #7fd0d8;background:#fff}
+  .fb{font-size:.88rem;margin-top:3px}
+  ol.hunt li.ok{border-left-color:var(--ok);background:var(--ok-bg)} ol.hunt li.ok .fb{color:var(--ok)}
+  ol.hunt li.bad{border-left-color:var(--bad);background:var(--bad-bg)} ol.hunt li.bad .fb{color:var(--bad)}
+  ol.hunt li.show{border-left-color:var(--show);background:var(--show-bg)} ol.hunt li.show .fb{color:var(--show)}
+  ol.hunt li.un{border-left-color:#c9a227} ol.hunt li.un .fb{color:var(--mid)}
+  footer{text-align:center;color:var(--navy-soft);font-size:.84rem;padding:6px 16px 40px}
+  @media(max-width:560px){header h1{font-size:1.35rem}.panel{padding:16px 12px 10px}details.rules ol{columns:1}.tab{padding:8px 10px;font-size:.85rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Gerunds &amp; Infinitives — Translation Workout</h1>
+  <p>Russian → English · three exercises · IT · B2 → C1</p>
+</header>
+
+<div class="tracker" role="status" aria-live="polite">
+  <div class="tracker-in">
+    <div class="stat">Score: <b id="score">—</b> / <span id="total">0</span> <span id="unitlabel">structures</span></div>
+    <div class="stat">Answered: <b id="answered">0</b></div>
+    <div class="bar"><i id="barfill"></i></div>
+    <div class="btns">
+      <button class="btn" id="btnCheck">Check Answers</button>
+      <button class="btn ghost" id="btnShow">Show Answers</button>
+      <button class="btn ghost" id="btnReset">Reset</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+
+<nav class="tabs" role="tablist" id="tabs"></nav>
+
+<main>
+  <section class="panel" id="panel-w" role="tabpanel">
+    <h2>Exercise 1 · Warm-up: ten very tricky sentences</h2>
+    <div class="intro">Translate each Russian sentence into English. Every sentence hides two to four gerund/infinitive traps — meaning-change verbs, <i>used to</i>, perception verbs, prepositions, complex forms. Write your own translation first; open the vocabulary help only if you are stuck.</div>
+    <details class="rules"><summary>Rule map (open only if you get stuck)</summary>
+      <ol>
+        <li>enjoy / avoid / suggest / deny… + <b>-ing</b></li>
+        <li>want / decide / manage / afford… + <b>to V</b></li>
+        <li>begin / start / like / prefer… — either form</li>
+        <li>remember, forget, stop, try, regret, mean, go on, need — <b>meaning changes</b></li>
+        <li>used to V · be / get used to <b>-ing</b></li>
+        <li>advise / tell / allow / persuade + object + <b>to V</b></li>
+        <li>make / let (+ help) + object + <b>bare V</b></li>
+        <li>see / hear / notice + object + <b>V</b> (whole) or <b>-ing</b> (in progress)</li>
+        <li>preposition + <b>-ing</b> (look forward to, instead of, without)</li>
+        <li>gerund as subject · it's no use / no point in / can't help <b>-ing</b></li>
+        <li>purpose: <b>to V</b> / in order to / so as (not) to</li>
+        <li>adjective + <b>to V</b> · it's kind <i>of</i> you / difficult <i>for</i> me</li>
+        <li><b>too</b> + adj + to V · adj + <b>enough</b> + to V</li>
+        <li>perfect / passive / continuous forms: having done, being done, to have done, to be doing</li>
+      </ol>
+    </details>
+    <div class="caveat">The structure check is automatic and approximate: it looks for the target pattern in your text. A correct alternative may be marked ✗ — compare with the model translation, and your teacher has the final word.</div>
+    <div id="units-w"></div>
+  </section>
+
+  <section class="panel" id="panel-t" role="tabpanel">
+    <h2>Exercise 2 · Translate a coherent text</h2>
+    <div class="intro">This is one continuous story, so keep tenses and pronouns consistent from paragraph to paragraph. Translate paragraph by paragraph. The text uses many different gerund/infinitive rules — decide for each verb which form is needed.</div>
+    <div class="caveat">The structure check is automatic and approximate. Use it as a guide, then compare your whole text with the model translation.</div>
+    <div class="storytitle">«Дорога в Стамбул»</div>
+    <div id="units-t"></div>
+  </section>
+
+  <section class="panel" id="panel-e" role="tabpanel">
+    <h2>Exercise 3 · Error hunt: typical “Russian-interference” mistakes</h2>
+    <div class="intro">Each sentence contains a mistake that Russian speakers often make because the Russian structure (an infinitive after almost any verb or preposition) does not work in English. Type the corrected form of the <b style="color:var(--bad)">bold</b> part.</div>
+    <ol class="hunt" id="hunt"></ol>
+  </section>
+</main>
+
+<footer>Structure checks are not case-sensitive. Contractions (don’t / do not) are both accepted.</footer>
+
+<script>
+/* ===================== DATA ===================== */
+/* unit: {ru, help, model (with <mark>), note, targets:[{l:label, re:[regex,...]}]} */
+const WARM = [
+{ru:"Я помню, как отправлял эту конфигурацию на маршрутизатор, но забыл сохранить изменения — и после перезагрузки всё пропало.",
+ help:"конфигурация — configuration (config) · маршрутизатор — router · сохранить — to save · перезагрузка — reboot · пропасть — to be lost",
+ model:"I <mark>remember sending</mark> this configuration to the router, but I <mark>forgot to save</mark> the changes — and after the reboot everything was lost.",
+ note:"remember / forget: <b>-ing</b> = a memory of something that happened; <b>to V</b> = a task that was (not) done.",
+ targets:[
+  {l:"remember + -ing (a memory)",re:[/remember(ed)?\s+(sending|uploading|pushing|applying|loading|copying|deploying|transferring)/i]},
+  {l:"forget + to-infinitive (a missed task)",re:[/forgot\s+to\s+(save|commit|write|store|apply)/i]}]},
+{ru:"Мы перестали использовать этот протокол, а когда связь пропала, остановились, чтобы проверить кабель; потом попробовали перезагрузить коммутатор, но так и не смогли ничего исправить.",
+ help:"протокол — protocol · связь пропала — the connection dropped · кабель — cable · коммутатор — switch · исправить — to fix",
+ model:"We <mark>stopped using</mark> that protocol, and when the connection dropped we <mark>stopped to check</mark> the cable; then we <mark>tried restarting</mark> the switch, but we never managed to fix anything.",
+ note:"stop + <b>-ing</b> = quit; stop + <b>to V</b> = pause in order to. try + <b>-ing</b> = experiment (“see if it helps”); try + to V = make an effort.",
+ targets:[
+  {l:"stop + -ing (quit an activity)",re:[/stopped\s+(using|working\s+with|running|relying\s+on|applying)/i]},
+  {l:"stop + to-infinitive (pause in order to)",re:[/stopped\s+to\s+(check|inspect|test|look|examine|see)/i]},
+  {l:"try + -ing (an experiment)",re:[/tried\s+(restarting|rebooting|resetting|power[- ]?cycling|turning|switching|reloading)/i]}]},
+{ru:"Мы с сожалением сообщаем, что проект закрывается; я жалею, что не предупредил вас раньше, но продолжать финансирование означало бы рисковать всей командой.",
+ help:"с сожалением сообщаем — we regret to … · предупредить — to warn · финансирование — funding · рисковать — to risk",
+ model:"We <mark>regret to inform</mark> you that the project is being closed; I <mark>regret not warning</mark> you earlier, but continuing to fund it would <mark>mean risking</mark> the whole team.",
+ note:"regret + <b>to V</b> = formal bad news; regret + <b>-ing</b> = sorry about a past action. mean + <b>-ing</b> = involve / result in.",
+ targets:[
+  {l:"regret + to-infinitive (formal news)",re:[/regret\s+to\s+(inform|tell|announce|say|let\s+you\s+know|notify)/i]},
+  {l:"regret + (not) -ing (past action)",re:[/regret(ted)?\s+(not\s+)?(having\s+)?(warning|warned|telling|told|informing|informed|notifying|notified|letting|giving)/i]},
+  {l:"mean + -ing (it would involve)",re:[/mean(s|t)?\s+(risking|putting|jeopardi[sz]ing|endangering|gambling)/i]}]},
+{ru:"Раньше я часто работал по ночам, а теперь мне трудно привыкнуть к тому, что в Германии не принято писать коллегам после семи вечера.",
+ help:"не принято — it isn’t customary · коллега — colleague · привыкнуть к тому, что — to get used to the fact that",
+ model:"I <mark>used to work</mark> nights a lot, and now it’s hard for me <mark>to get used to</mark> the fact that in Germany it isn’t customary to message colleagues after seven p.m.",
+ note:"used to + <b>base verb</b> = a past habit; get / be used to + <b>noun or -ing</b> = (becoming) accustomed.",
+ targets:[
+  {l:"used to + base verb (past habit)",re:[/used\s+to\s+(work|stay|do|log|sit|spend|go|be\s+working)/i]},
+  {l:"get used to + noun / -ing",re:[/(get|getting|got)\s+used\s+to\b/i]}]},
+{ru:"Начальник велел мне не трогать продакшн-сервер до конца аудита, но не позволил мне уйти домой и заставил остаться на дежурство.",
+ help:"продакшн-сервер — production server · аудит — audit · дежурство — on-call duty · не позволил — wouldn’t let / didn’t allow",
+ model:"My boss <mark>told me not to touch</mark> the production server until the end of the audit, but he <mark>wouldn’t let me go</mark> home and <mark>made me stay</mark> on call.",
+ note:"tell + object + <b>(not) to V</b>; let / make + object + <b>bare V</b>. (Passive: <i>I was made <b>to</b> stay</i>.)",
+ targets:[
+  {l:"tell + object + not to + V",re:[/(told|ordered|asked|instructed|warned|advised)\s+me\s+not\s+to\s+(touch|change|modify|access|use|restart|reboot|do)/i]},
+  {l:"let / allow + object (negative)",re:[/(wouldn'?t|would\s+not|didn'?t|did\s+not|refused\s+to|never)\s+(let|allow)\s+me\s+(to\s+)?(go|leave|get|head|walk)/i]},
+  {l:"make + object + bare infinitive",re:[/made\s+me\s+(stay|remain|keep|work|be|take)/i,/forced\s+me\s+to\s+(stay|remain|keep|work|be|take)/i]}]},
+{ru:"Я видел, как инженер подключал кабель к порту, и слышал, как кто-то в соседней комнате спорил, но не заметил, как сработала сигнализация.",
+ help:"подключать — to plug in / connect · порт — port · спорить — to argue · сигнализация — alarm · сработать — to go off",
+ model:"I <mark>saw an engineer plugging</mark> a cable into the port and <mark>heard someone arguing</mark> in the next room, but I <mark>didn’t notice the alarm go off</mark>.",
+ note:"perception verb + object + <b>-ing</b> = in progress; + <b>bare V</b> = the whole event (“go off” — it happened once, completely).",
+ targets:[
+  {l:"saw + object + -ing (in progress)",re:[/saw\s+(the|an?|our)\s+(\w+\s+)?engineer\s+(plugging|connecting|attaching|inserting)/i]},
+  {l:"heard + object + -ing",re:[/heard\s+(someone|somebody|people|two\s+people|a\s+man|a\s+woman|a\s+colleague|two\s+colleagues|them|voices)\s+(arguing|quarrel+ing|shouting|fighting|talking|yelling)/i]},
+  {l:"notice + object + bare V (whole event)",re:[/(didn'?t|did\s+not|never)\s+notice\s+(the\s+)?(alarm|alarms|siren)\s+(go|going|start|sound|trigger|activate)/i]}]},
+{ru:"Вместо того чтобы искать ошибку в коде, он настоял на замене платы и заказал новую, не посоветовавшись с командой.",
+ help:"ошибка в коде — bug · плата — board · заказать — to order · посоветоваться — to consult",
+ model:"<mark>Instead of looking</mark> for the bug in the code, he <mark>insisted on replacing</mark> the board and ordered a new one <mark>without consulting</mark> the team.",
+ note:"After any <b>preposition</b> (instead of, insist on, without…) use the <b>-ing</b> form.",
+ targets:[
+  {l:"instead of + -ing",re:[/instead\s+of\s+(looking|searching|trying|hunting|checking|debugging|finding|digging)/i]},
+  {l:"insist on + -ing",re:[/insisted\s+on\s+(replacing|changing|swapping|installing|exchanging)/i]},
+  {l:"without + -ing",re:[/without\s+(consulting|asking|checking|talking|discussing|telling|speaking)/i]}]},
+{ru:"Бесполезно спорить с заказчиком, когда он уже принял решение; я не мог не улыбнуться, но, честно говоря, нет смысла тратить время на обсуждение, которое ни к чему не приведёт.",
+ help:"заказчик — client · принять решение — to make a decision · честно говоря — frankly · ни к чему не приведёт — will lead nowhere",
+ model:"<mark>It’s no use arguing</mark> with the client when he has already made a decision; I <mark>couldn’t help smiling</mark>, but, frankly, <mark>there’s no point in wasting</mark> time on a discussion that will lead nowhere.",
+ note:"Fixed gerund patterns: it’s no use / it’s worth / there’s no point in / can’t help + <b>-ing</b>.",
+ targets:[
+  {l:"it’s no use + -ing",re:[/(it'?s|it\s+is|its)\s+(no\s+use|useless|no\s+good|pointless)\s+(arguing|to\s+argue|trying\s+to\s+argue|debating)/i]},
+  {l:"can’t help + -ing",re:[/(couldn'?t|could\s+not)\s+help\s+(smiling|but\s+smile|laughing)/i]},
+  {l:"there’s no point in + -ing",re:[/no\s+point\s+in\s+(wasting|spending|having|continuing|discussing|taking|losing)/i]}]},
+{ru:"Система слишком сложна, чтобы её мог поддерживать один человек, и недостаточно надёжна, чтобы запускать её в продакшн; говорят, что её уже успели протестировать.",
+ help:"поддерживать — to maintain · надёжный — reliable · запускать — to launch / deploy · успели протестировать — has already been tested",
+ model:"The system is <mark>too complex for one person to maintain</mark> and <mark>not reliable enough to be launched</mark> into production; it is <mark>said to have been tested</mark> already.",
+ note:"too / enough + <b>to V</b> (use the passive infinitive when the subject receives the action). Reporting verbs: <i>is said to have been + V3</i>.",
+ targets:[
+  {l:"too + adjective + to-infinitive",re:[/too\s+(complex|complicated|difficult|hard|sophisticated|big|large)\b.{0,40}\bto\s+(be\s+)?(maintain|maintained|support|supported|manage|managed|handle|handled|run)/i]},
+  {l:"not + adjective + enough + to be + V3",re:[/(not|isn'?t|wasn'?t)\s+(reliable|stable|robust|dependable|trustworthy|secure)\s+enough\s+to\s+(be\s+)?(launch|launched|deploy|deployed|put|release|released|run|use|used|push|pushed|go|start|started)/i]},
+  {l:"said to have been + V3 (perfect passive infinitive)",re:[/(said|reported|believed|thought|claimed|rumou?red)\s+to\s+have\s+(already\s+)?been\s+(tested|checked|verified|validated)/i]}]},
+{ru:"Он отрицает, что взломал сеть, и терпеть не может, когда его в чём-то обвиняют; ему лучше помолчать, ведь, похоже, он всё это время готовился к такому разговору.",
+ help:"взломать — to hack / breach · терпеть не может — can’t stand · обвинять — to accuse · помолчать — to keep quiet · готовиться к — to prepare for",
+ model:"He <mark>denies having hacked</mark> the network and <mark>can’t stand being accused</mark> of anything; he <mark>had better keep</mark> quiet, because he <mark>seems to have been preparing</mark> for this conversation all along.",
+ note:"deny + <b>(having) V3 / -ing</b>; can’t stand + <b>being V3</b> (passive gerund); had better + <b>bare V</b>; seem + <b>to have been -ing</b> (perfect continuous infinitive).",
+ targets:[
+  {l:"deny + (perfect) gerund",re:[/denies\s+(having\s+)?(hacked|hacking|breached|breaching|broken|breaking|compromised|compromising|cracked|cracking|penetrated|penetrating|infiltrated|infiltrating)/i]},
+  {l:"can’t stand + passive gerund",re:[/(can'?t|cannot)\s+(stand|bear|tolerate)\s+(being|to\s+be)\s+(accused|blamed|charged|suspected|criticized|criticised)|hates\s+being\s+(accused|blamed|suspected)/i]},
+  {l:"had better + bare infinitive",re:[/had\s+better\s+(keep|stay|say|be|remain|shut)|'d\s+better\s+(keep|stay|say|be|remain|shut)/i]},
+  {l:"seem + perfect continuous infinitive",re:[/(seems|appears|seemed|appeared)\s+to\s+have\s+been\s+(preparing|getting|planning|rehearsing|working)/i]}]}
+];
+
+const PARAS = [
+{ru:"Максим работал сетевым инженером в небольшой компании и привык дежурить по ночам. Он не мог не замечать, что тратит часы на ручную настройку одних и тех же коммутаторов. Однажды он решил написать скрипт на Python, чтобы автоматизировать эту рутину.",
+ help:"сетевой инженер — network engineer · дежурить — to be on call · ручная настройка — manual configuration · коммутатор — switch · рутина — routine",
+ model:"Maxim worked as a network engineer at a small company and <mark>was used to being</mark> on call at night. He <mark>couldn’t help noticing</mark> that he <mark>spent hours configuring</mark> the same switches by hand. One day he <mark>decided to write</mark> a Python script <mark>to automate</mark> this routine.",
+ note:"be used to + -ing · can’t help + -ing · spend time + -ing · decide + to V · infinitive of purpose.",
+ targets:[
+  {l:"be used to + -ing",re:[/(used|accustomed)\s+to\s+(being|working|staying|doing|taking|having|spending|covering|standing|pulling|handling)/i]},
+  {l:"can’t help + -ing",re:[/(couldn'?t|could\s+not)\s+help\s+(noticing|but\s+notice|seeing|realising|realizing)/i]},
+  {l:"spend time + -ing",re:[/spen[dt]\b.{0,45}\b(configuring|setting\s+up|adjusting|tweaking|programming|setting)\b/i]},
+  {l:"decide + to-infinitive",re:[/decided\s+to\s+(write|create|develop|code|build|make|script)/i]},
+  {l:"infinitive of purpose",re:[/\b(to|in\s+order\s+to|so\s+as\s+to)\s+(automate|automatize|automatise)\b/i]}]},
+{ru:"Поначалу ему было трудно признать, что он не умеет писать чистый код. Коллега посоветовал ему прочитать книгу по рефакторингу и разрешил пользоваться своим тестовым стендом. Максим до сих пор помнит, как впервые увидел, что скрипт сам настраивает двадцать устройств, и ещё долго не мог перестать улыбаться.",
+ help:"поначалу — at first · признать — to admit · чистый код — clean code · рефакторинг — refactoring · тестовый стенд — test bench · до сих пор — still",
+ model:"At first <mark>it was hard for him to admit</mark> that he didn’t know how to write clean code. A colleague <mark>advised him to read</mark> a book on refactoring and <mark>let him use</mark> his test bench. Maxim still <mark>remembers seeing</mark> the script configure twenty devices on its own for the first time, and for a long time he <mark>couldn’t stop smiling</mark>.",
+ note:"adjective + for sb + to V · advise + object + to V · let + object + bare V · remember + -ing (a memory) · can’t stop + -ing.",
+ targets:[
+  {l:"it’s hard for sb + to-infinitive",re:[/(it\s+was|it'?s|it\s+is)\s+(hard|difficult|not\s+easy|tough|painful|embarrassing|uncomfortable)\s+for\s+him\s+to\s+(admit|accept|acknowledge|recognise|recognize|say)/i]},
+  {l:"advise + object + to-infinitive",re:[/(advised|told|urged|encouraged|persuaded)\s+(him|maxim)\s+to\s+(read|take|study|look)/i]},
+  {l:"let / allow + object + (to) V",re:[/let\s+(him|maxim)\s+(use|work|run|try|test|borrow)/i,/(allowed|permitted)\s+(him|maxim)\s+to\s+(use|work|run|try|test|borrow)/i]},
+  {l:"remember + -ing (a memory)",re:[/remember(s|ed)?\s+(seeing|watching|noticing|witnessing)/i]},
+  {l:"can’t stop + -ing",re:[/(couldn'?t|could\s+not|was\s+unable\s+to|can'?t)\s+stop\s+(smiling|grinning|laughing)/i]}]},
+{ru:"Через год Максим всерьёз задумался о работе за границей. Он перестал откладывать поиск вакансий и начал рассылать резюме, не дожидаясь идеального момента. В Германии его заинтересовали вакансии, связанные с автоматизацией сетей, однако рекрутёр предупредил, что без опыта работы с облачными платформами рассчитывать на успех не стоит.",
+ help:"задуматься о — to start thinking about · откладывать — to put off · поиск вакансий — job search · рассылать резюме — to send out CVs · рекрутёр — recruiter · облачные платформы — cloud platforms · рассчитывать на — to count on",
+ model:"A year later Maxim seriously <mark>began thinking about working</mark> abroad. He <mark>stopped putting off</mark> his job search and <mark>began sending</mark> out his CV <mark>without waiting</mark> for the perfect moment. In Germany he became interested in vacancies connected with network automation, but a recruiter warned him that without experience with cloud platforms <mark>it wasn’t worth counting</mark> on success.",
+ note:"think about + -ing · stop + -ing · begin + -ing / to V · without + -ing · it’s (not) worth + -ing.",
+ targets:[
+  {l:"think about + -ing",re:[/think(ing)?\s+(about|of)\s+(working|moving|living|going|relocating|settling|looking|finding)/i]},
+  {l:"stop + -ing (quit the habit)",re:[/stopped\s+(putting\s+off|postponing|delaying|procrastinating)/i]},
+  {l:"begin / start + -ing or to V",re:[/(began|started)\s+(sending|to\s+send|mailing|submitting|to\s+submit|distributing|to\s+distribute)/i]},
+  {l:"without + -ing",re:[/without\s+(waiting|holding|hesitating|delaying)/i]},
+  {l:"it’s not worth + -ing",re:[/(not\s+worth|wasn'?t\s+worth|isn'?t\s+worth|no\s+point\s+in|pointless)\s+(counting|relying|hoping|expecting|banking)/i]}]},
+{ru:"Собеседования оказались сложнее, чем он ожидал. Ему не удавалось объяснить свои решения достаточно ясно, чтобы произвести впечатление на интервьюеров, и он жалел, что раньше не занимался английским всерьёз. Тогда он начал каждый день тренироваться отвечать на вопросы вслух, и его речь постепенно перестала казаться ему чужой.",
+ help:"оказаться — to turn out · произвести впечатление — to impress · интервьюер — interviewer · заниматься всерьёз — to take seriously · тренироваться — to practise · постепенно — little by little · чужой — foreign / alien",
+ model:"The interviews <mark>turned out to be</mark> harder than he had expected. He <mark>failed to explain</mark> his decisions <mark>clearly enough to impress</mark> the interviewers, and he <mark>regretted not taking</mark> English seriously earlier. Then he began to <mark>practise answering</mark> questions aloud every day, and little by little his speech <mark>stopped seeming</mark> foreign to him.",
+ note:"turn out + to V · fail + to V · adjective/adverb + enough + to V · regret + (not) -ing · practise + -ing · stop + -ing.",
+ targets:[
+  {l:"turn out + to-infinitive",re:[/turned\s+out\s+to\s+be/i]},
+  {l:"fail / manage / struggle + to V",re:[/(failed|didn'?t\s+manage|did\s+not\s+manage|was\s+unable|wasn'?t\s+able|was\s+not\s+able|never\s+managed|couldn'?t|could\s+not|struggled|had\s+trouble|had\s+difficulty)\s+(to\s+|in\s+)?(explain|explaining)/i]},
+  {l:"adverb + enough + to-infinitive",re:[/(clearly|clear|well|convincingly|persuasively|coherently)\s+enough\s+to\s+(impress|convince|make|satisfy|persuade)/i]},
+  {l:"regret + (not) -ing",re:[/regret(ted)?\s+(not|never)\s+(having\s+)?(taking|taken|studying|studied|learning|learned|working|worked|practising|practicing|practised|practiced|devoting|devoted|focusing|focused|treating|treated|doing|done)/i]},
+  {l:"practise + -ing",re:[/practi[sc](e|ed|ing)\s+(answering|responding|replying|giving)/i]},
+  {l:"stop + -ing (seeming)",re:[/stopped\s+(seeming|feeling|sounding|being|looking)/i]}]},
+{ru:"Через несколько месяцев ему предложили работу в Стамбуле. Максим не мог позволить себе отказаться, хотя ему и предстояло расстаться с семьёй на несколько месяцев. Теперь он с нетерпением ждёт начала работы и надеется, что к тому времени его уже не будут считать новичком. Говорят, что он стал первым в команде, кому удалось получить такое предложение, не имея диплома европейского вуза.",
+ help:"предложить работу — to offer a job · не мог позволить себе — couldn’t afford · отказаться — to turn down · расстаться с — to be apart from · с нетерпением ждать — to look forward to · новичок — newcomer · вуз — university",
+ model:"A few months later he was offered a job in Istanbul. Maxim <mark>couldn’t afford to turn</mark> it down, even though he would have to leave his family for several months. Now he is <mark>looking forward to starting</mark> work and hopes that by then he will no longer be seen as a newcomer. He <mark>is said to be</mark> the first on the team to have received such an offer <mark>without having</mark> a degree from a European university.",
+ note:"can’t afford + to V · look forward to + -ing · is said + to V · without + -ing (having).",
+ targets:[
+  {l:"can’t afford + to-infinitive",re:[/(couldn'?t|could\s+not|can'?t|cannot)\s+afford\s+to\s+(turn|refuse|decline|reject|say|pass|give|miss)/i]},
+  {l:"look forward to + -ing",re:[/looking\s+forward\s+to\s+(starting|beginning|getting|taking|working|commencing|joining)/i]},
+  {l:"be said + to-infinitive",re:[/(is|was|are)\s+(said|reported|believed|thought|rumou?red|claimed)\s+to\s+(be|have)/i]},
+  {l:"without + having",re:[/without\s+(having|holding|possessing|owning)/i]}]}
+];
+
+/* error hunt: [sentence, "answer|alt"] */
+const HUNT = [
+ ["I’m not used to <b>work</b> at night.","working"],
+ ["He suggested <b>to go</b> to the cinema.","going"],
+ ["I’m looking forward <b>to see</b> you in Berlin.","to seeing"],
+ ["She asked me <b>that I help</b> her.","to help"],
+ ["It’s worth <b>to try</b> again.","trying"],
+ ["He is interested <b>to learn</b> Python.","in learning"],
+ ["I really enjoy <b>to solve</b> logic puzzles.","solving"],
+ ["Thank you for <b>to help</b> me.","helping"],
+ ["The manager made us <b>to stay</b> late.","stay"],
+ ["I forgot <b>locking</b> the server room, so anyone could walk in.","to lock"],
+ ["<b>Without to know</b> the password, you can’t log in.","without knowing"],
+ ["He denied <b>to have</b> read the email.","having"],
+ ["I’d rather <b>to stay</b> at home tonight.","stay"],
+ ["<b>Instead to wait</b>, he left.","instead of waiting"],
+ ["She promised <b>sending</b> the report by Friday.","to send"]
+];
+
+/* ===================== BUILD ===================== */
+const TABS = [
+  {id:'w', title:'1 · Warm-up', kind:'trans', units:WARM, unitLabel:'structures'},
+  {id:'t', title:'2 · Text translation', kind:'trans', units:PARAS, unitLabel:'structures'},
+  {id:'e', title:'3 · Error hunt', kind:'fix', items:HUNT, unitLabel:'items'}
+];
+const $ = id => document.getElementById(id);
+const state = {};
+TABS.forEach(t => {
+  state[t.id] = {checked:false, shown:false};
+  if (t.kind === 'trans') t.total = t.units.reduce((s,u)=>s+u.targets.length,0);
+  else t.total = t.items.length;
+});
+
+(function build(){
+  $('tabs').innerHTML = TABS.map((t,i)=>`<button class="tab" role="tab" data-tab="${t.id}" aria-selected="${i===0}">${t.title}<span class="tchip" id="tchip-${t.id}"></span></button>`).join('');
+  [['w',WARM],['t',PARAS]].forEach(([id,units])=>{
+    $('units-'+id).innerHTML = units.map((u,i)=>`
+      <div class="unit" id="unit-${id}-${i}">
+        <div class="unit-head"><span class="num">${i+1}</span><span class="tcount">${u.targets.length} structures checked</span></div>
+        <p class="ru">${u.ru}</p>
+        <details class="help"><summary>Подсказки · vocabulary help</summary><p>${u.help}</p></details>
+        <textarea rows="${id==='t'?5:3}" data-tab="${id}" data-u="${i}" placeholder="Type your English translation here…" spellcheck="false"></textarea>
+        <ul class="tgt"></ul>
+        <div class="model" hidden><b class="lbl">Model translation</b>${u.model}<span class="note">${u.note}</span></div>
+      </div>`).join('');
+  });
+  $('hunt').innerHTML = HUNT.map((it,i)=>{
+    const ans = it[1].split('|'); const size = Math.max(8,...ans.map(a=>a.length))+1;
+    return `<li data-i="${i}"><div>${it[0]} <span class="arrow">→</span> <input type="text" class="gap" data-tab="e" data-i="${i}" size="${size}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Corrected form"></div><div class="fb"></div></li>`;
+  }).join('');
+})();
+
+/* ===================== LOGIC ===================== */
+let active = 'w';
+const tab = id => TABS.find(t=>t.id===id);
+const normText = s => s.replace(/[’‘`]/g,"'").replace(/\s+/g,' ').trim();
+const normAns = s => normText(s).toLowerCase().replace(/[.!?,]+$/,'');
+
+function gradeTrans(t){
+  const st = state[t.id]; let score=0, answered=0;
+  t.units.forEach((u,i)=>{
+    const el = $(`unit-${t.id}-${i}`), ta = el.querySelector('textarea'), ul = el.querySelector('ul.tgt'), model = el.querySelector('.model');
+    const txt = normText(ta.value); const has = txt.length>0; if(has) answered++;
+    el.classList.remove('ok','part','bad','un','show'); ul.innerHTML=''; model.hidden = !(st.shown);
+    let hits = 0;
+    const res = u.targets.map(tg => { const h = has && tg.re.some(r=>r.test(txt)); if(h) hits++; return {l:tg.l,h}; });
+    score += hits;
+    if (!st.checked) return;
+    if (st.shown) { el.classList.add('show'); ul.innerHTML = u.targets.map(tg=>`<li class="info">• ${tg.l}</li>`).join(''); return; }
+    if (!has) { el.classList.add('un'); ul.innerHTML = '<li class="miss">Not translated yet</li>'; return; }
+    el.classList.add(hits===u.targets.length?'ok':hits===0?'bad':'part');
+    ul.innerHTML = res.map(r=>`<li class="${r.h?'hit':'miss'}">${r.h?'✓':'✗'} ${r.l}</li>`).join('');
+  });
+  return {score, answered, n:t.units.length};
+}
+function gradeHunt(t){
+  const st = state.e; let score=0, answered=0;
+  t.items.forEach((it,i)=>{
+    const el = document.querySelector(`#hunt li[data-i="${i}"]`), inp = el.querySelector('input'), fb = el.querySelector('.fb');
+    const v = inp.value, has = v.trim()!==''; if(has) answered++;
+    const ans = it[1].split('|'); const ok = has && ans.map(normAns).includes(normAns(v));
+    if(ok) score++;
+    el.classList.remove('ok','bad','show','un'); fb.textContent='';
+    if(!st.checked) return;
+    if(st.shown){ el.classList.add('show'); fb.textContent='Answer: '+ans.join(' / '); return; }
+    if(!has){ el.classList.add('un'); fb.textContent='Not answered — '+ans.join(' / '); }
+    else if(ok){ el.classList.add('ok'); fb.textContent='✓ Correct'; }
+    else { el.classList.add('bad'); fb.textContent='✗ Correct answer: '+ans.join(' / '); }
+  });
+  return {score, answered, n:t.items.length};
+}
+function grade(){
+  TABS.forEach(t=>{
+    const r = t.kind==='trans' ? gradeTrans(t) : gradeHunt(t);
+    t.res = r;
+    const chip = $('tchip-'+t.id), st = state[t.id];
+    if(st.checked && !st.shown){ chip.textContent = r.score+'/'+t.total; chip.className='tchip on'; } else { chip.className='tchip'; chip.textContent=''; }
+  });
+  const t = tab(active), st = state[active], r = t.res;
+  $('total').textContent = t.total; $('unitlabel').textContent = t.unitLabel;
+  $('score').textContent = st.checked && !st.shown ? r.score : '—';
+  $('answered').textContent = r.answered+' / '+r.n;
+  $('barfill').style.width = (r.answered/r.n*100)+'%';
+  const msg = $('msg');
+  if(st.shown) msg.textContent = 'Answers are shown — press Reset to try this exercise again.';
+  else if(st.checked){
+    const pct = Math.round(r.score/t.total*100), left = r.n-r.answered;
+    msg.textContent = (left? left+' not answered. ':'') + pct+'% of '+t.unitLabel+' matched — ' + (t.kind==='trans' ? 'now compare your text with the model translation (Show Answers).' : (pct>=90?'excellent!':pct>=70?'good, review the red items.':'review the rules and try again.'));
+  } else msg.textContent = '';
+}
+function showTab(id){
+  active = id;
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected', b.dataset.tab===id));
+  TABS.forEach(t=>$('panel-'+t.id).classList.toggle('on', t.id===id));
+  grade();
+}
+$('tabs').addEventListener('click', e=>{ const b=e.target.closest('.tab'); if(b) showTab(b.dataset.tab); });
+function onEdit(e){
+  const id = e.target.dataset && e.target.dataset.tab; if(!id) return;
+  if(state[id].shown) state[id].shown=false;
+  grade();
+}
+document.addEventListener('input', onEdit);
+$('btnCheck').addEventListener('click', ()=>{ state[active].checked=true; state[active].shown=false; grade(); });
+$('btnShow').addEventListener('click', ()=>{
+  const t = tab(active);
+  if(t.kind==='fix'){ t.items.forEach((it,i)=>{ document.querySelector(`#hunt li[data-i="${i}"] input`).value = it[1].split('|')[0]; }); }
+  state[active].checked=true; state[active].shown=true; grade();
+});
+$('btnReset').addEventListener('click', ()=>{
+  const t = tab(active);
+  document.querySelectorAll(`#panel-${t.id} textarea, #panel-${t.id} input.gap`).forEach(x=>x.value='');
+  state[active] = {checked:false, shown:false}; grade();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+showTab('w');
+</script>
+</body>
+</html>
