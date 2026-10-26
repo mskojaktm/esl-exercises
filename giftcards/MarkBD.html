@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Mark!</title>
+<style>
+:root{--bg1:#fff1f5;--bg2:#fff7e0;--bg3:#e8f4ff;--text:#2b2140;--sub:#6b5b86;--card:rgba(255,255,255,.7);--accent:#ff4d8d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2a1233;--bg2:#1b1a3d;--bg3:#10243a;--text:#fff4fb;--sub:#c9b8e6;--card:rgba(255,255,255,.08);--accent:#ff7ab0}}
+:root[data-theme="dark"]{--bg1:#2a1233;--bg2:#1b1a3d;--bg3:#10243a;--text:#fff4fb;--sub:#c9b8e6;--card:rgba(255,255,255,.08);--accent:#ff7ab0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--text);
+background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg1));background-size:300% 300%;animation:bg 14s ease infinite;overflow-x:hidden;text-align:center}
+@keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.wrap{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:clamp(2.2rem,9vw,4rem);margin:10px 0 4px;line-height:1.1}
+h1 span{display:inline-block;animation:pop .7s cubic-bezier(.3,1.6,.5,1) both,bob 2.4s ease-in-out infinite;background:linear-gradient(90deg,#ff4d8d,#ffb300,#4d9bff,#8e5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes pop{from{transform:scale(0) rotate(-40deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.name{font-size:clamp(2.6rem,12vw,5rem)}
+.sub{color:var(--sub);font-size:1.1rem;min-height:1.6em;margin:8px 0 18px}
+.cake{width:200px;height:200px;margin:10px auto}
+.flame{transform-origin:center bottom;animation:flick .35s ease-in-out infinite alternate}
+.flame:nth-of-type(2){animation-delay:.1s}.flame:nth-of-type(3){animation-delay:.2s}
+@keyframes flick{from{transform:scale(1,1) rotate(-4deg)}to{transform:scale(.85,1.2) rotate(4deg)}}
+.card{background:var(--card);backdrop-filter:blur(8px);border-radius:20px;padding:20px;margin:18px 0;box-shadow:0 8px 30px rgba(120,60,160,.15);animation:rise .9s ease both .8s}
+@keyframes rise{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.wishes{display:grid;gap:10px;text-align:left;list-style:none;padding:0;margin:0}
+.wishes li{opacity:0;animation:rise .6s ease forwards}
+.wishes li:nth-child(1){animation-delay:1.2s}.wishes li:nth-child(2){animation-delay:1.6s}.wishes li:nth-child(3){animation-delay:2s}.wishes li:nth-child(4){animation-delay:2.4s}
+button{font:inherit;font-size:1.1rem;padding:14px 26px;border:0;border-radius:999px;background:var(--accent);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(255,77,141,.4);transition:transform .15s;animation:pulse 2s infinite}
+button:active{transform:scale(.94)}
+@keyframes pulse{50%{box-shadow:0 6px 30px rgba(255,77,141,.7)}}
+.balloon{position:fixed;bottom:-120px;width:48px;height:62px;border-radius:50% 50% 48% 48%;z-index:1;animation:float linear infinite;opacity:.85}
+.balloon:after{content:"";position:absolute;left:50%;top:100%;width:1px;height:50px;background:var(--sub)}
+@keyframes float{to{transform:translateY(-120vh) translateX(40px)}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="wrap">
+  <h1><span>Happy</span> <span style="animation-delay:.15s,.15s">Birthday,</span><br><span class="name" style="animation-delay:.3s,.3s">Mark!</span></h1>
+  <div class="sub" id="sub"></div>
+  <svg class="cake" viewBox="0 0 200 200" aria-label="Birthday cake">
+    <rect x="30" y="120" width="140" height="55" rx="10" fill="#8e5bff"/>
+    <rect x="45" y="85" width="110" height="40" rx="10" fill="#ff4d8d"/>
+    <path d="M30 128q12 14 24 0t24 0 24 0 24 0 24 0 22 0" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <rect x="62" y="58" width="8" height="30" rx="3" fill="#4d9bff"/><rect x="96" y="58" width="8" height="30" rx="3" fill="#ffb300"/><rect x="130" y="58" width="8" height="30" rx="3" fill="#4dd6a0"/>
+    <ellipse class="flame" cx="66" cy="48" rx="6" ry="11" fill="#ffb300"/><ellipse class="flame" cx="100" cy="48" rx="6" ry="11" fill="#ffb300"/><ellipse class="flame" cx="134" cy="48" rx="6" ry="11" fill="#ffb300"/>
+    <rect x="20" y="172" width="160" height="10" rx="5" fill="#cfc3e6"/>
+  </svg>
+  <div class="card">
+    <ul class="wishes">
+      <li>🎉 May this year bring you joy in every little moment.</li>
+      <li>🌟 Wishing you health, happiness and lots of laughter.</li>
+      <li>🚀 May all your goals turn into wonderful achievements.</li>
+      <li>🎁 Enjoy your day to the fullest – you deserve it!</li>
+    </ul>
+  </div>
+  <button id="btn">🎊 Celebrate!</button>
+</div>
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');let W,H,parts=[];
+function size(){W=cv.width=innerWidth;H=cv.height=innerHeight}size();addEventListener('resize',size);
+const cols=['#ff4d8d','#ffb300','#4d9bff','#8e5bff','#4dd6a0','#ff7a45'];
+function burst(x,y,n=90){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=4+Math.random()*9;
+parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-5,r:Math.random()*6+3,c:cols[i%cols.length],rot:Math.random()*6,vr:(Math.random()-.5)*.4,life:1})}}
+function rain(){parts.push({x:Math.random()*W,y:-10,vx:(Math.random()-.5)*2,vy:2+Math.random()*3,r:Math.random()*5+3,c:cols[Math.random()*6|0],rot:0,vr:.1,life:1,rainy:1})}
+function tick(){ctx.clearRect(0,0,W,H);if(Math.random()<.25)rain();
+parts=parts.filter(p=>p.y<H+20&&p.life>0);
+for(const p of parts){p.x+=p.vx;p.y+=p.vy;if(!p.rainy){p.vy+=.25;p.vx*=.99;p.life-=.008}p.rot+=p.vr;
+ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.max(p.life,0);ctx.fillStyle=p.c;ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);ctx.restore()}
+requestAnimationFrame(tick)}tick();
+burst(W/2,H/3,140);setTimeout(()=>burst(W*.2,H/3),500);setTimeout(()=>burst(W*.8,H/3),900);
+document.getElementById('btn').onclick=()=>{for(let i=0;i<4;i++)setTimeout(()=>burst(Math.random()*W,Math.random()*H*.6),i*180)};
+addEventListener('pointerdown',e=>{if(e.target.id!=='btn')burst(e.clientX,e.clientY,40)});
+for(let i=0;i<9;i++){const b=document.createElement('div');b.className='balloon';
+b.style.left=(i*11+Math.random()*6)+'%';b.style.background=cols[i%cols.length];
+b.style.animationDuration=(9+Math.random()*7)+'s';b.style.animationDelay=(Math.random()*6)+'s';document.body.appendChild(b)}
+const msg='Wishing you a day full of smiles, cake and surprises! 🎂';let k=0;
+(function type(){document.getElementById('sub').textContent=msg.slice(0,++k);if(k<msg.length)setTimeout(type,60)})();
+</script>
+</body>
+</html>
