@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UNIT 2 — International Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#f2f7f8;--card:#fff;--text:#1d2b30;--line:#d5e3e6;--ok:#1b7f4b;--okbg:#e5f5ec;--bad:#b3261e;--badbg:#fdeceb;--ex:#eef4f5;--pl:88%}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1d23;--card:#112a32;--text:#e4eef0;--line:#24434d;--ok:#6fd49b;--okbg:#14382b;--bad:#ff8f88;--badbg:#401a18;--ex:#17333c;--teal:#2bb3c4;--pl:26%}}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 60px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Calibri,'Open Sans',sans-serif;font-size:17px;line-height:1.65;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+header{background:var(--navy);color:#fff;padding:26px 16px}
+header h1{font-family:'Trebuchet MS',sans-serif;margin:0 auto;max-width:800px;font-size:1.7rem}
+header p{max-width:800px;margin:4px auto 0;opacity:.85}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:2px solid var(--teal);padding:8px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.score{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);margin-right:auto}
+.ctl{font:inherit;font-size:.88rem;border:0;border-radius:6px;padding:6px 13px;cursor:pointer;background:var(--teal);color:#fff}
+.ctl.alt{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+main{max-width:800px;margin:0 auto;padding:10px 14px 50px}
+.grp{font-family:'Trebuchet MS',sans-serif;color:var(--navy);margin:30px 0 10px;font-size:1.2rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--line)}
+@media (prefers-color-scheme:dark){.grp{color:var(--text)}}
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:16px 18px;margin-bottom:18px}
+.sh{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.sh h2{font-size:1.02rem;margin:0;font-weight:600}
+.badge{flex:none;background:var(--teal);color:#fff;font-family:'Trebuchet MS',sans-serif;font-weight:700;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px}
+.sc{margin-left:auto;font-weight:700;color:var(--teal);white-space:nowrap}
+.cr{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.q{display:flex;gap:10px;margin-bottom:12px}
+.q .n{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);min-width:1.4em}
+.q.ex{background:var(--ex);border-radius:8px;padding:8px 10px}
+.exw{color:var(--teal);border-bottom:2px solid var(--teal)}
+input[type=text],textarea{font:inherit;padding:2px 8px;border:0;border-bottom:2px solid var(--teal);background:var(--ex);color:var(--text);border-radius:4px 4px 0 0;max-width:100%}
+input[type=text]{width:9em;text-align:center}input.ph{width:20em}
+textarea{width:100%;border:2px solid var(--line);border-radius:6px;min-height:3.4em;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--teal)}
+.ok{border-color:var(--ok)!important}.bad{border-color:var(--bad)!important}
+input.ok,textarea.ok{background:var(--okbg);color:var(--ok)}input.bad,textarea.bad{background:var(--badbg);color:var(--bad)}
+.fb{display:block;font-size:.88rem;margin-top:2px}.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.opt{font:inherit;font-size:.95rem;padding:3px 12px;border:2px solid var(--line);border-radius:18px;background:var(--card);color:var(--text);cursor:pointer}
+.opt:hover{border-color:var(--teal)}.opt.sel{background:var(--teal);border-color:var(--teal);color:#fff}
+.opt.ok{background:var(--okbg);color:var(--ok)}.opt.bad{background:var(--badbg);color:var(--bad);text-decoration:line-through}
+.gap{white-space:nowrap}
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.list{display:flex;flex-direction:column;gap:7px}
+.w{font:inherit;display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:6px 10px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;min-height:42px;line-height:1.3}
+.w:hover:not(:disabled){border-color:var(--teal)}
+.w .lab{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);min-width:1.1em}
+.w .tx{flex:1}
+.w.sel{border-color:var(--teal);box-shadow:0 0 0 3px rgba(2,128,144,.35);font-weight:600}
+.w.pr{background:hsl(var(--h) 60% var(--pl));border-color:hsl(var(--h) 55% 45%)}
+.w.ok{box-shadow:inset 0 0 0 1px var(--ok)}.w.bad{box-shadow:inset 0 0 0 1px var(--bad)}
+.tag{font-family:'Trebuchet MS',sans-serif;font-size:.78rem;font-weight:700;min-width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:hsl(var(--h) 55% 38%);color:#fff}
+.slots,.pool{display:flex;flex-wrap:wrap;gap:6px;min-height:40px}
+.slots{border-bottom:2px solid var(--teal);padding:2px 0 4px;margin:4px 0 6px}
+.slots.ok{background:var(--okbg)}.slots.bad{background:var(--badbg)}
+.tile{font:inherit;padding:2px 11px;border:2px solid var(--line);border-radius:8px;background:var(--ex);color:var(--text);cursor:pointer}
+.tile:hover{border-color:var(--teal)}.tile.used{visibility:hidden}
+.ex-s{border:2px solid var(--line);border-radius:8px;padding:8px 12px;margin:0 0 8px;background:var(--ex)}
+.cx{display:block;width:100%;text-align:left;font:inherit;padding:8px 12px;margin-bottom:8px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--text);cursor:pointer}
+.cx.on{text-decoration:line-through;opacity:.6;background:var(--ex)}
+.tk{display:flex;gap:10px;align-items:flex-start;padding:6px 10px;margin-bottom:6px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tk input{margin-top:.45em;width:1.1em;height:1.1em;accent-color:var(--teal)}
+.tk.ex{background:var(--ex);cursor:default}
+.note{font-size:.88rem;opacity:.8;margin:8px 0 0}
+.cw{display:inline-block;vertical-align:middle;text-align:center;margin:2px 8px;padding:2px 10px;border:1px solid var(--line);border-radius:6px;line-height:1.3;background:var(--ex)}
+select.gs{font:inherit;font-size:.95rem;max-width:100%;padding:2px 6px;border:0;border-bottom:2px solid var(--teal);background:var(--ex);color:var(--text);border-radius:4px 4px 0 0}
+select.gs.ok{background:var(--okbg);color:var(--ok)}select.gs.bad{background:var(--badbg);color:var(--bad)}select.gs:disabled,input.exg{opacity:1;color:var(--teal);font-weight:600;-webkit-text-fill-color:var(--teal)}
+sup{color:var(--teal);font-weight:700;font-size:.7em}.cl{margin:0 0 12px}
+.letter{border:2px solid var(--line);border-radius:8px;padding:14px 18px;background:var(--ex)}.letter h3{font-family:'Trebuchet MS',sans-serif;font-size:1rem;margin:0 0 6px}
+.vb{display:inline-block;border:1.5px solid var(--teal);border-radius:6px;padding:3px 14px;margin:0 0 10px}
+.ln{align-items:center}.lt{flex:1}.lc{display:flex;gap:6px;align-items:center;flex:none}.lc input[type=text]{width:7.5em}
+.chk{list-style:none;padding:0;margin:8px 0}.chk li{padding:2px 0}.chk li.ok{color:var(--ok)}.chk li.bad{color:var(--bad)}
+.em label{display:block;margin:6px 0 2px;font-weight:600}.em input[type=text]{width:100%;text-align:left}.em textarea{min-height:12em}
+.hint{margin:0 0 10px;font-size:.92rem;opacity:.88}.row2{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+@media (max-width:520px){.card{padding:14px 11px}.lc{flex-wrap:wrap}.boxes{gap:8px}.w{padding:5px 7px;font-size:.93rem}input.ph{width:100%}}
+</style></head><body>
+<header><h1>UNIT 2 — International Marketing</h1><p>Language work: vocabulary, noun phrases, linking ideas and a marketing letter. Do each exercise, then press Check.</p></header>
+<div class="bar"><span class="score" id="tot">Score: 0 / 0</span>
+<button class="ctl" id="gc">Check All</button><button class="ctl alt" id="gs">Show Answers</button><button class="ctl alt" id="gr">Reset All</button></div>
+<main id="main"></main>
+<script>
+const $=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const N=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/-/g,' ').replace(/[.!?]+$/,'').replace(/\s+/g,' ').trim();
+const LET='abcdefghij';
+
+/* ---------- engines ---------- */
+function fill(body,items){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'+(it.ex?' ex':'')),d=$('div'),ins=[];
+  const A=it.ex?null:(Array.isArray(it.a[0])?it.a:[it.a]);
+  it.t.split('[]').forEach((p,k,arr)=>{d.insertAdjacentHTML('beforeend',p);
+   if(k<arr.length-1){if(it.ex)d.insertAdjacentHTML('beforeend','<b class="exw">'+it.ex+'</b>');
+    else{const x=$('input');x.type='text';x.autocomplete='off';x.spellcheck=false;x.placeholder=(it.ph&&it.ph[k])||'';x.setAttribute('autocapitalize','off');
+     x.className=A[k][0].includes(' ')?'ph':'';x.setAttribute('aria-label','answer '+(i+1));ins.push(x);d.appendChild(x)}}});
+  const fb=$('span','fb');d.appendChild(fb);
+  r.append($('span','n',i+1),d);body.appendChild(r);
+  if(!it.ex)rows.push({ins,A,fb});
+ });
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{let all=true,any=false;
+    r.ins.forEach((x,k)=>{const v=N(x.value);if(v)any=true;const g=r.A[k].some(a=>N(a)===v);x.classList.remove('ok','bad');if(v)x.classList.add(g?'ok':'bad');if(!g)all=false});
+    if(all){ok++;r.fb.className='fb ok';r.fb.textContent='✓ Correct'}
+    else if(any){r.fb.className='fb bad';r.fb.textContent='✗ Not quite. Try again.'}else{r.fb.className='fb';r.fb.textContent=''}});return ok},
+  show(){rows.forEach(r=>r.ins.forEach((x,k)=>x.value=r.A[k][0]))},
+  reset(){rows.forEach(r=>{r.ins.forEach(x=>{x.value='';x.className=x.className.replace(/\b(ok|bad)\b/g,'').trim()});r.fb.textContent='';r.fb.className='fb'})}};
+}
+function choice(body,items,inline){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'+(it.ex?' ex':'')),d=$('div'),row={it,btns:[],sel:it.ex?it.a:null};
+  const mk=()=>{const w=$('span',inline?'gap':'opts');it.o.forEach((v,k)=>{const b=$('button','opt',(inline?'':LET[k]+') ')+v);b.type='button';
+    b.onclick=()=>{if(it.ex)return;row.sel=v;paint(row)};row.btns.push(b);w.appendChild(b)});return w};
+  const parts=it.t.split('[]');d.insertAdjacentHTML('beforeend',parts[0]);
+  if(inline){d.appendChild(mk())}else{d.insertAdjacentHTML('beforeend','<b>………</b>')}
+  d.insertAdjacentHTML('beforeend',parts[1]||'');
+  if(!inline)d.appendChild(mk());
+  row.fb=$('span','fb');d.appendChild(row.fb);r.append($('span','n',i+1),d);body.appendChild(r);rows.push(row);paint(row);
+ });
+ function paint(r,chk){r.btns.forEach((b,k)=>{b.className='opt';if(r.it.o[k]===r.sel){b.classList.add(r.it.ex?'ok':chk?(r.sel===r.it.a?'ok':'bad'):'sel')}})}
+ return{max:rows.filter(r=>!r.it.ex).length,
+  check(){let ok=0;rows.forEach(r=>{if(r.it.ex)return;paint(r,true);const g=r.sel===r.it.a;if(g)ok++;
+    r.fb.className='fb '+(r.sel?(g?'ok':'bad'):'');r.fb.textContent=r.sel?(g?'✓ Correct':'✗ Not quite. Try again.'):''});return ok},
+  show(){rows.forEach(r=>{if(!r.it.ex){r.sel=r.it.a;paint(r)}})},
+  reset(){rows.forEach(r=>{if(!r.it.ex){r.sel=null;paint(r);r.fb.textContent='';r.fb.className='fb'}})}};
+}
+function match(body,c){
+ let pairs={},sel=null,chk=false;if(c.ex!=null)pairs[c.ex]=c.key[c.ex];
+ const wrap=$('div','boxes'),LA=$('div','list'),LB=$('div','list'),fb=$('p','fb');wrap.append(LA,LB);body.append(wrap,fb);
+ const left=r=>Object.keys(pairs).find(k=>pairs[k]===r);
+ const H=i=>[190,28,285,140,340,55][i%6];
+ function btn(side,i){const L=side==='L';const pi=L?(i in pairs?pairs[i]:null):(left(i)!=null?+left(i):null);
+  const b=$('button','w');b.type='button';b.innerHTML='<span class="lab">'+(L?i+1:LET[i])+'</span><span class="tx">'+(L?c.L[i]:c.R[i])+'</span>';
+  const li=L?i:pi;
+  if(pi!=null){b.classList.add('pr');b.style.setProperty('--h',H(li));b.insertAdjacentHTML('beforeend','<span class="tag">'+(L?LET[pi]:+pi+1)+'</span>');
+   if(chk)b.classList.add(c.key[li]===pairs[li]?'ok':'bad')}
+  if(L&&sel===i)b.classList.add('sel');
+  if(li===c.ex&&pi!=null){b.disabled=true}
+  b.onclick=()=>{chk=false;fb.textContent='';
+   if(L){if(sel===i)sel=null;else{delete pairs[i];sel=i}}
+   else{const o=left(i);if(sel!=null){if(o!=null)delete pairs[o];pairs[sel]=i;sel=null}else if(o!=null)delete pairs[o]}
+   rend()};return b}
+ function rend(){LA.innerHTML='';LB.innerHTML='';c.L.forEach((_,i)=>LA.appendChild(btn('L',i)));c.R.forEach((_,i)=>LB.appendChild(btn('R',i)))}
+ rend();
+ return{max:c.L.length-(c.ex!=null?1:0),
+  check(){chk=true;let ok=0,t=0;c.L.forEach((_,i)=>{if(i===c.ex||!(i in pairs))return;t++;if(pairs[i]===c.key[i])ok++});rend();
+   fb.className='fb '+(t&&ok===t?'ok':'bad');fb.textContent=t?ok+' of '+t+' pairs correct'+(t<this.max?' ('+(this.max-t)+' still to match)':'')+'.':'';return ok},
+  show(){pairs={};c.L.forEach((_,i)=>pairs[i]=c.key[i]);sel=null;rend()},
+  reset(){pairs={};if(c.ex!=null)pairs[c.ex]=c.key[c.ex];sel=null;chk=false;fb.textContent='';rend()}};
+}
+function reorder(body,items){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'),d=$('div'),slots=$('div','slots'),pool=$('div','pool'),fb=$('span','fb');
+  const st={placed:[]};d.style.flex='1';d.append(slots,pool,fb);r.append($('span','n',it.n||i+1),d);body.appendChild(r);
+  const rend=(c)=>{slots.innerHTML='';pool.innerHTML='';slots.className='slots'+(c?(c==='ok'?' ok':' bad'):'');
+   st.placed.forEach(k=>{const b=$('button','tile',it.w[k]);b.type='button';b.onclick=()=>{st.placed=st.placed.filter(x=>x!==k);fb.textContent='';rend()};slots.appendChild(b)});
+   it.w.forEach((w,k)=>{const b=$('button','tile'+(st.placed.includes(k)?' used':''),w);b.type='button';b.onclick=()=>{st.placed.push(k);fb.textContent='';rend()};pool.appendChild(b)})};
+  rows.push({it,st,rend,fb});rend();
+ });
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{const s=r.st.placed.map(k=>r.it.w[k]).join(' ');const g=N(s)===N(r.it.a);if(g)ok++;
+    r.rend(r.st.placed.length?(g?'ok':'bad'):'');r.fb.className='fb '+(r.st.placed.length?(g?'ok':'bad'):'');r.fb.textContent=r.st.placed.length?(g?'✓ Correct':'✗ Not quite. Try again.'):''});return ok},
+  show(){rows.forEach(r=>{const used=[];r.st.placed=r.it.a.split(' ').map(w=>{const k=r.it.w.findIndex((x,j)=>x===w&&!used.includes(j));used.push(k);return k});r.rend()})},
+  reset(){rows.forEach(r=>{r.st.placed=[];r.fb.textContent='';r.rend()})}};
+}
+
+/* ---------- extra engines ---------- */
+function both(b,fs){const ps=fs.map(f=>{const d=$('div');d.style.marginBottom='14px';b.appendChild(d);return f(d)});
+ return{max:ps.reduce((s,p)=>s+p.max,0),check(){return ps.reduce((s,p)=>s+p.check(),0)},show(){ps.forEach(p=>p.show())},reset(){ps.forEach(p=>p.reset())}}}
+function cloze(b,paras,G,mode){
+ const gs=[];
+ paras.forEach(p=>{const d=$('p','cl');
+  p.split(/\{(\d+)\}/).forEach((s,k)=>{
+   if(k%2===0){d.insertAdjacentHTML('beforeend',s);return}
+   const n=+s,g=G[n];let c;
+   if(mode==='sel'){c=$('select','gs');c.appendChild(new Option('— choose —',''));g.o.forEach((o,i)=>c.appendChild(new Option(LET[i]+') '+o,LET[i])))}
+   else{c=$('input');c.type='text';c.autocomplete='off';c.spellcheck=false;c.setAttribute('autocapitalize','off');c.style.width='8.5em'}
+   c.setAttribute('aria-label','gap '+n);
+   if(g.ex){c.value=g.ex;c.disabled=true;c.classList.add('exg')}else gs.push([c,g]);
+   d.appendChild(c);d.insertAdjacentHTML('beforeend','<sup>'+n+'</sup>')});
+  b.appendChild(d)});
+ const okv=(c,g)=>mode==='sel'?c.value===g.a:g.a.some(a=>N(a)===N(c.value));
+ return{max:gs.length,
+  check(){let ok=0;gs.forEach(([c,g])=>{c.classList.remove('ok','bad');if(!c.value.trim())return;const t=okv(c,g);if(t)ok++;c.classList.add(t?'ok':'bad')});return ok},
+  show(){gs.forEach(([c,g])=>c.value=mode==='sel'?g.a:g.a[0])},
+  reset(){gs.forEach(([c])=>{c.value='';c.classList.remove('ok','bad')})}};
+}
+function halves(b,c){
+ const rows=[];
+ c.L.forEach((t,i)=>{
+  const r=$('div','q'),d=$('div');d.style.flex='1';d.insertAdjacentHTML('beforeend',t+' ');
+  const s1=$('select','gs'),s2=$('select','gs');
+  s1.appendChild(new Option('— linker —',''));c.lk.forEach(x=>s1.appendChild(new Option(x,x)));
+  s2.appendChild(new Option('— choose the ending —',''));c.E.forEach((x,k)=>s2.appendChild(new Option(x,k)));
+  s1.setAttribute('aria-label','linker '+(i+1));s2.setAttribute('aria-label','ending '+(i+1));
+  const fb=$('span','fb');d.append(s1,$('span',null,' '),s2,fb);r.append($('span','n',i+1),d);b.appendChild(r);
+  const row={s1,s2,fb,k:c.key[i]};
+  if(i===c.ex){s1.value=row.k[0];s2.value=row.k[1];s1.disabled=s2.disabled=true;r.classList.add('ex')}else rows.push(row)});
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{[r.s1,r.s2].forEach(s=>s.classList.remove('ok','bad'));if(!r.s1.value&&!r.s2.value){r.fb.textContent='';return}
+    const a=r.s1.value===r.k[0],e=r.s2.value!==''&&+r.s2.value===r.k[1];
+    if(r.s1.value)r.s1.classList.add(a?'ok':'bad');if(r.s2.value)r.s2.classList.add(e?'ok':'bad');
+    if(a&&e){ok++;r.fb.className='fb ok';r.fb.textContent=' ✓'}else{r.fb.className='fb bad';r.fb.textContent=' ✗ Check the linker and the ending.'}});return ok},
+  show(){rows.forEach(r=>{r.s1.value=r.k[0];r.s2.value=r.k[1]})},
+  reset(){rows.forEach(r=>{r.s1.value=r.s2.value='';[r.s1,r.s2].forEach(s=>s.classList.remove('ok','bad'));r.fb.textContent=''})}};
+}
+function cross(b,T,keep,okmsg){
+ const on=T.map(()=>0),fb=$('p','fb'),bs=T.map((t,k)=>{const x=$('button','cx',LET[k]+') '+t);x.type='button';
+  x.onclick=()=>{on[k]^=1;x.classList.toggle('on',!!on[k]);fb.textContent='';bs.forEach(y=>y.classList.remove('ok','bad'))};b.appendChild(x);return x});
+ b.appendChild(fb);
+ const set=v=>v.forEach((z,k)=>{on[k]=z;bs[k].classList.toggle('on',!!z);bs[k].classList.remove('ok','bad')});
+ return{max:1,check(){const g=on.every((z,k)=>k===keep?!z:!!z);bs.forEach((x,k)=>{x.classList.remove('ok','bad');if(on[k])x.classList.add(k===keep?'bad':'ok')});
+  fb.className='fb '+(g?'ok':'bad');fb.textContent=g?'✓ Correct: '+okmsg:'✗ Not quite. Cross out the TWO explanations which are not correct.';return g?1:0},
+  show(){set(T.map((_,k)=>k===keep?0:1))},reset(){set(T.map(()=>0));fb.textContent=''}};
+}
+function lines(b,pre,L,post){
+ b.appendChild($('p','cl',pre));const rows=[];
+ L.forEach((l,i)=>{
+  const r=$('div','q ln'),t=$('span','lt',l.t),c=$('span','lc'),x=$('input'),tk=$('button','opt','✓');
+  x.type='text';x.placeholder='extra word';x.autocomplete='off';x.spellcheck=false;x.setAttribute('autocapitalize','off');x.setAttribute('aria-label','line '+(i+1));
+  tk.type='button';tk.setAttribute('aria-label','line '+(i+1)+' is correct');
+  const st={tick:false};
+  const sync=()=>tk.classList.toggle('sel',st.tick);
+  x.oninput=()=>{if(x.value.trim())st.tick=false;sync()};
+  tk.onclick=()=>{st.tick=!st.tick;if(st.tick)x.value='';sync()};
+  c.append(x,tk);r.append($('span','n',i+1),t,c);b.appendChild(r);
+  if(l.ex){r.classList.add('ex');x.disabled=tk.disabled=true;if(l.ex==='✓'){st.tick=true;sync()}else x.value=l.ex}else rows.push({l,x,tk,st,r,sync})});
+ if(post)b.appendChild($('p','cl',post));
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(w=>{const v=w.x.value.trim();w.r.classList.remove('ok','bad');if(!v&&!w.st.tick)return;
+    const g=w.l.a?(N(v)===N(w.l.a)&&!w.st.tick):(w.st.tick&&!v);if(g)ok++;w.r.classList.add(g?'ok':'bad')});return ok},
+  show(){rows.forEach(w=>{if(w.l.a){w.x.value=w.l.a;w.st.tick=false}else{w.x.value='';w.st.tick=true}w.sync()})},
+  reset(){rows.forEach(w=>{w.x.value='';w.st.tick=false;w.sync();w.r.classList.remove('ok','bad')})}};
+}
+function email(b){
+ b.insertAdjacentHTML('beforeend','<div class="ex-s">Ivan Gasperlin, the manager of Kommerz Bank (Trubarjeva 47, 1000 Ljubljana, Slovenia), wishes to order five more copies of both the brochure and the poster. Write an e-mail message.</div>');
+ const w=$('div','em');
+ w.innerHTML='<label>To:</label><input type="text" id="e_to"><label>Subject:</label><input type="text" id="e_su"><label>Message:</label><textarea id="e_bd" placeholder="Dear …"></textarea><p class="note" id="e_wc">0 words</p>';
+ b.appendChild(w);
+ const C=['Refers to Professor Trollerova’s letter (of 20 June)','Asks for five (extra) copies','Mentions both the brochure and the poster','Gives the delivery address (Trubarjeva 47, 1000 Ljubljana)','Has a greeting and a polite closing (e.g. Dear …, Thank you …, Best wishes)'];
+ const ul=$('ul','chk');C.forEach(c=>ul.appendChild($('li',null,'☐ '+c)));b.insertAdjacentHTML('beforeend','<p class="hint"><b>Your e-mail should:</b></p>');b.appendChild(ul);
+ const to=w.querySelector('#e_to'),su=w.querySelector('#e_su'),bd=w.querySelector('#e_bd'),wc=w.querySelector('#e_wc');
+ bd.oninput=()=>{wc.textContent=(bd.value.trim()?bd.value.trim().split(/\s+/).length:0)+' words'};
+ const T=[t=>/trollerova|20 june/.test(t),t=>/\b(5|five)\b[^.]{0,30}cop(y|ies)/.test(t),t=>/brochure/.test(t)&&/poster/.test(t),t=>/trubarjeva/.test(t)&&/ljubljana/.test(t),t=>/\bdear\b/.test(t)&&/(best wishes|regards|sincerely|yours|thank you|thanks)/.test(t)];
+ const SAMPLE='Dear Mr Cutka,\n\nWith reference to Professor Trollerova’s letter of 20 June, I would like to request an extra 5 copies of both your new brochure and poster. Please address them to:\n\nMr Ivan Gasperlin, Manager,\nKommerz Bank,\nTrubarjeva 47,\n1000 Ljubljana, Slovenia\n\nThank you in advance.\n\nBest wishes,\nIvan Gasperlin';
+ return{max:5,
+  check(){const t=(su.value+' '+bd.value).toLowerCase().replace(/[’‘]/g,"'");let ok=0;
+   [...ul.children].forEach((li,i)=>{const g=bd.value.trim()&&T[i](t);if(g)ok++;li.className=bd.value.trim()?(g?'ok':'bad'):'';li.textContent=(bd.value.trim()?(g?'✓ ':'✗ '):'☐ ')+C[i]});return ok},
+  show(){to.value='Igor Cutka';su.value='CEIMD brochure and poster';bd.value=SAMPLE;bd.oninput()},
+  reset(){to.value=su.value=bd.value='';bd.oninput();[...ul.children].forEach((li,i)=>{li.className='';li.textContent='☐ '+C[i]})}};
+}
+
+/* ---------- data ---------- */
+const BA=['competitive','product','marketing','market','customer','brand'],BB=['segmentation','retention','portfolio','strategy','identity','advantage'];
+const VA=[
+{t:'In order to secure a [], companies will try to make their products and services stand out from their competitors’.',ex:'competitive advantage'},
+{t:'The company’s aggressive [] [] targets numerous trade fairs around the world.',a:[['marketing'],['strategy']]},
+{t:'The CEO described industrial services as one of the three main growth drivers for Siemens, alongside its green [] [] and sales in emerging markets such as China, India, Brazil and the Middle East.',a:[['product'],['portfolio']]},
+{t:'A survey by a German car magazine showed that customers were worried that mass market carmaker VW could damage the Porsche [] [].',a:[['brand'],['identity']]},
+{t:'By ‘[] []’, we mean the process of defining and subdividing a large homogeneous market into clearly identifiable segments having similar needs, wants or characteristics.',a:[['market'],['segmentation']]},
+{t:'The key to success is not in just securing the first order, but in fixing problems and offering new services. So we reward our sales staff for [] [] rather than just for the initial sale.',a:[['customer'],['retention']]}];
+const VBp=['To create the right marketing {1}, businesses have to meet a number of conditions.',
+'First of all, the product has to have the right {2}. For example, it must look good and work well. Secondly, the {3} must be right. If you hope to make a good profit, you want consumers to buy in large numbers.',
+'Then, the goods must be in the right place at the right time, so you have to make sure that the goods arrive when and where they are wanted. To this end, accessing the right {4} channels is crucial.',
+'Finally, the {5} group needs to be made aware of the existence and availability of the product through {6}. So you need to decide where and when you can get across your marketing messages to your target market. Besides, you also need to ask yourself how you will reach your {7}. For example, you can get your marketing {8} across by advertising in the press, on TV, on the Internet or on billboards.'];
+const VBg={1:{ex:'c',o:['strategy','plan','mix','profile']},2:{a:'b',o:['portfolio','features','extension','base']},3:{a:'d',o:['retail','identity','wholesale','price']},4:{a:'a',o:['distribution','exporter','survey','focus']},
+5:{a:'b',o:['USP','target','SWOT','wholesaler']},6:{a:'c',o:['discount','sample','promotion','questionnaire']},7:{a:'b',o:['profile','audience','strategy','retailer']},8:{a:'d',o:['plans','offers','samples','messages']}};
+const RA=[{w:['balance','sheet','improving','steadily'],a:'steadily improving balance sheet',n:2},{w:['research','market','ambitious','programme'],a:'ambitious market research programme',n:3},
+{w:['relations','new','department','public'],a:'new public relations department',n:4},{w:['figures','impressive','profit','extremely'],a:'extremely impressive profit figures',n:5},
+{w:['operations','rapidly','overseas','expanding'],a:'rapidly expanding overseas operations',n:6}];
+const cw=(a,b)=>'<span class="cw">'+a+'<br>'+b+'</span>';
+const RB=[
+{t:cw('target','youth')+' [] '+cw('segmentation','share'),ex:'market'},
+{t:cw('niche','global')+' [] '+cw('campaign','budget'),a:['marketing'],ph:['m________']},
+{t:cw('fair','world')+' [] '+cw('fair','deficit'),a:['trade'],ph:['t____']},
+{t:cw('outdoor','Internet')+' [] '+cw('campaign','agency'),a:['advertising'],ph:['a__________']},
+{t:cw('premium','leading')+' [] '+cw('image','name'),a:['brand'],ph:['b____']},
+{t:cw('car','overseas')+' [] '+cw('figures','department'),a:['sales'],ph:['s____']}];
+const WAL=['The company is planning a direct mail campaign','Their mailing list contains plentiful information and data','Their competitors, however, still have to go through a specialist direct mail agency','Every company must work hard','The government decided to introduce a quota','They increased their competitiveness'];
+const WAE=['compete or even survive.','improving sales of their range of office supplies.','limiting exports of textile products from India.','reach potential customers, which costs them extra time and money.','their market share would increase.','they won’t have any difficulty identifying the most appropriate recipients for the mailshots.'];
+const WAK=[['with a view to',1],['so that',5],['in order to',3],['in order to',0],['with a view to',2],['so that',4]];
+const WC=[
+{t:'Today, by the contrast, international marketers ask themselves whether it is better',ex:'the'},
+{t:'to standardise or to adapt a product across different markets. Finding the right',ex:'✓'},
+{t:'international mix it has become one of the key questions, and answers vary greatly',a:'it'},
+{t:'from a company to company and from product to product. Coca-Cola, for example,',a:'a'},
+{t:'has customised its soft drinks to every market. It is well known fact that Coke in',a:'fact'},
+{t:'Indonesia tastes lot different from Coke in the UK. Such a strategy is in stark',a:'lot'},
+{t:'contrast to Rolex’s. Indeed, Rolex uses the same advertising message, and positions',a:null},
+{t:'its watches in the same way in the world over. Other companies strike a',a:'in'},
+{t:'compromise between customising and standardising, and opt for a middle-of-the',a:null},
+{t:'road strategy. Car manufacturers, for example, cannot afford them to design a',a:'them'},
+{t:'separate car for each market. However, they do need to think of a country-specific',a:'a'},
+{t:'differentiating features, as consumer tastes vary enormously from one country to',a:null}];
+const WDp=['Dear Sir or Madam','I have pleasure in enclosing five copies of our new brochure, detailing the Strategic Leadership Programme and the Advanced Management Programme available here at the Bratislava Central European Institute for Management Development for entry next September.',
+'I should be grateful if you could please {1} the brochure as appropriate within your organisation, so that it is available to both the Head of Human Resources and employees when {2} professional development options.',
+'In addition, I {3} a poster which includes prepaid response cards and should be most grateful if you could {4} for this to be displayed.',
+'Should you {5} further copies of either brochure or poster, please {6} Igor Cutka at our Admissions Office by email on I.Cutka3@pk.uniba.sk.',
+'Finally, I hope you and your staff find the brochure of interest.','Yours faithfully<br><b>Professor Irena Trollerova MBA</b><br>Head of the CEIMD'];
+const WDg={1:{ex:'forward'},2:{a:['considering']},3:{a:['enclose']},4:{a:['arrange']},5:{a:['require']},6:{a:['contact']}};
+
+/* ---------- sections ---------- */
+const S=[];const sec=(g,l,i,b)=>S.push({g,l,i,b});
+sec('Vocabulary','A','Match a word from box A with a word from box B to complete the sentences below.',b=>both(b,[
+ d=>{d.insertAdjacentHTML('beforeend','<p class="hint"><b>Step 1.</b> Tap a word in A, then a word in B to join them. Tap a joined word again to undo the pair.</p>');return match(d,{L:BA,R:BB,key:[5,2,3,0,1,4],ex:0})},
+ d=>{d.insertAdjacentHTML('beforeend','<p class="hint"><b>Step 2.</b> Complete the sentences: one word from A, then one word from B in each gap.</p>');return fill(d,VA)}]));
+sec('Vocabulary','B','Complete each space in the article with the best word (a, b, c or d).',b=>cloze(b,VBp,VBg,'sel'));
+sec('Language review: Noun compounds and noun phrases','A','The words in each of the noun phrases below are in the wrong order. Write the phrases in their correct form.',b=>{
+ b.insertAdjacentHTML('beforeend','<div class="q ex"><span class="n">1</span><div>report · confidential · marketing · highly → <b class="exw">highly confidential marketing report</b></div></div><p class="hint">Tap the words in the right order; tap a placed word to take it back.</p>');return reorder(b,RA)});
+sec('Language review: Noun compounds and noun phrases','B','Find the word which can make a compound or a collocation with both words on the left and on the right, as in the example. The grey hint shows the first letter and the number of letters.',b=>fill(b,RB));
+sec('Writing: Linking ideas','A','Match the appropriate sentence halves below and join them with the correct linker.',b=>{
+ b.insertAdjacentHTML('beforeend','<p class="hint">For each sentence choose the linker (<i>in order to, with a view to, so that</i>) and the ending that completes it. Sentence 1 is done for you.</p>');
+ return halves(b,{L:WAL,E:WAE,lk:['in order to','with a view to','so that'],key:WAK,ex:0})});
+sec('Writing: Linking ideas','B','Cross out the two explanations which are not correct. The three linkers in exercise A are used to…',b=>cross(b,['contrast ideas.','express the cause of something.','express the purpose of something.'],2,'the linkers express the purpose of something.'));
+sec('Writing: Linking ideas','C','Read the passage below about international marketing. In most of the lines 1–12 there is one extra word which does not fit. Some lines, however, are correct.',b=>{
+ b.insertAdjacentHTML('beforeend','<p class="hint">If a line is <b>correct</b>, press ✓. If there is an <b>extra word</b>, type that word. Lines 1 and 2 are done for you.</p>');
+ return lines(b,'Globalisation has affected marketing strategies in many ways. In the past, for example, how to enter a market tended to be the main question.',WC,'another.')});
+sec('Writing: A marketing letter','D','The letter below was sent by an institute for management development to a large number of companies throughout Eastern and Central Europe. As you read it, complete it with the correct form of the verbs from the box.',b=>{
+ b.insertAdjacentHTML('beforeend','<p><span class="vb">arrange &nbsp; consider &nbsp; contact &nbsp; enclose &nbsp; <s>forward</s> &nbsp; require</span></p>');
+ const L=$('div','letter');L.innerHTML='<h3>CENTRAL EUROPEAN INSTITUTE FOR MANAGEMENT DEVELOPMENT</h3><p class="note" style="margin:0 0 12px">Hviezdoslavovo nam. 128, 812 03 Bratislava<br>20 June</p>';b.appendChild(L);
+ return cloze(L,WDp,WDg,'txt')});
+sec('Writing: A marketing letter','E','Ivan Gasperlin, the manager of Kommerz Bank, wishes to order five more copies of both the brochure and the poster. Write an e-mail message.',email);
+
+/* ---------- page ---------- */
+const main=document.getElementById('main'),tot=document.getElementById('tot');let last='';
+function upd(){let s=0,m=0;S.forEach(x=>{s+=x.res;m+=x.o.max});tot.textContent='Score: '+s+' / '+m}
+function chk(x){x.res=x.o.check();x.sc.textContent=x.res+' / '+x.o.max;upd()}
+S.forEach(x=>{
+ if(x.g!==last){main.appendChild($('h2','grp',x.g));last=x.g}
+ const c=$('section','card'),h=$('div','sh'),b=$('div');x.res=0;
+ x.sc=$('span','sc');h.append($('span','badge',x.l.length>1?'':x.l),$('h2',null,x.i),x.sc);c.append(h,b);
+ x.o=x.b(b);
+ const cr=$('div','cr');
+ [['Check','ctl',()=>chk(x)],['Show Answers','ctl alt',()=>{x.o.show();chk(x)}],['Reset','ctl alt',()=>{x.o.reset();x.res=0;x.sc.textContent='';upd()}]]
+  .forEach(([t,k,f])=>{const bt=$('button',k,t);bt.type='button';bt.onclick=f;cr.appendChild(bt)});
+ c.appendChild(cr);main.appendChild(c);
+});
+document.getElementById('gc').onclick=()=>S.forEach(chk);
+document.getElementById('gs').onclick=()=>S.forEach(x=>{x.o.show();chk(x)});
+document.getElementById('gr').onclick=()=>S.forEach(x=>{x.o.reset();x.res=0;x.sc.textContent=''});
+document.getElementById('gr').addEventListener('click',upd);
+upd();
+</script></body></html>
