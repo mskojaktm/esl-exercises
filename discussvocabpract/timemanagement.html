@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Time Management · B2–C1 Vocabulary Practice</title>
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#f2f7f8;--card:#fff;--tx:#0D2B35;--mut:#58727d;--ok:#1b8a4b;--no:#c0392b;--okb:#e5f5eb;--nob:#fdeceb;--bd:#cfdfe3;--in:#f7fbfc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0a181d;--card:#112b34;--tx:#e6f1f4;--mut:#9db6bf;--ok:#6fd699;--no:#ff8f82;--okb:#133a2a;--nob:#3f2121;--bd:#254f5b;--in:#0c2129}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0a181d;--card:#112b34;--tx:#e6f1f4;--mut:#9db6bf;--ok:#6fd699;--no:#ff8f82;--okb:#133a2a;--nob:#3f2121;--bd:#254f5b;--in:#0c2129}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 Calibri,"Segoe UI",Arial,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:30}
+h1,h2,#bar b{font-family:"Trebuchet MS",Verdana,sans-serif}
+header{background:var(--navy);color:#fff;padding:26px 16px 20px;text-align:center}
+header h1{margin:0 0 4px;font-size:1.7rem}
+header p{margin:4px auto;max-width:720px;color:#cfe6ea}
+.chips span{display:inline-block;background:var(--teal);color:#fff;border-radius:14px;padding:2px 11px;margin:3px;font-size:.93rem}
+#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--navy);color:#fff;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:8px 14px;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+button{font:inherit;cursor:pointer;border:0;border-radius:6px;padding:6px 12px;background:var(--teal);color:#fff}
+button.g{background:#fff;color:var(--navy)}
+button.sm{margin-top:4px;padding:3px 10px;font-size:.9rem}
+main{max-width:860px;margin:0 auto;padding:0 12px 40px}
+.sec{background:var(--card);border-left:6px solid var(--teal);border-radius:10px;box-shadow:0 3px 10px rgba(13,43,53,.14);margin:20px 0;padding:14px 18px 10px}
+.sec h2{margin:0 0 4px;font-size:1.2rem;color:var(--teal)}
+.b{display:inline-block;min-width:1.7em;text-align:center;background:var(--teal);color:#fff;border-radius:50%;margin-right:6px}
+.d{margin:0 0 8px;color:var(--mut);font-size:.95rem}
+.defs{margin:6px 0 10px;padding:8px 8px 8px 34px;background:var(--in);border:1px solid var(--bd);border-radius:8px;font-size:.94rem}
+.bank{margin:4px 0 8px}.bank span{display:inline-block;border:1.5px solid var(--teal);border-radius:14px;padding:1px 10px;margin:2px;font-size:.93rem}
+.it{padding:8px 0;border-top:1px solid var(--bd)}
+.n{color:var(--teal);font-weight:700}
+input[type=text],select,textarea{font:inherit;color:var(--tx);background:var(--in);border:1.5px solid var(--bd);border-radius:6px;padding:3px 8px;max-width:100%}
+.gp{width:11em}.w{display:block;width:100%;box-sizing:border-box;margin-top:5px}
+.opts label{display:block;padding:2px 0;cursor:pointer}
+.opts{border:1.5px solid transparent;border-radius:6px;padding:2px 6px;margin-top:3px}
+.ok{border-color:var(--ok)!important;background:var(--okb)!important}
+.no{border-color:var(--no)!important;background:var(--nob)!important}
+.fb{margin-top:4px;font-size:.93rem}.fb:empty{display:none}
+.fb.g{color:var(--ok)}.fb.r{color:var(--no)}.fb.m{color:var(--mut)}
+</style></head><body>
+<header><h1>⏱ Time Management</h1>
+<p>B2–C1 vocabulary practice: 7 mixed exercises (matching, open cloze, multiple choice, translation both ways, rewriting, free use in context)</p>
+<div class="chips"><span>to put off</span><span>hustle and bustle</span><span>to stick to the schedule/plan</span><span>to call it a day</span><span>to prioritize</span><span>tardiness</span><span>aftermath</span><span>to break it down into</span><span>to keep track of</span><span>to log something</span></div></header>
+<div id="bar"><span>Score: <b id="sc">–</b> / <b id="tt">0</b> &nbsp;·&nbsp; Answered: <b id="an">0</b></span>
+<span><button onclick="run(0)">Check answers</button> <button class="g" onclick="run(1)">Show answers</button> <button class="g" onclick="rs()">Reset</button></span></div>
+<main id="app"></main>
+<script>
+const app=document.getElementById("app");
+const R={put:"(put|puts|putting)\\s+(\\w+\\s+)?off",hb:"hustle\\s+and\\s+bustle",stick:"(stick|sticks|sticking|stuck)\\s+(\\w+\\s+)?to",call:"call(ed|s|ing)?\\s+it\\s+a\\s+day",pri:"prioriti[sz](e|es|ed|ing)",tard:"tardiness",after:"aftermath",brk:"(break(s|ing)?|broke)\\b[\\w\\s]*\\bdown\\s+into",keep:"(keep|keeps|keeping|kept)\\s+track\\s+of",log:"\\blog(s|ged|ging)?\\b"};
+const LB={put:"put off",hb:"hustle and bustle",stick:"stick to",call:"call it a day",pri:"prioritize",tard:"tardiness",after:"aftermath",brk:"break … down into",keep:"keep track of",log:"log"};
+const N=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/[.,!?;:]+$/,"").replace(/\s+/g," ").trim();
+const S=[];
+const mk=(t,h,c)=>{const e=document.createElement(t);if(h)e.innerHTML=h;if(c)e.className=c;return e};
+const mark=(e,f,ok,bad,good)=>{e.classList.toggle("ok",ok);e.classList.toggle("no",!ok);f.className="fb "+(ok?"g":"r");f.innerHTML=ok?(good||"✓ Correct"):bad};
+const clr=(e,f)=>{e.classList.remove("ok","no");f.className="fb";f.innerHTML=""};
+const fb=it=>{const f=mk("div","","fb");it.append(f);return f};
+
+const sel=(q,o,c)=>it=>{it.insertAdjacentHTML("beforeend",q+" ");const s=mk("select",'<option value="">–</option>'+o.map((x,i)=>`<option value="${i}">${x}</option>`).join(""));it.append(s);const f=fb(it);
+return{a:()=>s.value!=="",chk(){const ok=s.value!==""&&+s.value===c;mark(s,f,ok,"✗ Correct: <b>"+o[c]+"</b>");return ok},show(){s.value=c},rst(){s.value="";clr(s,f)}}};
+
+const mc=(q,o,c)=>it=>{it.insertAdjacentHTML("beforeend",q);const w=mk("div","","opts"),n="q"+S.length;
+const r=o.map((x,i)=>{const l=mk("label");l.innerHTML=`<input type="radio" name="${n}"> ${x}`;w.append(l);return l.firstChild});
+it.append(w);const f=fb(it),g=()=>r.findIndex(x=>x.checked);
+return{a:()=>g()>=0,chk(){const ok=g()===c;mark(w,f,ok,"✗ Correct: <b>"+o[c]+"</b>");return ok},show(){r[c].checked=true},rst(){r.forEach(x=>x.checked=false);clr(w,f)}}};
+
+const gap=(a,b,ans)=>it=>{it.insertAdjacentHTML("beforeend",a+" ");const i=mk("input","","gp");i.type="text";i.autocomplete="off";i.spellcheck=false;it.append(i);it.insertAdjacentHTML("beforeend"," "+b);const f=fb(it);
+return{a:()=>i.value.trim()!=="",chk(){const ok=ans.includes(N(i.value));mark(i,f,ok,"✗ Answer: <b>"+ans[0]+"</b>");return ok},show(){i.value=ans[0]},rst(){i.value="";clr(i,f)}}};
+
+const rx=(q,m,mod,min,ta)=>it=>{it.insertAdjacentHTML("beforeend",q);const i=mk(ta?"textarea":"input","","w");if(ta)i.rows=3;else i.type="text";i.spellcheck=false;it.append(i);const f=fb(it);
+return{a:()=>i.value.trim()!=="",chk(){const v=i.value,x=m.filter(k=>!new RegExp(R[k],"i").test(v)).map(k=>LB[k]),ok=!x.length&&v.trim().length>=min;
+mark(i,f,ok,"✗ "+(x.length?"Use correctly: <b>"+x.join(", ")+"</b>. ":"Write a full sentence. ")+"<br>Model: <i>"+mod+"</i>","✓ Target language used.<br>Model: <i>"+mod+"</i>");return ok},show(){i.value=mod},rst(){i.value="";clr(i,f)}}};
+
+const self=(q,mod)=>it=>{it.insertAdjacentHTML("beforeend",q);const i=mk("textarea","","w");i.rows=2;it.append(i);const b=mk("button","Show model translation","sm");it.append(b);const f=fb(it);
+const sh=()=>{f.className="fb m";f.innerHTML="Model: <i>"+mod+"</i>"};b.onclick=sh;
+return{a:()=>false,chk:()=>null,show:sh,rst(){i.value="";clr(i,f)}}};
+
+const sec=(n,h,d,x,items,sc=1)=>{const s=mk("section",`<h2><span class="b">${n}</span> ${h}</h2><p class="d">${d}</p>${x||""}`,"sec");
+items.forEach((f,i)=>{const it=mk("div",`<span class="n">${i+1}.</span> `,"it"),o=f(it);o.sc=sc;S.push(o);s.append(it)});app.append(s)};
+
+/* 1 Matching */
+const DEF=["to divide a big task, amount or problem into smaller, more manageable parts","to stop working for the day (or to stop an activity)","the habit of arriving late or doing things after the agreed time","to follow an arrangement exactly, without changing it","the noisy, crowded, busy activity of a lot of people in one place","to record something officially in a list, system or diary (e.g. hours, events)","to delay doing something until a later time","the situation that follows an important, usually unpleasant event, and its consequences","to put tasks in order of importance, so that the most urgent ones are dealt with first","to follow the progress or changes of something so that you always know the current situation"];
+const L="ABCDEFGHIJ".split("");
+sec(1,"Match the expressions with the definitions","Choose the letter of the correct definition.",'<ol type="A" class="defs">'+DEF.map(x=>"<li>"+x+"</li>").join("")+"</ol>",
+[["to put off",6],["hustle and bustle",4],["to stick to the schedule/plan",3],["to call it a day",1],["to prioritize",8],["tardiness",2],["aftermath",7],["to break it down into",0],["to keep track of",9],["to log something",5]].map(([t,c])=>sel("<b>"+t+"</b> →",L,c)));
+
+/* 2 Open cloze */
+sec(2,"Open cloze: complete the gaps","Write the expression from the word bank in the correct form. Each gap needs one expression.",
+'<div class="bank"><span>put off</span><span>hustle and bustle</span><span>stick to</span><span>call it a day</span><span>prioritize</span><span>tardiness</span><span>aftermath</span><span>break it down into</span><span>keep track of</span><span>log</span></div>',[
+gap("I’ve been","telling my landlord about the leak for weeks, and now the ceiling has started to collapse.",["putting off"]),
+gap("It was nearly midnight, so we agreed to","and finish the report in the morning.",["call it a day"]),
+gap("After ten years in the capital, she longed to escape the","of city life.",["hustle and bustle"]),
+gap("Persistent","is the main reason he was passed over for promotion.",["tardiness"]),
+gap("In the","of the scandal, the CEO was forced to resign.",["aftermath"]),
+gap("You can’t do everything at once, so you need to","the tasks that will have the biggest impact.",["prioritize","prioritise"]),
+gap("Despite the unexpected delays, the team managed to","the schedule and delivered the product on time.",["stick to"]),
+gap("The task seemed overwhelming until she learned how to","manageable steps.",["break it down into"]),
+gap("I use a simple app to","how much time I spend on social media.",["keep track of"]),
+gap("All contractors must","their hours in the online system by Friday.",["log"])]);
+
+/* 3 Multiple choice */
+sec(3,"Choose the correct option","Pick the best answer. Watch collocations, prepositions and verb patterns.",null,[
+mc("He’s the kind of person who always ____ unpleasant tasks until the very last minute.",["puts off","logs","prioritizes","breaks down"],0),
+mc("It’s hard to ____ all the changes when ten people are editing the same document.",["keep track of","call it a day","hustle and bustle","tardiness"],0),
+mc("We need to stick ____ the original plan.",["at","to","with","on"],1),
+mc("Can you break the budget down ____ categories?",["into","on","over","about"],0),
+mc("“Tardiness” is closest in meaning to …",["lateness","laziness","carelessness","clumsiness"],0),
+mc("Which sentence is correct?",["She put off to make the call.","She put off making the call.","She put off make the call.","She put off of making the call."],1),
+mc("Which sentence is correct?",["Let’s call a day.","Let’s call it the day.","Let’s call it a day.","Let’s call day it."],2),
+mc("Which sentence is correct?",["I can’t keep track about my expenses.","I can’t keep track of my expenses.","I can’t keep a track of my expenses.","I can’t keep tracking my expenses of."],1),
+mc("Which sentence uses “aftermath” appropriately?",["The aftermath of the earthquake was devastating.","We had a wonderful aftermath on holiday.","The aftermath of the meeting will start at 9.","Aftermath, I will call you tomorrow."],0),
+mc("Which sentence uses “hustle and bustle” appropriately?",["We enjoyed the hustle and bustle of the Christmas market.","He lives in a hustle and bustle of silence.","The hustle and bustle was quiet and empty.","She hustled and bustled her homework yesterday."],0)]);
+
+/* 4 RU -> EN */
+sec(4,"Translate from Russian into English","Use the target vocabulary. The checker looks for the expression; then compare your sentence with the model.",null,[
+rx("Не откладывай это на последний момент – раздели задачу на небольшие части.",["put","brk"],"Don’t put it off until the last minute – break the task down into smaller parts.",15),
+rx("Она устала от суеты большого города и мечтала переехать куда-нибудь потише.",["hb"],"She was tired of the hustle and bustle of the big city and dreamed of moving somewhere quieter.",15),
+rx("Мы строго придерживались графика, поэтому закончили проект вовремя.",["stick"],"We strictly stuck to the schedule, so we finished the project on time.",15),
+rx("Хроническое опоздание сотрудников – главная проблема нашего офиса.",["tard"],"Employees’ chronic tardiness is the main problem in our office.",15),
+rx("Многие компании до сих пор восстанавливаются после последствий пандемии.",["after"],"Many companies are still recovering from the aftermath of the pandemic.",15),
+rx("Я записываю каждую потраченную копейку в приложение, чтобы следить за бюджетом.",["log","keep"],"I log every kopeck I spend in an app to keep track of my budget.",15)]);
+
+/* 5 EN -> RU */
+sec(5,"Translate from English into Russian","Translate, then reveal the model. This exercise is not scored.",null,[
+self("I couldn’t keep track of all the tasks, so I started logging everything in a spreadsheet.","Я не мог уследить за всеми задачами, поэтому начал записывать всё в таблицу."),
+self("If you prioritize badly, you’ll end up putting off the things that really matter.","Если неправильно расставить приоритеты, в итоге будешь откладывать то, что действительно важно."),
+self("After weeks of sticking to a strict plan, we finally called it a day.","После нескольких недель строгого следования плану мы наконец решили на этом закончить."),
+self("In the aftermath of the crisis, the team had to break the budget down into smaller categories.","После кризиса команде пришлось разбить бюджет на более мелкие категории.")],0);
+
+/* 6 Rewriting */
+sec(6,"Rewrite the sentence","Rewrite the whole sentence using the expression in bold. Keep the meaning.",null,[
+rx("“We didn’t change the plan at all.” → <b>to stick to</b>",["stick"],"We stuck to the plan.",8),
+rx("“I want to know at all times how each project is progressing.” → <b>to keep track of</b>",["keep"],"I want to keep track of how each project is progressing.",12),
+rx("“Divide the report into three sections.” → <b>to break … down into</b>",["brk"],"Break the report down into three sections.",12),
+rx("“Every freelancer has to record their working hours in the system.” → <b>to log</b>",["log"],"Every freelancer has to log their working hours in the system.",12)]);
+
+/* 7 Context */
+sec(7,"Use the vocabulary in context","Write 2–3 sentences for each task. Use ALL the expressions given.",null,[
+rx("Describe your perfect weekend away from work. Use: <b>hustle and bustle, to call it a day</b>.",["hb","call"],"I’d love to escape the hustle and bustle of the city and spend the weekend in the mountains. After a long hike, we’d call it a day and relax by the fire.",40,1),
+rx("Give advice to a student who is often late and always leaves homework until the last minute. Use: <b>tardiness, to put off, to prioritize</b>.",["tard","put","pri"],"Your tardiness is starting to affect your grades. Stop putting off your homework and learn to prioritize the tasks that are due first.",40,1),
+rx("Explain how you would manage a big project at work. Use: <b>to break it down into, to keep track of, to stick to the plan</b>.",["brk","keep","stick"],"I’d break it down into small tasks, keep track of progress in a spreadsheet and do my best to stick to the plan.",40,1)]);
+
+/* Controls */
+const T=S.filter(o=>o.sc).length;document.getElementById("tt").textContent=T;
+const upd=()=>document.getElementById("an").textContent=S.filter(o=>o.sc&&o.a()).length;
+function run(show){let g=0;S.forEach(o=>{if(show)o.show();const r=o.chk();if(r&&o.sc)g++});document.getElementById("sc").textContent=g}
+function rs(){S.forEach(o=>o.rst());document.getElementById("sc").textContent="–";upd()}
+document.addEventListener("input",upd);document.addEventListener("change",upd);
+</script></body></html>
