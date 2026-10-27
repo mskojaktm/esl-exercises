@@ -19,6 +19,12 @@ input,select,textarea{font:inherit;border:1.5px solid #9bb;border-radius:5px;pad
 input{width:9em}select{max-width:100%}
 .ok{border-color:var(--ok)!important;background:#e6f6ea}.bad{border-color:var(--bad)!important;background:#fdecea}.sh{background:#fff6d6}
 .b{margin-top:8px;display:flex;gap:6px;align-items:center}.r{margin-left:8px;font-weight:bold}
+.cr{display:grid;grid-template-columns:24px repeat(13,32px);gap:2px;align-items:center;margin:0 0 2px}
+.cn{font-size:.85rem;text-align:right;padding-right:4px;color:#456}
+input.c{box-sizing:border-box;width:32px;height:32px;padding:0;margin:0;text-align:center;font-size:1.1rem;font-weight:bold;text-transform:uppercase;border:1.5px solid #0D2B35;border-radius:0;background:#fff}
+.e{display:block;width:32px;height:32px}
+input.c.sd{background:#cfe9ee}input.c.sd.ok,input.c.ok{background:#e6f6ea}input.c.sd.bad,input.c.bad{background:#fdecea}input.c.sd.sh,input.c.sh{background:#fff6d6}
+.ex{overflow-x:auto}
 </style></head><body>
 <header><h1>Gateway B1 — UNIT 1 — Family Life</h1><p>Interactive practice · Workbook pp. 4–11</p></header>
 <div id="bar"><b id="sc">Score: 0 / 0</b><button onclick="all_('chk')">Check all</button><button class="g" onclick="all_('rst')">Reset all</button></div>
@@ -30,14 +36,8 @@ L=s=>S(s).map((x,i)=>"abcdefgh"[i]+") "+x),
 GB=["G","B"],TF=["✓","✗"];
 const E=[
 "Vocabulary (p. 4)",
-["1 Crossword clues","Write the words from the clues. The last item is the word in the shaded column.","f",0,[
-["1 He's 72. He's a __.","senior citizen"],
-["2 & 3 She's 55. She's a __ __ woman.","middle;aged"],
-["4 The period of life when you change from being a child to being a young adult","adolescence"],
-["5 A very young child who can't talk or walk","baby"],
-["6 The stage of life when you are 70, for example","old age"],
-["7 The opposite of life","death"],
-["8 The beginning of life","birth"],
+["1 Crossword","Read the clues and complete the puzzle. Which word appears in the shaded column?\n1 He's 72. He's a ______.\n2 & 3 She's 55. She's a ______ ______ woman.\n4 The period of life when you change from being a child to being a young adult\n5 A very young child who can't talk or walk\n6 The stage of life when you are 70, for example\n7 The opposite of life\n8 The beginning of life\n9 (the word in the shaded column)","x",0,[
+["1","senior citizen",1],["2","middle",4],["3","aged",7],["4","adolescence",1],["5","baby",8],["6","old age",5],["7","death",8],["8","birth",7],
 ["9 Shaded column word:","teenager"]]],
 ["2 Complete the sentences with words from the puzzle","","f",0,[
 ["1 We're celebrating the __ of our new sister.","birth"],
@@ -45,7 +45,7 @@ const E=[
 ["3 __ is a difficult time for many people. They aren't children, but they aren't adults either.","adolescence"],
 ["4 When you're sitting on the bus, you should always offer your seat to a __.","senior citizen"],
 ["5 It's important to look after your parents in their __.","old age"]]],
-["3 Family tree","Tree: John = Natasha → Ian (= Susan → Simon), Sandra (= Luke → James, Sophie), Daniel.","f",0,[
+["3 Family tree","<svg viewBox='0 0 520 170' style='width:100%;max-width:520px;display:block;margin:6px auto' font-family='Arial' font-size='15' text-anchor='middle'><path stroke='#0D2B35' stroke-width='1.5' fill='none' d='M260 28V50M70 50H450M70 50V76M260 50V76M450 50V76M70 100V140M260 100V118M215 118H305M215 118V140M305 118V140'/><g fill='#0D2B35'><text x='260' y='20'>John = Natasha</text><text x='70' y='92'>Ian = Susan</text><text x='260' y='92'>Sandra = Luke</text><text x='450' y='92'>Daniel</text><text x='70' y='158'>Simon</text><text x='215' y='158'>James</text><text x='305' y='158'>Sophie</text></g></svg>","f",0,[
 ["1 John and Natasha are Simon's __.","grandparents"],["2 Susan is Ian's __.","wife"],["3 James is Simon's __.","cousin"],
 ["4 Natasha is Luke's __.","mother-in-law"],["5 Luke is Ian's __.","brother-in-law"],["6 Daniel is Simon's __.","uncle"],
 ["7 Sophie is Ian's __.","niece"],["8 James is Daniel's __.","nephew"],["9 Sophie is John's __.","granddaughter"],["10 Luke is Sandra's __.","husband"]]],
@@ -57,6 +57,7 @@ const E=[
 ["4 After you retire, you become a __ and get money from the government.","pensioner"],["5 A __ is a child between two and four.","toddler"],
 ["6 An __ is a child in its first year.","infant"],["7 A __ is a child who is not yet a teenager (about 10–12 years old).","tween"]]],
 "Reading (p. 5) — Ella's blog",
+"<div class='ex'><h3>Ella's blog</h3><div id='blog' style='background:#faf6ea;border:1px dashed #b9a;padding:10px;white-space:pre-line'><!-- PASTE THE BLOG TEXT HERE --><em>[Blog text goes here. Read it, then do exercises 1–5 below.]</em></div></div>",
 ["1 Why is Ella angry with her sister?","Read the blog quickly (in your book) to check.","p",L("because she shares the same room|because she never leaves her alone|because she borrows her clothes"),[["Ella is angry","c"]]],
 ["2 Choose the best answers","","p",0,[
 q("1 Ella is quite happy at the moment because …","a","she's got more freedom than before|she likes going out with her family|she's getting on well with her school work"),
@@ -191,11 +192,15 @@ function act(d,c){
 function all_(c){document.querySelectorAll(".ex").forEach(d=>els(d).length&&act(d,c))}
 const m=document.getElementById("m");
 E.forEach(e=>{
- if(typeof e=="string"){m.insertAdjacentHTML("beforeend","<h2>"+e+"</h2>");return}
+ if(typeof e=="string"){m.insertAdjacentHTML("beforeend",e[0]=="<"?e:"<h2>"+e+"</h2>");return}
  const [h,ins,k,o,it]=e,d=document.createElement("div");d.className="ex";
  let t="<h3>"+h+"</h3>"+(ins?"<div class=i>"+ins+"</div>":"");
  it.forEach(([p,a,oo])=>{
   if(k=="w"){t+="<textarea rows=9 style='width:100%'></textarea>";return}
+  if(k=="x"){if(oo==null){t+="<div class=q>"+p+" <input data-a=\""+a+"\"></div>";return}
+   const w=a.replace(/ /g,"");t+="<div class=cr><b class=cn>"+p+"</b>";
+   for(let c=1;c<=13;c++){const j=c-oo;t+=(j>=0&&j<w.length)?"<input maxlength=1 class='c"+(c==9?" sd":"")+"' data-a='"+w[j]+"'>":"<span class=e></span>"}
+   t+="</div>";return}
   if(k=="p"){const op=oo||o,an=op.find(y=>y.startsWith(a+") "))||a;
    t+="<div class=q>"+p+" <select data-a=\""+an+"\"><option value=''>—</option>"+op.map(y=>"<option>"+y+"</option>").join("")+"</select></div>";return}
   const as=a.split(";"),ps=p.split("__");let s=ps[0];
