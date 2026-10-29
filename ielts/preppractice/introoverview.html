@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Writing Task 1 · Introduction &amp; Overview Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D2B35;--teal:#028090;--teal-d:#016F7C;--bg:#F4F7F8;--card:#fff;--line:#D5E0E3;--soft:#E8F4F1;--amber:#FFF6E0;--amber-l:#E3C27A;--brown:#8A4B0F;--ok:#0d7a4a;--bad:#b3261e;--mut:#4F6870}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--navy);font-family:Calibri,Carlito,'Segoe UI',Arial,sans-serif;font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:'Trebuchet MS',Arial,sans-serif;color:var(--navy);line-height:1.25}
+.hero{background:var(--navy);color:#EAF2F4;padding:34px 20px 28px;text-align:center}
+.hero h1{color:#fff;margin:0 0 6px;font-size:1.9em}.hero p{margin:0;color:#BFD3D8}
+.hero .tag{color:#F2B134;font-weight:700;letter-spacing:.06em;font-size:.85em}
+.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:3px solid var(--teal);box-shadow:0 2px 8px rgba(13,43,53,.12);padding:10px 16px}
+.bar .in{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.stat{font-weight:700}.stat small{font-weight:400;color:var(--mut)}
+.prog{flex:1;min-width:120px;height:10px;background:var(--line);border-radius:6px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:var(--teal);transition:width .25s}
+button{font:inherit;font-weight:700;border:0;border-radius:8px;padding:8px 14px;cursor:pointer;background:var(--teal);color:#fff}
+button.alt{background:#fff;color:var(--teal-d);border:2px solid var(--teal)}button.gh{background:var(--navy)}button:hover{filter:brightness(.93)}
+.wrap{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+.part{margin:34px 0 10px;padding:10px 16px;background:var(--navy);color:#fff;border-radius:10px;font-family:'Trebuchet MS',Arial,sans-serif;font-size:1.15em;font-weight:700}
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:12px;box-shadow:0 2px 10px rgba(13,43,53,.09);padding:20px 24px;margin:18px 0}
+.card h2{margin:0 0 12px;font-size:1.25em;display:flex;gap:10px;align-items:center}
+.card h3{margin:18px 0 6px;font-size:1.05em;color:var(--teal-d)}
+.badge{flex:none;background:var(--teal);color:#fff;border-radius:50%;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:.85em}
+.formula{background:var(--soft);border:1px solid #8CC9C2;border-radius:10px;padding:12px 16px;font-weight:700;margin:10px 0}
+.tip{background:var(--soft);border-left:5px solid var(--teal);border-radius:8px;padding:10px 14px;margin:12px 0}
+.warn{background:var(--amber);border-left:5px solid var(--amber-l);border-radius:8px;padding:10px 14px;margin:12px 0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+.box{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff}
+.box.w{background:var(--amber);border-color:var(--amber-l)}.box.s{background:var(--soft);border-color:#8CC9C2}
+.box b.l{display:block;font-size:.8em;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-d)}.box.w b.l{color:var(--brown)}
+.chip{display:inline-block;background:var(--soft);border:1px solid #8CC9C2;border-radius:999px;padding:1px 11px;margin:3px 4px 3px 0;font-size:.93em}
+table{width:100%;border-collapse:collapse;font-size:.95em;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}th{background:var(--navy);color:#fff;font-weight:700}
+td.k{font-weight:700;color:var(--teal-d);white-space:nowrap}
+ul{margin:6px 0 6px 20px;padding:0}li{margin:3px 0}
+.item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin:8px 0;background:#fff}
+.item .n{flex:none;background:var(--navy);color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:.8em;margin-top:2px}
+.item .t{flex:1}.item select,.item input[type=text]{font:inherit;border:2px solid var(--line);border-radius:8px;padding:4px 8px;max-width:100%}
+.item.ok{border-color:var(--ok);background:#EEF8F2}.item.bad{border-color:var(--bad);background:#FDF0EF}
+.fb{display:block;font-size:.9em;margin-top:4px}.ok>.t .fb{color:var(--ok)}.bad>.t .fb{color:var(--bad)}
+input.gap{width:120px;margin:0 3px}input.gap.ok{border-color:var(--ok);background:#EEF8F2}input.gap.bad{border-color:var(--bad);background:#FDF0EF}
+.cue{font-size:.92em;color:var(--mut);display:block;margin-bottom:4px}
+.opt{display:block;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin:5px 0;cursor:pointer;background:#fff}.opt input{margin-right:8px}
+.dat{font-size:.93em;background:#F4F7F8;border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin:6px 0}
+textarea{width:100%;font:inherit;border:2px solid var(--line);border-radius:8px;padding:8px;min-height:62px;resize:vertical}
+.lab{font-weight:700;color:var(--teal-d);display:block;margin-top:8px}
+.res{font-size:.93em;margin:6px 0}.res div{margin:2px 0}.res .y{color:var(--ok)}.res .x{color:var(--bad)}
+.model{display:none;background:var(--soft);border:1px solid #8CC9C2;border-radius:8px;padding:8px 12px;margin-top:8px;font-size:.95em}.model.show{display:block}
+.chk label{display:block;padding:3px 0}
+footer{text-align:center;color:var(--mut);font-size:.88em;padding:10px 0 30px}
+</style>
+</head>
+<body>
+<div class="hero"><div class="tag">IELTS ACADEMIC · WRITING TASK 1</div><h1>Introduction &amp; Overview Lab</h1><p>How to write the first two paragraphs of a band 7–9 report: lesson, vocabulary, examples and practice</p></div>
+<div class="bar"><div class="in">
+<div class="stat" id="stat">Answered 0 / 0 <small>· Score: —</small></div><div class="prog"><i id="pb"></i></div>
+<div><button onclick="checkAll()">Check Answers</button> <button class="alt" onclick="showAll()">Show Answers</button> <button class="gh" onclick="resetAll()">Reset</button></div>
+</div></div>
+<div class="wrap">
+
+<div class="part">PART A · LEARN</div>
+
+<div class="card"><h2><span class="badge">1</span> What these two paragraphs do</h2>
+<div class="g2">
+<div class="box"><b class="l">Paragraph 1 · Introduction</b>Tells the reader <b>what</b> the visual shows. It is a paraphrase of the task: one or two sentences, about 20–35 words, no data and no opinion.</div>
+<div class="box"><b class="l">Paragraph 2 · Overview</b>Tells the reader <b>the big picture</b>: the 2–4 most important trends, differences or stages. Begin with “Overall,” and use no figures.</div></div>
+<div class="tip"><b>Why it matters.</b> The official public descriptors for Task Achievement ask for “a clear overview” at band 7, and only an <i>attempted</i> overview at band 6. At band 8, key features must be <i>skilfully selected</i>. Many teachers treat a missing overview as a ceiling of about band 5. Task 1 has no conclusion: the overview does that job.</div>
+<p><b>Order:</b> Introduction → Overview → Details 1 → Details 2. Put the overview in its own paragraph so the examiner finds it at once.</p></div>
+
+<div class="card"><h2><span class="badge">2</span> The introduction</h2>
+<div class="formula">[chart type] + [reporting verb] + [what is measured] + [where / who] + [when]</div>
+<h3>Reporting verbs</h3>
+<span class="chip">shows</span><span class="chip">illustrates</span><span class="chip">compares</span><span class="chip">presents</span><span class="chip">depicts</span><span class="chip">gives information about</span><span class="chip">provides data on</span><span class="chip">outlines (process)</span><span class="chip">sets out (table)</span>
+<h3>Four paraphrase techniques</h3>
+<table><tr><th>Technique</th><th>Before</th><th>After</th></tr>
+<tr><td class="k">1 Synonyms</td><td>the percentage of</td><td>the proportion / share of</td></tr>
+<tr><td class="k">2 Change the word class</td><td>the number of visitors</td><td>how many people visited</td></tr>
+<tr><td class="k">3 Change the structure</td><td>the percentage of households with a car</td><td>how common car ownership was</td></tr>
+<tr><td class="k">4 Reorder</td><td>…between 1990 and 2010</td><td>From 1990 to 2010, … / over a twenty-year period</td></tr></table>
+<div class="g2"><div class="box s"><b class="l">Keep exactly</b>numbers and years · units · place names · key technical terms (e.g. CO₂) · the meaning</div>
+<div class="box w"><b class="l">Never</b>copy the task wording · add an opinion or reason · include data · write “This graph shows” without naming the chart type</div></div>
+<h3>Six task → introduction examples</h3>
+<table><tr><th>Type</th><th>Task wording</th><th>Paraphrase</th></tr>
+<tr><td class="k">Line graph</td><td>The graph shows the number of international students enrolled at a UK university between 2005 and 2020.</td><td>The line graph illustrates how many overseas students were enrolled at a British university over a fifteen-year period, from 2005 to 2020.</td></tr>
+<tr><td class="k">Bar chart</td><td>The chart shows the percentage of adults who used public libraries in five countries in 2019.</td><td>The bar chart compares what proportion of adults in five different countries made use of public libraries in 2019.</td></tr>
+<tr><td class="k">Pie charts</td><td>The pie charts show the sources of electricity in a European country in 1990 and 2020.</td><td>The pie charts compare how a European country generated its electricity in 1990 and in 2020.</td></tr>
+<tr><td class="k">Table</td><td>The table gives information about the average monthly spending of households in four countries on food, housing and transport.</td><td>The table presents data on how much households in four countries spend each month, on average, on food, accommodation and transport.</td></tr>
+<tr><td class="k">Process</td><td>The diagram shows how paper is recycled.</td><td>The diagram illustrates the stages involved in turning used paper into recycled paper.</td></tr>
+<tr><td class="k">Map</td><td>The maps show changes to a seaside town between 1990 and the present day.</td><td>The two maps illustrate how a coastal town developed from 1990 to the present.</td></tr></table>
+<div class="tip"><b>Tense:</b> past simple for past years (“was enrolled”, “generated”); present simple for processes and for maps of today. <b>Length:</b> one sentence is enough; two at most.</div></div>
+
+<div class="card"><h2><span class="badge">3</span> The overview</h2>
+<div class="formula">Overall, [main trend / biggest difference / main stages]. [Second key feature or contrast].</div>
+<h3>Three ways to find the key features</h3>
+<ul><li><b>Newspaper headline:</b> what would the headline be if this were a news story?</li><li><b>Gun to head:</b> you may mention only 2–4 things. Which?</li><li><b>Boss report:</b> what must a busy boss know in ten seconds?</li></ul>
+<h3>What to look for, by visual</h3>
+<table><tr><th>Visual</th><th>Look for</th></tr>
+<tr><td class="k">Line graph</td><td>overall direction of each line · highest / lowest · crossover points · stable vs volatile lines</td></tr>
+<tr><td class="k">Bar chart</td><td>tallest / shortest bars · groups that behave alike · contrast between groups · change over time if dynamic</td></tr>
+<tr><td class="k">Pie charts</td><td>largest / smallest segment · segments that grew or shrank · one dominant category</td></tr>
+<tr><td class="k">Table</td><td>highest / lowest · biggest change · a clear pattern in rows or columns</td></tr>
+<tr><td class="k">Process</td><td>how many stages · where it starts and ends · linear or cyclical · main inputs and outputs</td></tr>
+<tr><td class="k">Map</td><td>biggest changes (new / removed / replaced) · what stayed the same · overall direction of development</td></tr></table>
+<h3>Openers and sentence patterns</h3>
+<span class="chip">Overall,</span><span class="chip">In general,</span><span class="chip">It is clear that</span><span class="chip">As can be seen,</span><span class="chip">The most striking feature is that</span><span class="chip">What stands out is</span>
+<ul><li>X rose in every country, while Y fell.</li><li>A was consistently higher than B.</li><li>X overtook Y to become the largest …</li><li>The process has N stages, beginning with … and ending with …</li><li>The most significant change was …, whereas … remained unchanged.</li></ul>
+<div class="g2"><div class="box s"><b class="l">Do</b>start with “Overall,” · pick 2–4 features · compare · keep it to 2 sentences · make it a separate paragraph</div>
+<div class="box w"><b class="l">Don’t</b>put numbers in · give reasons or opinions · write “In conclusion” · claim more than the data shows · write only “there were many changes”</div></div>
+<h3>Weak → strong overviews</h3>
+<table><tr><th>Visual</th><th>Weak</th><th>Strong</th></tr>
+<tr><td class="k">Line graph</td><td>The graph shows many changes in car ownership.</td><td>Overall, car ownership rose in all four countries, with Japan showing the steepest growth, while the UK remained the highest throughout.</td></tr>
+<tr><td class="k">Bar chart</td><td>Many people went to libraries in different countries.</td><td>Overall, library use was far higher in the Nordic countries than elsewhere, and women used libraries more than men in every country.</td></tr>
+<tr><td class="k">Pie charts</td><td>In 1990 coal was 50% and in 2020 it was 20%.</td><td>Overall, coal went from being the dominant source to a minor one, while renewable energy showed the opposite trend and became the largest source by 2020.</td></tr>
+<tr><td class="k">Table</td><td>Households spend money on food, housing and transport.</td><td>Overall, housing was the biggest expense in every country, and Country A spent the most on all three categories.</td></tr>
+<tr><td class="k">Process</td><td>Paper is recycled in many steps.</td><td>Overall, the process has six stages, beginning with the collection of used paper and ending with the delivery of new paper rolls.</td></tr>
+<tr><td class="k">Map</td><td>The town changed a lot.</td><td>Overall, the town became far more developed, with the beach area turned into tourist facilities, while the old harbour remained unchanged.</td></tr></table></div>
+
+<div class="card"><h2><span class="badge">4</span> Vocabulary bank</h2>
+<div class="g2">
+<div class="box"><b class="l">Chart nouns</b><span class="chip">line graph</span><span class="chip">bar chart</span><span class="chip">pie chart</span><span class="chip">table</span><span class="chip">diagram</span><span class="chip">flow chart</span><span class="chip">the two maps</span><span class="chip">the figures</span></div>
+<div class="box"><b class="l">Measures</b>percentage → <span class="chip">proportion</span><span class="chip">share</span><br>number → <span class="chip">figure</span><span class="chip">how many</span><br>cost / spending → <span class="chip">expenditure</span><span class="chip">outlay</span><br>population → <span class="chip">inhabitants</span><span class="chip">residents</span></div>
+<div class="box"><b class="l">Time phrases</b><span class="chip">from 2000 to 2020</span><span class="chip">over a twenty-year period</span><span class="chip">during the period</span><span class="chip">across two decades</span><span class="chip">in the years 2000–2020</span><span class="chip">by 2020</span><span class="chip">the present day</span></div>
+<div class="box"><b class="l">Trend language for overviews</b><span class="chip">rose / grew / climbed</span><span class="chip">fell / declined / dropped</span><span class="chip">remained stable</span><span class="chip">fluctuated</span><span class="chip">overtook</span><span class="chip">consistently higher</span><span class="chip">by far the largest</span><span class="chip">the vast majority</span><span class="chip">remained largely unchanged</span></div>
+<div class="box"><b class="l">Comparison</b><span class="chip">whereas</span><span class="chip">while</span><span class="chip">in contrast</span><span class="chip">the highest / lowest</span><span class="chip">dominated</span><span class="chip">led</span><span class="chip">lagged behind</span><span class="chip">the gap widened / narrowed</span></div>
+<div class="box"><b class="l">Process</b><span class="chip">stages / steps / phases</span><span class="chip">begins with … ends with</span><span class="chip">linear</span><span class="chip">cyclical</span><span class="chip">turned into</span><span class="chip">involves</span><span class="chip">from … to …</span></div>
+<div class="box"><b class="l">Maps</b><span class="chip">was replaced by</span><span class="chip">was converted into</span><span class="chip">was extended</span><span class="chip">was relocated</span><span class="chip">built-up</span><span class="chip">residential</span><span class="chip">commercial</span><span class="chip">remained unchanged</span></div>
+<div class="box"><b class="l">Degree words (match the data)</b><span class="chip">sharply</span><span class="chip">dramatically</span><span class="chip">steadily</span><span class="chip">gradually</span><span class="chip">slightly</span><span class="chip">marginally</span><br><small>“steadily” = constant rate. Not for a sharp fall followed by a slow one.</small></div></div></div>
+
+<div class="card"><h2><span class="badge">5</span> Common mistakes and fixes</h2>
+<table><tr><th>Mistake</th><th>Fix</th></tr>
+<tr><td>Copying the task wording</td><td>Rebuild the sentence with synonyms and a new structure.</td></tr>
+<tr><td>Figures in the overview</td><td>Move them to the detail paragraphs; the overview describes trends only.</td></tr>
+<tr><td>A vague overview (“many changes”)</td><td>Name the changes: which rose, which fell, which is highest.</td></tr>
+<tr><td>“In conclusion…” at the end</td><td>Task 1 has no conclusion. Write “Overall,” as paragraph 2.</td></tr>
+<tr><td>Reasons or opinions (“because people are richer”)</td><td>Report only what the visual shows.</td></tr>
+<tr><td>Only one feature covered</td><td>Give 2–4 features that together tell the whole story.</td></tr>
+<tr><td>Unsupported claims (“the largest countries”)</td><td>Claim only what the data shows.</td></tr>
+<tr><td>Wrong degree word (“steadily” for a sharp fall, then slow)</td><td>Match the adverb to the shape of the data.</td></tr>
+<tr><td>Percent of what? (e.g. rate within a group vs share of all)</td><td>Read the title and legend: say exactly what the whole is.</td></tr></table></div>
+
+<div class="part">PART B · PRACTISE</div>
+
+<div class="card"><h2><span class="badge">1</span> Exercise 1 · Introduction, overview or detail?</h2><p>Decide what each sentence is.</p><div id="ex1"></div></div>
+<div class="card"><h2><span class="badge">2</span> Exercise 2 · Choose the best paraphrase</h2><p>Which version keeps the meaning and sounds natural in a report?</p><div id="ex2"></div></div>
+<div class="card"><h2><span class="badge">3</span> Exercise 3 · Complete the introductions</h2><p>Type one word in each gap. Task wording is shown above each sentence.</p><div id="ex3"></div></div>
+<div class="card"><h2><span class="badge">4</span> Exercise 4 · Diagnose the overview</h2><p>What is the main problem with each overview? One is good.</p><div id="ex4"></div></div>
+<div class="card"><h2><span class="badge">5</span> Exercise 5 · Pick the best overview</h2><p>Study the data. Which sentence is the best overview?</p><div id="ex5"></div></div>
+
+<div class="card"><h2><span class="badge">6</span> Exercise 6 · Writing lab</h2>
+<p>Write an introduction and an overview for each task. Press <b>Quick check</b> for instant feedback on length, copying, figures and structure, then compare with the model under <b>Show Answers</b>. Writing tasks are not scored.</p><div id="ex6"></div></div>
+
+<div class="card chk"><h2><span class="badge">✓</span> Self-check before you move on</h2>
+<label><input type="checkbox"> My introduction names the chart type and keeps every fact the same.</label>
+<label><input type="checkbox"> I changed the structure, not only single words.</label>
+<label><input type="checkbox"> My introduction contains no data and no opinion.</label>
+<label><input type="checkbox"> My overview starts with “Overall,” and has 2–4 features.</label>
+<label><input type="checkbox"> My overview contains no figures and no reasons.</label>
+<label><input type="checkbox"> My overview compares (highest / lowest, rose / fell, overtook).</label>
+<label><input type="checkbox"> My tenses are consistent.</label></div>
+</div>
+<footer>IELTS Writing Task 1 · Introduction &amp; Overview Lab · built from the official public band descriptors (May 2023) and published teaching guides</footer>
+
+<script>
+/*DATA*/
+const EX={
+ sort:{opts:["Introduction","Overview","Detail"],items:[
+  ["The line graph compares how many tourists visited three Caribbean islands between 2010 and 2020.",0,"It says what the chart shows, with no trends: an introduction."],
+  ["Overall, tourist numbers rose on all three islands, with Island B attracting the most visitors.",1,"Main trend plus key difference, no figures: an overview."],
+  ["In 2010, Island A welcomed around 1.2 million visitors, compared with 0.8 million on Island C.",2,"Specific figures belong in the detail paragraphs."],
+  ["The table presents data on weekly spending by students in four cities.",0,"It paraphrases the task: an introduction."],
+  ["Overall, rent was the largest expense in every city, while spending on leisure was consistently the lowest.",1,"Biggest and smallest categories, no figures: an overview."],
+  ["Rent in London reached £210 per week, twice the figure for Leeds.",2,"Specific figures and a comparison: a detail sentence."],
+  ["The diagram illustrates how glass bottles are recycled.",0,"It says what the diagram shows: an introduction."],
+  ["Overall, the process consists of six stages, beginning with the collection of used bottles and ending with the inspection of new ones.",1,"Number of stages, start and end: an overview."]]},
+ para:[
+  ["between 2000 and 2020",["from 2000 to 2020","before 2000 and 2020","at 2000 or 2020"],0],
+  ["the percentage of households",["the money of households","the proportion of households","the numbers of houses"],1],
+  ["the number of visitors",["how much visitors","how often visitors","how many visitors"],2],
+  ["how much households spend on food",["households’ spending to food","household expenditure on food","expenditures of household food"],1],
+  ["a seaside town",["a town by sea","a sea town","a coastal town"],2],
+  ["changes to the town",["how the town developed","what the town changed","the changing for town"],0],
+  ["The diagram shows how paper is made.",["The diagram says paper makes.","The diagram outlines the stages of paper production.","The diagram is how paper."],1],
+  ["over a 20-year period",["in 20 years ago","for 20 year","across two decades"],2]],
+ cloze:[
+  {cue:"Task: The graph shows the number of international students enrolled at a UK university between 2005 and 2020.",s:"The line graph {1} how {2} overseas students were enrolled at a British university {3} a fifteen-year period.",a:{1:["illustrates","shows","compares","presents","depicts","describes"],2:["many"],3:["over","during","across"]}},
+  {cue:"Task: The pie charts show the sources of electricity in a European country in 1990 and 2020.",s:"The pie charts compare how a European country {4} its electricity in 1990 {5} in 2020.",a:{4:["generated","produced"],5:["and"]}},
+  {cue:"Task: The diagram shows how paper is recycled.",s:"The diagram {6} the stages {7} in turning used paper {8} recycled paper.",a:{6:["outlines","illustrates","shows","presents","depicts","describes"],7:["involved"],8:["into"]}}],
+ diag:{opts:["Too vague","Contains figures","Gives an opinion or reason","Covers only one feature","Good overview"],items:[
+  ["The graph shows many changes in car ownership over the years.",0,"It names no trend or feature."],
+  ["Overall, car ownership rose from 20% to 45% in Japan and from 35% to 50% in the UK.",1,"Figures belong in the detail paragraphs."],
+  ["Overall, tourism grew because more people can afford flights, which is good for the economy.",2,"Task 1 reports data; it does not explain or evaluate."],
+  ["Overall, Japan’s car ownership rose.",3,"Only one country; the overview must cover the whole picture."],
+  ["Overall, car ownership increased in all four countries, with Japan growing fastest and the UK staying the highest throughout.",4,"Clear trend, a comparison, no figures: a good overview."],
+  ["Overall, governments should build more bike lanes, as car use keeps rising.",2,"An opinion and a recommendation: not allowed in Task 1."]]},
+ best:[
+  {t:"Line graph · households with internet at home (%)",d:"UK 25 → 80 → 96 · Brazil 5 → 40 → 80 · Nigeria 1 → 10 → 35 (2000 → 2010 → 2020)",o:["In 2000, 25% of UK households had internet, compared with 5% in Brazil and 1% in Nigeria.","Overall, internet access increased because technology became cheaper.","Overall, internet access rose in all three countries, but the UK stayed ahead throughout while Nigeria remained far behind."],a:2,fb:"A is detail, B gives a reason; C states the trend and the main contrast."},
+  {t:"Bar chart · hours of exercise per week by age",d:"18–29: 5.2 · 30–44: 3.8 · 45–59: 2.9 · 60+: 3.5",o:["Overall, exercise time was highest among 18–29-year-olds and lowest among 45–59-year-olds, although people over 60 exercised more than those aged 45 to 59.","Young people exercise the most because they have more energy.","Exercise time was 5.2 hours for 18–29-year-olds and 2.9 hours for 45–59-year-olds."],a:0,fb:"The best answer gives highest, lowest and the exception, with no figures."},
+  {t:"Pie charts · household energy use (%)",d:"1990: heating 52, lighting 18, appliances 30 · 2020: heating 38, lighting 7, appliances 55",o:["Heating used 52% in 1990 and 38% in 2020, while lighting fell to 7%.","Overall, appliances went from the second-largest use of household energy to the largest, while heating and lighting both declined in share.","Overall, people use too much energy on appliances, which is bad."],a:1,fb:"A is detail with figures, C is an opinion; B names the key shift."},
+  {t:"Process · making cheese",d:"1 milk is heated · 2 bacteria are added · 3 curds form · 4 whey is drained · 5 curds are pressed into moulds · 6 the cheese is aged",o:["Cheese-making is a long and interesting process that has existed for centuries.","Milk is heated, then bacteria are added, then curds form, then whey is drained.","Overall, the process has six stages, beginning with the heating of milk and ending with the ageing of the pressed cheese."],a:2,fb:"A is outside knowledge and opinion, B lists steps; C gives stage count, start and end."}],
+ write:[
+  {t:"Line graph",p:"The graph below shows the number of cars sold (in thousands) in three countries between 2005 and 2020.",d:"Country X: 120 → 150 → 200 → 260 · Country Y: 200 → 190 → 170 → 150 · Country Z: 80 → 80 → 90 → 85 (2005, 2010, 2015, 2020)",must:["2005","2020"],
+   i:"The line graph illustrates how many cars were sold, in thousands, in three countries over a fifteen-year period from 2005 to 2020.",
+   o:"Overall, car sales rose throughout the period in Country X, which overtook Country Y to become the largest market, while sales in Y declined and those in Z remained low and fairly stable."},
+  {t:"Bar chart",p:"The chart below shows the percentage of people in four age groups who use social media every day.",d:"16–24: 92% · 25–34: 85% · 35–54: 64% · 55+: 33%",must:[],
+   i:"The bar chart compares how common daily social media use is among people in four different age groups.",
+   o:"Overall, daily social media use fell as age increased, with the youngest group by far the most active and the oldest group the least."},
+  {t:"Pie charts",p:"The pie charts show how a family spent its monthly income in 2000 and 2020.",d:"2000: food 32, housing 28, transport 12, leisure 8, other 20 · 2020: food 18, housing 40, transport 14, leisure 16, other 12 (%)",must:["2000","2020"],
+   i:"The pie charts compare how a family divided its monthly income between five categories of spending in 2000 and in 2020.",
+   o:"Overall, housing overtook food as the largest item of family spending, and leisure took a bigger share, while the share spent on food fell sharply."},
+  {t:"Process",p:"The diagram shows how rainwater is collected and used in a household.",d:"Rain falls on the roof · gutters carry it to a filter · the filter removes leaves and dirt · clean water is stored in an underground tank · a pump sends it to garden taps and toilets · overflow goes to the drain",must:[],
+   i:"The diagram outlines how a household collects rainwater and uses it in the garden and the toilets.",
+   o:"Overall, the process has five main stages, beginning with the collection of rain on the roof and ending with the use of the filtered water in the garden and toilets, while any excess flows into a drain."},
+  {t:"Map",p:"The maps show a village in 1990 and today.",d:"1990: farmland north of the road; a shop on the main street; a small school; a church and a river. Today: a housing estate on the former farmland; the shop is now a café; a new car park by the church; the school has been extended; the church and river are unchanged.",must:["1990"],
+   i:"The two maps illustrate how a village changed between 1990 and the present day.",
+   o:"Overall, the village became more built-up and commercial, with farmland replaced by housing and new facilities added, while the river and the church remained unchanged."}]
+};
+const CHK={
+ wc:s=>(s.trim().match(/\S+/g)||[]).length,
+ norm:s=>s.toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(Boolean),
+ run(a,b){const x=this.norm(a),y=this.norm(b);let best=0,prev=new Array(y.length+1).fill(0);for(let i=1;i<=x.length;i++){const cur=new Array(y.length+1).fill(0);for(let j=1;j<=y.length;j++){if(x[i-1]===y[j-1]){cur[j]=prev[j-1]+1;if(cur[j]>best)best=cur[j];}}prev=cur;}return best;},
+ intro(s,t){const r=[],n=this.wc(s);
+  r.push([n>=12&&n<=45,"Length: "+n+" words (aim for about 12–45)"]);
+  r.push([/(line graph|bar chart|pie chart|table|diagram|flow chart|maps?|graph|chart)/i.test(s),"Names the chart type"]);
+  r.push([this.run(s,t.p)<7,"Not copied from the task (longest shared run: "+this.run(s,t.p)+" words; keep it under 7)"]);
+  r.push([t.must.every(m=>s.includes(m)),"Keeps the key dates"+(t.must.length?" ("+t.must.join(", ")+")":"")]);
+  r.push([!/\b(because|should|i think|in my opinion|unfortunately)\b/i.test(s),"No opinion or reason"]);return r;},
+ over(s){const r=[],n=this.wc(s);
+  r.push([/^\s*(overall|in general|it is clear that|as can be seen|generally)/i.test(s),"Starts with an overview opener (Overall, …)"]);
+  r.push([!/\d/.test(s),"No figures"]);
+  r.push([n>=18&&n<=55,"Length: "+n+" words (aim for about 18–55, two features or more)"]);
+  r.push([/(higher|highest|lowest|lower|more|most|least|fewer|rose|rise|increase|grew|fell|declin|dropp|overtook|while|whereas|although|remained|stable|unchanged|largest|smallest|stages|replaced)/i.test(s),"Contains a trend or comparison"]);
+  r.push([!/\b(because|due to|as a result|in conclusion|should)\b/i.test(s),"No reasons, advice or “in conclusion”"]);return r;}
+};
+/*END*/
+
+const $=s=>document.querySelector(s),items=[];
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function mk(row,o){items.push(Object.assign({row},o));}
+function sel(opts,cls){const s=document.createElement("select");s.innerHTML='<option value="">—</option>'+opts.map((o,i)=>`<option value="${i}">${esc(o)}</option>`).join("");return s;}
+function row(n,html){const d=document.createElement("div");d.className="item";d.innerHTML=`<span class="n">${n}</span><span class="t">${html}<span class="fb"></span></span>`;return d;}
+function mark(it,ok,txt){it.row.classList.remove("ok","bad");it.row.classList.add(ok?"ok":"bad");const f=it.row.querySelector(".fb");if(f)f.textContent=(ok?"✓ ":"✗ ")+txt;}
+// Ex1 + Ex4: classification
+function classify(id,D,start){const box=$(id);D.items.forEach(([t,a,fb],k)=>{const r=row(start+k,esc(t)+'<br>');const s=sel(D.opts);r.querySelector(".t").insertBefore(s,r.querySelector(".fb"));box.appendChild(r);
+ mk(r,{ans:()=>s.value!=="",chk:()=>{const ok=+s.value===a&&s.value!=="";mark(items.find(i=>i.row===r),ok,ok?fb:(s.value===""?"Not answered. "+fb:fb));return ok},show:()=>{s.value=a},reset:()=>{s.value=""}});});}
+classify("#ex1",EX.sort,1);
+// Ex2
+(()=>{const box=$("#ex2");EX.para.forEach(([p,o,a],k)=>{const r=row(k+1,'<span class="cue">Original: <b>'+esc(p)+'</b></span>');const s=sel(o);r.querySelector(".t").insertBefore(s,r.querySelector(".fb"));box.appendChild(r);
+ mk(r,{ans:()=>s.value!=="",chk:()=>{const ok=s.value!==""&&+s.value===a;mark(items.find(i=>i.row===r),ok,ok?"Correct: "+o[a]:"Best answer: “"+o[a]+"”");return ok},show:()=>{s.value=a},reset:()=>{s.value=""}});});})();
+// Ex3: open cloze
+(()=>{const box=$("#ex3");EX.cloze.forEach(c=>{const wrap=document.createElement("div");wrap.className="item";wrap.style.display="block";wrap.innerHTML='<span class="cue">'+esc(c.cue)+'</span>';const p=document.createElement("div");p.innerHTML=esc(c.s).replace(/\{(\d)\}/g,'<input type="text" class="gap" data-g="$1" autocomplete="off" spellcheck="false">');wrap.appendChild(p);box.appendChild(wrap);
+ p.querySelectorAll("input").forEach(inp=>{const g=inp.dataset.g,acc=c.a[g];const fake={row:inp};
+ mk(inp,{ans:()=>inp.value.trim()!=="",chk:()=>{const ok=acc.includes(inp.value.trim().toLowerCase());inp.classList.remove("ok","bad");inp.classList.add(ok?"ok":"bad");inp.title=ok?"":"Possible answers: "+acc.join(" / ");return ok},show:()=>{inp.value=acc[0];inp.classList.remove("bad");inp.classList.add("ok");inp.title="Also accepted: "+acc.join(" / ")},reset:()=>{inp.value="";inp.classList.remove("ok","bad");inp.title=""}});});});})();
+classify("#ex4",EX.diag,1);
+// Ex5
+(()=>{const box=$("#ex5");EX.best.forEach((t,k)=>{const r=row(k+1,"<b>"+esc(t.t)+'</b><div class="dat">'+esc(t.d)+"</div>");const name="b"+k;t.o.forEach((o,i)=>{const l=document.createElement("label");l.className="opt";l.innerHTML=`<input type="radio" name="${name}" value="${i}">${esc(o)}`;r.querySelector(".t").insertBefore(l,r.querySelector(".fb"));});box.appendChild(r);
+ const val=()=>{const c=r.querySelector("input:checked");return c?+c.value:-1};
+ mk(r,{ans:()=>val()>=0,chk:()=>{const ok=val()===t.a;mark(items.find(i=>i.row===r),ok,t.fb);return ok},show:()=>{r.querySelectorAll("input")[t.a].checked=true},reset:()=>{r.querySelectorAll("input").forEach(x=>x.checked=false)}});});})();
+// Ex6: writing lab
+const writes=[];
+(()=>{const box=$("#ex6");EX.write.forEach((t,k)=>{const d=document.createElement("div");d.className="item";d.style.display="block";d.innerHTML=`<b>${k+1}. ${esc(t.t)}</b><div class="dat"><b>Task:</b> ${esc(t.p)}<br><b>Data:</b> ${esc(t.d)}</div>
+<span class="lab">Introduction</span><textarea id="wi${k}" placeholder="Paraphrase the task…"></textarea><div class="res" id="ri${k}"></div>
+<span class="lab">Overview</span><textarea id="wo${k}" placeholder="Overall, …"></textarea><div class="res" id="ro${k}"></div>
+<button onclick="quick(${k})">Quick check</button><div class="model" id="m${k}"><b>Model introduction:</b> ${esc(t.i)}<br><b>Model overview:</b> ${esc(t.o)}</div>`;box.appendChild(d);writes.push(d);});})();
+function fmt(r){return r.map(([ok,m])=>`<div class="${ok?"y":"x"}">${ok?"✓":"✗"} ${esc(m)}</div>`).join("")}
+function quick(k){const t=EX.write[k];$("#ri"+k).innerHTML=fmt(CHK.intro($("#wi"+k).value,t));$("#ro"+k).innerHTML=fmt(CHK.over($("#wo"+k).value));}
+// controls
+function upd(sc){const a=items.filter(i=>i.ans()).length,n=items.length;$("#stat").innerHTML=`Answered ${a} / ${n} <small>· Score: ${sc===undefined?"—":sc+" / "+n}</small>`;$("#pb").style.width=(100*a/n)+"%";}
+function checkAll(){let c=0;items.forEach(i=>{if(i.chk())c++});upd(c);}
+function showAll(){items.forEach(i=>{i.show();if(i.row.classList&&i.row.classList.contains("item")){i.row.classList.remove("bad");i.row.classList.add("ok");}});document.querySelectorAll(".model").forEach(m=>m.classList.add("show"));$("#stat").innerHTML=`Answers shown <small>· Score: —</small>`;}
+function resetAll(){items.forEach(i=>{i.reset();if(i.row.classList){i.row.classList.remove("ok","bad");const f=i.row.querySelector&&i.row.querySelector(".fb");if(f)f.textContent="";}});document.querySelectorAll(".model").forEach(m=>m.classList.remove("show"));document.querySelectorAll("textarea").forEach(t=>t.value="");document.querySelectorAll(".res").forEach(r=>r.innerHTML="");upd();}
+document.addEventListener("input",()=>upd());document.addEventListener("change",()=>upd());upd();
+</script>
+</body>
+</html>
