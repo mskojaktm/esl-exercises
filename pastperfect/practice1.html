@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Past Perfect: B2–C1 practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--t:#028090;--n:#0D2B35;--bg:#F1F7F8;--ok:#1B8A5A;--no:#C0392B;--ln:#CFE0E3;--y:#FFF4D6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--n);font:17px/1.55 Calibri,Carlito,"Segoe UI",Arial,sans-serif}
+h1,h2{font-family:"Trebuchet MS",Tahoma,sans-serif;margin:0;line-height:1.2}
+header{background:var(--n);color:#fff;padding:28px 20px 22px}
+header>div,main{max-width:860px;margin:0 auto}
+header h1{font-size:30px}header p{margin:8px 0 0;color:#BFE3E8}
+.bar{position:sticky;top:0;z-index:5;background:var(--t);color:#fff;box-shadow:0 2px 8px rgba(13,43,53,.25)}
+.bar>div{max-width:860px;margin:0 auto;padding:8px 20px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.sc{font-weight:700;font-size:18px}
+.pg{flex:1;min-width:90px;height:8px;background:rgba(255,255,255,.3);border-radius:4px;overflow:hidden}
+.pg i{display:block;height:100%;width:0;background:#fff;transition:width .3s}
+button,select,textarea{font:inherit;color:var(--n)}
+button{cursor:pointer}
+.bar button{background:#fff;border:0;border-radius:6px;padding:6px 12px;font-weight:700}
+.bar button:hover{background:#DFF3F6}
+main{padding:0 20px 40px}
+section{background:#fff;border-left:6px solid var(--t);border-radius:8px;box-shadow:0 2px 10px rgba(13,43,53,.1);padding:18px 20px;margin:22px 0}
+section h2{font-size:21px;display:flex;gap:10px;align-items:center}
+.b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--t);color:#fff;display:grid;place-items:center;font-size:16px}
+.hint{margin:6px 0 14px;color:#41636B}
+.kind{margin:0 0 4px;font-weight:700;color:var(--t)}
+details{margin:14px 0 0}summary{cursor:pointer;font-weight:700}
+.rules{background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(13,43,53,.1);padding:12px 20px;margin-top:22px}
+.cl{line-height:2.3;margin:0 0 10px}.g{white-space:nowrap}
+.g input{font:inherit;color:var(--n);border:0;border-bottom:2px solid var(--t);background:var(--y);padding:1px 6px;margin:0 3px;border-radius:3px 3px 0 0}
+.g small{color:#5C7C84;margin-right:3px}
+.ok{border-color:var(--ok)!important;background:#DDF4E8!important}
+.no{border-color:var(--no)!important;background:#FBE2DE!important}
+.shown{border-color:#999!important;background:#EEE!important;color:#444}
+.sel{border-color:var(--t)!important;background:#E2F4F6!important}
+.q{margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--ln)}
+.q:last-child{border:0}
+.q p{margin:0 0 6px}
+.opts,.tray{display:flex;flex-wrap:wrap;gap:8px}
+.opts button,.seg button,.tray button{border:2px solid var(--ln);background:#fff;border-radius:8px;padding:5px 11px}
+.opts button:hover,.seg button:hover,.tray button:hover{border-color:var(--t)}
+.seg{line-height:2.3}.seg button{margin:0 2px}
+.line{border:2px dashed var(--ln);border-radius:8px;padding:6px;margin:8px 0;min-height:50px}
+.line.okl{border:2px solid var(--ok)}.line.nol{border:2px solid var(--no)}
+.fb{min-height:1.3em;font-size:15px;color:#41636B}.fb.okt{color:var(--ok)}.fb.not{color:var(--no)}
+.row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.row select{border:2px solid var(--ln);border-radius:6px;padding:3px 6px;background:#fff}
+.mo{margin:0 0 14px;padding-left:28px;background:var(--bg);border-radius:8px;padding:10px 10px 10px 36px}
+.pr{background:#E8F5F7;border-radius:8px;padding:14px 16px;font-size:19px;margin:0 0 12px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px}
+.tools button,.mini{border:2px solid var(--t);background:#fff;border-radius:8px;padding:6px 14px;font-weight:700}
+.tools button:disabled{opacity:.45;cursor:default}
+.tt{font:700 26px "Trebuchet MS",sans-serif;min-width:70px}
+.chk label{display:block;margin:2px 0}
+textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8px;padding:10px}
+.meta{margin:6px 0 0;font-size:15px;color:#41636B}
+:focus-visible{outline:3px solid #F2A900;outline-offset:2px}
+@media(max-width:560px){body{font-size:16px}section{padding:14px}main,header{padding-left:12px;padding-right:12px}}
+@media(prefers-reduced-motion:reduce){.pg i{transition:none}}
+</style>
+</head>
+<body>
+<header><div><h1>Past Perfect: B2–C1 practice</h1><p>Six checked exercises, two speaking tasks and one writing task, built from the Past Perfect presentation.</p></div></header>
+<div class="bar"><div>
+<span class="sc" id="sc">Score 0 / 0</span><span id="an">Answered 0 / 0</span>
+<div class="pg"><i id="pg"></i></div>
+<button type="button" id="ck">Check Answers</button><button type="button" id="sh">Show Answers</button><button type="button" id="rz">Reset</button>
+</div></div>
+<main>
+<div class="rules"><details><summary>Quick rules</summary>
+<ul>
+<li>Form: <b>had + V3</b>. Negative: <b>hadn’t + V3</b>. Question: <b>Had + subject + V3?</b> Short answers: Yes, I had. / No, I hadn’t.</li>
+<li>Past Perfect marks the earlier of two past actions. The later action, or a simple list of events in order, stays in the Past Simple.</li>
+<li>Markers: by (the time), before, after, when, already, just, yet, never, hardly … when, no sooner … than.</li>
+<li>Also used after thinking verbs, for reasons (because / as), in the third conditional, after wish / if only, and in reported speech.</li>
+<li>Check your V3 forms: fly → flown, go → gone, give → given, draw → drawn, come → come, become → become.</li>
+</ul></details></div>
+
+<section><h2><span class="b">1</span>Story gap-fill</h2>
+<p class="hint">Put each verb into the correct form. Most gaps need the Past Perfect, but not all of them.</p><div id="e1"></div></section>
+
+<section><h2><span class="b">2</span>Past Simple or Past Perfect?</h2>
+<p class="hint">Tap the better option. The explanation appears when you check.</p><div id="e2"></div></section>
+
+<section><h2><span class="b">3</span>Find the mistake</h2>
+<p class="hint">Tap the part of each sentence that contains the error, then check. The correction appears after you check.</p><div id="e3"></div></section>
+
+<section><h2><span class="b">4</span>Build the sentence</h2>
+<p class="hint">Tap the words in order to build the sentence. Tap a word in your line to take it back.</p><div id="e4"></div></section>
+
+<section><h2><span class="b">5</span>Reported speech</h2>
+<p class="hint">Choose the correct reported version of each sentence. Two of the options are wrong and are not used.</p><div id="e5"></div></section>
+
+<section><h2><span class="b">6</span>Regrets and what-ifs</h2>
+<p class="hint">Third conditional, wish and if only: complete the gaps.</p><div id="e6"></div></section>
+
+<section><h2><span class="b">7</span>Speaking: the story challenge</h2>
+<p class="hint">Get a prompt, then speak for one minute without stopping. Tick each box as you manage it, and listen back if you record yourself.</p>
+<p class="pr" id="pr">Press “New prompt” to begin.</p>
+<div class="tools"><button type="button" id="np">New prompt</button><button type="button" id="ts">Start 1 minute</button><span class="tt" id="tt">1:00</span></div>
+<div class="chk" id="chk"></div>
+<div class="tools" id="rcw"><button type="button" id="rb">Record</button><button type="button" id="rx" disabled>Stop</button><audio id="au" controls hidden></audio><span class="fb" id="rm"></span></div>
+</section>
+
+<section><h2><span class="b">8</span>Speaking: “Had you ever …?”</h2>
+<p class="hint">Answer each question aloud with a short answer (Yes, I had. / No, I hadn’t.) and then two more sentences using the Past Perfect. Open a model answer only after you have spoken.</p><div id="e8"></div></section>
+
+<section><h2><span class="b">9</span>Writing: the surprise</h2>
+<p class="hint">Write 100–140 words. Begin with “By the time Mia got home, …” and tell what had already happened and what happened next. Use at least five Past Perfect verbs, two time markers, and one wish or third conditional.</p>
+<textarea id="wr" aria-label="Your story" placeholder="By the time Mia got home, …"></textarea>
+<p class="meta" id="wm">0 words · 0 Past Perfect forms · markers: none yet</p>
+<details><summary>Model answer</summary><p>By the time Mia got home, her friends had already arrived. They had decorated the living room, and her sister had baked a cake. Mia hadn’t expected anything because she had told everyone she was too tired to celebrate. Hardly had she opened the door when everyone shouted “Surprise!” She wished she had changed her clothes before leaving the office, but nobody cared. If her sister hadn’t called the guests, the party would never have happened.</p></details>
+</section>
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s),mk=h=>{const d=document.createElement("div");d.innerHTML=h;return d.firstElementChild};
+const esc=s=>s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const norm=s=>s.toLowerCase().replace(/[’‘`]/g,"'").replace(/\s+/g," ").trim();
+const bare=s=>norm(s).replace(/[.,!?;:"“”]/g,"").replace(/\s+/g," ").trim();
+const items=[];
+const upd=()=>{const t=items.length,k=items.filter(i=>i.ok).length,a=items.filter(i=>i.shown||i.done()).length;
+$("#sc").textContent="Score "+k+" / "+t;$("#an").textContent="Answered "+a+" / "+t;$("#pg").style.width=(t?100*k/t:0)+"%"};
+
+function cloze(id,lines){
+ const el=$("#"+id);
+ lines.forEach(l=>{
+  const p=document.createElement("p");p.className="cl";
+  p.innerHTML=l.replace(/\[\[(.*?)::(.*?)\]\]/g,(m,h,a)=>'<span class="g"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="gap" style="width:'+Math.max(6,a.split("|")[0].length+2)+'ch" data-a="'+esc(a)+'"><small>('+esc(h)+')</small></span>');
+  el.appendChild(p);
+ });
+ el.querySelectorAll("input").forEach(inp=>{
+  const ans=inp.dataset.a.split("|");
+  const it={ok:null,shown:false,
+   check(){if(this.shown)return;const v=norm(inp.value);inp.classList.remove("ok","no");if(!v){this.ok=null;return}
+    this.ok=ans.some(a=>norm(a)===v);inp.classList.add(this.ok?"ok":"no")},
+   show(){inp.value=ans[0];inp.classList.remove("ok","no");inp.classList.add("shown");this.shown=true;this.ok=null},
+   reset(){inp.value="";inp.className="";this.ok=null;this.shown=false},
+   done:()=>!!inp.value.trim()};
+  inp.addEventListener("input",()=>{it.ok=null;inp.classList.remove("ok","no");upd()});
+  items.push(it);
+ });
+}
+
+function choice(id,data,spot){
+ const el=$("#"+id);
+ data.forEach((d,n)=>{
+  const list=spot?d.s:d.o;
+  const q=mk('<div class="q"><p class="'+(spot?"seg":"")+'"><b>'+(n+1)+'.</b> '+(spot?"":d.q)+(spot?list.map((s,i)=>'<button type="button" data-i="'+i+'">'+s+'</button>').join(" "):"")+'</p>'+(spot?"":'<div class="opts">'+list.map((s,i)=>'<button type="button" data-i="'+i+'">'+s+'</button>').join("")+'</div>')+'<p class="fb"></p></div>');
+  el.appendChild(q);
+  const bs=[...q.querySelectorAll("button")],fb=$(".fb",q),right=spot?d.w:d.a,msg=spot?"Correction: "+d.f:d.w;let sel=-1;
+  const it={ok:null,shown:false,
+   check(){if(this.shown||sel<0)return;this.ok=sel===right;bs.forEach((b,i)=>{b.className=i===sel?(this.ok?"ok":"no"):""});
+    fb.textContent=this.ok?msg:"Not quite. Try again.";fb.className="fb "+(this.ok?"okt":"not")},
+   show(){sel=right;bs.forEach((b,i)=>{b.className=i===right?"sel":""});fb.textContent=msg;fb.className="fb";this.shown=true;this.ok=null},
+   reset(){sel=-1;bs.forEach(b=>b.className="");fb.textContent="";fb.className="fb";this.ok=null;this.shown=false},
+   done:()=>sel>=0};
+  q.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||it.shown)return;sel=+b.dataset.i;bs.forEach((x,i)=>{x.className=i===sel?"sel":""});fb.textContent="";fb.className="fb";it.ok=null;upd()});
+  items.push(it);
+ });
+}
+
+function build(id,data){
+ const el=$("#"+id);
+ data.forEach((d,n)=>{
+  const ch=d.map((t,o)=>({t,o}));let placed=[];
+  do{ch.sort(()=>Math.random()-.5)}while(ch.every((c,i)=>c.o===i));
+  const q=mk('<div class="q"><p><b>'+(n+1)+'.</b> Build the sentence.</p><div class="tray pool"></div><div class="tray line" aria-label="Your sentence"></div><p class="fb"></p></div>');
+  el.appendChild(q);
+  const pool=$(".pool",q),line=$(".line",q),fb=$(".fb",q),goal=bare(d.join(" "));
+  const draw=()=>{
+   pool.innerHTML=ch.map((c,i)=>placed.includes(i)?"":'<button type="button" data-w="p" data-i="'+i+'">'+c.t+'</button>').join("");
+   line.innerHTML=placed.map(i=>'<button type="button" data-w="l" data-i="'+i+'">'+ch[i].t+'</button>').join("");
+  };
+  draw();
+  const it={ok:null,shown:false,
+   check(){if(this.shown||!placed.length)return;this.ok=bare(placed.map(i=>ch[i].t).join(" "))===goal;
+    line.className="tray line "+(this.ok?"okl":"nol");fb.textContent=this.ok?"":"Not quite. Tap a word to take it back."},
+   show(){placed=ch.map((c,i)=>i).sort((a,b)=>ch[a].o-ch[b].o);draw();line.className="tray line shown";fb.textContent="";this.shown=true;this.ok=null},
+   reset(){placed=[];draw();line.className="tray line";fb.textContent="";this.ok=null;this.shown=false},
+   done:()=>placed.length>0};
+  q.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||it.shown)return;const i=+b.dataset.i;
+   if(b.dataset.w==="p")placed.push(i);else placed=placed.filter(x=>x!==i);
+   line.className="tray line";fb.textContent="";it.ok=null;draw();upd()});
+  items.push(it);
+ });
+}
+
+function match(id,data,opts){
+ const el=$("#"+id);
+ el.innerHTML='<ol class="mo" type="A">'+opts.map(o=>"<li>"+o+"</li>").join("")+"</ol>";
+ data.forEach((d,n)=>{
+  const q=mk('<div class="q row"><span><b>'+(n+1)+'.</b> '+d.q+'</span><select aria-label="Reported version of sentence '+(n+1)+'"><option value="">–</option>'+opts.map((_,i)=>'<option value="'+i+'">'+"ABCDEFG"[i]+"</option>").join("")+'</select><span class="fb"></span></div>');
+  el.appendChild(q);
+  const s=$("select",q),fb=$(".fb",q);
+  const it={ok:null,shown:false,
+   check(){if(this.shown||s.value==="")return;this.ok=+s.value===d.a;s.className=this.ok?"ok":"no";fb.textContent=this.ok?"✓":"✗"},
+   show(){s.value=d.a;s.className="shown";fb.textContent="";this.shown=true;this.ok=null},
+   reset(){s.value="";s.className="";fb.textContent="";this.ok=null;this.shown=false},
+   done:()=>s.value!==""};
+  s.onchange=()=>{it.ok=null;s.className="";fb.textContent="";upd()};
+  items.push(it);
+ });
+}
+
+cloze("e1",[
+ "When Nora reached the airport, she realised that she [[leave::had left]] her passport at home. Her husband [[already / drive::had already driven|'d already driven]] back to town, so she couldn’t ask him for help.",
+ "“I was sure I [[pack::had packed|'d packed]] everything,” she told the clerk. “[[you / check::Had you checked]] the front pocket?” he asked. “Yes, I [[short answer::had]],” she said. “But I [[not / look::hadn't looked|had not looked]] in my coat.”",
+ "By the time her husband [[bring::brought]] the passport, the gate [[close::had closed]]. Hardly [[she / sit::had she sat]] down in the café when the loudspeaker announced that her flight [[be::had been]] cancelled. She wished she [[stay::had stayed]] in bed."
+]);
+
+choice("e2",[
+ {q:"She came to the office, but he ___ already.",o:["left","had left"],a:1,w:"He left before she came, so the earlier action takes the Past Perfect."},
+ {q:"I got up, ___ a shower and went to work.",o:["took","had taken"],a:0,w:"A plain sequence of events in order stays in the Past Simple."},
+ {q:"He didn’t recognise her because she ___ so much.",o:["changed","had changed"],a:1,w:"The change came first and explains the result."},
+ {q:"I thought you ___ the email, but nothing arrived.",o:["sent","had sent"],a:1,w:"After a thinking verb, the earlier action goes into the Past Perfect."},
+ {q:"By the end of the month, they ___ out of money.",o:["ran","had run"],a:1,w:"By + a point in the past calls for the Past Perfect."},
+ {q:"She cooked dinner, ___ the table and called everyone.",o:["laid","had laid"],a:0,w:"Three actions told in the order they happened: all Past Simple."}
+]);
+
+choice("e3",[
+ {s:["By the time we arrived,","the film","already started","and we missed the beginning."],w:2,f:"had already started"},
+ {s:["I wish","I","didn’t buy","that old car."],w:2,f:"hadn’t bought"},
+ {s:["She said","that she","has never seen","the sea."],w:2,f:"had never seen"},
+ {s:["Had you","been ever","to Ireland","before 2020?"],w:1,f:"ever been"},
+ {s:["If I","would have known,","I would have","called you."],w:1,f:"had known"},
+ {s:["No sooner","he had left","than","the phone rang."],w:1,f:"had he left"}
+],true);
+
+build("e4",[
+ ["Hardly","had","they","crossed","the road","when","the lights","changed."],
+ ["No sooner","had","I","locked","the car","than","it","started","to rain."],
+ ["By the time","we","arrived,","the concert","had","finished."],
+ ["She","wished","she","hadn’t","told","him","the secret."],
+ ["I","thought","you","had","already","called","Eric."]
+]);
+
+match("e5",[
+ {q:"“I’ve lost my keys,” Tom said.",a:4},
+ {q:"“We saw the accident,” they told us.",a:1},
+ {q:"“I didn’t read the contract,” she admitted.",a:6},
+ {q:"“I’ve never been to Dublin,” Mark said.",a:2},
+ {q:"“I forgot to call you,” Lena said.",a:3}
+],[
+ "Tom said that he lost his keys.",
+ "They told us that they had seen the accident.",
+ "Mark said that he had never been to Dublin.",
+ "Lena said that she had forgotten to call me.",
+ "Tom said that he had lost his keys.",
+ "She admitted that she didn’t read the contract.",
+ "She admitted that she hadn’t read the contract."
+]);
+
+cloze("e6",[
+ "If I [[know::had known]] about the strike, I [[take::would have taken|'d have taken]] a taxi.",
+ "She wishes she [[not / say::hadn't said|had not said]] anything to her boss.",
+ "If only we [[book::had booked]] earlier!",
+ "They [[not / lose::wouldn't have lost|would not have lost]] the deal if they [[read::had read]] the contract carefully.",
+ "I wish you [[tell::had told]] me before the meeting."
+]);
+
+/* Speaking 7 */
+const P=["Tell the story of a day when everything went wrong. What had already happened before you even got to work or school?",
+"Describe your first day in a new place (a city, job or school). What had you done to prepare, and what had you not expected?",
+"Tell a story that begins: “By the time I realised, it was too late.”",
+"Describe a trip that did not go to plan. What had you planned, and what had gone differently?",
+"Talk about an opportunity you missed. Use I wish and the third conditional: what would have happened?",
+"Imagine you came home and found that something had changed. Describe what you saw and what had happened while you were away."];
+const CK=["3 or more Past Perfect verbs","2 markers (by the time, already, hardly … when, before, after)","1 thinking verb + Past Perfect (I thought / I realised … had)","1 reason with because / as + Past Perfect","1 third conditional or wish sentence"];
+$("#chk").innerHTML=CK.map(c=>'<label><input type="checkbox"> '+c+"</label>").join("");
+let pi=-1,tm=null,left=60;
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+$("#np").onclick=()=>{let n;do{n=Math.floor(Math.random()*P.length)}while(n===pi);pi=n;$("#pr").textContent=P[n];
+ document.querySelectorAll("#chk input").forEach(c=>c.checked=false);clearInterval(tm);$("#tt").textContent="1:00"};
+$("#ts").onclick=()=>{clearInterval(tm);left=60;$("#tt").textContent=fmt(left);
+ tm=setInterval(()=>{left--;if(left<=0){clearInterval(tm);$("#tt").textContent="Time!"}else $("#tt").textContent=fmt(left)},1000)};
+let rec,chunks=[];
+if(!(navigator.mediaDevices&&window.MediaRecorder))$("#rcw").hidden=true;
+$("#rb").onclick=async()=>{try{
+ const st=await navigator.mediaDevices.getUserMedia({audio:true});rec=new MediaRecorder(st);chunks=[];
+ rec.ondataavailable=e=>chunks.push(e.data);
+ rec.onstop=()=>{$("#au").src=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));$("#au").hidden=false;st.getTracks().forEach(t=>t.stop())};
+ rec.start();$("#rb").disabled=true;$("#rx").disabled=false;$("#rm").textContent="Recording…";
+}catch(e){$("#rm").textContent="The microphone is not available."}};
+$("#rx").onclick=()=>{if(rec&&rec.state==="recording")rec.stop();$("#rb").disabled=false;$("#rx").disabled=true;$("#rm").textContent=""};
+
+/* Speaking 8 */
+const Q=[
+["Before you turned eighteen, had you ever travelled abroad?","Yes, I had. By the time I was sixteen, I had already visited two countries with my family. / No, I hadn’t. I had never left my country, but I had always wanted to."],
+["By the age of twenty-five, had you already decided on your career?","Yes, I had. I had chosen my profession because I had always been interested in it. / No, I hadn’t. I had tried several jobs before I found the right one."],
+["Think of your last holiday. What had you planned, and what hadn’t gone according to plan?","We had booked a hotel by the sea, but when we arrived, we found that they had cancelled our reservation."],
+["Had you studied English before you started this course? How?","Yes, I had. I had learned the basics at school, and I had practised with films and apps."],
+["Describe a time when you realised you had forgotten something important.","Last year I got to the airport and realised I had left my charger at home. I hadn’t checked my bag properly because I had been in a hurry."],
+["What is something you wish you had learned earlier?","I wish I had learned to drive earlier. If I had, I would have saved a lot of time."]];
+$("#e8").innerHTML=Q.map((q,i)=>'<div class="q"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><details><summary>Model answer</summary><p>'+q[1]+"</p></details></div>").join("");
+
+/* Writing 9 */
+const MK=["by the time","already","hardly","no sooner","before","after","because","just","yet","never","if only","wish"];
+$("#wr").oninput=function(){
+ const t=this.value.replace(/[’‘]/g,"'"),w=(t.trim().match(/\S+/g)||[]).length,
+ n=(t.match(/\b(had|hadn't)\s+(not\s+)?(?!to\b)[a-z]+/gi)||[]).length,
+ f=MK.filter(m=>new RegExp("\\b"+m+"\\b","i").test(t));
+ $("#wm").textContent=w+" words · "+n+" Past Perfect forms · markers: "+(f.length?f.join(", "):"none yet");
+};
+
+$("#ck").onclick=()=>{items.forEach(i=>i.check());upd()};
+$("#sh").onclick=()=>{items.forEach(i=>i.show());upd()};
+$("#rz").onclick=()=>{items.forEach(i=>i.reset());upd()};
+upd();
+</script>
+</body>
+</html>
