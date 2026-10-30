@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Task 1 (Table &amp; Pie Charts) — Error Markup v4</title>
+<style>
+  :root {
+    --navy: #0D2B35;
+    --teal: #028090;
+    --vocab: #2F80ED;      --vocab-bg: #D6E8FF;
+    --grammar: #C9A227;    --grammar-bg: #FFF3C4;
+    --spelling: #D64550;   --spelling-bg: #FBDADB;
+    --style: #8E44AD;      --style-bg: #EBDBF3;
+    --card-bg: #ffffff;
+    --page-bg: #f4f7f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+    background: var(--page-bg);
+    color: var(--navy);
+    margin: 0;
+    padding: 24px 16px 60px;
+    line-height: 1.7;
+  }
+  h1, h2 { font-family: 'Trebuchet MS', Trebuchet, Arial, sans-serif; color: var(--navy); }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 22px; }
+  header h1 { font-size: 1.45em; margin-bottom: 4px; }
+  header p { color: #4a636c; margin-top: 0; }
+
+  .legend {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    background: var(--card-bg); border-radius: 10px; padding: 14px 18px;
+    box-shadow: 0 2px 8px rgba(13,43,53,0.08); margin-bottom: 18px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-weight: bold; font-size: 0.92em; }
+  .swatch { width: 16px; height: 16px; border-radius: 4px; display: inline-block; }
+  .swatch.vocab { background: var(--vocab-bg); border: 2px solid var(--vocab); }
+  .swatch.grammar { background: var(--grammar-bg); border: 2px solid var(--grammar); }
+  .swatch.spelling { background: var(--spelling-bg); border: 2px solid var(--spelling); }
+  .swatch.style { background: var(--style-bg); border: 2px solid var(--style); }
+  .legend-hint { width: 100%; text-align: center; font-weight: normal; color: #4a636c; font-size: 0.83em; margin-top: 2px; }
+
+  .note { border-radius: 10px; padding: 13px 18px; margin-bottom: 14px; font-size: 0.92em; }
+  .note.good { background: #E8F4F1; border-left: 5px solid #0d7a4a; }
+  .note.watch { background: #FBEFE0; border-left: 5px solid #C9781E; }
+
+  .card {
+    background: var(--card-bg); border-radius: 12px; padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(13,43,53,0.08); margin-bottom: 20px; border-left: 5px solid var(--teal);
+  }
+  .card h2 { font-size: 1.02em; margin-top: 0; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .badge {
+    background: var(--teal); color: white; width: 26px; height: 26px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em; font-family: 'Trebuchet MS', sans-serif;
+  }
+  .essay p { margin: 0 0 6px; font-size: 1.06em; }
+
+  mark {
+    background: none; color: inherit; padding: 1px 2px; border-radius: 3px;
+    cursor: pointer; position: relative; font-weight: 600; border-bottom: 2px solid transparent;
+    display: inline-block; min-width: 6px;
+  }
+  mark.vocab { background: var(--vocab-bg); border-bottom-color: var(--vocab); }
+  mark.grammar { background: var(--grammar-bg); border-bottom-color: var(--grammar); }
+  mark.spelling { background: var(--spelling-bg); border-bottom-color: var(--spelling); }
+  mark.style { background: var(--style-bg); border-bottom-color: var(--style); }
+  mark.repeat { box-shadow: 0 0 0 2px #C9781E; }
+
+  .tooltip {
+    display: none; position: absolute; left: 0; top: 100%; margin-top: 6px;
+    background: var(--navy); color: #fff; padding: 9px 13px; border-radius: 8px;
+    font-size: 0.8em; font-weight: normal; line-height: 1.45; width: max-content; max-width: 290px;
+    z-index: 10; box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  }
+  .tooltip .tag { display: inline-block; font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 4px; opacity: 0.85; }
+  .tooltip .idea { color: #8be2c9; font-weight: bold; }
+  mark.show-tip .tooltip { display: block; }
+
+  .summary-toggle {
+    display: block; width: 100%; background: var(--teal); color: white; border: none;
+    padding: 13px; border-radius: 8px; font-family: 'Trebuchet MS', sans-serif; font-size: 1em;
+    cursor: pointer; margin: 10px 0 20px;
+  }
+  .summary-toggle:hover { background: #026a75; }
+
+  table {
+    width: 100%; border-collapse: collapse; background: var(--card-bg);
+    border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(13,43,53,0.08); font-size: 0.86em;
+  }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e4ecee; vertical-align: top; }
+  th { background: var(--navy); color: white; font-family: 'Trebuchet MS', sans-serif; font-weight: normal; }
+  td.t-vocab { color: var(--vocab); font-weight: bold; white-space: nowrap; }
+  td.t-grammar { color: var(--grammar); font-weight: bold; white-space: nowrap; }
+  td.t-style { color: var(--style); font-weight: bold; white-space: nowrap; }
+  .orig { color: #b3261e; }
+  .idea-txt { color: #0d7a4a; }
+  #summarySection { display: none; }
+  footer { text-align: center; color: #7d939a; font-size: 0.85em; margin-top: 28px; }
+  @media (max-width: 480px) { .card { padding: 16px; } .tooltip { max-width: 220px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>IELTS Task 1 (Table &amp; Pie Charts) — Error Markup (v4)</h1><p>Tap or click a highlighted word/phrase to see the issue and an improvement idea</p></header>
+  <div class="legend"><div class="legend-item"><span class="swatch spelling"></span> Spelling</div><div class="legend-item"><span class="swatch grammar"></span> Grammar</div><div class="legend-item"><span class="swatch style"></span> Style</div><div class="legend-item"><span class="swatch vocab"></span> Vocabulary</div><div class="legend-hint">Tap or click any highlighted word to see the fix · orange ring = unchanged or new since last time</div></div>
+  <div class="note good">✅ <strong>Big step forward:</strong> every singular “import” is now “imports”, “which is labelled” and “the US” are fixed, dollar signs are added, all the double spaces and the bracket spacing are gone, the stray comma is removed, and Canada’s decline is now described as sharp-then-slower. Down from 17 issues to 10.</div>
+  <div class="note watch">🔶 <strong>Watch:</strong> figures have crept into the overview (the “(60% to 34%)” and “(to 28%)” brackets), which breaks the rule that the overview carries no data. There is also a spelling slip (“than” for “then”) and a comma splice in the overview. The total-value trend (rising throughout) is still missing from the overview.</div>
+  <div class="card essay"><h2><span class="badge">1</span> Introduction</h2><p>The pie charts <mark class="style repeat" tabindex="0">provide information about the sources of fish imported to the United States<span class="tooltip"><span class="tag">Style — repeat</span>Still almost identical to the task wording — only “give” became “provide” and “US” became “United States”.<br><span class="idea">Idea:</span> “illustrate where the fish imported by the US came from in 1988, 1992 and 2000”</span></mark>. There are two separate countries (Canada and China) and one category which is labelled "others". The table illustrates the total value of the fish brought into the US in billions of dollars in 1988, 1992, and 2000.</p></div>
+  <div class="card essay"><h2><span class="badge">2</span> Overview</h2><p>Overall, from 1988 to 2000 <mark class="style" tabindex="0">the fish-import sources changed<span class="tooltip"><span class="tag">Style</span>The hyphen helps, but it is still a clumsy noun stack.<br><span class="idea">Idea:</span> “the sources of fish imports changed”</span></mark>: the share of fish brought into the US from Canada declined sharply at first <mark class="style" tabindex="0">(60% to 34%)<span class="tooltip"><span class="tag">Style — new</span>New: figures have crept into the overview. They belong in the detail paragraph, where they already appear.<br><span class="idea">Idea:</span> “declined sharply at first and then more slowly”</span></mark> and <mark class="spelling" tabindex="0">than<span class="tooltip"><span class="tag">Spelling</span>“Than” compares; “then” marks sequence.<br><span class="idea">Idea:</span> “then”</span></mark> <mark class="vocab" tabindex="0">steadily<span class="tooltip"><span class="tag">Vocabulary</span>The shape is better described now, but “steadily” suggests a constant rate; the later fall (34% to 28% over eight years) was slow.<br><span class="idea">Idea:</span> “more slowly” / “gradually”</span></mark> <mark class="style" tabindex="0">(to 28%)<span class="tooltip"><span class="tag">Style — new</span>Same point: no figures in the overview.<br><span class="idea">Idea:</span> delete the bracket</span></mark><mark class="grammar" tabindex="0">,<span class="tooltip"><span class="tag">Grammar</span>Comma splice: two full clauses joined by a comma. (This was present in earlier drafts too; I missed it before.)<br><span class="idea">Idea:</span> use a semicolon, or “while”: “…declined sharply at first and then more slowly, while imports from other countries and China rose…”</span></mark> imports from other countries and China rose over the same period.</p></div>
+  <div class="card essay"><h2><span class="badge">3</span> Total Value, China &amp; Canada</h2><p>The total value increased gradually from 1988 to 2000, and the final year ($10.72 billion) was 1.6 times higher than the first year ($6.57 billion). Also, the share of imports from China increased over the period (from 13% in 1988 to 20% in 1992, and 30% in 2000); meanwhile, the imports from Canada showed the opposite trend — reduction in the share (from 60% in 1988 to 34% in 1992, and 28% in 2000).</p></div>
+  <div class="card essay"><h2><span class="badge">4</span> Other Countries</h2><p>The most noticeable feature was that the share of other countries <mark class="vocab repeat" tabindex="0">fluctuated<span class="tooltip"><span class="tag">Vocabulary — repeat</span>“Fluctuate” suggests repeated ups and downs; the data show one rise, then one small dip.<br><span class="idea">Idea:</span> “rose sharply, then dipped slightly” (acceptable as is)</span></mark> during the period; the lowest proportion was in 1988 (27%); the <mark class="vocab repeat" tabindex="0">highest percentage of fish imports to the US<span class="tooltip"><span class="tag">Vocabulary — repeat</span>Still ambiguous: read literally, Canada’s 60% in 1988 is the highest figure of all, not 46%.<br><span class="idea">Idea:</span> “its highest share” / “the share of other countries peaked at 46% in 1992”</span></mark> was in 1992 (46%). Then, the segment of "others" decreased <mark class="vocab repeat" tabindex="0">insignificantly<span class="tooltip"><span class="tag">Vocabulary — repeat</span>Still reads as statistical jargon (“not statistically significant”).<br><span class="idea">Idea:</span> “slightly” / “marginally”</span></mark> by 4 percentage points in 2000.</p></div>
+  <button class="summary-toggle" onclick="toggleSummary()">📋 Show Full Correction List</button>
+  <div id="summarySection"><table><thead><tr><th>Type</th><th>Original</th><th>Improvement idea</th></tr></thead><tbody><tr><td class="t-style">Style</td><td class="orig">provide information about the sources of fish imported to the United States</td><td class="idea-txt">illustrate where the fish imported by the US came from</td></tr><tr><td class="t-style">Style</td><td class="orig">the fish-import sources changed</td><td class="idea-txt">the sources of fish imports changed</td></tr><tr><td class="t-style">Style</td><td class="orig">(60% to 34%)</td><td class="idea-txt">delete: declined sharply at first and then more slowly</td></tr><tr><td class="t-spelling">Spelling</td><td class="orig">than steadily</td><td class="idea-txt">then more slowly</td></tr><tr><td class="t-vocab">Vocabulary</td><td class="orig">steadily</td><td class="idea-txt">more slowly / gradually</td></tr><tr><td class="t-style">Style</td><td class="orig">(to 28%)</td><td class="idea-txt">delete the bracket</td></tr><tr><td class="t-grammar">Grammar</td><td class="orig">(to 28%), imports from other countries and China rose</td><td class="idea-txt">…, while imports from other countries and China rose</td></tr><tr><td class="t-vocab">Vocabulary</td><td class="orig">fluctuated</td><td class="idea-txt">rose sharply, then dipped slightly</td></tr><tr><td class="t-vocab">Vocabulary</td><td class="orig">the highest percentage of fish imports to the US</td><td class="idea-txt">its highest share</td></tr><tr><td class="t-vocab">Vocabulary</td><td class="orig">insignificantly</td><td class="idea-txt">slightly / marginally</td></tr></tbody></table></div>
+  <footer>10 marked issues — 1 spelling, 1 grammar, 4 style, 4 vocabulary (down from 17 last draft)</footer>
+</div>
+<script>
+  function toggleSummary() {
+    const el = document.getElementById('summarySection');
+    const btn = document.querySelector('.summary-toggle');
+    if (el.style.display === 'block') { el.style.display = 'none'; btn.textContent = '📋 Show Full Correction List'; }
+    else { el.style.display = 'block'; btn.textContent = '📋 Hide Full Correction List'; }
+  }
+  function closeAll() {
+    document.querySelectorAll('mark.show-tip').forEach(function(m) { m.classList.remove('show-tip'); });
+  }
+  document.querySelectorAll('mark').forEach(function(mark) {
+    mark.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = mark.classList.contains('show-tip');
+      closeAll();
+      if (!isOpen) {
+        mark.classList.add('show-tip');
+        const tip = mark.querySelector('.tooltip');
+        tip.style.left = '0'; tip.style.right = 'auto';
+        const r = tip.getBoundingClientRect();
+        if (r.right > window.innerWidth - 8) { tip.style.left = 'auto'; tip.style.right = '0'; }
+      }
+    });
+  });
+  document.addEventListener('click', closeAll);
+</script>
+</body>
+</html>
