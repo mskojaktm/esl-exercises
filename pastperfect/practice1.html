@@ -58,13 +58,15 @@ details{margin:14px 0 0}summary{cursor:pointer;font-weight:700}
 .chk label{display:block;margin:2px 0}
 textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8px;padding:10px}
 .meta{margin:6px 0 0;font-size:15px;color:#41636B}
+.ru{border-left:4px solid var(--ln);background:var(--bg);border-radius:0 8px 8px 0;padding:8px 14px;margin:0 0 14px}
+#e7 .opts{flex-direction:column;align-items:stretch}#e7 .opts button{text-align:left}
 :focus-visible{outline:3px solid #F2A900;outline-offset:2px}
 @media(max-width:560px){body{font-size:16px}section{padding:14px}main,header{padding-left:12px;padding-right:12px}}
 @media(prefers-reduced-motion:reduce){.pg i{transition:none}}
 </style>
 </head>
 <body>
-<header><div><h1>Past Perfect: B2–C1 practice</h1><p>Six checked exercises, two speaking tasks and one writing task, built from the Past Perfect presentation.</p></div></header>
+<header><div><h1>Past Perfect: B2–C1 practice</h1><p>Eight checked exercises, a translation task, two speaking tasks and one writing task, built from the Past Perfect presentation.</p></div></header>
 <div class="bar"><div>
 <span class="sc" id="sc">Score 0 / 0</span><span id="an">Answered 0 / 0</span>
 <div class="pg"><i id="pg"></i></div>
@@ -98,7 +100,25 @@ textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8p
 <section><h2><span class="b">6</span>Regrets and what-ifs</h2>
 <p class="hint">Third conditional, wish and if only: complete the gaps.</p><div id="e6"></div></section>
 
-<section><h2><span class="b">7</span>Speaking: the story challenge</h2>
+<section><h2><span class="b">7</span>Translate: choose the right version</h2>
+<p class="hint">Each Russian sentence has four English versions that look almost the same. Only one is correct in both grammar and meaning.</p><div id="e7"></div></section>
+
+<section><h2><span class="b">8</span>Translate the gaps</h2>
+<p class="hint">Read the Russian text, then complete the English version. The Russian words in brackets show what each gap must say. No options are given.</p>
+<p class="ru">Когда Даниэль впервые осмотрел квартиру, владельцы уже съехали. Агент заранее сообщил ему, что кухню отремонтировали, но он обнаружил, что с девяностых годов к ней никто не прикасался. Если бы он внимательнее прочитал договор, он не подписал бы его так быстро. Ему было жаль, что он не попросил специалиста осмотреть квартиру. К тому времени, как он решил пожаловаться, агентство уже закрыло офис.</p>
+<div id="e8"></div></section>
+
+<section><h2><span class="b">9</span>Translate the text</h2>
+<p class="hint">Translate the whole text into English. Use the Past Perfect wherever the Russian points to an earlier action, then compare your version with the model.</p>
+<p class="ru">К тому времени, как Анна добралась до офиса, совещание уже началось. Она поняла, что забыла дома ноутбук. Если бы она не опоздала на автобус, она успела бы вернуться за ним. Её начальник сказал, что она никогда раньше не опаздывала. Анна пожалела, что не встала на час раньше.</p>
+<textarea id="tr" aria-label="Your translation" placeholder="Type your translation here"></textarea>
+<p class="meta" id="tm">0 words</p>
+<details><summary>Model translation</summary><p>By the time Anna got to the office, the meeting had already started. She realised that she had left her laptop at home. If she hadn’t missed the bus, she would have had time to go back for it. Her boss said that she had never been late before. Anna wished she had got up an hour earlier.</p></details>
+<p class="kind" style="margin-top:14px">Tick what your version got right</p>
+<div class="chk"><label><input type="checkbox"> the meeting had already started (after by the time)</label><label><input type="checkbox"> she had left her laptop (after realised)</label><label><input type="checkbox"> If she hadn’t missed the bus, she would have had time … (third conditional)</label><label><input type="checkbox"> her boss said she had never been late (reported speech)</label><label><input type="checkbox"> Anna wished she had got up (wish + Past Perfect)</label></div>
+</section>
+
+<section><h2><span class="b">10</span>Speaking: the story challenge</h2>
 <p class="hint">Get a prompt, then speak for one minute without stopping. Tick each box as you manage it, and listen back if you record yourself.</p>
 <p class="pr" id="pr">Press “New prompt” to begin.</p>
 <div class="tools"><button type="button" id="np">New prompt</button><button type="button" id="ts">Start 1 minute</button><span class="tt" id="tt">1:00</span></div>
@@ -106,10 +126,10 @@ textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8p
 <div class="tools" id="rcw"><button type="button" id="rb">Record</button><button type="button" id="rx" disabled>Stop</button><audio id="au" controls hidden></audio><span class="fb" id="rm"></span></div>
 </section>
 
-<section><h2><span class="b">8</span>Speaking: “Had you ever …?”</h2>
+<section><h2><span class="b">11</span>Speaking: “Had you ever …?”</h2>
 <p class="hint">Answer each question aloud with a short answer (Yes, I had. / No, I hadn’t.) and then two more sentences using the Past Perfect. Open a model answer only after you have spoken.</p><div id="e8"></div></section>
 
-<section><h2><span class="b">9</span>Writing: the surprise</h2>
+<section><h2><span class="b">12</span>Writing: the surprise</h2>
 <p class="hint">Write 100–140 words. Begin with “By the time Mia got home, …” and tell what had already happened and what happened next. Use at least five Past Perfect verbs, two time markers, and one wish or third conditional.</p>
 <textarea id="wr" aria-label="Your story" placeholder="By the time Mia got home, …"></textarea>
 <p class="meta" id="wm">0 words · 0 Past Perfect forms · markers: none yet</p>
@@ -261,6 +281,27 @@ cloze("e6",[
  "They [[not / lose::wouldn't have lost|would not have lost]] the deal if they [[read::had read]] the contract carefully.",
  "I wish you [[tell::had told]] me before the meeting."
 ]);
+
+choice("e7",[
+ {q:"«Когда мы приехали на вокзал, поезд уже ушёл.»",o:["When we got to the station, the train already went.","When we got to the station, the train had already left.","When we got to the station, the train has already left.","When we had got to the station, the train already left."],a:1,w:"The departure came before the arrival, so only the departure takes the Past Perfect."},
+ {q:"«Если бы он не опоздал на собеседование, он получил бы эту работу.»",o:["If he didn’t be late for the interview, he would get the job.","If he hadn’t been late for the interview, he would get the job.","If he hadn’t been late for the interview, he would have got the job.","If he wouldn’t have been late for the interview, he had got the job."],a:2,w:"Third conditional: if + Past Perfect, would have + V3. Never would have in the if-clause."},
+ {q:"«Жаль, что я не сказала ему правду раньше.»",o:["I wish I told him the truth earlier.","I wish I hadn’t told him the truth earlier.","I wish I would tell him the truth earlier.","I wish I had told him the truth earlier."],a:3,w:"The regret is about something you did not do, so the wish is positive: I wish I had told him. The negative version reverses the meaning."},
+ {q:"«Он сказал, что никогда раньше не видел такого города.»",o:["He said that he never saw such a city before.","He told that he had never seen such a city before.","He said that he had never seen such a city before.","He said that he has never seen such a city before."],a:2,w:"Reported speech moves the Present Perfect back to the Past Perfect, and say needs no object (told needs one)."},
+ {q:"«Едва она закрыла дверь, как зазвонил телефон.»",o:["Hardly she had closed the door when the phone rang.","Hardly had she closed the door than the phone rang.","Hardly had she closed the door when the phone rang.","Hardly she closed the door when the phone had rung."],a:2,w:"Hardly takes inversion (had she closed) and goes with when. No sooner goes with than."},
+ {q:"«К тому времени, как приехала полиция, вор уже скрылся.»",o:["By the time the police had arrived, the thief disappeared.","By the time the police arrive, the thief had already disappeared.","By the time the police arrived, the thief already disappeared.","By the time the police arrived, the thief had already disappeared."],a:3,w:"After by the time, the later event is Past Simple and the earlier one is Past Perfect."},
+ {q:"«Я думал, что ты уже позвонил ей.»",o:["I thought you would already call her.","I thought you had already called her.","I thought you already had been calling her.","I thought you have already called her."],a:1,w:"A thinking verb is followed by the Past Perfect for the earlier, finished action. had been calling would describe a longer activity."},
+ {q:"«Если бы я тогда не потерял паспорт, я бы сейчас жил в Дублине.»",o:["If I hadn’t lost my passport then, I would be living in Dublin now.","If I didn’t lose my passport then, I would have lived in Dublin now.","If I hadn’t lost my passport then, I would have lived in Dublin now.","If I wouldn’t have lost my passport then, I would live in Dublin now."],a:0,w:"Mixed conditional: a past cause (hadn’t lost) with a present result (would be living … now)."}
+]);
+
+cloze("e8",[
+ "When Daniel viewed the flat for the first time, the owners [[уже съехали::had already moved out|had moved out|'d already moved out]].",
+ "The agent [[заранее сообщил::had told|'d told]] him that the kitchen [[(было) отремонтировано::had been renovated|had been refitted]], but he found that nobody [[никто не трогал::had touched|had even touched]] it since the 1990s.",
+ "If he [[внимательнее прочитал::had read]] the contract more carefully, he [[не подписал бы::wouldn't have signed|would not have signed]] it so quickly.",
+ "He wished he [[жаль, что не попросил::had asked]] an expert to inspect the flat.",
+ "By the time he decided to complain, the agency [[уже закрыло::had already closed|had closed|'d already closed]] its office."
+]);
+
+$("#tr").oninput=function(){$("#tm").textContent=(this.value.trim().match(/\S+/g)||[]).length+" words"};
 
 /* Speaking 7 */
 const P=["Tell the story of a day when everything went wrong. What had already happened before you even got to work or school?",
