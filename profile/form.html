@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Student profile</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2b3a;--mute:#66758a;--line:#d9dee6;--acc:#0f7c85;--acc-ink:#fff;--soft:#e2f2f3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a24;--card:#1a2634;--ink:#e6edf5;--mute:#93a3b8;--line:#2b3a4d;--acc:#3cb3bd;--acc-ink:#0b1a20;--soft:#1d3a40}}
+:root[data-theme="dark"]{--bg:#121a24;--card:#1a2634;--ink:#e6edf5;--mute:#93a3b8;--line:#2b3a4d;--acc:#3cb3bd;--acc-ink:#0b1a20;--soft:#1d3a40}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.wrap{max-width:760px;margin:0 auto}
+h1{font-size:20px;margin:0 0 6px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-top:6px}
+main{padding:16px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:0 0 16px}
+h2{font-size:17px;margin:0 0 12px;display:flex;justify-content:space-between;align-items:baseline}
+h2 small{font-weight:400;color:var(--mute);font-size:13px}
+.f{margin:0 0 14px}
+.f:last-child{margin-bottom:0}
+label,.lab{display:block;font-size:14px;font-weight:600;margin:0 0 6px}
+input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+textarea{min-height:76px;resize:vertical}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.skills{display:grid;gap:8px}
+.skill{display:grid;grid-template-columns:90px 1fr;gap:8px;align-items:center}
+.skill span{font-size:14px}
+.out{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.out textarea{min-height:200px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{font:inherit;font-weight:600;border-radius:8px;padding:10px 16px;border:1px solid var(--acc);background:var(--acc);color:var(--acc-ink);cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--line)}
+.hint{font-size:13px;color:var(--mute);margin:8px 0 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Student profile</h1>
+<div class="bar"><i id="pb"></i></div>
+<div class="meta"><span id="pt">0 of 0 filled</span><span id="st">Autosaves on this device</span></div>
+</div></header>
+<main><div class="wrap">
+<div id="form"></div>
+<div class="out">
+<h2>Export</h2>
+<textarea id="md" readonly aria-label="Profile as text"></textarea>
+<div class="row">
+<button class="btn" id="copy" type="button">Copy profile</button>
+<button class="btn alt" id="reset" type="button">Clear all</button>
+</div>
+<p class="hint">Paste the copied text into the chat and ask me to save it as the student’s profile. Only filled fields are included.</p>
+</div>
+</div></main>
+<script>
+const CE=['A0','A1','A2','B1','B2','C1','C2'];
+const S=[
+{t:'Basics',f:[['name','Name','text'],['age','Age or school grade','text'],['l1','Native language','text'],['loc','Location and time zone','text'],['occ','Occupation or school','text'],['fmt','Lesson format','one',['1:1','Group','Mixed']],['sched','Length and frequency','text']]},
+{t:'Goals',f:[['goal','Main goals','many',['Exam','Work','Study abroad','Relocation','Travel','School grades','General English']],['exam','Target exam and score','text'],['dead','Deadline or key dates','text'],['why','Why now','area']]},
+{t:'Current level',f:[['cefr','Overall CEFR','one',CE],['how','Level determined by','one',['Placement test','Exam result','Self-assessment','Teacher’s impression']],['sk_speaking','Speaking','one',CE],['sk_listening','Listening','one',CE],['sk_reading','Reading','one',CE],['sk_writing','Writing','one',CE],['sk_grammar','Grammar','one',CE],['sk_vocab','Vocabulary','one',CE],['accent','Pronunciation focus','one',['British','American','No preference']]]},
+{t:'Diagnostics',f:[['str','Strengths','area'],['weak','Recurring weaknesses','many',['Articles','Tenses','Prepositions','Word order','Connectors','Vocabulary range','Spelling','Pronunciation','Fluency and hesitation','Listening speed','Idea expression']],['errs','Specific errors and fossilised mistakes','area']]},
+{t:'Learning history',f:[['prev','Previous teachers, courses, textbooks','area'],['abroad','Time in English-speaking environments','text'],['worked','What worked and what didn’t','area']]},
+{t:'Interests and context',f:[['int','Interests and hobbies','text'],['field','Professional field','text'],['use','Where she uses English','many',['Work','School','Media','Travel','Online chat','Gaming','Family or friends']]]},
+{t:'Learning style',f:[['mat','Preferred materials','many',['Interactive HTML','Slides','Plain text','Speaking drills','Games','Video and audio','Textbook']],['tone','Tone','one',['Playful','Neutral','Serious']],['corr','Error correction','one',['Immediate','End of task','Written after lesson']],['att','Attention span','one',['Short','Medium','Long']]]},
+{t:'Practicalities',f:[['hw','Homework capacity per week','text'],['tools','Self-study tools and apps','text'],['risk','Consistency risks','text'],['tech','Tech comfort','one',['Low','Medium','High']]]},
+{t:'Motivation and confidence',f:[['mot','Motivation (1 low, 5 high)','one',['1','2','3','4','5']],['conf','Speaking confidence','one',['1','2','3','4','5']],['anx','Test anxiety','one',['1','2','3','4','5']],['ld','Learning difficulties (optional)','text'],['hard','What she finds hardest, in her words','area']]},
+{t:'Course planning',f:[['course','Chosen course or textbook','text'],['prio','Syllabus priorities','area'],['mile','Milestones and review dates','area']]}
+];
+const K='esl-student-profile-v1';
+let D={name:'Eva'};
+try{const r=localStorage.getItem(K);if(r)D=Object.assign(D,JSON.parse(r))}catch(e){}
+const $=id=>document.getElementById(id);
+function save(){try{localStorage.setItem(K,JSON.stringify(D));$('st').textContent='Saved on this device'}catch(e){$('st').textContent='Not saved: storage unavailable'}update()}
+const has=v=>Array.isArray(v)?v.length>0:!!(v&&String(v).trim());
+function update(){
+let n=0,tot=0;
+S.forEach((s,i)=>{let c=0;s.f.forEach(f=>{tot++;if(has(D[f[0]])){n++;c++}});const e=$('c'+i);if(e)e.textContent=c+'/'+s.f.length});
+$('pb').style.width=(tot?n/tot*100:0)+'%';$('pt').textContent=n+' of '+tot+' filled';
+$('md').value=build()}
+function build(){
+let o='# Student profile: '+(D.name||'Unnamed')+'\n';
+S.forEach(s=>{const L=s.f.filter(f=>f[0]!=='name'&&has(D[f[0]])).map(f=>'- '+f[1]+': '+(Array.isArray(D[f[0]])?D[f[0]].join(', '):String(D[f[0]]).trim().replace(/\n+/g,' ')));
+if(L.length)o+='\n## '+s.t+'\n'+L.join('\n')+'\n'});
+return o}
+function mk(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;return e}
+function chips(f){
+const [id,,type,opts]=f;const box=mk('div','chips');
+const paint=()=>box.querySelectorAll('button').forEach(b=>{const v=D[id];b.setAttribute('aria-pressed',String(type==='many'?(v||[]).includes(b.dataset.v):v===b.dataset.v))});
+opts.forEach(o=>{const b=mk('button','chip',o);b.type='button';b.dataset.v=o;
+b.onclick=()=>{if(type==='many'){const a=D[id]||[];D[id]=a.includes(o)?a.filter(x=>x!==o):a.concat(o)}else{D[id]=D[id]===o?'':o}paint();save()};box.appendChild(b)});
+paint();return box}
+const F=$('form');
+S.forEach((s,i)=>{
+const sec=mk('section');const h=mk('h2',null,s.t);const c=mk('small');c.id='c'+i;h.appendChild(c);sec.appendChild(h);
+s.f.forEach(f=>{
+const [id,label,type]=f;const w=mk('div','f');
+if(type==='text'||type==='area'){
+const l=mk('label',null,label);l.htmlFor='f_'+id;
+const inp=type==='text'?mk('input'):mk('textarea');if(type==='text')inp.type='text';
+inp.id='f_'+id;inp.value=D[id]||'';inp.oninput=()=>{D[id]=inp.value;save()};w.append(l,inp)
+}else{w.append(mk('div','lab',label),chips(f))}
+sec.appendChild(w)});
+F.appendChild(sec)});
+$('copy').onclick=async()=>{
+const t=$('md').value;let ok=false;
+try{await navigator.clipboard.writeText(t);ok=true}catch(e){}
+if(!ok){try{$('md').select();ok=document.execCommand('copy')}catch(e){}}
+$('copy').textContent=ok?'Copied':'Select the text and copy manually';
+setTimeout(()=>$('copy').textContent='Copy profile',2000)};
+let armed=false;
+$('reset').onclick=()=>{
+const b=$('reset');
+if(!armed){armed=true;b.textContent='Click again to clear everything';setTimeout(()=>{armed=false;b.textContent='Clear all'},3000);return}
+D={};try{localStorage.removeItem(K)}catch(e){}
+document.querySelectorAll('input,textarea').forEach(x=>{if(x.id!=='md')x.value=''});
+document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+armed=false;b.textContent='Clear all';update()};
+update();
+</script>
+</body>
+</html>
