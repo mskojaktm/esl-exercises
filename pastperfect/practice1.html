@@ -58,6 +58,7 @@ details{margin:14px 0 0}summary{cursor:pointer;font-weight:700}
 .chk label{display:block;margin:2px 0}
 textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8px;padding:10px}
 .meta{margin:6px 0 0;font-size:15px;color:#41636B}
+.hb{border:1px solid var(--t);background:#fff;color:var(--t);border-radius:50%;width:22px;height:22px;padding:0;font-size:13px;font-weight:700;line-height:1;vertical-align:middle}
 .ru{border-left:4px solid var(--ln);background:var(--bg);border-radius:0 8px 8px 0;padding:8px 14px;margin:0 0 14px}
 #e7 .opts{flex-direction:column;align-items:stretch}#e7 .opts button{text-align:left}
 :focus-visible{outline:3px solid #F2A900;outline-offset:2px}
@@ -66,7 +67,7 @@ textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8p
 </style>
 </head>
 <body>
-<header><div><h1>Past Perfect: B2–C1 practice</h1><p>Eight checked exercises, a translation task, two speaking tasks and one writing task, built from the Past Perfect presentation.</p></div></header>
+<header><div><h1>Past Perfect: B2–C1 practice</h1><p>Ten checked exercises, a translation task, two speaking tasks and one writing task, built from the Past Perfect presentation.</p></div></header>
 <div class="bar"><div>
 <span class="sc" id="sc">Score 0 / 0</span><span id="an">Answered 0 / 0</span>
 <div class="pg"><i id="pg"></i></div>
@@ -100,15 +101,21 @@ textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8p
 <section><h2><span class="b">6</span>Regrets and what-ifs</h2>
 <p class="hint">Third conditional, wish and if only: complete the gaps.</p><div id="e6"></div></section>
 
-<section><h2><span class="b">7</span>Translate: choose the right version</h2>
+<section><h2><span class="b">7</span>Story gap-fill: mixed past tenses</h2>
+<p class="hint">Put each verb into the correct form: Past Simple, Past Continuous or Past Perfect. Press ? next to a gap for the first letters of the answer.</p><div id="s1"></div></section>
+
+<section><h2><span class="b">8</span>Past Simple or Past Perfect?</h2>
+<p class="hint">Put the verbs in brackets into the Past Simple or the Past Perfect. Where words like <i>first, then</i> or <i>as soon as</i> already show the order, the Past Simple is enough, and in item 4 both tenses are accepted. Press ? for a hint.</p><div id="s2"></div></section>
+
+<section><h2><span class="b">9</span>Translate: choose the right version</h2>
 <p class="hint">Each Russian sentence has four English versions that look almost the same. Only one is correct in both grammar and meaning.</p><div id="e7"></div></section>
 
-<section><h2><span class="b">8</span>Translate the gaps</h2>
+<section><h2><span class="b">10</span>Translate the gaps</h2>
 <p class="hint">Read the Russian text, then complete the English version. The Russian words in brackets show what each gap must say. No options are given.</p>
 <p class="ru">Когда Даниэль впервые осмотрел квартиру, владельцы уже съехали. Агент заранее сообщил ему, что кухню отремонтировали, но он обнаружил, что с девяностых годов к ней никто не прикасался. Если бы он внимательнее прочитал договор, он не подписал бы его так быстро. Ему было жаль, что он не попросил специалиста осмотреть квартиру. К тому времени, как он решил пожаловаться, агентство уже закрыло офис.</p>
 <div id="e8"></div></section>
 
-<section><h2><span class="b">9</span>Translate the text</h2>
+<section><h2><span class="b">11</span>Translate the text</h2>
 <p class="hint">Translate the whole text into English. Use the Past Perfect wherever the Russian points to an earlier action, then compare your version with the model.</p>
 <p class="ru">К тому времени, как Анна добралась до офиса, совещание уже началось. Она поняла, что забыла дома ноутбук. Если бы она не опоздала на автобус, она успела бы вернуться за ним. Её начальник сказал, что она никогда раньше не опаздывала. Анна пожалела, что не встала на час раньше.</p>
 <textarea id="tr" aria-label="Your translation" placeholder="Type your translation here"></textarea>
@@ -118,7 +125,7 @@ textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8p
 <div class="chk"><label><input type="checkbox"> the meeting had already started (after by the time)</label><label><input type="checkbox"> she had left her laptop (after realised)</label><label><input type="checkbox"> If she hadn’t missed the bus, she would have had time … (third conditional)</label><label><input type="checkbox"> her boss said she had never been late (reported speech)</label><label><input type="checkbox"> Anna wished she had got up (wish + Past Perfect)</label></div>
 </section>
 
-<section><h2><span class="b">10</span>Speaking: the story challenge</h2>
+<section><h2><span class="b">12</span>Speaking: the story challenge</h2>
 <p class="hint">Get a prompt, then speak for one minute without stopping. Tick each box as you manage it, and listen back if you record yourself.</p>
 <p class="pr" id="pr">Press “New prompt” to begin.</p>
 <div class="tools"><button type="button" id="np">New prompt</button><button type="button" id="ts">Start 1 minute</button><span class="tt" id="tt">1:00</span></div>
@@ -126,10 +133,10 @@ textarea{width:100%;min-height:150px;border:2px solid var(--ln);border-radius:8p
 <div class="tools" id="rcw"><button type="button" id="rb">Record</button><button type="button" id="rx" disabled>Stop</button><audio id="au" controls hidden></audio><span class="fb" id="rm"></span></div>
 </section>
 
-<section><h2><span class="b">11</span>Speaking: “Had you ever …?”</h2>
-<p class="hint">Answer each question aloud with a short answer (Yes, I had. / No, I hadn’t.) and then two more sentences using the Past Perfect. Open a model answer only after you have spoken.</p><div id="e8"></div></section>
+<section><h2><span class="b">13</span>Speaking: “Had you ever …?”</h2>
+<p class="hint">Answer each question aloud with a short answer (Yes, I had. / No, I hadn’t.) and then two more sentences using the Past Perfect. Open a model answer only after you have spoken.</p><div id="q8"></div></section>
 
-<section><h2><span class="b">12</span>Writing: the surprise</h2>
+<section><h2><span class="b">14</span>Writing: the surprise</h2>
 <p class="hint">Write 100–140 words. Begin with “By the time Mia got home, …” and tell what had already happened and what happened next. Use at least five Past Perfect verbs, two time markers, and one wish or third conditional.</p>
 <textarea id="wr" aria-label="Your story" placeholder="By the time Mia got home, …"></textarea>
 <p class="meta" id="wm">0 words · 0 Past Perfect forms · markers: none yet</p>
@@ -145,11 +152,11 @@ const items=[];
 const upd=()=>{const t=items.length,k=items.filter(i=>i.ok).length,a=items.filter(i=>i.shown||i.done()).length;
 $("#sc").textContent="Score "+k+" / "+t;$("#an").textContent="Answered "+a+" / "+t;$("#pg").style.width=(t?100*k/t:0)+"%"};
 
-function cloze(id,lines){
+function cloze(id,lines,hint){
  const el=$("#"+id);
  lines.forEach(l=>{
   const p=document.createElement("p");p.className="cl";
-  p.innerHTML=l.replace(/\[\[(.*?)::(.*?)\]\]/g,(m,h,a)=>'<span class="g"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="gap" style="width:'+Math.max(6,a.split("|")[0].length+2)+'ch" data-a="'+esc(a)+'"><small>('+esc(h)+')</small></span>');
+  p.innerHTML=l.replace(/\[\[(.*?)::(.*?)\]\]/g,(m,h,a)=>'<span class="g"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="gap" style="width:'+Math.max(6,a.split("|")[0].length+2)+'ch" data-a="'+esc(a)+'"><small>('+esc(h)+')</small>'+(hint?'<button type="button" class="hb" aria-label="Hint">?</button>':'')+'</span>');
   el.appendChild(p);
  });
  el.querySelectorAll("input").forEach(inp=>{
@@ -158,9 +165,10 @@ function cloze(id,lines){
    check(){if(this.shown)return;const v=norm(inp.value);inp.classList.remove("ok","no");if(!v){this.ok=null;return}
     this.ok=ans.some(a=>norm(a)===v);inp.classList.add(this.ok?"ok":"no")},
    show(){inp.value=ans[0];inp.classList.remove("ok","no");inp.classList.add("shown");this.shown=true;this.ok=null},
-   reset(){inp.value="";inp.className="";this.ok=null;this.shown=false},
+   reset(){inp.value="";inp.className="";inp.placeholder="";this.ok=null;this.shown=false},
    done:()=>!!inp.value.trim()};
   inp.addEventListener("input",()=>{it.ok=null;inp.classList.remove("ok","no");upd()});
+  const hb=inp.parentNode.querySelector(".hb");if(hb)hb.onclick=()=>{if(!it.shown&&!inp.value)inp.placeholder=ans[0].slice(0,2)+"…";inp.focus()};
   items.push(it);
  });
 }
@@ -282,6 +290,29 @@ cloze("e6",[
  "I wish you [[tell::had told]] me before the meeting."
 ]);
 
+cloze("s1",[
+ "It [[happen::happened]] last winter at a small railway station. I [[get::got]] there an hour early because I [[not / want::didn't want|did not want]] to risk missing my train to a friend’s wedding.",
+ "While I [[wait::was waiting]] on the platform, I [[notice::noticed]] that the board [[show::was showing|showed]] a different platform from the one on my ticket. I [[check::checked]] the ticket again and [[realise::realised|realized]] that I [[misread::had misread]] the number.",
+ "My train [[already / pull in::had already pulled in|'d already pulled in]] on the other side of the station, and the passengers [[board::were boarding|boarded]]. I [[run::ran]] across the footbridge. By the time I [[reach::reached]] the door, the guard [[already / blow::had already blown|'d already blown]] his whistle.",
+ "I [[jump::jumped]] on just as the train [[start::started|was starting]] to move. When I [[sit::sat]] down, I [[realise::realised|realized]] that I [[leave::had left|'d left]] my coffee on a bench.",
+ "If I [[not / check::hadn't checked|had not checked]] the ticket a second time, I [[miss::would have missed|'d have missed]] the train."
+],true);
+
+cloze("s2",[
+ "1. When I [[arrive::arrived]] at the party, most of the guests [[already / leave::had already left]].",
+ "2. First he [[work::worked]] as a waiter for two years, then he [[open::opened]] his own café.",
+ "3. He [[not / recognise::didn't recognise|did not recognise]] his old school because they [[rebuild::had rebuilt]] it completely.",
+ "4. As soon as the guests [[leave::had left|left]], we [[start::started]] cleaning.",
+ "5. He [[phone::phoned]] the hotel to confirm his booking, but they [[tell::told]] him that nobody [[make::had made]] a reservation in his name.",
+ "6. Anna was exhausted because she [[not / sleep::hadn't slept|had not slept]] for two days.",
+ "7. By the time the rescue team [[reach::reached]] the village, the flood [[destroy::had destroyed]] most of the houses.",
+ "8. He told me that he [[never / see::had never seen]] such a big shop.",
+ "9. When the film [[end::ended]], everybody [[stand::stood]] up and [[leave::left]].",
+ "10. I [[not / eat::hadn't eaten|had not eaten]] anything since breakfast, so I [[be::was]] starving when I got home.",
+ "11. If she [[tell::had told]] me earlier, I [[help::would have helped|'d have helped]] her.",
+ "12. I wish I [[not / lose::hadn't lost|had not lost]] that ring."
+],true);
+
 choice("e7",[
  {q:"«Когда мы приехали на вокзал, поезд уже ушёл.»",o:["When we got to the station, the train already went.","When we got to the station, the train had already left.","When we got to the station, the train has already left.","When we had got to the station, the train already left."],a:1,w:"The departure came before the arrival, so only the departure takes the Past Perfect."},
  {q:"«Если бы он не опоздал на собеседование, он получил бы эту работу.»",o:["If he didn’t be late for the interview, he would get the job.","If he hadn’t been late for the interview, he would get the job.","If he hadn’t been late for the interview, he would have got the job.","If he wouldn’t have been late for the interview, he had got the job."],a:2,w:"Third conditional: if + Past Perfect, would have + V3. Never would have in the if-clause."},
@@ -336,7 +367,7 @@ const Q=[
 ["Had you studied English before you started this course? How?","Yes, I had. I had learned the basics at school, and I had practised with films and apps."],
 ["Describe a time when you realised you had forgotten something important.","Last year I got to the airport and realised I had left my charger at home. I hadn’t checked my bag properly because I had been in a hurry."],
 ["What is something you wish you had learned earlier?","I wish I had learned to drive earlier. If I had, I would have saved a lot of time."]];
-$("#e8").innerHTML=Q.map((q,i)=>'<div class="q"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><details><summary>Model answer</summary><p>'+q[1]+"</p></details></div>").join("");
+$("#q8").innerHTML=Q.map((q,i)=>'<div class="q"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><details><summary>Model answer</summary><p>'+q[1]+"</p></details></div>").join("");
 
 /* Writing 9 */
 const MK=["by the time","already","hardly","no sooner","before","after","because","just","yet","never","if only","wish"];
