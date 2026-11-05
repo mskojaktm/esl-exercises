@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Writing Task 2 · Band 8–9 Training Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D2B35;--teal:#028090;--teal-d:#016F7C;--bg:#F4F7F8;--card:#fff;--line:#D5E0E3;--soft:#E8F4F1;--amber:#FFF6E0;--amber-l:#E3C27A;--brown:#8A4B0F;--ok:#0d7a4a;--bad:#b3261e;--mut:#4F6870}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--navy);font-family:Calibri,Carlito,'Segoe UI',Arial,sans-serif;font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:'Trebuchet MS',Arial,sans-serif;color:var(--navy);line-height:1.25}
+.hero{background:var(--navy);color:#EAF2F4;padding:34px 20px 28px;text-align:center}
+.hero h1{color:#fff;margin:0 0 6px;font-size:1.9em}.hero p{margin:0;color:#BFD3D8}
+.hero .tag{color:#F2B134;font-weight:700;letter-spacing:.06em;font-size:.85em}
+.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:3px solid var(--teal);box-shadow:0 2px 8px rgba(13,43,53,.12);padding:10px 16px}
+.bar .in{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.stat{font-weight:700}.stat small{font-weight:400;color:var(--mut)}
+.prog{flex:1;min-width:120px;height:10px;background:var(--line);border-radius:6px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:var(--teal);transition:width .25s}
+button{font:inherit;font-weight:700;border:0;border-radius:8px;padding:8px 14px;cursor:pointer;background:var(--teal);color:#fff}
+button.alt{background:#fff;color:var(--teal-d);border:2px solid var(--teal)}button.gh{background:var(--navy)}button:hover{filter:brightness(.93)}
+.wrap{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+.part{margin:34px 0 10px;padding:10px 16px;background:var(--navy);color:#fff;border-radius:10px;font-family:'Trebuchet MS',Arial,sans-serif;font-size:1.15em;font-weight:700}
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:12px;box-shadow:0 2px 10px rgba(13,43,53,.09);padding:20px 24px;margin:18px 0}
+.card h2{margin:0 0 12px;font-size:1.25em;display:flex;gap:10px;align-items:center}
+.card h3{margin:18px 0 6px;font-size:1.05em;color:var(--teal-d)}
+.badge{flex:none;background:var(--teal);color:#fff;border-radius:50%;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:.85em}
+.formula{background:var(--soft);border:1px solid #8CC9C2;border-radius:10px;padding:12px 16px;font-weight:700;margin:10px 0}
+.tip{background:var(--soft);border-left:5px solid var(--teal);border-radius:8px;padding:10px 14px;margin:12px 0}
+.warn{background:var(--amber);border-left:5px solid var(--amber-l);border-radius:8px;padding:10px 14px;margin:12px 0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+.box{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff}
+.box.w{background:var(--amber);border-color:var(--amber-l)}.box.s{background:var(--soft);border-color:#8CC9C2}
+.box b.l{display:block;font-size:.8em;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-d)}.box.w b.l{color:var(--brown)}
+.chip{display:inline-block;background:var(--soft);border:1px solid #8CC9C2;border-radius:999px;padding:1px 11px;margin:3px 4px 3px 0;font-size:.93em}
+table{width:100%;border-collapse:collapse;font-size:.95em;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}th{background:var(--navy);color:#fff;font-weight:700}
+td.k{font-weight:700;color:var(--teal-d);white-space:nowrap}
+ul{margin:6px 0 6px 20px;padding:0}li{margin:3px 0}
+.item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin:8px 0;background:#fff}
+.item .n{flex:none;background:var(--navy);color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:.8em;margin-top:2px}
+.item .t{flex:1}.item select,.item input[type=text]{font:inherit;border:2px solid var(--line);border-radius:8px;padding:4px 8px;max-width:100%}
+.item.ok{border-color:var(--ok);background:#EEF8F2}.item.bad{border-color:var(--bad);background:#FDF0EF}
+.fb{display:block;font-size:.9em;margin-top:4px}.ok>.t .fb{color:var(--ok)}.bad>.t .fb{color:var(--bad)}
+input.gap{width:120px;margin:0 3px}input.gap.ok{border-color:var(--ok);background:#EEF8F2}input.gap.bad{border-color:var(--bad);background:#FDF0EF}
+.cue{font-size:.92em;color:var(--mut);display:block;margin-bottom:4px}
+.opt{display:block;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin:5px 0;cursor:pointer;background:#fff}.opt input{margin-right:8px}
+.dat{font-size:.93em;background:#F4F7F8;border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin:6px 0}
+textarea{width:100%;font:inherit;border:2px solid var(--line);border-radius:8px;padding:8px;min-height:62px;resize:vertical}
+.lab{font-weight:700;color:var(--teal-d);display:block;margin-top:8px}
+.res{font-size:.93em;margin:6px 0}.res div{margin:2px 0}.res .y{color:var(--ok)}.res .x{color:var(--bad)}
+.model{display:none;background:var(--soft);border:1px solid #8CC9C2;border-radius:8px;padding:8px 12px;margin-top:8px;font-size:.95em}.model.show{display:block}
+.chk label{display:block;padding:3px 0}
+footer{text-align:center;color:var(--mut);font-size:.88em;padding:10px 0 30px}
+</style>
+</head>
+<body>
+<div class="hero"><div class="tag">IELTS WRITING TASK 2</div><h1>Band 8–9 Training Lab</h1><p>Nine training stations and a writing lab that follow the lesson: criteria → question types → structure → four moves → introduction → linking → band ladder → timed essay</p></div>
+<div class="bar"><div class="in">
+<div class="stat" id="stat">Answered 0 / 0 <small>· Score: —</small></div><div class="prog"><i id="pb"></i></div>
+<div><button onclick="checkAll()">Check Answers</button> <button class="alt" onclick="showAll()">Show Answers</button> <button class="gh" onclick="resetAll()">Reset</button></div>
+</div></div>
+<div class="wrap">
+<div class="part">PART A · THE LOGIC IN ONE SCREEN</div>
+<div class="card"><h2><span class="badge">★</span> Recap of the lesson</h2>
+<div class="g3">
+<div class="box"><b class="l">Four criteria · 25% each</b>Task Response · Coherence &amp; Cohesion · Lexical Resource · Grammatical Range &amp; Accuracy. Language is about half of the marks; the rest is technique.</div>
+<div class="box"><b class="l">Five question types</b>Opinion: state and support your view · Discussion: both views, then your opinion · Advantages / disadvantages: both sides · Causes / solutions: equal weight · Two-part: answer both questions.</div>
+<div class="box"><b class="l">The essay map</b>Introduction (2–3 sentences) · Body 1 (about 85 words) · Body 2 (about 85 words) · Conclusion (1–2 sentences). Plan 5 · write 30 · check 5 minutes. 250+ words, aim for 270–290.</div>
+<div class="box s"><b class="l">Body paragraph: four moves</b>Position → Reason → Example → Link back. Specific example plus reasoning is the jump from band 6 to 7.</div>
+<div class="box"><b class="l">Linking</b>Vary the devices; not every sentence needs one. Stay formal (no “all in all”, no “despite of”). Link ideas, not just words. Memorised openers are risky.</div>
+<div class="box w"><b class="l">What bands 8–9 add</b>Fully extended ideas · a nuanced position (concede, then qualify) · precise vocabulary · accurate complex structures · cohesion that comes from meaning, not from a linker on every line.</div></div>
+<div class="tip"><b>How to use this page.</b> Work through stations 1–9, press <b>Check Answers</b>, then write in the lab. The writing lab gives instant feedback on length, copying, stock phrases, structure and linking. Compare with the models under <b>Show Answers</b>.</div></div>
+
+<div class="part">PART B · TRAINING STATIONS</div>
+<div class="card"><h2><span class="badge">1</span> Station 1 · Which criterion?</h2><p>An examiner leaves this comment. Which criterion does it belong to?</p><div id="ex1"></div></div>
+<div class="card"><h2><span class="badge">2</span> Station 2 · Question types</h2><p>Name the type. Underline the instruction words in your head first.</p><div id="ex2"></div></div>
+<div class="card"><h2><span class="badge">3</span> Station 3 · Plan the paragraphs</h2><p>Which plan answers the question fully?</p><div id="ex3"></div></div>
+<div class="card"><h2><span class="badge">4</span> Station 4 · Find the four moves</h2><p>Label every sentence: Position, Reason, Example or Link back. The sentences are not in order.</p><h3>Paragraph A · working from home</h3><div id="ex4a"></div><h3>Paragraph B · cycle lanes</h3><div id="ex4b"></div></div>
+<div class="card"><h2><span class="badge">5</span> Station 5 · Weak to strong</h2><p>Same argument, three versions. Which one is band 7+ material: a reason <i>and</i> a specific example?</p><div id="ex5"></div></div>
+<div class="card"><h2><span class="badge">6</span> Station 6 · Introductions</h2><p>Part 1: pick the best introduction. Part 2: complete one (one word per gap).</p><div id="ex6a"></div><h3>Complete the introduction</h3><div id="ex6b"></div></div>
+<div class="card"><h2><span class="badge">7</span> Station 7 · Linking and cohesion</h2><p>Part 1: diagnose the fault. Part 2: type the missing linker (one or two words).</p><div id="ex7a"></div><h3>Complete the sentences</h3><div id="ex7b"></div></div>
+<div class="card"><h2><span class="badge">8</span> Station 8 · Upgrade to band 8–9</h2><p>Part 1: choose the best formal, precise version. Part 2: complete the sentences with advanced structures.</p><div id="ex8a"></div><h3>Advanced structures</h3><div id="ex8b"></div></div>
+<div class="card"><h2><span class="badge">9</span> Station 9 · Rate the paragraph</h2><p>All four paragraphs answer “Should governments limit children’s screen time?” Which band does each one deserve?</p><div id="ex9"></div></div>
+
+<div class="part">PART C · WRITING LAB</div>
+<div class="card"><h2><span class="badge">L1</span> Lab 1 · Write the introduction</h2><p>Paraphrase, take a position, outline in fresh words. Aim for 30–75 words.</p><div id="lab1"></div></div>
+<div class="card"><h2><span class="badge">L2</span> Lab 2 · Write one body paragraph</h2><p>Use all four moves: position, reason, example, link back. Aim for 55–120 words.</p><div id="lab2"></div></div>
+<div class="card"><h2><span class="badge">L3</span> Lab 3 · Plan, then write (40 minutes)</h2><div id="lab3"></div></div>
+
+<div class="card chk"><h2><span class="badge">✓</span> Final self-check</h2>
+<label><input type="checkbox"> I answered every part of the question and kept one position throughout.</label>
+<label><input type="checkbox"> My introduction paraphrases, takes a position and outlines in fresh words.</label>
+<label><input type="checkbox"> Each body paragraph has one central idea and uses the four moves.</label>
+<label><input type="checkbox"> My examples are specific, not general.</label>
+<label><input type="checkbox"> My linkers are varied and not on every sentence.</label>
+<label><input type="checkbox"> I used precise vocabulary and accurate complex structures.</label>
+<label><input type="checkbox"> I wrote 270–290 words and proofread articles, agreement and register.</label></div>
+</div>
+<footer>IELTS Writing Task 2 · Band 8–9 Training Lab · based on the Task 2 teaching deck (criteria, types, structure, four moves, linking, band ladder)</footer>
+
+<script>
+/*DATA*/
+const EX={
+ crit:{opts:["Task Response","Coherence & Cohesion","Lexical Resource","Grammatical Range & Accuracy"],items:[
+  ["The essay explains the trend but never says whether it is positive or negative, as the question asked.",0,"Every part of the question must be answered: Task Response."],
+  ["Nearly every sentence begins with a linker (Moreover, However, Furthermore).",1,"Mechanical linking: Coherence & Cohesion."],
+  ["The candidate writes “kids” and “a lot of stuff” in a formal essay.",2,"Register and precision: Lexical Resource."],
+  ["Complex sentences are attempted, but articles and verb agreement are often wrong.",3,"Accuracy of structures: Grammatical Range & Accuracy."],
+  ["The introduction agrees with the statement, but the conclusion disagrees with it.",0,"The position must be clear and consistent: Task Response."],
+  ["One paragraph mixes three unrelated ideas and has no central topic.",1,"Paragraphing and logical progression: Coherence & Cohesion."]]},
+ types:{opts:["Opinion (agree / disagree)","Discussion","Advantages / disadvantages","Causes / solutions","Two-part question"],items:[
+  ["Some people say the best way to reduce crime is longer prison sentences. Others believe better education would be more effective. Discuss both views and give your opinion.",1,"“Discuss both views and give your opinion”: discussion."],
+  ["In many cities, traffic congestion is getting worse. What are the causes, and what measures could be taken to reduce it?",3,"Causes and solutions: one paragraph for each."],
+  ["More people are choosing to live in big cities. What are the advantages and disadvantages of this trend?",2,"Both sides must be covered."],
+  ["Learning a foreign language is more useful than studying other school subjects. To what extent do you agree or disagree?",0,"“To what extent do you agree”: opinion."],
+  ["In some countries, many people now work well past retirement age. Why is this happening, and is it a positive or negative development?",4,"Two questions, so two answers, each in its own paragraph."],
+  ["Governments should spend money on public transport rather than building new roads. Do you agree or disagree?",0,"Agree or disagree: opinion."]]},
+ plan:[
+  {t:"Some people say the best way to reduce crime is longer prison sentences. Others believe better education would be more effective. Discuss both views and give your opinion.",o:["Body 1: causes of crime. Body 2: solutions to crime.","Body 1: the case for longer sentences. Body 2: the case for education. Opinion in the introduction and conclusion.","Body 1: why I like education. Body 2: my personal experience of school."],a:1,fb:"A discussion essay needs both views, with your opinion stated."},
+  {t:"In many cities, traffic congestion is getting worse. What are the causes, and what measures could be taken to reduce it?",o:["Body 1: causes of congestion. Body 2: measures to reduce it.","Body 1: advantages of cars. Body 2: disadvantages of cars.","Body 1: my opinion on cars. Body 2: an example from my city."],a:0,fb:"Give both parts equal weight: causes, then solutions."},
+  {t:"In some countries, many people now work well past retirement age. Why is this happening, and is it a positive or negative development?",o:["Body 1: advantages of working longer. Body 2: disadvantages of working longer.","Body 1: why it is happening. Body 2: positive or negative (choose one and justify it).","Body 1: a history of retirement. Body 2: a conclusion."],a:1,fb:"Two questions, two paragraphs: why, then positive or negative."},
+  {t:"Learning a foreign language is more useful than studying other school subjects. To what extent do you agree or disagree?",o:["Body 1: reasons for my view. Body 2: a second reason. Position stated in the introduction.","Body 1: I agree completely. Body 2: I disagree completely, with no clear position.","Body 1: a list of school subjects. Body 2: a list of languages."],a:0,fb:"Opinion essay: a clear position, supported by two developed reasons."},
+  {t:"More people are choosing to live in big cities. What are the advantages and disadvantages of this trend?",o:["Body 1: causes of urbanisation. Body 2: solutions to overcrowding.","Body 1: two advantages. Body 2: two disadvantages.","Body 1: my favourite city. Body 2: why I would move there."],a:1,fb:"Cover both sides; say which is stronger only if the question asks."}],
+ movesA:{opts:["Position","Reason","Example","Link back"],items:[
+  ["As a result, flexible work can improve both employees’ wellbeing and their productivity.",3,"It returns to the thesis: link back."],
+  ["For example, an employee who saves two hours of commuting each day can use that time to exercise or rest, and often returns to work with more energy.",2,"A specific case: example."],
+  ["Working from home gives employees greater control over their daily routine.",0,"The main claim: position."],
+  ["This control reduces stress, because people can organize their time around personal responsibilities as well as work.",1,"It explains why the claim is true: reason."]]},
+ movesB:{opts:["Position","Reason","Example","Link back"],items:[
+  ["In a mid-sized city, for instance, an office worker who lives five kilometres from work can cycle there in under twenty minutes, so the car stops being the obvious choice.",2,"A specific, imagined case: example."],
+  ["Therefore, cycle lanes can make cities healthier and less congested at the same time.",3,"It ties the paragraph back to the thesis: link back."],
+  ["This is because many people avoid cycling only when they fear sharing the road with heavy traffic.",1,"It explains why: reason."],
+  ["Safe, separated cycle lanes encourage more residents to leave their cars at home.",0,"The main claim: position."]]},
+ strong:[
+  {t:"Argument: free university tuition",o:["Free tuition would be a great benefit, and it is clearly better for everybody.","Free tuition removes the main financial barrier for talented students from poorer families; for example, a gifted student whose parents cannot afford fees would otherwise take a low-paid job and never reach lecture halls.","Tuition fees are expensive, and many students have to borrow money."],a:1,fb:"Reason plus a specific example."},
+  {t:"Argument: limiting children’s screen time",o:["Screens can be bad for children, so governments should do something about it.","Excessive screen time reduces sleep and physical activity, which can harm concentration at school.","Excessive screen time reduces sleep and physical activity, which can harm concentration at school; for instance, a child who watches videos until midnight may struggle to stay alert in morning lessons."],a:2,fb:"B has a reason but no example; C adds the specific case."},
+  {t:"Argument: investing in public transport",o:["Investing in buses and trams gives residents without cars a realistic way to reach distant workplaces; for example, a shop assistant living in a suburb could accept a better-paid job across the city instead of the nearest one.","Public transport is important. It is used by many people every day.","Investing in buses and trams gives residents without cars a realistic way to reach distant workplaces."],a:0,fb:"Specific example plus reasoning beats general statements."},
+  {t:"Argument: compulsory recycling",o:["Mandatory recycling reduces landfill waste because households must separate materials.","Mandatory recycling reduces landfill waste because households must separate materials; in a typical apartment block, for instance, glass and paper that once filled general bins are collected separately and reused.","Recycling is good for the environment, and we should all do it."],a:1,fb:"Reason plus a concrete example."}],
+ introPick:[
+  {t:"Prompt: Some people think museums and art galleries should be free for everyone. To what extent do you agree or disagree?",o:["In today’s modern world, museums are very important. This essay will discuss whether museums should be free. I agree.","Some people argue that cultural institutions should open their doors without charging admission. I largely agree, since free entry widens access to education and culture, although funding remains a practical concern.","Some people think museums and art galleries should be free for everyone. I agree with this opinion and I will give two reasons."],a:1,fb:"B paraphrases, takes a position and outlines in fresh words. A is a cliché plus a memorised outline; C copies the prompt."},
+  {t:"Prompt: Some people believe working remotely is better than working in an office. Discuss both views and give your opinion.",o:["Opinions differ on whether remote work or office work suits employees better. While working from home offers flexibility, the office supports teamwork; on balance, I believe a hybrid arrangement works best.","In this essay I will discuss both views and give my opinion about remote work.","Working remotely is better. Offices are bad. I think so."],a:0,fb:"A covers both views and states an opinion in fresh language."},
+  {t:"Prompt: Obesity is rising in many countries. What are the causes of this problem, and what can be done to solve it?",o:["Obesity is rising in many countries. This essay will discuss the causes and what can be done.","Obesity is bad for health and many people have it, so governments must act at once.","Rising obesity rates are a growing concern worldwide. The main causes are inactive lifestyles and cheap processed food, and the most effective responses are probably education and taxation."],a:2,fb:"C answers both parts with a clear plan and no copying."}],
+ introCloze:[{cue:"Complete the introduction (opinion essay, museums).",s:"Some people believe that public museums and galleries should not {1} for admission. I {2} agree with this view, {3} free entry broadens access to education and culture, {4} there are practical funding issues to consider.",a:{1:["charge"],2:["largely","mostly","broadly","generally","strongly","fully","partly"],3:["because","since","as"],4:["although","though","while","whereas"]}}],
+ diag:{opts:["Mechanical chain","Informal linker","Fragment","Wrong structure","Repetition","Correct"],items:[
+  ["Firstly, parks improve health. Secondly, parks reduce stress. Thirdly, parks bring communities together.",0,"A numbered chain sounds mechanical; join the ideas instead."],
+  ["All in all, public transport benefits everyone.",1,"“All in all” is informal; use “To conclude” or “Overall”."],
+  ["Many students prefer online lessons. Because they are flexible.",2,"“Because they are flexible” is not a sentence."],
+  ["Despite of the rain, the match went ahead.",3,"Say “Despite the rain” or “In spite of the rain”."],
+  ["Cars are convenient. However, they pollute. However, they are expensive.",4,"The same linker twice; vary or merge the sentences."],
+  ["Although cycling is cheap, many commuters still prefer cars.",5,"Correct concession structure."]]},
+ linkCloze:[
+  {cue:"1",s:"{1} the high cost of living, many young people remain in their home city.",a:{1:["despite"]}},
+  {cue:"2",s:"Remote work saves time; {2}, it can leave employees feeling isolated.",a:{2:["however","nevertheless","nonetheless"]}},
+  {cue:"3",s:"Cities are often crowded, {3} rural areas frequently lack basic services.",a:{3:["whereas","while","but","yet"]}},
+  {cue:"4",s:"Public libraries offer free access to books. {4}, they provide computers and quiet study spaces.",a:{4:["moreover","in addition","furthermore","additionally","besides"]}},
+  {cue:"5",s:"The policy failed to reduce traffic; {5}, it was withdrawn within a year.",a:{5:["consequently","therefore","thus","hence","as a result"]}}],
+ upgrade:[
+  ["A lot of people struggle to afford housing.",1,"“A considerable number of” is formal and precise.",["Lots of people struggle to afford housing.","A considerable number of people struggle to afford housing.","Tons of people struggle to afford housing."]],
+  ["Governments should do something about pollution.",0,"A specific verb phrase is more precise.",["Governments should take decisive action to reduce pollution.","Governments should fix pollution stuff.","Governments should do things about pollution."]],
+  ["This is a big problem.",2,"“Poses a serious challenge” is precise and formal.",["This is a really huge problem.","This is a big, big problem.","This poses a serious challenge."]],
+  ["Technology has made life better.",1,"“Significantly improved quality of life” is precise.",["Technology made life more better.","Technology has significantly improved quality of life.","Technology has made life nice."]],
+  ["People don’t have enough money.",0,"Formal, specific and grammatical.",["Many households lack sufficient income.","Peoples have no enough money.","People are broke."]],
+  ["Kids spend too much time on phones.",2,"Formal register and precise wording.",["Kids spend way too much time on phones.","Kids are on phones all the time.","Children spend an excessive amount of time on mobile devices."]],
+  ["If you want a good job, you need a degree.",1,"Impersonal and formal.",["If u want a job you need a degree.","Individuals seeking well-paid employment generally need a degree.","If you wants a good job, a degree is needed."]],
+  ["Many people think that technology isolates us.",0,"Hedged, formal opening.",["It is widely believed that technology isolates us.","Everybody knows that technology isolates us.","Lots of people think that technology isolates us."]]],
+ gram:[
+  {cue:"Inversion in a conditional",s:"{1} governments to invest more in public transport, traffic congestion would fall significantly.",a:{1:["were"]}},
+  {cue:"Non-defining relative clause",s:"Libraries provide free access to books, {2} is essential for low-income families.",a:{2:["which"]}},
+  {cue:"Inversion after “not only”",s:"Not only {3} remote work reduce commuting time, but it also gives employees greater flexibility.",a:{3:["does"]}},
+  {cue:"Participle clause",s:"The scheme, {4} in 2015, has had little effect.",a:{4:["introduced","launched","implemented","adopted"]}},
+  {cue:"Hedged claim",s:"It is often {5} that technology isolates people, yet the evidence suggests otherwise.",a:{5:["argued","claimed","said","believed","thought","suggested","assumed"]}}],
+ rate:{opts:["Band 6","Band 7","Band 8–9"],items:[
+  ["Children use screens too much. Firstly, it is bad for health. Secondly, it is bad for school. Thirdly, parents are busy. So the government must do something.",0,"Vague claims, a numbered chain, no examples, weak vocabulary: band 6 at best."],
+  ["Excessive screen time can damage children’s health because it reduces physical activity. For example, a child who spends every evening watching videos has little time for sport. Therefore, limiting screen time would improve children’s wellbeing.",1,"Clear position, reason, example and link back, but plain vocabulary and structures: band 7."],
+  ["Limiting screen time is justified, but only to a degree. While sedentary habits and disrupted sleep are genuine concerns, a blanket restriction would overlook the educational value of well-chosen content; a child who uses an interactive app to learn mathematics, for instance, is engaged in something far removed from passive viewing. A more effective approach is therefore guidance on how, not merely how long, children use screens.",2,"Nuanced position, concession and qualification, precise vocabulary, extended example: band 8–9."],
+  ["In today’s modern world, screens are everywhere. Moreover, children spend many hours on them. Furthermore, this causes problems. Additionally, parents should limit it. Consequently, children will be healthier.",0,"A stock opener and a linker on every sentence, with no development: band 6."]]},
+ lab1:[
+  {kind:"opinion",p:"Some people think museums and art galleries should be free for everyone. To what extent do you agree or disagree?",m:"Some people argue that public museums and galleries should not charge for admission. I largely agree with this view, because free entry widens access to education and culture, although funding remains a practical concern."},
+  {kind:"opinion",p:"Some people say that the best way to reduce crime is to give longer prison sentences. Others believe better education would be more effective. Discuss both views and give your opinion.",m:"Opinions differ on how best to tackle crime: some favour longer prison terms, while others prioritise education. Both approaches have merit, but I believe that investing in education offers a more lasting solution, since it addresses the roots of offending."},
+  {kind:"causes",p:"Obesity is rising in many countries. What are the causes of this problem, and what can be done to solve it?",m:"Rising obesity rates are a growing concern worldwide. The main causes appear to be inactive lifestyles and the low cost of processed food, and the most promising responses are public education and measures that make healthy food more affordable."}],
+ lab2:[
+  {p:"Governments should spend money on public transport rather than building new roads. Write ONE body paragraph giving a reason in favour.",m:"Investment in public transport widens opportunities for people who do not own cars. Without reliable buses and trains, workers in outer suburbs can only accept jobs within walking distance, which keeps their wages low. For instance, a shop assistant living on the edge of a city could take a better-paid position downtown if a direct tram line existed. Public transport therefore expands both individual prospects and the labour market as a whole."},
+  {p:"Learning a foreign language is more useful than studying other school subjects. Write ONE body paragraph giving a reason against.",m:"Mathematics and science provide skills that apply across nearly every profession. A graduate who can analyse data, for example, is valued by employers in fields as different as medicine, finance and engineering, whereas language skills are often useful only in specific roles. Core academic subjects therefore prepare students more broadly for the labour market, which is the main purpose of a general education."}],
+ lab3:{p:"Some people think children spend too much time on screens and that governments should limit it. To what extent do you agree or disagree?",
+  m:"It is often claimed that children now spend far too long in front of screens, and some argue that governments should impose limits. I agree that excessive use is harmful, but I believe that regulation is a blunt instrument and that guidance is a more effective response.\n\nAdmittedly, heavy screen use carries real risks. Children who watch videos or play games late into the evening sleep less, move less and often struggle to concentrate in class. Younger children, whose habits are still forming, are especially vulnerable. Persistent tiredness also affects mood, which can strain relationships at home and at school. A child who stays up until midnight on a tablet, for instance, may be too tired to follow morning lessons. Since these effects accumulate over years, some form of public guidance on healthy limits is justified.\n\nHowever, a legal limit would be hard to enforce and would ignore how varied screen use really is. Time spent on an interactive app that teaches mathematics is very different from hours of passive scrolling, and a blanket rule treats them identically. For example, a pupil who films and edits a school documentary develops creative and technical skills that few traditional activities provide. Rules based on time alone would therefore punish beneficial use as well as harmful use.\n\nIn conclusion, the problem is not screens themselves but how children use them. Governments should fund guidance for parents and schools rather than set strict limits, because families are better placed to judge what suits their own children. Such support would be cheaper, fairer and more flexible than any enforcement scheme. Children who learn to use technology deliberately are better prepared for adult life than those who merely obey rules."}
+};
+const CHK={
+ wc:s=>(s.trim().match(/\S+/g)||[]).length,
+ norm:s=>s.toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(Boolean),
+ run(a,b){const x=this.norm(a),y=this.norm(b);let best=0,prev=new Array(y.length+1).fill(0);for(let i=1;i<=x.length;i++){const cur=new Array(y.length+1).fill(0);for(let j=1;j<=y.length;j++){if(x[i-1]===y[j-1]){cur[j]=prev[j-1]+1;if(cur[j]>best)best=cur[j];}}prev=cur;}return best;},
+ STOCK:/(this essay (will|aims)|in today[’']?s modern world|in this day and age|since the dawn of time|all in all|last but not least)/i,
+ LINK:/^(firstly|secondly|thirdly|moreover|furthermore|additionally|however|in addition|besides|consequently|therefore|thus|admittedly|for example|for instance|in conclusion|to sum up|to conclude|nevertheless|on the other hand)\b/i,
+ POS:/(i (largely |strongly |partly |mostly |fully |broadly )?(agree|disagree)|i believe|in my (view|opinion)|i would argue|i think|i am convinced)/i,
+ EXAMPLE:/(for example|for instance|such as|to illustrate|consider|e\.g\.)/gi,
+ sents(s){return s.split(/(?<=[.!?])\s+/).map(x=>x.trim()).filter(Boolean);},
+ ratio(s){const a=this.sents(s);return a.length?a.filter(x=>this.LINK.test(x)).length/a.length:0;},
+ intro(s,t){const n=this.wc(s),r=[];
+  r.push([n>=30&&n<=75,"Length: "+n+" words (aim for about 30–75)"]);
+  r.push([this.run(s,t.p)<7,"Not copied from the prompt (longest shared run: "+this.run(s,t.p)+" words; keep it under 7)"]);
+  r.push([!this.STOCK.test(s),"No stock phrases (“This essay will discuss…”, “In today’s modern world…”)"]);
+  if(t.kind==="causes"){r.push([/(cause|because of|due to|stem|result from|reason)/i.test(s),"Refers to the causes"]);r.push([/(solution|response|measure|remedy|address|tackle|reduce|can be done|promising)/i.test(s),"Refers to solutions or measures"]);}
+  else r.push([this.POS.test(s),"Position is stated (I agree / I believe / in my view…)"]);return r;},
+ body(s,t){const n=this.wc(s),r=[];
+  r.push([n>=55&&n<=120,"Length: "+n+" words (aim for about 55–120)"]);
+  r.push([(s.match(this.EXAMPLE)||[]).length>=1,"Contains a specific example (for example / for instance / such as)"]);
+  r.push([/(therefore|thus|consequently|as a result|hence|this means|for this reason|which is why)/i.test(s),"Links back (therefore / as a result…)"]);
+  r.push([this.ratio(s)<=0.5,"Linkers are not on every sentence (share of sentences starting with one: "+Math.round(100*this.ratio(s))+"%)"]);
+  r.push([!this.STOCK.test(s),"No stock phrases"]);return r;},
+ essay(s,t){const n=this.wc(s),paras=s.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean),r=[];
+  r.push([n>=250&&n<=330,"Length: "+n+" words (250+ required; aim for 270–290; over 330 adds errors)"]);
+  r.push([paras.length>=4,"Paragraphs: "+paras.length+" (separate with a blank line; aim for 4)"]);
+  r.push([paras.length>0&&this.POS.test(paras[0]),"Position is stated in the introduction"]);
+  r.push([paras.length>0&&this.run(paras[0],t.p)<7,"Introduction is not copied from the prompt"]);
+  r.push([paras.length>1&&/(to sum up|in conclusion|to conclude|overall|in summary|on balance)/i.test(paras[paras.length-1]),"The last paragraph is a conclusion (to conclude / overall…)"]);
+  r.push([(s.match(this.EXAMPLE)||[]).length>=2,"At least two specific examples"]);
+  r.push([this.ratio(s)<=0.4,"Linkers are varied, not on every sentence (share: "+Math.round(100*this.ratio(s))+"%)"]);
+  r.push([!this.STOCK.test(s),"No stock phrases"]);return r;}
+};
+/*END*/
+
+const $=s=>document.querySelector(s),items=[];
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function reg(r,o){const it=Object.assign({row:r},o);items.push(it);return it;}
+function sel(opts){const s=document.createElement("select");s.innerHTML='<option value="">—</option>'+opts.map((o,i)=>`<option value="${i}">${esc(o)}</option>`).join("");return s;}
+function rowEl(n,html){const d=document.createElement("div");d.className="item";d.innerHTML=`<span class="n">${n}</span><span class="t">${html}<span class="fb"></span></span>`;return d;}
+function put(r,el){r.querySelector(".t").insertBefore(el,r.querySelector(".fb"));}
+function mark(it,ok,txt){it.row.classList.remove("ok","bad");it.row.classList.add(ok?"ok":"bad");const f=it.row.querySelector(".fb");if(f)f.textContent=(ok?"✓ ":"✗ ")+txt;}
+function selectEx(id,list,opts,start){const box=$(id);list.forEach((e,k)=>{const o=e[3]||opts,a=e[1],r=rowEl((start||1)+k,esc(e[0])+"<br>");const s=sel(o);put(r,s);box.appendChild(r);
+ const it=reg(r,{ans:()=>s.value!=="",chk:()=>{const ok=s.value!==""&&+s.value===a;mark(it,ok,ok?e[2]:(s.value===""?"Not answered. ":"")+e[2]);return ok},show:()=>{s.value=a},reset:()=>{s.value=""}});});}
+function radioEx(id,list){const box=$(id);list.forEach((t,k)=>{const r=rowEl(k+1,"<b>"+esc(t.t)+"</b>");const name=id+k;t.o.forEach((o,i)=>{const l=document.createElement("label");l.className="opt";l.innerHTML=`<input type="radio" name="${name}" value="${i}">${esc(o)}`;put(r,l);});box.appendChild(r);
+ const val=()=>{const c=r.querySelector("input:checked");return c?+c.value:-1};
+ const it=reg(r,{ans:()=>val()>=0,chk:()=>{const ok=val()===t.a;mark(it,ok,t.fb);return ok},show:()=>{r.querySelectorAll("input")[t.a].checked=true},reset:()=>{r.querySelectorAll("input").forEach(x=>x.checked=false)}});});}
+function clozeEx(id,list){const box=$(id);list.forEach(c=>{const w=document.createElement("div");w.className="item";w.style.display="block";w.innerHTML='<span class="cue">'+esc(c.cue)+"</span>";const p=document.createElement("div");p.innerHTML=esc(c.s).replace(/\{(\d)\}/g,'<input type="text" class="gap" data-g="$1" autocomplete="off" spellcheck="false">');w.appendChild(p);box.appendChild(w);
+ p.querySelectorAll("input").forEach(inp=>{const acc=c.a[inp.dataset.g];reg(inp,{ans:()=>inp.value.trim()!=="",chk:()=>{const ok=acc.includes(inp.value.trim().toLowerCase());inp.classList.remove("ok","bad");inp.classList.add(ok?"ok":"bad");inp.title=ok?"":"Possible answers: "+acc.join(" / ");return ok},show:()=>{inp.value=acc[0];inp.classList.remove("bad");inp.classList.add("ok");inp.title="Also accepted: "+acc.join(" / ")},reset:()=>{inp.value="";inp.classList.remove("ok","bad");inp.title=""}});});});}
+selectEx("#ex1",EX.crit.items,EX.crit.opts);
+selectEx("#ex2",EX.types.items,EX.types.opts);
+radioEx("#ex3",EX.plan);
+selectEx("#ex4a",EX.movesA.items,EX.movesA.opts,1);
+selectEx("#ex4b",EX.movesB.items,EX.movesB.opts,5);
+radioEx("#ex5",EX.strong);
+radioEx("#ex6a",EX.introPick);clozeEx("#ex6b",EX.introCloze);
+selectEx("#ex7a",EX.diag.items,EX.diag.opts);clozeEx("#ex7b",EX.linkCloze);
+selectEx("#ex8a",EX.upgrade.map(e=>[e[0],e[1],e[2],e[3]]),[]);clozeEx("#ex8b",EX.gram);
+selectEx("#ex9",EX.rate.items,EX.rate.opts);
+// writing lab
+function fmt(r){return r.map(([ok,m])=>`<div class="${ok?"y":"x"}">${ok?"✓":"✗"} ${esc(m)}</div>`).join("")}
+function lab(id,list,kind,fn){const box=$(id);list.forEach((t,k)=>{const d=document.createElement("div");d.className="item";d.style.display="block";
+ d.innerHTML=`<b>${k+1}. ${esc(t.p)}</b><textarea placeholder="Write here…"></textarea><div class="res"></div><button>Quick check</button><div class="model"><b>Model:</b> ${esc(t.m)}</div>`;box.appendChild(d);
+ d.querySelector("button").addEventListener("click",()=>{d.querySelector(".res").innerHTML=fmt(CHK[fn](d.querySelector("textarea").value,t));});});}
+lab("#lab1",EX.lab1,"intro","intro");lab("#lab2",EX.lab2,"body","body");
+(()=>{const t=EX.lab3,box=$("#lab3");const d=document.createElement("div");
+ d.innerHTML=`<div class="dat"><b>Prompt:</b> ${esc(t.p)}</div>
+<span class="lab">Plan · 5 minutes</span>
+<textarea id="p1" placeholder="Question type and instruction words"></textarea>
+<textarea id="p2" placeholder="Your position (one sentence)"></textarea>
+<textarea id="p3" placeholder="Body 1: idea + specific example"></textarea>
+<textarea id="p4" placeholder="Body 2: idea + specific example"></textarea>
+<button id="qp">Check plan</button><div class="res" id="rp"></div>
+<span class="lab">Essay · 30 minutes · 270–290 words · blank line between paragraphs <span id="wcnt" style="color:#4F6870;font-weight:400"></span></span>
+<textarea id="es" style="min-height:300px" placeholder="Write your essay here…"></textarea>
+<button id="qe">Quick check</button><div class="res" id="re"></div>
+<div class="model"><b>Model essay (band 8–9):</b><br>${esc(t.m).replace(/\n\n/g,"<br><br>")}</div>`;box.appendChild(d);
+ $("#qp").addEventListener("click",()=>{$("#rp").innerHTML=fmt(["p1","p2","p3","p4"].map((i,n)=>[CHK.wc($("#"+i).value)>=4,["Question type and instruction words","Position","Body 1 idea and example","Body 2 idea and example"][n]+" filled in"]));});
+ $("#qe").addEventListener("click",()=>{$("#re").innerHTML=fmt(CHK.essay($("#es").value,t));});
+ $("#es").addEventListener("input",()=>{$("#wcnt").textContent="· "+CHK.wc($("#es").value)+" words";});})();
+// controls
+function upd(sc){const a=items.filter(i=>i.ans()).length,n=items.length;$("#stat").innerHTML=`Answered ${a} / ${n} <small>· Score: ${sc===undefined?"—":sc+" / "+n}</small>`;$("#pb").style.width=(100*a/n)+"%";}
+function checkAll(){let c=0;items.forEach(i=>{if(i.chk())c++});upd(c);}
+function showAll(){items.forEach(i=>{i.show();if(i.row.classList.contains("item")){i.row.classList.remove("bad");i.row.classList.add("ok");}});document.querySelectorAll(".model").forEach(m=>m.classList.add("show"));$("#stat").innerHTML=`Answers shown <small>· Score: —</small>`;}
+function resetAll(){items.forEach(i=>{i.reset();i.row.classList.remove("ok","bad");const f=i.row.querySelector(".fb");if(f)f.textContent="";});document.querySelectorAll(".model").forEach(m=>m.classList.remove("show"));document.querySelectorAll("textarea").forEach(t=>t.value="");document.querySelectorAll(".res").forEach(r=>r.innerHTML="");const w=$("#wcnt");if(w)w.textContent="";upd();}
+document.addEventListener("input",()=>upd());document.addEventListener("change",()=>upd());upd();
+</script>
+</body>
+</html>
