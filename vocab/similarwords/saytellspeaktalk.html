@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Say, Tell, Speak, Talk — B1–B2 Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#f3f8f9;--ok:#1b8a4b;--bad:#c0392b;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--navy);font:16px/1.5 Calibri,Arial,sans-serif}
+h1,h2,h3{font-family:"Trebuchet MS",Arial,sans-serif;margin:0}
+header{background:var(--navy);color:#fff;padding:26px 20px 22px;text-align:center}
+header h1{font-size:28px}header p{margin:6px 0 0;opacity:.85}
+#bar{position:sticky;top:0;z-index:10;background:var(--teal);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:8px 18px;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+#bar button{background:#fff;color:var(--teal);border:0;border-radius:6px;padding:5px 12px;font-weight:bold;cursor:pointer}
+main{max-width:860px;margin:0 auto;padding:18px 14px 60px}
+section{background:var(--card);border-left:6px solid var(--teal);border-radius:8px;box-shadow:0 2px 8px rgba(13,43,53,.12);padding:16px 18px;margin:18px 0}
+section h2{font-size:20px;display:flex;align-items:center;gap:10px}
+.badge{background:var(--teal);color:#fff;border-radius:50%;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.time{margin-left:auto;font-size:13px;font-weight:normal;color:#5a7380}
+.inst{margin:8px 0 12px;color:#35525e}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+.rule{border:2px solid var(--teal);border-radius:8px;padding:10px 12px;background:#f7fcfc}
+.rule h3{color:var(--teal);font-size:18px}.rule ul{margin:6px 0 0;padding-left:18px}
+.rule em{color:#5a7380}
+.row{padding:7px 0;border-bottom:1px dashed #d5e3e7;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.row .n{font-weight:bold;color:var(--teal);width:26px}
+input[type=text],select{font:inherit;padding:3px 7px;border:2px solid #b7cdd3;border-radius:6px;background:#fff;color:var(--navy)}
+input[type=text]{width:130px}
+.ok{border-color:var(--ok)!important;background:#e8f6ee}
+.bad{border-color:var(--bad)!important;background:#fdecea}
+.fb{font-size:14px;width:100%;margin-left:32px}.fb.g{color:var(--ok)}.fb.r{color:var(--bad)}
+.btns{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btns button{border:0;border-radius:6px;padding:7px 14px;font-weight:bold;cursor:pointer;color:#fff;background:var(--teal)}
+.btns button.s{background:var(--navy)}.btns button.r{background:#7a8f98}
+.sc{margin-left:auto;font-weight:bold}
+.err{background:#fff3cd;padding:0 4px;border-radius:3px;font-weight:bold}
+.story{line-height:2.1}
+.sp{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.sp div{border:2px dashed var(--teal);border-radius:8px;padding:10px}
+.sp b{color:var(--teal)}
+.plan{font-size:14px;color:#35525e;margin-top:6px}
+</style>
+</head>
+<body>
+<header>
+<h1>Say · Tell · Speak · Talk</h1>
+<p>Level B1–B2 · 45–55 minutes · 11 exercises + writing + speaking</p>
+</header>
+<div id="bar"><span id="total">Score: 0 / 0</span><button onclick="resetAll()">Reset all</button></div>
+<main>
+
+<section>
+<h2><span class="badge">0</span>Warm-up: the key differences<span class="time">5 min</span></h2>
+<p class="inst">Read the rules. Then try to think of one more example for each verb.</p>
+<div class="grid">
+<div class="rule"><h3>SAY (said)</h3><ul>
+<li>Focus on the <b>words</b> that are spoken.</li>
+<li>say + words / that-clause: <em>She said (that) she was tired.</em></li>
+<li>Person is optional and needs <b>to</b>: <em>He said to me…</em> (not <s>said me</s>)</li>
+<li>say hello, say sorry, say yes, say a few words</li>
+</ul></div>
+<div class="rule"><h3>TELL (told)</h3><ul>
+<li>Focus on <b>giving information</b> to someone.</li>
+<li>tell + <b>person</b> (+ information): <em>She told me she was tired.</em></li>
+<li>tell sb (not) to do sth: <em>He told us to wait.</em></li>
+<li>tell the truth / a lie / a joke / a story / a secret / the time / the difference</li>
+</ul></div>
+<div class="rule"><h3>SPEAK (spoke)</h3><ul>
+<li>The <b>ability</b> to use a language, or more formal / one-way speaking.</li>
+<li>speak English, speak fluently, speak slowly, speak up</li>
+<li>speak to / with sb: <em>I'd like to speak to the manager.</em></li>
+<li>speak at a conference, speak your mind</li>
+</ul></div>
+<div class="rule"><h3>TALK (talked)</h3><ul>
+<li>A <b>conversation</b>, usually informal and two-way.</li>
+<li>talk to / with sb about sth: <em>We talked about football.</em></li>
+<li>talk business / politics / nonsense / sense</li>
+<li>talk for hours, small talk</li>
+</ul></div>
+</div>
+</section>
+
+<div id="ex"></div>
+
+<section>
+<h2><span class="badge">12</span>Writing<span class="time">7 min</span></h2>
+<p class="inst">Write 80–100 words about a conversation you remember (a family dinner, a job interview, a phone call). Use at least six different expressions with <b>say, tell, speak</b> and <b>talk</b>.</p>
+<textarea id="wr" rows="7" style="width:100%;font:inherit;padding:8px;border:2px solid #b7cdd3;border-radius:6px" placeholder="Write here..."></textarea>
+<div class="btns"><button onclick="checkWrite()">Check my verbs</button><span class="sc" id="wc"></span></div>
+<div id="wout" class="plan"></div>
+</section>
+
+<section>
+<h2><span class="badge">13</span>Speaking: use all four verbs<span class="time">7 min</span></h2>
+<p class="inst">Work in pairs or with your teacher. Use <b>say, tell, speak</b> and <b>talk</b> correctly in your answers.</p>
+<div class="sp">
+<div><b>TALK</b><br>What do you and your friends usually talk about? Is there a topic you never talk about?</div>
+<div><b>TELL</b><br>Tell your partner a short story or a joke. Can you tell when someone is lying?</div>
+<div><b>SPEAK</b><br>Which languages do you speak? When do you feel nervous speaking English?</div>
+<div><b>SAY</b><br>What is the best (or worst) thing anyone has said to you? Do you find it hard to say sorry?</div>
+<div><b>MIX</b><br>Describe a time when someone didn't tell you the truth. What did you say to them?</div>
+<div><b>REPORT</b><br>Tell your partner what your boss, teacher or parents said to you last week.</div>
+</div>
+<p class="plan">Teacher tip: note mistakes with say/tell and give feedback at the end.</p>
+</section>
+</main>
+
+<script>
+var V=["say","tell","speak","talk"];
+var EX=[
+{t:"Choose the correct verb",time:"5 min",inst:"Choose the best verb in the correct form. If two answers are possible, choose either.",items:[
+{q:"He didn't ___ a word during the whole meeting.",o:["say","tell","speak","talk"],a:["say"]},
+{q:"Can you ___ me what happened?",o:["say","tell","speak","talk"],a:["tell"]},
+{q:"Do you ___ any foreign languages?",o:["say","tell","speak","talk"],a:["speak"]},
+{q:"I'd like to ___ to the manager, please.",o:["say","tell","speak","talk"],a:["speak","talk"],n:"Both are possible. 'Speak' is more formal; 'talk' is more informal."},
+{q:"He's always ___ lies.",o:["saying","telling","speaking","talking"],a:["telling"]},
+{q:"“Good luck!” she ___ before the exam.",o:["said","told","spoke","talked"],a:["said"]},
+{q:"The doctor ___ me to rest for a week.",o:["said","told","spoke","talked"],a:["told"]},
+{q:"We ___ about music for hours last night.",o:["said","told","spoke","talked"],a:["talked","spoke"],n:"'Talked' is more natural for an informal chat; 'spoke' is also possible."}
+]},
+{t:"Fixed expressions",time:"5 min",inst:"Complete each expression with say, tell, speak or talk.",items:[
+{q:"___ sorry",o:V,a:["say"]},{q:"___ the truth",o:V,a:["tell"]},{q:"___ Spanish",o:V,a:["speak"]},{q:"___ nonsense",o:V,a:["talk"]},
+{q:"___ goodnight",o:V,a:["say"]},{q:"___ a lie",o:V,a:["tell"]},{q:"___ slowly",o:V,a:["speak"]},{q:"___ business",o:V,a:["talk"]},
+{q:"___ a few words",o:V,a:["say"]},{q:"___ the time",o:V,a:["tell"]},{q:"___ your mind",o:V,a:["speak"]},{q:"___ sense",o:V,a:["talk"]},
+{q:"___ yes",o:V,a:["say"]},{q:"___ the difference",o:V,a:["tell"]},{q:"___ up (louder)",o:V,a:["speak"]},{q:"___ politics",o:V,a:["talk"]}
+],inline:true},
+{t:"Open gap fill",time:"6 min",inst:"Write the correct verb in the correct form (say, tell, speak or talk). No hints!",items:[
+{q:"She ___ me she was tired, but I didn't believe her.",a:["told"]},
+{q:"“I'm hungry,” he ___.",a:["said"]},
+{q:"Sorry, I can't hear you. Could you ___ up a bit?",a:["speak"]},
+{q:"We ___ on the phone for two hours yesterday.",a:["talked","spoke"]},
+{q:"He ___ that he would be late for dinner.",a:["said"]},
+{q:"I was ___ to my sister when you called.",a:["talking","speaking"]},
+{q:"Nobody ___ me about the change of plan.",a:["told"]},
+{q:"“Don't worry,” she ___ to me.",a:["said"]}
+]},
+{t:"Find and fix the mistake",time:"5 min",inst:"The verb in bold is wrong. Type the correct verb in the correct form.",items:[
+{q:"She <span class='err'>said</span> me that she was leaving.",a:["told"]},
+{q:"Can you <span class='err'>tell</span> more slowly, please?",a:["speak"]},
+{q:"He <span class='err'>spoke</span> a lie to his teacher.",a:["told"]},
+{q:"They <span class='err'>told</span> about the problem for hours.",a:["talked","spoke"]},
+{q:"He <span class='err'>told</span> goodbye and closed the door.",a:["said"]},
+{q:"Please <span class='err'>say</span> the truth.",a:["tell"]},
+{q:"I'd love to <span class='err'>talk</span> English fluently.",a:["speak"]}
+],html:true},
+{t:"Reporting what people said",time:"5 min",inst:"Complete the reported sentence with said or told (add to or not to if needed).",items:[
+{q:"“I'm tired,” she said to me. → She ___ me she was tired.",a:["told"]},
+{q:"“Close the door,” he said to Tom. → He ___ Tom to close the door.",a:["told"]},
+{q:"“I love this song,” Mia said. → Mia ___ that she loved the song.",a:["said"]},
+{q:"“Don't be late,” Dad said to us. → Dad ___ us not to be late.",a:["told"]},
+{q:"“I'll help you,” Kate said to me. → Kate ___ to me that she would help me.",a:["said"]},
+{q:"“It's raining,” Ben said to Lucy. → Ben ___ Lucy it was raining.",a:["told"]}
+]},
+{t:"Prepositions with speak and talk",time:"3 min",inst:"Choose the correct preposition. If two are possible, choose either.",items:[
+{q:"She spoke ___ her teacher about the exam.",o:["to","with","about","at"],a:["to","with"]},
+{q:"They talked ___ football all evening.",o:["to","with","about","at"],a:["about"]},
+{q:"Can I talk ___ you in private?",o:["to","with","about","at"],a:["to","with"]},
+{q:"Don't talk ___ me like that!",o:["to","with","about","at"],a:["to"]},
+{q:"Nobody speaks ___ the accident any more.",o:["to","of","with","at"],a:["of"],n:"'Speak of' and 'speak about' are both correct."},
+{q:"My grandfather is talking ___ himself again.",o:["to","with","about","at"],a:["to"]}
+]},
+{t:"Short story",time:"5 min",inst:"Fill each gap with say, tell, speak or talk in the correct form.",story:true,items:[
+{a:["talked","spoke"]},{a:["said"]},{a:["spoke"]},{a:["told"]},{a:["talked","spoke"]},{a:["told"]},{a:["told"]},{a:["said"]}
+],tpl:"Last week I ___ to my neighbour Tom for the first time. He ___ hello and asked me if I ___ French, because he was planning a trip to Paris. I ___ him that I did, so we ___ about his plans for an hour. He ___ me that he was nervous about the journey, and I ___ him not to worry. Before he left, he ___ thank you twice."}
+,
+{t:"Word families",time:"5 min",inst:"Complete each sentence with a word formed from the verb in capitals (speak, talk, tell or say). Use a noun, adjective or verb form.",items:[
+{q:"The president gave a powerful ___ at the conference. (SPEAK)",a:["speech"]},
+{q:"She is a fluent ___ of three languages. (SPEAK)",a:["speaker"]},
+{q:"My little brother is very ___ and never stops chatting. (TALK)",a:["talkative"]},
+{q:"There was a ___ sign that he had been crying. (TELL)",a:["telltale","tell-tale"]},
+{q:"As my grandmother always used to say, it's an old ___. (SAY)",a:["saying"]},
+{q:"English is the most widely ___ language in the world. (SPEAK)",a:["spoken"]},
+{q:"He's a brilliant ___ and children love his stories. (TELL, story-)",a:["storyteller","story-teller"]},
+{q:"There is a lot of ___ in the office about a possible merger. (TALK)",a:["talk"]}
+]},
+{t:"Phrasal verbs",time:"5 min",inst:"Complete each sentence with say, tell, speak or talk in the correct form. The particle after the gap will help you.",items:[
+{q:"My boss ___ me off for being late again.",a:["told"]},
+{q:"Don't let him ___ you into spending all that money.",a:["talk"]},
+{q:"It's hard to ___ the twins apart.",a:["tell"]},
+{q:"Several employees have ___ out against the new policy.",a:["spoken"]},
+{q:"We need to ___ this over before we make a decision.",a:["talk"]},
+{q:"Could you ___ up? The music is really loud.",a:["speak"]},
+{q:"Who ___ on me to the teacher?",a:["told"]},
+{q:"Children shouldn't ___ back to their parents.",a:["talk"]}
+]},
+{t:"Which sentence is correct?",time:"4 min",inst:"Only one sentence in each group is correct. Choose it.",items:[
+{q:"1.",o:["She told that she was busy.","She said that she was busy.","She said me that she was busy."],a:["She said that she was busy."]},
+{q:"2.",o:["He said us to be quiet.","He told us to be quiet.","He said to be quiet us."],a:["He told us to be quiet."]},
+{q:"3.",o:["I can't say the difference between them.","I can't speak the difference between them.","I can't tell the difference between them."],a:["I can't tell the difference between them."]},
+{q:"4.",o:["He told goodbye to everyone.","He said goodbye to everyone.","He spoke goodbye to everyone."],a:["He said goodbye to everyone."]},
+{q:"5.",o:["They were speaking in French, so I didn't understand.","They were telling in French, so I didn't understand.","They were saying in French, so I didn't understand."],a:["They were speaking in French, so I didn't understand."]},
+{q:"6.",o:["I said him not to worry.","I spoke him not to worry.","I told him not to worry."],a:["I told him not to worry."]},
+{q:"7.",o:["You can't say a book by its cover.","You can't tell a book by its cover.","You can't talk a book by its cover."],a:["You can't tell a book by its cover."]},
+{q:"8.",o:["He asked what I said to the police.","He asked what I told to the police.","He asked what I spoke to the police."],a:["He asked what I said to the police."]}
+]},
+{t:"Russian → English",time:"4 min",inst:"Russian speakers often confuse these verbs. Complete the English sentence with the correct verb.",items:[
+{q:"Он рассказал нам смешную историю. → He ___ us a funny story.",a:["told"]},
+{q:"Она сказала, что опоздает. → She ___ she would be late.",a:["said"]},
+{q:"Вы говорите по-английски? → Do you ___ English?",a:["speak"]},
+{q:"Мы проговорили всю ночь. → We ___ all night.",a:["talked"]},
+{q:"Не говори так со мной! → Don't ___ to me like that!",a:["talk"]},
+{q:"Скажи мне правду. → ___ me the truth.",a:["tell"]},
+{q:"Он ничего не сказал. → He ___ nothing.",a:["said"]},
+{q:"Говорите громче, пожалуйста. → Please ___ up.",a:["speak"]}
+]},
+{t:"Team meeting",time:"8 min",story:true,inst:"Fill each gap with say, tell, speak or talk in the correct form. Be careful: some verbs are used more than once.",items:[
+{a:["spoke","talked"]},{a:["told"]},{a:["said"]},{a:["spoke"]},{a:["told"]},{a:["said"]},{a:["told"]},{a:["talked"]},{a:["talked","spoke"]},{a:["told"]}
+],tpl:"Yesterday our manager ___ to the whole team about the new project. She ___ us that the deadline had moved to March. Nobody ___ anything at first, but then Paul ___ up and ___ her that the schedule was unrealistic. She ___ that she understood, and she ___ us to send her our suggestions by Friday. After the meeting, we ___ the problem over in the canteen. Everyone ___ about how stressed they felt, but Anna ___ me not to worry."}
+];
+
+var state=[];
+function norm(s){return s.toLowerCase().replace(/[.,!?]/g,"").replace(/\s+/g," ").trim()}
+function field(it,id,o){
+ if(it.o) return "<select id='"+id+"'><option value=''>—</option>"+it.o.map(function(x){return "<option>"+x+"</option>"}).join("")+"</select>";
+ return "<input type='text' id='"+id+"' autocomplete='off' autocapitalize='off' spellcheck='false'>";
+}
+function build(){
+ var h="";
+ EX.forEach(function(e,ei){
+  state[ei]=[];
+  h+="<section><h2><span class='badge'>"+(ei+1)+"</span>"+e.t+"<span class='time'>"+e.time+"</span></h2><p class='inst'>"+e.inst+"</p>";
+  if(e.story){
+   var k=0;
+   h+="<p class='story'>"+e.tpl.replace(/___/g,function(){var i=k++;return "<b>("+(i+1)+")</b> "+field(e.items[i],"f"+ei+"_"+i)})+"</p><div id='fb"+ei+"'></div>";
+  } else {
+   e.items.forEach(function(it,i){
+    var id="f"+ei+"_"+i,q=it.q;
+    var row;
+    if(q.indexOf("___")>-1){
+     if(e.html===undefined&&!e.inline&&q.indexOf("→")>-1){row=q.replace("___",field(it,id))}
+     else row=q.replace("___",field(it,id));
+    } else row=q+" "+field(it,id);
+    h+="<div class='row'><span class='n'>"+(i+1)+"</span><span>"+row+"</span><span class='fb' id='fb"+ei+"_"+i+"'></span></div>";
+   });
+  }
+  h+="<div class='btns'><button onclick='check("+ei+")'>Check answers</button><button class='s' onclick='show("+ei+")'>Show answers</button><button class='r' onclick='reset("+ei+")'>Reset</button><span class='sc' id='sc"+ei+"'></span></div></section>";
+ });
+ document.getElementById("ex").innerHTML=h;
+}
+function el(ei,i){return document.getElementById("f"+ei+"_"+i)}
+function ok(it,v){return it.a.map(norm).indexOf(norm(v))>-1}
+function check(ei){
+ var e=EX[ei],c=0;
+ e.items.forEach(function(it,i){
+  var f=el(ei,i),v=f.value,good=v&&ok(it,v);
+  f.classList.remove("ok","bad");
+  if(v) f.classList.add(good?"ok":"bad");
+  if(good)c++;
+  var fb=document.getElementById("fb"+ei+"_"+i);
+  if(fb){fb.className="fb "+(good?"g":"r");fb.textContent=good?(it.n||""):(v?"Not quite. Try again or check the rules.":"")}
+ });
+ state[ei]=c;
+ document.getElementById("sc"+ei).textContent=c+" / "+e.items.length;
+ total();
+}
+function show(ei){
+ EX[ei].items.forEach(function(it,i){
+  var f=el(ei,i);f.value=it.a[0];f.classList.remove("bad");f.classList.add("ok");
+  var fb=document.getElementById("fb"+ei+"_"+i);
+  if(fb){fb.className="fb g";fb.textContent=(it.a.length>1?"Also possible: "+it.a.slice(1).join(", ")+". ":"")+(it.n||"")}
+ });
+ state[ei]=0;document.getElementById("sc"+ei).textContent="Answers shown";total();
+}
+function reset(ei){
+ EX[ei].items.forEach(function(it,i){
+  var f=el(ei,i);f.value="";f.classList.remove("ok","bad");
+  var fb=document.getElementById("fb"+ei+"_"+i);if(fb){fb.textContent="";fb.className="fb"}
+ });
+ state[ei]=0;document.getElementById("sc"+ei).textContent="";total();
+}
+function resetAll(){EX.forEach(function(e,i){reset(i)})}
+function total(){
+ var s=0,n=0;
+ EX.forEach(function(e,i){n+=e.items.length;s+=(state[i]||0)});
+ document.getElementById("total").textContent="Score: "+s+" / "+n;
+}
+function checkWrite(){
+ var t=document.getElementById("wr").value,low=t.toLowerCase();
+ var n=(t.trim()?t.trim().split(/\s+/).length:0);
+ document.getElementById("wc").textContent=n+" words";
+ var g={say:/\b(say|says|said|saying)\b/g,tell:/\b(tell|tells|told|telling)\b/g,speak:/\b(speak|speaks|spoke|spoken|speaking)\b/g,talk:/\b(talk|talks|talked|talking)\b/g};
+ var o="";
+ for(var k in g){var m=low.match(g[k]);o+="<b>"+k+"</b>: "+(m?m.length:0)+" &nbsp; "}
+ var w=[];
+ if(/\b(said|say|says)\s+(me|him|her|us|them)\b/.test(low))w.push("Check 'say + person': use <b>tell</b> + person, or <b>say to</b> + person.");
+ if(/\b(told|tell|tells)\s+to\s+(me|him|her|us|them)\b/.test(low))w.push("Check 'tell to + person': after <b>tell</b> the person comes directly (told me), without 'to'.");
+ if(n&&n<80)w.push("Aim for 80–100 words.");
+ document.getElementById("wout").innerHTML=o+(w.length?"<br>"+w.join("<br>"):"")+"<br><i>Show your text to your teacher for feedback.</i>";
+}
+build();total();
+</script>
+</body>
+</html>
