@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UNIT 3 — Building Relationships</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#028090;--navy:#0D2B35;--bg:#f2f7f8;--card:#fff;--text:#1d2b30;--line:#d5e3e6;--ok:#1b7f4b;--okbg:#e5f5ec;--bad:#b3261e;--badbg:#fdeceb;--ex:#eef4f5;--pl:88%}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1d23;--card:#112a32;--text:#e4eef0;--line:#24434d;--ok:#6fd49b;--okbg:#14382b;--bad:#ff8f88;--badbg:#401a18;--ex:#17333c;--teal:#2bb3c4;--pl:26%}}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 60px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Calibri,'Open Sans',sans-serif;font-size:17px;line-height:1.65;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+header{background:var(--navy);color:#fff;padding:26px 16px}
+header h1{font-family:'Trebuchet MS',sans-serif;margin:0 auto;max-width:800px;font-size:1.7rem}
+header p{max-width:800px;margin:4px auto 0;opacity:.85}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:2px solid var(--teal);padding:8px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.score{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);margin-right:auto}
+.ctl{font:inherit;font-size:.88rem;border:0;border-radius:6px;padding:6px 13px;cursor:pointer;background:var(--teal);color:#fff}
+.ctl.alt{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+main{max-width:800px;margin:0 auto;padding:10px 14px 50px}
+.grp{font-family:'Trebuchet MS',sans-serif;color:var(--navy);margin:30px 0 10px;font-size:1.2rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--line)}
+@media (prefers-color-scheme:dark){.grp{color:var(--text)}}
+.card{background:var(--card);border-left:6px solid var(--teal);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:16px 18px;margin-bottom:18px}
+.sh{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.sh h2{font-size:1.02rem;margin:0;font-weight:600}
+.badge{flex:none;background:var(--teal);color:#fff;font-family:'Trebuchet MS',sans-serif;font-weight:700;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px}
+.sc{margin-left:auto;font-weight:700;color:var(--teal);white-space:nowrap}
+.cr{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.q{display:flex;gap:10px;margin-bottom:12px}
+.q .n{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);min-width:1.4em}
+.q.ex{background:var(--ex);border-radius:8px;padding:8px 10px}
+.exw{color:var(--teal);border-bottom:2px solid var(--teal)}
+input[type=text],textarea{font:inherit;padding:2px 8px;border:0;border-bottom:2px solid var(--teal);background:var(--ex);color:var(--text);border-radius:4px 4px 0 0;max-width:100%}
+input[type=text]{width:9em;text-align:center}input.ph{width:20em}
+textarea{width:100%;border:2px solid var(--line);border-radius:6px;min-height:3.4em;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--teal)}
+.ok{border-color:var(--ok)!important}.bad{border-color:var(--bad)!important}
+input.ok,textarea.ok{background:var(--okbg);color:var(--ok)}input.bad,textarea.bad{background:var(--badbg);color:var(--bad)}
+.fb{display:block;font-size:.88rem;margin-top:2px}.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.opt{font:inherit;font-size:.95rem;padding:3px 12px;border:2px solid var(--line);border-radius:18px;background:var(--card);color:var(--text);cursor:pointer}
+.opt:hover{border-color:var(--teal)}.opt.sel{background:var(--teal);border-color:var(--teal);color:#fff}
+.opt.ok{background:var(--okbg);color:var(--ok)}.opt.bad{background:var(--badbg);color:var(--bad);text-decoration:line-through}
+.gap{white-space:nowrap}
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.list{display:flex;flex-direction:column;gap:7px}
+.w{font:inherit;display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:6px 10px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;min-height:42px;line-height:1.3}
+.w:hover:not(:disabled){border-color:var(--teal)}
+.w .lab{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--teal);min-width:1.1em}
+.w .tx{flex:1}
+.w.sel{border-color:var(--teal);box-shadow:0 0 0 3px rgba(2,128,144,.35);font-weight:600}
+.w.pr{background:hsl(var(--h) 60% var(--pl));border-color:hsl(var(--h) 55% 45%)}
+.w.ok{box-shadow:inset 0 0 0 1px var(--ok)}.w.bad{box-shadow:inset 0 0 0 1px var(--bad)}
+.tag{font-family:'Trebuchet MS',sans-serif;font-size:.78rem;font-weight:700;min-width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:hsl(var(--h) 55% 38%);color:#fff}
+.slots,.pool{display:flex;flex-wrap:wrap;gap:6px;min-height:40px}
+.slots{border-bottom:2px solid var(--teal);padding:2px 0 4px;margin:4px 0 6px}
+.slots.ok{background:var(--okbg)}.slots.bad{background:var(--badbg)}
+.tile{font:inherit;padding:2px 11px;border:2px solid var(--line);border-radius:8px;background:var(--ex);color:var(--text);cursor:pointer}
+.tile:hover{border-color:var(--teal)}.tile.used{visibility:hidden}
+.ex-s{border:2px solid var(--line);border-radius:8px;padding:8px 12px;margin:0 0 8px;background:var(--ex)}
+.cx{display:block;width:100%;text-align:left;font:inherit;padding:8px 12px;margin-bottom:8px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--text);cursor:pointer}
+.cx.on{text-decoration:line-through;opacity:.6;background:var(--ex)}
+.tk{display:flex;gap:10px;align-items:flex-start;padding:6px 10px;margin-bottom:6px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tk input{margin-top:.45em;width:1.1em;height:1.1em;accent-color:var(--teal)}
+.tk.ex{background:var(--ex);cursor:default}
+.note{font-size:.88rem;opacity:.8;margin:8px 0 0}
+.cw{display:inline-block;vertical-align:middle;text-align:center;margin:2px 8px;padding:2px 10px;border:1px solid var(--line);border-radius:6px;line-height:1.3;background:var(--ex)}
+select.gs{font:inherit;font-size:.95rem;max-width:100%;padding:2px 6px;border:0;border-bottom:2px solid var(--teal);background:var(--ex);color:var(--text);border-radius:4px 4px 0 0}
+select.gs.ok{background:var(--okbg);color:var(--ok)}select.gs.bad{background:var(--badbg);color:var(--bad)}select.gs:disabled,input.exg{opacity:1;color:var(--teal);font-weight:600;-webkit-text-fill-color:var(--teal)}
+sup{color:var(--teal);font-weight:700;font-size:.7em}.cl{margin:0 0 12px}
+.letter{border:2px solid var(--line);border-radius:8px;padding:14px 18px;background:var(--ex)}.letter h3{font-family:'Trebuchet MS',sans-serif;font-size:1rem;margin:0 0 6px}
+.vb{display:inline-block;border:1.5px solid var(--teal);border-radius:6px;padding:3px 14px;margin:0 0 10px}
+.ln{align-items:center}.lt{flex:1}.lc{display:flex;gap:6px;align-items:center;flex:none}.lc input[type=text]{width:7.5em}
+.chk{list-style:none;padding:0;margin:8px 0}.chk li.ck{cursor:pointer;padding:6px 12px;border:2px solid var(--line);border-radius:8px;margin-bottom:6px;user-select:none}.chk li.ck:hover{border-color:var(--teal)}.chk li.ck.done{background:var(--okbg);border-color:var(--ok)}.chk li.ck.done .tx{text-decoration:line-through;opacity:.65}.chk li.ck .bx{font-size:1.15em;color:var(--teal)}.rs{font-weight:600;font-size:.86rem;margin-left:6px}.rs.ok{color:var(--ok)}.rs.bad{color:var(--bad)}.chk li{padding:2px 0}.chk li.ok{color:var(--ok)}.chk li.bad{color:var(--bad)}
+.em label{display:block;margin:6px 0 2px;font-weight:600}.em input[type=text]{width:100%;text-align:left}.em textarea{min-height:12em}
+.hint{margin:0 0 10px;font-size:.92rem;opacity:.88}.row2{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.wd2{cursor:pointer;border-radius:3px;padding:0 1px}.wd2:hover{background:var(--ex)}.wd2.u{text-decoration:underline;text-decoration-color:var(--bad);text-decoration-thickness:2px;background:var(--badbg)}
+.sn{cursor:pointer;border-radius:3px;padding:0 1px}.sn:hover{background:var(--okbg)}.sn.x{text-decoration:line-through;color:var(--bad);opacity:.85}.sn.ok{background:var(--okbg)}.sn.bad{background:var(--badbg)}
+.note.ok{color:var(--ok);opacity:1;font-weight:600}.note.bad{color:var(--bad);opacity:1;font-weight:600}
+.ulbox{border:2px solid var(--line);border-radius:8px;margin:10px 0;overflow:hidden}.ulbox h4{margin:0;background:var(--navy);color:#fff;font-family:'Trebuchet MS',sans-serif;letter-spacing:.06em;font-size:.85rem;padding:5px 12px;text-transform:uppercase}
+.ulg{display:grid;grid-template-columns:1fr 1fr}.ulg div{padding:8px 12px;font-size:.95rem}.ulg div+div{border-left:1.5px solid var(--line)}
+.q.ln .lt{min-width:0}
+@media (max-width:520px){.ulg{grid-template-columns:1fr}.ulg div+div{border-left:0;border-top:1.5px solid var(--line)}}
+@media (max-width:520px){.card{padding:14px 11px}.lc{flex-wrap:wrap}.boxes{gap:8px}.w{padding:5px 7px;font-size:.93rem}input.ph{width:100%}}
+</style></head><body>
+<header><h1>UNIT 3 — Building Relationships</h1><p>Language work: vocabulary, multi-word verbs, linking ideas and business letters. Do each exercise, then press Check.</p></header>
+<div class="bar"><span class="score" id="tot">Score: 0 / 0</span>
+<button class="ctl" id="gc">Check All</button><button class="ctl alt" id="gs">Show Answers</button><button class="ctl alt" id="gr">Reset All</button></div>
+<main id="main"></main>
+<script>
+const $=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const N=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/-/g,' ').replace(/[.!?]+$/,'').replace(/\s+/g,' ').trim();
+const LET='abcdefghij';
+
+/* ---------- engines ---------- */
+function fill(body,items){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'+(it.ex?' ex':'')),d=$('div'),ins=[];
+  const A=it.ex?null:(Array.isArray(it.a[0])?it.a:[it.a]);
+  it.t.split('[]').forEach((p,k,arr)=>{d.insertAdjacentHTML('beforeend',p);
+   if(k<arr.length-1){if(it.ex)d.insertAdjacentHTML('beforeend','<b class="exw">'+it.ex+'</b>');
+    else{const x=$('input');x.type='text';x.autocomplete='off';x.spellcheck=false;x.placeholder=(it.ph&&it.ph[k])||'';x.setAttribute('autocapitalize','off');
+     x.className=A[k][0].includes(' ')?'ph':'';x.setAttribute('aria-label','answer '+(i+1));ins.push(x);d.appendChild(x)}}});
+  const fb=$('span','fb');d.appendChild(fb);
+  r.append($('span','n',i+1),d);body.appendChild(r);
+  if(!it.ex)rows.push({ins,A,fb});
+ });
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{let all=true,any=false;
+    r.ins.forEach((x,k)=>{const v=N(x.value);if(v)any=true;const g=r.A[k].some(a=>N(a)===v);x.classList.remove('ok','bad');if(v)x.classList.add(g?'ok':'bad');if(!g)all=false});
+    if(all){ok++;r.fb.className='fb ok';r.fb.textContent='✓ Correct'}
+    else if(any){r.fb.className='fb bad';r.fb.textContent='✗ Not quite. Try again.'}else{r.fb.className='fb';r.fb.textContent=''}});return ok},
+  show(){rows.forEach(r=>r.ins.forEach((x,k)=>x.value=r.A[k][0]))},
+  reset(){rows.forEach(r=>{r.ins.forEach(x=>{x.value='';x.className=x.className.replace(/\b(ok|bad)\b/g,'').trim()});r.fb.textContent='';r.fb.className='fb'})}};
+}
+function choice(body,items,inline){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'+(it.ex?' ex':'')),d=$('div'),row={it,btns:[],sel:it.ex?it.a:null};
+  const mk=()=>{const w=$('span',inline?'gap':'opts');it.o.forEach((v,k)=>{const b=$('button','opt',(inline?'':LET[k]+') ')+v);b.type='button';
+    b.onclick=()=>{if(it.ex)return;row.sel=v;paint(row)};row.btns.push(b);w.appendChild(b)});return w};
+  const parts=it.t.split('[]');d.insertAdjacentHTML('beforeend',parts[0]);
+  if(inline){d.appendChild(mk())}else{d.insertAdjacentHTML('beforeend','<b>………</b>')}
+  d.insertAdjacentHTML('beforeend',parts[1]||'');
+  if(!inline)d.appendChild(mk());
+  row.fb=$('span','fb');d.appendChild(row.fb);r.append($('span','n',i+1),d);body.appendChild(r);rows.push(row);paint(row);
+ });
+ function paint(r,chk){r.btns.forEach((b,k)=>{b.className='opt';if(r.it.o[k]===r.sel){b.classList.add(r.it.ex?'ok':chk?(r.sel===r.it.a?'ok':'bad'):'sel')}})}
+ return{max:rows.filter(r=>!r.it.ex).length,
+  check(){let ok=0;rows.forEach(r=>{if(r.it.ex)return;paint(r,true);const g=r.sel===r.it.a;if(g)ok++;
+    r.fb.className='fb '+(r.sel?(g?'ok':'bad'):'');r.fb.textContent=r.sel?(g?'✓ Correct':'✗ Not quite. Try again.'):''});return ok},
+  show(){rows.forEach(r=>{if(!r.it.ex){r.sel=r.it.a;paint(r)}})},
+  reset(){rows.forEach(r=>{if(!r.it.ex){r.sel=null;paint(r);r.fb.textContent='';r.fb.className='fb'}})}};
+}
+function match(body,c){
+ let pairs={},sel=null,chk=false;if(c.ex!=null)pairs[c.ex]=c.key[c.ex];
+ const wrap=$('div','boxes'),LA=$('div','list'),LB=$('div','list'),fb=$('p','fb');wrap.append(LA,LB);body.append(wrap,fb);
+ const left=r=>Object.keys(pairs).find(k=>pairs[k]===r);
+ const H=i=>[190,28,285,140,340,55][i%6];
+ function btn(side,i){const L=side==='L';const pi=L?(i in pairs?pairs[i]:null):(left(i)!=null?+left(i):null);
+  const b=$('button','w');b.type='button';b.innerHTML='<span class="lab">'+(L?i+1:LET[i])+'</span><span class="tx">'+(L?c.L[i]:c.R[i])+'</span>';
+  const li=L?i:pi;
+  if(pi!=null){b.classList.add('pr');b.style.setProperty('--h',H(li));b.insertAdjacentHTML('beforeend','<span class="tag">'+(L?LET[pi]:+pi+1)+'</span>');
+   if(chk)b.classList.add(c.key[li]===pairs[li]?'ok':'bad')}
+  if(L&&sel===i)b.classList.add('sel');
+  if(li===c.ex&&pi!=null){b.disabled=true}
+  b.onclick=()=>{chk=false;fb.textContent='';
+   if(L){if(sel===i)sel=null;else{delete pairs[i];sel=i}}
+   else{const o=left(i);if(sel!=null){if(o!=null)delete pairs[o];pairs[sel]=i;sel=null}else if(o!=null)delete pairs[o]}
+   rend()};return b}
+ function rend(){LA.innerHTML='';LB.innerHTML='';c.L.forEach((_,i)=>LA.appendChild(btn('L',i)));c.R.forEach((_,i)=>LB.appendChild(btn('R',i)))}
+ rend();
+ return{max:c.L.length-(c.ex!=null?1:0),
+  check(){chk=true;let ok=0,t=0;c.L.forEach((_,i)=>{if(i===c.ex||!(i in pairs))return;t++;if(pairs[i]===c.key[i])ok++});rend();
+   fb.className='fb '+(t&&ok===t?'ok':'bad');fb.textContent=t?ok+' of '+t+' pairs correct'+(t<this.max?' ('+(this.max-t)+' still to match)':'')+'.':'';return ok},
+  show(){pairs={};c.L.forEach((_,i)=>pairs[i]=c.key[i]);sel=null;rend()},
+  reset(){pairs={};if(c.ex!=null)pairs[c.ex]=c.key[c.ex];sel=null;chk=false;fb.textContent='';rend()}};
+}
+function reorder(body,items){
+ const rows=[];
+ items.forEach((it,i)=>{
+  const r=$('div','q'),d=$('div'),slots=$('div','slots'),pool=$('div','pool'),fb=$('span','fb');
+  const st={placed:[]};d.style.flex='1';d.append(slots,pool,fb);r.append($('span','n',it.n||i+1),d);body.appendChild(r);
+  const rend=(c)=>{slots.innerHTML='';pool.innerHTML='';slots.className='slots'+(c?(c==='ok'?' ok':' bad'):'');
+   st.placed.forEach(k=>{const b=$('button','tile',it.w[k]);b.type='button';b.onclick=()=>{st.placed=st.placed.filter(x=>x!==k);fb.textContent='';rend()};slots.appendChild(b)});
+   it.w.forEach((w,k)=>{const b=$('button','tile'+(st.placed.includes(k)?' used':''),w);b.type='button';b.onclick=()=>{st.placed.push(k);fb.textContent='';rend()};pool.appendChild(b)})};
+  rows.push({it,st,rend,fb});rend();
+ });
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{const s=r.st.placed.map(k=>r.it.w[k]).join(' ');const g=N(s)===N(r.it.a);if(g)ok++;
+    r.rend(r.st.placed.length?(g?'ok':'bad'):'');r.fb.className='fb '+(r.st.placed.length?(g?'ok':'bad'):'');r.fb.textContent=r.st.placed.length?(g?'✓ Correct':'✗ Not quite. Try again.'):''});return ok},
+  show(){rows.forEach(r=>{const used=[];r.st.placed=r.it.a.split(' ').map(w=>{const k=r.it.w.findIndex((x,j)=>x===w&&!used.includes(j));used.push(k);return k});r.rend()})},
+  reset(){rows.forEach(r=>{r.st.placed=[];r.fb.textContent='';r.rend()})}};
+}
+
+/* ---------- extra engines ---------- */
+function both(b,fs){const ps=fs.map(f=>{const d=$('div');d.style.marginBottom='14px';b.appendChild(d);return f(d)});
+ return{max:ps.reduce((s,p)=>s+p.max,0),check(){return ps.reduce((s,p)=>s+p.check(),0)},show(){ps.forEach(p=>p.show())},reset(){ps.forEach(p=>p.reset())}}}
+function cloze(b,paras,G,mode){
+ const gs=[];
+ paras.forEach(p=>{const d=$('p','cl');
+  p.split(/\{(\d+)\}/).forEach((s,k)=>{
+   if(k%2===0){d.insertAdjacentHTML('beforeend',s);return}
+   const n=+s,g=G[n];let c;
+   if(mode==='sel'){c=$('select','gs');c.appendChild(new Option('— choose —',''));g.o.forEach((o,i)=>c.appendChild(new Option(LET[i]+') '+o,LET[i])))}
+   else{c=$('input');c.type='text';c.autocomplete='off';c.spellcheck=false;c.setAttribute('autocapitalize','off');c.style.width='8.5em'}
+   c.setAttribute('aria-label','gap '+n);
+   if(g.ex){c.value=g.ex;c.disabled=true;c.classList.add('exg')}else gs.push([c,g]);
+   d.appendChild(c);d.insertAdjacentHTML('beforeend','<sup>'+n+'</sup>')});
+  b.appendChild(d)});
+ const okv=(c,g)=>mode==='sel'?c.value===g.a:g.a.some(a=>N(a)===N(c.value));
+ return{max:gs.length,
+  check(){let ok=0;gs.forEach(([c,g])=>{c.classList.remove('ok','bad');if(!c.value.trim())return;const t=okv(c,g);if(t)ok++;c.classList.add(t?'ok':'bad')});return ok},
+  show(){gs.forEach(([c,g])=>c.value=mode==='sel'?g.a:g.a[0])},
+  reset(){gs.forEach(([c])=>{c.value='';c.classList.remove('ok','bad')})}};
+}
+function halves(b,c){
+ const rows=[];
+ c.L.forEach((t,i)=>{
+  const r=$('div','q'),d=$('div');d.style.flex='1';d.insertAdjacentHTML('beforeend',t+' ');
+  const s1=$('select','gs'),s2=$('select','gs');
+  s1.appendChild(new Option('— linker —',''));c.lk.forEach(x=>s1.appendChild(new Option(x,x)));
+  s2.appendChild(new Option('— choose the ending —',''));c.E.forEach((x,k)=>s2.appendChild(new Option(x,k)));
+  s1.setAttribute('aria-label','linker '+(i+1));s2.setAttribute('aria-label','ending '+(i+1));
+  const fb=$('span','fb');d.append(s1,$('span',null,' '),s2,fb);r.append($('span','n',i+1),d);b.appendChild(r);
+  const row={s1,s2,fb,k:c.key[i]};
+  if(i===c.ex){s1.value=row.k[0];s2.value=row.k[1];s1.disabled=s2.disabled=true;r.classList.add('ex')}else rows.push(row)});
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{[r.s1,r.s2].forEach(s=>s.classList.remove('ok','bad'));if(!r.s1.value&&!r.s2.value){r.fb.textContent='';return}
+    const a=r.s1.value===r.k[0],e=r.s2.value!==''&&+r.s2.value===r.k[1];
+    if(r.s1.value)r.s1.classList.add(a?'ok':'bad');if(r.s2.value)r.s2.classList.add(e?'ok':'bad');
+    if(a&&e){ok++;r.fb.className='fb ok';r.fb.textContent=' ✓'}else{r.fb.className='fb bad';r.fb.textContent=' ✗ Check the linker and the ending.'}});return ok},
+  show(){rows.forEach(r=>{r.s1.value=r.k[0];r.s2.value=r.k[1]})},
+  reset(){rows.forEach(r=>{r.s1.value=r.s2.value='';[r.s1,r.s2].forEach(s=>s.classList.remove('ok','bad'));r.fb.textContent=''})}};
+}
+function cross(b,T,keep,okmsg){
+ const on=T.map(()=>0),fb=$('p','fb'),bs=T.map((t,k)=>{const x=$('button','cx',LET[k]+') '+t);x.type='button';
+  x.onclick=()=>{on[k]^=1;x.classList.toggle('on',!!on[k]);fb.textContent='';bs.forEach(y=>y.classList.remove('ok','bad'))};b.appendChild(x);return x});
+ b.appendChild(fb);
+ const set=v=>v.forEach((z,k)=>{on[k]=z;bs[k].classList.toggle('on',!!z);bs[k].classList.remove('ok','bad')});
+ return{max:1,check(){const g=on.every((z,k)=>k===keep?!z:!!z);bs.forEach((x,k)=>{x.classList.remove('ok','bad');if(on[k])x.classList.add(k===keep?'bad':'ok')});
+  fb.className='fb '+(g?'ok':'bad');fb.textContent=g?'✓ Correct: '+okmsg:'✗ Not quite. Cross out the TWO explanations which are not correct.';return g?1:0},
+  show(){set(T.map((_,k)=>k===keep?0:1))},reset(){set(T.map(()=>0));fb.textContent=''}};
+}
+function lines(b,pre,L,post){
+ b.appendChild($('p','cl',pre));const rows=[];
+ L.forEach((l,i)=>{
+  const r=$('div','q ln'),t=$('span','lt',l.t),c=$('span','lc'),x=$('input'),tk=$('button','opt','✓');
+  x.type='text';x.placeholder='extra word';x.autocomplete='off';x.spellcheck=false;x.setAttribute('autocapitalize','off');x.setAttribute('aria-label','line '+(i+1));
+  tk.type='button';tk.setAttribute('aria-label','line '+(i+1)+' is correct');
+  const st={tick:false};
+  const sync=()=>tk.classList.toggle('sel',st.tick);
+  x.oninput=()=>{if(x.value.trim())st.tick=false;sync()};
+  tk.onclick=()=>{st.tick=!st.tick;if(st.tick)x.value='';sync()};
+  c.append(x,tk);r.append($('span','n',i+1),t,c);b.appendChild(r);
+  if(l.ex){r.classList.add('ex');x.disabled=tk.disabled=true;if(l.ex==='✓'){st.tick=true;sync()}else x.value=l.ex}else rows.push({l,x,tk,st,r,sync})});
+ if(post)b.appendChild($('p','cl',post));
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(w=>{const v=w.x.value.trim();w.r.classList.remove('ok','bad');if(!v&&!w.st.tick)return;
+    const g=w.l.a?(N(v)===N(w.l.a)&&!w.st.tick):(w.st.tick&&!v);if(g)ok++;w.r.classList.add(g?'ok':'bad')});return ok},
+  show(){rows.forEach(w=>{if(w.l.a){w.x.value=w.l.a;w.st.tick=false}else{w.x.value='';w.st.tick=true}w.sync()})},
+  reset(){rows.forEach(w=>{w.x.value='';w.st.tick=false;w.sync();w.r.classList.remove('ok','bad')})}};
+}
+function email(b){
+ b.insertAdjacentHTML('beforeend','<div class="ex-s">Ivan Gasperlin, the manager of Kommerz Bank (Trubarjeva 47, 1000 Ljubljana, Slovenia), wishes to order five more copies of both the brochure and the poster. Write an e-mail message.</div>');
+ const w=$('div','em');
+ w.innerHTML='<label>To:</label><input type="text" id="e_to"><label>Subject:</label><input type="text" id="e_su"><label>Message:</label><textarea id="e_bd" placeholder="Dear …"></textarea><p class="note" id="e_wc">0 words</p>';
+ b.appendChild(w);
+ const C=['Refers to Professor Trollerova’s letter (of 20 June)','Asks for five (extra) copies','Mentions both the brochure and the poster','Gives the delivery address (Trubarjeva 47, 1000 Ljubljana)','Has a greeting and a polite closing (e.g. Dear …, Thank you …, Best wishes)'];
+ const ul=$('ul','chk');
+ const setTick=(li,on)=>{li.classList.toggle('done',on);li.setAttribute('aria-checked',on?'true':'false');li.querySelector('.bx').textContent=on?'☑':'☐'};
+ const lis=C.map(c=>{const li=$('li','ck');li.tabIndex=0;li.setAttribute('role','checkbox');li.setAttribute('aria-checked','false');
+  li.innerHTML='<span class="bx">☐</span> <span class="tx"></span><span class="rs"></span>';li.querySelector('.tx').textContent=c;
+  const tg=()=>setTick(li,!li.classList.contains('done'));li.onclick=tg;li.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tg()}};ul.appendChild(li);return li});
+ b.insertAdjacentHTML('beforeend','<p class="hint"><b>Your e-mail should:</b> click each point when you have included it.</p>');b.appendChild(ul);
+ const to=w.querySelector('#e_to'),su=w.querySelector('#e_su'),bd=w.querySelector('#e_bd'),wc=w.querySelector('#e_wc');
+ bd.oninput=()=>{wc.textContent=(bd.value.trim()?bd.value.trim().split(/\s+/).length:0)+' words'};
+ const T=[t=>/trollerova|20 june/.test(t),t=>/\b(5|five)\b[^.]{0,30}cop(y|ies)/.test(t),t=>/brochure/.test(t)&&/poster/.test(t),t=>/trubarjeva/.test(t)&&/ljubljana/.test(t),t=>/\bdear\b/.test(t)&&/(best wishes|regards|sincerely|yours|thank you|thanks)/.test(t)];
+ const SAMPLE='Dear Mr Cutka,\n\nWith reference to Professor Trollerova’s letter of 20 June, I would like to request an extra 5 copies of both your new brochure and poster. Please address them to:\n\nMr Ivan Gasperlin, Manager,\nKommerz Bank,\nTrubarjeva 47,\n1000 Ljubljana, Slovenia\n\nThank you in advance.\n\nBest wishes,\nIvan Gasperlin';
+ return{max:5,
+  check(){const t=(su.value+' '+bd.value).toLowerCase().replace(/[’‘]/g,"'");let ok=0;
+   lis.forEach((li,i)=>{const g=bd.value.trim()&&T[i](t);if(g)ok++;const r=li.querySelector('.rs'),has=!!bd.value.trim();r.textContent=has?(g?' ✓ found in your e-mail':' ✗ not found yet'):'';r.className='rs '+(has?(g?'ok':'bad'):'')});return ok},
+  show(){to.value='Igor Cutka';su.value='CEIMD brochure and poster';bd.value=SAMPLE;bd.oninput();lis.forEach(li=>setTick(li,true))},
+  reset(){to.value=su.value=bd.value='';bd.oninput();lis.forEach(li=>{setTick(li,false);const r=li.querySelector('.rs');r.textContent='';r.className='rs'})}};
+}
+
+/* ---------- Unit 3 engines ---------- */
+function tf(b,items){
+ const rows=[];
+ items.forEach(it=>{
+  const r=$('div','q'),d=$('div');d.style.flex='1';d.insertAdjacentHTML('beforeend',it.t);
+  const w=$('div','opts');w.style.marginTop='6px';
+  const row={it,sel:null,btns:[],r,fb:$('span','fb')};
+  [['True',true],['False',false]].forEach(([l,v])=>{const bt=$('button','opt',l);bt.type='button';bt.onclick=()=>{row.sel=v;paint(row)};row.btns.push([bt,v]);w.appendChild(bt)});
+  d.append(w,row.fb);r.append($('span','n',it.n),d);b.appendChild(r);rows.push(row)});
+ function paint(r,chk){r.btns.forEach(([bt,v])=>{bt.className='opt';if(r.sel===v)bt.classList.add(chk?(v===r.it.a?'ok':'bad'):'sel')});if(!chk){r.fb.textContent='';r.fb.className='fb'}}
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{if(r.sel===null){paint(r);return}paint(r,true);const g=r.sel===r.it.a;if(g)ok++;r.fb.className='fb '+(g?'ok':'bad');r.fb.textContent=g?'✓ Correct':'✗ Not quite. Try again.'});return ok},
+  show(){rows.forEach(r=>{r.sel=r.it.a;paint(r)})},reset(){rows.forEach(r=>{r.sel=null;paint(r)})}};
+}
+function wrong(b,pre,L){
+ b.appendChild($('p','cl',pre));const rows=[];
+ const strip=s=>s.replace(/[^A-Za-z’']/g,'').toLowerCase();
+ L.forEach((l,i)=>{
+  const r=$('div','q ln'),t=$('div','lt'),c=$('span','lc'),x=$('input');
+  x.type='text';x.placeholder='correct word';x.autocomplete='off';x.spellcheck=false;x.setAttribute('autocapitalize','off');x.setAttribute('aria-label','correct word for line '+(i+1));
+  const row={l,x,sel:-1,r,ws:[],fb:$('span','fb')};
+  l.t.split(/(\s+)/).forEach(tok=>{if(!tok)return;if(/^\s+$/.test(tok)){t.appendChild(document.createTextNode(tok));return}
+   const k=row.ws.length,w=$('span','wd2',tok);w.tabIndex=0;w.setAttribute('role','button');
+   const tg=()=>{if(l.ex)return;row.sel=row.sel===k?-1:k;mark(row)};
+   w.onclick=tg;w.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tg()}};row.ws.push([w,tok]);t.appendChild(w)});
+  t.appendChild(row.fb);c.appendChild(x);r.append($('span','n',i+1),t,c);b.appendChild(r);
+  if(l.ex){r.classList.add('ex');x.value=l.a[0];x.disabled=true;row.sel=row.ws.findIndex(([,tk])=>strip(tk)===l.w);mark(row)}else rows.push(row)});
+ function mark(r){r.ws.forEach(([w],k)=>w.classList.toggle('u',r.sel===k));r.r.classList.remove('ok','bad');r.x.classList.remove('ok','bad');r.fb.textContent='';r.fb.className='fb'}
+ return{max:rows.length,
+  check(){let ok=0;rows.forEach(r=>{const v=r.x.value.trim();r.r.classList.remove('ok','bad');r.x.classList.remove('ok','bad');if(r.sel<0&&!v){r.fb.textContent='';return}
+    const gw=r.sel>=0&&strip(r.ws[r.sel][1])===r.l.w,gf=r.l.a.some(a=>N(a)===N(v));
+    if(gw&&gf){ok++;r.r.classList.add('ok');r.fb.className='fb ok';r.fb.textContent='✓ Correct'}
+    else{r.r.classList.add('bad');r.fb.className='fb bad';r.fb.textContent=r.sel<0?'✗ Click the wrong word in this line first.':!gw?'✗ Look again: a different word is wrong.':!v?'✗ Now write the correct word.':'✗ Right word underlined, but the correction is not right.'}});return ok},
+  show(){rows.forEach(r=>{r.sel=r.ws.findIndex(([,tk])=>strip(tk)===r.l.w);mark(r);r.x.value=r.l.a[0]})},
+  reset(){rows.forEach(r=>{r.sel=-1;r.x.value='';mark(r)})}};
+}
+function strike(b,build,bad,okmsg){
+ const sp=[],on=[],fb=$('p','fb');
+ const mk=text=>{const i=sp.length,s=$('span','sn',text);s.tabIndex=0;s.setAttribute('role','button');
+  const tg=()=>{on[i]^=1;s.classList.toggle('x',!!on[i]);fb.textContent='';sp.forEach(z=>z.classList.remove('ok','bad'))};
+  s.onclick=tg;s.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tg()}};sp.push(s);on.push(0);return s};
+ const L=$('div','letter');build(L,mk);b.appendChild(L);b.appendChild(fb);
+ const set=v=>{v.forEach((z,k)=>{on[k]=z;sp[k].classList.toggle('x',!!z);sp[k].classList.remove('ok','bad')});fb.textContent=''};
+ return{max:1,
+  check(){const g=on.every((z,k)=>k===bad?!!z:!z);sp.forEach((s,k)=>{s.classList.remove('ok','bad');if(on[k])s.classList.add(k===bad?'ok':'bad')});
+   fb.className='fb '+(on.some(z=>z)?(g?'ok':'bad'):'');fb.textContent=on.some(z=>z)?(g?'✓ Correct: '+okmsg:'✗ Not quite. Cross out only the ONE sentence which does not fit.'):'';return g?1:0},
+  show(){set(sp.map((_,k)=>k===bad?1:0))},reset(){set(sp.map(()=>0))}};
+}
+function reply(b){
+ b.insertAdjacentHTML('beforeend','<div class="ex-s">You work for <b>Futuro Office</b>. Write a short reply (<b>100–150 words</b>) to Morrison Office Supplies International.<ul><li>Express interest in <i>one</i> of the three products mentioned in their letter, and request further information.</li><li>Enquire about the exact discount for that particular product.</li><li>Tell them what you think about their new website.</li></ul></div>'+
+ '<div class="ulbox"><h4>Useful language</h4><div class="ulg"><div>Thank you for your letter of …<br>Could you please let us have further details of …<br>Could you please specify …<br>We would welcome more information about …<br>As regards your …<br>Regarding your …<br>With regard to your …</div><div>We would like to take this opportunity to …<br>Meanwhile, we would like to …<br><br>We look forward to hearing from you.<br>We look forward to your letter.<br><br>Yours sincerely,<br>Best regards,<br>Best wishes,</div></div></div>');
+ const ta=$('textarea');ta.id='reply_bd';ta.rows=12;ta.placeholder='Dear …';ta.style.minHeight='13em';b.appendChild(ta);
+ const wc=$('p','note','0 words (aim for 100–150)');b.appendChild(wc);
+ const cnt=()=>ta.value.trim()?ta.value.trim().split(/\s+/).length:0;
+ ta.oninput=()=>{const n=cnt();wc.textContent=n+' words (aim for 100–150)';wc.className='note '+(n===0?'':(n>=100&&n<=150?'ok':'bad'))};
+ const C=['Expresses interest in one of the three products and asks for further information','Enquires about the exact discount for that product','Tells them what you think about their new website','Is 100–150 words long','Has a greeting (Dear …) and a polite closing (e.g. We look forward to hearing from you / Yours sincerely)'];
+ const T=[t=>/(avalon|wizard|pxl|chair|copier|printer|scanner)/.test(t)&&/(details|information|enquir|specif|catalogue|brochure)/.test(t),t=>/discount/.test(t),t=>/(website|web site|\bsite\b)/.test(t),null,t=>/\bdear\b/.test(t)&&/(look forward|yours|regards|best wishes|sincerely)/.test(t)];
+ const ul=$('ul','chk');
+ const setTick=(li,on)=>{li.classList.toggle('done',on);li.setAttribute('aria-checked',on?'true':'false');li.querySelector('.bx').textContent=on?'☑':'☐'};
+ const lis=C.map(c=>{const li=$('li','ck');li.tabIndex=0;li.setAttribute('role','checkbox');li.setAttribute('aria-checked','false');
+  li.innerHTML='<span class="bx">☐</span> <span class="tx"></span><span class="rs"></span>';li.querySelector('.tx').textContent=c;
+  const tg=()=>setTick(li,!li.classList.contains('done'));li.onclick=tg;li.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tg()}};ul.appendChild(li);return li});
+ b.insertAdjacentHTML('beforeend','<p class="hint"><b>Your reply should:</b> click each point when you have included it.</p>');b.appendChild(ul);
+ const SAMPLE='Dear Mr Lindsey,\n\nThank you for your letter of 21 September.\n\nWe would indeed welcome further details of your ‘Avalon’ seminar chairs, as we have recently received numerous enquiries about alternative office seats.\n\nCould you please specify exactly what discount you are prepared to offer on items from that particular collection?\n\nAs regards your website, the new design is astounding. However, we find that the previous version of your online catalogue was easier to browse through. We registered with your site a week ago and hope we will be among the lucky winners.\n\nWe would like to take this opportunity to add that, for us, too, it has been a pleasure to do business with you.\n\nWe look forward to hearing from you.\n\nFrancis Potter\nManager, Futuro Office';
+ return{max:5,
+  check(){const t=ta.value.toLowerCase().replace(/[’‘]/g,"'"),has=!!ta.value.trim(),n=cnt();let ok=0;
+   lis.forEach((li,i)=>{const g=has&&(i===3?(n>=100&&n<=150):T[i](t));if(g)ok++;const r=li.querySelector('.rs');r.textContent=has?(g?' ✓ found in your letter':' ✗ not found yet'):'';r.className='rs '+(has?(g?'ok':'bad'):'')});return ok},
+  show(){ta.value=SAMPLE;ta.oninput();lis.forEach(li=>setTick(li,true))},
+  reset(){ta.value='';ta.oninput();lis.forEach(li=>{setTick(li,false);const r=li.querySelector('.rs');r.textContent='';r.className='rs'})}};
+}
+
+/* ---------- data ---------- */
+const VA=[
+{t:'A: Their firm has <i>developed</i> considerably.<br>B: Yeah. They’ve certainly managed to [] a good business over the years.',a:['build up']},
+{t:'A: Getting rid of those trade barriers should <i>cement</i> the friendship between our countries.<br>B: Absolutely. There’s nothing like trade to [] relations.',a:['strengthen']},
+{t:'A: It’s good to hear that they’re thinking of <i>resuming</i> diplomatic relations, isn’t it?<br>B: Yes. That’s great. [] relations is probably the best decision.',a:['restoring']},
+{t:'A: The key question is, how can we <i>encourage</i> cooperation between our organisations?<br>B: Definitely. We need to find ways to [] cooperation.',a:['foster']},
+{t:'A: I’m afraid lack of communication is now <i>jeopardising</i> our relations.<br>B: I agree. I think it’s really [] future cooperation.',a:['undermining']},
+{t:'A: I hear Riel Engineering has <i>broken off</i> relations with its main distributor.<br>B: To be honest, I wonder what took them so long to [] relations with such an unreliable distributor.',a:['sever']}];
+const VB=[
+{t:'To do business with someone, first you should try to [] a rapport.',o:['improve','establish','promote'],a:'establish',ex:1},
+{t:'Their repeated interventions [] the whole meeting.',o:['corrupted','broke off','disrupted'],a:'disrupted'},
+{t:'Japan is trying to [] a much warmer relationship with China.',o:['cut off','improve','cultivate'],a:'cultivate'},
+{t:'China’s desire to [] a solid relationship with the US has been the anchor of its foreign policy for several decades.',o:['maintain','undermine','strain'],a:'maintain'},
+{t:'Thanks to its sponsorship of various cultural events, the company [] very good relations with the local community.',o:['resumes','enjoys','improves'],a:'enjoys'},
+{t:'With a view to fostering economic prosperity, the European Union has launched an initiative to [] closer relations with a number of ex-Soviet states.',o:['establish','disrupt','damage'],a:'establish'}];
+const LAL=['Jarvis will never let down','Sue and Marco are going to share a small office','In three years’ time we plan to set up','I asked them to draw up','When we heard we’d lost the deal,','This conference is crucial','Tod’s CEO expects China and India to account for','We’re looking for new ways'];
+const LAR=['for as much as 25 per cent of revenues in the near future.','so we can’t afford to put it off once again.','we called off the party immediately.','a customer who has a problem.','of strengthening our relations with our suppliers.','so they’d better learn to get on together.','the contract as soon as possible.','a distribution network in Mexico.'];
+const LAK=[3,5,7,6,2,1,0,4];
+const LB=[
+{t:'A: Do you think our new agent is reliable?<br>B: Absolutely. I know you can [] her to boost sales.',ex:'count on'},
+{t:'A: I’m really glad I’ll be able to go to the Frankfurt conference.<br>B: Me, too. I’m very much [] seeing you there.',a:['looking forward to']},
+{t:'A: Those new models have really saved the factory from closure, haven’t they?<br>B: Yeah. They’ve [] the company [].',a:[['turned'],['round','around']]},
+{t:'A: Do you socialise with them?<br>B: Well, we usually [] for lunch on Thursdays.',a:['meet up']},
+{t:'A: The negotiation was a great success.<br>B: Yes. Things [] pretty well in the end.',a:['worked out']},
+{t:'A: Have you checked the report?<br>B: Yes. I [] it yesterday.',a:['went over']},
+{t:'A: I suppose you all stood up when the CEO arrived.<br>B: No. In fact everyone [] working as if nothing had happened.',a:['carried on']},
+{t:'A: Hi Jeff. Igor here. Have you arrived at the hotel yet?<br>B: Hi Igor. Yes, I’m just [] now.',a:['checking in']},
+{t:'A: Was everyone on time?<br>B: Almost everyone. Hans [] late as usual.',a:['turned up']},
+{t:'A: Is guanxi an old concept, then?<br>B: Oh yes. It [] thousands of years.',a:['goes back']}];
+const WAT=[
+{n:'a)',t:'<i>Although, even though, in spite of, despite, nevertheless, nonetheless, however, yet, on the other hand</i> are all used to <b>contrast</b> ideas.',a:true},
+{n:'b)',t:'<i>Although, even though, in spite of, despite</i> are used to <b>link parts of a sentence together</b>.',a:true},
+{n:'c)',t:'<i>Nevertheless, nonetheless, however, yet, on the other hand</i> are used to <b>link ideas across sentences</b>.',a:true}];
+const WBI=[
+{t:'Relations between the two countries seemed to improve [] they kept putting off the peace talks.',o:['however','even though','despite'],a:'even though',ex:1},
+{t:'Their prices are very competitive. [], we have decided not to do business with them.',o:['Nonetheless','Although','Furthermore'],a:'Nonetheless'},
+{t:'We reached out to customers with special offers, continuity programmes and appreciation letters. [], customer retention did not improve.',o:['However','Despite','Even though'],a:'However'},
+{t:'Negotiating prices and securing orders is very exciting. [], ensuring that the customer remains a customer can be less stimulating.',o:['Moreover','In spite of','On the other hand'],a:'On the other hand'},
+{t:'He likes keeping himself to himself. [] he spends a lot of time entertaining suppliers.',o:['As well as','Besides','Yet'],a:'Yet'},
+{t:'Tsampa and Rexon have only been doing business for a couple of months. [], Tsampa’s managers have already given Rexon their full confidence.',o:['Despite','Nevertheless','Besides'],a:'Nevertheless'}];
+const WCL=[
+{t:'Having said that, they often have a number of common feature. Like all good',w:'feature',a:['features'],ex:1},
+{t:'communicators, they are aware that there audience is just as important as what they',w:'there',a:['their']},
+{t:'have to say. Therefore, they tried to find out how much their listeners already know',w:'tried',a:['try']},
+{t:'about the topic, and about their attitude for it. Whenever possible, good presenters',w:'for',a:['to','towards','toward']},
+{t:'also arrive 10 or 15 minutes before their talking is due to start. This gives them',w:'talking',a:['talk']},
+{t:'plenty of time not only to prepare their notes and check the equipments but also to',w:'equipments',a:['equipment']},
+{t:'chat to the participants as they come in. By create a relaxed atmosphere, they can',w:'create',a:['creating']},
+{t:'easily establish rapport for the audience. And good rapport, as many presenters will',w:'for',a:['with']}];
+const WCP='It is probably true that the most effective presenters have all developed their own special way of captivating their audience.';
+function letter(L,mk){
+ L.insertAdjacentHTML('beforeend','<h3 style="font-variant:small-caps;text-transform:lowercase;font-size:1.15rem">morrison office supplies international</h3><p class="note" style="text-align:right;margin:0 0 10px">1 Connaught Place, Edinburgh EH2 7EY<br>Tel/Fax 0131 123 7650</p><p class="note" style="margin:0 0 10px">Mr F. Potter<br>Futuro Office<br>98 Artillery Lane, Harefield,<br>Uxbridge, Middlesex UB7 5LS<br>21 September</p><p>Dear Mr Potter,</p>');
+ const para=a=>{const p=$('p');a.forEach((t,i)=>{if(i)p.appendChild(document.createTextNode(' '));p.appendChild(mk(t))});L.appendChild(p)};
+ const ul=a=>{const u=$('ul');a.forEach(t=>{const li=$('li');li.appendChild(mk(t));u.appendChild(li)});L.appendChild(u)};
+ para(['Thank you for doing business with us for over three years.']);
+ para(['We continue to be one of the world’s leading business-to-business suppliers of office products and services, and our motto continues to be: ‘Our job is to make your job easier’.']);
+ para(['Now, be prepared to be surprised about our latest additions to our wide range of products:']);
+ ul(['Morrison’s combined PXL-100 Laser Copier / Printer / Scanner – it does what none of the competition is able to do in the same way','our new collection of Wizard office chairs','our recently expanded collection of Avalon seminar chairs.']);
+ para(['For more information, call: 0800 123 9876 or visit our website: www.morrison.co.uk']);
+ para(['You will notice that our site has been completely redesigned to provide you with more information, and to serve you better.','Let us know what you think about it.','The company runs other funds that would have competed with the joint venture.','Register with our site by 1 October and win an ergonomic desk chair worth GBP300!']);
+ para(['We would also like to draw your attention to our special offers for regular customers like you:']);
+ ul(['up to 30% discount off the normal purchase price on ALL orders placed in October','free consultations.']);
+ para(['We look forward to continuing our business with you.']);
+ L.insertAdjacentHTML('beforeend','<p>Best regards,<br><b>Frank Lindsey</b>, General Manager, Morrison UK</p>');
+}
+
+/* ---------- sections ---------- */
+const S=[];const sec=(g,l,i,b)=>S.push({g,l,i,b});
+sec('Vocabulary','A','Study how Speaker B responds to what Speaker A says. Focus on the words in italics. Then take Speaker B’s part.',b=>{
+ b.insertAdjacentHTML('beforeend','<div class="ex-s">A: What do you think <i>damaged</i> our relations with Oxaco?<br>B: Well, I’d say communication problems certainly <i>soured</i> them a bit.</div><p class="hint"><b>Speaker B doesn’t repeat the same verb as Speaker A but instead uses a verb with a very similar meaning.</b> Use the correct form of a verb from the box.</p><p><span class="vb">foster &nbsp; restore &nbsp; sever &nbsp; undermine &nbsp; strengthen &nbsp; build up</span></p>');
+ return fill(b,VA)});
+sec('Vocabulary','B','Complete each sentence with the best word (a, b or c).',b=>choice(b,VB,false));
+sec('Language review: Multi-word verbs','A','Match these sentence halves. Tap a half on the left, then its ending on the right. Pair 2 is done for you.',b=>{
+ const m=match(b,{L:LAL,R:LAR,key:LAK,ex:1});return m});
+sec('Language review: Multi-word verbs','B','Complete each conversation with the correct form of a multi-word verb from the box.',b=>{
+ b.insertAdjacentHTML('beforeend','<p><span class="vb"><s>count on</s> &nbsp; check in &nbsp; go back &nbsp; go over &nbsp; look forward to &nbsp; meet up &nbsp; turn round &nbsp; turn up &nbsp; work out &nbsp; carry on</span></p>');
+ return fill(b,LB)});
+sec('Writing: Linking ideas','A','Study these sentences, then decide whether the three statements below are true or false.',b=>{
+ b.insertAdjacentHTML('beforeend','<div class="ex-s">• Although their prices are very competitive, we have decided not to do business with them.<br>• Their ads are hardly noticeable. <i>Nevertheless</i>, they keep attracting new customers.</div>');
+ return tf(b,WAT)});
+sec('Writing: Linking ideas','B','Complete each sentence with the correct linker (a, b or c).',b=>choice(b,WBI,false));
+sec('Writing: Linking ideas','C','Read the passage below about giving presentations. In each line 1–8 there is one wrong word. For each line, click the wrong word to underline it and write the correct word in the box.',b=>wrong(b,WCP,WCL));
+sec('Writing: Linking ideas','D','Read the direct marketing letter below and cross out the one sentence which does not fit in. Tap a sentence to cross it out; tap again to undo.',b=>strike(b,letter,9,'“The company runs other funds that would have competed with the joint venture.” does not fit in.'));
+sec('Writing: Linking ideas','E','You work for Futuro Office. Write a short reply (100–150 words) to Morrison Office Supplies International.',reply);
+
+/* ---------- page ---------- */
+const main=document.getElementById('main'),tot=document.getElementById('tot');let last='';
+function upd(){let s=0,m=0;S.forEach(x=>{s+=x.res;m+=x.o.max});tot.textContent='Score: '+s+' / '+m}
+function chk(x){x.res=x.o.check();x.sc.textContent=x.res+' / '+x.o.max;upd()}
+S.forEach(x=>{
+ if(x.g!==last){main.appendChild($('h2','grp',x.g));last=x.g}
+ const c=$('section','card'),h=$('div','sh'),b=$('div');x.res=0;
+ x.sc=$('span','sc');h.append($('span','badge',x.l.length>1?'':x.l),$('h2',null,x.i),x.sc);c.append(h,b);
+ x.o=x.b(b);
+ const cr=$('div','cr');
+ [['Check','ctl',()=>chk(x)],['Show Answers','ctl alt',()=>{x.o.show();chk(x)}],['Reset','ctl alt',()=>{x.o.reset();x.res=0;x.sc.textContent='';upd()}]]
+  .forEach(([t,k,f])=>{const bt=$('button',k,t);bt.type='button';bt.onclick=f;cr.appendChild(bt)});
+ c.appendChild(cr);main.appendChild(c);
+});
+document.getElementById('gc').onclick=()=>S.forEach(chk);
+document.getElementById('gs').onclick=()=>S.forEach(x=>{x.o.show();chk(x)});
+document.getElementById('gr').onclick=()=>S.forEach(x=>{x.o.reset();x.res=0;x.sc.textContent=''});
+document.getElementById('gr').addEventListener('click',upd);
+upd();
+</script></body></html>
