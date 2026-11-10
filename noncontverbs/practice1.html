@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stative &amp; Dynamic Verbs — Present Continuous Practice</title>
+<style>
+  :root{
+    --teal:#028090; --teal-d:#016b78; --navy:#0D2B35; --tint:#E6F5F7; --tint2:#F0F6F7;
+    --ok:#1e8e4e; --ok-bg:#e8f6ee; --bad:#c0392b; --bad-bg:#fdecea; --show:#2f6fb3; --show-bg:#eaf2fb;
+    --muted:#5b6f76; --line:#d5e3e6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4f8f9;color:var(--navy);font-family:Calibri,Carlito,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.5}
+  h1,h2,h3{font-family:"Trebuchet MS",Arial,sans-serif;margin:0}
+  .wrap{max-width:920px;margin:0 auto;padding:0 16px 60px}
+
+  /* header */
+  header.hero{background:var(--navy);color:#fff;padding:28px 16px 24px}
+  header.hero .wrap{padding-bottom:0}
+  .hero .kicker{color:#7fd3dc;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;font-size:13px}
+  .hero h1{font-size:30px;margin:6px 0 6px}
+  .hero p{margin:0;color:#cfe3e7}
+
+  /* sticky score */
+  .scorebar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(13,43,53,.08)}
+  .scorebar .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 16px}
+  .score{font-family:"Trebuchet MS",Arial,sans-serif;font-weight:bold;font-size:18px;white-space:nowrap}
+  .score b{color:var(--teal)}
+  .meter{flex:1;min-width:120px;height:10px;background:var(--tint);border-radius:6px;overflow:hidden}
+  .meter i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+  .sub{font-size:14px;color:var(--muted);white-space:nowrap}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  button{font:inherit;font-size:15px;border:0;border-radius:8px;padding:7px 14px;cursor:pointer;font-weight:bold}
+  .b-check{background:var(--teal);color:#fff}.b-check:hover{background:var(--teal-d)}
+  .b-show{background:var(--tint);color:var(--navy)}.b-show:hover{background:#d3eef1}
+  .b-reset{background:#fff;color:var(--muted);border:1px solid var(--line)}.b-reset:hover{background:var(--tint2)}
+
+  /* cards & sections */
+  .card{background:#fff;border-radius:12px;box-shadow:0 3px 14px rgba(13,43,53,.08);padding:22px 24px;margin-top:22px}
+  .sec-head{display:flex;align-items:center;gap:12px;border-left:5px solid var(--teal);padding-left:12px;margin-bottom:6px}
+  .badge{flex:none;width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Trebuchet MS",Arial,sans-serif;font-weight:bold}
+  .sec-head h2{font-size:22px}
+  .sec-score{margin-left:auto;font-size:14px;color:var(--muted);white-space:nowrap}
+  .instr{color:var(--muted);margin:4px 0 14px}
+  .ru-t{color:var(--navy)}
+  .sec-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+
+  /* rules */
+  .rule{margin-top:18px}
+  .rule h3{font-size:18px;color:var(--teal);margin-bottom:6px}
+  .ru{color:var(--muted);font-style:italic;font-size:15px}
+  .ex-line{margin:2px 0}
+  .yes{color:var(--ok);font-weight:bold}.no{color:var(--bad);font-weight:bold}
+  table.t{width:100%;border-collapse:collapse;margin:8px 0;font-size:15.5px}
+  .t th{background:var(--teal);color:#fff;text-align:left;padding:7px 10px;font-family:"Trebuchet MS",Arial,sans-serif;font-size:14.5px}
+  .t td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  .t tr:nth-child(even) td{background:#f8fbfb}
+  .t td:first-child{font-weight:bold;white-space:nowrap}
+  .formula{display:inline-block;background:var(--tint);border-radius:8px;padding:4px 12px;font-weight:bold}
+
+  /* items */
+  .item{display:flex;gap:10px;padding:11px 12px;border-radius:9px;border:1px solid transparent;margin-bottom:6px}
+  .item:nth-child(odd){background:#fafcfc}
+  .num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--tint);color:var(--teal);font-weight:bold;font-size:14px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .body{flex:1;min-width:0}
+  .q{margin:0}
+  .pre{color:var(--muted);margin-bottom:3px}
+  .key{display:inline-block;background:var(--navy);color:#fff;font-weight:bold;font-size:13px;letter-spacing:.05em;border-radius:5px;padding:1px 8px;margin:0 4px}
+  input.gap{font:inherit;font-size:16px;border:none;border-bottom:2px solid var(--teal);background:#f3fafb;padding:2px 6px;width:11em;max-width:100%;border-radius:4px 4px 0 0;color:var(--navy)}
+  input.gap.wide{width:100%;margin-top:4px}
+  input.gap:focus{outline:2px solid #7fd3dc;outline-offset:1px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .opt{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:4px 14px;cursor:pointer;font-weight:normal;font-size:16px;color:var(--navy)}
+  .opt:hover{border-color:var(--teal)}
+  .opt.sel{background:var(--teal);border-color:var(--teal);color:#fff}
+  select.match{font:inherit;font-size:16px;padding:5px 8px;border:1.5px solid var(--line);border-radius:8px;max-width:100%;color:var(--navy);background:#fff}
+  .match-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .match-row .left{font-weight:bold;min-width:9.5em}
+  u{text-decoration-color:var(--bad);text-decoration-thickness:2px}
+
+  .fb{display:none;margin-top:6px;font-size:15px;border-radius:7px;padding:5px 10px}
+  .item.ok{border-color:#a9dcbd;background:var(--ok-bg)!important}
+  .item.bad{border-color:#efb3ac;background:var(--bad-bg)!important}
+  .item.shown{border-color:#b6cfee;background:var(--show-bg)!important}
+  .item.ok .fb,.item.bad .fb,.item.shown .fb{display:block}
+  .item.ok .fb{color:#155d34}.item.bad .fb{color:#8e2a20}.item.shown .fb{color:#1f4f84}
+  .fb .mark{font-weight:bold}
+  .item.ok input.gap{border-bottom-color:var(--ok)}
+  .item.bad input.gap{border-bottom-color:var(--bad)}
+  .item.shown input.gap{border-bottom-color:var(--show)}
+
+  footer{text-align:center;color:var(--muted);font-size:14px;margin-top:30px}
+
+  @media (max-width:600px){
+    body{font-size:16px}
+    .hero h1{font-size:24px}
+    .card{padding:16px 14px}
+    .sec-head h2{font-size:19px}
+    .sec-score{display:none}
+    .scorebar .wrap{gap:8px}
+    .sub{display:none}
+    button{padding:6px 10px;font-size:14px}
+    .t{font-size:14px}.t th,.t td{padding:6px 7px}
+    .t td:first-child{white-space:normal}
+    .match-row .left{min-width:0;width:100%}
+    select.match{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Grammar practice · A2–B1</div>
+    <h1>Stative &amp; Dynamic Verbs in the Present Continuous</h1>
+    <p>Read the rules, then do the 8 exercises. Press <b>Check</b> to see your score.</p>
+  </div>
+</header>
+
+<div class="scorebar">
+  <div class="wrap">
+    <div class="score">Score: <b id="sc">0</b> / <span id="tot">0</span></div>
+    <div class="meter"><i id="bar"></i></div>
+    <div class="sub" id="checked">Checked: 0</div>
+    <div class="btns">
+      <button class="b-check" id="checkAll">Check all</button>
+      <button class="b-show" id="showAll">Show all answers</button>
+      <button class="b-reset" id="resetAll">Reset</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- RULES -->
+  <section class="card" id="rules">
+    <div class="sec-head"><div class="badge">R</div><h2>Rules</h2></div>
+
+    <div class="rule">
+      <h3>1. Dynamic verbs = actions → Present Continuous is fine</h3>
+      <p class="ex-line"><span class="formula">am / is / are + verb-ing</span></p>
+      <p class="ex-line"><i>She <b>is cooking</b> dinner.</i> · <i>Look! It<b>'s raining</b>.</i></p>
+    </div>
+
+    <div class="rule">
+      <h3>2. Stative verbs = states → NOT in the Continuous (even with <i>now</i>)</h3>
+      <p class="ex-line">Stative verbs describe a state, not an action. Use the <b>Present Simple</b>, even when you mean "right now".</p>
+      <table class="t">
+        <tr><th>Group</th><th>Verbs</th></tr>
+        <tr><td>Feelings &amp; wants</td><td>like, love, hate, dislike, want, need, prefer, envy, fear, seem</td></tr>
+        <tr><td>Thinking</td><td>know, believe, understand, remember, think (= have an opinion), suppose, agree, doubt, recognize, realize, imagine, mean, matter</td></tr>
+        <tr><td>Possession &amp; relations</td><td>have (= own), own, possess, belong to, contain, include, consist of, depend on</td></tr>
+      </table>
+      <p class="ex-line"><span class="yes">✔</span> <i>I <b>want</b> to eat.</i> &nbsp; <span class="no">✘</span> <i>I am wanting to eat.</i></p>
+      <p class="ex-line"><span class="yes">✔</span> <i>I <b>believe</b> you.</i> &nbsp; <span class="no">✘</span> <i>I am believing you.</i></p>
+      <p class="ex-line"><span class="yes">✔</span> <i>I <b>don't know</b> the answer now.</i> &nbsp; <span class="no">✘</span> <i>I am not knowing…</i></p>
+    </div>
+
+    <div class="rule">
+      <h3>3. Same verb, two meanings</h3>
+      <p class="ex-line">Some verbs are stative in one meaning and dynamic in another.</p>
+      <table class="t">
+        <tr><th>Verb</th><th>Simple (state)</th><th>Continuous (action)</th></tr>
+        <tr><td>think</td><td><i>I <b>think</b> he is kind.</i> <span class="ru">(полагаю)</span></td><td><i>I<b>'m thinking</b> of buying a bike.</i> <span class="ru">(размышляю)</span></td></tr>
+        <tr><td>see</td><td><i>I <b>see</b> an iceberg!</i> <span class="ru">(вижу)</span></td><td><i>I<b>'m seeing</b> a doctor today.</i> <span class="ru">(встречаюсь)</span></td></tr>
+        <tr><td>taste</td><td><i>This <b>tastes</b> good.</i> <span class="ru">(имеет вкус)</span></td><td><i>I<b>'m tasting</b> the soup.</i> <span class="ru">(пробую)</span></td></tr>
+        <tr><td>smell</td><td><i>I <b>smell</b> gas.</i> <span class="ru">(чувствую запах)</span></td><td><i>The dog <b>is smelling</b> a flower.</i> <span class="ru">(нюхает)</span></td></tr>
+        <tr><td>weigh</td><td><i>I <b>weigh</b> 70 kilos.</i> <span class="ru">(вешу)</span></td><td><i>I<b>'m weighing</b> the bag.</i> <span class="ru">(взвешиваю)</span></td></tr>
+        <tr><td>cost</td><td><i>How much <b>does</b> it <b>cost</b>?</i> <span class="ru">(стоит)</span></td><td><i>Your car <b>is costing</b> me a fortune.</i> <span class="ru">(обходится)</span></td></tr>
+        <tr><td>expect</td><td><i>I <b>expect</b> he'll come.</i> <span class="ru">(полагаю)</span></td><td><i>I<b>'m expecting</b> a parcel.</i> <span class="ru">(жду)</span></td></tr>
+      </table>
+    </div>
+
+    <div class="rule">
+      <h3>4. <i>Be</i> and <i>have</i></h3>
+      <p class="ex-line"><b>be</b> — permanent quality → <i>You <b>are</b> stupid.</i> · temporary behaviour → <i>You<b>'re being</b> stupid!</i> <span class="ru">(ведёшь себя)</span></p>
+      <p class="ex-line"><b>have</b> — possession → <i>He <b>has</b> a car.</i> <span class="no">✘</span> <i>He is having a car.</i></p>
+      <p class="ex-line"><b>have</b> in fixed expressions (an action) → <i>He<b>'s having</b> breakfast / a shower / a party / a good time.</i></p>
+    </div>
+  </section>
+
+  <!-- RULES — RUSSIAN -->
+  <section class="card" id="rules-ru" lang="ru">
+    <div class="sec-head"><div class="badge">RU</div><h2>Правила (перевод)</h2></div>
+
+    <div class="rule">
+      <h3>1. Динамические глаголы = активный процесс → можно употребить в Present Continuous</h3>
+      <p class="ex-line"><span class="formula">am / is / are + глагол с окончанием -ing</span></p>
+      <p class="ex-line"><i>She <b>is cooking</b> dinner.</i> — Она готовит ужин. · <i>Look! It<b>'s raining</b>.</i> — Смотри! Идёт дождь.</p>
+    </div>
+
+    <div class="rule">
+      <h3>2. Статичные глаголы = состояния → НЕ употребляются в Continuous (даже со словом <i>now</i>)</h3>
+      <p class="ex-line">Статичные глаголы (stative verbs) описывают состояние, а не действие. Используйте <b>Present Simple</b>, даже если имеете в виду «прямо сейчас».</p>
+      <table class="t">
+        <tr><th>Группа</th><th>Глаголы</th></tr>
+        <tr><td>Чувства и желания</td><td>like (нравиться), love (любить), hate (ненавидеть), dislike (не любить), want (хотеть), need (нуждаться), prefer (предпочитать), envy (завидовать), fear (бояться), seem (казаться)</td></tr>
+        <tr><td>Мышление</td><td>know (знать), believe (верить), understand (понимать), remember (помнить), think (= полагать, считать), suppose (полагать), agree (соглашаться), doubt (сомневаться), recognize (узнавать), realize (осознавать), imagine (представлять), mean (означать, иметь в виду), matter (иметь значение)</td></tr>
+        <tr><td>Обладание и отношения</td><td>have (= иметь, владеть), own (владеть), possess (обладать), belong to (принадлежать), contain (содержать), include (включать), consist of (состоять из), depend on (зависеть от)</td></tr>
+      </table>
+      <p class="ex-line"><span class="yes">✔</span> <i>I <b>want</b> to eat.</i> — Я хочу есть. &nbsp; <span class="no">✘</span> <i>I am wanting to eat.</i></p>
+      <p class="ex-line"><span class="yes">✔</span> <i>I <b>believe</b> you.</i> — Я тебе верю. &nbsp; <span class="no">✘</span> <i>I am believing you.</i></p>
+      <p class="ex-line"><span class="yes">✔</span> <i>I <b>don't know</b> the answer now.</i> — Сейчас я не знаю ответа. &nbsp; <span class="no">✘</span> <i>I am not knowing…</i></p>
+    </div>
+
+    <div class="rule">
+      <h3>3. Один глагол — два значения</h3>
+      <p class="ex-line">Некоторые глаголы в одном значении являются глаголами состояния, а в другом — обозначают действие.</p>
+      <table class="t">
+        <tr><th>Глагол</th><th>Simple (состояние)</th><th>Continuous (действие)</th></tr>
+        <tr><td>think</td><td><i>I <b>think</b> he is kind.</i> — Я думаю (полагаю), что он добрый.</td><td><i>I<b>'m thinking</b> of buying a bike.</i> — Я подумываю купить велосипед.</td></tr>
+        <tr><td>see</td><td><i>I <b>see</b> an iceberg!</i> — Я вижу айсберг!</td><td><i>I<b>'m seeing</b> a doctor today.</i> — Сегодня я иду к врачу (встречаюсь с врачом).</td></tr>
+        <tr><td>taste</td><td><i>This <b>tastes</b> good.</i> — Это вкусно (имеет хороший вкус).</td><td><i>I<b>'m tasting</b> the soup.</i> — Я пробую суп.</td></tr>
+        <tr><td>smell</td><td><i>I <b>smell</b> gas.</i> — Я чувствую запах газа.</td><td><i>The dog <b>is smelling</b> a flower.</i> — Собака нюхает цветок.</td></tr>
+        <tr><td>weigh</td><td><i>I <b>weigh</b> 70 kilos.</i> — Я вешу 70 килограммов.</td><td><i>I<b>'m weighing</b> the bag.</i> — Я взвешиваю сумку.</td></tr>
+        <tr><td>cost</td><td><i>How much <b>does</b> it <b>cost</b>?</i> — Сколько это стоит?</td><td><i>Your car <b>is costing</b> me a fortune.</i> — Твоя машина обходится мне в целое состояние.</td></tr>
+        <tr><td>expect</td><td><i>I <b>expect</b> he'll come.</i> — Я полагаю, что он придёт.</td><td><i>I<b>'m expecting</b> a parcel.</i> — Я жду посылку.</td></tr>
+      </table>
+    </div>
+
+    <div class="rule">
+      <h3>4. Глаголы <i>be</i> и <i>have</i></h3>
+      <p class="ex-line"><b>be</b> — постоянное качество → <i>You <b>are</b> stupid.</i> — Ты глупый. Если <b>be</b> в Present Continuous, это означает временное поведение → <i>You<b>'re being</b> stupid!</i> — Ты ведёшь себя глупо!</p>
+      <p class="ex-line"><b>have</b> — обладание → <i>He <b>has</b> a car.</i> — У него есть машина. <span class="no">✘</span> <i>He is having a car.</i></p>
+      <p class="ex-line"><b>have</b> в устойчивых выражениях (действие) → <i>He<b>'s having</b> breakfast / a shower / a party / a good time.</i> — Он завтракает / принимает душ / устраивает вечеринку / хорошо проводит время.</p>
+    </div>
+  </section>
+
+  <div id="sections"></div>
+
+  <footer>Stative &amp; Dynamic Verbs · Present Continuous · A2–B1</footer>
+</main>
+
+<script>
+/* ---------------- DATA ---------------- */
+const SECTIONS = [
+ { title:"Action or state?", type:"mc",
+   instr:"Is the verb an <b>action</b> (can be Continuous) or a <b>state</b> (usually Present Simple)? / <span class='ru-t'>Глагол обозначает <b>действие</b> (может употребляться в Continuous) или <b>состояние</b> (обычно Present Simple)?</span>",
+   opts:["State","Action"],
+   items:[
+    {q:"<b>know</b>", a:"State", ex:"Thinking verb → state."},
+    {q:"<b>cook</b>", a:"Action", ex:"Something you do → action."},
+    {q:"<b>contain</b>", a:"State", ex:"Relation (what is inside something) → state."},
+    {q:"<b>dance</b>", a:"Action", ex:"Something you do → action."},
+    {q:"<b>need</b>", a:"State", ex:"Feelings &amp; wants → state."},
+    {q:"<b>own</b>", a:"State", ex:"Possession → state."},
+    {q:"<b>build</b>", a:"Action", ex:"Something you do → action."},
+    {q:"<b>understand</b>", a:"State", ex:"Thinking verb → state."},
+    {q:"<b>travel</b>", a:"Action", ex:"Something you do → action."},
+    {q:"<b>prefer</b>", a:"State", ex:"Feelings &amp; wants → state."}
+ ]},
+ { title:"Choose the correct form", type:"mc",
+   instr:"Choose the correct verb form. / <span class='ru-t'>Выберите правильную форму глагола.</span>",
+   items:[
+    {q:"Be quiet! The baby ___.", opts:["sleeps","is sleeping"], a:"is sleeping", ex:"Action happening now."},
+    {q:"I ___ a glass of water.", opts:["want","am wanting"], a:"want", ex:"<i>want</i> is stative."},
+    {q:"Look! Anna ___ a red hat today.", opts:["wears","is wearing"], a:"is wearing", ex:"Action now (<i>look!, today</i>)."},
+    {q:"This book ___ to my teacher.", opts:["belongs","is belonging"], a:"belongs", ex:"<i>belong to</i> = relation → stative."},
+    {q:"I ___ this word.", opts:["don't understand","am not understanding"], a:"don't understand", ex:"<i>understand</i> is stative."},
+    {q:"Listen! Someone ___ at the door.", opts:["knocks","is knocking"], a:"is knocking", ex:"Action now (<i>listen!</i>)."},
+    {q:"We ___ a big house in the country.", opts:["have","are having"], a:"have", ex:"<i>have</i> = own → stative."},
+    {q:"Sorry, I can't talk now. I ___ lunch.", opts:["have","am having"], a:"am having", ex:"<i>have lunch</i> = an action."},
+    {q:"He ___ everything he reads online.", opts:["believes","is believing"], a:"believes", ex:"<i>believe</i> is stative."},
+    {q:"___ my name?", opts:["Do you remember","Are you remembering"], a:"Do you remember", ex:"<i>remember</i> is stative."}
+ ]},
+ { title:"Present Simple or Present Continuous?", type:"gap",
+   instr:"Put the verb in brackets into the Present Simple or the Present Continuous. / <span class='ru-t'>Поставьте глагол в скобках в Present Simple или Present Continuous.</span>",
+   items:[
+    {q:"I ___ (not / know) where Tom is right now.", a:["don't know"], ex:"Stative — even with <i>right now</i>."},
+    {q:"Look! It ___ (snow).", a:["is snowing"], ex:"Action now."},
+    {q:"My sister ___ (love) chocolate.", a:["loves"], ex:"Stative."},
+    {q:"What ___ (you / do) at the moment?", a:["are you doing"], ex:"Action now."},
+    {q:"This soup ___ (need) more salt.", a:["needs"], ex:"Stative."},
+    {q:"The students ___ (listen) to the teacher now.", a:["are listening"], ex:"Action now."},
+    {q:"I ___ (not / believe) his story.", a:["don't believe"], ex:"Stative."},
+    {q:"Kate ___ (prepare) for her exams these days.", a:["is preparing"], ex:"Action over a period (<i>these days</i>)."},
+    {q:"___ (you / agree) with me?", a:["Do you agree"], ex:"Stative."},
+    {q:"This bottle ___ (contain) orange juice.", a:["contains"], ex:"Stative."},
+    {q:"Please be quiet, I ___ (try) to concentrate.", a:["am trying"], ex:"Action now."},
+    {q:"My parents ___ (own) a small café.", a:["own"], ex:"Possession."}
+ ]},
+ { title:"One verb, two meanings", type:"gap",
+   instr:"Put the verb in brackets into the Present Simple or the Present Continuous. Think about the meaning! / <span class='ru-t'>Поставьте глагол в скобках в Present Simple или Present Continuous. Обратите внимание на значение глагола!</span>",
+   items:[
+    {q:"I ___ (think) English is an easy language.", a:["think"], ex:"Opinion → stative."},
+    {q:"I ___ (think) about my holiday plans.", a:["am thinking"], ex:"Thinking process → action."},
+    {q:"This cake ___ (taste) delicious.", a:["tastes"], ex:"Has a taste → stative."},
+    {q:"The chef ___ (taste) the sauce.", a:["is tasting"], ex:"Trying food → action."},
+    {q:"I ___ (see) a bird in that tree.", a:["see","can see"], ex:"Seeing with your eyes → stative."},
+    {q:"I ___ (see) the dentist tomorrow morning.", a:["am seeing"], ex:"Meeting someone (a plan) → action."},
+    {q:"This suitcase ___ (weigh) 20 kilos.", a:["weighs"], ex:"Has a weight → stative."},
+    {q:"The shop assistant ___ (weigh) the apples.", a:["is weighing"], ex:"Measuring weight → action."},
+    {q:"We ___ (have) two dogs.", a:["have"], ex:"Possession → stative."},
+    {q:"We ___ (have) a party on Saturday.", a:["are having"], ex:"<i>have a party</i> = action (a plan)."},
+    {q:"My brother ___ (be) a very calm person.", a:["is"], ex:"Permanent quality."},
+    {q:"You ___ (be) very rude today! That's not like you.", a:["are being"], ex:"Temporary behaviour."}
+ ]},
+ { title:"Find and correct the mistake", type:"gap",
+   instr:"The <u>underlined</u> verb in each sentence is wrong. Write the correct form. / <span class='ru-t'>В каждом предложении <u>подчёркнутый</u> глагол употреблён неправильно. Напишите правильную форму.</span>",
+   items:[
+    {pre:"I <u>am knowing</u> your brother.", q:"→ ___", a:["know"], ex:"<i>know</i> is stative."},
+    {pre:"She <u>is having</u> a new phone.", q:"→ ___", a:["has"], ex:"<i>have</i> = own → stative."},
+    {pre:"Listen! The birds <u>sing</u>.", q:"→ ___", a:["are singing"], ex:"Action now (<i>listen!</i>)."},
+    {pre:"This flat <u>is belonging</u> to my aunt.", q:"→ ___", a:["belongs"], ex:"<i>belong to</i> is stative."},
+    {pre:"Why <u>do you smell</u> the milk? Is it bad?", q:"→ ___", a:["are you smelling"], ex:"<i>smell</i> = sniff (нюхать) → action."},
+    {pre:"I <u>am needing</u> your help.", q:"→ ___", a:["need"], ex:"<i>need</i> is stative."},
+    {pre:"Right now they <u>watch</u> a film.", q:"→ ___", a:["are watching"], ex:"Action now."},
+    {pre:"He <u>is seeming</u> tired today.", q:"→ ___", a:["seems"], ex:"<i>seem</i> is stative."},
+    {pre:"We <u>are preferring</u> the train to the bus.", q:"→ ___", a:["prefer"], ex:"<i>prefer</i> is stative."},
+    {pre:"Shh! I <u>talk</u> on the phone.", q:"→ ___", a:["am talking"], ex:"Action now."}
+ ]},
+ { title:"Match the halves", type:"match",
+   instr:"Choose the correct ending for each beginning. / <span class='ru-t'>Подберите правильное окончание к каждому началу предложения.</span>",
+   items:[
+    {q:"I think", a:"that this film is boring.", ex:"<i>think</i> = opinion → stative."},
+    {q:"I'm thinking", a:"of buying a new laptop.", ex:"<i>be thinking of</i> = considering → action."},
+    {q:"This coffee tastes", a:"too sweet.", ex:"<i>taste</i> = has a taste → stative."},
+    {q:"Mum is tasting", a:"the soup to check the salt.", ex:"<i>taste</i> = try food → action."},
+    {q:"I see", a:"a plane in the sky.", ex:"<i>see</i> with your eyes → stative."},
+    {q:"I'm seeing", a:"my friends tonight.", ex:"<i>see</i> = meet (a plan) → action."},
+    {q:"We have", a:"a cat and a dog.", ex:"<i>have</i> = own → stative."},
+    {q:"We're having", a:"a great time here!", ex:"<i>have a good time</i> = action."}
+ ]},
+ { title:"Rewrite the sentence", type:"gap",
+   instr:"Complete the second sentence so that it means the same as the first. Use the word in <span class='key'>CAPITALS</span>. / <span class='ru-t'>Закончите второе предложение так, чтобы оно имело то же значение, что и первое. Используйте слово, написанное <span class='key'>ЗАГЛАВНЫМИ</span> буквами.</span>",
+   items:[
+    {pre:"Is this your umbrella?", key:"BELONG", q:"Does this umbrella ___ to you?", a:["belong"], ex:"<i>belong to</i> — stative."},
+    {pre:"I am eating dinner at the moment.", key:"HAVING", q:"I ___ dinner at the moment.", a:["am having"], ex:"<i>have dinner</i> = action."},
+    {pre:"Olga has a car.", key:"OWNS", q:"Olga ___ a car.", a:["owns"], ex:"<i>own</i> — possession, stative."},
+    {pre:"In my opinion, he is right.", key:"THINK", q:"I ___ right.", a:["think he is","think that he is"], ex:"<i>think</i> = opinion → stative."},
+    {pre:"I'm considering a move to Canada.", key:"THINKING", q:"I ___ moving to Canada.", a:["am thinking of","am thinking about"], ex:"<i>be thinking of/about</i> = considering → action."},
+    {pre:"This drink has sugar in it.", key:"CONTAINS", q:"This drink ___ sugar.", a:["contains"], ex:"<i>contain</i> — stative."},
+    {pre:"Tea is better for me than coffee.", key:"PREFER", q:"I ___ coffee.", a:["prefer tea to"], ex:"<i>prefer A to B</i> — stative."},
+    {pre:"He is behaving very strangely today.", key:"BEING", q:"He ___ very strange today.", a:["is being"], ex:"<i>be being</i> = temporary behaviour."},
+    {pre:"The bag is 5 kilos.", key:"WEIGHS", q:"The bag ___ 5 kilos.", a:["weighs"], ex:"Has a weight → stative."},
+    {pre:"I have an appointment with the doctor this afternoon.", key:"SEEING", q:"I ___ the doctor this afternoon.", a:["am seeing"], ex:"<i>see</i> = meet (a plan) → action."}
+ ]},
+ { title:"Translate into English", type:"gap", wide:true,
+   instr:"Translate the sentences. Capital letters, punctuation and short forms (I'm, I am) don't matter. / <span class='ru-t'>Переведите предложения. Заглавные буквы, знаки препинания и краткие формы (I'm, I am) не учитываются.</span>",
+   items:[
+    {pre:"Я знаю этого человека.", q:"___", a:["I know this man","I know that man","I know this person","I know that person","I know this guy","I know that guy"], ex:"<i>know</i> is stative."},
+    {pre:"Посмотри! Идёт дождь.", q:"___", a:["Look! It is raining."], ex:"Action now."},
+    {pre:"Мне нужна твоя помощь.", q:"___", a:["I need your help."], ex:"<i>need</i> is stative."},
+    {pre:"Эта книга принадлежит Анне.", q:"___", a:["This book belongs to Anna.","This book belongs to Anne."], ex:"<i>belong to</i> is stative."},
+    {pre:"Мы сейчас обедаем.", q:"___", a:["We are having lunch now.","We are having lunch right now.","We are having lunch at the moment.","Now we are having lunch.","We are now having lunch."], ex:"<i>have lunch</i> = action."},
+    {pre:"Я подумываю о покупке велосипеда.", q:"___", a:["I am thinking of buying a bike.","I am thinking about buying a bike.","I am thinking of buying a bicycle.","I am thinking about buying a bicycle."], ex:"<i>be thinking of</i> = considering → action."},
+    {pre:"Сколько стоит эта сумка?", q:"___", a:["How much does this bag cost?","How much is this bag?"], ex:"<i>cost</i> (price) → stative."},
+    {pre:"Почему ты ведёшь себя так глупо?", q:"___", a:["Why are you being so stupid?","Why are you being so silly?"], ex:"<i>be being</i> = temporary behaviour."}
+ ]}
+];
+
+/* ---------------- HELPERS ---------------- */
+function norm(s){
+  s = (s||"").toLowerCase().replace(/[’‘`´]/g,"'");
+  s = s.replace(/\bcan't\b/g,"cannot").replace(/\bwon't\b/g,"will not").replace(/\b(\w+)n't\b/g,"$1 not");
+  s = s.replace(/'m\b/g," am").replace(/'re\b/g," are").replace(/'s\b/g," is").replace(/'ve\b/g," have").replace(/'ll\b/g," will").replace(/'d\b/g," would");
+  return s.replace(/[^a-z' ]+/g," ").replace(/\s+/g," ").trim();
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+
+/* ---------------- RENDER ---------------- */
+const ALL = [];  // {sec, el, item, kind, state}
+const root = document.getElementById("sections");
+
+SECTIONS.forEach((sec, si) => {
+  const card = document.createElement("section");
+  card.className = "card"; card.id = "sec"+(si+1);
+  card.innerHTML = `<div class="sec-head"><div class="badge">${si+1}</div><h2>${sec.title}</h2><span class="sec-score" id="ss${si}"></span></div>
+    <p class="instr">${sec.instr}</p><div class="items"></div>
+    <div class="sec-btns"><button class="b-check">Check answers</button><button class="b-show">Show answers</button><button class="b-reset">Reset</button></div>`;
+  const box = card.querySelector(".items");
+  const matchEndings = sec.type==="match" ? shuffle(sec.items.map(it=>it.a)) : null;
+
+  sec.items.forEach((it, ii) => {
+    const el = document.createElement("div");
+    el.className = "item";
+    let html = `<div class="num">${ii+1}</div><div class="body">`;
+    if (it.pre) html += `<div class="pre">${it.pre}${it.key?` <span class="key">${it.key}</span>`:""}</div>`;
+    if (sec.type==="gap") {
+      const inp = `<input class="gap${sec.wide?" wide":""}" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="answer ${ii+1}">`;
+      html += `<p class="q">${it.q.replace("___", inp)}</p>`;
+    } else if (sec.type==="mc") {
+      const opts = it.opts ? shuffle(it.opts) : sec.opts;
+      html += `<p class="q">${it.q}</p><div class="opts">${opts.map(o=>`<button type="button" class="opt" data-v="${esc(o)}">${o}</button>`).join("")}</div>`;
+    } else if (sec.type==="match") {
+      html += `<div class="match-row"><span class="left">${it.q} …</span><select class="match" aria-label="ending ${ii+1}"><option value="">— choose an ending —</option>${matchEndings.map(e=>`<option value="${esc(e)}">${e}</option>`).join("")}</select></div>`;
+    }
+    html += `<div class="fb"></div></div>`;
+    el.innerHTML = html;
+    box.appendChild(el);
+    const rec = {sec:si, el, item:it, kind:sec.type, state:""};
+    ALL.push(rec);
+
+    if (sec.type==="mc") el.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
+      if (rec.state==="shown") return;
+      el.querySelectorAll(".opt").forEach(x=>x.classList.remove("sel")); b.classList.add("sel");
+      if (rec.state) checkItem(rec); updateScore();
+    }));
+    if (sec.type==="gap") el.querySelector("input").addEventListener("keydown", e => { if(e.key==="Enter"){ checkItem(rec); updateScore(); }});
+    if (sec.type==="match") el.querySelector("select").addEventListener("change", () => { if(rec.state){ checkItem(rec); updateScore(); }});
+  });
+
+  const recs = () => ALL.filter(r=>r.sec===si);
+  const [bc,bs,br] = card.querySelectorAll(".sec-btns button");
+  bc.onclick = () => { recs().forEach(checkItem); updateScore(); };
+  bs.onclick = () => { recs().forEach(showItem); updateScore(); };
+  br.onclick = () => { recs().forEach(resetItem); updateScore(); };
+  root.appendChild(card);
+});
+
+/* ---------------- LOGIC ---------------- */
+function answers(rec){ const a = rec.item.a; return Array.isArray(a) ? a : [a]; }
+function userValue(rec){
+  const el = rec.el;
+  if (rec.kind==="gap") return el.querySelector("input").value;
+  if (rec.kind==="mc") { const s = el.querySelector(".opt.sel"); return s ? s.dataset.v : ""; }
+  if (rec.kind==="match") return el.querySelector("select").value;
+}
+function isCorrect(rec, v){
+  if (rec.kind==="gap") { const n = norm(v); return n!=="" && answers(rec).some(a => norm(a)===n); }
+  return v!=="" && v===answers(rec)[0];
+}
+function setFb(rec, cls, mark){
+  rec.el.classList.remove("ok","bad","shown");
+  if (cls) rec.el.classList.add(cls);
+  rec.state = cls==="ok"?"ok":cls==="bad"?"bad":cls==="shown"?"shown":"";
+  const fb = rec.el.querySelector(".fb");
+  if (!cls) { fb.innerHTML=""; return; }
+  const model = answers(rec)[0];
+  let extra = "";
+  if (cls!=="ok") extra = ` Answer: <b>${model}</b>.`;
+  fb.innerHTML = `<span class="mark">${mark}</span> ${rec.item.ex}${extra}`;
+}
+function checkItem(rec){
+  if (rec.state==="shown") return;
+  const v = userValue(rec);
+  if (!v || !v.trim()) { setFb(rec, "bad", "✘ No answer."); return; }
+  if (isCorrect(rec, v)) setFb(rec, "ok", "✔ Correct!");
+  else setFb(rec, "bad", "✘ Not quite.");
+}
+function showItem(rec){
+  const a = answers(rec)[0];
+  if (rec.kind==="gap") rec.el.querySelector("input").value = a;
+  if (rec.kind==="mc") rec.el.querySelectorAll(".opt").forEach(b => b.classList.toggle("sel", b.dataset.v===a));
+  if (rec.kind==="match") rec.el.querySelector("select").value = a;
+  if (rec.state==="ok") return;           // already earned — keep the point
+  setFb(rec, "shown", "ℹ");
+}
+function resetItem(rec){
+  if (rec.kind==="gap") rec.el.querySelector("input").value = "";
+  if (rec.kind==="mc") rec.el.querySelectorAll(".opt").forEach(b=>b.classList.remove("sel"));
+  if (rec.kind==="match") rec.el.querySelector("select").value = "";
+  setFb(rec, "", "");
+}
+function updateScore(){
+  const ok = ALL.filter(r=>r.state==="ok").length;
+  const checked = ALL.filter(r=>r.state).length;
+  document.getElementById("sc").textContent = ok;
+  document.getElementById("tot").textContent = ALL.length;
+  document.getElementById("checked").textContent = "Checked: " + checked;
+  document.getElementById("bar").style.width = (100*ok/ALL.length) + "%";
+  SECTIONS.forEach((s,si) => {
+    const r = ALL.filter(x=>x.sec===si);
+    document.getElementById("ss"+si).textContent = r.filter(x=>x.state==="ok").length + " / " + r.length;
+  });
+}
+document.getElementById("checkAll").onclick = () => { ALL.forEach(checkItem); updateScore(); };
+document.getElementById("showAll").onclick = () => { ALL.forEach(showItem); updateScore(); };
+document.getElementById("resetAll").onclick = () => { ALL.forEach(resetItem); updateScore(); window.scrollTo({top:0,behavior:"smooth"}); };
+updateScore();
+
+/* exposed for automated testing */
+window.__TEST = { ALL, SECTIONS, norm, checkItem, isCorrect, updateScore };
+</script>
+</body>
+</html>
