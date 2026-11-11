@@ -117,7 +117,7 @@ input.ok{background:var(--okbg);color:var(--ok);border-color:var(--ok)}input.bad
 @media (max-width:640px){.pers{grid-template-columns:1fr}.pers .frame{max-width:300px}.balls{grid-template-columns:repeat(3,minmax(0,1fr))}.swipe{display:block}}
 @media (max-width:520px){.card{padding:14px 11px}.boxes{gap:8px}.w{padding:5px 7px;font-size:.93rem}.cnt{grid-template-columns:1fr}.scenes{grid-template-columns:1fr}.person .pic{width:68px}.person{gap:10px;padding:4px 0}.ctl{padding:6px 9px}.score{width:100%;text-align:center;margin:0}}
 </style></head><body>
-<header><h1>Starter — Welcome back!</h1><p>Family and Friends 2 · Workbook · Lessons 1–4: names, looks, family, greetings, days of the week, toys and numbers 11–20. Do each exercise, then press <b>Check</b>.</p></header>
+<header><h1>Starter — Welcome back!</h1><p>Family and Friends 2 · Workbook · Lessons 1–4: names, looks, family, greetings, days of the week, toys and numbers 11–20. Do each exercise, then press <b>Check</b>. / Выполни каждое упражнение и нажми <b>Check</b>.</p></header>
 <div class="bar"><span class="score" id="tot">Score: 0 / 0</span>
 <button class="ctl" id="gc">Check All</button><button class="ctl alt" id="gs">Show Answers</button><button class="ctl alt" id="gr">Reset All</button></div>
 <main id="main"></main>
@@ -164,7 +164,7 @@ function finder(body,c){
   if(c.snake)b.style.setProperty('--dy',(Math.sin(i*.42)*13).toFixed(1)+'px');
   g.appendChild(b);cells.push(b)}));
  if(c.snake){const hd=$('span','shead','<i></i>');hd.style.setProperty('--dy',(Math.sin(W*.42)*13-6).toFixed(1)+'px');g.appendChild(hd)}
- const wrap=$('div','wwrap');wrap.appendChild(g);body.appendChild(wrap);if(c.snake)body.insertBefore($('p','swipe','↔ Swipe the snake sideways to see all the letters.'),wrap);
+ const wrap=$('div','wwrap');wrap.appendChild(g);body.appendChild(wrap);if(c.snake)body.insertBefore($('p','swipe','↔ Swipe the snake sideways to see all the letters. / Листай змейку в сторону, чтобы увидеть все буквы.'),wrap);
  const fb=$('p','fb');body.appendChild(fb);
  let found=new Set(c.ex?[c.ex]:[]),start=null,tm;
  function paint(){cells.forEach(e=>{e.classList.remove('f','s');e.style.removeProperty('--h')});
@@ -223,7 +223,7 @@ function orderWho(body,items){
   const r=$('div','q'+(it.ex?' ex':'')),d=$('div');d.style.flex='1';r.append($('span','n',it.n),d);body.appendChild(r);
   if(it.ex){d.innerHTML='<div class="pool">'+it.w.map(w=>'<span class="tile st">'+w+'</span>').join('')+'</div><div style="margin-top:6px"><b class="exw">'+it.ex+'</b> → <span class="lb ok" style="display:inline-flex;align-items:center;justify-content:center">'+it.p+'</span></div>';return}
   const slots=$('div','slots'),pool=$('div','pool'),who=$('div','who'),fb=$('span','fb');
-  who.appendChild($('span',null,'Who is it?'));
+  who.appendChild($('span',null,'Who is it? / Кто это?'));
   const st={placed:[],p:null,chk:false},lbs=[];
   ['a','b','c'].forEach(l=>{const b=$('button','lb',l);b.type='button';b.onclick=()=>{st.p=l;st.chk=false;fb.textContent='';paint()};lbs.push(b);who.appendChild(b)});
   d.append(pool,slots,who,fb);
@@ -254,7 +254,7 @@ function aboutMe(body){
   d.appendChild(o);L.appendChild(d);return r});
  function paint(r){r.g.innerHTML=r.v||'&nbsp;';r.bs.forEach(b=>b.classList.toggle('sel',b.textContent===r.v))}
  /* drawing */
- const fr=$('div','frame'),cv=$('canvas');cv.width=520;cv.height=600;fr.appendChild(cv);Rt.append($('p','hint','<b>Draw yourself</b> in the frame.'),fr);
+ const fr=$('div','frame'),cv=$('canvas');cv.width=520;cv.height=600;fr.appendChild(cv);Rt.append($('p','hint','<b>Draw yourself</b> in the frame. / <b>Нарисуй себя</b> в рамке.'),fr);
  const ctx=cv.getContext('2d');let col='#2b2b2b',drawing=false,pen=6;
  function guide(){ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);ctx.strokeStyle='#d6dde0';ctx.lineWidth=4;ctx.beginPath();ctx.ellipse(260,250,120,150,0,0,Math.PI*2);ctx.stroke();
   ctx.beginPath();ctx.moveTo(60,600);ctx.quadraticCurveTo(80,450,210,420);ctx.moveTo(310,420);ctx.quadraticCurveTo(440,450,460,600);ctx.stroke()}
@@ -275,7 +275,7 @@ function aboutMe(body){
   reset(){nm.value='';st.forEach(r=>{r.v=null;paint(r)});fb.textContent='';fb.className='fb';model.hidden=true;guide()}}}
 
 /* =================== LESSON ONE =================== */
-sec('Lesson One','1','Write.',b=>{
+sec('Lesson One','1','Write. / Напиши.',b=>{
  wbox(b,['Tim','brown','long','short','Rosy','green','curly','Billy'],['Rosy']);
  const G=Gaps(),E=['green','brown'];let rE,tE;
  const P=(n,pic,lines)=>{const p=$('div','person'),t=$('div');p.innerHTML=img(pic);p.prepend($('span','pn',n));
@@ -283,27 +283,27 @@ sec('Lesson One','1','Write.',b=>{
  P('1','p1',[["Her name's <b class=\"exw\">Rosy</b>."],["She's got ",G.add(['long'],{label:"Rosy's hair"})," hair."],["She's got ",rE=G.add(E,{label:"Rosy's eyes",show:'green',ok:v=>E.includes(v)&&N(tE.value)!==v})," eyes."]]);
  P('2','p2',[["His name's ",G.add(['Tim'],{label:"boy 2 name"}),"."],["He's Rosy's cousin."],["He's got ",G.add(['short'],{label:"Tim's hair"})," hair."],["He's got ",tE=G.add(E,{label:"Tim's eyes",show:'brown',ok:v=>E.includes(v)&&N(rE.value)!==v})," eyes."]]);
  P('3','p3',[["His name's ",G.add(['Billy'],{label:"boy 3 name"}),"."],["He's Rosy's brother."],["He's got ",G.add(['curly'],{label:"Billy's hair"})," hair."]]);
- b.insertAdjacentHTML('beforeend','<p class="hint">Tip: tap a word in the box to cross it out when you use it.</p>');
+ b.insertAdjacentHTML('beforeend','<p class="hint">Tip: tap a word in the box to cross it out when you use it. / Подсказка: нажми на слово в рамке, чтобы зачеркнуть его, когда используешь.</p>');
  return G.eng(b.appendChild($('p','fb')))});
-sec('Lesson One','2','Find and circle the family words.',b=>{
+sec('Lesson One','2','Find and circle the family words. / Найди и обведи слова о семье.',b=>{
  const box=wbox(b,['mum','dad','brother','cousin','grandma','grandpa'],['brother']);
- b.insertAdjacentHTML('beforeend','<p class="hint">Tap the <b>first</b> letter of a word, then its <b>last</b> letter. <i>brother</i> is done for you.</p>');
+ b.insertAdjacentHTML('beforeend','<p class="hint">Tap the <b>first</b> letter of a word, then its <b>last</b> letter. <i>brother</i> is done for you. / Нажми на <b>первую</b> букву слова, потом на <b>последнюю</b>. Слово <i>brother</i> уже найдено.</p>');
  return finder(b,{rows:['brothercousingrandmamumgrandpadad'],words:['brother','cousin','grandma','mum','grandpa','dad'],ex:'brother',snake:true,box})});
 
 /* =================== LESSON TWO =================== */
-sec('Lesson Two','1','Write your name. Circle the correct word and write. Then draw yourself.',b=>{
- b.insertAdjacentHTML('beforeend','<p class="hint">Tap a word to circle it — it goes into the sentence. This exercise is about <b>you</b>, so it is not scored.</p>');return aboutMe(b)});
-sec('Lesson Two','2','Order the words. Match.',b=>{
- b.innerHTML='<div class="strip"><figure>'+img('fa')+'<figcaption>a</figcaption></figure><figure>'+img('fb')+'<figcaption>b</figcaption></figure><figure>'+img('fc')+'<figcaption>c</figcaption></figure></div><p class="hint">Tap the words in order (the full stop goes last). Tap a placed word to take it back. Then choose the picture.</p>';
+sec('Lesson Two','1','Write your name. Circle the correct word and write. Then draw yourself. / Напиши своё имя. Обведи правильное слово и напиши его. Потом нарисуй себя.',b=>{
+ b.insertAdjacentHTML('beforeend','<p class="hint">Tap a word to circle it — it goes into the sentence. This exercise is about <b>you</b>, so it is not scored. / Нажми на слово, чтобы обвести его, — оно появится в предложении. Это упражнение о <b>тебе</b>, поэтому баллы за него не ставятся.</p>');return aboutMe(b)});
+sec('Lesson Two','2','Order the words. Match. / Расставь слова по порядку. Соедини.',b=>{
+ b.innerHTML='<div class="strip"><figure>'+img('fa')+'<figcaption>a</figcaption></figure><figure>'+img('fb')+'<figcaption>b</figcaption></figure><figure>'+img('fc')+'<figcaption>c</figcaption></figure></div><p class="hint">Tap the words in order (the full stop goes last). Tap a placed word to take it back. Then choose the picture. / Нажимай на слова по порядку (точка — в конце). Чтобы убрать слово, нажми на него ещё раз. Потом выбери картинку.</p>';
  return orderWho(b,[{n:1,w:["Rosy's",'This','.','mum','is'],ex:"This is Rosy's mum.",p:'c'},
   {n:2,w:['dad','is','This',"Rosy's",'.'],a:["This is Rosy's dad ."],p:'b'},
   {n:3,w:['.','cousin','Tim','is',"Rosy's"],a:["Tim is Rosy's cousin .","Rosy's cousin is Tim ."],p:'a'}])});
 
 /* =================== LESSON THREE =================== */
-sec('Lesson Three','1','Match.',b=>{
- b.insertAdjacentHTML('beforeend','<p class="hint">Tap a question on the left, then its answer on the right. Number 1 is done for you.</p>');
+sec('Lesson Three','1','Match. / Соедини.',b=>{
+ b.insertAdjacentHTML('beforeend','<p class="hint">Tap a question on the left, then its answer on the right. Number 1 is done for you. / Нажми на вопрос слева, потом на ответ справа. Номер 1 уже сделан.</p>');
  return match(b,{L:['Hello.','How are you?',"What's your name?",'How old are you?','Goodbye.'],R:["I'm seven.",'Hi.','Bye.',"I'm fine, thank you.","My name's Jasmin."],key:[1,3,4,0,2],ex:0})});
-sec('Lesson Three','2','Write.',b=>{
+sec('Lesson Three','2','Write. / Напиши.',b=>{
  wbox(b,['Her','His',"He's","She's"],['Her']);
  const G=Gaps(),sc=$('div','scenes');b.appendChild(sc);
  const c1=$('div'),c2=$('div');sc.append(c1,c2);
@@ -311,17 +311,17 @@ sec('Lesson Three','2','Write.',b=>{
  const b2=$('div','bub');b2.append("This is my friend. ",G.add(['His'],{label:'gap 2'})," name's Sam. ",G.add(["He's","He is"],{label:'gap 3'})," nine.");
  c1.appendChild(b1);c1.insertAdjacentHTML('beforeend',img('s1'));c2.appendChild(b2);c2.insertAdjacentHTML('beforeend',img('s2'));
  return G.eng(b.appendChild($('p','fb')))});
-sec('Lesson Three','3','Find and circle the days of the week. Write.',b=>{
+sec('Lesson Three','3','Find and circle the days of the week. Write. / Найди и обведи дни недели. Напиши.',b=>{
  const D=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
  return both(b,[d=>{const box=wbox(d,D,['Tuesday']);
-   d.insertAdjacentHTML('beforeend','<p class="hint">Words go across → or down ↓. Tap the first letter, then the last letter. <i>Tuesday</i> is done for you.</p>');
+   d.insertAdjacentHTML('beforeend','<p class="hint">Words go across → or down ↓. Tap the first letter, then the last letter. <i>Tuesday</i> is done for you. / Слова идут слева направо → или сверху вниз ↓. Нажми на первую букву, потом на последнюю. Слово <i>Tuesday</i> уже найдено.</p>');
    return finder(d,{rows:['TSaturdayS','h********u','u*Tuesdayn','r*Friday*d','s********a','dWednesday','a*********','y***Monday'],words:D,ex:'Tuesday',box})},
   d=>{const G=Gaps(),today=()=>D[new Date().getDay()],p=$('div','today');
    p.append('Today is ',G.add(D,{label:'today',show:today,ok:v=>v===N(today())}),'.');d.appendChild(p);
    return G.eng(d.appendChild($('p','fb')))}])});
 
 /* =================== LESSON FOUR =================== */
-sec('Lesson Four','1','Count and write.',b=>{
+sec('Lesson Four','1','Count and write. / Посчитай и напиши.',b=>{
  wbox(b,['There is','There are'],[]);b.insertAdjacentHTML('beforeend',img('shop','pic shop'));
  const G=Gaps(),g=$('div','cnt');b.appendChild(g);
  const one=['There is one','There is a',"There's one","There's a"];
@@ -330,7 +330,7 @@ sec('Lesson Four','1','Count and write.',b=>{
   if(a)d.append(G.add(a,{cls:'ph',label:'sentence '+n}),' '+w+'.');else d.innerHTML='<b class="exw">There are two</b> '+w+'.';
   q.appendChild(d);g.appendChild(q)});
  return G.eng(b.appendChild($('p','fb')))});
-sec('Lesson Four','2','Write the missing words and numbers.',b=>{
+sec('Lesson Four','2','Write the missing words and numbers. / Напиши пропущенные слова и числа.',b=>{
  const G=Gaps(),g=$('div','balls');b.appendChild(g);
  [{n:'11',w:'eleven'},{n:'12',ex:'twelve'},{a:'13',w:'thirteen'},{n:'14',a:'fourteen'},{a:'15',w:'fifteen'},{n:'16',a:'sixteen'},{a:'17',w:'seventeen'},{n:'18',a:'eighteen'},{a:'19',w:'nineteen'},{n:'20',a:'twenty'}].forEach((x,i)=>{
   const d=$('div','bl'),ball=$('div','ball k'+(i%5));d.append($('span','bn',String(i+1)),ball);
