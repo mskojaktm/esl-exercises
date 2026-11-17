@@ -16,6 +16,7 @@ h1{font-size:1.5rem;text-align:center;margin:4px 0}.sub{text-align:center;color:
 button{font:inherit;padding:8px 14px;border-radius:8px;border:2px solid #334155;background:#fff;color:#1f2937;cursor:pointer}button:hover{background:#e2e8f0}
 button:disabled{opacity:.5;cursor:not-allowed;background:#fff}
 .hc{display:inline-block;min-width:1.5em;margin-left:6px;padding:0 6px;border-radius:999px;background:#2563eb;color:#fff;font-weight:700;font-size:.9em}button:disabled .hc{background:#94a3b8}
+#lives{margin-top:10px;font-size:20px;letter-spacing:2px;min-height:1.4em}#lives .lt{font-size:15px;font-weight:700;color:#475569;letter-spacing:0;margin-right:6px}#lives .off{filter:grayscale(1);opacity:.35}
 #msg{margin-top:10px;font-weight:700;min-height:1.4em;max-width:380px}
 .pics{flex:1;min-width:300px;max-width:600px;display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px}
 .pc{background:#fff;border:2px solid #cbd5e1;border-radius:12px;padding:6px;text-align:center;cursor:pointer;position:relative}
@@ -29,7 +30,7 @@ button:disabled{opacity:.5;cursor:not-allowed;background:#fff}
 <div class="wrap">
 <div><div id="gw"><div id="ws"></div><div id="ov"></div></div>
 <div class="btns"><button id="hint"></button><button id="rst">Start again</button></div>
-<div id="msg"></div></div>
+<div id="lives"></div><div id="msg"></div></div>
 <div class="pics" id="pics"></div>
 </div>
 <script>
@@ -40,14 +41,15 @@ const cellEl={};
 for(let r=0;r<N;r++)for(let c=0;c<N;c++){const d=document.createElement('div');d.className='c';d.textContent=G[r][c];d.dataset.r=r;d.dataset.c=c;ws.appendChild(d);cellEl[r+','+c]=d}
 const key=a=>a.map(x=>x[0]+','+x[1]).sort().join('|');
 W.forEach(w=>w.k=key(w.cells));
-const found=new Set(),hinted={};let sel=null,start=null,drag=false,last=null,hintsUsed=0;
-const HMAX=Math.floor(W.reduce((s,w)=>s+w.w.length,0)*0.2);
+const found=new Set(),hinted={};let sel=null,start=null,drag=false,last=null,hintsUsed=0,miss=0,over=false;const TMAX=10;
+const lv=document.getElementById('lives');function lvUpd(){let h='<span class="lt">Tries:</span>';for(let k=0;k<TMAX;k++)h+='<span'+(k<TMAX-miss?'':' class="off"')+'>❤️</span>';lv.innerHTML=h}lvUpd();
+const HMAX=5;
 function hbUpd(){const l=HMAX-hintsUsed;hb.innerHTML='💡 Hint<span class="hc">'+l+'</span>';hb.disabled=l<=0}hbUpd();
 // picture cards (shuffled order so they don't follow the grid)
 const order=W.map((_,i)=>i);for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
 order.forEach(i=>{const el=document.createElement('div');el.className='pc';el.id='pc'+i;
  el.innerHTML=`<span class="tk">✓</span>${SV[i]}<span class="wd"></span>`;
- el.onclick=()=>{if(found.has(i))return;sel=sel===i?null:i;document.querySelectorAll('.pc.on').forEach(x=>x.classList.remove('on'));if(sel!==null)el.classList.add('on')};
+ el.onclick=()=>{if(over||found.has(i))return;sel=sel===i?null:i;document.querySelectorAll('.pc.on').forEach(x=>x.classList.remove('on'));if(sel!==null)el.classList.add('on')};
  document.getElementById('pics').appendChild(el)});
 function cellOf(t){const d=t&&t.closest?t.closest('.c'):null;return d?[+d.dataset.r,+d.dataset.c]:null}
 function line(a,b){const out=[];if(a[0]===b[0]){const s=Math.sign(b[1]-a[1]);for(let c=a[1];;c+=s){out.push([a[0],c]);if(c===b[1])break}}
@@ -61,7 +63,9 @@ function finish(a,b){clearSel();const l=line(a,b);
  if(l&&l.length>1&&l[1][0]<l[0][0]){flash(l);msg.textContent='Words go → , ← or ↓ (not up).';return}
  if(!l||l.length<2){flash(l||[a]);msg.textContent='Choose letters in one straight line: → , ← or ↓.';return}
  const k=key(l),i=W.findIndex(w=>w.k===k);
- if(i<0){flash(l);msg.textContent='Not a word from the pictures. Try again!';return}
+ if(i<0){flash(l);miss++;lvUpd();const left=TMAX-miss;
+ if(left<=0){over=true;hb.disabled=true;sel=null;document.querySelectorAll('.pc.on').forEach(x=>x.classList.remove('on'));msg.textContent='No more tries! You found '+found.size+' of '+W.length+' words. Press “Start again” to play again.';return}
+ msg.textContent='Not a word from the pictures. Try again! ('+left+(left===1?' try':' tries')+' left)';return}
  if(found.has(i)){msg.textContent='You already found this word.';return}
  found.add(i);cap(i);const el=document.getElementById('pc'+i);el.classList.add('done');el.classList.remove('on');el.querySelector('.wd').textContent=W[i].w.toUpperCase();
  if(sel===i)sel=null;
@@ -69,20 +73,20 @@ function finish(a,b){clearSel();const l=line(a,b);
  msg.textContent=(found.size===W.length?'🎉 Well done! You found all '+W.length+' words.':'Great! Found '+found.size+' of '+W.length+'.')+h}
 function flash(l){l.forEach(x=>{const e=cellEl[x[0]+','+x[1]];e.classList.add('bad');setTimeout(()=>e.classList.remove('bad'),600)})}
 const same=(a,b)=>a&&b&&a[0]===b[0]&&a[1]===b[1];
-ws.addEventListener('pointerdown',e=>{const c=cellOf(e.target);if(!c)return;e.preventDefault();
+ws.addEventListener('pointerdown',e=>{if(over)return;const c=cellOf(e.target);if(!c)return;e.preventDefault();
  if(start&&!drag&&!same(start,c)){const s=start;start=null;finish(s,c);return}
  start=c;last=c;drag=true;preview(c,c)});
 window.addEventListener('pointermove',e=>{if(!drag)return;const c=cellOf(document.elementFromPoint(e.clientX,e.clientY));if(c){last=c;preview(start,c)}});
 window.addEventListener('pointerup',()=>{if(!drag)return;drag=false;
  if(same(start,last)){clearSel();cellEl[start[0]+','+start[1]].classList.add('start');msg.textContent='Now click the last letter of the word.';return}
  const s=start;start=null;finish(s,last)});
-hb.onclick=()=>{if(hintsUsed>=HMAX){msg.textContent='No hints left.';return}
+hb.onclick=()=>{if(over)return;if(hintsUsed>=HMAX){msg.textContent='No hints left.';return}
  if(sel===null){msg.textContent='Click a picture first, then press Hint.';return}
  const w=W[sel],n=hinted[sel]||0;
  if(n>=w.w.length){msg.textContent='All the letters of this word are already shown.';return}
  const x=w.cells[n];cellEl[x[0]+','+x[1]].classList.add('hint');hinted[sel]=n+1;hintsUsed++;hbUpd();
  msg.textContent='Hint: letter '+(n+1)+' of '+w.w.length+' is marked in blue.'+(hintsUsed>=HMAX?' That was your last hint.':'')};
-document.getElementById('rst').onclick=()=>{found.clear();ov.innerHTML='';start=null;sel=null;clearSel();
+document.getElementById('rst').onclick=()=>{found.clear();miss=0;over=false;lvUpd();hbUpd();ov.innerHTML='';start=null;sel=null;clearSel();
  for(const k in hinted)delete hinted[k];document.querySelectorAll('.c.hint').forEach(x=>x.classList.remove('hint'));
  document.querySelectorAll('.pc').forEach(x=>{x.classList.remove('done','on');x.querySelector('.wd').textContent=''});msg.textContent=''};
 </script></body></html>
