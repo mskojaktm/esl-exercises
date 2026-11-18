@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Letters &amp; Sounds — Darina's Riding School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0D2B35; --saddle:#8B5A2B; --saddle-l:#F3E6D3; --meadow:#3F7D58; --meadow-l:#E3F1E7;
+    --cream:#FBF6EC; --rose:#C8414F; --rose-l:#FBE5E7; --gold:#D9A21B; --gold-l:#FFF4D6;
+    --ok:#2E8B57; --bad:#C8414F; --card:#FFFFFF; --shadow:0 3px 10px rgba(13,43,53,.12);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--navy);font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.45}
+  h1,h2,h3{font-family:"Trebuchet MS",Arial,sans-serif;margin:0}
+  .ipa,.big-letter,.letter-card .l,.sym{font-family:"Andika","Lucida Sans Unicode","Segoe UI",sans-serif}
+  mark{background:var(--gold-l);color:var(--rose);font-weight:700;border-radius:4px;padding:0 2px}
+
+  /* Header + sticky bar */
+  header{background:var(--saddle);color:#fff;padding:18px 20px 14px;text-align:center}
+  header h1{font-size:30px}
+  header .ru{opacity:.9;font-size:17px;margin-top:2px}
+  .bar{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;box-shadow:var(--shadow)}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+  .tab{border:0;border-radius:12px;padding:10px 14px;font-size:18px;font-family:"Trebuchet MS",Arial,sans-serif;font-weight:700;background:#21495a;color:#fff;cursor:pointer}
+  .tab.active{background:var(--gold);color:var(--navy)}
+  .score{font-family:"Trebuchet MS",Arial,sans-serif;font-weight:700;background:#fff;color:var(--navy);border-radius:12px;padding:8px 14px;white-space:nowrap}
+  .score .rosettes{margin-left:6px}
+
+  main{max-width:1000px;margin:0 auto;padding:18px 14px 60px}
+  .panel{display:none}
+  .panel.active{display:block}
+  .voice-note{font-size:15px;background:var(--meadow-l);border-left:5px solid var(--meadow);padding:8px 12px;border-radius:8px;margin-bottom:14px}
+  .voice-note.warn{background:var(--rose-l);border-left-color:var(--rose)}
+
+  section.block{background:var(--card);border-left:6px solid var(--meadow);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin:0 0 20px}
+  .block-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .badge{flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--meadow);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:"Trebuchet MS",Arial,sans-serif;font-size:19px}
+  .block-head h2{font-size:23px}
+  .instr-ru{color:#4b6670;font-size:16px;margin:0 0 12px}
+
+  .btn{border:0;border-radius:12px;padding:10px 16px;font-size:17px;font-weight:700;cursor:pointer;font-family:"Trebuchet MS",Arial,sans-serif;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+  .btn:active{transform:translateY(1px)}
+  .btn-green{background:var(--meadow);color:#fff}
+  .btn-brown{background:var(--saddle);color:#fff}
+  .btn-gold{background:var(--gold);color:var(--navy)}
+  .btn-light{background:#e9eef0;color:var(--navy)}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+
+  /* Alphabet */
+  .detail{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:var(--saddle-l);border-radius:14px;padding:16px;margin-bottom:14px}
+  .big-letter{font-size:96px;line-height:1;font-weight:700;color:var(--meadow);min-width:170px;text-align:center}
+  .big-letter.vowel{color:var(--rose)}
+  .detail .row{margin:4px 0;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .detail .lbl{font-weight:700;min-width:120px}
+  .detail .ipa{font-size:24px}
+  .detail .word{font-size:26px;font-weight:700}
+  .detail .emoji{font-size:44px}
+  .note{background:#fff;border-radius:10px;padding:8px 12px;margin-top:8px;font-size:17px}
+  .note.trap{border:2px solid var(--rose)}
+  .tag{display:inline-block;font-size:14px;font-weight:700;border-radius:20px;padding:2px 10px;margin-right:6px}
+  .tag.v{background:var(--rose-l);color:var(--rose)}
+  .tag.c{background:var(--meadow-l);color:var(--meadow)}
+  .tag.t{background:var(--rose);color:#fff}
+  .speak{border:0;background:var(--gold);color:var(--navy);border-radius:50%;width:44px;height:44px;font-size:22px;cursor:pointer;flex:0 0 auto}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:10px}
+  .letter-card{background:#fff;border:3px solid var(--meadow-l);border-radius:14px;padding:8px 4px;text-align:center;cursor:pointer;box-shadow:var(--shadow);user-select:none}
+  .letter-card .l{font-size:32px;font-weight:700;color:var(--meadow)}
+  .letter-card.vowel{border-color:var(--rose-l)}
+  .letter-card.vowel .l{color:var(--rose)}
+  .letter-card .e{font-size:22px}
+  .letter-card.both{border-color:var(--gold-l)}
+  .both-txt{background:linear-gradient(90deg,var(--rose) 50%,var(--meadow) 50%);-webkit-background-clip:text;background-clip:text;color:transparent !important}
+  .tag.b{background:linear-gradient(90deg,var(--rose-l) 50%,var(--meadow-l) 50%);color:var(--navy)}
+  .letter-card.sel{border-color:var(--gold);background:var(--gold-l)}
+  .letter-card.trap::after{content:"⚠️";font-size:13px;display:block;margin-top:-2px}
+  .legend{font-size:15px;margin:10px 0 0;color:#4b6670}
+
+  /* Sounds */
+  .sgroup{margin-bottom:22px}
+  .sgroup h3{font-size:20px;margin:4px 0 2px}
+  .sgroup .gru{font-size:15px;color:#4b6670;margin-bottom:10px}
+  .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
+  .scard{background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:10px 12px;cursor:pointer;border-top:5px solid var(--meadow);user-select:none}
+  .scard.g2{border-top-color:var(--rose)} .scard.g3{border-top-color:var(--saddle)} .scard.g4{border-top-color:var(--gold)} .scard.g5{border-top-color:#5B7DB1}
+  .scard .top{display:flex;align-items:center;justify-content:space-between}
+  .scard .sym{font-size:34px;font-weight:700}
+  .scard .em{font-size:30px}
+  .scard .w{font-weight:700;font-size:19px}
+  .scard .ipa{font-size:18px}
+  .scard .hint{font-size:14.5px;color:#4b6670;margin-top:4px}
+  .scard.playing{outline:3px solid var(--gold)}
+  .rule{background:var(--gold-l);border-left:6px solid var(--gold);border-radius:10px;padding:12px 14px;margin:6px 0 20px}
+
+  /* Games */
+  .items{display:grid;gap:10px}
+  .item{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;background:#f7faf8;border-radius:12px;padding:10px 12px;border:2px solid transparent}
+  .item.right{border-color:var(--ok);background:#eef8f1}
+  .item.revealed{border-color:var(--gold)}
+  .num{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:6px}
+  .prompt{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;font-size:20px}
+  .prompt .ipa{font-size:28px}
+  .prompt .cap{font-family:"Andika",sans-serif;font-size:40px;font-weight:700;color:var(--meadow)}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{min-width:62px;border:3px solid #cfdad6;background:#fff;border-radius:12px;padding:8px 14px;font-size:24px;cursor:pointer;font-family:"Andika",sans-serif}
+  .opt.wide{font-size:18px;font-family:"Trebuchet MS",Arial,sans-serif;font-weight:700}
+  .opt.emo{font-size:36px;padding:4px 12px}
+  .opt.ok{border-color:var(--ok);background:#dff3e6}
+  .opt.no{border-color:var(--bad);background:var(--rose-l);opacity:.75}
+  .opt:disabled{cursor:default;color:var(--navy);opacity:1}
+  .opt:disabled:not(.ok){opacity:.45}
+  .fb{font-size:16px;margin-top:6px;min-height:0}
+  .fb.good{color:var(--ok);font-weight:700}
+  .fb.try{color:var(--bad);font-weight:700}
+  .gscore{font-weight:700;font-family:"Trebuchet MS",Arial,sans-serif;margin-left:auto;background:var(--meadow-l);color:var(--meadow);border-radius:10px;padding:4px 10px;font-size:16px}
+  .win{display:none;margin-top:10px;background:var(--gold-l);border:2px dashed var(--gold);border-radius:12px;padding:10px;text-align:center;font-weight:700;font-size:19px}
+
+  /* Gallop break */
+  .gallop{text-align:center}
+  .gallop .big{font-family:"Andika",sans-serif;font-size:150px;font-weight:700;color:var(--saddle);line-height:1.1;min-height:170px}
+  .gallop .count{font-size:18px;margin:6px 0 14px}
+  .timer{font-family:"Trebuchet MS",Arial,sans-serif;font-size:28px;font-weight:700;margin-top:10px}
+
+  footer{text-align:center;font-size:14px;color:#6c8590;padding:10px 10px 30px}
+  footer select{font-size:14px;max-width:260px}
+
+  @media (max-width:640px){
+    header h1{font-size:23px}
+    .detail{grid-template-columns:1fr;text-align:center}
+    .detail .row{justify-content:center}
+    .big-letter{font-size:78px}
+    .tab{padding:8px 10px;font-size:16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🐴 Letters &amp; Sounds 🐴</h1>
+  <div class="ru">Darina's Riding School · Буквы и звуки английского</div>
+</header>
+
+<div class="bar">
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-tab="alphabet">🔤 Alphabet</button>
+    <button class="tab" data-tab="sounds">🔊 Sounds</button>
+    <button class="tab" data-tab="games">🎮 Games</button>
+    <button class="tab" data-tab="gallop">🏇 Gallop!</button>
+  </div>
+  <div class="score">⭐ <span id="scoreNow">0</span> / <span id="scoreMax">0</span><span class="rosettes" id="rosettes"></span></div>
+</div>
+
+<main>
+  <div class="voice-note" id="voiceNote">🔊 Checking the voice…</div>
+
+  <!-- ===================== ALPHABET ===================== -->
+  <div class="panel active" id="panel-alphabet">
+    <section class="block">
+      <div class="block-head"><div class="badge">1</div><h2>The Alphabet Stable</h2></div>
+      <p class="instr-ru">Нажми на букву: услышишь её <b>название</b> и слово. Розовые буквы — гласные, зелёные — согласные, Y — и то, и другое. ⚠️ — буква-ловушка!</p>
+
+      <div class="detail" id="detail">
+        <div class="big-letter" id="dBig">Aa</div>
+        <div>
+          <div class="row"><span class="tag" id="dTag">vowel</span></div>
+          <div class="row"><span class="lbl">Name · название</span><span class="ipa" id="dName">/eɪ/</span><button class="speak" id="dNameBtn" title="Listen to the name">🔊</button></div>
+          <div class="row"><span class="lbl">Sound · звук</span><span class="ipa" id="dSound">/æ/</span></div>
+          <div class="row"><span class="emoji" id="dEmoji">🍎</span><span class="word" id="dWord">apple</span><span class="ipa" id="dWordIpa"></span><button class="speak" id="dWordBtn" title="Listen to the word">🔊</button></div>
+          <div class="note" id="dNote"></div>
+          <div class="controls">
+            <button class="btn btn-light" id="prevL">◀ Back</button>
+            <button class="btn btn-light" id="nextL">Next ▶</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" id="letterGrid"></div>
+      <p class="legend">⚠️ = trap letter: looks like a Russian letter or its name is different from its sound.</p>
+      <div class="controls">
+        <button class="btn btn-green" id="playAll">▶ Play the whole alphabet</button>
+        <button class="btn btn-light" id="stopAll">■ Stop</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== SOUNDS ===================== -->
+  <div class="panel" id="panel-sounds">
+    <section class="block">
+      <div class="block-head"><div class="badge">2</div><h2>Sound Symbols (British English)</h2></div>
+      <p class="instr-ru">Это значки транскрипции — так записывают звуки. Нажми на карточку, чтобы услышать слово. Цветная часть транскрипции — это нужный звук.</p>
+      <div class="rule">🤫 <b>The secret of British r.</b> In British English, <b>r</b> is read only before a vowel sound:
+        <b>r</b>ed, <b>r</b>ide, zeb<b>r</b>a ✔ — but ca<b>r</b>, ho<b>r</b>se, bi<b>r</b>d, chai<b>r</b> ✘ (silent r).<br>
+        <span style="font-size:16px">В британском английском буква r читается только перед гласным звуком. В словах car, horse, bird её не слышно!</span></div>
+      <div id="soundGroups"></div>
+    </section>
+  </div>
+
+  <!-- ===================== GAMES ===================== -->
+  <div class="panel" id="panel-games">
+    <div id="gamesWrap"></div>
+    <div class="controls" style="justify-content:center">
+      <button class="btn btn-brown" id="resetAll">↺ Start all games again</button>
+    </div>
+  </div>
+
+  <!-- ===================== GALLOP BREAK ===================== -->
+  <div class="panel" id="panel-gallop">
+    <section class="block gallop">
+      <div class="block-head" style="justify-content:center"><div class="badge">🏇</div><h2>Gallop Break!</h2></div>
+      <p class="instr-ru">Нажми кнопку — появится буква. Быстро скажи её <b>звук</b> и <b>слово</b> на эту букву! Встань и «скачи» на месте, пока думаешь 🐎</p>
+      <div class="big" id="gBig">🐴</div>
+      <div class="count">Letters: <b id="gCount">0</b></div>
+      <div class="controls" style="justify-content:center">
+        <button class="btn btn-gold" id="gNext" style="font-size:22px;padding:14px 26px">🏇 Next letter!</button>
+        <button class="btn btn-light" id="gSay">🔊 Say it again</button>
+        <button class="btn btn-green" id="gTimer">⏱ 60-second gallop</button>
+      </div>
+      <div class="timer" id="gTime"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  Voice / голос: <select id="voiceSel"></select> · Speed:
+  <select id="rateSel"><option value="0.65">slow</option><option value="0.8" selected>normal</option><option value="0.95">fast</option></select>
+</footer>
+
+<script>
+/* ======================= DATA ======================= */
+const LETTERS = [
+ {L:'A',n:'eɪ',s:'æ',w:'[a]pple',i:'ˈ[æ]pl',e:'🍎',v:1,t:0,ru:'Название буквы — «эй», а в слове apple она звучит /æ/: широко открой рот — звук между «а» и «э».'},
+ {L:'B',n:'biː',s:'b',w:'[b]oots',i:'[b]uːts',e:'👢',t:1,ru:'Похожа на русскую В, но это звук /b/ — как «б»!'},
+ {L:'C',n:'siː',s:'k',w:'[c]at',i:'[k]æt',e:'🐱',t:1,ru:'Похожа на русскую С. Название — «си», а в слове cat звучит /k/ — как «к».'},
+ {L:'D',n:'diː',s:'d',w:'[d]og',i:'[d]ɒg',e:'🐶',ru:'Звук /d/ — как «д», только кончик языка на бугорках за верхними зубами.'},
+ {L:'E',n:'iː',s:'e',w:'[e]gg',i:'[e]g',e:'🥚',v:1,ru:'Название — «и:», а в слове egg звучит /e/ — как «э».'},
+ {L:'F',n:'ef',s:'f',w:'[f]ish',i:'[f]ɪʃ',e:'🐟',ru:'Звук /f/ — как «ф».'},
+ {L:'G',n:'dʒiː',s:'g',w:'[g]oat',i:'[g]əʊt',e:'🐐',ru:'Название — «джи», а в слове goat звучит /g/ — как «г».'},
+ {L:'H',n:'eɪtʃ',s:'h',w:'[h]orse',i:'[h]ɔːs',e:'🐴',t:1,ru:'Похожа на русскую Н, но это звук /h/ — просто тёплый выдох, как будто дышишь на стекло. Не «х»!'},
+ {L:'I',n:'aɪ',s:'ɪ',w:'[i]nsect',i:'ˈ[ɪ]nsekt',e:'🐛',v:1,ru:'Название — «ай», а в слове insect звучит /ɪ/ — короткое «и».'},
+ {L:'J',n:'dʒeɪ',s:'dʒ',w:'[j]acket',i:'ˈ[dʒ]ækɪt',e:'🧥',ru:'Звук /dʒ/ — «дж», слитно, как один звук.'},
+ {L:'K',n:'keɪ',s:'k',w:'[k]ey',i:'[k]iː',e:'🔑',ru:'Похожа на русскую К — и звучит так же: /k/.'},
+ {L:'L',n:'el',s:'l',w:'[l]ion',i:'ˈ[l]aɪən',e:'🦁',ru:'Звук /l/ — как «л».'},
+ {L:'M',n:'em',s:'m',w:'[m]oon',i:'[m]uːn',e:'🌙',ru:'Похожа на русскую М — и звучит так же: /m/.'},
+ {L:'N',n:'en',s:'n',w:'[n]ose',i:'[n]əʊz',e:'👃',ru:'Звук /n/ — как «н». Не путай с русской И!'},
+ {L:'O',n:'əʊ',s:'ɒ',w:'[o]range',i:'ˈ[ɒ]rɪndʒ',e:'🍊',v:1,ru:'Название — «оу», а в слове orange звучит /ɒ/ — короткое открытое «о».'},
+ {L:'P',n:'piː',s:'p',w:'[p]ony',i:'ˈ[p]əʊni',e:'🐎',t:1,ru:'Похожа на русскую Р, но это звук /p/ — как «п»!'},
+ {L:'Q',n:'kjuː',s:'kw',w:'[qu]een',i:'[kw]iːn',e:'👑',ru:'Почти всегда стоит вместе с u: qu = /kw/ — «кв».'},
+ {L:'R',n:'ɑː',s:'r',w:'[r]ide',i:'[r]aɪd',e:'🏇',t:1,ru:'Ловушка! Название — /ɑː/ («а-а»), в нём нет звука р. Звук /r/: язык НЕ касается нёба и НЕ дрожит, губы немного округлены.'},
+ {L:'S',n:'es',s:'s',w:'[s]un',i:'[s]ʌn',e:'☀️',ru:'Звук /s/ — как «с».'},
+ {L:'T',n:'tiː',s:'t',w:'[t]en',i:'[t]en',e:'🔟',ru:'Похожа на русскую Т — звук /t/, с лёгким выдохом.'},
+ {L:'U',n:'juː',s:'ʌ',w:'[u]mbrella',i:'[ʌ]mˈbrelə',e:'☂️',v:1,ru:'Название — «ю:», а в слове umbrella звучит /ʌ/ — короткое «а».'},
+ {L:'V',n:'viː',s:'v',w:'[v]an',i:'[v]æn',e:'🚐',ru:'Звук /v/ — как «в». Не путай с W!'},
+ {L:'W',n:'ˈdʌbljuː',s:'w',w:'[w]ater',i:'ˈ[w]ɔːtə',e:'💧',t:1,ru:'Название — «дабл-ю» («две U»). Звук /w/: губы трубочкой, как для «у». Это НЕ «в»!'},
+ {L:'X',n:'eks',s:'ks',w:'fo[x]',i:'fɒ[ks]',e:'🦊',t:1,ru:'Похожа на русскую Х, но звучит /ks/ — «кс». Часто стоит в конце слова: fox, box, six.'},
+ {L:'Y',n:'waɪ',s:'j',w:'[y]ellow',i:'ˈ[j]eləʊ',e:'💛',t:1,v:2,ru:'Похожа на русскую У. Y — особая буква: в начале слова она согласная и звучит /j/, как «й» (yellow, yes). В середине и в конце слова — гласная: my /aɪ/, gym /ɪ/, happy /i/.'},
+ {L:'Z',n:'zed',s:'z',w:'[z]ebra',i:'ˈ[z]ebrə',e:'🦓',ru:'Звук /z/ — как «з». В британском английском буква называется «зед».'}
+];
+
+const SOUND_GROUPS = [
+ {cls:'g1', title:'1. Easy friends', ru:'Похожи на русские звуки — их легко запомнить.', items:[
+  ['p','pen','🖊️','[p]en','как «п»'],['b','bag','🎒','[b]æg','как «б»'],['t','ten','🔟','[t]en','как «т»'],
+  ['d','dog','🐶','[d]ɒg','как «д»'],['k','cat','🐱','[k]æt','как «к»'],['g','goat','🐐','[g]əʊt','как «г»'],
+  ['f','fish','🐟','[f]ɪʃ','как «ф»'],['v','van','🚐','[v]æn','как «в»'],['s','sun','☀️','[s]ʌn','как «с»'],
+  ['z','zebra','🦓','ˈ[z]ebrə','как «з»'],['m','moon','🌙','[m]uːn','как «м»'],['n','nose','👃','[n]əʊz','как «н»'],
+  ['l','lion','🦁','ˈ[l]aɪən','как «л»'],['ʃ','shoe','👟','[ʃ]uː','как «ш», но мягче'],['ʒ','television','📺','ˈtelɪvɪ[ʒ]n','как «ж», но мягче'],
+  ['tʃ','chick','🐥','[tʃ]ɪk','как «ч»'],['dʒ','jacket','🧥','ˈ[dʒ]ækɪt','«дж» слитно']]},
+ {cls:'g2', title:'2. Tricky ones ⚠️', ru:'Выглядят знакомо, но звучат по-другому. Будь внимательна!', items:[
+  ['r','ride','🏇','[r]aɪd','НЕ русское «р»! Язык не дрожит и не касается нёба'],
+  ['h','horse','🐴','[h]ɔːs','НЕ «х»! Просто тёплый выдох'],
+  ['w','water','💧','ˈ[w]ɔːtə','НЕ «в»! Губы трубочкой: «у-а»'],
+  ['j','yellow','💛','ˈ[j]eləʊ','значок j = звук «й», а не «дж»!'],
+  ['e','egg','🥚','[e]g','значок e = «э», а не «е»']]},
+ {cls:'g3', title:'3. New symbols', ru:'Новые значки — таких звуков нет в русском. Учим понемногу.', items:[
+  ['θ','three','3️⃣','[θ]riː','язык между зубами, дуй без голоса'],
+  ['ð','this','👉','[ð]ɪs','язык между зубами, с голосом'],
+  ['ŋ','sing','🎤','sɪ[ŋ]','«н» задней частью языка'],
+  ['æ','apple','🍎','ˈ[æ]pl','широкое «э», рот открыт'],
+  ['ʌ','duck','🦆','d[ʌ]k','короткое «а»'],
+  ['ɒ','fox','🦊','f[ɒ]ks','короткое открытое «о»'],
+  ['ɪ','pig','🐷','p[ɪ]g','короткое «и», ближе к «ы»'],
+  ['ʊ','book','📖','b[ʊ]k','короткое «у», губы спокойные'],
+  ['ə','banana','🍌','b[ə]ˈnɑːn[ə]','очень короткий «ленивый» звук']]},
+ {cls:'g4', title:'4. Long sounds ː', ru:'Две точки ː значат «тяни звук долго»!', items:[
+  ['iː','bee','🐝','b[iː]','долгое «и-и»'],
+  ['ɑː','car','🚗','k[ɑː]','долгое «а-а» — r не читается!'],
+  ['ɔː','horse','🐴','h[ɔː]s','долгое «о-о» — r не читается!'],
+  ['uː','boots','👢','b[uː]ts','долгое «у-у»'],
+  ['ɜː','bird','🐦','b[ɜː]d','между «ё» и «э», долго — r не читается!']]},
+ {cls:'g5', title:'5. Gliding sounds', ru:'Два звука в одном — один плавно переходит в другой.', items:[
+  ['eɪ','cake','🎂','k[eɪ]k','«эй»'],['aɪ','five','5️⃣','f[aɪ]v','«ай»'],['ɔɪ','boy','👦','b[ɔɪ]','«ой»'],
+  ['əʊ','boat','⛵','b[əʊ]t','«эу»'],['aʊ','cow','🐮','k[aʊ]','«ау»'],['ɪə','ear','👂','[ɪə]','«иэ» — r не читается!'],
+  ['eə','chair','🪑','tʃ[eə]','«эа» — r не читается!'],['ʊə','tour','🗺️','t[ʊə]','«уэ» (редкий звук)']]}
+];
+
+/* Games: each item = {say?, prompt(html), opts:[{h,ok}], fb} */
+const shuffle = a => { const b=a.slice(); for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; };
+const L = c => LETTERS.find(x=>x.L===c);
+const mk = (correct, wrongs) => [{h:correct,ok:true}, ...wrongs.map(w=>({h:w,ok:false}))];
+
+const GAMES = [
+ {id:'g1', title:'Listen and click the letter', ru:'Нажми 🔊, послушай название буквы и выбери её.', optCls:'',
+  items:[
+   ['G',['J','Z','D']],['J',['G','A','K']],['E',['I','A','Y']],['I',['E','Y','A']],
+   ['R',['A','O','U']],['H',['A','K','E']],['Y',['W','I','U']],['W',['V','U','Y']]
+  ].map(([c,w])=>({say:c, prompt:'🔊 Listen!', opts:mk(c,w), fb:`It's <b>${c}</b> — /${L(c).n}/`}))},
+ {id:'g2', title:'Find the small letter', ru:'Найди маленькую (строчную) букву для большой. Осторожно: b, d, p, q очень похожи!', optCls:'',
+  items:[
+   ['B','b',['d','p','q']],['D','d',['b','q','p']],['P','p',['q','b','d']],['Q','q',['p','g','d']],
+   ['G','g',['q','j','y']],['N','n',['m','h','u']],['M','m',['n','w','u']],['A','a',['o','e','d']]
+  ].map(([C,c,w])=>({prompt:`<span class="cap">${C}</span>`, opts:mk(c,w), say:null, fb:`<b>${C} – ${c}</b>`, after:C}))},
+ {id:'g3', title:'Read the transcription', ru:'Прочитай транскрипцию и выбери картинку. После ответа слово прозвучит.', optCls:'emo',
+  items:[
+   ['hɔːs','horse','🐴',['🐶','🐱','🐟']],['dɒg','dog','🐶',['🐐','🐴','🦊']],['kæt','cat','🐱',['🦆','🐶','🐷']],
+   ['fɪʃ','fish','🐟',['🦊','🐝','🐮']],['red','red','🔴',['💛','💧','🌙']],['ˈæpl','apple','🍎',['🍊','🍌','🥚']],
+   ['sʌn','sun','☀️',['🌙','🔑','⛵']],['kaʊ','cow','🐮',['🐐','🐴','🦓']]
+  ].map(([ipa,word,em,w])=>({prompt:`<span class="ipa">/${ipa}/</span>`, opts:mk(em,w), sayAfter:word, fb:`/${ipa}/ = <b>${word}</b> ${em}`}))},
+ {id:'g4', title:'Do you hear r?', ru:'Нажми 🔊 и послушай слово. Звук /r/ слышно или r «молчит»? (Британский английский!)', optCls:'wide', fixed:true,
+  items:[
+   ['[r]ed','red',true,'red'],['ho[r]se','hɔːs',false,'horse'],['[r]ide','raɪd',true,'ride'],['ca[r]','kɑː',false,'car'],
+   ['[r]abbit','ˈræbɪt',true,'rabbit'],['bi[r]d','bɜːd',false,'bird'],['zeb[r]a','ˈzebrə',true,'zebra'],['wate[r]','ˈwɔːtə',false,'water']
+  ].map(([sp,ipa,heard,word])=>({say:word, prompt:`🔊 <span class="word" style="font-size:24px;font-weight:700">${sp.replace(/\[(.+?)\]/g,'<mark>$1</mark>')}</span>`,
+     opts:[{h:'🔴 I hear /r/',ok:heard},{h:'🤫 Silent r',ok:!heard}],
+     fb: heard ? `/${ipa}/ — r before a vowel: we say it!` : `/${ipa}/ — no vowel after r: it's silent.`}))},
+ {id:'g5', title:"What's missing?", ru:'Какой буквы не хватает в алфавите?', optCls:'',
+  items:[
+   ['A B _ D','C',['E','G']],['F _ H','G',['J','I']],['K L _','M',['N','J']],
+   ['_ P Q','O',['R','U']],['R S _','T',['U','V']],['X Y _','Z',['W','V']]
+  ].map(([seq,c,w])=>({prompt:`<span class="cap" style="font-size:32px;letter-spacing:4px">${seq.replace('_','<span style="color:var(--rose)">?</span>')}</span>`, opts:mk(c,w), fb:`<b>${seq.replace('_',c)}</b>`, after:c}))}
+];
+
+/* ======================= SPEECH ======================= */
+const synth = window.speechSynthesis || null;
+let voices = [], voice = null, rate = 0.8;
+const voiceNote = document.getElementById('voiceNote'), voiceSel = document.getElementById('voiceSel');
+function isGB(v){ return /en[-_]GB/i.test(v.lang) || /UK|British/i.test(v.name); }
+function loadVoices(){
+  if(!synth){ voiceNote.className='voice-note warn'; voiceNote.innerHTML='⚠️ This browser has no voice. Please use Chrome, Edge or Safari. / В этом браузере нет озвучки.'; return; }
+  voices = synth.getVoices().filter(v=>/^en/i.test(v.lang));
+  if(!voices.length){ voiceNote.className='voice-note warn'; voiceNote.innerHTML='⚠️ No English voice found yet. Try Chrome or Edge. / Английский голос не найден — открой страницу в Chrome или Edge.'; return; }
+  const gb = voices.filter(isGB);
+  const rank = v => (isGB(v)?0:10) + (/Google|Natural|Online|Neural/i.test(v.name)?0:1) + (/female|Serena|Kate|Hazel|Sonia|Libby/i.test(v.name)?0:0.5);
+  voices.sort((a,b)=>rank(a)-rank(b));
+  const saved = (()=>{try{return localStorage.getItem('ls_voice')}catch(e){return null}})();
+  voice = voices.find(v=>v.name===saved) || voices[0];
+  voiceSel.innerHTML = voices.map(v=>`<option ${v===voice?'selected':''}>${v.name}</option>`).join('');
+  showVoice();
+}
+function showVoice(){
+  if(voice && isGB(voice)){ voiceNote.className='voice-note'; voiceNote.innerHTML=`🔊 British voice: <b>${voice.name}</b> ✓`; }
+  else { voiceNote.className='voice-note warn'; voiceNote.innerHTML=`⚠️ No British voice found (using <b>${voice?voice.name:'—'}</b>). The “Do you hear r?” game needs British English — the teacher should read those words aloud. / Британского голоса нет — слова в игре 4 читает учитель.`; }
+}
+if(synth){ loadVoices(); synth.onvoiceschanged = loadVoices; }
+voiceSel.onchange = () => { voice = voices.find(v=>v.name===voiceSel.value)||voice; try{localStorage.setItem('ls_voice',voice.name)}catch(e){} showVoice(); };
+document.getElementById('rateSel').onchange = e => rate = parseFloat(e.target.value);
+
+function speak(text, onend){
+  if(!synth){ if(onend) onend(); return; }
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = voice ? voice.lang : 'en-GB'; if(voice) u.voice = voice; u.rate = rate;
+  if(onend){ u.onend = onend; u.onerror = onend; }
+  synth.speak(u);
+}
+
+/* ======================= TABS ======================= */
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+t.dataset.tab));
+  stopAll(); window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const hl = s => s.replace(/\[(.+?)\]/g,'<mark>$1</mark>');
+
+/* ======================= ALPHABET ======================= */
+let cur = 0;
+const grid = document.getElementById('letterGrid');
+LETTERS.forEach((x,i)=>{
+  const d = document.createElement('div');
+  d.className = 'letter-card'+(x.v===2?' both':x.v?' vowel':'')+(x.t?' trap':'');
+  d.innerHTML = `<div class="l${x.v===2?' both-txt':''}">${x.L}${x.L.toLowerCase()}</div><div class="e">${x.e}</div>`;
+  d.onclick = ()=>{ show(i); speak(x.L); };
+  grid.appendChild(d);
+});
+function show(i){
+  cur = (i+LETTERS.length)%LETTERS.length; const x = LETTERS[cur];
+  const big = document.getElementById('dBig'); big.textContent = x.L + x.L.toLowerCase(); big.className = 'big-letter'+(x.v===2?' both-txt':x.v?' vowel':'');
+  const tag = document.getElementById('dTag');
+  tag.className = 'tag '+(x.v===2?'b':x.v?'v':'c');
+  tag.textContent = x.v===2?'consonant + vowel · и согласная, и гласная':x.v?'vowel · гласная':'consonant · согласная';
+  tag.parentElement.querySelectorAll('.tag.t').forEach(n=>n.remove());
+  if(x.t){ const t=document.createElement('span'); t.className='tag t'; t.textContent='⚠️ trap · ловушка'; tag.after(t); }
+  document.getElementById('dName').textContent = '/'+x.n+'/';
+  document.getElementById('dSound').textContent = '/'+x.s+'/';
+  document.getElementById('dEmoji').textContent = x.e;
+  document.getElementById('dWord').innerHTML = hl(x.w);
+  document.getElementById('dWordIpa').innerHTML = '/'+hl(x.i)+'/';
+  const note = document.getElementById('dNote'); note.textContent = x.ru; note.className = 'note'+(x.t?' trap':'');
+  grid.querySelectorAll('.letter-card').forEach((c,j)=>c.classList.toggle('sel',j===cur));
+}
+const plain = s => s.replace(/[\[\]]/g,'');
+document.getElementById('dNameBtn').onclick = ()=>speak(LETTERS[cur].L);
+document.getElementById('dWordBtn').onclick = ()=>speak(plain(LETTERS[cur].w));
+document.getElementById('prevL').onclick = ()=>{ show(cur-1); speak(LETTERS[cur].L); };
+document.getElementById('nextL').onclick = ()=>{ show(cur+1); speak(LETTERS[cur].L); };
+let playing = false;
+function playFrom(i){
+  if(!playing || i>=LETTERS.length){ playing=false; return; }
+  show(i); speak(LETTERS[i].L, ()=>setTimeout(()=>playFrom(i+1), 250));
+}
+document.getElementById('playAll').onclick = ()=>{ playing=true; playFrom(0); };
+function stopAll(){ playing=false; if(synth) synth.cancel(); }
+document.getElementById('stopAll').onclick = stopAll;
+show(0);
+
+/* ======================= SOUNDS ======================= */
+const sg = document.getElementById('soundGroups');
+SOUND_GROUPS.forEach(g=>{
+  const box = document.createElement('div'); box.className='sgroup';
+  box.innerHTML = `<h3>${g.title}</h3><div class="gru">${g.ru}</div>`;
+  const gr = document.createElement('div'); gr.className='sgrid';
+  g.items.forEach(([sym,word,em,ipa,hint])=>{
+    const c = document.createElement('div'); c.className='scard '+g.cls;
+    c.innerHTML = `<div class="top"><span class="sym">/${sym}/</span><span class="em">${em}</span></div>
+      <div class="w">${word} 🔊</div><div class="ipa">/${hl(ipa)}/</div><div class="hint">${hint}</div>`;
+    c.onclick = ()=>{ document.querySelectorAll('.scard.playing').forEach(n=>n.classList.remove('playing')); c.classList.add('playing'); speak(word); };
+    gr.appendChild(c);
+  });
+  box.appendChild(gr); sg.appendChild(box);
+});
+
+/* ======================= GAMES ======================= */
+const state = {};   // gameId -> array of {done, first(bool|null)}
+const wrap = document.getElementById('gamesWrap');
+let maxScore = 0;
+GAMES.forEach((g,gi)=>{
+  maxScore += g.items.length;
+  const sec = document.createElement('section'); sec.className='block'; sec.id='game-'+g.id;
+  sec.innerHTML = `<div class="block-head"><div class="badge">${gi+1}</div><h2>${g.title}</h2><span class="gscore" id="gs-${g.id}">0 / ${g.items.length}</span></div>
+    <p class="instr-ru">${g.ru}</p><div class="items" id="items-${g.id}"></div>
+    <div class="win" id="win-${g.id}">🏆 Rosette! Well done, Darina! · Отлично!</div>
+    <div class="controls"><button class="btn btn-gold" data-show="${g.id}">👀 Show answers</button><button class="btn btn-light" data-reset="${g.id}">↺ Reset</button></div>`;
+  wrap.appendChild(sec);
+  renderGame(g);
+});
+document.getElementById('scoreMax').textContent = maxScore;
+
+function renderGame(g){
+  state[g.id] = g.items.map(()=>({done:false, first:null}));
+  const box = document.getElementById('items-'+g.id); box.innerHTML='';
+  document.getElementById('win-'+g.id).style.display='none';
+  g.items.forEach((it,k)=>{
+    const row = document.createElement('div'); row.className='item';
+    const sayBtn = it.say ? `<button class="speak" data-say="${it.say}">🔊</button>` : '';
+    const promptHtml = it.say ? it.prompt.replace(/^🔊\s*/,'') : it.prompt;
+    row.innerHTML = `<div class="num">${k+1}</div><div><div class="prompt">${sayBtn}${promptHtml}</div><div class="opts"></div><div class="fb"></div></div>`;
+    const opts = row.querySelector('.opts');
+    (g.fixed ? it.opts : shuffle(it.opts)).forEach(o=>{
+      const b = document.createElement('button'); b.className='opt '+(g.optCls||''); b.innerHTML=o.h; b.dataset.ok = o.ok?'1':'0';
+      b.onclick = ()=>answer(g,k,row,b);
+      opts.appendChild(b);
+    });
+    const sb = row.querySelector('[data-say]'); if(sb) sb.onclick = ()=>speak(sb.dataset.say);
+    box.appendChild(row);
+  });
+  updateScore(g);
+}
+function answer(g,k,row,b){
+  const st = state[g.id][k]; if(st.done) return;
+  const it = g.items[k], fb = row.querySelector('.fb');
+  if(b.dataset.ok==='1'){
+    if(st.first===null) st.first = true;
+    st.done = true; b.classList.add('ok'); row.classList.add('right');
+    row.querySelectorAll('.opt').forEach(o=>o.disabled=true);
+    fb.className='fb good'; fb.innerHTML = '✓ '+(st.first?'Great! ':'Yes! ')+it.fb;
+    if(it.sayAfter) speak(it.sayAfter); else if(it.after) speak(it.after);
+  } else {
+    if(st.first===null) st.first = false;
+    b.classList.add('no'); b.disabled = true;
+    fb.className='fb try'; fb.textContent='✗ Try again! · Попробуй ещё раз!';
+  }
+  updateScore(g);
+}
+function updateScore(g){
+  const s = state[g.id]; const got = s.filter(x=>x.first===true).length;
+  document.getElementById('gs-'+g.id).textContent = `${got} / ${g.items.length}`;
+  const allDone = s.every(x=>x.done);
+  document.getElementById('win-'+g.id).style.display = (allDone && s.every(x=>x.first!==null)) ? 'block':'none';
+  let total = 0; GAMES.forEach(gg=>{ if(state[gg.id]) total += state[gg.id].filter(x=>x.first===true).length; });
+  document.getElementById('scoreNow').textContent = total;
+  const ros = Math.floor(total/10); document.getElementById('rosettes').textContent = ros ? ' '+'🏅'.repeat(ros) : '';
+}
+wrap.addEventListener('click', e=>{
+  const s = e.target.closest('[data-show]'), r = e.target.closest('[data-reset]');
+  if(s){
+    const g = GAMES.find(x=>x.id===s.dataset.show);
+    document.querySelectorAll(`#items-${g.id} .item`).forEach((row,k)=>{
+      const st = state[g.id][k]; if(st.done) return;
+      st.done = true; row.classList.add('revealed');
+      row.querySelectorAll('.opt').forEach(o=>{ o.disabled=true; if(o.dataset.ok==='1') o.classList.add('ok'); });
+      const fb=row.querySelector('.fb'); fb.className='fb'; fb.innerHTML='👀 '+g.items[k].fb;
+    });
+    updateScore(g);
+  }
+  if(r){ renderGame(GAMES.find(x=>x.id===r.dataset.reset)); }
+});
+document.getElementById('resetAll').onclick = ()=>GAMES.forEach(renderGame);
+
+/* ======================= GALLOP BREAK ======================= */
+let gCount = 0, gLast = null, gTimerId = null;
+const gBig = document.getElementById('gBig');
+document.getElementById('gNext').onclick = ()=>{
+  let x; do { x = LETTERS[Math.floor(Math.random()*LETTERS.length)]; } while(x===gLast);
+  gLast = x; gBig.textContent = x.L + x.L.toLowerCase(); gBig.style.color = x.v===1 ? 'var(--rose)' : 'var(--saddle)';
+  document.getElementById('gCount').textContent = ++gCount; speak(x.L);
+};
+document.getElementById('gSay').onclick = ()=>{ if(gLast) speak(gLast.L); };
+document.getElementById('gTimer').onclick = ()=>{
+  clearInterval(gTimerId); let t = 60; const el = document.getElementById('gTime');
+  gCount = 0; document.getElementById('gCount').textContent = 0; el.textContent = '⏱ '+t;
+  gTimerId = setInterval(()=>{ t--; el.textContent = t>0 ? '⏱ '+t : `🏁 Time! ${gCount} letters!`; if(t<=0) clearInterval(gTimerId); },1000);
+};
+</script>
+</body>
+</html>
