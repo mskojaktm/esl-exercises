@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destiny or Choice? — Proverb Challenge</title>
+<style>
+  :root{
+    --teal:#028090; --teal-l:#e3f3f5; --navy:#0D2B35; --muted:#5b6f77;
+    --fate:#6a4c93; --choice:#028090; --chance:#d98a1c; --accept:#8a5a44;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4f7f8;color:var(--navy);font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.45}
+  header{background:var(--navy);color:#fff;padding:22px 20px 18px;text-align:center}
+  header h1{font-family:"Trebuchet MS",Arial,sans-serif;margin:0 0 4px;font-size:1.7rem}
+  header p{margin:0;opacity:.85}
+  main{max-width:1100px;margin:0 auto;padding:18px 16px 40px}
+  .task{background:#fff;border-left:5px solid var(--teal);border-radius:8px;box-shadow:0 2px 8px rgba(13,43,53,.08);padding:14px 18px;margin-bottom:14px}
+  .task h2{font-family:"Trebuchet MS",Arial,sans-serif;font-size:1.1rem;margin:0 0 6px}
+  .task ol{margin:0;padding-left:22px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font-size:.9rem}
+  .controls{position:sticky;top:0;z-index:5;background:#f4f7f8;padding:10px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .controls button{font:inherit;font-size:.95rem;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;background:var(--navy);color:#fff}
+  .controls button.alt{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+  .controls .count{margin-left:auto;font-size:.95rem;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+  .card{background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(13,43,53,.09);padding:14px 16px;display:flex;flex-direction:column;gap:8px;border-top:4px solid #cfdde1;transition:border-color .2s}
+  .card.done{border-top-color:var(--teal)}
+  .num{font-family:"Trebuchet MS",Arial,sans-serif;font-size:.8rem;font-weight:bold;background:var(--teal);color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+  .ru{display:flex;gap:10px;align-items:flex-start;font-size:1.12rem;font-weight:bold}
+  .btns{display:flex;gap:8px}
+  .btns button{flex:1;font:inherit;font-size:.9rem;border-radius:6px;padding:7px 8px;cursor:pointer;border:1.5px dashed var(--teal);background:var(--teal-l);color:var(--navy)}
+  .btns button.open{border-style:solid;background:#fff;color:var(--muted)}
+  .reveal{display:none;border-radius:6px;padding:8px 10px;font-size:.98rem}
+  .reveal.show{display:block;animation:fade .25s ease}
+  .lit{background:#f2f4f5;font-style:italic;color:#34474f}
+  .eq{background:var(--teal-l)}
+  .eq b{font-size:1.05rem}
+  .note{display:block;margin-top:4px;font-size:.88rem;color:var(--muted)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .tag{font-size:.75rem;font-weight:bold;text-transform:uppercase;letter-spacing:.03em;border-radius:20px;padding:2px 9px;color:#fff}
+  .t-fate{background:var(--fate)} .t-choice{background:var(--choice)} .t-chance{background:var(--chance)} .t-acceptance{background:var(--accept)}
+  .m{background:#fff;border:1.5px solid #9fb3ba;color:#34474f}
+  @keyframes fade{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+  @media (max-width:520px){header h1{font-size:1.35rem}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Destiny or Choice? — Proverb Challenge</h1>
+  <p>Russian proverbs &amp; sayings about fate, choice, chance and acceptance</p>
+</header>
+<main>
+  <section class="task">
+    <h2>Your task</h2>
+    <ol>
+      <li>Translate the proverb <b>literally</b> into English. Then check with <i>Literally</i>.</li>
+      <li>Think of an <b>English equivalent</b>, or explain the meaning in English. Then check with <i>English equivalent</i>.</li>
+      <li>Decide: is it about <b>fate</b>, <b>choice</b>, <b>chance</b> or <b>acceptance</b>?</li>
+      <li>Pick one proverb you agree with and one you disagree with. Explain why with an example from your life.</li>
+    </ol>
+    <div class="legend">
+      <span class="tag t-fate">Fate</span><span class="tag t-choice">Choice</span><span class="tag t-chance">Chance</span><span class="tag t-acceptance">Acceptance</span>
+      <span class="tag m">Exact match</span><span class="tag m">Close match</span><span class="tag m">No direct equivalent</span>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button id="shuffle">Shuffle</button>
+    <button class="alt" id="showLit">Show all literal</button>
+    <button class="alt" id="showAll">Show all answers</button>
+    <button class="alt" id="hideAll">Hide all</button>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</main>
+
+<script>
+const DATA = [
+ {ru:"Чему быть, того не миновать.", lit:"What is to be cannot be avoided.", en:"What will be, will be.", note:"Also: Whatever will be, will be.", cat:"fate", m:"Exact match"},
+ {ru:"На Бога надейся, а сам не плошай.", lit:"Trust in God, but don't slip up yourself.", en:"God helps those who help themselves.", note:"Also: Trust in God and keep your powder dry.", cat:"choice", m:"Exact match"},
+ {ru:"Не было бы счастья, да несчастье помогло.", lit:"There would have been no happiness, but misfortune helped.", en:"It was a blessing in disguise.", note:"Bad luck that turned into something good.", cat:"chance", m:"Close match"},
+ {ru:"Судьбу конём не объедешь.", lit:"You can't ride around fate on a horse.", en:"You can't escape your fate.", note:"Also: There's no escaping destiny.", cat:"fate", m:"Close match"},
+ {ru:"Кто не рискует, тот не пьёт шампанского.", lit:"He who doesn't take risks doesn't drink champagne.", en:"Nothing ventured, nothing gained.", note:"", cat:"choice", m:"Exact match"},
+ {ru:"После драки кулаками не машут.", lit:"You don't wave your fists after the fight.", en:"It's no use crying over spilt milk.", note:"Also: That ship has sailed.", cat:"acceptance", m:"Close match"},
+ {ru:"Человек предполагает, а Бог располагает.", lit:"Man supposes, but God disposes.", en:"Man proposes, God disposes.", note:"", cat:"fate", m:"Exact match"},
+ {ru:"Дуракам везёт.", lit:"Fools are lucky.", en:"Fortune favours fools.", note:"Close in meaning: beginner's luck.", cat:"chance", m:"Exact match"},
+ {ru:"Каждый сам кузнец своего счастья.", lit:"Everyone is the blacksmith of their own happiness.", en:"Every man is the architect of his own fortune.", note:"Modern version: You make your own luck.", cat:"choice", m:"Exact match"},
+ {ru:"Всё, что ни делается, — к лучшему.", lit:"Whatever is done is for the better.", en:"Everything happens for a reason.", note:"Also: It's all for the best.", cat:"fate", m:"Close match"},
+ {ru:"Знал бы, где упасть, соломки бы подстелил.", lit:"If I had known where I would fall, I would have spread some straw.", en:"Hindsight is 20/20.", note:"Notice the grammar: it's a third conditional!", cat:"chance", m:"Close match"},
+ {ru:"Плетью обуха не перешибёшь.", lit:"You can't break the back of an axe with a whip.", en:"You can't fight City Hall.", note:"You can't beat a much stronger system.", cat:"acceptance", m:"Close match"},
+ {ru:"Смелость города берёт.", lit:"Courage takes cities.", en:"Fortune favours the brave.", note:"Also: Fortune favours the bold.", cat:"choice", m:"Close match"},
+ {ru:"Кому суждено быть повешенным, тот не утонет.", lit:"He who is destined to be hanged will not drown.", en:"He who is born to be hanged will never be drowned.", note:"Old-fashioned, often used jokingly.", cat:"fate", m:"Exact match"},
+ {ru:"Бабушка надвое сказала.", lit:"Grandma said it two ways.", en:"That remains to be seen.", note:"Also: It could go either way.", cat:"chance", m:"Close match"},
+ {ru:"Без труда не выловишь и рыбку из пруда.", lit:"Without effort you can't even pull a fish out of a pond.", en:"No pain, no gain.", note:"Also: Nothing worth having comes easy.", cat:"choice", m:"Close match"},
+ {ru:"Видно, не судьба.", lit:"Evidently, it's not fate.", en:"It wasn't meant to be.", note:"", cat:"fate", m:"Exact match"},
+ {ru:"Выше головы не прыгнешь.", lit:"You can't jump higher than your head.", en:"You can only do so much.", note:"Also: Know your limits.", cat:"acceptance", m:"Close match"},
+ {ru:"Что посеешь, то и пожнёшь.", lit:"What you sow, you will reap.", en:"You reap what you sow.", note:"Also: As you sow, so shall you reap.", cat:"choice", m:"Exact match"},
+ {ru:"Не родись красивой, а родись счастливой.", lit:"Don't be born beautiful, be born lucky.", en:"Better to be born lucky than rich.", note:"", cat:"chance", m:"Close match"},
+ {ru:"Жребий брошен.", lit:"The lot has been cast.", en:"The die is cast.", note:"Julius Caesar; a point of no return.", cat:"choice", m:"Exact match"},
+ {ru:"От судьбы не уйдёшь.", lit:"You won't walk away from fate.", en:"No one can escape their destiny.", note:"", cat:"fate", m:"Close match"},
+ {ru:"Семь раз отмерь, один раз отрежь.", lit:"Measure seven times, cut once.", en:"Measure twice, cut once.", note:"Also: Look before you leap.", cat:"choice", m:"Exact match"},
+ {ru:"Вилами по воде писано.", lit:"It's written on water with a pitchfork.", en:"It's anyone's guess.", note:"Also: It's far from certain.", cat:"chance", m:"Close match"},
+ {ru:"Под лежачий камень вода не течёт.", lit:"Water doesn't flow under a lying stone.", en:"Nothing comes to a sleeper but a dream.", note:"No exact match. Meaning: if you do nothing, nothing will change.", cat:"choice", m:"No direct equivalent"},
+ {ru:"Нет худа без добра.", lit:"There is no bad without good.", en:"Every cloud has a silver lining.", note:"", cat:"chance", m:"Exact match"},
+ {ru:"Двум смертям не бывать, а одной не миновать.", lit:"Two deaths can't happen, but one can't be avoided.", en:"You only die once.", note:"Said before taking a big risk: “What have I got to lose?”", cat:"fate", m:"Close match"},
+ {ru:"Утро вечера мудренее.", lit:"The morning is wiser than the evening.", en:"Sleep on it.", note:"Don't make big decisions when you're tired.", cat:"choice", m:"Close match"},
+ {ru:"Пан или пропал.", lit:"Either a lord or lost.", en:"It's sink or swim.", note:"Also: all or nothing, make or break.", cat:"choice", m:"Close match"},
+ {ru:"На всё воля Божья.", lit:"Everything is God's will.", en:"It's in God's hands.", note:"Also: God willing.", cat:"fate", m:"Close match"},
+ {ru:"Глаза боятся, а руки делают.", lit:"The eyes are afraid, but the hands do the work.", en:"Feel the fear and do it anyway.", note:"No exact match. Meaning: a task looks scary until you start.", cat:"choice", m:"No direct equivalent"},
+ {ru:"Не боги горшки обжигают.", lit:"It isn't gods who fire the pots.", en:"You don't have to be a genius to do it.", note:"No exact match. Meaning: ordinary people can do great things.", cat:"choice", m:"No direct equivalent"},
+ {ru:"Попытка не пытка.", lit:"An attempt is not torture.", en:"There's no harm in trying.", note:"Also: It doesn't hurt to try.", cat:"choice", m:"Exact match"},
+ {ru:"Что имеем — не храним, потерявши — плачем.", lit:"What we have we don't keep; once we lose it, we cry.", en:"You don't know what you've got till it's gone.", note:"", cat:"acceptance", m:"Close match"},
+ {ru:"Терпение и труд всё перетрут.", lit:"Patience and work will grind through everything.", en:"Little strokes fell great oaks.", note:"Also: Slow and steady wins the race.", cat:"choice", m:"Close match"}
+];
+
+const LABEL = {fate:"Fate", choice:"Choice", chance:"Chance", acceptance:"Acceptance"};
+const grid = document.getElementById('grid');
+let order = DATA.map((_,i)=>i);
+
+function render(){
+  grid.innerHTML = '';
+  order.forEach((idx,n)=>{
+    const d = DATA[idx];
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="ru"><span class="num">${n+1}</span><span>${d.ru}</span></div>
+      <div class="btns">
+        <button data-t="lit">Literally</button>
+        <button data-t="eq">English equivalent</button>
+      </div>
+      <div class="reveal lit">“${d.lit}”</div>
+      <div class="reveal eq"><b>${d.en}</b>${d.note?`<span class="note">${d.note}</span>`:''}
+        <div class="tags"><span class="tag t-${d.cat}">${LABEL[d.cat]}</span><span class="tag m">${d.m}</span></div>
+      </div>`;
+    card.querySelectorAll('.btns button').forEach(b=>{
+      b.addEventListener('click',()=>{
+        const box = card.querySelector('.reveal.'+b.dataset.t);
+        const on = box.classList.toggle('show');
+        b.classList.toggle('open',on);
+        update();
+      });
+    });
+    grid.appendChild(card);
+  });
+  update();
+}
+function update(){
+  let done = 0;
+  grid.querySelectorAll('.card').forEach(c=>{
+    const opened = c.querySelector('.reveal.eq').classList.contains('show');
+    c.classList.toggle('done',opened);
+    if(opened) done++;
+  });
+  document.getElementById('count').textContent = `Revealed: ${done} / ${DATA.length}`;
+}
+function setAll(type,on){
+  grid.querySelectorAll('.card').forEach(c=>{
+    c.querySelectorAll('.reveal').forEach(r=>{
+      const t = r.classList.contains('lit')?'lit':'eq';
+      if(type==='all' || type===t){
+        r.classList.toggle('show',on);
+        c.querySelector(`button[data-t="${t}"]`).classList.toggle('open',on);
+      }
+    });
+  });
+  update();
+}
+document.getElementById('shuffle').onclick=()=>{
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  render();
+};
+document.getElementById('showLit').onclick=()=>setAll('lit',true);
+document.getElementById('showAll').onclick=()=>setAll('all',true);
+document.getElementById('hideAll').onclick=()=>setAll('all',false);
+render();
+</script>
+</body>
+</html>
