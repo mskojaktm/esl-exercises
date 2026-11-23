@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESL Listening Worksheet: 4 Kinds of Regret (Daniel H. Pink)</title>
+<style>
+  :root {
+    --primary: #1e3a5f;
+    --primary-light: #2d568a;
+    --accent: #d9534f;
+    --accent-soft: #fdf2f2;
+    --bg: #f4f6f9;
+    --card-bg: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #d1d5db;
+    --success: #15803d;
+    --success-bg: #dcfce7;
+    --error: #b91c1c;
+    --error-bg: #fee2e2;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  header .tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  header h1 {
+    margin: 0 0 8px 0;
+    font-size: 1.7rem;
+    line-height: 1.25;
+  }
+
+  header p {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.92;
+  }
+
+  .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.88rem;
+  }
+
+  .meta-bar a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .student-info {
+    background: var(--card-bg);
+    padding: 16px 24px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .student-info label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--primary);
+  }
+
+  .student-info input {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 0.95rem;
+    min-width: 220px;
+  }
+
+  .video-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #000;
+    margin-top: 12px;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .video-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .task-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 2px solid #eef2f6;
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+  }
+
+  .task-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--primary);
+  }
+
+  .task-badge {
+    background: #e0e7ff;
+    color: #1e40af;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .instructions {
+    background: #f8fafc;
+    border-left: 4px solid var(--primary);
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    font-size: 0.94rem;
+    color: #334155;
+  }
+
+  /* Task 1 Styles */
+  .question-item {
+    margin-bottom: 18px;
+    padding: 14px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+
+  .question-item p.q-title {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+  }
+
+  .options label {
+    display: block;
+    padding: 6px 10px;
+    margin-bottom: 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .options label:hover {
+    background: #eef2f6;
+  }
+
+  .options input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  .tf-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .tf-row:last-child {
+    border-bottom: none;
+  }
+
+  .tf-statement {
+    flex: 1;
+    min-width: 260px;
+  }
+
+  .tf-controls {
+    display: flex;
+    gap: 12px;
+  }
+
+  /* Task 2 Styles */
+  .grammar-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 0.92rem;
+  }
+
+  .grammar-box strong {
+    color: #92400e;
+  }
+
+  .gap-item {
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fcfcfd;
+  }
+
+  .gap-meta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .gap-sentence {
+    font-size: 1.02rem;
+    line-height: 1.9;
+  }
+
+  .gap-input {
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    background: #eef2ff;
+    padding: 3px 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #111827;
+    border-radius: 4px 4px 0 0;
+    min-width: 190px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .gap-input:focus {
+    outline: none;
+    background: #e0e7ff;
+    border-bottom-color: var(--accent);
+  }
+
+  .gap-input.correct {
+    background: var(--success-bg);
+    border-bottom-color: var(--success);
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .gap-input.incorrect {
+    background: var(--error-bg);
+    border-bottom-color: var(--error);
+    color: var(--error);
+  }
+
+  .answer-hint {
+    display: none;
+    margin-top: 6px;
+    font-size: 0.88rem;
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  /* Task 3 Styles */
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .category-box {
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 18px 20px;
+    background: #ffffff;
+    border-left: 5px solid var(--primary);
+  }
+
+  .category-box.cat-1 { border-left-color: #2563eb; }
+  .category-box.cat-2 { border-left-color: #d97706; }
+  .category-box.cat-3 { border-left-color: #059669; }
+  .category-box.cat-4 { border-left-color: #7c3aed; }
+
+  .category-box h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.08rem;
+    color: #111827;
+  }
+
+  .category-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .category-box label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #374151;
+  }
+
+  .category-box textarea {
+    width: 100%;
+    min-height: 76px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    margin-bottom: 10px;
+  }
+
+  .category-box textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+  }
+
+  /* Buttons & Feedback */
+  .btn-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background 0.15s, transform 0.05s;
+  }
+
+  button:active {
+    transform: translateY(1px);
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-light);
+  }
+
+  .btn-secondary {
+    background: #e5e7eb;
+    color: #1f2937;
+  }
+
+  .btn-secondary:hover {
+    background: #d1d5db;
+  }
+
+  .btn-outline {
+    background: #fff;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+  }
+
+  .btn-outline:hover {
+    background: #f0f4f8;
+  }
+
+  .feedback-banner {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .feedback-banner.good {
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid #86efac;
+  }
+
+  .feedback-banner.warn {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fcd34d;
+  }
+
+  .feedback-msg {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  .feedback-msg.ok { color: var(--success); }
+  .feedback-msg.err { color: var(--error); }
+
+  .sample-toggle {
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 0.9rem;
+    display: none;
+  }
+
+  @media print {
+    body {
+      background: #fff;
+      padding: 0;
+    }
+    .video-card, .btn-bar {
+      display: none !important;
+    }
+    .task-card {
+      box-shadow: none;
+      border: 1px solid #999;
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="tag">ESL Listening &amp; Grammar Worksheet • B1+ / B2</div>
+    <h1>4 Kinds of Regret — and What They Teach You About Yourself</h1>
+    <p>Speaker: Daniel H. Pink (TED Talk)</p>
+    <div class="meta-bar">
+      <span><strong>Focus:</strong> Listening Comprehension, Wishes &amp; Regrets (<em>I wish / If only + Past Perfect</em>), Creative Writing</span>
+      <span>•</span>
+      <a href="https://www.youtube.com/watch?v=cenxg8j-Rc0" target="_blank" rel="noopener">Open Video on YouTube ↗</a>
+    </div>
+  </header>
+
+  <div class="student-info">
+    <div>
+      <label for="studentName">Student Name:</label>
+      <input type="text" id="studentName" placeholder="Enter your full name">
+    </div>
+    <div>
+      <label for="lessonDate">Date:</label>
+      <input type="date" id="lessonDate">
+    </div>
+  </div>
+
+  <!-- VIDEO EMBED -->
+  <div class="video-card">
+    <strong>Watch &amp; Listen (Focus especially on 00:00 – 07:35 for the core talk, plus 09:55 – 17:45 for the guest story):</strong>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/cenxg8j-Rc0" title="4 Kinds of Regret – and What They Teach You about Yourself | Daniel H. Pink | TED" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="video-note">If the embedded player is blocked on your network, click <strong>"Open Video on YouTube"</strong> in the header above.</div>
+  </div>
+
+  <!-- TASK 1 -->
+  <section class="task-card" id="task1">
+    <div class="task-header">
+      <h2>Task 1: Understanding the Context &amp; Key Ideas</h2>
+      <span class="task-badge">Listening Comprehension</span>
+    </div>
+    <div class="instructions">
+      Listen to Daniel H. Pink's talk and answer the questions below to check your general understanding of his research and main message.
+    </div>
+
+    <!-- Part A: Multiple Choice -->
+    <div class="question-item" id="q1-block">
+      <p class="q-title">1. According to 50 years of social science research, which group of people does NOT experience regret?</p>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a"> People who are naturally optimistic and confident</label>
+        <label><input type="radio" name="q1" value="b"> Five-year-olds, people with brain damage, and sociopaths</label>
+        <label><input type="radio" name="q1" value="c"> Older adults who have already achieved their life goals</label>
+      </div>
+      <div class="feedback-msg" id="fb-q1"></div>
+    </div>
+
+    <div class="question-item" id="q2-block">
+      <p class="q-title">2. How did Daniel Pink gather data for his global database of regrets?</p>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> He collected about 16,000 regrets from people across 105 countries.</label>
+        <label><input type="radio" name="q2" value="b"> He interviewed 50 psychologists from around the world.</label>
+        <label><input type="radio" name="q2" value="c"> He analyzed historical diaries from the last century.</label>
+      </div>
+      <div class="feedback-msg" id="fb-q2"></div>
+    </div>
+
+    <div class="question-item" id="q3-block">
+      <p class="q-title">3. Why does Daniel Pink describe the four core regrets as a "photographic negative of the good life"?</p>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> Because dwelling on past mistakes ruins our present happiness.</label>
+        <label><input type="radio" name="q3" value="b"> Because what people regret the most reveals what they value and need the most.</label>
+        <label><input type="radio" name="q3" value="c"> Because regret proves that most people make poor life choices.</label>
+      </div>
+      <div class="feedback-msg" id="fb-q3"></div>
+    </div>
+
+    <!-- Part B: True / False -->
+    <p style="font-weight: 600; margin: 20px 0 10px 0;">Decide whether each statement is True or False based on the talk:</p>
+    <div style="border: 1px solid #e5e7eb; border-radius: 8px; background: #fafafa;">
+      <div class="tf-row" id="q4-block">
+        <div class="tf-statement">4. People from different countries tend to have completely different kinds of core regrets.</div>
+        <div class="tf-controls">
+          <label><input type="radio" name="q4" value="true"> True</label>
+          <label><input type="radio" name="q4" value="false"> False</label>
+        </div>
+        <div class="feedback-msg" id="fb-q4" style="width: 100%;"></div>
+      </div>
+
+      <div class="tf-row" id="q5-block">
+        <div class="tf-statement">5. Overwhelmingly, people regret taking a risk that failed more than not taking the chance at all.</div>
+        <div class="tf-controls">
+          <label><input type="radio" name="q5" value="true"> True</label>
+          <label><input type="radio" name="q5" value="false"> False</label>
+        </div>
+        <div class="feedback-msg" id="fb-q5" style="width: 100%;"></div>
+      </div>
+
+      <div class="tf-row" id="q6-block">
+        <div class="tf-statement">6. Most connection regrets happen because relationships drift apart quietly, and people feel awkward reaching out.</div>
+        <div class="tf-controls">
+          <label><input type="radio" name="q6" value="true"> True</label>
+          <label><input type="radio" name="q6" value="false"> False</label>
+        </div>
+        <div class="feedback-msg" id="fb-q6" style="width: 100%;"></div>
+      </div>
+    </div>
+
+    <div class="btn-bar">
+      <button type="button" class="btn-primary" onclick="checkTask1()">Check Task 1 Answers</button>
+      <button type="button" class="btn-secondary" onclick="resetTask1()">Reset Task 1</button>
+    </div>
+    <div class="feedback-banner" id="task1-summary"></div>
+  </section>
+
+  <!-- TASK 2 -->
+  <section class="task-card" id="task2">
+    <div class="task-header">
+      <h2>Task 2: Listening for Exact Words — <em>I wish</em> &amp; <em>If only</em></h2>
+      <span class="task-badge">Intensive Listening &amp; Grammar</span>
+    </div>
+    <div class="instructions">
+      Listen carefully to the exact sentences spoken in the video. Complete each gap with the exact missing words using <strong>I wish</strong> or <strong>If only</strong> (including contractions like <em>I'd</em> where spoken). You can see the beginning and the end of each sentence.
+    </div>
+
+    <div class="grammar-box">
+      <strong>Grammar Reminder:</strong> To express a regret about a past action or situation that cannot be changed, English uses:<br>
+      <code>I wish / If only + Subject + Past Perfect (had / 'd + past participle)</code>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-meta">1. Foundation Regrets — Catchphrase (02:35)</div>
+      <div class="gap-sentence">
+        "So Foundation regrets sound like this: <input type="text" class="gap-input" id="gap1" data-answers="if only i'd done|if only i had done" placeholder="type missing words"> the work."
+      </div>
+      <div class="answer-hint" id="hint1">Answer: <strong>If only I'd done</strong> (or <em>If only I had done</em>)</div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-meta">2. Boldness Regrets — Speaking Up (03:08)</div>
+      <div class="gap-sentence">
+        "People who said, 'Ah, I always like, <input type="text" class="gap-input" id="gap2" data-answers="i wish i had spoken|i wish i'd spoken" placeholder="type missing words"> up more.'"
+      </div>
+      <div class="answer-hint" id="hint2">Answer: <strong>I wish I had spoken</strong> (or <em>I wish I'd spoken</em>)</div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-meta">3. Boldness Regrets — Asserting Oneself (03:10)</div>
+      <div class="gap-sentence">
+        "<input type="text" class="gap-input" id="gap3" data-answers="i wish i'd said|i wish i had said" placeholder="type missing words"> something and asserted myself."
+      </div>
+      <div class="answer-hint" id="hint3">Answer: <strong>I wish I'd said</strong> (or <em>I wish I had said</em>)</div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-meta">4. Boldness Regrets — Catchphrase (03:37)</div>
+      <div class="gap-sentence">
+        "Boldness regrets sound like this: <input type="text" class="gap-input" id="gap4" data-answers="if only i'd taken|if only i had taken" placeholder="type missing words"> the chance."
+      </div>
+      <div class="answer-hint" id="hint4">Answer: <strong>If only I'd taken</strong> (or <em>If only I had taken</em>)</div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-meta">5. Moral Regrets — Catchphrase (04:36)</div>
+      <div class="gap-sentence">
+        "Moral regrets sound like this: <input type="text" class="gap-input" id="gap5" data-answers="if only i'd done|if only i had done" placeholder="type missing words"> the right thing."
+      </div>
+      <div class="answer-hint" id="hint5">Answer: <strong>If only I'd done</strong> (or <em>If only I had done</em>)</div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-meta">6. Connection Regrets — Catchphrase (05:29)</div>
+      <div class="gap-sentence">
+        "So that's what connection regrets are: <input type="text" class="gap-input" id="gap6" data-answers="if only i'd reached|if only i had reached" placeholder="type missing words"> out."
+      </div>
+      <div class="answer-hint" id="hint6">Answer: <strong>If only I'd reached</strong> (or <em>If only I had reached</em>)</div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-meta">7. Guest Story (Lily) — Building Confidence (11:19)</div>
+      <div class="gap-sentence">
+        "And I think that, you know, my regret is that <input type="text" class="gap-input" id="gap7" data-answers="i just really wish that i had taken|i just really wish i had taken|i really wish that i had taken|i really wish i had taken" placeholder="type missing words" style="min-width: 270px;"> a little bit more effort to build my confidence..."
+      </div>
+      <div class="answer-hint" id="hint7">Answer: <strong>I just really wish that I had taken</strong></div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-meta">8. Summary of Lily's Regret (17:23)</div>
+      <div class="gap-sentence">
+        "So Lily has this regret. She's looking backwards saying, 'Ah, <input type="text" class="gap-input" id="gap8" data-answers="if only i'd spoken|if only i had spoken" placeholder="type missing words"> up.'"
+      </div>
+      <div class="answer-hint" id="hint8">Answer: <strong>if only I'd spoken</strong> (or <em>if only I had spoken</em>)</div>
+    </div>
+
+    <div class="btn-bar">
+      <button type="button" class="btn-primary" onclick="checkTask2()">Check Task 2 Answers</button>
+      <button type="button" class="btn-outline" onclick="toggleTask2Hints()">Show / Hide Answer Key</button>
+      <button type="button" class="btn-secondary" onclick="resetTask2()">Reset Task 2</button>
+    </div>
+    <div class="feedback-banner" id="task2-summary"></div>
+  </section>
+
+  <!-- TASK 3 -->
+  <section class="task-card" id="task3">
+    <div class="task-header">
+      <h2>Task 3: Generate Your Own Examples by Category</h2>
+      <span class="task-badge">Written Production</span>
+    </div>
+    <div class="instructions">
+      Using Daniel Pink's classification of the four core regrets, generate your own original examples (from your own life, from people you know, or realistic fictional scenarios). For each category, describe the situation briefly and write <strong>1–2 sentences using <em>I wish</em> or <em>If only</em></strong>.
+    </div>
+
+    <div class="category-grid">
+      <!-- Category 1 -->
+      <div class="category-box cat-1">
+        <h3>1. Foundation Regrets (Stability: Health, Education, Finances)</h3>
+        <div class="category-desc">
+          Small choices made early on that fail to build a stable platform for life (e.g., not saving money, neglecting health, not studying hard enough).
+        </div>
+        <label for="write1">Your Situation &amp; Sentences (use <em>I wish</em> / <em>If only</em>):</label>
+        <textarea id="write1" placeholder="Example: In university, I spent all my part-time salary on gadgets instead of saving. If only I had put aside a small amount every month, I would have a deposit for an apartment now."></textarea>
+      </div>
+
+      <!-- Category 2 -->
+      <div class="category-box cat-2">
+        <h3>2. Boldness Regrets (Taking Chances &amp; Speaking Up)</h3>
+        <div class="category-desc">
+          Moments at a crossroads where you played it safe instead of taking a risk, starting something new, or speaking your mind.
+        </div>
+        <label for="write2">Your Situation &amp; Sentences (use <em>I wish</em> / <em>If only</em>):</label>
+        <textarea id="write2" placeholder="Write your situation and regret sentence(s) here..."></textarea>
+      </div>
+
+      <!-- Category 3 -->
+      <div class="category-box cat-3">
+        <h3>3. Moral Regrets (Doing the Right Thing)</h3>
+        <div class="category-desc">
+          Situations where you faced a choice between right and wrong, chose the wrong path, and still feel bothered by that moral breach.
+        </div>
+        <label for="write3">Your Situation &amp; Sentences (use <em>I wish</em> / <em>If only</em>):</label>
+        <textarea id="write3" placeholder="Write your situation and regret sentence(s) here..."></textarea>
+      </div>
+
+      <!-- Category 4 -->
+      <div class="category-box cat-4">
+        <h3>4. Connection Regrets (Relationships &amp; Reaching Out)</h3>
+        <div class="category-desc">
+          Relationships with family, friends, or colleagues that drifted apart over time because you hesitated to reach out.
+        </div>
+        <label for="write4">Your Situation &amp; Sentences (use <em>I wish</em> / <em>If only</em>):</label>
+        <textarea id="write4" placeholder="Write your situation and regret sentence(s) here..."></textarea>
+      </div>
+    </div>
+
+    <div class="btn-bar">
+      <button type="button" class="btn-primary" onclick="checkTask3()">Check Written Structure</button>
+      <button type="button" class="btn-outline" onclick="toggleSampleModels()">Show / Hide Model Examples</button>
+      <button type="button" class="btn-outline" onclick="downloadSubmission()">Download My Completed Work (.txt)</button>
+      <button type="button" class="btn-secondary" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <div class="feedback-banner" id="task3-summary"></div>
+
+    <div class="sample-toggle" id="sample-models">
+      <strong>Model Examples for Reference:</strong>
+      <ul style="margin: 8px 0 0 18px; padding: 0;">
+        <li><strong>Foundation:</strong> "I ignored minor back pain for years while working at a desk. <em>I wish I had started</em> exercising regularly in my twenties."</li>
+        <li><strong>Boldness:</strong> "A few years ago, I was offered a job transfer to another country, but I turned it down out of fear. <em>If only I'd taken</em> the chance to live abroad."</li>
+        <li><strong>Moral:</strong> "When a classmate was unfairly blamed for a mistake I made, I stayed silent. <em>I wish I'd admitted</em> the truth at the time."</li>
+        <li><strong>Connection:</strong> "My closest childhood friend and I stopped calling each other after moving to different cities. <em>If only I had reached out</em> when I first thought of her."</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Set today's date by default
+  document.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('lessonDate');
+    if (dateInput && !dateInput.value) {
+      dateInput.value = new Date().toISOString().split('T')[0];
+    }
+  });
+
+  // Task 1 Logic
+  const task1Answers = {
+    q1: 'b',
+    q2: 'a',
+    q3: 'b',
+    q4: 'false',
+    q5: 'false',
+    q6: 'true'
+  };
+
+  const task1Explanations = {
+    q1: "Correct: Pink states that only 5-year-olds, people with brain damage, and sociopaths have no regrets.",
+    q2: "Correct: He collected roughly 16,000 regrets from people in 105 countries.",
+    q3: "Correct: Understanding what we regret most shows what we value and need most in a good life.",
+    q4: "False — Pink found very little national difference; people worldwide express the exact same four core regrets.",
+    q5: "False — People overwhelmingly regret NOT taking the chance rather than taking a risk that didn't work out.",
+    q6: "True — Most relationships drift apart gradually, and people wrongly assume reaching out will be awkward."
+  };
+
+  function checkTask1() {
+    let score = 0;
+    const total = Object.keys(task1Answers).length;
+
+    for (const [qName, correctVal] of Object.entries(task1Answers)) {
+      const selected = document.querySelector(`input[name="${qName}"]:checked`);
+      const fb = document.getElementById(`fb-${qName}`);
+
+      if (!selected) {
+        fb.textContent = "Please select an option.";
+        fb.className = "feedback-msg err";
+        continue;
+      }
+
+      if (selected.value === correctVal) {
+        score++;
+        fb.textContent = "✓ " + task1Explanations[qName];
+        fb.className = "feedback-msg ok";
+      } else {
+        fb.textContent = "✗ Incorrect. " + task1Explanations[qName];
+        fb.className = "feedback-msg err";
+      }
+    }
+
+    const banner = document.getElementById('task1-summary');
+    banner.style.display = 'block';
+    if (score === total) {
+      banner.className = 'feedback-banner good';
+      banner.textContent = `Excellent work! You scored ${score} / ${total} on Task 1.`;
+    } else {
+      banner.className = 'feedback-banner warn';
+      banner.textContent = `You scored ${score} / ${total} on Task 1. Review the explanations above and try again.`;
+    }
+  }
+
+  function resetTask1() {
+    for (const qName of Object.keys(task1Answers)) {
+      document.querySelectorAll(`input[name="${qName}"]`).forEach(el => el.checked = false);
+      const fb = document.getElementById(`fb-${qName}`);
+      fb.textContent = "";
+    }
+    const banner = document.getElementById('task1-summary');
+    banner.style.display = 'none';
+  }
+
+  // Task 2 Logic
+  function normalizeText(str) {
+    return str
+      .toLowerCase()
+      .replace(/[’‘]/g, "'")
+      .replace(/[.,!?;:"()]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function checkTask2() {
+    let score = 0;
+    const total = 8;
+
+    for (let i = 1; i <= total; i++) {
+      const input = document.getElementById(`gap${i}`);
+      const hint = document.getElementById(`hint${i}`);
+      const userVal = normalizeText(input.value);
+      const accepted = input.dataset.answers.split('|').map(normalizeText);
+
+      input.classList.remove('correct', 'incorrect');
+
+      if (accepted.includes(userVal)) {
+        score++;
+        input.classList.add('correct');
+        hint.style.display = 'none';
+      } else {
+        input.classList.add('incorrect');
+        hint.style.display = 'block';
+      }
+    }
+
+    const banner = document.getElementById('task2-summary');
+    banner.style.display = 'block';
+    if (score === total) {
+      banner.className = 'feedback-banner good';
+      banner.textContent = `Perfect! You got ${score} / ${total} exact phrases right.`;
+    } else {
+      banner.className = 'feedback-banner warn';
+      banner.textContent = `You got ${score} / ${total}. Check the highlighted boxes and compare with the exact wording from the video.`;
+    }
+  }
+
+  let hintsVisible = false;
+  function toggleTask2Hints() {
+    hintsVisible = !hintsVisible;
+    for (let i = 1; i <= 8; i++) {
+      document.getElementById(`hint${i}`).style.display = hintsVisible ? 'block' : 'none';
+    }
+  }
+
+  function resetTask2() {
+    for (let i = 1; i <= 8; i++) {
+      const input = document.getElementById(`gap${i}`);
+      input.value = '';
+      input.classList.remove('correct', 'incorrect');
+      document.getElementById(`hint${i}`).style.display = 'none';
+    }
+    hintsVisible = false;
+    document.getElementById('task2-summary').style.display = 'none';
+  }
+
+  // Task 3 Logic
+  function checkTask3() {
+    const categories = [
+      { id: 'write1', name: '1. Foundation Regrets' },
+      { id: 'write2', name: '2. Boldness Regrets' },
+      { id: 'write3', name: '3. Moral Regrets' },
+      { id: 'write4', name: '4. Connection Regrets' }
+    ];
+
+    let completed = 0;
+    let hasTargetGrammar = 0;
+    const notes = [];
+
+    categories.forEach(cat => {
+      const text = document.getElementById(cat.id).value.trim();
+      if (text.length >= 15) {
+        completed++;
+        if (/ (i wish|if only) /i.test(text)) {
+          hasTargetGrammar++;
+        } else {
+          notes.push(`${cat.name}: Remember to include "I wish" or "If only".`);
+        }
+      } else {
+        notes.push(`${cat.name}: Please write a complete example.`);
+      }
+    });
+
+    const banner = document.getElementById('task3-summary');
+    banner.style.display = 'block';
+
+    if (completed === 4 && hasTargetGrammar === 4) {
+      banner.className = 'feedback-banner good';
+      banner.textContent = 'Great job! All 4 categories are complete and include target "I wish / If only" structures. You can now download or print your work.';
+    } else {
+      banner.className = 'feedback-banner warn';
+      banner.innerHTML = `Completed: ${completed}/4 categories (${hasTargetGrammar}/4 using "I wish" or "If only").<br>` + notes.join('<br>');
+    }
+  }
+
+  function toggleSampleModels() {
+    const box = document.getElementById('sample-models');
+    box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+  }
+
+  function downloadSubmission() {
+    const name = document.getElementById('studentName').value.trim() || 'Student';
+    const date = document.getElementById('lessonDate').value || '';
+
+    let output = `ESL LISTENING WORKSHEET: 4 KINDS OF REGRET (DANIEL H. PINK)
+`;
+    output += `Student: ${name} | Date: ${date}
+`;
+    output += `Video: https://www.youtube.com/watch?v=cenxg8j-Rc0
+`;
+    output += `====================================================================
+
+`;
+
+    output += `TASK 1: CONTEXT & COMPREHENSION
+`;
+    for (let i = 1; i <= 6; i++) {
+      const sel = document.querySelector(`input[name="q${i}"]:checked`);
+      output += `Q${i}: ${sel ? sel.value.toUpperCase() : '(unanswered)'}
+`;
+    }
+
+    output += `
+TASK 2: I WISH / IF ONLY GAP-FILL
+`;
+    for (let i = 1; i <= 8; i++) {
+      const val = document.getElementById(`gap${i}`).value.trim() || '(blank)';
+      output += `${i}. ${val}
+`;
+    }
+
+    output += `
+TASK 3: ORIGINAL EXAMPLES BY CATEGORY
+`;
+    const titles = [
+      '1. Foundation Regrets',
+      '2. Boldness Regrets',
+      '3. Moral Regrets',
+      '4. Connection Regrets'
+    ];
+    for (let i = 1; i <= 4; i++) {
+      const txt = document.getElementById(`write${i}`).value.trim() || '(no response)';
+      output += `
+${titles[i-1]}:
+${txt}
+`;
+    }
+
+    const blob = new Blob([output], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Regret_Listening_Task_${name.replace(/\s+/g, '_')}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+</script>
+
+</body>
+</html>
