@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>I wish and If only: in-class practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--t:#028090;--n:#0D2B35;--bg:#F1F7F8;--ok:#1B8A5A;--no:#C0392B;--ln:#CFE0E3;--y:#FFF4D6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--n);font:17px/1.55 Calibri,Carlito,"Segoe UI",Arial,sans-serif}
+h1,h2{font-family:"Trebuchet MS",Tahoma,sans-serif;margin:0;line-height:1.2}
+header{background:var(--n);color:#fff;padding:28px 20px 22px}
+header>div,main{max-width:860px;margin:0 auto}
+header h1{font-size:30px}header p{margin:8px 0 0;color:#BFE3E8}
+.bar{position:sticky;top:0;z-index:5;background:var(--t);color:#fff;box-shadow:0 2px 8px rgba(13,43,53,.25)}
+.bar>div{max-width:860px;margin:0 auto;padding:8px 20px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.sc{font-weight:700;font-size:18px}
+.pg{flex:1;min-width:90px;height:8px;background:rgba(255,255,255,.3);border-radius:4px;overflow:hidden}
+.pg i{display:block;height:100%;width:0;background:#fff;transition:width .3s}
+button,select{font:inherit;color:var(--n)}
+button{cursor:pointer}
+.bar button{background:#fff;border:0;border-radius:6px;padding:6px 12px;font-weight:700}
+.bar button:hover{background:#DFF3F6}
+main{padding:0 20px 40px}
+section{background:#fff;border-left:6px solid var(--t);border-radius:8px;box-shadow:0 2px 10px rgba(13,43,53,.1);padding:18px 20px;margin:22px 0}
+section h2{font-size:21px;display:flex;gap:10px;align-items:center}
+.b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--t);color:#fff;display:grid;place-items:center;font-size:16px}
+.hint{margin:6px 0 14px;color:#41636B}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{border:1px solid var(--ln);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--n);color:#fff}
+td:first-child{background:var(--bg)}
+.note{margin:12px 0 0;padding:10px 14px;background:#E8F5F7;border-radius:8px}
+.cl{line-height:2.3;margin:0 0 10px}.g{white-space:nowrap}
+.g input{font:inherit;color:var(--n);border:0;border-bottom:2px solid var(--t);background:var(--y);padding:1px 6px;margin:0 3px;border-radius:3px 3px 0 0}
+.g small{color:#5C7C84;margin-right:3px}
+select{border:2px solid var(--ln);border-radius:6px;padding:2px 6px;background:var(--y);max-width:100%}
+.ok{border-color:var(--ok)!important;background:#DDF4E8!important}
+.no{border-color:var(--no)!important;background:#FBE2DE!important}
+.shown{border-color:#999!important;background:#EEE!important;color:#444}
+.q{margin:0 0 10px;padding:6px 10px;border-radius:8px;border:2px solid transparent}
+.q p{margin:0}
+.q label,.cards label{display:block;cursor:pointer}
+.fb{min-height:1.2em;font-size:15px;color:#41636B}
+.chips span{display:inline-block;background:var(--bg);border:2px solid var(--ln);border-radius:8px;padding:3px 11px;margin:0 6px 6px 0}
+.spk{color:var(--t)}
+.pr{background:#E8F5F7;border-radius:8px;padding:14px 16px;font-size:19px;margin:0 0 12px}
+.cards label{margin:0 0 6px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px}
+.tools button{border:2px solid var(--t);background:#fff;border-radius:8px;padding:6px 14px;font-weight:700}
+:focus-visible{outline:3px solid #F2A900;outline-offset:2px}
+@media(max-width:560px){body{font-size:16px}section{padding:14px}main,header{padding-left:12px;padding-right:12px}th,td{padding:5px 6px}}
+@media(prefers-reduced-motion:reduce){.pg i{transition:none}}
+</style>
+</head>
+<body>
+<header><div><h1>I wish and If only: in-class practice</h1><p>A rules recap, five checked exercises and two speaking tasks, including wishes and conditionals together.</p></div></header>
+<div class="bar"><div>
+<span class="sc" id="sc">Score 0 / 0</span><span id="an">Answered 0 / 0</span>
+<div class="pg"><i id="pg"></i></div>
+<button type="button" id="ck">Check Answers</button><button type="button" id="sh">Show Answers</button><button type="button" id="rz">Reset</button>
+</div></div>
+<main>
+
+<section><h2><span class="b">1</span>Recap: which form for which meaning?</h2>
+<p class="hint">Keep this table open while you work.</p>
+<table>
+<tr><th>Meaning</th><th>Form</th><th>Example</th></tr>
+<tr><td>A present situation you want to be different</td><td>wish + Past Simple / Past Continuous</td><td>I wish I lived by the sea. She wishes it weren’t raining.</td></tr>
+<tr><td>A regret about the past</td><td>wish + Past Perfect</td><td>I wish I had saved more money.</td></tr>
+<tr><td>Annoyance at someone else’s habit, or at something that keeps happening</td><td>wish + would + infinitive</td><td>I wish the lift would work.</td></tr>
+<tr><td>A formal request or desire</td><td>wish + to + infinitive</td><td>I wish to speak to the manager.</td></tr>
+</table>
+<div class="note"><b>If only</b> works like <b>wish</b> but sounds stronger: If only I had a car. = I wish I had a car.<br>
+<b>Compare:</b> I <i>hope</i> it stops raining (it is possible). I <i>wish</i> it would stop raining (it is annoying, and we can’t control it).<br>
+<b>Link to conditionals:</b> If only I had left earlier. = If I had left earlier, I wouldn’t have missed the train.<br>
+<b>Avoid:</b> wish + will · I wish I would (use could) · wish + would have + V3 (use had + V3).</div>
+</section>
+
+<section><h2><span class="b">2</span>Tick the correct sentences</h2>
+<p class="hint">Tick the sentences that correctly express an annoying habit or situation, then press Check Answers. For every incorrect sentence, the correction appears below it.</p><div id="e2"></div></section>
+
+<section><h2><span class="b">3</span>Your regrets and wishes</h2>
+<p class="hint">Put the verb into the correct form. Afterwards, read each sentence aloud and tell your partner whether you feel the same: “So do I.” / “Not me.”</p><div id="e3"></div></section>
+
+<section><h2><span class="b">4</span>Complete the conversation</h2>
+<p class="hint">Choose the missing phrase for each gap. Each phrase is used once.</p><div id="e4"></div></section>
+
+<section><h2><span class="b">5</span>Turn the situation into a wish</h2>
+<p class="hint">Complete the sentences with the correct words and forms. Use <i>I wish</i> or <i>If only</i>. Example: My desk is too small. → I wish I had a bigger desk.</p><div id="e5"></div></section>
+
+<section><h2><span class="b">6</span>Wish or conditional?</h2>
+<p class="hint">For each situation, complete a wish sentence and a conditional sentence about the same idea.</p><div id="e6"></div></section>
+
+<section><h2><span class="b">7</span>Speaking: sentence starters</h2>
+<p class="pr">Choose one small regret and one persistent irritation. Speak for about thirty seconds on each, honestly and briefly. Your partner asks one follow-up question after each answer.</p>
+<p class="hint">Complete these starters aloud with <i>I wish</i> or <i>If only</i>:</p>
+<ul>
+<li>I wish I were more … (a quality you would like to have)</li>
+<li>If only I had asked … before … </li>
+<li>I wish my family / friends / colleagues would stop … (something that annoys you)</li>
+<li>If only my city had … </li>
+<li>I wish I could … (a skill you don’t have yet)</li>
+<li>I wish to … (a formal request you might make in a letter or at a meeting)</li>
+</ul></section>
+
+<section><h2><span class="b">8</span>Speaking: question cards</h2>
+<p class="hint">Take turns. Press “Pick a question”, ask it to your partner or teacher, and answer with <i>I wish</i> or <i>If only</i>. Keep answers short and clear, then tick the question.</p>
+<div class="tools"><button type="button" id="pick">Pick a question</button></div>
+<p class="pr" id="pk">Press “Pick a question” to begin.</p>
+<div class="cards" id="cards"></div></section>
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s),mk=h=>{const d=document.createElement("div");d.innerHTML=h;return d.firstElementChild};
+const esc=s=>s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const norm=s=>s.toLowerCase().replace(/[’‘`]/g,"'").replace(/\s+/g," ").trim();
+const items=[];
+const upd=()=>{const t=items.length,k=items.filter(i=>i.ok).length,a=items.filter(i=>i.shown||i.done()).length;
+$("#sc").textContent="Score "+k+" / "+t;$("#an").textContent="Answered "+a+" / "+t;$("#pg").style.width=(t?100*k/t:0)+"%"};
+
+function cloze(id,lines){
+ const el=$("#"+id);
+ lines.forEach(l=>{
+  const p=document.createElement("p");p.className="cl";
+  p.innerHTML=l.replace(/\[\[(.*?)::(.*?)\]\]/g,(m,h,a)=>'<span class="g"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="gap" style="width:'+Math.max(6,a.split("|")[0].length+2)+'ch" data-a="'+esc(a)+'"><small>('+esc(h)+')</small></span>');
+  el.appendChild(p);
+ });
+ el.querySelectorAll("input").forEach(inp=>{
+  const ans=inp.dataset.a.split("|");
+  const it={ok:null,shown:false,
+   check(){if(this.shown)return;const v=norm(inp.value);inp.classList.remove("ok","no");if(!v){this.ok=null;return}
+    this.ok=ans.some(a=>norm(a)===v);inp.classList.add(this.ok?"ok":"no")},
+   show(){inp.value=ans[0];inp.classList.remove("ok","no");inp.classList.add("shown");this.shown=true;this.ok=null},
+   reset(){inp.value="";inp.className="";this.ok=null;this.shown=false},
+   done:()=>!!inp.value.trim()};
+  inp.addEventListener("input",()=>{it.ok=null;inp.classList.remove("ok","no");upd()});
+  items.push(it);
+ });
+}
+
+function ticks(id,data){
+ const el=$("#"+id),qs=[],bx=[],group=[];
+ data.forEach(d=>{
+  const q=mk('<div class="q"><label><input type="checkbox"> '+d.t+'</label><p class="fb"></p></div>');
+  el.appendChild(q);qs.push(q);
+  const cb=$("input",q),fb=$(".fb",q);bx.push(cb);
+  const msg=d.ok?"":"Correction: "+d.f;
+  const it={ok:null,shown:false,
+   check(){if(this.shown||!bx.some(b=>b.checked))return;
+    this.ok=cb.checked===d.ok;q.className="q "+(this.ok?"ok":"no");
+    fb.textContent=d.ok?(this.ok?"":"This sentence is correct."):msg},
+   show(){cb.checked=d.ok;q.className="q shown";fb.textContent=msg;this.shown=true;this.ok=null},
+   reset(){cb.checked=false;q.className="q";fb.textContent="";this.ok=null;this.shown=false},
+   done:()=>bx.some(b=>b.checked)};
+  cb.addEventListener("change",()=>{group.forEach(i=>{if(!i.shown)i.ok=null});qs.forEach(x=>{if(x.className!=="q shown")x.className="q"});upd()});
+  group.push(it);items.push(it);
+ });
+}
+
+function bank(id,lines,opts){
+ const el=$("#"+id),sh=[...opts].sort(()=>Math.random()-.5);
+ el.appendChild(mk('<p class="chips">'+opts.map(o=>"<span>"+o+"</span>").join("")+"</p>"));
+ lines.forEach(l=>{
+  el.appendChild(mk('<p class="cl"><b class="spk">'+l[0]+':</b> '+l[1].replace(/\[\[(.*?)\]\]/g,(m,a)=>'<select data-a="'+esc(a)+'" aria-label="gap"><option value="">…</option>'+sh.map(o=>"<option>"+o+"</option>").join("")+"</select>")+"</p>"));
+ });
+ el.querySelectorAll("select").forEach(s=>{
+  const a=s.dataset.a;
+  const it={ok:null,shown:false,
+   check(){if(this.shown||!s.value)return;this.ok=s.value===a;s.className=this.ok?"ok":"no"},
+   show(){s.value=a;s.className="shown";this.shown=true;this.ok=null},
+   reset(){s.value="";s.className="";this.ok=null;this.shown=false},
+   done:()=>!!s.value};
+  s.onchange=()=>{it.ok=null;s.className="";upd()};
+  items.push(it);
+ });
+}
+
+ticks("e2",[
+ {t:"I wish my neighbour would turn his music down after ten.",ok:true},
+ {t:"She wishes her brother will stop leaving dishes in the sink.",ok:false,f:"She wishes her brother would stop leaving dishes in the sink."},
+ {t:"I wish it would stop raining so we could go out.",ok:true},
+ {t:"I wish I would stop checking my phone every minute.",ok:false,f:"I wish I could stop checking my phone every minute. (Would is not used for your own behaviour.)"},
+ {t:"He wishes his boss would listen to the team’s ideas.",ok:true},
+ {t:"We wish our flatmates don’t leave the front door unlocked.",ok:false,f:"We wish our flatmates wouldn’t leave the front door unlocked."},
+ {t:"If only my laptop wouldn’t freeze whenever I open two programs.",ok:true},
+ {t:"I wish you would have told me about the meeting.",ok:false,f:"I wish you had told me about the meeting. (A past regret takes the Past Perfect.)"},
+ {t:"If only people wouldn’t leave their shopping trolleys in the middle of the road.",ok:true},
+ {t:"She wishes the neighbours would to be quieter.",ok:false,f:"She wishes the neighbours would be quieter."}
+]);
+
+cloze("e3",[
+ "1. I didn’t call my grandmother often last year. I wish I [[call::had called]] her more often.",
+ "2. I feel tired every afternoon. If only I [[sleep::slept|could sleep]] better at night.",
+ "3. We never visited the old town when we lived in Prague. I wish we [[visit::had visited]] it.",
+ "4. My flat is very dark. I wish it [[be::were|was]] brighter.",
+ "5. I spent my savings on a gadget I never use. If only I [[not / buy::hadn't bought|had not bought]] it.",
+ "6. I don’t have a driving licence. I wish I [[have::had]] one.",
+ "7. My team often misses deadlines. I wish we [[manage::managed|could manage]] our time better.",
+ "8. I told my manager the wrong date for the meeting. I wish I [[check::had checked]] the calendar first."
+]);
+
+bank("e4",[
+ ["Mia","Look at these photos from Naples! I wish we [[lived closer to the coast]], then we could go every weekend."],
+ ["Leo","Tell me about it. And now every hotel is full. If only we [[had booked earlier]]!"],
+ ["Mia","Don’t remind me. It’s snowing again and the roads are closed. I wish it [[would stop snowing]]."],
+ ["Leo","And I can’t even read the menus. I wish I [[could speak Italian]] properly."],
+ ["Mia","At least you still have your phone. If only I [[hadn’t lost my phone]] on the train, I could show you the saved maps."]
+],["had booked earlier","would stop snowing","could speak Italian","lived closer to the coast","hadn’t lost my phone"]);
+
+cloze("e5",[
+ "1. — The train is always late. — I [[to wish::wish]] the train [[to arrive::would arrive|'d arrive]] on time.",
+ "2. — Peter gave up piano at fifteen. — Peter [[to wish::wishes]] he [[not / to give up::hadn't given up|had not given up]] piano.",
+ "3. — We didn’t take a taxi and arrived soaked. — If only we [[to take::had taken]] a taxi.",
+ "4. — My brother always uses my charger without asking. — I [[to wish::wish]] he [[not / to use::wouldn't use|would not use]] it.",
+ "5. — It’s snowing and we can’t drive. — If only it [[not / to snow::wasn't snowing|weren't snowing|was not snowing|were not snowing]], we would be on the road now.",
+ "6. — I can’t cook Thai food, and I’d love to. — I [[to wish::wish]] I [[can / to cook::could cook]] Thai food.",
+ "7. — I forgot to renew my passport and now I can’t travel. — I [[to wish::wish]] I [[to renew::had renewed]] it earlier.",
+ "8. — Our neighbours throw loud parties every weekend. — We [[to wish::wish]] they [[not / to throw::wouldn't throw|would not throw]] them."
+]);
+
+cloze("e6",[
+ "<b>1.</b> I didn’t revise, so I failed the test.<br>I wish I [[revise::had revised]]. If I [[revise::had revised]], I [[not / fail::wouldn't have failed|would not have failed]] the test.",
+ "<b>2.</b> I live far from work.<br>I wish I [[live::lived]] closer. If I [[live::lived]] closer, I [[spend::would spend|'d spend]] less time commuting.",
+ "<b>3.</b> The neighbours play loud music at night.<br>I wish they [[not / play::wouldn't play|would not play]] it. If they [[stop::stopped]], I [[sleep::would sleep|'d sleep]] better.",
+ "<b>4.</b> We missed the train.<br>If only we [[leave::had left]] earlier. If we [[leave::had left]] earlier, we [[catch::would have caught|'d have caught]] it.",
+ "<b>5.</b> She doesn’t have a car.<br>She wishes she [[have::had]] one. If she [[have::had]] one, she [[drive::would drive|'d drive]] to the office."
+]);
+
+const Q=["What do you wish you had known before you started learning English?",
+"If only you had a free day tomorrow, how would you spend it?",
+"What do you wish people would do more often on public transport?",
+"If only you could live in another country for a year, which one would you choose?",
+"What do you wish you had packed for your last trip?",
+"If only you could change one thing in your daily routine, what would it be?",
+"What do you wish you were better at?",
+"If only you could give your younger self one piece of advice, what would it be?",
+"What do you wish your phone or computer would do automatically?",
+"If only you had a bigger kitchen, what would you cook?",
+"What do you wish you had said in a recent conversation?",
+"If only you could speak any language fluently, which one would you pick?"];
+$("#cards").innerHTML=Q.map(q=>"<label><input type=\"checkbox\"> "+q+"</label>").join("");
+$("#pick").onclick=()=>{const l=[...document.querySelectorAll("#cards label")].filter(x=>!$("input",x).checked);
+ if(!l.length){$("#pk").textContent="All questions done. Well done!";return}
+ $("#pk").textContent=l[Math.floor(Math.random()*l.length)].textContent.trim()};
+
+$("#ck").onclick=()=>{items.forEach(i=>i.check());upd()};
+$("#sh").onclick=()=>{items.forEach(i=>i.show());upd()};
+$("#rz").onclick=()=>{items.forEach(i=>i.reset());upd()};
+upd();
+</script>
+</body>
+</html>
