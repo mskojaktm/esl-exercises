@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passive Voice Trainer (Present & Past Simple | B1-B2)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .tab-active { border-bottom: 3px solid #4f46e5; color: #4f46e5; font-weight: 600; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .accordion-content { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+    <!-- TOP DASHBOARD / HEADER -->
+    <header class="sticky top-0 z-50 bg-slate-900 text-white shadow-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Title & Badge -->
+                <div class="flex items-center space-x-3">
+                    <div class="bg-indigo-600 p-2.5 rounded-xl shadow-inner">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                            Passive Voice Trainer 
+                            <span class="text-xs bg-indigo-500/30 text-indigo-300 font-semibold px-2 py-0.5 rounded border border-indigo-500/40">B1-B2 Level</span>
+                        </h1>
+                        <p class="text-xs text-slate-400">Present Simple & Past Simple Passive Practice (~90 мин)</p>
+                    </div>
+                </div>
+
+                <!-- Stats & Timer -->
+                <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-6 w-full md:w-auto">
+                    <!-- Session Timer -->
+                    <div class="flex items-center bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-xs font-mono">
+                        <svg class="w-4 h-4 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span id="timer-display" class="text-slate-200 text-sm font-semibold">00:00:00</span>
+                        <button id="timer-toggle-btn" onclick="toggleTimer()" class="ml-2 text-slate-400 hover:text-white transition" title="Пауза/Старт">
+                            <svg id="timer-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                    </div>
+
+                    <!-- Points Counter -->
+                    <div class="flex items-center bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-xs">
+                        <svg class="w-4 h-4 text-amber-400 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                        <span class="text-slate-400 mr-1">Баллы:</span>
+                        <span id="score-counter" class="text-amber-400 font-bold text-sm">0 / 0</span>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="flex items-center space-x-2 min-w-[140px]">
+                        <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden border border-slate-700">
+                            <div id="global-progress-bar" class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full transition-all duration-500 w-0"></div>
+                        </div>
+                        <span id="global-progress-text" class="text-xs font-semibold text-slate-300">0%</span>
+                    </div>
+
+                    <!-- Reset Progress Button -->
+                    <button onclick="resetAllProgress()" class="text-xs text-slate-400 hover:text-rose-400 underline transition" title="Сбросить локальный прогресс">
+                        Сбросить
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="bg-white border-b border-slate-200 sticky top-[57px] z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-2 sm:space-x-8 overflow-x-auto custom-scrollbar">
+                <button onclick="switchTab('grammar')" id="tab-btn-grammar" class="tab-btn tab-active py-3 px-3 text-sm font-medium border-b-2 flex items-center whitespace-nowrap gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    1. Грамматика <span class="text-xs text-slate-400 font-normal">(~40 мин)</span>
+                </button>
+                <button onclick="switchTab('reading')" id="tab-btn-reading" class="tab-btn py-3 px-3 text-sm font-medium text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center whitespace-nowrap gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    2. Чтение <span class="text-xs text-slate-400 font-normal">(~30 мин)</span>
+                </button>
+                <button onclick="switchTab('listening')" id="tab-btn-listening" class="tab-btn py-3 px-3 text-sm font-medium text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center whitespace-nowrap gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                    3. Аудирование <span class="text-xs text-slate-400 font-normal">(~20 мин)</span>
+                </button>
+                <button onclick="switchTab('summary')" id="tab-btn-summary" class="tab-btn py-3 px-3 text-sm font-medium text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center whitespace-nowrap gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    Итоги и Отчет
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ========================================== -->
+        <!-- MODULE 1: GRAMMAR PRACTICE TAB -->
+        <!-- ========================================== -->
+        <div id="tab-grammar" class="tab-content space-y-8">
+            
+            <!-- THEORY CHEAT SHEET (ACCORDION) -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <button onclick="toggleAccordion('theory-content')" class="w-full p-5 bg-gradient-to-r from-indigo-50 to-slate-50 hover:from-indigo-100 flex items-center justify-between text-left transition">
+                    <div class="flex items-center space-x-3">
+                        <span class="p-2 bg-indigo-600 text-white rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </span>
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Теоретическая шпаргалка: Passive Voice (Present & Past Simple)</h2>
+                            <p class="text-xs text-slate-500">Нажмите, чтобы развернуть правила, формулы и таблицу глаголов</p>
+                        </div>
+                    </div>
+                    <svg id="theory-accordion-arrow" class="w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+
+                <div id="theory-content" class="hidden p-6 space-y-6 border-t border-slate-200 bg-white">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Present Simple Passive -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-indigo-700">Present Simple Passive</h3>
+                                <span class="text-xs font-mono bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded">am / is / are + V3 (Past Participle)</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3">Используется для регулярных действий, фактов, процессов и общеизвестных истин.</p>
+                            <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                <li><strong>Affirmative:</strong> Coffee <em>is grown</em> in Brazil.</li>
+                                <li><strong>Negative:</strong> Emails <em>are not (aren't) sent</em> on Sundays.</li>
+                                <li><strong>Question:</strong> <em>Is</em> the museum <em>cleaned</em> every day?</li>
+                            </ul>
+                        </div>
+
+                        <!-- Past Simple Passive -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-indigo-700">Past Simple Passive</h3>
+                                <span class="text-xs font-mono bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded">was / were + V3 (Past Participle)</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3">Используется для завершенных действий в прошлом, где исполнитель неизвестен или неважен.</p>
+                            <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                <li><strong>Affirmative:</strong> The castle <em>was built</em> in 1492.</li>
+                                <li><strong>Negative:</strong> The documents <em>were not (weren't) found</em> yesterday.</li>
+                                <li><strong>Question:</strong> <em>Was</em> the window <em>broken</em> by the kids?</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Nuances: By vs With & Agent Omission -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                            <h4 class="font-bold text-amber-900 mb-1">Предлог BY</h4>
+                            <p class="text-amber-800">Указывает на <strong>одушевленного исполнителя</strong> или организацию: <em>The book was written <strong>by</strong> Orwell.</em></p>
+                        </div>
+                        <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                            <h4 class="font-bold text-amber-900 mb-1">Предлог WITH</h4>
+                            <p class="text-amber-800">Указывает на <strong>инструмент, материал или ингредиент</strong>: <em>The soup was seasoned <strong>with</strong> herbs.</em></p>
+                        </div>
+                        <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                            <h4 class="font-bold text-indigo-900 mb-1">Опущение Агента (Agent Omission)</h4>
+                            <p class="text-indigo-800">Агент опускается, если это <em>people, someone, they</em> или если автор очевиден: <em>The thief was arrested (by police - очевидно).</em></p>
+                        </div>
+                    </div>
+
+                    <!-- Irregular Verbs Mini Search -->
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="text-sm font-bold text-slate-800">Быстрый справочник III формы глаголов (V3)</h4>
+                            <input type="text" id="verb-search" onkeyup="filterVerbs()" placeholder="Поиск глагола (напр. write)..." class="text-xs px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none w-48">
+                        </div>
+                        <div class="max-h-40 overflow-y-auto custom-scrollbar border border-slate-200 rounded-lg">
+                            <table class="w-full text-xs text-left">
+                                <thead class="bg-slate-100 text-slate-600 sticky top-0">
+                                    <tr>
+                                        <th class="p-2 border-b">Infinitive (V1)</th>
+                                        <th class="p-2 border-b">Past Simple (V2)</th>
+                                        <th class="p-2 border-b">Past Participle (V3)</th>
+                                        <th class="p-2 border-b">Перевод</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="verbs-table-body" class="divide-y divide-slate-100">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- EXERCISE 1.1: MULTIPLE CHOICE (12 QUESTIONS) -->
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>Задание 1.1. Множественный выбор (Multiple Choice)</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-normal">12 вопросов</span>
+                        </h3>
+                        <p class="text-xs text-slate-500">Выберите грамматически верный вариант пассивной формы или предлога.</p>
+                    </div>
+                    <button onclick="checkMultipleChoice()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition shadow-sm">
+                        Проверить модуль 1.1
+                    </button>
+                </div>
+
+                <div id="mc-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- EXERCISE 1.2: GAP-FILL (14 SENTENCES) -->
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>Задание 1.2. Раскрытие скобок (Gap-Fill)</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-normal">14 предложений</span>
+                        </h3>
+                        <p class="text-xs text-slate-500">Поставьте глагол в правильную форму Present Simple Passive или Past Simple Passive.</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="checkGapFill()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition shadow-sm">
+                            Проверить модуль 1.2
+                        </button>
+                    </div>
+                </div>
+
+                <div id="gapfill-container" class="space-y-4">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- EXERCISE 1.3: ACTIVE TO PASSIVE TRANSFORMATION (10 SENTENCES) -->
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>Задание 1.3. Трансформация предложений (Active &rarr; Passive)</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-normal">10 предложений</span>
+                        </h3>
+                        <p class="text-xs text-slate-500">Перепишите активные предложения в пассивные, сохраняя время (Present Simple или Past Simple).</p>
+                    </div>
+                    <button onclick="checkTransformations()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition shadow-sm">
+                        Проверить модуль 1.3
+                    </button>
+                </div>
+
+                <div id="transform-container" class="space-y-4">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- EXERCISE 1.4: ERROR CORRECTION (8 SENTENCES) -->
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>Задание 1.4. Исправление ошибок (Error Correction)</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-normal">8 предложений</span>
+                        </h3>
+                        <p class="text-xs text-slate-500">В каждом предложении есть одна ошибка в образовании пассивного залога или выборе предлога. Напишите правильное предложение целиком.</p>
+                    </div>
+                    <button onclick="checkErrorCorrections()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition shadow-sm">
+                        Проверить модуль 1.4
+                    </button>
+                </div>
+
+                <div id="errorcorr-container" class="space-y-4">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- EXERCISE 1.5: RU -> EN TRANSLATION (10 SENTENCES) -->
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>Задание 1.5. Перевод с русского на английский (RU &rarr; EN)</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-normal">10 предложений</span>
+                        </h3>
+                        <p class="text-xs text-slate-500">Переведите предложения на английский язык, используя Present или Past Simple Passive.</p>
+                    </div>
+                    <button onclick="checkTranslations()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition shadow-sm">
+                        Проверить модуль 1.5
+                    </button>
+                </div>
+
+                <div id="translation-container" class="space-y-4">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MODULE 2: READING COMPREHENSION TAB -->
+        <!-- ========================================== -->
+        <div id="tab-reading" class="tab-content hidden space-y-8">
+
+            <!-- TEXT 1: PRESENT SIMPLE PASSIVE PROCESS -->
+            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-gradient-to-r from-emerald-700 to-teal-800 text-white p-6">
+                    <div class="flex items-center space-x-2 text-xs font-semibold text-emerald-200 uppercase tracking-wider mb-1">
+                        <span>Reading Text 1</span> &bull; <span>Process & Technology</span> &bull; <span>Present Simple Passive Focus</span>
+                    </div>
+                    <h2 class="text-xl font-bold">How Modern Paper Recycling Works</h2>
+                </div>
+
+                <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Text Column -->
+                    <div class="lg:col-span-6 bg-slate-50 p-5 rounded-xl border border-slate-200 text-sm leading-relaxed text-slate-700 space-y-3 custom-scrollbar max-h-[500px] overflow-y-auto">
+                        <p>Paper recycling is a critical industrial process by which used paper is converted into new, reusable products. Every day, tons of paper waste <strong>are collected</strong> from households, offices, and schools. First, the gathered material <strong>is sorted</strong> into different grades, such as cardboard, newsprint, and office stationery. Contaminants like plastics, glass, and metals <strong>are removed</strong> manually or with automated separators.</p>
+                        
+                        <p>After sorting, the paper <strong>is transported</strong> to a recycling mill. There, it <strong>is mixed</strong> with water and chemical solutions in a giant vessel called a pulper. The mixture <strong>is heated</strong> and chopped into tiny strands of cellulose fibers. This thick liquid <strong>is known</strong> as pulp. To ensure high quality, the pulp <strong>is passed</strong> through screens with holes of varying sizes to filter out remaining staples, glue, and tape.</p>
+                        
+                        <p>Next, the de-inking phase takes place. Ink particles and sticky substances <strong>are detached</strong> using air bubbles in a process called flotation. Then, the cleaned pulp <strong>is bleached</strong> with hydrogen peroxide or chlorine-free agents to enhance whiteness. Finally, the wet pulp <strong>is spread</strong> onto large moving wire screens. Water <strong>is drained</strong> out, and the sheet <strong>is pressed</strong> through heavy heated rollers. Once dried, the new paper <strong>is wound</strong> onto massive reels and <strong>is shipped</strong> to manufacturers worldwide.</p>
+                    </div>
+
+                    <!-- Tasks Column -->
+                    <div class="lg:col-span-6 space-y-6">
+                        
+                        <!-- Task 1: True / False / Not Stated -->
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-slate-900 text-sm">1.1 True / False / Not Stated</h4>
+                                <button onclick="checkReading1TF()" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded transition">Проверить T/F</button>
+                            </div>
+                            <div id="r1-tf-container" class="space-y-3"></div>
+                        </div>
+
+                        <!-- Task 2: Multiple Choice Questions -->
+                        <div class="border-t border-slate-200 pt-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-slate-900 text-sm">1.2 Detail Comprehension (Multiple Choice)</h4>
+                                <button onclick="checkReading1MC()" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded transition">Проверить MC</button>
+                            </div>
+                            <div id="r1-mc-container" class="space-y-4"></div>
+                        </div>
+
+                        <!-- Task 3: Summary Gap-Fill -->
+                        <div class="border-t border-slate-200 pt-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-slate-900 text-sm">1.3 Summary Completion (Passives)</h4>
+                                <button onclick="checkReading1Summary()" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded transition">Проверить резюме</button>
+                            </div>
+                            <div id="r1-summary-container" class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100 text-xs leading-relaxed space-y-2"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+
+            <!-- TEXT 2: PAST SIMPLE PASSIVE HISTORICAL -->
+            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-6">
+                    <div class="flex items-center space-x-2 text-xs font-semibold text-blue-200 uppercase tracking-wider mb-1">
+                        <span>Reading Text 2</span> &bull; <span>History & Mystery</span> &bull; <span>Past Simple Passive Focus</span>
+                    </div>
+                    <h2 class="text-xl font-bold">The Mystery of the Mary Celeste</h2>
+                </div>
+
+                <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Text Column -->
+                    <div class="lg:col-span-6 bg-slate-50 p-5 rounded-xl border border-slate-200 text-sm leading-relaxed text-slate-700 space-y-3 custom-scrollbar max-h-[500px] overflow-y-auto">
+                        <p>The <em>Mary Celeste</em> remains one of the most intriguing maritime mysteries in history. Built in Canada in 1861, the merchant ship <strong>was originally named</strong> the <em>Amazon</em>. In November 1872, under the command of Captain Benjamin Briggs, the vessel <strong>was loaded</strong> with over 1,700 barrels of industrial alcohol and <strong>was dispatched</strong> from New York toward Genoa, Italy.</p>
+                        
+                        <p>However, the ship never reached its intended destination. On December 4, 1872, the <em>Mary Celeste</em> <strong>was spotted</strong> in the Atlantic Ocean by the crew of a British brig, the <em>Dei Gratia</em>. The ship appeared to be drifting aimlessly. When a boarding party <strong>was sent</strong> to inspect the vessel, a baffling scene <strong>was discovered</strong>. The ship was fully seaworthy, and its cargo of alcohol <strong>was left</strong> virtually untouched. Six months’ worth of food and fresh water <strong>were stored</strong> in the hold.</p>
+                        
+                        <p>Yet, not a single person <strong>was found</strong> on board. The lifeboat <strong>was removed</strong>, along with the captain’s navigation tools and logbook. No signs of violent struggle <strong>were noticed</strong>, and the personal belongings of the crew <strong>were left</strong> behind intact. Over the decades, dozens of theories <strong>were proposed</strong> by researchers—ranging from sea monster attacks to pirate raids and alcohol vapor explosions. Ultimately, no definitive proof <strong>was presented</strong>, and the true fate of the passengers was never uncovered.</p>
+                    </div>
+
+                    <!-- Tasks Column -->
+                    <div class="lg:col-span-6 space-y-6">
+                        
+                        <!-- Task 1: True / False / Not Stated -->
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-slate-900 text-sm">2.1 True / False / Not Stated</h4>
+                                <button onclick="checkReading2TF()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded transition">Проверить T/F</button>
+                            </div>
+                            <div id="r2-tf-container" class="space-y-3"></div>
+                        </div>
+
+                        <!-- Task 2: Multiple Choice Questions -->
+                        <div class="border-t border-slate-200 pt-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-slate-900 text-sm">2.2 Detail Comprehension (Multiple Choice)</h4>
+                                <button onclick="checkReading2MC()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded transition">Проверить MC</button>
+                            </div>
+                            <div id="r2-mc-container" class="space-y-4"></div>
+                        </div>
+
+                        <!-- Task 3: Passive Structure Extraction & Matching -->
+                        <div class="border-t border-slate-200 pt-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-slate-900 text-sm">2.3 Structure Matching (Passive Context)</h4>
+                                <button onclick="checkReading2Matching()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded transition">Проверить ответы</button>
+                            </div>
+                            <div id="r2-matching-container" class="space-y-3 text-xs"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MODULE 3: LISTENING COMPREHENSION TAB -->
+        <!-- ========================================== -->
+        <div id="tab-listening" class="tab-content hidden space-y-8">
+
+            <!-- WEB SPEECH API AUDIO CONTROL PANEL (GLOBAL FOR LISTENING) -->
+            <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-md border border-slate-800">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-3 bg-indigo-600 rounded-xl">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 016 0v6a3 3 0 01-3 3z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-base">Интерактивный плеер аудирования (Web Speech Engine)</h3>
+                            <p class="text-xs text-slate-400">Синтезатор речи браузера для прослушивания аудио-материалов</p>
+                        </div>
+                    </div>
+
+                    <!-- Speech Controls -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <!-- Voice Selector -->
+                        <div class="flex items-center space-x-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                            <label class="text-xs text-slate-400">Голос:</label>
+                            <select id="tts-voice" class="bg-transparent text-xs text-slate-200 outline-none cursor-pointer max-w-[150px]">
+                                <option value="en-US">English (US)</option>
+                                <option value="en-GB">English (UK)</option>
+                            </select>
+                        </div>
+
+                        <!-- Speed Selector -->
+                        <div class="flex items-center space-x-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                            <label class="text-xs text-slate-400">Скорость:</label>
+                            <select id="tts-rate" class="bg-transparent text-xs text-slate-200 outline-none cursor-pointer">
+                                <option value="0.8">0.8x (Медленно)</option>
+                                <option value="1.0" selected>1.0x (Норм)</option>
+                                <option value="1.15">1.15x (Быстро)</option>
+                            </select>
+                        </div>
+
+                        <!-- Global Stop Button -->
+                        <button onclick="stopAudio()" class="px-3 py-1.5 bg-rose-600/80 hover:bg-rose-600 text-white rounded-lg text-xs font-semibold transition">
+                            Стоп
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AUDIO TRACK 1: PAST SIMPLE PASSIVE NEWS REPORT -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                    <div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">Audio 1: News Bulletin</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Archaeological Breakthrough in Wiltshire</h3>
+                        <p class="text-xs text-slate-500">Слушайте репортаж в Past Simple Passive и выполняйте задания ниже.</p>
+                    </div>
+
+                    <!-- Track 1 Audio Buttons -->
+                    <div class="flex items-center space-x-2">
+                        <button onclick="playAudio('track1')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium px-4 py-2 rounded-lg flex items-center space-x-1 transition shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Воспроизвести Audio 1</span>
+                        </button>
+                        <button onclick="toggleTranscript('transcript1')" class="border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs px-3 py-2 rounded-lg transition">
+                            Показать скрипт
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hidden Transcript 1 -->
+                <div id="transcript1" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs leading-relaxed text-slate-700">
+                    <p class="font-bold text-slate-900 mb-1">Transcript (Audio 1):</p>
+                    <p id="track1-text">
+                        "Good evening. An extraordinary Roman villa was discovered last week by local farmers in Wiltshire, England. The ancient site was uncovered during routine agricultural work. Shortly after the first artifacts were spotted, expert archaeologists were called to inspect the area. During the preliminary excavation, several remarkably preserved mosaic floors were unearthed. Valuable silver coins were also found inside a buried clay pot. Historic records show that the main building was constructed in the fourth century AD. Unfortunately, part of the northern wall was damaged by modern farming equipment years ago. Yesterday, the entire site was protected by local authorities, and plans were made for further research next summer."
+                    </p>
+                </div>
+
+                <!-- Audio 1 Tasks -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Dictation Gap Fill -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700">Задание 1.1: Заполнение пропусков (Note Completion)</h4>
+                            <button onclick="checkAudio1Gaps()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded transition">Проверить</button>
+                        </div>
+                        <div id="a1-gaps-container" class="space-y-3 text-xs"></div>
+                    </div>
+
+                    <!-- Multiple Choice -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700">Задание 1.2: Выбор ответа (Multiple Choice)</h4>
+                            <button onclick="checkAudio1MC()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded transition">Проверить</button>
+                        </div>
+                        <div id="a1-mc-container" class="space-y-3 text-xs"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- AUDIO TRACK 2: PRESENT SIMPLE PASSIVE PODCAST -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                    <div>
+                        <span class="text-xs font-semibold text-teal-600 bg-teal-50 px-2 py-0.5 rounded border border-teal-100">Audio 2: Tech Podcast</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Inside an Automated Fulfillment Center</h3>
+                        <p class="text-xs text-slate-500">Слушайте подкаст о современных логистических центрах в Present Simple Passive.</p>
+                    </div>
+
+                    <!-- Track 2 Audio Buttons -->
+                    <div class="flex items-center space-x-2">
+                        <button onclick="playAudio('track2')" class="bg-teal-600 hover:bg-teal-700 text-white text-xs font-medium px-4 py-2 rounded-lg flex items-center space-x-1 transition shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Воспроизвести Audio 2</span>
+                        </button>
+                        <button onclick="toggleTranscript('transcript2')" class="border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs px-3 py-2 rounded-lg transition">
+                            Показать скрипт
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hidden Transcript 2 -->
+                <div id="transcript2" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs leading-relaxed text-slate-700">
+                    <p class="font-bold text-slate-900 mb-1">Transcript (Audio 2):</p>
+                    <p id="track2-text">
+                        "Welcome back to Tech Today. Have you ever wondered what happens after you click buy online? Thousands of orders are processed every minute in modern automated fulfillment centers. First, incoming inventory is delivered by trucks and scanned into the system. Items are placed onto automated robotic shelves. When a customer order is confirmed, autonomous robots are dispatched to fetch the items. High-tech sensors are used to ensure the correct products are retrieved. Next, goods are transported to packing stations where sturdy boxes are selected automatically. Before shipping, each package is weighed and checked for quality. Finally, shipping labels are attached, and boxes are loaded onto outgoing trucks bound for delivery."
+                    </p>
+                </div>
+
+                <!-- Audio 2 Tasks -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Matching Task -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700">Задание 2.1: Сопоставление (Matching)</h4>
+                            <button onclick="checkAudio2Matching()" class="text-xs bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded transition">Проверить</button>
+                        </div>
+                        <div id="a2-matching-container" class="space-y-3 text-xs"></div>
+                    </div>
+
+                    <!-- True / False Task -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700">Задание 2.2: True / False</h4>
+                            <button onclick="checkAudio2TF()" class="text-xs bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded transition">Проверить</button>
+                        </div>
+                        <div id="a2-tf-container" class="space-y-3 text-xs"></div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MODULE 4: SUMMARY & REPORT TAB -->
+        <!-- ========================================== -->
+        <div id="tab-summary" class="tab-content hidden space-y-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center max-w-3xl mx-auto space-y-6">
+                <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Результаты прохождения курса</h2>
+                    <p class="text-xs text-slate-500 mt-1">Полный сводный отчет по упражнениям Passive Voice (B1-B2)</p>
+                </div>
+
+                <!-- Stats Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-500 uppercase font-semibold">Итоговый балл</span>
+                        <div id="summary-score" class="text-2xl font-bold text-indigo-600 mt-1">0 / 0</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-500 uppercase font-semibold">Процент выполнения</span>
+                        <div id="summary-percentage" class="text-2xl font-bold text-emerald-600 mt-1">0%</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-500 uppercase font-semibold">Затраченное время</span>
+                        <div id="summary-time" class="text-2xl font-bold text-amber-600 mt-1">00:00:00</div>
+                    </div>
+                </div>
+
+                <!-- Detailed Breakdown Table -->
+                <div class="text-left border border-slate-200 rounded-xl overflow-hidden">
+                    <table class="w-full text-xs">
+                        <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3 text-left">Модуль</th>
+                                <th class="p-3 text-center">Пройдено пунктов</th>
+                                <th class="p-3 text-right">Набрано баллов</th>
+                            </tr>
+                        </thead>
+                        <tbody id="summary-table-body" class="divide-y divide-slate-100">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex justify-center space-x-4 pt-4">
+                    <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        <span>Распечатать / Сохранить в PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs border-t border-slate-800 mt-auto">
+        <p>Interactive Passive Voice Masterclass (Present & Past Simple | B1-B2 Level) &bull; Ready for GitHub Pages</p>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE & DATA SCRIPT -->
+    <script>
+        /* ==========================================
+           1. DATA STRUCTURES & DATASETS
+           ========================================== */
+
+        const IRREGULAR_VERBS = [
+            { v1: 'be', v2: 'was/were', v3: 'been', ru: 'быть' },
+            { v1: 'build', v2: 'built', v3: 'built', ru: 'строить' },
+            { v1: 'buy', v2: 'bought', v3: 'bought', ru: 'покупать' },
+            { v1: 'catch', v2: 'caught', v3: 'caught', ru: 'ловить' },
+            { v1: 'choose', v2: 'chose', v3: 'chosen', ru: 'выбирать' },
+            { v1: 'do', v2: 'did', v3: 'done', ru: 'делать' },
+            { v1: 'find', v2: 'found', v3: 'found', ru: 'находить' },
+            { v1: 'give', v2: 'gave', v3: 'given', ru: 'давать' },
+            { v1: 'make', v2: 'made', v3: 'made', ru: 'создавать' },
+            { v1: 'send', v2: 'sent', v3: 'sent', ru: 'отправлять' },
+            { v1: 'write', v2: 'wrote', v3: 'written', ru: 'писать' },
+            { v1: 'speak', v2: 'spoke', v3: 'spoken', ru: 'говорить' }
+        ];
+
+        // 1.1 Multiple Choice (12 questions)
+        const MC_QUESTIONS = [
+            { id: 'mc1', q: 'Millions of recycled plastic bottles _____ into fleece jackets every year.', opts: ['are transformed', 'were transformed', 'transform', 'is transformed'], ans: 0, hint: 'Present Simple Passive + множественное число (bottles).' },
+            { id: 'mc2', q: 'The ancient scroll _____ by a team of historians in 1923.', opts: ['is discovered', 'was discovered', 'were discovered', 'discovered'], ans: 1, hint: 'Указан 1923 год (Past Simple Passive, единственное число).' },
+            { id: 'mc3', q: 'The new stadium was designed _____ a famous Italian architect.', opts: ['with', 'by', 'from', 'of'], ans: 1, hint: 'Предлог BY используется для одушевленного автора/архитектора.' },
+            { id: 'mc4', q: 'In many modern offices, routine emails _____ automatically.', opts: ['are answered', 'is answered', 'were answer', 'was answered'], ans: 0, hint: 'Present Simple Passive (emails -> are).' },
+            { id: 'mc5', q: 'The cake was decorated _____ fresh berries and dark chocolate.', opts: ['by', 'with', 'at', 'from'], ans: 1, hint: 'Предлог WITH используется для ингредиентов и предметов.' },
+            { id: 'mc6', q: 'Several important documents _____ during the security audit last week.', opts: ['are lost', 'were lost', 'was lost', 'lost'], ans: 1, hint: 'Last week = Past Simple Passive (documents -> were).' },
+            { id: 'mc7', q: 'English _____ as an official language in over 50 countries.', opts: ['is spoken', 'was spoken', 'speaks', 'are spoken'], ans: 0, hint: 'Общеизвестный факт в настоящее время (Present Simple).' },
+            { id: 'mc8', q: 'The urgent parcel _____ to the wrong address yesterday morning.', opts: ['is delivered', 'was delivered', 'were delivered', 'delivered'], ans: 1, hint: 'Yesterday morning = Past Simple (parcel -> was).' },
+            { id: 'mc9', q: 'These wooden tables are made _____ skilled craftsmen in Sweden.', opts: ['by', 'with', 'for', 'about'], ans: 0, hint: 'Мастера (craftsmen) — одушевленные исполнители (by).' },
+            { id: 'mc10', q: 'Why _____ the museum closed during the summer of 2021?', opts: ['is', 'was', 'were', 'are'], ans: 1, hint: 'Прошедшее время 2021 год + ед. число (museum -> was).' },
+            { id: 'mc11', q: 'Fresh bread _____ in this bakery every morning at 5 AM.', opts: ['was baked', 'is baked', 'bakes', 'are baked'], ans: 1, hint: 'Every morning = регулярное действие в настоящем.' },
+            { id: 'mc12', q: 'The stolen painting _____ back to the museum two days ago.', opts: ['is returned', 'was returned', 'were returned', 'returned'], ans: 1, hint: 'Two days ago = Past Simple Passive.' }
+        ];
+
+        // 1.2 Gap Fill (14 sentences)
+        const GAPFILL_DATA = [
+            { id: 'gf1', sentence: 'All employee reports (check) _____ by the manager every Friday.', tense: 'present', ans: 'are checked', hint: 'Present Simple Passive (reports -> are checked)' },
+            { id: 'gf2', sentence: 'The Mona Lisa (paint) _____ by Leonardo da Vinci in the 16th century.', tense: 'past', ans: 'was painted', hint: 'Past Simple Passive (painted)' },
+            { id: 'gf3', sentence: 'Thousands of emails (send) _____ across our corporate network daily.', tense: 'present', ans: 'are sent', hint: 'Present Simple Passive (send -> sent)' },
+            { id: 'gf4', sentence: 'The old wooden bridge (destroy) _____ by a heavy storm last winter.', tense: 'past', ans: 'was destroyed', hint: 'Past Simple Passive (was destroyed)' },
+            { id: 'gf5', sentence: 'Organic vegetables (grow) _____ without synthetic pesticides on this farm.', tense: 'present', ans: 'are grown', hint: 'Present Simple Passive (grow -> grown)' },
+            { id: 'gf6', sentence: 'The lost keys (find) _____ under the sofa yesterday evening.', tense: 'past', ans: 'were found', hint: 'Past Simple Passive (keys -> were found)' },
+            { id: 'gf7', sentence: 'Great movies (not make) _____ overnight; they require months of editing.', tense: 'present', ans: 'are not made|aren\'t made', hint: 'Present Simple Negative (are not made / aren\'t made)' },
+            { id: 'gf8', sentence: 'The flight (cancel) _____ due to severe fog two hours ago.', tense: 'past', ans: 'was cancelled|was canceled', hint: 'Past Simple Passive (was cancelled)' },
+            { id: 'gf9', sentence: 'How many newspapers (print) _____ in this city every day?', tense: 'present', ans: 'are printed', hint: 'Present Simple Question (are ... printed)' },
+            { id: 'gf10', sentence: 'The confidential file (not leak) _____ to the press during the conference.', tense: 'past', ans: 'was not leaked|wasn\'t leaked', hint: 'Past Simple Negative' },
+            { id: 'gf11', sentence: 'Solar panels (install) _____ on roofs to generate clean energy.', tense: 'present', ans: 'are installed', hint: 'Present Simple Passive (are installed)' },
+            { id: 'gf12', sentence: 'The patient (examine) _____ by three specialists yesterday afternoon.', tense: 'past', ans: 'was examined', hint: 'Past Simple Passive' },
+            { id: 'gf13', sentence: 'Coffee beans (roast) _____ at high temperatures to unlock their flavor.', tense: 'present', ans: 'are roasted', hint: 'Present Simple Passive' },
+            { id: 'gf14', sentence: 'The historic declaration (sign) _____ by leaders of five nations in 1945.', tense: 'past', ans: 'was signed', hint: 'Past Simple Passive (was signed)' }
+        ];
+
+        // 1.3 Active to Passive Transformations (10 sentences)
+        const TRANSFORM_DATA = [
+            { id: 'tr1', active: 'The company publishes a new magazine every month.', key: 'A new magazine is published by the company every month.|A new magazine is published every month.', hint: 'Active: Present Simple -> Passive: is published' },
+            { id: 'tr2', active: 'Architects designed this modern hospital in 2018.', key: 'This modern hospital was designed by architects in 2018.|This modern hospital was designed in 2018.', hint: 'Active: Past Simple -> Passive: was designed' },
+            { id: 'tr3', active: 'Workers clean the office windows every Saturday.', key: 'The office windows are cleaned by workers every Saturday.|The office windows are cleaned every Saturday.', hint: 'Present Simple Passive: are cleaned' },
+            { id: 'tr4', active: 'The chef prepared a special dinner for the guests.', key: 'A special dinner was prepared for the guests by the chef.|A special dinner was prepared for the guests.', hint: 'Past Simple Passive: was prepared' },
+            { id: 'tr5', active: 'Millions of tourists visit the Eiffel Tower each year.', key: 'The Eiffel Tower is visited by millions of tourists each year.|The Eiffel Tower is visited each year.', hint: 'Present Simple Passive: is visited' },
+            { id: 'tr6', active: 'The police officer caught the thief near the station.', key: 'The thief was caught by the police officer near the station.|The thief was caught near the station.', hint: 'Past Simple Passive: was caught' },
+            { id: 'tr7', active: 'They do not allow pets inside the museum.', key: 'Pets are not allowed inside the museum.|Pets aren\'t allowed inside the museum.', hint: 'Present Simple Negative Passive: are not allowed' },
+            { id: 'tr8', active: 'Did the earthquake destroy the old town square?', key: 'Was the old town square destroyed by the earthquake?|Was the old town square destroyed?', hint: 'Past Simple Question Passive: Was ... destroyed?' },
+            { id: 'tr9', active: 'The mechanic repaired my car yesterday afternoon.', key: 'My car was repaired by the mechanic yesterday afternoon.|My car was repaired yesterday afternoon.', hint: 'Past Simple Passive: was repaired' },
+            { id: 'tr10', active: 'Farmers harvest tea leaves by hand in this region.', key: 'Tea leaves are harvested by hand in this region.|Tea leaves are harvested by hand by farmers in this region.', hint: 'Present Simple Passive: are harvested' }
+        ];
+
+        // 1.4 Error Correction (8 sentences)
+        const ERROR_DATA = [
+            { id: 'err1', wrong: 'The novel was write by Charles Dickens.', key: 'The novel was written by Charles Dickens.', issue: 'Использована 1-я форма глагола write вместо III формы (written).' },
+            { id: 'err2', wrong: 'This smartphone is produced with a giant technology firm.', key: 'This smartphone is produced by a giant technology firm.', issue: 'Для одушевленного исполнителя/фирмы нужен предлог BY, а не WITH.' },
+            { id: 'err3', wrong: 'The letters were sent yesterday by airmail with my secretary.', key: 'The letters were sent yesterday by airmail by my secretary.', issue: 'Исполнитель секретарь требует предлога BY.' },
+            { id: 'err4', wrong: 'English and French is taught in most Canadian schools.', key: 'English and French are taught in most Canadian schools.', issue: 'Два предмета (English and French) требуют множественного числа ARE.' },
+            { id: 'err5', wrong: 'The ancient coins was found inside a hidden chamber.', key: 'The ancient coins were found inside a hidden chamber.', issue: 'Существительное coins во множественном числе требует WERE.' },
+            { id: 'err6', wrong: 'The parcel didn\'t delivered on time last Monday.', key: 'The parcel wasn\'t delivered on time last Monday.|The parcel was not delivered on time last Monday.', hint: 'В пассиве вместо didn\'t используется was not / wasn\'t.', issue: 'Пассивный залог образуется через wasn\'t delivered, а не didn\'t.' },
+            { id: 'err7', wrong: 'These wooden boxes cutted with sharp laser blades.', key: 'These wooden boxes are cut with sharp laser blades.|These wooden boxes were cut with sharp laser blades.', issue: 'Неправильный глагол cut не имеет формы cutted (V3 = cut) + пропущен глагол be.' },
+            { id: 'err8', wrong: 'Is the new highway build by the government last year?', key: 'Was the new highway built by the government last year?', issue: 'Событие прошлое (last year) -> WAS + V3 (built).' }
+        ];
+
+        // 1.5 RU -> EN Translation (10 sentences)
+        const TRANSLATION_DATA = [
+            { id: 'tr_ru1', ru: 'Эту книгу читают миллионы людей по всему миру.', key: 'This book is read by millions of people all over the world.|This book is read by millions of people around the world.', hint: 'Present Simple Passive: is read by...' },
+            { id: 'tr_ru2', ru: 'Старый замок был построен в 15 веке.', key: 'The old castle was built in the 15th century.', hint: 'Past Simple Passive: was built in...' },
+            { id: 'tr_ru3', ru: 'Письма не отправляются по воскресеньям.', key: 'Letters are not sent on Sundays.|Emails are not sent on Sundays.', hint: 'Present Simple Negative Passive: are not sent' },
+            { id: 'tr_ru4', ru: 'Вчера эту проблему обсудили на заседании.', key: 'This problem was discussed at the meeting yesterday.|The problem was discussed at the meeting yesterday.', hint: 'Past Simple Passive: was discussed' },
+            { id: 'tr_ru5', ru: 'Где производят эти автомобили?', key: 'Where are these cars produced?|Where are these cars made?', hint: 'Present Simple Question: Where are ... produced?' },
+            { id: 'tr_ru6', ru: 'Окна моют дважды в месяц.', key: 'The windows are washed twice a month.', hint: 'Present Simple Passive: are washed' },
+            { id: 'tr_ru7', ru: 'Этот дом не был поврежден штормом.', key: 'This house was not damaged by the storm.|This house wasn\'t damaged by the storm.', hint: 'Past Simple Passive: was not damaged' },
+            { id: 'tr_ru8', ru: 'Кофе подают с горячим молоком.', key: 'Coffee is served with hot milk.', hint: 'Ингредиенты / дополнения: served with...' },
+            { id: 'tr_ru9', ru: 'Когда был изобретен телефон?', key: 'When was the telephone invented?|When was the phone invented?', hint: 'Past Simple Question: When was ... invented?' },
+            { id: 'tr_ru10', ru: 'Эти фотографии были сделаны известным фотографом.', key: 'These photos were taken by a famous photographer.|These photographs were taken by a famous photographer.', hint: 'Past Simple Passive: were taken by...' }
+        ];
+
+        // 2. Reading Tasks Data
+        const READING1_TF = [
+            { id: 'r1tf1', q: 'Paper waste is sorted immediately after it arrives at the recycling mill.', ans: 'False', hint: 'Сортировка происходит ДО транспортировки на фабрику (First, gathered material is sorted... Then transported).' },
+            { id: 'r1tf2', q: 'A pulper is a large vessel used to mix paper with water and chemicals.', ans: 'True', hint: 'Прямо сказано в тексте: "...mixed with water and chemical solutions in a giant vessel called a pulper."' },
+            { id: 'r1tf3', q: 'Bleaching of pulp is done strictly using chlorine gas.', ans: 'False', hint: 'В тексте указано: "bleached with hydrogen peroxide or chlorine-free agents".' },
+            { id: 'r1tf4', q: 'Staples and tape are filtered out through screens during pulping.', ans: 'True', hint: 'Pulp is passed through screens to filter out remaining staples, glue, and tape.' },
+            { id: 'r1tf5', q: 'Recycled paper is sold exclusively to local UK schools.', ans: 'Not Stated', hint: 'В тексте говорится "shipped to manufacturers worldwide", нет информации про эксклюзивность для UK.' }
+        ];
+
+        const READING1_MC = [
+            { id: 'r1mc1', q: 'What happens during the flotation process?', opts: ['Paper is chopped into strands', 'Ink particles are detached using air bubbles', 'Pulp is pressed through rollers', 'Water is drained out'], ans: 1 },
+            { id: 'r1mc2', q: 'Why is wet pulp passed through heavy heated rollers?', opts: ['To remove staples', 'To add chemical solutions', 'To dry and flatten the sheet', 'To detach sticky glue'], ans: 2 },
+            { id: 'r1mc3', q: 'Which passive construction describes the final delivery?', opts: ['is collected', 'is wound and shipped', 'is bleached', 'is chopped'], ans: 1 },
+            { id: 'r1mc4', q: 'What is pulp defined as in the text?', opts: ['A dry plastic sheet', 'A thick liquid of cellulose fibers', 'A chemical solvent', 'A metallic screen'], ans: 1 }
+        ];
+
+        const READING1_SUMMARY_GAPS = [
+            { id: 'r1s1', before: 'First, paper waste ', ans: 'is collected', after: ' and sorted. Next, it ', id2: 'r1s2', ans2: 'is transported', after2: ' to the mill where it ', id3: 'r1s3', ans3: 'is mixed', after3: ' with water. Contaminants ', id4: 'r1s4', ans4: 'are removed', after4: ', and ink particles ', id5: 'r1s5', ans5: 'are detached', after5: '. Finally, the paper ', id6: 'r1s6', ans6: 'is dried', after6: ' and rolled.' }
+        ];
+
+        const READING2_TF = [
+            { id: 'r2tf1', q: 'The Mary Celeste was originally built under the name "Amazon".', ans: 'True', hint: 'В тексте: "...was originally named the Amazon."' },
+            { id: 'r2tf2', q: 'The ship was found damaged and sinking in the Atlantic Ocean.', ans: 'False', hint: 'Текст утверждает: "The ship was fully seaworthy".' },
+            { id: 'r2tf3', q: 'All barrels of industrial alcohol were stolen by pirates.', ans: 'False', hint: '"...its cargo of alcohol was left virtually untouched."' },
+            { id: 'r2tf4', q: 'The captain\'s logbook and navigation tools were missing.', ans: 'True', hint: '"The lifeboat was removed, along with the captain\'s navigation tools and logbook."' },
+            { id: 'r2tf5', q: 'An investigation officially proved that a sea monster attacked the crew.', ans: 'False', hint: '"...no definitive proof was presented."' }
+        ];
+
+        const READING2_MC = [
+            { id: 'r2mc1', q: 'Who spotted the drifting Mary Celeste in December 1872?', opts: ['The US Coast Guard', 'The crew of the Dei Gratia', 'Pirates from Genoa', 'Benjamin Briggs'], ans: 1 },
+            { id: 'r2mc2', q: 'How much food and water remained on board when found?', opts: ['None at all', 'One week\'s worth', 'Six months\' worth', 'Two years\' worth'], ans: 2 },
+            { id: 'r2mc3', q: 'Which item was NOT left behind on the ship?', opts: ['Personal belongings', 'Industrial alcohol cargo', 'The lifeboat', 'Fresh water supply'], ans: 2 },
+            { id: 'r2mc4', q: 'What tense is primarily used in this mystery recount?', opts: ['Present Simple Active', 'Present Simple Passive', 'Past Simple Passive', 'Future Passive'], ans: 2 }
+        ];
+
+        const READING2_MATCHING = [
+            { id: 'r2m1', sentence: 'The merchant ship _____ in Canada in 1861.', opts: ['was built', 'was loaded', 'was spotted', 'were stored'], ans: 'was built' },
+            { id: 'r2m2', sentence: 'Over 1,700 barrels of alcohol _____ into the hold.', opts: ['was built', 'was loaded', 'were stored', 'was discovered'], ans: 'was loaded' },
+            { id: 'r2m3', sentence: 'Six months of provisions _____ in the ship hold.', opts: ['were stored', 'was removed', 'was spotted', 'were proposed'], ans: 'were stored' },
+            { id: 'r2m4', sentence: 'Dozens of theories _____ by investigators over the decades.', opts: ['were proposed', 'was signed', 'were found', 'was dispatched'], ans: 'were proposed' }
+        ];
+
+        // 3. Listening Tasks Data
+        const AUDIO1_GAPS = [
+            { id: 'a1g1', prompt: '1. The Roman villa _____ (discover) last week by local farmers.', ans: 'was discovered' },
+            { id: 'a1g2', prompt: '2. The site _____ (uncover) during routine agricultural work.', ans: 'was uncovered' },
+            { id: 'a1g3', prompt: '3. Expert archaeologists _____ (call) to inspect the area.', ans: 'were called' },
+            { id: 'a1g4', prompt: '4. Mosaic floors _____ (unearth) during excavation.', ans: 'were unearthed' },
+            { id: 'a1g5', prompt: '5. Silver coins _____ (find) inside a clay pot.', ans: 'were found' },
+            { id: 'a1g6', prompt: '6. The main building _____ (construct) in the 4th century AD.', ans: 'was constructed' },
+            { id: 'a1g7', prompt: '7. Part of the wall _____ (damage) years ago.', ans: 'was damaged' },
+            { id: 'a1g8', prompt: '8. The site _____ (protect) by authorities yesterday.', ans: 'was protected' }
+        ];
+
+        const AUDIO1_MC = [
+            { id: 'a1mc1', q: 'Where was the Roman villa discovered?', opts: ['In London', 'In Wiltshire, England', 'In Genoa, Italy', 'In Rome'], ans: 1 },
+            { id: 'a1mc2', q: 'What was found inside a clay pot?', opts: ['Golden jewelry', 'Mosaic tiles', 'Silver coins', 'Ancient letters'], ans: 2 },
+            { id: 'a1mc3', q: 'When was the main building constructed?', opts: ['1st century BC', '4th century AD', '15th century AD', '18th century'], ans: 1 },
+            { id: 'a1mc4', q: 'What caused damage to the northern wall?', opts: ['A heavy flood', 'Modern farming equipment', 'An earthquake', 'Fires'], ans: 1 },
+            { id: 'a1mc5', q: 'What is planned for next summer?', opts: ['Building a hotel', 'Further archaeological research', 'Selling the land', 'Closing the site'], ans: 1 }
+        ];
+
+        const AUDIO2_MATCHING = [
+            { id: 'a2m1', item: '1. Incoming inventory', match: 'is delivered by trucks and scanned into system' },
+            { id: 'a2m2', item: '2. Autonomous robots', match: 'are dispatched to fetch confirmed items' },
+            { id: 'a2m3', item: '3. High-tech sensors', match: 'are used to ensure correct retrieval' },
+            { id: 'a2m4', item: '4. Sturdy boxes', match: 'are selected automatically at packing stations' },
+            { id: 'a2m5', item: '5. Packages', match: 'are weighed and checked for quality' },
+            { id: 'a2m6', item: '6. Shipping labels', match: 'are attached before loading onto trucks' }
+        ];
+
+        const AUDIO2_TF = [
+            { id: 'a2tf1', q: 'Items are placed onto shelves manually by human workers only.', ans: 'False', hint: 'В скрипте говорится про automated robotic shelves.' },
+            { id: 'a2tf2', q: 'Thousands of orders are processed every minute in automated fulfillment centers.', ans: 'True' },
+            { id: 'a2tf3', q: 'High-tech sensors are used to check product retrieval accuracy.', ans: 'True' },
+            { id: 'a2tf4', q: 'Boxes are packed without any weight verification.', ans: 'False', hint: '"Each package is weighed and checked for quality."' },
+            { id: 'a2tf5', q: 'Robots are dispatched before customer orders are confirmed.', ans: 'False', hint: '"When a customer order is confirmed, autonomous robots are dispatched..."' },
+            { id: 'a2tf6', q: 'Shipping labels are attached after boxes are loaded on trucks.', ans: 'False', hint: '"Shipping labels are attached, and boxes are loaded onto outgoing trucks."' }
+        ];
+
+        /* ==========================================
+           2. STATE & TIMER MANAGEMENT
+           ========================================== */
+        let state = {
+            timerSeconds: 0,
+            timerRunning: true,
+            userAnswers: {},
+            scores: {}
+        };
+
+        let timerInterval = null;
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            loadLocalStorage();
+            startTimer();
+            renderIrregularVerbs();
+            renderGrammarModule();
+            renderReadingModule();
+            renderListeningModule();
+            updateGlobalProgress();
+        });
+
+        // Timer
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (state.timerRunning) {
+                    state.timerSeconds++;
+                    updateTimerDisplay();
+                    if (state.timerSeconds % 10 === 0) saveLocalStorage();
+                }
+            }, 1000);
+        }
+
+        function toggleTimer() {
+            state.timerRunning = !state.timerRunning;
+            const btnIcon = document.getElementById('timer-icon');
+            if (state.timerRunning) {
+                btnIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>`;
+            } else {
+                btnIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>`;
+            }
+        }
+
+        function updateTimerDisplay() {
+            const hrs = String(Math.floor(state.timerSeconds / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((state.timerSeconds % 3600) / 60)).padStart(2, '0');
+            const secs = String(state.timerSeconds % 60).padStart(2, '0');
+            const str = `${hrs}:${mins}:${secs}`;
+            document.getElementById('timer-display').innerText = str;
+            const sumTime = document.getElementById('summary-time');
+            if (sumTime) sumTime.innerText = str;
+        }
+
+        // Tab Navigation
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('text-slate-500');
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.classList.add('tab-active');
+            activeBtn.classList.remove('text-slate-500');
+
+            if (tabId === 'summary') renderSummaryReport();
+        }
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const arrow = document.getElementById('theory-accordion-arrow');
+            content.classList.toggle('hidden');
+            if (arrow) arrow.classList.toggle('rotate-180');
+        }
+
+        // Local Storage
+        function saveLocalStorage() {
+            try {
+                localStorage.setItem('pv_trainer_state', JSON.stringify(state));
+            } catch (e) { console.error('LocalStorage save error', e); }
+        }
+
+        function loadLocalStorage() {
+            try {
+                const saved = localStorage.getItem('pv_trainer_state');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    state.timerSeconds = parsed.timerSeconds || 0;
+                    state.userAnswers = parsed.userAnswers || {};
+                    state.scores = parsed.scores || {};
+                }
+            } catch (e) { console.error('LocalStorage load error', e); }
+        }
+
+        function resetAllProgress() {
+            if (confirm('Вы уверены, что хотите сбросить весь сохраненный прогресс и ответы?')) {
+                localStorage.removeItem('pv_trainer_state');
+                state.timerSeconds = 0;
+                state.userAnswers = {};
+                state.scores = {};
+                location.reload();
+            }
+        }
+
+        /* ==========================================
+           3. RENDER MODULES & RENDERING HELPERS
+           ========================================== */
+
+        // Irregular Verbs Table
+        function renderIrregularVerbs() {
+            const tbody = document.getElementById('verbs-table-body');
+            tbody.innerHTML = IRREGULAR_VERBS.map(v => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-2 font-semibold text-slate-800">${v.v1}</td>
+                    <td class="p-2 text-slate-600">${v.v2}</td>
+                    <td class="p-2 text-indigo-700 font-bold">${v.v3}</td>
+                    <td class="p-2 text-slate-500">${v.ru}</td>
+                </tr>
+            `).join('');
+        }
+
+        function filterVerbs() {
+            const query = document.getElementById('verb-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#verbs-table-body tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        // Grammar Module Render
+        function renderGrammarModule() {
+            // 1.1 Multiple Choice
+            const mcBox = document.getElementById('mc-container');
+            mcBox.innerHTML = MC_QUESTIONS.map((q, idx) => {
+                const savedAns = state.userAnswers[q.id];
+                return `
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2" id="card-${q.id}">
+                        <div class="text-xs font-semibold text-slate-700"><strong>${idx + 1}.</strong> ${q.q}</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            ${q.opts.map((opt, oIdx) => `
+                                <label class="flex items-center space-x-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer hover:border-indigo-300">
+                                    <input type="radio" name="${q.id}" value="${oIdx}" ${savedAns == oIdx ? 'checked' : ''} onchange="saveAnswer('${q.id}', ${oIdx})" class="text-indigo-600 focus:ring-indigo-500">
+                                    <span class="text-slate-700">${opt}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                        <div id="feedback-${q.id}" class="text-xs hidden mt-1"></div>
+                    </div>
+                `;
+            }).join('');
+
+            // 1.2 Gap Fill
+            const gfBox = document.getElementById('gapfill-container');
+            gfBox.innerHTML = GAPFILL_DATA.map((item, idx) => {
+                const parts = item.sentence.split('_____');
+                const savedVal = state.userAnswers[item.id] || '';
+                return `
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2" id="card-${item.id}">
+                        <div class="flex-grow">
+                            <span class="font-bold text-slate-500 mr-1">${idx + 1}.</span>
+                            <span>${parts[0]}</span>
+                            <input type="text" id="input-${item.id}" value="${escapeHtml(savedVal)}" oninput="saveAnswer('${item.id}', this.value)" placeholder="введите глагол..." class="px-2 py-1 mx-1 border border-slate-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none w-44 font-semibold text-indigo-700">
+                            <span>${parts[1]}</span>
+                        </div>
+                        <div id="feedback-${item.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+
+            // 1.3 Active to Passive Transformations
+            const trBox = document.getElementById('transform-container');
+            trBox.innerHTML = TRANSFORM_DATA.map((item, idx) => {
+                const savedVal = state.userAnswers[item.id] || '';
+                return `
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs" id="card-${item.id}">
+                        <div class="font-medium text-slate-800">
+                            <span class="font-bold text-indigo-600 mr-1">Active ${idx + 1}:</span> ${item.active}
+                        </div>
+                        <div>
+                            <input type="text" id="input-${item.id}" value="${escapeHtml(savedVal)}" oninput="saveAnswer('${item.id}', this.value)" placeholder="Перепишите в Passive Voice..." class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none font-mono text-slate-800">
+                        </div>
+                        <div id="feedback-${item.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+
+            // 1.4 Error Correction
+            const errBox = document.getElementById('errorcorr-container');
+            errBox.innerHTML = ERROR_DATA.map((item, idx) => {
+                const savedVal = state.userAnswers[item.id] || '';
+                return `
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs" id="card-${item.id}">
+                        <div class="flex items-center text-rose-700 font-medium">
+                            <svg class="w-4 h-4 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>${idx + 1}. Ошибка: "${item.wrong}"</span>
+                        </div>
+                        <input type="text" id="input-${item.id}" value="${escapeHtml(savedVal)}" oninput="saveAnswer('${item.id}', this.value)" placeholder="Исправленное предложение целиком..." class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-slate-800">
+                        <div id="feedback-${item.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+
+            // 1.5 RU -> EN Translation
+            const transBox = document.getElementById('translation-container');
+            transBox.innerHTML = TRANSLATION_DATA.map((item, idx) => {
+                const savedVal = state.userAnswers[item.id] || '';
+                return `
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs" id="card-${item.id}">
+                        <div class="font-semibold text-slate-800">
+                            <span class="text-indigo-600">${idx + 1}.</span> ${item.ru}
+                        </div>
+                        <input type="text" id="input-${item.id}" value="${escapeHtml(savedVal)}" oninput="saveAnswer('${item.id}', this.value)" placeholder="Английский перевод..." class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-slate-800">
+                        <div id="feedback-${item.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Reading Module Render
+        function renderReadingModule() {
+            // Text 1 TF
+            renderTFContainer('r1-tf-container', READING1_TF);
+            // Text 1 MC
+            renderMCContainer('r1-mc-container', READING1_MC);
+            // Text 1 Summary Gaps
+            const sumBox = document.getElementById('r1-summary-container');
+            const g = READING1_SUMMARY_GAPS[0];
+            sumBox.innerHTML = `
+                <p>
+                    ${g.before}
+                    <input type="text" id="input-${g.id}" value="${escapeHtml(state.userAnswers[g.id]||'')}" oninput="saveAnswer('${g.id}', this.value)" class="px-2 py-0.5 border border-slate-300 rounded text-indigo-700 font-semibold w-28 text-xs">
+                    ${g.after}
+                    <input type="text" id="input-${g.id2}" value="${escapeHtml(state.userAnswers[g.id2]||'')}" oninput="saveAnswer('${g.id2}', this.value)" class="px-2 py-0.5 border border-slate-300 rounded text-indigo-700 font-semibold w-28 text-xs">
+                    ${g.after2}
+                    <input type="text" id="input-${g.id3}" value="${escapeHtml(state.userAnswers[g.id3]||'')}" oninput="saveAnswer('${g.id3}', this.value)" class="px-2 py-0.5 border border-slate-300 rounded text-indigo-700 font-semibold w-24 text-xs">
+                    ${g.after3}
+                    <input type="text" id="input-${g.id4}" value="${escapeHtml(state.userAnswers[g.id4]||'')}" oninput="saveAnswer('${g.id4}', this.value)" class="px-2 py-0.5 border border-slate-300 rounded text-indigo-700 font-semibold w-24 text-xs">
+                    ${g.after4}
+                    <input type="text" id="input-${g.id5}" value="${escapeHtml(state.userAnswers[g.id5]||'')}" oninput="saveAnswer('${g.id5}', this.value)" class="px-2 py-0.5 border border-slate-300 rounded text-indigo-700 font-semibold w-24 text-xs">
+                    ${g.after5}
+                    <input type="text" id="input-${g.id6}" value="${escapeHtml(state.userAnswers[g.id6]||'')}" oninput="saveAnswer('${g.id6}', this.value)" class="px-2 py-0.5 border border-slate-300 rounded text-indigo-700 font-semibold w-24 text-xs">
+                    ${g.after6}
+                </p>
+                <div id="feedback-r1-summary" class="text-xs hidden mt-2"></div>
+            `;
+
+            // Text 2 TF
+            renderTFContainer('r2-tf-container', READING2_TF);
+            // Text 2 MC
+            renderMCContainer('r2-mc-container', READING2_MC);
+            // Text 2 Matching
+            const matchBox = document.getElementById('r2-matching-container');
+            matchBox.innerHTML = READING2_MATCHING.map(m => {
+                const parts = m.sentence.split('_____');
+                const saved = state.userAnswers[m.id] || '';
+                return `
+                    <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-between gap-2" id="card-${m.id}">
+                        <span>${parts[0]}</span>
+                        <select id="input-${m.id}" onchange="saveAnswer('${m.id}', this.value)" class="px-2 py-1 bg-white border border-slate-300 rounded font-bold text-indigo-700 text-xs">
+                            <option value="">-- выберите --</option>
+                            ${m.opts.map(o => `<option value="${o}" ${saved === o ? 'selected' : ''}>${o}</option>`).join('')}
+                        </select>
+                        <span>${parts[1]}</span>
+                        <div id="feedback-${m.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Listening Module Render
+        function renderListeningModule() {
+            // Audio 1 Gaps
+            const a1GapsBox = document.getElementById('a1-gaps-container');
+            a1GapsBox.innerHTML = AUDIO1_GAPS.map(g => {
+                const saved = state.userAnswers[g.id] || '';
+                return `
+                    <div class="p-2 bg-white rounded border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2" id="card-${g.id}">
+                        <span>${g.prompt}</span>
+                        <input type="text" id="input-${g.id}" value="${escapeHtml(saved)}" oninput="saveAnswer('${g.id}', this.value)" placeholder="ответ..." class="px-2 py-1 border border-slate-300 rounded font-medium text-indigo-700 w-36 text-xs">
+                        <div id="feedback-${g.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+
+            // Audio 1 MC
+            renderMCContainer('a1-mc-container', AUDIO1_MC);
+
+            // Audio 2 Matching
+            const a2MatchBox = document.getElementById('a2-matching-container');
+            const allMatches = AUDIO2_MATCHING.map(x => x.match);
+            a2MatchBox.innerHTML = AUDIO2_MATCHING.map(m => {
+                const saved = state.userAnswers[m.id] || '';
+                return `
+                    <div class="p-2.5 bg-white rounded border border-slate-200 space-y-1" id="card-${m.id}">
+                        <div class="font-bold text-slate-800">${m.item}</div>
+                        <select id="input-${m.id}" onchange="saveAnswer('${m.id}', this.value)" class="w-full px-2 py-1 bg-slate-50 border border-slate-300 rounded text-slate-700 text-xs">
+                            <option value="">-- Сопоставьте с процессом --</option>
+                            ${allMatches.map(opt => `<option value="${opt}" ${saved === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                        </select>
+                        <div id="feedback-${m.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+
+            // Audio 2 TF
+            renderTFContainer('a2-tf-container', AUDIO2_TF);
+        }
+
+        // Helper: Render TF Containers
+        function renderTFContainer(containerId, dataList) {
+            const box = document.getElementById(containerId);
+            box.innerHTML = dataList.map((item, idx) => {
+                const saved = state.userAnswers[item.id];
+                return `
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs" id="card-${item.id}">
+                        <div class="text-slate-800"><strong>${idx + 1}.</strong> ${item.q}</div>
+                        <div class="flex items-center space-x-4">
+                            <label class="inline-flex items-center space-x-1 cursor-pointer">
+                                <input type="radio" name="${item.id}" value="True" ${saved === 'True' ? 'checked' : ''} onchange="saveAnswer('${item.id}', 'True')" class="text-indigo-600">
+                                <span>True</span>
+                            </label>
+                            <label class="inline-flex items-center space-x-1 cursor-pointer">
+                                <input type="radio" name="${item.id}" value="False" ${saved === 'False' ? 'checked' : ''} onchange="saveAnswer('${item.id}', 'False')" class="text-indigo-600">
+                                <span>False</span>
+                            </label>
+                            ${item.q.includes('Not Stated') || containerId.includes('r1') || containerId.includes('r2') ? `
+                            <label class="inline-flex items-center space-x-1 cursor-pointer">
+                                <input type="radio" name="${item.id}" value="Not Stated" ${saved === 'Not Stated' ? 'checked' : ''} onchange="saveAnswer('${item.id}', 'Not Stated')" class="text-indigo-600">
+                                <span>Not Stated</span>
+                            </label>` : ''}
+                        </div>
+                        <div id="feedback-${item.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Helper: Render MC Containers
+        function renderMCContainer(containerId, dataList) {
+            const box = document.getElementById(containerId);
+            box.innerHTML = dataList.map((item, idx) => {
+                const saved = state.userAnswers[item.id];
+                return `
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs" id="card-${item.id}">
+                        <div class="font-medium text-slate-800"><strong>${idx + 1}.</strong> ${item.q}</div>
+                        <div class="space-y-1">
+                            ${item.opts.map((opt, oIdx) => `
+                                <label class="flex items-center space-x-2 p-1.5 bg-white rounded border border-slate-200 cursor-pointer hover:border-indigo-300">
+                                    <input type="radio" name="${item.id}" value="${oIdx}" ${saved == oIdx ? 'checked' : ''} onchange="saveAnswer('${item.id}', ${oIdx})" class="text-indigo-600">
+                                    <span>${opt}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                        <div id="feedback-${item.id}" class="text-xs hidden"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /* ==========================================
+           4. CHECKING & VERIFICATION LOGIC
+           ========================================== */
+
+        function saveAnswer(id, val) {
+            state.userAnswers[id] = val;
+            saveLocalStorage();
+            updateGlobalProgress();
+        }
+
+        // Normalize text string for flexible comparisons
+        function norm(str) {
+            if (!str) return '';
+            return str.toString()
+                .toLowerCase()
+                .trim()
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "")
+                .replace(/\s+/g, " ");
+        }
+
+        function setFeedback(id, isCorrect, msg, fullCorrect = '') {
+            const fb = document.getElementById(`feedback-${id}`);
+            const card = document.getElementById(`card-${id}`);
+            if (!fb) return;
+
+            fb.classList.remove('hidden', 'text-emerald-700', 'text-rose-700', 'bg-emerald-50', 'bg-rose-50');
+            fb.classList.add('p-2', 'rounded-lg', 'mt-1.5');
+
+            if (isCorrect) {
+                fb.classList.add('bg-emerald-50', 'text-emerald-700', 'border', 'border-emerald-200');
+                fb.innerHTML = `<strong>&check; Верно!</strong> ${msg || ''}`;
+                if (card) { card.classList.add('border-emerald-300'); card.classList.remove('border-rose-300'); }
+            } else {
+                fb.classList.add('bg-rose-50', 'text-rose-700', 'border', 'border-rose-200');
+                fb.innerHTML = `<strong>&cross; Ошибка.</strong> ${msg || ''} ${fullCorrect ? `<br><span class="text-slate-600">Правильный ответ: <strong>${fullCorrect}</strong></span>` : ''}`;
+                if (card) { card.classList.add('border-rose-300'); card.classList.remove('border-emerald-300'); }
+            }
+        }
+
+        // 1.1 MC Check
+        function checkMultipleChoice() {
+            let correct = 0;
+            MC_QUESTIONS.forEach(q => {
+                const ans = state.userAnswers[q.id];
+                if (ans !== undefined && parseInt(ans) === q.ans) {
+                    correct++;
+                    setFeedback(q.id, true, q.hint);
+                } else {
+                    setFeedback(q.id, false, q.hint, q.opts[q.ans]);
+                }
+            });
+            state.scores['mc1'] = { score: correct, max: MC_QUESTIONS.length };
+            updateGlobalProgress();
+        }
+
+        // 1.2 Gap Fill Check
+        function checkGapFill() {
+            let correct = 0;
+            GAPFILL_DATA.forEach(item => {
+                const val = norm(state.userAnswers[item.id] || '');
+                const validOptions = item.ans.split('|').map(v => norm(v));
+                if (validOptions.includes(val)) {
+                    correct++;
+                    setFeedback(item.id, true, item.hint);
+                } else {
+                    setFeedback(item.id, false, item.hint, item.ans.replace('|', ' ИЛИ '));
+                }
+            });
+            state.scores['gapfill'] = { score: correct, max: GAPFILL_DATA.length };
+            updateGlobalProgress();
+        }
+
+        // 1.3 Transformation Check
+        function checkTransformations() {
+            let correct = 0;
+            TRANSFORM_DATA.forEach(item => {
+                const val = norm(state.userAnswers[item.id] || '');
+                const keys = item.key.split('|').map(k => norm(k));
+                if (keys.includes(val)) {
+                    correct++;
+                    setFeedback(item.id, true, 'Отличная трансформация!');
+                } else {
+                    setFeedback(item.id, false, item.hint, item.key.split('|')[0]);
+                }
+            });
+            state.scores['transform'] = { score: correct, max: TRANSFORM_DATA.length };
+            updateGlobalProgress();
+        }
+
+        // 1.4 Error Correction Check
+        function checkErrorCorrections() {
+            let correct = 0;
+            ERROR_DATA.forEach(item => {
+                const val = norm(state.userAnswers[item.id] || '');
+                const keys = item.key.split('|').map(k => norm(k));
+                if (keys.includes(val)) {
+                    correct++;
+                    setFeedback(item.id, true, item.issue);
+                } else {
+                    setFeedback(item.id, false, item.issue, item.key.split('|')[0]);
+                }
+            });
+            state.scores['errorcorr'] = { score: correct, max: ERROR_DATA.length };
+            updateGlobalProgress();
+        }
+
+        // 1.5 Translation Check
+        function checkTranslations() {
+            let correct = 0;
+            TRANSLATION_DATA.forEach(item => {
+                const val = norm(state.userAnswers[item.id] || '');
+                const keys = item.key.split('|').map(k => norm(k));
+                if (keys.includes(val)) {
+                    correct++;
+                    setFeedback(item.id, true, 'Точный перевод!');
+                } else {
+                    setFeedback(item.id, false, item.hint, item.key.split('|')[0]);
+                }
+            });
+            state.scores['translation'] = { score: correct, max: TRANSLATION_DATA.length };
+            updateGlobalProgress();
+        }
+
+        // Reading Checks
+        function checkReading1TF() {
+            let c = 0;
+            READING1_TF.forEach(item => {
+                const ans = state.userAnswers[item.id];
+                if (ans === item.ans) { c++; setFeedback(item.id, true, item.hint); }
+                else { setFeedback(item.id, false, item.hint, item.ans); }
+            });
+            state.scores['r1tf'] = { score: c, max: READING1_TF.length };
+            updateGlobalProgress();
+        }
+
+        function checkReading1MC() {
+            let c = 0;
+            READING1_MC.forEach(item => {
+                const ans = state.userAnswers[item.id];
+                if (ans !== undefined && parseInt(ans) === item.ans) { c++; setFeedback(item.id, true, ''); }
+                else { setFeedback(item.id, false, '', item.opts[item.ans]); }
+            });
+            state.scores['r1mc'] = { score: c, max: READING1_MC.length };
+            updateGlobalProgress();
+        }
+
+        function checkReading1Summary() {
+            const g = READING1_SUMMARY_GAPS[0];
+            const ids = [g.id, g.id2, g.id3, g.id4, g.id5, g.id6];
+            const ansList = [g.ans, g.ans2, g.ans3, g.ans4, g.ans5, g.ans6];
+            let c = 0;
+
+            ids.forEach((id, idx) => {
+                const val = norm(state.userAnswers[id] || '');
+                if (val === norm(ansList[idx])) c++;
+            });
+
+            const fb = document.getElementById('feedback-r1-summary');
+            fb.classList.remove('hidden');
+            if (c === ids.length) {
+                fb.className = 'text-xs p-2 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded mt-2';
+                fb.innerHTML = '<strong>&check; Резюме составлено верно! (6/6)</strong>';
+            } else {
+                fb.className = 'text-xs p-2 bg-amber-50 text-amber-800 border border-amber-200 rounded mt-2';
+                fb.innerHTML = `Верно заполнено: ${c} из 6. Правильные формы: is collected, is transported, is mixed, are removed, are detached, is dried.`;
+            }
+            state.scores['r1summary'] = { score: c, max: ids.length };
+            updateGlobalProgress();
+        }
+
+        function checkReading2TF() {
+            let c = 0;
+            READING2_TF.forEach(item => {
+                const ans = state.userAnswers[item.id];
+                if (ans === item.ans) { c++; setFeedback(item.id, true, item.hint); }
+                else { setFeedback(item.id, false, item.hint, item.ans); }
+            });
+            state.scores['r2tf'] = { score: c, max: READING2_TF.length };
+            updateGlobalProgress();
+        }
+
+        function checkReading2MC() {
+            let c = 0;
+            READING2_MC.forEach(item => {
+                const ans = state.userAnswers[item.id];
+                if (ans !== undefined && parseInt(ans) === item.ans) { c++; setFeedback(item.id, true, ''); }
+                else { setFeedback(item.id, false, '', item.opts[item.ans]); }
+            });
+            state.scores['r2mc'] = { score: c, max: READING2_MC.length };
+            updateGlobalProgress();
+        }
+
+        function checkReading2Matching() {
+            let c = 0;
+            READING2_MATCHING.forEach(item => {
+                const val = state.userAnswers[item.id];
+                if (val === item.ans) { c++; setFeedback(item.id, true, 'Верно'); }
+                else { setFeedback(item.id, false, '', item.ans); }
+            });
+            state.scores['r2match'] = { score: c, max: READING2_MATCHING.length };
+            updateGlobalProgress();
+        }
+
+        // Listening Checks
+        function checkAudio1Gaps() {
+            let c = 0;
+            AUDIO1_GAPS.forEach(item => {
+                const val = norm(state.userAnswers[item.id] || '');
+                if (val === norm(item.ans)) { c++; setFeedback(item.id, true, 'Верно'); }
+                else { setFeedback(item.id, false, '', item.ans); }
+            });
+            state.scores['a1gaps'] = { score: c, max: AUDIO1_GAPS.length };
+            updateGlobalProgress();
+        }
+
+        function checkAudio1MC() {
+            let c = 0;
+            AUDIO1_MC.forEach(item => {
+                const ans = state.userAnswers[item.id];
+                if (ans !== undefined && parseInt(ans) === item.ans) { c++; setFeedback(item.id, true, ''); }
+                else { setFeedback(item.id, false, '', item.opts[item.ans]); }
+            });
+            state.scores['a1mc'] = { score: c, max: AUDIO1_MC.length };
+            updateGlobalProgress();
+        }
+
+        function checkAudio2Matching() {
+            let c = 0;
+            AUDIO2_MATCHING.forEach(item => {
+                const val = state.userAnswers[item.id];
+                if (val === item.match) { c++; setFeedback(item.id, true, 'Верно'); }
+                else { setFeedback(item.id, false, '', item.match); }
+            });
+            state.scores['a2match'] = { score: c, max: AUDIO2_MATCHING.length };
+            updateGlobalProgress();
+        }
+
+        function checkAudio2TF() {
+            let c = 0;
+            AUDIO2_TF.forEach(item => {
+                const ans = state.userAnswers[item.id];
+                if (ans === item.ans) { c++; setFeedback(item.id, true, item.hint); }
+                else { setFeedback(item.id, false, item.hint, item.ans); }
+            });
+            state.scores['a2tf'] = { score: c, max: AUDIO2_TF.length };
+            updateGlobalProgress();
+        }
+
+        /* ==========================================
+           5. WEB SPEECH API (AUDIO TTS ENGINE)
+           ========================================== */
+
+        let currentUtterance = null;
+
+        function playAudio(trackId) {
+            if (!('speechSynthesis' in window)) {
+                alert('Ваш браузер не поддерживает синтез речи (Web Speech API). Пожалуйста, используйте скрыть/показать скрипт для ознакомления с текстом.');
+                return;
+            }
+
+            window.speechSynthesis.cancel(); // stop current
+
+            const text = document.getElementById(`${trackId}-text`).innerText;
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            const langSelect = document.getElementById('tts-voice').value;
+            const rateSelect = parseFloat(document.getElementById('tts-rate').value);
+
+            utterance.lang = langSelect;
+            utterance.rate = rateSelect;
+
+            // Try picking an actual native voice matching lang
+            const voices = window.speechSynthesis.getVoices();
+            const matchingVoice = voices.find(v => v.lang.startsWith(langSelect));
+            if (matchingVoice) utterance.voice = matchingVoice;
+
+            currentUtterance = utterance;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopAudio() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        function toggleTranscript(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        /* ==========================================
+           6. GLOBAL PROGRESS & REPORTING
+           ========================================== */
+
+        function updateGlobalProgress() {
+            let totalPointsEarned = 0;
+            let totalMaxPoints = 0;
+
+            // Sum up scores from state.scores
+            Object.values(state.scores).forEach(item => {
+                if (item && item.max) {
+                    totalPointsEarned += (item.score || 0);
+                    totalMaxPoints += item.max;
+                }
+            });
+
+            // Calculate potential max points from all datasets if scores not checked yet
+            const absoluteMaxPoints = MC_QUESTIONS.length + GAPFILL_DATA.length + TRANSFORM_DATA.length + 
+                                      ERROR_DATA.length + TRANSLATION_DATA.length + READING1_TF.length + 
+                                      READING1_MC.length + 6 + READING2_TF.length + READING2_MC.length + 
+                                      READING2_MATCHING.length + AUDIO1_GAPS.length + AUDIO1_MC.length + 
+                                      AUDIO2_MATCHING.length + AUDIO2_TF.length;
+
+            document.getElementById('score-counter').innerText = `${totalPointsEarned} / ${absoluteMaxPoints}`;
+
+            const percent = Math.min(100, Math.round((totalPointsEarned / absoluteMaxPoints) * 100));
+            const bar = document.getElementById('global-progress-bar');
+            const txt = document.getElementById('global-progress-text');
+            if (bar) bar.style.width = `${percent}%`;
+            if (txt) txt.innerText = `${percent}%`;
+        }
+
+        function renderSummaryReport() {
+            const tbody = document.getElementById('summary-table-body');
+            let totalEarned = 0;
+            let totalMax = 0;
+
+            const modulesDef = [
+                { key: 'mc1', name: 'Грамматика 1.1: Множественный выбор', max: MC_QUESTIONS.length },
+                { key: 'gapfill', name: 'Грамматика 1.2: Раскрытие скобок', max: GAPFILL_DATA.length },
+                { key: 'transform', name: 'Грамматика 1.3: Трансформация предложений', max: TRANSFORM_DATA.length },
+                { key: 'errorcorr', name: 'Грамматика 1.4: Исправление ошибок', max: ERROR_DATA.length },
+                { key: 'translation', name: 'Грамматика 1.5: RU -> EN Перевод', max: TRANSLATION_DATA.length },
+                { key: 'r1tf', name: 'Чтение 1.1: T/F/NS (Paper Recycling)', max: READING1_TF.length },
+                { key: 'r1mc', name: 'Чтение 1.2: MC (Paper Recycling)', max: READING1_MC.length },
+                { key: 'r1summary', name: 'Чтение 1.3: Summary Gaps', max: 6 },
+                { key: 'r2tf', name: 'Чтение 2.1: T/F/NS (Mary Celeste)', max: READING2_TF.length },
+                { key: 'r2mc', name: 'Чтение 2.2: MC (Mary Celeste)', max: READING2_MC.length },
+                { key: 'r2match', name: 'Чтение 2.3: Structure Matching', max: READING2_MATCHING.length },
+                { key: 'a1gaps', name: 'Аудирование 1.1: Note Completion', max: AUDIO1_GAPS.length },
+                { key: 'a1mc', name: 'Аудирование 1.2: News MC', max: AUDIO1_MC.length },
+                { key: 'a2match', name: 'Аудирование 2.1: Process Matching', max: AUDIO2_MATCHING.length },
+                { key: 'a2tf', name: 'Аудирование 2.2: Podcast T/F', max: AUDIO2_TF.length }
+            ];
+
+            tbody.innerHTML = modulesDef.map(m => {
+                const sc = state.scores[m.key] ? state.scores[m.key].score : 0;
+                totalEarned += sc;
+                totalMax += m.max;
+                return `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 text-slate-800 font-medium">${m.name}</td>
+                        <td class="p-3 text-center text-slate-500">${state.scores[m.key] ? 'Проверено' : 'Не проверено'}</td>
+                        <td class="p-3 text-right font-bold ${sc === m.max ? 'text-emerald-600' : 'text-slate-700'}">${sc} / ${m.max}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.getElementById('summary-score').innerText = `${totalEarned} / ${totalMax}`;
+            const perc = totalMax > 0 ? Math.round((totalEarned / totalMax) * 100) : 0;
+            document.getElementById('summary-percentage').innerText = `${perc}%`;
+        }
+
+        // Utility: Escape HTML
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;")
+                      .replace(/</g, "&lt;")
+                      .replace(/>/g, "&gt;")
+                      .replace(/"/g, "&quot;")
+                      .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
